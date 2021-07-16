@@ -12,18 +12,20 @@
  * limitations under the License.
  */
 
-import { flow } from 'lodash';
 import {
   withDesign,
   addClasses,
   asToken,
   addProps,
+  replaceWith,
+  addPropsIf,
 } from '@bodiless/fclasses';
-import { ifViewportIsNot } from '@bodiless/components';
+import { ifViewportIsNot, ifViewportIs } from '@bodiless/components';
 import {
   asAccordionWrapper,
   asAccordionBody,
   asAccordionTitle,
+  useAccordionContext,
 } from '@bodiless/accordion';
 import {
   withAnyTag,
@@ -43,13 +45,27 @@ const asExpandedOnDesktopBody = asToken(
   }),
 );
 
-const asResponsiveFilterByGroup = flow(
+const useRefineButtonProps = () => {
+  const { setExpanded } = useAccordionContext();
+  return {
+    children: 'Refine',
+    onClick: () => setExpanded(false),
+  };
+};
+
+const asResponsiveFilterByGroup = asToken(
   ifViewportIsNot(['lg', 'xl', '2xl'])(
     withDesign({
       FilterWrapper: asAccordionWrapper,
       FilterTitle: asResponsiveAccordionTitle,
-      Filter: asExpandedOnDesktopBody,
+      FilterBody: asExpandedOnDesktopBody,
       ResetButton: asExpandedOnDesktopBody,
+      RefineButton: addPropsIf(() => true)(useRefineButtonProps),
+    }),
+  ),
+  ifViewportIs(['lg', 'xl', '2xl'])(
+    withDesign({
+      RefineButton: replaceWith(() => null),
     }),
   ),
 );
