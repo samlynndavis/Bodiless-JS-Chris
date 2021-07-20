@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.6...v0.2.7) (2021-07-20)
+
+
+### Bug Fixes
+
+* **filtering:** Update selected filters properly from query string. ([#1026](https://github.com/johnsonandjohnson/bodiless-js/issues/1026)) ([9f88309](https://github.com/johnsonandjohnson/bodiless-js/commit/9f88309f199533f23a131e5931f10dfd90faf5b8))
+
+
+
+
+
 ## [0.2.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.2.5...v0.2.6) (2021-07-20)
 
 **Note:** Version bump only for package @bodiless/filtering
