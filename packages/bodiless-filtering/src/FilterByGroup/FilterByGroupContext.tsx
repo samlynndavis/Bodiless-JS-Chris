@@ -14,8 +14,11 @@
 
 /* eslint-disable react/jsx-indent */
 import React, {
+  useState,
+  useEffect,
   useRef,
   useContext,
+  useMemo,
   createContext,
   FC,
 } from 'react';
@@ -28,9 +31,16 @@ import {
   SuggestionsRefType,
   FBGContextType,
   TagType,
+  ItemsType,
+  NotifyContextType,
+  ItemsProviderType,
 } from './types';
 import { useFilterByGroupStore } from './FilterByGroupStore';
 import { useTagsAccessors } from './FilterModel';
+
+const NotifyContext = React.createContext<NotifyContextType>({
+  notify: () => undefined,
+});
 
 const FilterByGroupContext = createContext<FBGContextType>({
   getSuggestions: () => [],
@@ -53,6 +63,8 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
   children,
   suggestions,
   multipleAllowedTags,
+  items,
+  notifyContextValue,
 }) => {
   const {
     selectTag,
@@ -96,6 +108,8 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
     isTagSelected,
     multipleAllowedTags: multipleAllowedTags || false,
     clearSelectedTags,
+    items,
+    notifyContextValue,
   };
 
   return (
@@ -107,10 +121,22 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
 
 const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props => {
   const { suggestions, multipleAllowedTags } = props as FBGContextOptions;
+  const [items, setItems] = useState<ItemsProviderType[]>([]);
+  const notify = (owner: string, newItems: ItemsType[]) => setItems(
+    (oldItems: ItemsProviderType[]) => oldItems
+      .filter(n => n.owner !== owner)
+      .concat(
+        newItems.map(n => ({ ...n, owner })),
+      ),
+  );
+
+  const notifyContextValue = useMemo(() => ({ notify }), [setItems]);
   return (
       <FilterByGroupProvider
         suggestions={suggestions}
         multipleAllowedTags={multipleAllowedTags}
+        items={items}
+        notifyContextValue={notifyContextValue}
       >
         <Component {...props} />
       </FilterByGroupProvider>
@@ -146,6 +172,18 @@ const withTagProps = (
 
 const withFBGSuggestions = ({ suggestions }: FBGContextOptions) => addProps({ suggestions });
 
+const useRegisterItem = (items: ItemsType[]) => {
+  const owner = useRef(v1()).current;
+  const { notify } = useContext(NotifyContext);
+  useEffect(
+    () => {
+      notify(owner, items || []);
+      return () => notify(owner, []);
+    },
+    [notify, owner, items],
+  );
+};
+
 export default FilterByGroupContext;
 export {
   FilterByGroupContext,
@@ -154,4 +192,5 @@ export {
   withFBGSuggestions,
   withTagProps,
   useIsFilterTagSelected,
+  useRegisterItem,
 };

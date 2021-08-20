@@ -62,9 +62,25 @@ export type NodeTagType = {
   tags: TagType[],
 };
 
+export type ItemsType = {
+  id: string,
+};
+
+export type ItemsProviderType = ItemsType & {
+  owner: string,
+};
+
+export type Notifier = (owner: string, items: ItemsType[]) => void;
+
+export type NotifyContextType = {
+  notify: Notifier,
+};
+
 export type FBGContextOptions = {
   suggestions?: TagType[],
   multipleAllowedTags?: boolean,
+  items?: ItemsType[],
+  notifyContextValue?: NotifyContextType,
 };
 
 export type SuggestionsRefType = {
