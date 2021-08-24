@@ -70,4 +70,6 @@ const asTaggableItem = (
   withNode,
   withNodeKey(nodeKey),
 );
+
 export default asTaggableItem;
+export { asTaggableItem };
