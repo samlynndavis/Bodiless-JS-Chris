@@ -82,7 +82,7 @@ describe('createPages', () => {
     ];
     it('creates a page with the specified template', async () => {
       prepareMocks(files);
-      await createPages({ actions: actions, graphql, getNode });
+      await createPages({ actions, graphql, getNode });
       const pageObject = actions.createPage.mock.calls[0][0];
       const expected = {
         path: '/products/shampoo/',
@@ -116,7 +116,7 @@ describe('createPages', () => {
     ];
     it('creates subpage with template specified in the parent page', async () => {
       prepareMocks(files);
-      await createPages({ actions: actions, graphql, getNode });
+      await createPages({ actions, graphql, getNode });
       const parentPageObject = actions.createPage.mock.calls[0][0];
       const parentExpected = {
         path: '/products/',

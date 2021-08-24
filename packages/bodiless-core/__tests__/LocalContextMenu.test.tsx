@@ -74,6 +74,7 @@ const MockContextProvider: FC<Props> = ({
   });
 
   return (
+    // eslint-disable-next-line react/jsx-pascal-case
     <PageEditContext.context.Provider value={mockPageContext}>
       {children}
     </PageEditContext.context.Provider>

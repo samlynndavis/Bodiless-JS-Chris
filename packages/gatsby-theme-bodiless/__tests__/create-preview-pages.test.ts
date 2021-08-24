@@ -60,7 +60,7 @@ describe('createPages', () => {
     it('generates preview pages on development environment', async () => {
       process.env.NODE_ENV = 'development';
       prepareMocks(templates);
-      await createPages({ actions: actions, graphql, getNode });
+      await createPages({ actions, graphql, getNode });
       const expectedPage = {
         path: '/___templates/_default/',
         component: './src/templates/_default.jsx',
@@ -73,7 +73,7 @@ describe('createPages', () => {
     it('does not generate templates on production environment', async () => {
       process.env.NODE_ENV = 'production';
       prepareMocks(templates);
-      await createPages({ actions: actions, graphql, getNode });
+      await createPages({ actions, graphql, getNode });
       expect(actions.createPage).not.toHaveBeenCalled();
     });
   });

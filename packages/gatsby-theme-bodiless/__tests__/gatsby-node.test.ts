@@ -61,7 +61,7 @@ describe('gatsby-node', () => {
       fs.existsSync.mockReturnValue(true);
 
       graphql.mockResolvedValue(generateData(countPages));
-      return createPages({ actions: actions, graphql, getNode })
+      return createPages({ actions, graphql, getNode })
         .then(() => {
           // expect(actions.createPage.mock.calls).toMatchSnapshot();
           expect(actions.createPage.mock.calls.length).toBe(countPages);
@@ -73,7 +73,7 @@ describe('gatsby-node', () => {
       fs.existsSync.mockReturnValueOnce(true);
 
       graphql.mockResolvedValue(generateData(countPages));
-      return createPages({ actions: actions, graphql, getNode })
+      return createPages({ actions, graphql, getNode })
         .then(() => {
           // expect(actions.createPage.mock.calls).toMatchSnapshot();
           expect(actions.createPage.mock.calls.length).toBe(countPages);
@@ -85,7 +85,7 @@ describe('gatsby-node', () => {
       fs.existsSync.mockReturnValueOnce(false);
 
       graphql.mockResolvedValue(generateData(countPages));
-      return createPages({ actions: actions, graphql, getNode })
+      return createPages({ actions, graphql, getNode })
         .then(() => {
           // expect(actions.createPage.mock.calls).toMatchSnapshot();
           expect(actions.createPage.mock.calls.length).toBe(countPages);
