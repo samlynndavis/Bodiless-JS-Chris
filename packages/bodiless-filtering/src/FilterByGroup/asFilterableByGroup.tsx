@@ -16,7 +16,7 @@ import { withSidecarNodes } from '@bodiless/core';
 import { asToken } from '@bodiless/fclasses';
 import { withTagProps } from './FilterByGroupContext';
 import withFilterByTags from './withFilterByTags';
-import asTaggableItem from '../Taggable/asTaggableItem';
+import { asTaggableItem } from '../Taggable/asTaggableItem';
 
 const asFilterableByGroup = (nodeKey: string = '_tags') => asToken(
   withSidecarNodes(

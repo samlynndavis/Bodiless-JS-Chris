@@ -20,10 +20,9 @@ import {
 } from '@bodiless/fclasses';
 
 import type { TagType } from './types';
-import { useFilterByGroupContext } from './FilterByGroupContext';
+import { useFilterByGroupContext, useRegisterItem } from './FilterByGroupContext';
 import { TAG_ANY_KEY } from './FilterByGroupStore';
 import { useTagsAccessors } from '../TagButton';
-import { useRegisterItem } from '../FilterByGroup/FilterByGroupContext';
 
 type ToggleByTagsProps = {
   selectedTags: TagType[];
@@ -76,7 +75,7 @@ const ifTagsNotSelected = ifToggledOff(useToggleByTags);
 
 const asRegisteredItem: Token = Component => props => {
   const { node } = useNode();
-  const [ productUuid ] = node.path.slice(-2);
+  const [productUuid] = node.path.slice(-2);
   useRegisterItem([{ id: productUuid }]);
   return <Component {...props} />;
 };

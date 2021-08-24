@@ -61,5 +61,5 @@ const asTaggableItem = (
   withNodeKey(nodeKey),
 );
 
-export default asTaggableItem;
+// eslint-disable-next-line import/prefer-default-export
 export { asTaggableItem };
