@@ -24,11 +24,12 @@ import {
 } from '@bodiless/core';
 import { withTagButton, TagsNodeType } from '../TagButton';
 import type { UseTagButtonOverrides } from '../TagButton';
-// import { useRegisterItem } from '@bodiless/filtering';
+import { useRegisterItem } from '../FilterByGroup/FilterByGroupContext';
 
 const withUuidRegister: Token = Component => props => {
   const { node } = useNode();
-  console.log('nodepath', node.path);
+  const uuidString = node.path[2];
+  useRegisterItem([{ id: uuidString }]);
   return <Component {...props} />;
 };
 

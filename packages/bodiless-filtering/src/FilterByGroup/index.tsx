@@ -19,6 +19,7 @@ import {
   useIsFilterTagSelected,
   withFBGSuggestions,
   withTagProps,
+  useRegisterItem,
 } from './FilterByGroupContext';
 import asFilterableByGroup from './asFilterableByGroup';
 import { Tag } from './FilterByGroupStore';
@@ -35,6 +36,7 @@ export {
   useFilterByGroupContext,
   useIsFilterTagSelected,
   withTagProps,
+  useRegisterItem,
   Tag,
   asResponsiveFilter,
   withFilterByTags,
