@@ -24,7 +24,6 @@ import React, {
 } from 'react';
 import { v1 } from 'uuid';
 import { uniqBy } from 'lodash';
-import { TagButtonProps } from '@bodiless/components';
 import { Injector, addProps, Enhancer } from '@bodiless/fclasses';
 import {
   FBGContextOptions,
@@ -37,6 +36,7 @@ import {
 } from './types';
 import { useFilterByGroupStore } from './FilterByGroupStore';
 import { useTagsAccessors } from './FilterModel';
+import { TagButtonProps } from '../TagButton';
 
 const NotifyContext = React.createContext<NotifyContextType>({
   notify: () => undefined,

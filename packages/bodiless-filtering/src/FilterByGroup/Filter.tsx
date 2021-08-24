@@ -46,7 +46,6 @@ import {
   asSubList, withDeleteNodeOnUnwrap,
   withSubLists,
   ifViewportIsNot,
-  withTagButton,
 } from '@bodiless/components';
 import { asAccordionBody, asAccordionTitle, asAccordionWrapper } from '@bodiless/accordion';
 import { TAG_ANY_KEY } from './FilterByGroupStore';
@@ -57,6 +56,7 @@ import {
 import { useFilterByGroupContext, withTagProps } from './FilterByGroupContext';
 import { useTagsAccessors } from './FilterModel';
 import { withCategoryListContextProvider, useCategoryListContext } from './CategoryListContext';
+import withTagButton from '../TagButton/withTagButton';
 
 const tagTitleComponentsStart: TagTitleComponents = {
   FilterInputWrapper: Div,

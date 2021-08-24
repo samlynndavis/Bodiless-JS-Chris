@@ -18,10 +18,10 @@ import {
 } from '@bodiless/core';
 import { replaceWith, withoutProps, Enhancer } from '@bodiless/fclasses';
 import { flowRight, differenceWith, isEmpty } from 'lodash';
-import { useTagsAccessors } from '@bodiless/components';
 import { useFilterByGroupContext } from './FilterByGroupContext';
 import { TAG_ANY_KEY } from './FilterByGroupStore';
 import type { TagType } from './types';
+import { useTagsAccessors } from '../TagButton';
 
 type ToggleByTagsProps = {
   selectedTags: TagType[];

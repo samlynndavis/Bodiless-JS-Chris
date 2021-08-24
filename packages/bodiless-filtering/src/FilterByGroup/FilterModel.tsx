@@ -13,11 +13,11 @@
  */
 
 import {
-  useTagsAccessors as useBaseTagsAccessors,
   useListContext,
 } from '@bodiless/components';
 import { useCategoryListContext } from './CategoryListContext';
 import { Tag, TAG_ANY_KEY } from './FilterByGroupStore';
+import { useTagsAccessors as useBaseTagsAccessors } from '../TagButton';
 
 /* eslint-disable import/prefer-default-export */
 
