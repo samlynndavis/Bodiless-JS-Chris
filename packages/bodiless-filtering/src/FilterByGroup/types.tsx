@@ -101,4 +101,5 @@ export type FBGContextType = {
   isTagSelected: (tag: TagType) => boolean,
   clearSelectedTags: () => void,
   multipleAllowedTags: boolean,
+  items: ItemsType[],
 };

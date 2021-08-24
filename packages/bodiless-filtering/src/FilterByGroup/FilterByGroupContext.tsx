@@ -51,6 +51,7 @@ const FilterByGroupContext = createContext<FBGContextType>({
   isTagSelected: () => false,
   clearSelectedTags: () => { },
   multipleAllowedTags: false,
+  items: [],
 });
 
 const useFilterByGroupContext = () => useContext(FilterByGroupContext);
@@ -108,10 +109,9 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
     isTagSelected,
     multipleAllowedTags: multipleAllowedTags || false,
     clearSelectedTags,
-    items,
+    items: items || [],
     notifyContextValue,
   };
-
   return (
     <FilterByGroupContext.Provider value={newValue}>
       {children}
@@ -129,7 +129,6 @@ const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props
         newItems.map(n => ({ ...n, owner })),
       ),
   );
-
   const notifyContextValue = useMemo(() => ({ notify }), [setItems]);
   return (
       <FilterByGroupProvider
