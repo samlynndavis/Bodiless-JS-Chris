@@ -96,7 +96,7 @@ const asTestableFlowContainer = withDesign({
 });
 const ProductFlowContainer = asTestableFlowContainer(FlowContainerDefault);
 
-export default (props: any) => (
+export default (props) => (
   <Page {...props}>
     <Layout>
       <GTMDataLayerProductHelmet />
