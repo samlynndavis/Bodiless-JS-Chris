@@ -47,4 +47,5 @@ export type {
   TagType,
 };
 
+export * from './CategoryListContext';
 export * from './token';

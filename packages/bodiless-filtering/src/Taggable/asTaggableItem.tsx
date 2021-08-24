@@ -11,8 +11,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import React from 'react';
-import { withoutProps, asToken, Token } from '@bodiless/fclasses';
+// import React from 'react';
+import { withoutProps, asToken } from '@bodiless/fclasses';
 import {
   withContextActivator,
   withNode,
@@ -20,18 +20,9 @@ import {
   withLocalContextMenu,
   ifEditable,
   withNodeKey,
-  useNode,
 } from '@bodiless/core';
 import { withTagButton, TagsNodeType } from '../TagButton';
 import type { UseTagButtonOverrides } from '../TagButton';
-import { useRegisterItem } from '../FilterByGroup/FilterByGroupContext';
-
-const withUuidRegister: Token = Component => props => {
-  const { node } = useNode();
-  const uuidString = node.path[2];
-  useRegisterItem([{ id: uuidString }]);
-  return <Component {...props} />;
-};
 
 const emptyValue: TagsNodeType = {
   tags: [],
@@ -60,7 +51,6 @@ const asTaggableItem = (
     'formTitle',
     'setComponentData',
   ]),
-  withUuidRegister,
   ifEditable(
     withTagButton(useOverrides),
     withContextActivator('onClick'),

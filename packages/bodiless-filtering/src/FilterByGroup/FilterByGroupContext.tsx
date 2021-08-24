@@ -174,6 +174,7 @@ const withFBGSuggestions = ({ suggestions }: FBGContextOptions) => addProps({ su
 const useRegisterItem = (items: ItemsType[]) => {
   const owner = useRef(v1()).current;
   const { notify } = useContext(NotifyContext);
+  console.log('NOTIFY: ', notify);
   useEffect(
     () => {
       notify(owner, items || []);

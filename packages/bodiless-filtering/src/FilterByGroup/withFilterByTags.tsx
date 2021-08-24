@@ -12,16 +12,18 @@
  * limitations under the License.
  */
 
-import {
-  ifToggledOn,
-  ifToggledOff,
-} from '@bodiless/core';
-import { replaceWith, withoutProps, Enhancer } from '@bodiless/fclasses';
+import React from 'react';
 import { flowRight, differenceWith, isEmpty } from 'lodash';
+import { ifToggledOn, ifToggledOff, useNode } from '@bodiless/core';
+import {
+  replaceWith, withoutProps, Enhancer, Token,
+} from '@bodiless/fclasses';
+
+import type { TagType } from './types';
 import { useFilterByGroupContext } from './FilterByGroupContext';
 import { TAG_ANY_KEY } from './FilterByGroupStore';
-import type { TagType } from './types';
 import { useTagsAccessors } from '../TagButton';
+import { useRegisterItem } from '../FilterByGroup/FilterByGroupContext';
 
 type ToggleByTagsProps = {
   selectedTags: TagType[];
@@ -72,7 +74,15 @@ const useToggleByTags = ({ selectedTags }: ToggleByTagsProps) => {
 const ifTagsSelected = ifToggledOn(useToggleByTags);
 const ifTagsNotSelected = ifToggledOff(useToggleByTags);
 
+const asRegisteredItem: Token = Component => props => {
+  const { node } = useNode();
+  const [ productUuid ] = node.path.slice(-2);
+  useRegisterItem([{ id: productUuid }]);
+  return <Component {...props} />;
+};
+
 const withFilterByTags: Enhancer<ToggleByTagsProps> = flowRight(
+  ifTagsSelected(asRegisteredItem),
   ifTagsNotSelected(replaceWith(() => null)),
   withoutProps(['selectedTags']),
 );
