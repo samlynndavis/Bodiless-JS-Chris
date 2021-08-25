@@ -80,7 +80,6 @@ export type FBGContextOptions = {
   suggestions?: TagType[],
   multipleAllowedTags?: boolean,
   items?: ItemsType[],
-  notifyContextValue?: NotifyContextType,
 };
 
 export type SuggestionsRefType = {

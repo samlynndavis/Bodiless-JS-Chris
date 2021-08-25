@@ -65,7 +65,6 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
   suggestions,
   multipleAllowedTags,
   items,
-  notifyContextValue,
 }) => {
   const {
     selectTag,
@@ -110,7 +109,6 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
     multipleAllowedTags: multipleAllowedTags || false,
     clearSelectedTags,
     items: items || [],
-    notifyContextValue,
   };
   return (
     <FilterByGroupContext.Provider value={newValue}>
@@ -135,9 +133,10 @@ const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props
         suggestions={suggestions}
         multipleAllowedTags={multipleAllowedTags}
         items={items}
-        notifyContextValue={notifyContextValue}
       >
-        <Component {...props} />
+        <NotifyContext.Provider value={notifyContextValue}>
+          <Component {...props} />
+        </NotifyContext.Provider>
       </FilterByGroupProvider>
   );
 };
@@ -179,7 +178,7 @@ const useRegisterItem = (items: ItemsType[]) => {
       notify(owner, items || []);
       return () => notify(owner, []);
     },
-    [notify, owner, items],
+    [notify, owner],
   );
 };
 
