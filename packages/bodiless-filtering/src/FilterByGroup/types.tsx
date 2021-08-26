@@ -56,6 +56,7 @@ export type FilterByGroupProps = {
 
 export type TagTitleProps = {
   emptyTitleText?: string,
+  onFilter?: () => any,
 } & DesignableComponentsProps<TagTitleComponents>;
 
 export type NodeTagType = {
