@@ -56,7 +56,7 @@ export type FilterByGroupProps = {
 
 export type TagTitleProps = {
   emptyTitleText?: string,
-  onFilter?: () => any,
+  onChange?: () => any,
 } & DesignableComponentsProps<TagTitleComponents>;
 
 export type NodeTagType = {
@@ -95,9 +95,9 @@ export type RegisterSuggestionsProps = {
 export type FBGContextType = {
   getSuggestions: () => TagType[],
   useRegisterSuggestions: () => (tags: TagType[]) => void,
-  selectTag: (tag: TagType) => void,
+  selectTag: (tag: TagType, callback?: Function) => void,
   getSelectedTags: () => TagType[],
-  unSelectTag: (tag: TagType) => void,
+  unSelectTag: (tag: TagType, callback?: Function) => void,
   isTagSelected: (tag: TagType) => boolean,
   clearSelectedTags: () => void,
   multipleAllowedTags: boolean,

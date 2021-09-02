@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 const TAG_ANY_KEY = 'any';
 
@@ -64,8 +64,29 @@ const updateUrlQueryParams = (tags: Tag[]) => {
   window.history.pushState({ path: newurl }, '', newurl);
 };
 
+const useStateCallback = (initialState: any) => {
+  const [state, setState] = useState(initialState);
+  const cbRef = useRef<Function | null>(null); // init mutable ref container for callbacks
+
+  const setStateCallback = useCallback((state, cb) => {
+    cbRef.current = cb; // store current, passed callback in ref
+    setState(state);
+  }, []); // keep object reference stable, exactly like `useState`
+
+  useEffect(() => {
+    // cb.current is `null` on initial render,
+    // so we only invoke callback on state *updates*
+    if (cbRef.current) {
+      cbRef.current(state);
+      cbRef.current = null; // reset callback after execution
+    }
+  }, [state]);
+
+  return [state, setStateCallback];
+};
+
 const useFilterByGroupStore = (settings: FilterByGroupStoreSettings) => {
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useStateCallback([]);
 
   useEffect(() => {
     const tags = readTagsFromQueryParams();
@@ -74,26 +95,26 @@ const useFilterByGroupStore = (settings: FilterByGroupStoreSettings) => {
 
   const { multipleAllowedTags = false } = settings;
 
-  const updateSelectedTags = (tags: Tag[]) => {
+  const updateSelectedTags = (tags: Tag[], callback?: Function) => {
     updateUrlQueryParams(tags);
-    setSelectedTags(tags);
+    setSelectedTags(tags, callback);
   };
 
-  const selectTag = (tag: Tag) => {
+  const selectTag = (tag: Tag, callback?: Function) => {
     updateSelectedTags([
       ...(
         multipleAllowedTags
           ? selectedTags
-          : selectedTags.filter(tag$ => tag.categoryId !== tag$.categoryId)
+          : selectedTags.filter((tag$: Tag) => tag.categoryId !== tag$.categoryId)
       ),
       tag,
-    ]);
+    ], callback);
   };
 
-  const unSelectTag = (tag: Tag) => {
+  const unSelectTag = (tag: Tag, callback?: Function) => {
     updateSelectedTags([
-      ...selectedTags.filter(tag$ => !tag.isEqual(tag$)),
-    ]);
+      ...selectedTags.filter((tag$: Tag) => !tag.isEqual(tag$)),
+    ], callback);
   };
 
   const isTagSelected = (tag: Tag) => {
@@ -102,7 +123,7 @@ const useFilterByGroupStore = (settings: FilterByGroupStoreSettings) => {
       const tagsInCategory = selectedTags.filter(t => t.categoryId === tag.categoryId);
       if (tagsInCategory.length === 0) return true;
     }
-    return selectedTags.find(tag$ => tag.isEqual(tag$)) !== undefined;
+    return selectedTags.find((tag$: Tag) => tag.isEqual(tag$)) !== undefined;
   };
 
   const getSelectedTags = () => selectedTags;

@@ -78,8 +78,8 @@ const withUnselectOnDelete: HOC<{ onDelete?: any }> = Component => props => {
 
 const TagTitleBase: FC<TagTitleProps> = ({
   components,
+  onChange,
   emptyTitleText = 'Select Tag...',
-  onFilter = () => {},
   ...rest
 }) => {
   const {
@@ -101,7 +101,7 @@ const TagTitleBase: FC<TagTitleProps> = ({
 
   if (tag === undefined) return <></>;
 
-  const onSelect = () => (isTagSelected(tag) ? unSelectTag(tag) : selectTag(tag));
+  const onSelect = () => (isTagSelected(tag) ? unSelectTag(tag, onChange) : selectTag(tag, onChange));
   const htmlId = tag.id === TAG_ANY_KEY ? categoryId : tag.id;
 
   return (
@@ -111,7 +111,7 @@ const TagTitleBase: FC<TagTitleProps> = ({
         name={categoryId}
         value={tag.id}
         id={htmlId}
-        onChange={() => { onSelect(); onFilter(); }}
+        onChange={onSelect}
         checked={isTagSelected(tag)}
       />
       {
