@@ -80,7 +80,7 @@ export type NotifyContextType = {
 export type FBGContextOptions = {
   suggestions?: TagType[],
   multipleAllowedTags?: boolean,
-  items?: ItemsType[],
+  items: ItemsType[],
 };
 
 export type SuggestionsRefType = {
@@ -101,5 +101,5 @@ export type FBGContextType = {
   isTagSelected: (tag: TagType) => boolean,
   clearSelectedTags: () => void,
   multipleAllowedTags: boolean,
-  items: ItemsType[],
+  getFilteredItems: () => ItemsType[],
 };
