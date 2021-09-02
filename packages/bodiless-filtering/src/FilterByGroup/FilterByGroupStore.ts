@@ -12,7 +12,9 @@
  * limitations under the License.
  */
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import {
+  useState, useEffect, useRef, useCallback,
+} from 'react';
 
 const TAG_ANY_KEY = 'any';
 
@@ -68,9 +70,9 @@ const useStateCallback = (initialState: any) => {
   const [state, setState] = useState(initialState);
   const cbRef = useRef<Function | null>(null); // init mutable ref container for callbacks
 
-  const setStateCallback = useCallback((state, cb) => {
+  const setStateCallback = useCallback((newState, cb) => {
     cbRef.current = cb; // store current, passed callback in ref
-    setState(state);
+    setState(newState);
   }, []); // keep object reference stable, exactly like `useState`
 
   useEffect(() => {
