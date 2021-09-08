@@ -18,14 +18,16 @@ import {
 import {
   useEditContext,
   withMenuOptions,
+  TMenuOption,
+  MenuOptionsDefinition,
 } from '@bodiless/core';
 
-const useMenuOptions = () => {
+const useMenuOptions = (): TMenuOption[] => {
   const context = useEditContext();
 
-  const menuOptions = [
+  const menuOptions$: TMenuOption[] = [
     {
-      name: 'pagedisable',
+      name: 'page-disable',
       icon: 'visibility_off',
       label: 'Disable',
       group: 'page-group',
@@ -33,13 +35,15 @@ const useMenuOptions = () => {
       handler: () => { alert('PageDisabled'); },
     },
   ];
-  return menuOptions;
+  return menuOptions$;
 };
 
-const withPageDisableButton = withMenuOptions({
+const menuOptions: MenuOptionsDefinition<object> = {
   useMenuOptions,
   name: 'PageDisable',
   root: true,
-});
+};
+
+const withPageDisableButton = withMenuOptions(menuOptions);
 
 export default withPageDisableButton;
