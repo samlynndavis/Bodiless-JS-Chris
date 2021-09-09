@@ -60,11 +60,26 @@ const useIsFilterTagSelected = () => {
   return useFilterByGroupContext().isTagSelected(tag);
 };
 
+const itemsEventBus = {
+  on(event: string, callback: (data: ItemsProviderType[]) => void) {
+    document.addEventListener(event,
+      ((e: CustomEvent) => { callback(e.detail); }) as EventListener);
+  },
+  dispatch(event: string, data: ItemsProviderType[]) {
+    const eventCustom = new CustomEvent(event, { detail: data });
+    document.dispatchEvent(eventCustom);
+  },
+  off(event: string, callback: () => void) {
+    document.removeEventListener(event, callback, false);
+  },
+};
+
 const FilterByGroupProvider: FC<FBGContextOptions> = ({
   children,
   suggestions,
   multipleAllowedTags,
   items,
+  setItemsRegistered,
 }) => {
   const {
     selectTag,
@@ -109,6 +124,7 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
     multipleAllowedTags: multipleAllowedTags || false,
     clearSelectedTags,
     getFilteredItems: () => items,
+    setItemsRegistered,
   };
   return (
     <FilterByGroupContext.Provider value={newValue}>
@@ -120,6 +136,7 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
 const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props => {
   const { suggestions, multipleAllowedTags } = props as FBGContextOptions;
   const [items, setItems] = useState<ItemsProviderType[]>([]);
+  const [itemsRegistered, setItemsRegistered] = useState<boolean>(false);
   const notify = (owner: string, newItems: ItemsType[]) => setItems(
     (oldItems: ItemsProviderType[]) => oldItems
       .filter(n => n.owner !== owner)
@@ -128,11 +145,15 @@ const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props
       ),
   );
   const notifyContextValue = useMemo(() => ({ notify }), [setItems]);
+  if (!itemsRegistered) {
+    itemsEventBus.dispatch('ItemsRegistered', items);
+  }
   return (
       <FilterByGroupProvider
         suggestions={suggestions}
         multipleAllowedTags={multipleAllowedTags}
         items={items}
+        setItemsRegistered={setItemsRegistered}
       >
         <NotifyContext.Provider value={notifyContextValue}>
           <Component {...props} />
@@ -191,4 +212,5 @@ export {
   withTagProps,
   useIsFilterTagSelected,
   useRegisterItem,
+  itemsEventBus,
 };

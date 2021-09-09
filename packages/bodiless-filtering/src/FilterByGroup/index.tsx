@@ -20,6 +20,7 @@ import {
   withFBGSuggestions,
   withTagProps,
   useRegisterItem,
+  itemsEventBus,
 } from './FilterByGroupContext';
 import asFilterableByGroup from './asFilterableByGroup';
 import { Tag } from './FilterByGroupStore';
@@ -40,6 +41,7 @@ export {
   Tag,
   asResponsiveFilter,
   withFilterByTags,
+  itemsEventBus,
 };
 
 export type {

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { ComponentType, HTMLProps } from 'react';
+import { ComponentType, HTMLProps, SetStateAction } from 'react';
 import { TagType as BaseTagType, WithNodeProps } from '@bodiless/core';
 import { StylableProps, DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import { ListProps } from '@bodiless/components';
@@ -81,6 +81,7 @@ export type FBGContextOptions = {
   suggestions?: TagType[],
   multipleAllowedTags?: boolean,
   items: ItemsType[],
+  setItemsRegistered: React.Dispatch<SetStateAction<boolean>>,
 };
 
 export type SuggestionsRefType = {
