@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import {
+import React, {
   useCallback,
 } from 'react';
 import {
@@ -20,7 +20,43 @@ import {
   withMenuOptions,
   TMenuOption,
   MenuOptionsDefinition,
+  useMenuOptionUI,
+  ContextMenuForm,
 } from '@bodiless/core';
+
+import type {
+  ContextMenuFormProps,
+} from '@bodiless/core';
+
+const DisabledForm = (props: ContextMenuFormProps) => {
+  const { ComponentFormFieldTitle, ComponentFormTitle } = useMenuOptionUI();
+  return (
+    <ContextMenuForm {...props}>
+      <ComponentFormTitle>
+        Disabled
+      </ComponentFormTitle>
+      <ComponentFormFieldTitle>
+        This page is now disabled.
+        <br />
+        You can enable it again at this URL.
+      </ComponentFormFieldTitle>
+    </ContextMenuForm>
+  );
+};
+
+const EnabledForm = (props: ContextMenuFormProps) => {
+  const { ComponentFormFieldTitle, ComponentFormTitle } = useMenuOptionUI();
+  return (
+    <ContextMenuForm {...props}>
+      <ComponentFormTitle>
+        Enabled
+      </ComponentFormTitle>
+      <ComponentFormFieldTitle>
+        This page is now enabled.
+      </ComponentFormFieldTitle>
+    </ContextMenuForm>
+  );
+};
 
 const useMenuOptions = (): TMenuOption[] => {
   const context = useEditContext();
@@ -32,7 +68,15 @@ const useMenuOptions = (): TMenuOption[] => {
       label: 'Disable',
       group: 'page-group',
       isDisabled: useCallback(() => !context.isEdit, []),
-      handler: () => { alert('PageDisabled'); },
+      handler: () => DisabledForm,
+    },
+    {
+      name: 'page-enable',
+      icon: 'visibility',
+      label: 'Enable',
+      group: 'page-group',
+      isDisabled: useCallback(() => !context.isEdit, []),
+      handler: () => EnabledForm,
     },
   ];
   return menuOptions$;
@@ -41,7 +85,7 @@ const useMenuOptions = (): TMenuOption[] => {
 const menuOptions: MenuOptionsDefinition<object> = {
   useMenuOptions,
   name: 'PageDisable',
-  root: true,
+  peer: true,
 };
 
 const withPageDisableButton = withMenuOptions(menuOptions);
