@@ -183,7 +183,7 @@ export type ContextMenuUI = {
   ComponentFormWarning?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ComponentFormLink?: ComponentType<HTMLProps<HTMLAnchorElement>> | string;
   Form?: ComponentType<HTMLProps<HTMLFormElement>> | string;
-  Tooltip?: ComponentType<Tooltip['props']>;
+  Tooltip?: typeof Tooltip | ComponentType<{overlay: ReactNode | (() => ReactNode);}>;
   ReactTags?: ComponentType<ReactTagsFieldProps>;
   ComponentFormList?: ComponentType<HTMLProps<HTMLUListElement>> | string;
   ComponentFormListItem?: ComponentType<HTMLProps<HTMLLIElement>> | string;

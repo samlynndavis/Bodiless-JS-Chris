@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import ReactTooltip from 'rc-tooltip';
 import { flow } from 'lodash';
 import {
@@ -47,7 +47,10 @@ export const ToolbarDivider = addClasses(
   'bl-bg-gray bl-w-grid-12 bl--ml-grid-2 bl-mb-grid-3 bl-h-px',
 )(Hr);
 
-export const GlobalTooltip: FC<ReactTooltip['props']> = props => (
+type Props = {
+  overlay: ReactNode | (() => ReactNode);
+};
+export const GlobalTooltip: FC<Props> = (props: Props) => (
   <ReactTooltip
     align={{
       offset: [5, 0],
