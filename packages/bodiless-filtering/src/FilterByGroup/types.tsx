@@ -80,6 +80,9 @@ export type NotifyContextType = {
 export type FBGContextOptions = {
   suggestions?: TagType[],
   multipleAllowedTags?: boolean,
+};
+
+export type FBGContextItemsOptions = FBGContextOptions & {
   items: ItemsType[],
   setItemsRegistered: React.Dispatch<SetStateAction<boolean>>,
 };
