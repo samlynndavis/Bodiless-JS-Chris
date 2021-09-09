@@ -33,7 +33,6 @@ import {
   ItemsType,
   NotifyContextType,
   ItemsProviderType,
-  FBGContextItemsOptions,
 } from './types';
 import { useFilterByGroupStore } from './FilterByGroupStore';
 import { useTagsAccessors } from './FilterModel';
@@ -75,7 +74,7 @@ const itemsEventBus = {
   },
 };
 
-const FilterByGroupProvider: FC<FBGContextItemsOptions> = ({
+const FilterByGroupProvider: FC<FBGContextOptions> = ({
   children,
   suggestions,
   multipleAllowedTags,
@@ -124,7 +123,7 @@ const FilterByGroupProvider: FC<FBGContextItemsOptions> = ({
     isTagSelected,
     multipleAllowedTags: multipleAllowedTags || false,
     clearSelectedTags,
-    getFilteredItems: () => items,
+    getFilteredItems: items ? () => items : () => [],
     setItemsRegistered,
   };
   return (
@@ -134,8 +133,8 @@ const FilterByGroupProvider: FC<FBGContextItemsOptions> = ({
   );
 };
 
-const withFilterByGroupContext: Enhancer<FBGContextItemsOptions> = Component => props => {
-  const { suggestions, multipleAllowedTags } = props as FBGContextItemsOptions;
+const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props => {
+  const { suggestions, multipleAllowedTags } = props as FBGContextOptions;
   const [items, setItems] = useState<ItemsProviderType[]>([]);
   const [itemsRegistered, setItemsRegistered] = useState<boolean>(false);
   const notify = (owner: string, newItems: ItemsType[]) => setItems(
