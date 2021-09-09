@@ -52,6 +52,7 @@ const FilterByGroupContext = createContext<FBGContextType>({
   clearSelectedTags: () => { },
   multipleAllowedTags: false,
   getFilteredItems: () => [],
+  setItemsRegistered: () => {},
 });
 
 const useFilterByGroupContext = () => useContext(FilterByGroupContext);
@@ -69,8 +70,9 @@ const itemsEventBus = {
     const eventCustom = new CustomEvent(event, { detail: data });
     document.dispatchEvent(eventCustom);
   },
-  off(event: string, callback: () => void) {
-    document.removeEventListener(event, callback, false);
+  off(event: string, callback: (data: ItemsProviderType[]) => void) {
+    document.removeEventListener(event,
+      ((e: CustomEvent) => { callback(e.detail); }) as EventListener, false);
   },
 };
 
@@ -124,7 +126,7 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
     multipleAllowedTags: multipleAllowedTags || false,
     clearSelectedTags,
     getFilteredItems: items ? () => items : () => [],
-    setItemsRegistered,
+    setItemsRegistered: setItemsRegistered || (() => {}),
   };
   return (
     <FilterByGroupContext.Provider value={newValue}>

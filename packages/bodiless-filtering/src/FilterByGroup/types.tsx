@@ -103,4 +103,5 @@ export type FBGContextType = {
   clearSelectedTags: () => void,
   multipleAllowedTags: boolean,
   getFilteredItems: () => ItemsType[],
+  setItemsRegistered: React.Dispatch<SetStateAction<boolean>>,
 };
