@@ -14,6 +14,8 @@
 
 import React, {
   useCallback,
+  useEffect,
+  useState,
 } from 'react';
 import {
   useEditContext,
@@ -28,31 +30,44 @@ import type {
   ContextMenuFormProps,
 } from '@bodiless/core';
 
-const DisabledForm = (props: ContextMenuFormProps) => {
-  const { ComponentFormFieldTitle, ComponentFormTitle } = useMenuOptionUI();
-  return (
-    <ContextMenuForm {...props}>
-      <ComponentFormTitle>
-        Disabled
-      </ComponentFormTitle>
-      <ComponentFormFieldTitle>
-        This page is now disabled.
-        <br />
-        You can enable it again at this URL.
-      </ComponentFormFieldTitle>
-    </ContextMenuForm>
-  );
+// @TEMP
+const testDelay = (() => (
+  new Promise(resolve => {
+    setTimeout(() => {
+      resolve('done');
+    }, 10000);
+  })
+))();
+
+type FormState = {
+  pageDisabled: boolean,
+  formIcon?: string,
+  formTitle: string,
+  formDescription: string[],
 };
 
-const EnabledForm = (props: ContextMenuFormProps) => {
+type FormProps = ContextMenuFormProps & {state: FormState};
+
+const initialFormState: FormState = {
+  pageDisabled: false,
+  formTitle: 'Disabled',
+  formDescription: [
+    'This page is now disabled.',
+    'You can enable it again at this URL.',
+  ],
+  formIcon: 'visibility_off',
+};
+
+const Form = (props: FormProps) => {
   const { ComponentFormFieldTitle, ComponentFormTitle } = useMenuOptionUI();
+  const { state: { formTitle, formDescription } } = props;
   return (
     <ContextMenuForm {...props}>
       <ComponentFormTitle>
-        Enabled
+        {formTitle}
       </ComponentFormTitle>
       <ComponentFormFieldTitle>
-        This page is now enabled.
+        {formDescription.map(string => <p>{string}</p>)}
       </ComponentFormFieldTitle>
     </ContextMenuForm>
   );
@@ -60,23 +75,29 @@ const EnabledForm = (props: ContextMenuFormProps) => {
 
 const useMenuOptions = (): TMenuOption[] => {
   const context = useEditContext();
-
+  const [state, setState] = useState<FormState>(initialFormState);
+  useEffect(() => {
+    (async () => {
+      await testDelay;
+      setState(currentState => ({
+        ...currentState,
+        formTitle: 'Enabled',
+        formIcon: 'visibility',
+      }));
+    })();
+  }, []);
+  const render = (formProps: FormProps) => (
+    <Form {...formProps} state={state} />
+  );
+  const { formTitle, formIcon } = state;
   const menuOptions$: TMenuOption[] = [
     {
       name: 'page-disable',
-      icon: 'visibility_off',
-      label: 'Disable',
+      icon: formIcon,
+      label: formTitle,
       group: 'page-group',
       isDisabled: useCallback(() => !context.isEdit, []),
-      handler: () => DisabledForm,
-    },
-    {
-      name: 'page-enable',
-      icon: 'visibility',
-      label: 'Enable',
-      group: 'page-group',
-      isDisabled: useCallback(() => !context.isEdit, []),
-      handler: () => EnabledForm,
+      handler: () => render,
     },
   ];
   return menuOptions$;
