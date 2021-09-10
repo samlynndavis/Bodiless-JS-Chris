@@ -12,13 +12,15 @@
  * limitations under the License.
  */
 
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import ReactTooltip from 'rc-tooltip';
 import { flow } from 'lodash';
 import {
   addClasses, removeClasses, addProps,
 } from '@bodiless/fclasses';
-import { ContextMenu, ContextMenuUI, ContextMenuProps } from '@bodiless/core';
+import {
+  ContextMenu, ContextMenuUI, ContextMenuProps, TooltipProps,
+} from '@bodiless/core';
 import {
   ComponentFormTitle, ComponentFormCloseButton, ComponentFormLabel, ComponentFormText,
   ComponentFormButton, ToolbarIcon, Div, Hr, ToolbarButton, ComponentFormUnwrapButton,
@@ -47,10 +49,7 @@ export const ToolbarDivider = addClasses(
   'bl-bg-gray bl-w-grid-12 bl--ml-grid-2 bl-mb-grid-3 bl-h-px',
 )(Hr);
 
-type Props = {
-  overlay: ReactNode | (() => ReactNode);
-};
-export const GlobalTooltip: FC<Props> = (props: Props) => (
+export const GlobalTooltip: FC<TooltipProps> = (props: TooltipProps) => (
   <ReactTooltip
     align={{
       offset: [5, 0],

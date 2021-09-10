@@ -216,15 +216,11 @@ const ContextMenuOverlay = observer<{}>(() => {
   return <Menu options={options} />;
 });
 
-type Props = {
-  children?: ReactElement;
-};
-
 /*
  * Wraps its children in a tooltip displaying local context menu options, but only if the
  * current context is the innermost context to which a local context menu has been assigned.
  */
-const LocalContextMenu: FC<Props> = ({ children }) => {
+const LocalContextMenu: FC<{children?: ReactElement}> = ({ children }) => {
   const context = useEditContext();
   // console.log('render tooltip for', context.name);
   // let the context know it has a localMenu
