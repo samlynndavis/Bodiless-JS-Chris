@@ -21,7 +21,7 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
     const reactPath = path.resolve('./node_modules', 'react');
     const reactAlias = fs.existsSync(reactPath) ? { react: reactPath } : {};
     actions.setWebpackConfig({
-      devtool: 'cheap-module-source-map',
+      devtool: false,
       resolve: {
         plugins: [new TsconfigPathsPlugin()],
         alias: reactAlias,
