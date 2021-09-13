@@ -17,7 +17,7 @@ import React, {
 } from 'react';
 import {
   withNode,
-  // useNode,
+  useNode,
   useEditContext,
   withMenuOptions,
   TMenuOption,
@@ -36,6 +36,7 @@ import type {
 
 type FormState = {
   pageDisabled: boolean,
+  buttonLabel: string,
   formIcon?: string,
   formTitle: string,
   formDescription: string[],
@@ -43,14 +44,25 @@ type FormState = {
 
 type FormProps = ContextMenuFormProps & {state: FormState};
 
-const initialFormState: FormState = {
+const enabledFormState: FormState = {
   pageDisabled: false,
+  buttonLabel: 'Disable',
   formTitle: 'Disabled',
   formDescription: [
     'This page is now disabled.',
     'You can enable it again at this URL.',
   ],
   formIcon: 'visibility_off',
+};
+
+const disabledFormState: FormState = {
+  pageDisabled: true,
+  buttonLabel: 'Enable',
+  formTitle: 'Enabled',
+  formDescription: [
+    'This page is now enabled.',
+  ],
+  formIcon: 'visibility',
 };
 
 const Form = (props: FormProps) => {
@@ -68,12 +80,14 @@ const Form = (props: FormProps) => {
   );
 };
 
-// type Data = {
-//   disabledPages?: string[],
-// };
+type Data = {
+  disabledPages?: string[],
+};
 
 const useMenuOptions = (): TMenuOption[] => {
-  // const { node } = useNode<Data>();
+  const { node } = useNode<Data>();
+  const { disabledPages } = node.data;
+  const isPageDisabled = disabledPages && disabledPages.indexOf(node.pagePath) > -1;
   // const disablePage = () => {
   //   const disabledPages = node.data.disabledPages || [];
   //   node.setData({
@@ -91,16 +105,16 @@ const useMenuOptions = (): TMenuOption[] => {
   // };
 
   const context = useEditContext();
-  const formState: FormState = initialFormState;
+  const formState: FormState = isPageDisabled ? disabledFormState : enabledFormState;
   const render = (formProps: FormProps) => (
     <Form {...formProps} state={formState} />
   );
-  const { formTitle, formIcon } = formState;
+  const { buttonLabel, formIcon } = formState;
   const menuOptions$: TMenuOption[] = [
     {
       name: 'page-disable',
       icon: formIcon,
-      label: formTitle,
+      label: buttonLabel,
       group: 'page-group',
       isDisabled: useCallback(() => !context.isEdit, []),
       handler: () => render,
