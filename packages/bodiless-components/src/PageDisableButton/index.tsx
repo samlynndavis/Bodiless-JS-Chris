@@ -14,30 +14,25 @@
 
 import React, {
   useCallback,
-  useEffect,
-  useState,
 } from 'react';
 import {
+  withNode,
+  // useNode,
   useEditContext,
   withMenuOptions,
   TMenuOption,
   MenuOptionsDefinition,
   useMenuOptionUI,
   ContextMenuForm,
+  withNodeKey,
 } from '@bodiless/core';
+import {
+  asToken,
+} from '@bodiless/fclasses';
 
 import type {
   ContextMenuFormProps,
 } from '@bodiless/core';
-
-// @TEMP
-const testDelay = (() => (
-  new Promise(resolve => {
-    setTimeout(() => {
-      resolve('done');
-    }, 10000);
-  })
-))();
 
 type FormState = {
   pageDisabled: boolean,
@@ -73,23 +68,34 @@ const Form = (props: FormProps) => {
   );
 };
 
+// type Data = {
+//   disabledPages?: string[],
+// };
+
 const useMenuOptions = (): TMenuOption[] => {
+  // const { node } = useNode<Data>();
+  // const disablePage = () => {
+  //   const disabledPages = node.data.disabledPages || [];
+  //   node.setData({
+  //     ...node.data,
+  //     disabledPages: disabledPages.concat([node.pagePath]),
+  //   });
+  // };
+
+  // const enablePage = () => {
+  //   const disabledPages = node.data.disabledPages || [];
+  //   node.setData({
+  //     ...node.data,
+  //     disabledPages: disabledPages.filter(path => path !== node.pagePath),
+  //   });
+  // };
+
   const context = useEditContext();
-  const [state, setState] = useState<FormState>(initialFormState);
-  useEffect(() => {
-    (async () => {
-      await testDelay;
-      setState(currentState => ({
-        ...currentState,
-        formTitle: 'Enabled',
-        formIcon: 'visibility',
-      }));
-    })();
-  }, []);
+  const formState: FormState = initialFormState;
   const render = (formProps: FormProps) => (
-    <Form {...formProps} state={state} />
+    <Form {...formProps} state={formState} />
   );
-  const { formTitle, formIcon } = state;
+  const { formTitle, formIcon } = formState;
   const menuOptions$: TMenuOption[] = [
     {
       name: 'page-disable',
@@ -106,9 +112,16 @@ const useMenuOptions = (): TMenuOption[] => {
 const menuOptions: MenuOptionsDefinition<object> = {
   useMenuOptions,
   name: 'PageDisable',
-  peer: true,
+  root: true,
 };
 
-const withPageDisableButton = withMenuOptions(menuOptions);
+const withPageDisableButton = asToken(
+  withMenuOptions(menuOptions),
+  withNode,
+  withNodeKey({
+    nodeKey: 'disabled-pages',
+    nodeCollection: 'site',
+  }),
+);
 
 export default withPageDisableButton;
