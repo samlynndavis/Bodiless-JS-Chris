@@ -67,8 +67,10 @@ const itemsEventBus = {
       ((e: CustomEvent) => { callback(e.detail); }) as EventListener);
   },
   dispatch(event: string, data: ItemsProviderType[]) {
-    const eventCustom = new CustomEvent(event, { detail: data });
-    document.dispatchEvent(eventCustom);
+    if (typeof window !== 'undefined') {
+      const eventCustom = new CustomEvent(event, { detail: data });
+      document.dispatchEvent(eventCustom);
+    }
   },
   off(event: string, callback: (data: ItemsProviderType[]) => void) {
     document.removeEventListener(event,
