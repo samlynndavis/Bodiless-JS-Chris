@@ -13,6 +13,7 @@
  */
 
 import React, {
+  useState,
   useCallback,
 } from 'react';
 import {
@@ -35,7 +36,6 @@ import type {
 } from '@bodiless/core';
 
 type FormState = {
-  pageDisabled: boolean,
   buttonLabel: string,
   formIcon?: string,
   formTitle: string,
@@ -45,9 +45,8 @@ type FormState = {
 type FormProps = ContextMenuFormProps & {state: FormState};
 
 const enabledFormState: FormState = {
-  pageDisabled: false,
   buttonLabel: 'Disable',
-  formTitle: 'Disabled',
+  formTitle: 'Page Disabled',
   formDescription: [
     'This page is now disabled.',
     'You can enable it again at this URL.',
@@ -56,9 +55,8 @@ const enabledFormState: FormState = {
 };
 
 const disabledFormState: FormState = {
-  pageDisabled: true,
   buttonLabel: 'Enable',
-  formTitle: 'Enabled',
+  formTitle: 'Page Enabled',
   formDescription: [
     'This page is now enabled.',
   ],
@@ -86,29 +84,34 @@ type Data = {
 
 const useMenuOptions = (): TMenuOption[] => {
   const { node } = useNode<Data>();
-  const { disabledPages } = node.data;
-  const isPageDisabled = disabledPages && disabledPages.indexOf(node.pagePath) > -1;
-  // const disablePage = () => {
-  //   const disabledPages = node.data.disabledPages || [];
-  //   node.setData({
-  //     ...node.data,
-  //     disabledPages: disabledPages.concat([node.pagePath]),
-  //   });
-  // };
-
-  // const enablePage = () => {
-  //   const disabledPages = node.data.disabledPages || [];
-  //   node.setData({
-  //     ...node.data,
-  //     disabledPages: disabledPages.filter(path => path !== node.pagePath),
-  //   });
-  // };
-
   const context = useEditContext();
+  const { disabledPages = [] } = node.data;
+  const isPageInDisabledList = disabledPages && disabledPages.indexOf(node.pagePath) > -1;
+  const [isPageDisabled, setPageDisabled] = useState<boolean>(isPageInDisabledList);
+
+  const togglePageVisibility = (): void => {
+    if (isPageInDisabledList) {
+      // Enable
+      node.setData({
+        ...node.data,
+        disabledPages: disabledPages.filter(path => path !== node.pagePath),
+      });
+      setPageDisabled(false);
+    } else {
+      // Disable
+      node.setData({
+        ...node.data,
+        disabledPages: disabledPages.concat([node.pagePath]),
+      });
+      setPageDisabled(true);
+    }
+  };
+
   const formState: FormState = isPageDisabled ? disabledFormState : enabledFormState;
-  const render = (formProps: FormProps) => (
-    <Form {...formProps} state={formState} />
-  );
+  const render = (formProps: FormProps) => {
+    togglePageVisibility();
+    return <Form {...formProps} state={formState} />;
+  };
   const { buttonLabel, formIcon } = formState;
   const menuOptions$: TMenuOption[] = [
     {
@@ -116,7 +119,7 @@ const useMenuOptions = (): TMenuOption[] => {
       icon: formIcon,
       label: buttonLabel,
       group: 'page-group',
-      isDisabled: useCallback(() => !context.isEdit, []),
+      isHidden: useCallback(() => !context.isEdit, []),
       handler: () => render,
     },
   ];
