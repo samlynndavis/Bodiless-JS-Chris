@@ -16,6 +16,17 @@ require('dotenv').config({
 
 const SITEURL = process.env.SITE_URL;
 
+const getDisabledPages = () => {
+  try {
+    const json = fs.readFileSync('./src/data/site/disabled-pages.json');
+    const data = JSON.parse(json.toString());
+    return data.disabledPages || [];
+  } catch (e) {
+    return [];
+  }
+};
+const disabledPages = getDisabledPages();
+
 // Gatsby plugins list.
 const plugins = [
   {
@@ -43,6 +54,7 @@ const plugins = [
   },
   {
     resolve: 'gatsby-plugin-sitemap',
+    options: { excludes: disabledPages },
   },
   ...createDefaultContentPlugins(
     ...getSampleDefaultContentConfig(),
@@ -70,17 +82,6 @@ if (tagManagerEnabled) {
   });
 }
 
-const getDisabledPages = () => {
-  try {
-    const json = fs.readFileSync('./src/data/site/disabled-pages.json');
-    const data = JSON.parse(json.toString());
-    return data.disabledPages || [];
-  } catch (e) {
-    return [];
-  }
-};
-
-const disabledPages = getDisabledPages();
 if (process.env.NODE_ENV === 'production' && disabledPages.length > 0) {
   plugins.push({
     resolve: 'gatsby-plugin-exclude',
