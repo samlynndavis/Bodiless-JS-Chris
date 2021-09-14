@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const {
   createDefaultContentPlugins,
@@ -66,6 +67,24 @@ if (tagManagerEnabled) {
       // gtmPreview: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME',
       dataLayerName: 'globalDataLayer',
     },
+  });
+}
+
+const getDisabledPages = () => {
+  try {
+    const json = fs.readFileSync('./src/data/site/disabled-pages.json');
+    const data = JSON.parse(json.toString());
+    return data.disabledPages || [];
+  } catch (e) {
+    return [];
+  }
+};
+
+const disabledPages = getDisabledPages();
+if (process.env.NODE_ENV === 'production' && disabledPages.length > 0) {
+  plugins.push({
+    resolve: 'gatsby-plugin-exclude',
+    options: { paths: disabledPages },
   });
 }
 
