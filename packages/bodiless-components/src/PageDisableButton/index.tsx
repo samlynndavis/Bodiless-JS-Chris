@@ -78,30 +78,52 @@ const Form = (props: FormProps) => {
   );
 };
 
+type DisabledOptions = {
+  page: boolean,
+  menuLinks: boolean,
+  contentLinks: boolean,
+  indexing: boolean,
+};
+
 type Data = {
-  disabledPages?: string[],
+  disabledPages?: {
+    [path: string]: DisabledOptions,
+  },
 };
 
 const useMenuOptions = (): TMenuOption[] => {
   const { node } = useNode<Data>();
+  const { pagePath, data } = node;
+  const { disabledPages = {} } = data;
   const context = useEditContext();
-  const { disabledPages = [] } = node.data;
-  const isPageInDisabledList = disabledPages && disabledPages.indexOf(node.pagePath) > -1;
+  const isPageInDisabledList = disabledPages[pagePath]?.page !== undefined;
   const [isPageDisabled, setPageDisabled] = useState<boolean>(isPageInDisabledList);
 
   const togglePageVisibility = (): void => {
     if (isPageInDisabledList) {
       // Enable
       node.setData({
-        ...node.data,
-        disabledPages: disabledPages.filter(path => path !== node.pagePath),
+        ...data,
+        disabledPages: {
+          ...disabledPages,
+          [pagePath]: {
+            ...disabledPages[pagePath],
+            page: false,
+          },
+        },
       });
       setPageDisabled(false);
     } else {
       // Disable
       node.setData({
-        ...node.data,
-        disabledPages: disabledPages.concat([node.pagePath]),
+        ...data,
+        disabledPages: {
+          ...disabledPages,
+          [pagePath]: {
+            ...disabledPages[pagePath],
+            page: true,
+          },
+        },
       });
       setPageDisabled(true);
     }

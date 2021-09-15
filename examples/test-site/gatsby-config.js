@@ -20,8 +20,13 @@ const getDisabledPages = () => {
   try {
     const json = fs.readFileSync('./src/data/site/disabled-pages.json');
     const data = JSON.parse(json.toString());
-    return data.disabledPages || [];
-  } catch (e) {
+    const disabledPages$ = data.disabledPages || {};
+    const disabledPages = Object.keys(disabledPages$).filter(
+      item => disabledPages$[item].page === true,
+    );
+    return disabledPages;
+  } catch (error) {
+    console.error(error);
     return [];
   }
 };
