@@ -423,6 +423,7 @@ describe('Grouped options', () => {
       setMockOptions(initialOptions);
       const options = getRenderedOptions();
       const group = options.find(o => o.Component === 'group');
+
       expect(isHidden(group)).toBeFalsy();
     });
 
@@ -436,6 +437,7 @@ describe('Grouped options', () => {
       setMockOptions(initialOptions);
       const options = getRenderedOptions();
       const group = options.find(o => o.Component === 'group');
+
       expect(isHidden(group)).toBeTruthy();
     });
   });
