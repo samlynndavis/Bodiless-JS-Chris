@@ -17,6 +17,7 @@
 import React, { FC, useEffect } from 'react';
 import { mount, shallow } from 'enzyme';
 import { v1 } from 'uuid';
+import Tooltip from 'rc-tooltip';
 import PageEditContext from '../src/PageEditContext';
 import LocalContextMenu from '../src/components/LocalContextMenu';
 import ContextMenu from '../src/components/ContextMenu';
@@ -145,7 +146,7 @@ describe('LocalContextMenu', () => {
       </MockContextProvider>,
     );
 
-    expect(wrapper.find('Tooltip').get(0).props.visible).toBe(true);
+    expect(wrapper.find(Tooltip).get(0).props.visible).toBe(true);
 
     // Available menu option names from rendered tooltip.
     const optionNames = wrapper.find('ContextMenu').get(0).props.options.map((item: any) => item.name);
@@ -161,7 +162,7 @@ describe('LocalContextMenu', () => {
       </MockContextProvider>,
     );
 
-    expect(wrapper.find('Tooltip[visible=true]')).toHaveLength(0);
+    expect(wrapper.find(Tooltip).filter('[visible=true]')).toHaveLength(0);
   });
 
   it('renders visible Tooltip when ContextProvider is inner most.', () => {
@@ -171,7 +172,7 @@ describe('LocalContextMenu', () => {
       </MockContextProvider>,
     );
 
-    expect(wrapper.find('Tooltip[visible=true]')).toHaveLength(1);
+    expect(wrapper.find(Tooltip).filter('[visible=true]')).toHaveLength(1);
   });
 
   it('does not render visible Tooltip when local tooltips are disabled via edit context.', () => {
@@ -180,7 +181,7 @@ describe('LocalContextMenu', () => {
         <LocalContextMenu><Foo /></LocalContextMenu>
       </MockContextProvider>,
     );
-    expect(wrapper.find('Tooltip[visible=true]')).toHaveLength(0);
+    expect(wrapper.find(Tooltip).filter('[visible=true]')).toHaveLength(0);
   });
 });
 
