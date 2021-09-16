@@ -72,7 +72,11 @@ const Form = (props: FormProps) => {
         {formTitle}
       </ComponentFormTitle>
       <ComponentFormFieldTitle>
-        {formDescription.map(string => <p>{string}</p>)}
+        {
+          // We are not going to modify this array, so let's use the index as a key
+          // eslint-disable-next-line react/no-array-index-key
+          formDescription.map((string, index) => <p key={index}>{string}</p>)
+        }
       </ComponentFormFieldTitle>
     </ContextMenuForm>
   );
