@@ -21,7 +21,7 @@ import {
   withSwitcherButton,
   OnNodeErrorNotification,
 } from '@bodiless/core';
-import { withShowDesignKeys } from '@bodiless/fclasses';
+import { Pre, withShowDesignKeys } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import { withPageDisableButton } from '@bodiless/components';
@@ -52,7 +52,7 @@ const getUI = (ui: UI = {}): FinalUI => ({ ...defaultUI, ...ui });
 const NotificationButton = withNotificationButton(Fragment);
 const SwitcherButton = withSwitcherButton(Fragment);
 const NewPageButton = withNewPageButton(Fragment);
-const DisablePageButton = withPageDisableButton(Fragment);
+const DisablePageButton = withPageDisableButton(Pre);
 
 const GitButtons: FC = () => {
   useGitButtons();

@@ -15,7 +15,9 @@
 import React, {
   useState,
   useCallback,
+  useEffect,
 } from 'react';
+import { useObserver, observer } from 'mobx-react-lite';
 import {
   withNode,
   useNode,
@@ -28,7 +30,7 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import {
-  asToken,
+  asToken, Token,
 } from '@bodiless/fclasses';
 
 import type {
@@ -100,11 +102,10 @@ const useMenuOptions = (): TMenuOption[] => {
   const { pagePath, data } = node;
   const { disabledPages = {} } = data;
   const context = useEditContext();
-  const isPageInDisabledList = disabledPages[pagePath]?.page !== undefined;
-  const [isPageDisabled, setPageDisabled] = useState<boolean>(isPageInDisabledList);
+  const isPageDisabled = disabledPages[pagePath]?.page === true;
 
   const togglePageVisibility = (): void => {
-    if (isPageInDisabledList) {
+    if (isPageDisabled) {
       // Enable
       node.setData({
         ...data,
@@ -116,7 +117,6 @@ const useMenuOptions = (): TMenuOption[] => {
           },
         },
       });
-      setPageDisabled(false);
     } else {
       // Disable
       node.setData({
@@ -129,11 +129,11 @@ const useMenuOptions = (): TMenuOption[] => {
           },
         },
       });
-      setPageDisabled(true);
     }
   };
 
   const formState: FormState = isPageDisabled ? disabledFormState : enabledFormState;
+
   const render = (formProps: FormProps) => {
     togglePageVisibility();
     return <Form {...formProps} state={formState} />;
@@ -149,17 +149,23 @@ const useMenuOptions = (): TMenuOption[] => {
       handler: () => render,
     },
   ];
-  return menuOptions$;
+  return useObserver(() => menuOptions$);
 };
 
 const menuOptions: MenuOptionsDefinition<object> = {
   useMenuOptions,
   name: 'PageDisable',
-  root: true,
+  peer: true,
 };
+
+const withDataDisplayed: Token = Component => observer(props => {
+  const { node } = useNode<any>();
+  return <Component {...props}>{JSON.stringify(node.data, null, '\t')}</Component>;
+});
 
 const withPageDisableButton = asToken(
   withMenuOptions(menuOptions),
+  withDataDisplayed,
   withNode,
   withNodeKey({
     nodeKey: 'disabled-pages',
