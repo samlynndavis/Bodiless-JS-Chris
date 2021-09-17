@@ -13,11 +13,9 @@
  */
 
 import React, {
-  useState,
   useCallback,
-  useEffect,
 } from 'react';
-import { useObserver, observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite';
 import {
   withNode,
   useNode,
@@ -30,7 +28,7 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import {
-  asToken, Token,
+  asToken, Token, withoutProps,
 } from '@bodiless/fclasses';
 
 import type {
@@ -39,12 +37,25 @@ import type {
 
 type FormState = {
   buttonLabel: string,
-  formIcon?: string,
+  formIcon: string,
   formTitle: string,
   formDescription: string[],
 };
 
 type FormProps = ContextMenuFormProps & {state: FormState};
+
+type DataItem = {
+  pageDisabled: boolean,
+  menuLinksDisabled?: boolean,
+  contentLinksDisabled?: boolean,
+  indexingDisabled?: boolean,
+};
+
+type Data = {
+  disabledPages?: {
+    [path: string]: DataItem,
+  },
+};
 
 const enabledFormState: FormState = {
   buttonLabel: 'Disable',
@@ -63,6 +74,14 @@ const disabledFormState: FormState = {
     'This page is now enabled.',
   ],
   formIcon: 'visibility',
+};
+
+const useIsPageDisabled = () => {
+  const { node } = useNode<Data>();
+  const { pagePath, data } = node;
+  const { disabledPages = {} } = data;
+  const isPageDisabled = disabledPages[pagePath]?.pageDisabled === true;
+  return isPageDisabled;
 };
 
 const Form = (props: FormProps) => {
@@ -84,25 +103,12 @@ const Form = (props: FormProps) => {
   );
 };
 
-type DisabledOptions = {
-  page: boolean,
-  menuLinks: boolean,
-  contentLinks: boolean,
-  indexing: boolean,
-};
-
-type Data = {
-  disabledPages?: {
-    [path: string]: DisabledOptions,
-  },
-};
-
 const useMenuOptions = (): TMenuOption[] => {
   const { node } = useNode<Data>();
   const { pagePath, data } = node;
   const { disabledPages = {} } = data;
   const context = useEditContext();
-  const isPageDisabled = disabledPages[pagePath]?.page === true;
+  const isPageDisabled = useIsPageDisabled();
 
   const togglePageVisibility = (): void => {
     if (isPageDisabled) {
@@ -113,7 +119,7 @@ const useMenuOptions = (): TMenuOption[] => {
           ...disabledPages,
           [pagePath]: {
             ...disabledPages[pagePath],
-            page: false,
+            pageDisabled: false,
           },
         },
       });
@@ -125,7 +131,7 @@ const useMenuOptions = (): TMenuOption[] => {
           ...disabledPages,
           [pagePath]: {
             ...disabledPages[pagePath],
-            page: true,
+            pageDisabled: true,
           },
         },
       });
@@ -149,23 +155,30 @@ const useMenuOptions = (): TMenuOption[] => {
       handler: () => render,
     },
   ];
-  return useObserver(() => menuOptions$);
+  return menuOptions$;
 };
 
 const menuOptions: MenuOptionsDefinition<object> = {
   useMenuOptions,
   name: 'PageDisable',
-  peer: true,
+  root: true,
 };
 
-const withDataDisplayed: Token = Component => observer(props => {
-  const { node } = useNode<any>();
-  return <Component {...props}>{JSON.stringify(node.data, null, '\t')}</Component>;
+const withNodeObserver: Token = Component => observer(props => {
+  const isPageDisabled = useIsPageDisabled();
+  // Update component's prop on data change to force re-rendering.
+  return <Component {...props} page-disabled={isPageDisabled.toString()} />;
 });
 
+// Remove temporary props before rendering.
+// Fix "Invalid prop `...` supplied to `React.Fragment`.
+// React.Fragment can only have `key` and `children` props.
+const withPropsCleanUp = withoutProps(['page-disabled', 'data-bl-design-key']);
+
 const withPageDisableButton = asToken(
+  withPropsCleanUp,
   withMenuOptions(menuOptions),
-  withDataDisplayed,
+  withNodeObserver,
   withNode,
   withNodeKey({
     nodeKey: 'disabled-pages',

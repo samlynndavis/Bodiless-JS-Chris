@@ -22,7 +22,7 @@ const getDisabledPages = () => {
     const data = JSON.parse(json.toString());
     const disabledPages$ = data.disabledPages || {};
     const disabledPages = Object.keys(disabledPages$).filter(
-      item => disabledPages$[item].page === true,
+      item => disabledPages$[item].pageDisabled === true,
     );
     return disabledPages;
   } catch (error) {
