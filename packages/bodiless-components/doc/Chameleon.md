@@ -139,7 +139,7 @@ const VisibilityToggle = flow(
   withDesign(toggleVisibilityDesign),
 )(BaseAvailability);
 
-const VisibilityTogglerapper = flow(
+const VisibilityToggleWrapper = flow(
   withChameleonButton(() => ({ label: 'Avail' })),
   withChameleonContext('decomposed-toggle', { component: 'Available' }),
   withDesign(toggleVisibilityDesign),
@@ -147,10 +147,10 @@ const VisibilityTogglerapper = flow(
 
 ...
 
-<VisibilityTogglerapper>
+<VisibilityToggleWrapper>
   <div>Chameleons!</div>
   <VisibilityToggle isAvailable />
-</VisibilityTogglerapper>
+</VisibilityToggleWrapper>
 ```
 
 Here we've decomposed `asBodilessChameleon` into three constituent parts:
@@ -358,7 +358,7 @@ A few things to note:
 - We need to remove the 'productId' prop (provided by `asAddToCart`) because
   this prop doesn't make sense for the underlying component. We do this *inside*
   `applyChameleon` so that it won't be stripped when the toggle state is on.
-- We use `withChameleoonCompnentFormControls` to provide an `unwrap` and
+- We use `withChameleonComponentFormControls` to provide an `unwrap` and
   `onSubmit` prop to our context menu form. These allow the form to return the
   chameleon state off and on respectively.
 - We need to remove the 'unwrap' prop which after it is consumed by our context
