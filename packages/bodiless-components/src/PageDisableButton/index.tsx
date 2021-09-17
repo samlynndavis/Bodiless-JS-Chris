@@ -76,11 +76,14 @@ const disabledFormState: FormState = {
   formIcon: 'visibility',
 };
 
-const useIsPageDisabled = () => {
+const useIsPageDisabled = (path?: string) => {
   const { node } = useNode<Data>();
   const { pagePath, data } = node;
   const { disabledPages = {} } = data;
-  const isPageDisabled = disabledPages[pagePath]?.pageDisabled === true;
+
+  const path$ = path || pagePath;
+
+  const isPageDisabled = disabledPages[path$]?.pageDisabled === true;
   return isPageDisabled;
 };
 
@@ -187,3 +190,6 @@ const withPageDisableButton = asToken(
 );
 
 export default withPageDisableButton;
+export {
+  useIsPageDisabled,
+};
