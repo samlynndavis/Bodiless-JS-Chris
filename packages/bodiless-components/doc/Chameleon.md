@@ -8,7 +8,7 @@ components in this package, including lists (with toggled sublists) and link
 toggles.
 
 The Chameleon API builds on [the Design API](..).  A component wrapped in
-`asBodilessChamelion()` will accept a variable design (similar to the
+`asBodilessChameleon()` will accept a variable design (similar to the
 [Flow Container](..)). It also provides a context menu button which allows
 the user to choose among the designs which were provided.  Here is a 
 simple example (using the [FClasses API](..) and TailwindCSS for styling):
@@ -157,7 +157,7 @@ Here we've decomposed `asBodilessChameleon` into three constituent parts:
 - `withChameleonContext` establishes a connection to the Bodiless data system
   and makes the current state of the chameleon available to its children. It takes
   the `nodeKey` and `defaultData` as arguments.
-- `withChamelionButton` adds a context menu button which provides the Chameleon
+- `withChameleonButton` adds a context menu button which provides the Chameleon
   UX. It takes a normal Bodiless `useOverrides` hook as an argument. This can be
   used, for example, to modify the behavior or appearance of the button based on
   its state.
@@ -253,7 +253,7 @@ const AvailabilityAccordionToggle = flow(
 
 In `withChameleonAvailability` we invoke the `useChameleonContext()` hook to
 get current state of the Chameleon, and use that information to set the prop
-directly. This is essentially a custom version of `applyChamelion` which
+directly. This is essentially a custom version of `applyChameleon` which
 avoids re-creating the child tree.
 
 ### Component Form Toggle
