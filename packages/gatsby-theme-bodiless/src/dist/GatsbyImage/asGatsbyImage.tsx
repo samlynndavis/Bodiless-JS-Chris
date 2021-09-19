@@ -157,9 +157,6 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
       };
     }
 
-    // @todo: image data matching
-    // https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#image-options
-    // @todo: convert gatsbyImg to GatsbyPluginImageProps
     const image: IGatsbyImageData = {
       layout,
       width,
