@@ -27,7 +27,7 @@ import { Tag } from './FilterByGroupStore';
 import type {
   FilterByGroupComponents,
   TagType,
-  ItemsType,
+  FilteredItemType,
 } from './types';
 import { asResponsiveFilter } from './Filter';
 import withFilterByTags from './withFilterByTags';
@@ -51,7 +51,7 @@ export {
 export type {
   FilterByGroupComponents,
   TagType,
-  ItemsType,
+  FilteredItemType,
 };
 
 export * from './CategoryListContext';
