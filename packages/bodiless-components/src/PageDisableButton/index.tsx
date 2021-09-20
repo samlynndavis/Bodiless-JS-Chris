@@ -13,7 +13,7 @@
  */
 
 import React, {
-  useCallback,
+  useCallback, useEffect,
 } from 'react';
 import { observer } from 'mobx-react-lite';
 import {
@@ -28,7 +28,7 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import {
-  asToken, Token, withoutProps,
+  asToken, HOC, Token, withOnlyProps,
 } from '@bodiless/fclasses';
 
 import type {
@@ -40,9 +40,10 @@ type FormState = {
   formIcon: string,
   formTitle: string,
   formDescription: string[],
+  togglePageVisibility: () => void,
 };
 
-type FormProps = ContextMenuFormProps & {state: FormState};
+type FormProps = ContextMenuFormProps & { state: FormState };
 
 type DataItem = {
   pageDisabled: boolean,
@@ -65,9 +66,11 @@ const enabledFormState: FormState = {
     'You can enable it again at this URL.',
   ],
   formIcon: 'visibility_off',
+  togglePageVisibility: () => null,
 };
 
 const disabledFormState: FormState = {
+  ...enabledFormState,
   buttonLabel: 'Enable',
   formTitle: 'Page Enabled',
   formDescription: [
@@ -80,16 +83,21 @@ const useIsPageDisabled = (path?: string) => {
   const { node } = useNode<Data>();
   const { pagePath, data } = node;
   const { disabledPages = {} } = data;
-
   const path$ = path || pagePath;
-
   const isPageDisabled = disabledPages[path$]?.pageDisabled === true;
   return isPageDisabled;
 };
 
 const Form = (props: FormProps) => {
   const { ComponentFormFieldTitle, ComponentFormTitle } = useMenuOptionUI();
-  const { state: { formTitle, formDescription } } = props;
+  const {
+    state: { formTitle, formDescription, togglePageVisibility },
+  } = props;
+
+  useEffect(() => {
+    togglePageVisibility();
+  }, []);
+
   return (
     <ContextMenuForm {...props}>
       <ComponentFormTitle>
@@ -144,8 +152,14 @@ const useMenuOptions = (): TMenuOption[] => {
   const formState: FormState = isPageDisabled ? disabledFormState : enabledFormState;
 
   const render = (formProps: FormProps) => {
-    togglePageVisibility();
-    return <Form {...formProps} state={formState} />;
+    const props = {
+      ...formProps,
+      state: {
+        ...formState,
+        togglePageVisibility,
+      },
+    };
+    return <Form {...props} />;
   };
   const { buttonLabel, formIcon } = formState;
   const menuOptions$: TMenuOption[] = [
@@ -176,7 +190,7 @@ const withNodeObserver: Token = Component => observer(props => {
 // Remove temporary props before rendering.
 // Fix "Invalid prop `...` supplied to `React.Fragment`.
 // React.Fragment can only have `key` and `children` props.
-const withPropsCleanUp = withoutProps(['page-disabled', 'data-bl-design-key']);
+const withPropsCleanUp = withOnlyProps('key', 'children') as HOC;
 
 const withPageDisableButton = asToken(
   withPropsCleanUp,
