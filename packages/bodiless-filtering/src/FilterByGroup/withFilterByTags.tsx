@@ -76,7 +76,7 @@ const ifTagsNotSelected = ifToggledOff(useToggleByTags);
 const asRegisteredItem: Token = Component => props => {
   const { node } = useNode();
   const [productUuid] = node.path.slice(-2);
-  useRegisterItem([{ id: productUuid }]);
+  useRegisterItem({ id: productUuid });
   return <Component {...props} />;
 };
 

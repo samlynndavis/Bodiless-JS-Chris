@@ -30,9 +30,8 @@ import {
   SuggestionsRefType,
   FBGContextType,
   TagType,
-  ItemsType,
+  FilteredItemType,
   NotifyContextType,
-  ItemsProviderType,
 } from './types';
 import { useFilterByGroupStore } from './FilterByGroupStore';
 import { useTagsAccessors } from './FilterModel';
@@ -62,17 +61,17 @@ const useIsFilterTagSelected = () => {
 };
 
 const itemsEventBus = {
-  on(event: string, callback: (data: ItemsProviderType[]) => void) {
+  on(event: string, callback: (data: FilteredItemType[]) => void) {
     document.addEventListener(event,
       ((e: CustomEvent) => { callback(e.detail); }) as EventListener);
   },
-  dispatch(event: string, data: ItemsProviderType[]) {
+  dispatch(event: string, data: FilteredItemType[]) {
     if (typeof window !== 'undefined') {
       const eventCustom = new CustomEvent(event, { detail: data });
       document.dispatchEvent(eventCustom);
     }
   },
-  off(event: string, callback: (data: ItemsProviderType[]) => void) {
+  off(event: string, callback: (data: FilteredItemType[]) => void) {
     document.removeEventListener(event,
       ((e: CustomEvent) => { callback(e.detail); }) as EventListener, false);
   },
@@ -138,15 +137,21 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
 };
 
 const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props => {
-  const { suggestions, multipleAllowedTags } = props as FBGContextOptions;
-  const [items, setItems] = useState<ItemsProviderType[]>([]);
+  const { suggestions, multipleAllowedTags } = props;
+  const [items, setItems] = useState<FilteredItemType[]>([]);
   const [itemsRegistered, setItemsRegistered] = useState<boolean>(false);
-  const notify = (owner: string, newItems: ItemsType[]) => setItems(
-    (oldItems: ItemsProviderType[]) => oldItems
-      .filter(n => n.owner !== owner)
-      .concat(
-        newItems.map(n => ({ ...n, owner })),
-      ),
+  const notify = (newItem: FilteredItemType) => setItems(
+    (items: FilteredItemType[]) => {
+      const itemIndex = items.findIndex(x => x.id === newItem.id);
+
+      if (itemIndex === -1) {
+        items.push(newItem);
+      } else {
+        items[itemIndex] = newItem;
+      }
+
+      return items;
+    }
   );
   const notifyContextValue = useMemo(() => ({ notify }), [setItems]);
   if (!itemsRegistered) {
@@ -195,13 +200,13 @@ const withTagProps = (
 
 const withFBGSuggestions = ({ suggestions }: FBGContextOptions) => addProps({ suggestions });
 
-const useRegisterItem = (items: ItemsType[]) => {
+const useRegisterItem = (item: FilteredItemType) => {
   const owner = useRef(v1()).current;
   const { notify } = useContext(NotifyContext);
   useEffect(
     () => {
-      notify(owner, items || []);
-      return () => notify(owner, []);
+      notify({ ...item, isDisplayed: true });
+      return () => notify({ ...item, isDisplayed: false });
     },
     [notify, owner],
   );

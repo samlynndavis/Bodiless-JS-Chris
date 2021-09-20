@@ -63,15 +63,12 @@ export type NodeTagType = {
   tags: TagType[],
 };
 
-export type ItemsType = {
+export type FilteredItemType = {
   id: string,
+  isDisplayed?: boolean,
 };
 
-export type ItemsProviderType = ItemsType & {
-  owner: string,
-};
-
-export type Notifier = (owner: string, items: ItemsType[]) => void;
+export type Notifier = (item: FilteredItemType) => void;
 
 export type NotifyContextType = {
   notify: Notifier,
@@ -80,7 +77,7 @@ export type NotifyContextType = {
 export type FBGContextOptions = {
   suggestions?: TagType[],
   multipleAllowedTags?: boolean,
-  items?: ItemsType[],
+  items?: FilteredItemType[],
   setItemsRegistered?: React.Dispatch<SetStateAction<boolean>>,
 };
 
@@ -102,6 +99,6 @@ export type FBGContextType = {
   isTagSelected: (tag: TagType) => boolean,
   clearSelectedTags: () => void,
   multipleAllowedTags: boolean,
-  getFilteredItems: () => ItemsType[],
+  getFilteredItems: () => FilteredItemType[],
   setItemsRegistered: React.Dispatch<SetStateAction<boolean>>,
 };
