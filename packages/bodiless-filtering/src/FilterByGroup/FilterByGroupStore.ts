@@ -89,10 +89,12 @@ const useStateCallback = (initialState: any) => {
 
 const useFilterByGroupStore = (settings: FilterByGroupStoreSettings) => {
   const [selectedTags, setSelectedTags] = useStateCallback([]);
+  const [filtersInitialized, setFiltersInitialized] = useState<boolean>(false);
 
   useEffect(() => {
     const tags = readTagsFromQueryParams();
     setSelectedTags(tags);
+    setFiltersInitialized(true);
   }, []);
 
   const { multipleAllowedTags = false } = settings;
@@ -138,6 +140,7 @@ const useFilterByGroupStore = (settings: FilterByGroupStoreSettings) => {
     getSelectedTags,
     isTagSelected,
     clearSelectedTags,
+    filtersInitialized,
   };
 };
 

@@ -140,6 +140,8 @@ const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props
   const { suggestions, multipleAllowedTags } = props;
   const [items, setItems] = useState<FilteredItemType[]>([]);
   const [itemsRegistered, setItemsRegistered] = useState<boolean>(false);
+  const { filtersInitialized } = useFilterByGroupStore({ multipleAllowedTags });
+
   const notify = (newItem: FilteredItemType) => setItems(
     (items: FilteredItemType[]) => {
       const itemIndex = items.findIndex(x => x.id === newItem.id);
@@ -154,7 +156,7 @@ const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props
     }
   );
   const notifyContextValue = useMemo(() => ({ notify }), [setItems]);
-  if (!itemsRegistered) {
+  if (!itemsRegistered && filtersInitialized) {
     itemsEventBus.dispatch('ItemsRegistered', items);
   }
   return (
