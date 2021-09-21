@@ -150,7 +150,7 @@ const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props
         items[itemIndex] = newItem;
       }
 
-      return items;
+      return [...items];
     }
   );
   const notifyContextValue = useMemo(() => ({ notify }), [setItems]);
