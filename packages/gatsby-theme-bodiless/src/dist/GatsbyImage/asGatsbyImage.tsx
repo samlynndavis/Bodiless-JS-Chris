@@ -14,6 +14,7 @@
 
 import React, { ComponentType as CT, HTMLProps } from 'react';
 import flow from 'lodash/flow';
+import omit from 'lodash/omit';
 import {
   GatsbyImage as GatsbyPluginImage,
   GatsbyImageProps as GatsbyPluginImageProps,
@@ -206,7 +207,7 @@ const asDesignableGatsbyImage = (ImageComponent: CT<any>) => {
 
     if (imageData !== undefined) {
       return (
-        <GatsbyImage {...rest} alt={alt} image={imageData} />
+        <GatsbyImage {...omit(rest, 'canonicalPreset', '_nodeKey')} alt={alt} image={imageData} />
       );
     }
 
@@ -244,7 +245,7 @@ export const isGatsbyImage = ({ gatsbyImg }: GatsbyImageProps) => gatsbyImg !== 
  * hoc to remove props configured for GatsbyImage in image data
  * and to remove props added during image gatsby nodes creation
  *
- * it can be useful for cases when an image is procesed by gatsby
+ * it can be useful for cases when an image is processed by gatsby
  * but Gatsby Image is not enabled for the image
  */
 export const withoutGatsbyImageProps = withoutProps([
