@@ -145,9 +145,6 @@ const FBGNotificationProvider: FC<any> = ({
   items,
   setItems,
 }) => {
-  const { filtersInitialized } = useFilterByGroupContext();
-  console.log('NEW - filtersInitialized: ', filtersInitialized);
-  console.log('NEW - items: ', items);
   const notify = (newItem: FilteredItemType) => setItems(
     (items: FilteredItemType[]) => {
       const itemIndex = items.findIndex(x => x.id === newItem.id);
@@ -163,10 +160,7 @@ const FBGNotificationProvider: FC<any> = ({
   );
 
   const notifyContextValue = useMemo(() => ({ notify }), [setItems]);
-  if (!itemsRegistered && filtersInitialized) {
-    console.log('NEW - DISPATCH - items: ', items);
-    itemsEventBus.dispatch('ItemsRegistered', items);
-  }
+  itemsEventBus.dispatch('ItemsRegistered', items);
 
   return (
     <NotifyContext.Provider value={notifyContextValue}>
@@ -178,34 +172,14 @@ const FBGNotificationProvider: FC<any> = ({
 const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props => {
   const { suggestions, multipleAllowedTags } = props;
   const [items, setItems] = useState<FilteredItemType[]>([]);
-  const [itemsRegistered, setItemsRegistered] = useState<boolean>(false);
 
-  // const notify = (newItem: FilteredItemType) => setItems(
-  //   (items: FilteredItemType[]) => {
-  //     const itemIndex = items.findIndex(x => x.id === newItem.id);
-
-  //     if (itemIndex === -1) {
-  //       items.push(newItem);
-  //     } else {
-  //       items[itemIndex] = newItem;
-  //     }
-
-  //     return [...items];
-  //   }
-  // );
-  // const notifyContextValue = useMemo(() => ({ notify }), [setItems]);
-  // if (!itemsRegistered) {
-  //   itemsEventBus.dispatch('ItemsRegistered', items);
-  // }
   return (
       <FilterByGroupProvider
         suggestions={suggestions}
         multipleAllowedTags={multipleAllowedTags}
         items={items}
-        setItemsRegistered={setItemsRegistered}
       >
         <FBGNotificationProvider
-          itemsRegistered={itemsRegistered}
           setItems={setItems}
           items={items}
         >
@@ -247,12 +221,15 @@ const withFBGSuggestions = ({ suggestions }: FBGContextOptions) => addProps({ su
 const useRegisterItem = (item: FilteredItemType) => {
   const owner = useRef(v1()).current;
   const { notify } = useContext(NotifyContext);
+  const { filtersInitialized } = useFilterByGroupContext();
   useEffect(
     () => {
-      notify({ ...item, isDisplayed: true });
-      return () => notify({ ...item, isDisplayed: false });
+      if (filtersInitialized) {
+        notify({ ...item, isDisplayed: true });
+        return () => notify({ ...item, isDisplayed: false });
+      }
     },
-    [notify, owner],
+    [notify, owner, filtersInitialized],
   );
 };
 
