@@ -28,6 +28,8 @@ hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
         set -e
+        apt-get update
+        apt-get install libssl-dev libkrb5-dev
         npm run bootstrap
         npm run build:packages
         npm run build -- --scope @bodiless/test-site
