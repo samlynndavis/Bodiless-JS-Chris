@@ -28,11 +28,7 @@ hooks:
     # Build hooks can modify the application files on disk but not access any services like databases.
     build: |
         set -e
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-        echo 'eval $(/app/.linuxbrew/bin/brew shellenv)' >>~/.profile
-        eval $(/app/.linuxbrew/bin/brew shellenv)
-        brew analytics off
-        brew install krb5
+        bash $PLATFORM_APP_DIR/scripts/install_brew_packages.sh krb5
         npm run bootstrap
         npm run build:packages
         npm run build -- --scope @bodiless/test-site
