@@ -16,7 +16,9 @@
 
 import path from 'path';
 
-const getPackageRoot = (packagePath: string | number) => path.dirname(path.dirname(String(packagePath)));
+const getPackageRoot = (packagePath: string | number) => path.dirname(
+  path.dirname(String(packagePath)),
+);
 
 const getBodilessPackages = () => [
   {
