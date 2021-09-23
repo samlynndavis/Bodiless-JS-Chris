@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { ComponentType, HTMLProps, SetStateAction } from 'react';
+import { ComponentType, HTMLProps } from 'react';
 import { TagType as BaseTagType, WithNodeProps } from '@bodiless/core';
 import { StylableProps, DesignableComponentsProps, DesignableProps } from '@bodiless/fclasses';
 import { ListProps } from '@bodiless/components';
@@ -66,19 +66,19 @@ export type NodeTagType = {
 export type FilteredItemType = {
   id: string,
   isDisplayed?: boolean,
+  selectedTags?: TagType[],
 };
 
-export type Notifier = (item: FilteredItemType) => void;
+export type RegisterItem = (item: FilteredItemType) => void;
 
-export type NotifyContextType = {
-  notify: Notifier,
+export type RegisterItemContextType = {
+  registerItem: RegisterItem,
 };
 
 export type FBGContextOptions = {
   suggestions?: TagType[],
   multipleAllowedTags?: boolean,
   items?: FilteredItemType[],
-  setItemsRegistered?: React.Dispatch<SetStateAction<boolean>>,
 };
 
 export type SuggestionsRefType = {
@@ -100,6 +100,5 @@ export type FBGContextType = {
   clearSelectedTags: () => void,
   multipleAllowedTags: boolean,
   getFilteredItems: () => FilteredItemType[],
-  setItemsRegistered: React.Dispatch<SetStateAction<boolean>>,
   filtersInitialized?: boolean,
 };

@@ -31,14 +31,14 @@ import {
   FBGContextType,
   TagType,
   FilteredItemType,
-  NotifyContextType,
+  RegisterItemContextType,
 } from './types';
-import { useFilterByGroupStore } from './FilterByGroupStore';
+import { useFilterByGroupStore, Tag } from './FilterByGroupStore';
 import { useTagsAccessors } from './FilterModel';
 import { TagButtonProps } from '../TagButton';
 
-const NotifyContext = React.createContext<NotifyContextType>({
-  notify: () => undefined,
+const RegisterItemContext = React.createContext<RegisterItemContextType>({
+  registerItem: () => undefined,
 });
 
 const FilterByGroupContext = createContext<FBGContextType>({
@@ -51,7 +51,6 @@ const FilterByGroupContext = createContext<FBGContextType>({
   clearSelectedTags: () => { },
   multipleAllowedTags: false,
   getFilteredItems: () => [],
-  setItemsRegistered: () => {},
   filtersInitialized: false,
 });
 
@@ -83,7 +82,6 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
   suggestions,
   multipleAllowedTags,
   items,
-  setItemsRegistered,
 }) => {
   const {
     selectTag,
@@ -129,7 +127,6 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
     multipleAllowedTags: multipleAllowedTags || false,
     clearSelectedTags,
     getFilteredItems: items ? () => items : () => [],
-    setItemsRegistered: setItemsRegistered || (() => {}),
     filtersInitialized,
   };
   return (
@@ -145,7 +142,7 @@ const FBGNotificationProvider: FC<any> = ({
   items,
   setItems,
 }) => {
-  const notify = (newItem: FilteredItemType) => setItems(
+  const registerItem = (newItem: FilteredItemType) => setItems(
     (items: FilteredItemType[]) => {
       const itemIndex = items.findIndex(x => x.id === newItem.id);
 
@@ -159,18 +156,18 @@ const FBGNotificationProvider: FC<any> = ({
     }
   );
 
-  const notifyContextValue = useMemo(() => ({ notify }), [setItems]);
+  const notifyContextValue = useMemo(() => ({ registerItem }), [setItems]);
   itemsEventBus.dispatch('ItemsRegistered', items);
 
   return (
-    <NotifyContext.Provider value={notifyContextValue}>
+    <RegisterItemContext.Provider value={notifyContextValue}>
       {children}
-    </NotifyContext.Provider>
+    </RegisterItemContext.Provider>
   );
 };
 
 const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props => {
-  const { suggestions, multipleAllowedTags } = props;
+  const { suggestions, multipleAllowedTags, ...rest } = props;
   const [items, setItems] = useState<FilteredItemType[]>([]);
 
   return (
@@ -183,7 +180,7 @@ const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props
           setItems={setItems}
           items={items}
         >
-          <Component {...props} />
+          <Component {...rest} />
         </FBGNotificationProvider>
       </FilterByGroupProvider>
   );
@@ -218,18 +215,19 @@ const withTagProps = (
 
 const withFBGSuggestions = ({ suggestions }: FBGContextOptions) => addProps({ suggestions });
 
-const useRegisterItem = (item: FilteredItemType) => {
+const useRegisterItem = (
+  item: FilteredItemType, isDisplayed: boolean, selectedTags: Tag[]
+) => {
   const owner = useRef(v1()).current;
-  const { notify } = useContext(NotifyContext);
+  const { registerItem } = useContext(RegisterItemContext);
   const { filtersInitialized } = useFilterByGroupContext();
   useEffect(
     () => {
       if (filtersInitialized) {
-        notify({ ...item, isDisplayed: true });
-        return () => notify({ ...item, isDisplayed: false });
+        registerItem({ ...item, selectedTags, isDisplayed });
       }
     },
-    [notify, owner, filtersInitialized],
+    [registerItem, owner, filtersInitialized, selectedTags, isDisplayed],
   );
 };
 
