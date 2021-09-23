@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import React, { Fragment } from 'react';
+import React, { Fragment, FC } from 'react';
 import { differenceWith, isEmpty, omit } from 'lodash';
-import { ifToggledOn, ifToggledOff, useNode } from '@bodiless/core';
+import { ifToggledOn, ifToggledOff, useNode, ContentNode } from '@bodiless/core';
 import {
   Enhancer,
 } from '@bodiless/fclasses';
@@ -25,7 +25,8 @@ import { TAG_ANY_KEY } from './FilterByGroupStore';
 import { useTagsAccessors } from '../TagButton';
 
 type ToggleByTagsProps = {
-  selectedTags: FilterTagType[];
+  selectedTags: FilterTagType[],
+  getFilteredItemData: (node: ContentNode<any>) => any,
 };
 
 /**
@@ -73,12 +74,16 @@ const useToggleByTags = ({ selectedTags }: ToggleByTagsProps) => {
 const ifTagsSelected = ifToggledOn(useToggleByTags);
 const ifTagsNotSelected = ifToggledOff(useToggleByTags);
 
-const withFilterByTags: Enhancer<ToggleByTagsProps> = Component => (props: any) => {
-  const { node } = useNode();
-  const [id] = node.path.slice(-2);
-  const isDisplayed = useToggleByTags(props); 
-  useRegisterItem({ id, isDisplayed });
-  return isDisplayed ? <Component {...omit(props, 'selectedTags') as any} /> : <Fragment />;
+const withFilterByTags: Enhancer<ToggleByTagsProps> = Component => {
+  const WithFilterByTags: FC<any> = (props: ToggleByTagsProps) => {
+    const { node } = useNode();
+    const [id] = node.path.slice(-2);
+    const isDisplayed = useToggleByTags(props); 
+    const { getFilteredItemData = () => {}, ...rest } = props;
+    useRegisterItem({ id, isDisplayed, data: getFilteredItemData(node) });
+    return isDisplayed ? <Component {...omit(rest, 'selectedTags') as any} /> : <Fragment />;
+  };
+  return WithFilterByTags;
 };
 
 export { ifTagsSelected, ifTagsNotSelected };

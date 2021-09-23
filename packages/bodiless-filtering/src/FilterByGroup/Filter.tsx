@@ -100,6 +100,7 @@ const TagTitleBase: FC<TagTitleProps> = ({
   } = useFilterByGroupContext();
 
   if (tag === undefined) return <></>;
+  const checked = isTagSelected(tag);
 
   const onSelect = () => (isTagSelected(tag) ? unSelectTag(tag, onChange) : selectTag(tag, onChange));
   const htmlId = tag.id === TAG_ANY_KEY ? categoryId : tag.id;
@@ -112,7 +113,7 @@ const TagTitleBase: FC<TagTitleProps> = ({
         value={tag.id}
         id={htmlId}
         onChange={onSelect}
-        checked={isTagSelected(tag)}
+        checked={checked}
       />
       {
         isEmpty(tag.name)

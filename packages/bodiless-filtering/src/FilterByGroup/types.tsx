@@ -63,9 +63,10 @@ export type NodeTagType = {
   tags: TagType[],
 };
 
-export type FilteredItemType = {
+export type FilteredItemType<D = any> = {
   id: string,
   isDisplayed?: boolean,
+  data: D,
 };
 
 export type RegisterItem = (item: FilteredItemType) => void;

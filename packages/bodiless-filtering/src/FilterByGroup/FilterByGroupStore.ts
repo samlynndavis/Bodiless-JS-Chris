@@ -38,7 +38,7 @@ class Tag implements FilterTagType {
   }
 
   isEqual(tag: TagType) {
-    return tag.id === this.id;
+    return tag.id === this.id && (tag as FilterTagType).categoryName === this.categoryName;
   }
 }
 
