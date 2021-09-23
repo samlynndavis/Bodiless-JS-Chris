@@ -29,6 +29,7 @@ import {
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
 import GatsbyImagePresets from './GatsbyImagePresets';
+import { omit } from 'lodash';
 
 type Components = {
   GatsbyImage: CT<any>,
@@ -63,7 +64,7 @@ const asDesignableGatsbyImage = (Component: CT<any>) => {
       );
     }
     return (
-      <Image {...rest} />
+      <Image {...omit(rest, 'canonicalPreset', 'imgStyle')} />
     );
   };
   return designable(startComponents, 'GatsbyImage')(AsDesignableGatsbyImage);
