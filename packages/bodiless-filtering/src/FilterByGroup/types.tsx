@@ -66,7 +66,6 @@ export type NodeTagType = {
 export type FilteredItemType = {
   id: string,
   isDisplayed?: boolean,
-  selectedTags?: TagType[],
 };
 
 export type RegisterItem = (item: FilteredItemType) => void;
@@ -90,13 +89,18 @@ export type RegisterSuggestionsProps = {
   registerSuggestions: (tags: TagType[]) => undefined,
 };
 
+export type FilterTagType = TagType & {
+  categoryId: string,
+  categoryName: string,
+}
+
 export type FBGContextType = {
   getSuggestions: () => TagType[],
   useRegisterSuggestions: () => (tags: TagType[]) => void,
-  selectTag: (tag: TagType, callback?: Function) => void,
-  getSelectedTags: () => TagType[],
-  unSelectTag: (tag: TagType, callback?: Function) => void,
-  isTagSelected: (tag: TagType) => boolean,
+  selectTag: (tag: FilterTagType, callback?: Function) => void,
+  getSelectedTags: () => FilterTagType[],
+  unSelectTag: (tag: FilterTagType, callback?: Function) => void,
+  isTagSelected: (tag: FilterTagType) => boolean,
   clearSelectedTags: () => void,
   multipleAllowedTags: boolean,
   getFilteredItems: () => FilteredItemType[],

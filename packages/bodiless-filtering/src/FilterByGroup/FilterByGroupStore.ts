@@ -15,24 +15,30 @@
 import {
   useState, useEffect, useRef, useCallback,
 } from 'react';
+import { TagType } from '@bodiless/core';
+import { FilterTagType } from './types';
 
 const TAG_ANY_KEY = 'any';
 
-class Tag {
+
+class Tag implements FilterTagType {
   id: string;
 
   categoryId: string;
 
   name: string;
 
-  constructor(id: string, name: string, categoryId?: string) {
+  categoryName: string;
+
+  constructor(id: string, name: string, categoryId?: string, categoryName?: string) {
     this.id = id;
-    this.categoryId = categoryId || '';
     this.name = name;
+    this.categoryId = categoryId || '';
+    this.categoryName = categoryName || '';
   }
 
-  isEqual(tag: Tag) {
-    return tag.id === this.id && tag.categoryId === this.categoryId;
+  isEqual(tag: TagType) {
+    return tag.id === this.id;
   }
 }
 
@@ -44,13 +50,14 @@ const readTagsFromQueryParams = () => {
   if (typeof window === 'undefined') return [];
   const tags: Tag[] = [];
   const params = new URLSearchParams(window.location.search);
-  params.forEach((tagId, categoryId) => {
-    tags.push(new Tag(tagId, '', categoryId));
+  params.forEach((tag, categoryId) => {
+    const [tagId, tagName = 'N/A', categoryName = 'N/A'] = tag.split('~');
+    tags.push(new Tag(tagId, tagName, categoryId, categoryName));
   });
   return tags;
 };
 
-const updateUrlQueryParams = (tags: Tag[]) => {
+const updateUrlQueryParams = (tags: FilterTagType[]) => {
   if (typeof window === 'undefined') return;
   const {
     protocol,
@@ -59,7 +66,8 @@ const updateUrlQueryParams = (tags: Tag[]) => {
   } = window.location;
   const queryParams = new URLSearchParams();
   tags.forEach(tag => {
-    queryParams.append(tag.categoryId || '', tag.id);
+    const { categoryId, id, name, categoryName } = tag;
+    queryParams.append(categoryId || '', `${id}~${name}~${categoryName}`);
   });
   const query = tags.length > 0 ? `?${queryParams}` : '';
   const newurl = `${protocol}//${host}${pathname}${query}`;
@@ -104,12 +112,12 @@ const useFilterByGroupStore = (settings: FilterByGroupStoreSettings) => {
     setSelectedTags(tags, callback);
   };
 
-  const selectTag = (tag: Tag, callback?: Function) => {
+  const selectTag = (tag: FilterTagType, callback?: Function) => {
     updateSelectedTags([
       ...(
         multipleAllowedTags
           ? selectedTags
-          : selectedTags.filter((tag$: Tag) => tag.categoryId !== tag$.categoryId)
+          : selectedTags.filter((tag$: FilterTagType) => tag.categoryId !== tag$.categoryId)
       ),
       tag,
     ], callback);

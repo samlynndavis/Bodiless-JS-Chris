@@ -13,19 +13,19 @@
  */
 
 import React, { Fragment } from 'react';
-import { differenceWith, isEmpty } from 'lodash';
+import { differenceWith, isEmpty, omit } from 'lodash';
 import { ifToggledOn, ifToggledOff, useNode } from '@bodiless/core';
 import {
   Enhancer,
 } from '@bodiless/fclasses';
 
-import type { TagType } from './types';
+import type { FilterTagType } from './types';
 import { useFilterByGroupContext, useRegisterItem } from './FilterByGroupContext';
 import { TAG_ANY_KEY } from './FilterByGroupStore';
 import { useTagsAccessors } from '../TagButton';
 
 type ToggleByTagsProps = {
-  selectedTags: TagType[];
+  selectedTags: FilterTagType[];
 };
 
 /**
@@ -73,20 +73,13 @@ const useToggleByTags = ({ selectedTags }: ToggleByTagsProps) => {
 const ifTagsSelected = ifToggledOn(useToggleByTags);
 const ifTagsNotSelected = ifToggledOff(useToggleByTags);
 
-const withFilterByTags: Enhancer<ToggleByTagsProps> = Component => props => {
+const withFilterByTags: Enhancer<ToggleByTagsProps> = Component => (props: any) => {
   const { node } = useNode();
-  const [productUuid] = node.path.slice(-2);
+  const [id] = node.path.slice(-2);
   const isDisplayed = useToggleByTags(props); 
-  const { selectedTags, ...rest } = props as any as ToggleByTagsProps;
-  useRegisterItem({ id: productUuid }, isDisplayed, selectedTags);
-  return isDisplayed ? <Component {...rest as any} /> : <Fragment />;
+  useRegisterItem({ id, isDisplayed });
+  return isDisplayed ? <Component {...omit(props, 'selectedTags') as any} /> : <Fragment />;
 };
-
-// const withFilterByTags: Enhancer<ToggleByTagsProps> = asToken(
-//   withoutProps(['selectedTags']),
-//   ifTagsNotSelected(replaceWith(() => null)),
-//   asRegisteredItem,
-// );
 
 export { ifTagsSelected, ifTagsNotSelected };
 export default withFilterByTags;

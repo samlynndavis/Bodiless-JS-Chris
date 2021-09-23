@@ -33,7 +33,7 @@ import {
   FilteredItemType,
   RegisterItemContextType,
 } from './types';
-import { useFilterByGroupStore, Tag } from './FilterByGroupStore';
+import { useFilterByGroupStore } from './FilterByGroupStore';
 import { useTagsAccessors } from './FilterModel';
 import { TagButtonProps } from '../TagButton';
 
@@ -60,28 +60,11 @@ const useIsFilterTagSelected = () => {
   return useFilterByGroupContext().isTagSelected(tag);
 };
 
-const itemsEventBus = {
-  on(event: string, callback: (data: FilteredItemType[]) => void) {
-    document.addEventListener(event,
-      ((e: CustomEvent) => { callback(e.detail); }) as EventListener);
-  },
-  dispatch(event: string, data: FilteredItemType[]) {
-    if (typeof window !== 'undefined') {
-      const eventCustom = new CustomEvent(event, { detail: data });
-      document.dispatchEvent(eventCustom);
-    }
-  },
-  off(event: string, callback: (data: FilteredItemType[]) => void) {
-    document.removeEventListener(event,
-      ((e: CustomEvent) => { callback(e.detail); }) as EventListener, false);
-  },
-};
-
 const FilterByGroupProvider: FC<FBGContextOptions> = ({
   children,
   suggestions,
   multipleAllowedTags,
-  items,
+  items = [],
 }) => {
   const {
     selectTag,
@@ -126,7 +109,7 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
     isTagSelected,
     multipleAllowedTags: multipleAllowedTags || false,
     clearSelectedTags,
-    getFilteredItems: items ? () => items : () => [],
+    getFilteredItems: () => items,
     filtersInitialized,
   };
   return (
@@ -136,7 +119,7 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
   );
 };
 
-const FBGNotificationProvider: FC<any> = ({
+const FBGRegisterItemsProvider: FC<any> = ({
   children,
   itemsRegistered,
   items,
@@ -157,7 +140,6 @@ const FBGNotificationProvider: FC<any> = ({
   );
 
   const notifyContextValue = useMemo(() => ({ registerItem }), [setItems]);
-  itemsEventBus.dispatch('ItemsRegistered', items);
 
   return (
     <RegisterItemContext.Provider value={notifyContextValue}>
@@ -166,6 +148,16 @@ const FBGNotificationProvider: FC<any> = ({
   );
 };
 
+/**
+ * HOC which provides the context necessary to enable filtering by groups/tags. Must enclose
+ * the filters and all filterable items.
+ *
+ * @param Component
+ * The component to receive the context.
+ *
+ * @returns
+ * A version of the component wrapped in the context.
+ */
 const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props => {
   const { suggestions, multipleAllowedTags, ...rest } = props;
   const [items, setItems] = useState<FilteredItemType[]>([]);
@@ -176,12 +168,12 @@ const withFilterByGroupContext: Enhancer<FBGContextOptions> = Component => props
         multipleAllowedTags={multipleAllowedTags}
         items={items}
       >
-        <FBGNotificationProvider
+        <FBGRegisterItemsProvider
           setItems={setItems}
           items={items}
         >
-          <Component {...rest} />
-        </FBGNotificationProvider>
+          <Component {...rest as any} />
+        </FBGRegisterItemsProvider>
       </FilterByGroupProvider>
   );
 };
@@ -215,19 +207,19 @@ const withTagProps = (
 
 const withFBGSuggestions = ({ suggestions }: FBGContextOptions) => addProps({ suggestions });
 
-const useRegisterItem = (
-  item: FilteredItemType, isDisplayed: boolean, selectedTags: Tag[]
-) => {
-  const owner = useRef(v1()).current;
+const useRegisterItem = (item: FilteredItemType) => {
+  const { id, isDisplayed } = item;
   const { registerItem } = useContext(RegisterItemContext);
   const { filtersInitialized } = useFilterByGroupContext();
   useEffect(
     () => {
+      // Only register the item once the filters have been initialized from query params.
+      // This avoids registering all items on page load.
       if (filtersInitialized) {
-        registerItem({ ...item, selectedTags, isDisplayed });
+        registerItem(item);
       }
     },
-    [registerItem, owner, filtersInitialized, selectedTags, isDisplayed],
+    [registerItem, id, filtersInitialized, isDisplayed],
   );
 };
 
@@ -240,5 +232,4 @@ export {
   withTagProps,
   useIsFilterTagSelected,
   useRegisterItem,
-  itemsEventBus,
 };

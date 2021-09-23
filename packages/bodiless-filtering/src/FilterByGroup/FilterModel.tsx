@@ -24,7 +24,7 @@ import { useTagsAccessors as useBaseTagsAccessors } from '../TagButton';
 const TAG_ANY_LABEL = '- Any -';
 
 const useTagsAccessors = () => {
-  const { categoryId } = useCategoryListContext();
+  const { categoryId, categoryName } = useCategoryListContext();
   const { currentItem } = useListContext();
   let { tag } = useBaseTagsAccessors();
   if (currentItem === TAG_ANY_KEY) {
@@ -34,7 +34,7 @@ const useTagsAccessors = () => {
     };
   }
   return {
-    tag: new Tag(tag.id.toString(), tag.name, categoryId || ''),
+    tag: new Tag(tag.id.toString(), tag.name, categoryId, categoryName),
   };
 };
 
