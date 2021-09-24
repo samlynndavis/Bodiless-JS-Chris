@@ -26,7 +26,11 @@ const getDisabledPages = () => {
     );
     return disabledPages;
   } catch (error) {
-    console.error(error);
+    if (error.code === 'ENOENT') {
+      console.log("No pages to disable. The file doesn't exist:", error.path);
+    } else {
+      console.error(error);
+    }
     return [];
   }
 };
