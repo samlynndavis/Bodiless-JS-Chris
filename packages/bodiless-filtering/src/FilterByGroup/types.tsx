@@ -155,5 +155,5 @@ export type WithFilterByTagsProps = {
   /**
    * Callback to append data to the item when it registers itself.
    */
-  getFilteredItemData: (node: ContentNode<any>) => any,
+  getFilteredItemData?: (node: ContentNode<any>) => any,
 };
