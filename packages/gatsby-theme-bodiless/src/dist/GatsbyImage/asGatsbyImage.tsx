@@ -219,7 +219,7 @@ const asDesignableGatsbyImage = (ImageComponent: CT<any>) => {
     } = props;
 
     return (
-      <Image {...restImg} />
+      <Image {...omit(restImg, 'canonicalPreset', '_nodeKey')} />
     );
   };
   return designable(startComponents, 'GatsbyImage')(AsDesignableGatsbyImage);
