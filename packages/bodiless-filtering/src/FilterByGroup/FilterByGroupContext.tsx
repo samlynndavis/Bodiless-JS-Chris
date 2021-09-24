@@ -24,7 +24,7 @@ import React, {
 } from 'react';
 import { v1 } from 'uuid';
 import { uniqBy } from 'lodash';
-import { Injector, addProps, Enhancer } from '@bodiless/fclasses';
+import { Injector, Enhancer } from '@bodiless/fclasses';
 import {
   FBGContextOptions,
   SuggestionsRefType,
@@ -34,13 +34,16 @@ import {
   RegisterItemContextType,
 } from './types';
 import { useFilterByGroupStore } from './FilterByGroupStore';
-import { useTagsAccessors } from './FilterModel';
 import { TagButtonProps } from '../TagButton';
 
 const RegisterItemContext = React.createContext<RegisterItemContextType>({
   registerItem: () => undefined,
 });
 
+/**
+ * @private
+ * The context which provides access to the current state of the filters.
+ */
 const FilterByGroupContext = createContext<FBGContextType>({
   getSuggestions: () => [],
   useRegisterSuggestions: () => () => undefined,
@@ -54,12 +57,19 @@ const FilterByGroupContext = createContext<FBGContextType>({
   filtersInitialized: false,
 });
 
+/**
+ * Hook which provides access to the current state of the filters, an methods
+ * for registering tag autocomplete suggestions and selecting/unselecting tags.
+ *
+ * @returns
+ * The current value of the FilterByGroup context.
+ */
 const useFilterByGroupContext = () => useContext(FilterByGroupContext);
-const useIsFilterTagSelected = () => {
-  const { tag } = useTagsAccessors();
-  return useFilterByGroupContext().isTagSelected(tag);
-};
 
+/**
+ * @private
+ * Context provider for the FilterByGroup context.
+ */
 const FilterByGroupProvider: FC<FBGContextOptions> = ({
   children,
   suggestions,
@@ -119,6 +129,10 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
   );
 };
 
+/**
+ * @private
+ * Provider for the context which allows filterable items to register themselves.
+ */
 const FBGRegisterItemsProvider: FC<any> = ({
   children,
   itemsRegistered,
@@ -139,10 +153,10 @@ const FBGRegisterItemsProvider: FC<any> = ({
     }
   );
 
-  const notifyContextValue = useMemo(() => ({ registerItem }), [setItems]);
+  const contextValue = useMemo(() => ({ registerItem }), [setItems]);
 
   return (
-    <RegisterItemContext.Provider value={notifyContextValue}>
+    <RegisterItemContext.Provider value={contextValue}>
       {children}
     </RegisterItemContext.Provider>
   );
@@ -205,8 +219,22 @@ const withTagProps = (
   return <Component {...props} {...suggestionProps} />;
 };
 
-const withFBGSuggestions = ({ suggestions }: FBGContextOptions) => addProps({ suggestions });
-
+/**
+ * Hook which should be used in a filterable item to register itself on effect.
+ *
+ * Items register themselves in order to provide a source of truth
+ * about which items are visible with the currently selected tags. Items
+ * may also attach arbitrary data when they register themselves. This allows
+ * for things like pagination, dynamically updated TOC's, etc.
+ *
+ * Note: an item which uses this *must not* observe the FilterByGroupContext.
+ * Doing so will result in a render loop.
+ *.
+ * @param item
+ * The item which which to register itself.
+ *
+ * @see withFilterByTags
+ */
 const useRegisterItem = (item: FilteredItemType) => {
   const { id, isDisplayed } = item;
   const { registerItem } = useContext(RegisterItemContext);
@@ -223,13 +251,9 @@ const useRegisterItem = (item: FilteredItemType) => {
   );
 };
 
-export default FilterByGroupContext;
 export {
-  FilterByGroupContext,
   useFilterByGroupContext,
   withFilterByGroupContext,
-  withFBGSuggestions,
   withTagProps,
-  useIsFilterTagSelected,
   useRegisterItem,
 };
