@@ -93,7 +93,7 @@ export type RegisterSuggestionsProps = {
 export type FilterTagType = TagType & {
   categoryId: string,
   categoryName: string,
-}
+};
 
 /**
  * Type of the context which supports filtering by tags/groups.
