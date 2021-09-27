@@ -24,6 +24,7 @@ import { Tag } from './FilterByGroupStore';
 import type {
   FilterByGroupComponents,
   TagType,
+  FilterTagType,
   FilteredItemType,
 } from './types';
 import { asResponsiveFilter } from './Filter';
@@ -45,6 +46,7 @@ export {
 export type {
   FilterByGroupComponents,
   TagType,
+  FilterTagType,
   FilteredItemType,
 };
 

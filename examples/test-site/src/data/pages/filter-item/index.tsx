@@ -16,7 +16,7 @@ import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { H2 } from '@bodiless/fclasses';
 import { Tag } from '@bodiless/filtering';
-import { FilterTagType } from '@bodiless/filtering/src/FilterByGroup/types';
+import { FilterTagType } from '@bodiless/filtering';
 import Layout from '../../../components/Layout';
 import TaggableFilterableItem, { TagButton } from '../../../components/Filter';
 
