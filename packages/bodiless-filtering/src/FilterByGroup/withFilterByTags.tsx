@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { Fragment, FC } from 'react';
+import React, { FC } from 'react';
 import differenceWith from 'lodash/differenceWith';
 import isEmpty from 'lodash/isEmpty';
 import omit from 'lodash/omit';
@@ -27,12 +27,11 @@ import { useFilterByGroupContext, useRegisterItem } from './FilterByGroupContext
 import { TAG_ANY_KEY } from './FilterByGroupStore';
 import { useTagsAccessors } from '../TagButton';
 
-
 /**
  * @private
  * Determine whether a component should be displayed based on currently selected
  * tags.
- * 
+ *
  * @param selectedTags
  * The selected tags to use.
  *
@@ -94,10 +93,10 @@ const withFilterByTags: Enhancer<WithFilterByTagsProps> = Component => {
   const WithFilterByTags: FC<any> = (props: WithFilterByTagsProps) => {
     const { node } = useNode();
     const [id] = node.path.slice(-2);
-    const isDisplayed = useToggleByTags(props); 
+    const isDisplayed = useToggleByTags(props);
     const { getFilteredItemData = () => {}, ...rest } = props;
     useRegisterItem({ id, isDisplayed, data: getFilteredItemData(node) });
-    return isDisplayed ? <Component {...omit(rest, 'selectedTags') as any} /> : <Fragment />;
+    return isDisplayed ? <Component {...omit(rest, 'selectedTags') as any} /> : <></>;
   };
   return WithFilterByTags;
 };

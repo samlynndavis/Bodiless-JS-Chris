@@ -135,12 +135,11 @@ const FilterByGroupProvider: FC<FBGContextOptions> = ({
  */
 const FBGRegisterItemsProvider: FC<any> = ({
   children,
-  itemsRegistered,
-  items,
   setItems,
 }) => {
   const registerItem = (newItem: FilteredItemType) => setItems(
-    (items: FilteredItemType[]) => {
+    (oldItems: FilteredItemType[]) => {
+      const items = [...oldItems];
       const itemIndex = items.findIndex(x => x.id === newItem.id);
 
       if (itemIndex === -1) {
@@ -149,8 +148,8 @@ const FBGRegisterItemsProvider: FC<any> = ({
         items[itemIndex] = newItem;
       }
 
-      return [...items];
-    }
+      return items;
+    },
   );
 
   const contextValue = useMemo(() => ({ registerItem }), [setItems]);

@@ -93,7 +93,7 @@ export type RegisterSuggestionsProps = {
 export type FilterTagType = TagType & {
   categoryId: string,
   categoryName: string,
-}
+};
 
 /**
  * Type of the context which supports filtering by tags/groups.
@@ -155,5 +155,5 @@ export type WithFilterByTagsProps = {
   /**
    * Callback to append data to the item when it registers itself.
    */
-  getFilteredItemData: (node: ContentNode<any>) => any,
+  getFilteredItemData?: (node: ContentNode<any>) => any,
 };

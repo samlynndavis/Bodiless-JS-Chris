@@ -20,7 +20,6 @@ import { FilterTagType } from './types';
 
 const TAG_ANY_KEY = 'any';
 
-
 class Tag implements FilterTagType {
   id: string;
 
@@ -66,7 +65,9 @@ const updateUrlQueryParams = (tags: FilterTagType[]) => {
   } = window.location;
   const queryParams = new URLSearchParams();
   tags.forEach(tag => {
-    const { categoryId, id, name, categoryName } = tag;
+    const {
+      categoryId, id, name, categoryName,
+    } = tag;
     queryParams.append(categoryId || '', `${id}~${name}~${categoryName}`);
   });
   const query = tags.length > 0 ? `?${queryParams}` : '';

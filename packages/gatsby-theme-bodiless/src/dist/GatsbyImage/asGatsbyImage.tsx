@@ -28,8 +28,8 @@ import {
   addClasses, DesignableComponentsProps, Div, withDesign, withoutProps, designable,
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
+import omit from 'lodash/omit';
 import GatsbyImagePresets from './GatsbyImagePresets';
-import { omit } from 'lodash';
 
 type Components = {
   GatsbyImage: CT<any>,
