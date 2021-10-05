@@ -23,7 +23,7 @@
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
     "bluebird": "^3.5.5",
-    "cheerio": "^1.0.0-rc.3",
+    "cheerio": "1.0.0-rc.3",
     "cross-env": "^5.2.0",
     "css-to-object": "^1.1.0",
     "debug": "^4.1.1",
