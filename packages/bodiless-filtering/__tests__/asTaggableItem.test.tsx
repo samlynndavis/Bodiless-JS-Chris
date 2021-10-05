@@ -13,7 +13,9 @@
  */
 
 import React from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import Tooltip, { TooltipProps } from 'rc-tooltip/lib/Tooltip';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, ReactWrapper } from 'enzyme';
 import { flow } from 'lodash';
 
@@ -25,7 +27,7 @@ const setEditMode = (isEdit: boolean) => {
 setEditMode(true);
 
 // eslint-disable-next-line import/first
-import asTaggableItem from '../src/Taggable/asTaggableItem';
+import { asTaggableItem } from '../src/Taggable/asTaggableItem';
 
 const getSuggestions = () => [
   { id: 'a', name: 'Bananas' },
