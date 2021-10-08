@@ -28,7 +28,6 @@
     "@bodiless/fclasses": "^0.2.10",
     "@bodiless/layouts": "^0.2.10",
     "@bodiless/ui": "^0.2.10",
-    "@material/react-material-icon": "^0.15.0",
     "re-resizable": "^4.11.0",
     "react-sortable-hoc": "^1.9.1"
   },

@@ -34,7 +34,6 @@
     "@emotion/core": "^10.0.14",
     "@emotion/css": "^10.0.14",
     "@emotion/styled": "^10.0.14",
-    "@material/react-material-icon": "^0.15.0",
     "is-hotkey": "^0.1.6",
     "lodash": "^4.17.19",
     "mobx": "^5.8.0",
