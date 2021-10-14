@@ -29,7 +29,7 @@ resources:
 
 dependencies:
     nodejs:
-        pm2: "^3.5.1"
+        pm2: "^5.1.2"
 
 # The 'mounts' describe writable, persistent filesystem mounts in the application.
 # The keys are directory paths relative to the application root. The values are a
