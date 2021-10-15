@@ -14,6 +14,7 @@
  ##
 finalize_deploy () {
   npm run bootstrap -- --ci
+  npm run build:tailwind-configs
   npm run build:packages -- --concurrency 1
   npm run build:env-vars
   npm run build:doc
