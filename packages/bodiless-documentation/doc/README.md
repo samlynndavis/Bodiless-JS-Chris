@@ -35,6 +35,3 @@ Then Visit `localhost:8005` in your browser.
 
 - [Read the Documentation on GitHub](https://johnsonandjohnson.github.io/Bodiless-JS)
 - [BodilessJS on NPM](https://www.npmjs.com/org/bodiless)
-
-
-
