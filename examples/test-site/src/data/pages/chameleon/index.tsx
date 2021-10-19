@@ -23,6 +23,8 @@ import {
   Section, asToken,
   P,
   Token,
+  extendDesign,
+  varyDesigns,
 } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 
@@ -33,6 +35,7 @@ import {
   withChameleonComponentFormControls,
   useSelectorButtonMenuOption,
 } from '@bodiless/components';
+import { withAllTitlesFromTerms } from '@bodiless/layouts';
 
 import {
   useMenuOptionUI, asBodilessComponent, useEditContext,
@@ -63,6 +66,28 @@ const basicChameleonDesign = {
 const BasicChameleon = asToken(
   asBodilessChameleon('basic-chameleon', undefined, useSelectorButtonMenuOption),
   withDesign(basicChameleonDesign),
+)(BaseComponent);
+
+const borderDesign = {
+  Thick: asToken(asToken.meta.term('Border')('Thick')),
+  Thin: asToken(
+    removeClasses('border-8'), addClasses('border-2'), asToken.meta.term('Border')('Thin'),
+  ),
+};
+
+const selectorDesign = varyDesigns(
+  extendDesign(basicChameleonDesign)({
+    Red: asToken(asToken.meta.term('Color')('Red Border')),
+    Blue: asToken(asToken.meta.term('Color')('Blue Border')),
+    Green: asToken(asToken.meta.term('Color')('Green Border')),
+  }),
+  borderDesign,
+);
+
+const SelectorChameleon = asToken(
+  asBodilessChameleon('selector-chameleon', undefined, useSelectorButtonMenuOption),
+  withAllTitlesFromTerms(),
+  withDesign(selectorDesign),
 )(BaseComponent);
 
 /*
@@ -261,6 +286,17 @@ export default (props: any) => (
             <Description>
               Click anywhere inside the box while in edit mode to reveal a local
               context menu button which displays a form to choose a color for the box.
+            </Description>
+          </Example>
+          <Example>
+            <H2>Basic with Comopnent Selector</H2>
+            <SelectorChameleon>
+              <div>Chameleons!</div>
+              <div>Available Now!</div>
+            </SelectorChameleon>
+            <Description>
+              Like the previous example, except that the "swap" button uses a component
+              selector to choose the color of the box.
             </Description>
           </Example>
           <Example>
