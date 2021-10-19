@@ -15,6 +15,8 @@
 import withDirection, { DIRECTIONS } from './withDirection/withDirection';
 
 export { default as ComponentSelector } from './ComponentSelector';
+export { default as componentSelectorForm } from './ComponentSelector/componentSelectorForm';
+export type { ComponentSelectorFormProps } from './ComponentSelector/componentSelectorForm';
 export * from './ComponentSelector/types';
 export type { FlowContainerProps, FlowContainerWrapperProps } from './FlowContainer/types';
 export { default as FlowContainer, withMandatoryCategories } from './FlowContainer';

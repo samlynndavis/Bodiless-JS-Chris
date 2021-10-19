@@ -20,7 +20,7 @@ import {
 import type {
   WithNodeKeyProps, UseBodilessOverrides,
 } from '@bodiless/core';
-import { Token, asToken } from '@bodiless/fclasses';
+import { Token, asToken, A, ComponentOrTag } from '@bodiless/fclasses';
 import { ChameleonData } from './types';
 import withChameleonButton from './withChameleonButton';
 import applyChameleon from './applyChameleon';
@@ -64,13 +64,13 @@ const asBodilessChameleon = (
   nodeKeys: WithNodeKeyProps,
   defaultData?: ChameleonData,
   useOverrides?: UseBodilessOverrides,
-) => asToken(
+) => <P extends object>(Component:ComponentOrTag<P>) => asToken(
   applyChameleon,
   ifEditable(
     withChameleonButton(useOverrides),
   ),
-  withChameleonContext(nodeKeys, defaultData),
-);
+  withChameleonContext(nodeKeys, defaultData, Component),
+)(Component);
 
 export default asBodilessChameleon;
 

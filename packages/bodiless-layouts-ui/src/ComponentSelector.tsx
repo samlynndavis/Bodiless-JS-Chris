@@ -19,7 +19,11 @@ import {
   SubmitButton as SubmitButtonBase, Div, Span, Label, Input,
   Button, Anchor, ComponentFormTitle, ComponentFormLink,
 } from '@bodiless/ui';
-import { ComponentSelector as CleanComponentSelector, ComponentSelectorUI, ComponentSelectorProps } from '@bodiless/layouts';
+import {
+  ComponentSelector as CleanComponentSelector,
+  componentSelectorForm as componentSelectorFormClean,
+} from '@bodiless/layouts';
+import type { ComponentSelectorUI, ComponentSelectorProps, ComponentSelectorFormProps } from '@bodiless/layouts';
 
 /**
  * Checkbox component used on flow container.
@@ -148,5 +152,9 @@ export const ui: ComponentSelectorUI = {
 const ComponentSelector: FC<ComponentSelectorProps> = props => (
   <CleanComponentSelector ui={ui} {...props} />
 );
+
+export const componentSelectorForm = (
+  props: ComponentSelectorFormProps,
+) => componentSelectorFormClean({ ...props, ui });
 
 export default ComponentSelector;

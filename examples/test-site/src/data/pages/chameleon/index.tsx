@@ -31,6 +31,7 @@ import {
   applyChameleon,
   useChameleonContext,
   withChameleonComponentFormControls,
+  useSelectorButtonMenuOption,
 } from '@bodiless/components';
 
 import {
@@ -51,8 +52,16 @@ const basicChameleonDesign = {
   Green: addClasses('border-green-500 text-green-500'),
 };
 
+// const useOverrides = () => {
+//   console.log('my use overrides');
+//   const overrides = useSelectorButtonMenuOption();
+//   console.log('overrides', overrides);
+//   overrides.label = 'Foo';
+//   return overrides;
+// };
+
 const BasicChameleon = asToken(
-  asBodilessChameleon('basic-chameleon'),
+  asBodilessChameleon('basic-chameleon', undefined, useSelectorButtonMenuOption),
   withDesign(basicChameleonDesign),
 )(BaseComponent);
 
