@@ -33,7 +33,7 @@ import {
   applyChameleon,
   useChameleonContext,
   withChameleonComponentFormControls,
-  useSelectorButtonMenuOption,
+  useChameleonSelectorForm,
 } from '@bodiless/components';
 import { withAllTitlesFromTerms } from '@bodiless/layouts';
 
@@ -48,6 +48,10 @@ import Layout from '../../../components/Layout';
  */
 
 const BaseComponent = addClasses('border-8 py-5 text-center')(Div);
+// const BaseComponent = asToken(
+//   addClasses('border-8 py-5 text-center'),
+//   withoutProps('blacklistCategories'),
+// )(Div);
 
 const basicChameleonDesign = {
   Red: addClasses('border-red-500 text-red-500'),
@@ -55,20 +59,14 @@ const basicChameleonDesign = {
   Green: addClasses('border-green-500 text-green-500'),
 };
 
-// const useOverrides = () => {
-//   console.log('my use overrides');
-//   const overrides = useSelectorButtonMenuOption();
-//   console.log('overrides', overrides);
-//   overrides.label = 'Foo';
-//   return overrides;
-// };
-
 const BasicChameleon = asToken(
-  asBodilessChameleon('basic-chameleon', undefined, useSelectorButtonMenuOption),
+  // asBodilessChameleon('basic-chameleon', undefined, useSelectorButtonMenuOption),
+  asBodilessChameleon('basic-chameleon'),
   withDesign(basicChameleonDesign),
 )(BaseComponent);
 
 const borderDesign = {
+  '': removeClasses('border-8'),
   Thick: asToken(asToken.meta.term('Border')('Thick')),
   Thin: asToken(
     removeClasses('border-8'), addClasses('border-2'), asToken.meta.term('Border')('Thin'),
@@ -77,15 +75,17 @@ const borderDesign = {
 
 const selectorDesign = varyDesigns(
   extendDesign(basicChameleonDesign)({
-    Red: asToken(asToken.meta.term('Color')('Red Border')),
-    Blue: asToken(asToken.meta.term('Color')('Blue Border')),
-    Green: asToken(asToken.meta.term('Color')('Green Border')),
+    Red: asToken(asToken.meta.term('Color')('Red')),
+    Blue: asToken(asToken.meta.term('Color')('Blue')),
+    Green: asToken(asToken.meta.term('Color')('Green')),
   }),
   borderDesign,
 );
 
 const SelectorChameleon = asToken(
-  asBodilessChameleon('selector-chameleon', undefined, useSelectorButtonMenuOption),
+  asBodilessChameleon('selector-chameleon', undefined, useChameleonSelectorForm),
+  addProps({ blacklistCategories: ['Color'] }),
+  addProps({ mandatoryCategories: ['Border'] }),
   withAllTitlesFromTerms(),
   withDesign(selectorDesign),
 )(BaseComponent);
@@ -295,7 +295,7 @@ export default (props: any) => (
               <div>Available Now!</div>
             </SelectorChameleon>
             <Description>
-              Like the previous example, except that the "swap" button uses a component
+              Like the previous example, except that the swap button uses a component
               selector to choose the color of the box.
             </Description>
           </Example>

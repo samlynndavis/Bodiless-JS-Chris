@@ -84,6 +84,8 @@ const withChameleonContext = (
     <ChameleonContext.Provider value={{
       isOn: getIsOn(props),
       activeComponent: getActiveComponent(props),
+      // eslint-disable-next-line react/destructuring-assignment
+      components: props.components,
       selectableComponents: getSelectableComponents(props),
       setActiveComponent: (component: string|null) => props.setComponentData({ component }),
     }}

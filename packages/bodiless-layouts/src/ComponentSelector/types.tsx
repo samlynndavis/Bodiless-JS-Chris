@@ -153,3 +153,6 @@ export type FinalUI = {
   ScalingButtonQuarter: ComponentType<HTMLProps<HTMLElement>> | string;
 };
 export type ComponentSelectorUI = Partial<FinalUI>;
+
+export type ComponentSelectorOptions =
+  Pick<ComponentSelectorProps, 'mandatoryCategories'|'blacklistCategories'>;

@@ -40,6 +40,7 @@ const componentSelectorForm = (props: ComponentSelectorFormProps) => contextMenu
       onSelect={(...args) => { props.onSelect(...args); closeForm(null); }}
       components={Object.values(props.components) as ComponentWithMeta[]}
       mandatoryCategories={props.mandatoryCategories}
+      blacklistCategories={props.blacklistCategories}
     />
   ),
 );
