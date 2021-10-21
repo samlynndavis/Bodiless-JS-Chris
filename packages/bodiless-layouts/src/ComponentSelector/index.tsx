@@ -89,6 +89,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     onSelect,
     mandatoryCategories,
     blacklistCategories,
+    mode = ComponentDisplayMode.ComponentSelector,
   } = props;
 
   const allComponentsNames = allComponents.map(Component => (
@@ -118,7 +119,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
 
   const finalUI:FinalUI = { ...defaultUI, ...useMenuOptionUI(), ...ui };
   return (
-    <ComponentDisplayModeProvider mode={ComponentDisplayMode.ComponentSelector}>
+    <ComponentDisplayModeProvider mode={mode}>
       <uiContext.Provider value={finalUI}>
         <finalUI.MasterWrapper>
           {Object.getOwnPropertyNames(allFilters).length > 0 && (

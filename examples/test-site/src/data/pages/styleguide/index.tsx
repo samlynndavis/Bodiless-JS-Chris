@@ -26,6 +26,7 @@ import {
 import type { ComponentSelectorProps, ComponentWithMeta } from '@bodiless/layouts';
 import Layout from '../../../components/Layout';
 import withDefaultVariations from '../../../components/FlowContainer/withDefaultVariations';
+import { ComponentDisplayMode } from '@bodiless/layouts/lib/FlowContainer/ComponentDisplayMode';
 
 type StyleGuideProps =
   Omit<ComponentSelectorProps, 'components'|'onSelect'> & DesignableComponentsProps;
@@ -59,6 +60,7 @@ const StyleGuideBase: FC<StyleGuideProps> = props => {
     components: Object.values(components) as ComponentWithMeta[],
     onSelect,
     ui,
+    mode: ComponentDisplayMode.EditFlowContainer,
   };
   return (
     <ComponentSelector {...finalProps} />

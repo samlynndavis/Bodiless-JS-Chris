@@ -13,6 +13,7 @@
  */
 
 import type { ComponentType, HTMLProps } from 'react';
+import { ComponentDisplayMode } from '../FlowContainer/ComponentDisplayMode';
 
 export type ComponentSelectorProps = ItemListProps & {
   /**
@@ -27,6 +28,10 @@ export type ComponentSelectorProps = ItemListProps & {
    * List of categories which should always be shown in the filters.
    */
   mandatoryCategories?: string[];
+  /**
+   * 
+   */
+  mode?: ComponentDisplayMode, 
 };
 
 export type Categories = {
