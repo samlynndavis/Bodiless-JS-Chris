@@ -18,7 +18,7 @@ import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withNode } from '@bodiless/core';
 
-import { ComponentSelector } from '@bodiless/layouts';
+import { ComponentSelector, ComponentDisplayMode } from '@bodiless/layouts';
 import { componentSelectorUi } from '@bodiless/layouts-ui';
 import {
   designable, asToken, addProps, DesignableComponentsProps, removeClasses, HOC,
@@ -26,7 +26,6 @@ import {
 import type { ComponentSelectorProps, ComponentWithMeta } from '@bodiless/layouts';
 import Layout from '../../../components/Layout';
 import withDefaultVariations from '../../../components/FlowContainer/withDefaultVariations';
-import { ComponentDisplayMode } from '@bodiless/layouts/lib/FlowContainer/ComponentDisplayMode';
 
 type StyleGuideProps =
   Omit<ComponentSelectorProps, 'components'|'onSelect'> & DesignableComponentsProps;

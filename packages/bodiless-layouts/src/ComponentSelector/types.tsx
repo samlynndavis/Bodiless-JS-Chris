@@ -29,9 +29,9 @@ export type ComponentSelectorProps = ItemListProps & {
    */
   mandatoryCategories?: string[];
   /**
-   * 
+   *
    */
-  mode?: ComponentDisplayMode, 
+  mode?: ComponentDisplayMode,
 };
 
 export type Categories = {
