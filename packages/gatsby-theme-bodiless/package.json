@@ -50,6 +50,7 @@
     "@bodiless/accordion": "^0.2.10",
     "@bodiless/card": "^0.2.10",
     "@bodiless/components": "^0.2.10",
+    "@bodiless/components-ui": "^0.2.10",
     "@bodiless/core": "^0.2.10",
     "@bodiless/core-ui": "^0.2.10",
     "@bodiless/fclasses": "^0.2.10",

@@ -33,8 +33,10 @@ import {
   applyChameleon,
   useChameleonContext,
   withChameleonComponentFormControls,
-  useChameleonSelectorForm,
 } from '@bodiless/components';
+import {
+  useChameleonSelectorForm,
+} from '@bodiless/components-ui';
 import { withAllTitlesFromTerms } from '@bodiless/layouts';
 
 import {
