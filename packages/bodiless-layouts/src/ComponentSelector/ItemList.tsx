@@ -94,7 +94,7 @@ const ItemList: React.FC<ItemListProps> = props => {
   const elems: ReactNode[] = components.slice(0, maxComponents).map(
     (Component: ComponentWithMeta<any>) => (
       <finalUI.ItemBoxWrapper style={boxStyle} key={Component.displayName}>
-        <finalUI.ItemBox key={Component.displayName}>
+        <finalUI.ItemBox key={Component.displayName} data-display-name={Component.displayName}>
           <finalUI.TitleWrapper style={outerStyle}>
             {title(Component)}
           </finalUI.TitleWrapper>
