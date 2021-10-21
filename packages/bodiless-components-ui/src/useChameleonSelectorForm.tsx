@@ -26,7 +26,7 @@ import { ComponentSelectorFormProps } from '@bodiless/layouts';
  * ```
  */
 export const useChameleonSelectorForm = (
-  props: ComponentSelectorFormProps,
+  props: Omit<ComponentSelectorFormProps, 'onSelect'|'ui'>,
 ) => useChameleonSelectorFormBase({
   ...props,
   ui,

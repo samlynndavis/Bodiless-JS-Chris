@@ -102,7 +102,9 @@ export const useChameleonSwapForm = () => {
  * withChameleonButton('node-key', defaultData, useChameleonSelectorForm);
  * ```
  */
-export const useChameleonSelectorForm = (props: ComponentSelectorFormProps) => {
+export const useChameleonSelectorForm = (
+  props: Omit<ComponentSelectorFormProps, 'onSelect'>,
+) => {
   const { selectableComponents, setActiveComponent } = useChameleonContext();
   const onSelect = ([componentName]: string[]) => setActiveComponent(componentName);
   return {
