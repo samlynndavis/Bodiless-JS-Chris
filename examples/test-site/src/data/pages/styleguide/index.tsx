@@ -21,7 +21,7 @@ import { withNode } from '@bodiless/core';
 import { ComponentSelector } from '@bodiless/layouts';
 import { componentSelectorUi } from '@bodiless/layouts-ui';
 import {
-  designable, asToken, addProps, replaceWith, withDesign, DesignableComponentsProps, addClasses, removeClasses, HOC,
+  designable, asToken, addProps, DesignableComponentsProps, removeClasses, HOC,
 } from '@bodiless/fclasses';
 import type { ComponentSelectorProps, ComponentWithMeta } from '@bodiless/layouts';
 import Layout from '../../../components/Layout';
@@ -62,15 +62,6 @@ const StyleGuideBase: FC<StyleGuideProps> = props => {
   };
   return (
     <ComponentSelector {...finalProps} />
-  );
-};
-
-const PropPrinter: FC<any> = props => {
-  console.log(props);
-  return (
-    <pre>
-      {JSON.stringify(Object.keys(props.components), 0, 2)}
-    </pre>
   );
 };
 
