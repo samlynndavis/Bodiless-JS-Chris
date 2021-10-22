@@ -133,7 +133,10 @@ export const withUnwrap = <P extends object>(Component: ComponentType<P>) => {
  * Removes props used by the component selector in withChameleonButton
  */
 export const withoutChameleonButtonProps = withoutProps(
-  'blacklistCategories', 'mandatoryCategories',
+  'blacklistCategories',
+  'mandatoryCategories',
+  'scale',
+  'mode',
 );
 
 /**

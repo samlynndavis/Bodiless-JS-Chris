@@ -37,7 +37,7 @@ import {
 import {
   useChameleonSelectorForm,
 } from '@bodiless/components-ui';
-import { withAllTitlesFromTerms } from '@bodiless/layouts';
+import { withAllTitlesFromTerms, ComponentSelectorScale } from '@bodiless/layouts';
 
 import {
   useMenuOptionUI, asBodilessComponent, useEditContext,
@@ -86,8 +86,11 @@ const selectorDesign = varyDesigns(
 
 const SelectorChameleon = asToken(
   asBodilessChameleon('selector-chameleon', undefined, useChameleonSelectorForm),
-  addProps({ blacklistCategories: ['Color'] }),
-  addProps({ mandatoryCategories: ['Border'] }),
+  addProps({
+    blacklistCategories: ['Color'],
+    mandatoryCategories: ['Border'],
+    scale: ComponentSelectorScale.Half,
+  }),
   withAllTitlesFromTerms(),
   withDesign(selectorDesign),
 )(BaseComponent);

@@ -30,10 +30,10 @@ import withDefaultVariations from '../../../components/FlowContainer/withDefault
 type StyleGuideProps =
   Omit<ComponentSelectorProps, 'components'|'onSelect'> & DesignableComponentsProps;
 
-const withNodeKeyFromDisplayName: HOC = Component => {
+const withNodeKeyFromItemId: HOC = Component => {
   const WithNodeKeyFromDisplayName: FC<any> = props => (
     // eslint-disable-next-line react/destructuring-assignment
-    <Component {...props} nodeKey={props['data-display-name']} />
+    <Component {...props} nodeKey={props['data-item-id']} />
   );
   return WithNodeKeyFromDisplayName;
 };
@@ -50,7 +50,7 @@ const StyleGuideBase: FC<StyleGuideProps> = props => {
       'bl-text-white',
     )(componentSelectorUi.ComponentSelectorWrapper as ComponentType<any>),
     ItemBox: asToken(
-      withNode, withNodeKeyFromDisplayName,
+      withNode, withNodeKeyFromItemId,
     )(componentSelectorUi.ItemBox as ComponentType<any>),
   };
   const onSelect = () => null;

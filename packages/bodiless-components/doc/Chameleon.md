@@ -139,8 +139,11 @@ for example:
 ```ts
 const BasicChameleonWithComponentSelector = asToken(
   asBodilessChameleon('selector-chameleon', undefined, useChameleonSelectorForm),
-  addProps({ blacklistCategories: ['Color'] }),
-  addProps({ mandatoryCategories: ['Border'] }),
+  addProps({
+    blacklistCategories: ['Color'],
+    mandatoryCategories: ['Border'],
+    scale: ComponentSelectorScale.Half,
+  }),
   withAllTitlesFromTerms(),
   withDesign(basicChameleonDesign),
 )(BaseComponent);

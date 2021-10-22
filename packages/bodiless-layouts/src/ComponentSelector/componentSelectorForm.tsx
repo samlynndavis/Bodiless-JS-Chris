@@ -19,7 +19,7 @@ import { ComponentSelectorProps, ComponentSelectorUI, ComponentWithMeta } from '
 import ComponentSelector from '.';
 
 export type ComponentSelectorFormProps =
-  Pick<ComponentSelectorProps, 'mandatoryCategories'|'blacklistCategories'|'ui'|'onSelect'> & {
+  Omit<ComponentSelectorProps, 'closeForm'|'components'|'mode'> & {
     components: DesignableComponents,
   };
 
@@ -41,6 +41,7 @@ const componentSelectorForm = (props: ComponentSelectorFormProps) => contextMenu
       components={Object.values(props.components) as ComponentWithMeta[]}
       mandatoryCategories={props.mandatoryCategories}
       blacklistCategories={props.blacklistCategories}
+      scale={props.scale}
     />
   ),
 );

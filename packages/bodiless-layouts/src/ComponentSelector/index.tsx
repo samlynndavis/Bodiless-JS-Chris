@@ -90,6 +90,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
     mandatoryCategories,
     blacklistCategories,
     mode = ComponentDisplayMode.ComponentSelector,
+    scale,
   } = props;
 
   const allComponentsNames = allComponents.map(Component => (
@@ -152,6 +153,7 @@ const ComponentSelector: React.FC<ComponentSelectorProps> = props => {
               onSelect={onSelect}
               components={newCompRender}
               blacklistCategories={blacklistCategories}
+              scale={scale}
             />
           </finalUI.FlexSectionFull>
         </finalUI.MasterWrapper>

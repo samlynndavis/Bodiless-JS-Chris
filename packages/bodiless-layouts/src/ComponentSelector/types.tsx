@@ -15,6 +15,12 @@
 import type { ComponentType, HTMLProps } from 'react';
 import { ComponentDisplayMode } from '../FlowContainer/ComponentDisplayMode';
 
+export enum ComponentSelectorScale {
+  Full = 1,
+  Half = 2,
+  Quarter = 4
+}
+
 export type ComponentSelectorProps = ItemListProps & {
   /**
    * Calback to close the form.
@@ -80,6 +86,10 @@ export type ItemListProps = {
    * List of categories which should never be shown in the filters.
    */
   blacklistCategories?: string[];
+  /**
+   * Initial scale
+   */
+  scale?: ComponentSelectorScale,
 };
 
 export type FinalUI = {
