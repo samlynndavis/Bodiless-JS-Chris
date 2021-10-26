@@ -80,7 +80,7 @@ import OnNodeErrorNotification from './OnNodeErrorNotification';
 import {
   getFromSessionStorage,
   saveToSessionStorage,
-} from 'SessionStorage';
+} from './SessionStorage';
 
 export * from './components';
 export * from './Contentful';
