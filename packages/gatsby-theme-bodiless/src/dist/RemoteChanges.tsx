@@ -310,7 +310,7 @@ const FetchChanges = (
           formApi.setValue('mergeMaster', false);
           formApi.setValue('keepOpen', false);
         }
-      } catch (error) {
+      } catch (error: any) {
         setState({
           messageCode: MessageCode.PullErrored,
           messageData: error.message,
@@ -368,7 +368,7 @@ const PullChanges = (
         }
         setPullStatus({ complete: true });
         formApi.setValue('refreshWhenDone', true);
-      } catch (error) {
+      } catch (error: any) {
         setPullStatus({
           complete: false,
           error: error.message || 'An unexpected error has occurred.',
