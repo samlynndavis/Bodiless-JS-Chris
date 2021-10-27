@@ -42,7 +42,7 @@
   "scripts": {
     "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
     "build:watch": "npm run build -- --watch",
-    "build:api-doc": "typedoc --out doc/api --mode file",
+    "build:api-doc": "typedoc --out doc/api src",
     "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\"",
     "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\""
   },
