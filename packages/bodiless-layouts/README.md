@@ -341,7 +341,7 @@ can use an empty string.
 
 ### Component Selector Scale
 The component selector displays component previews in a grid with one, two
-or for items per row.  By default the initial scale is one item per row,
+or four items per row.  By default the initial scale is one item per row,
 but this can be controlled via the `scale` prop.  For example:
 
 ```ts
