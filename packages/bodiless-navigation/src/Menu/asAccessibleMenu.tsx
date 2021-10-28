@@ -116,7 +116,7 @@ const withSubmenuToggle = (Component: ComponentType<any> | string) => (props: an
 
 const AccessibleMenuItem: FC<any> = props => {
   const { activeSubmenu, setActiveSubmenu } = useMenuContext();
-  const currentItem = useListContext();
+  const { currentItem } = useListContext();
 
   const ref = useRef(null);
 
