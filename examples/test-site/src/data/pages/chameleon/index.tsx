@@ -50,10 +50,6 @@ import Layout from '../../../components/Layout';
  */
 
 const BaseComponent = addClasses('border-8 py-5 text-center')(Div);
-// const BaseComponent = asToken(
-//   addClasses('border-8 py-5 text-center'),
-//   withoutProps('blacklistCategories'),
-// )(Div);
 
 const basicChameleonDesign = {
   Red: addClasses('border-red-500 text-red-500'),
@@ -62,7 +58,6 @@ const basicChameleonDesign = {
 };
 
 const BasicChameleon = asToken(
-  // asBodilessChameleon('basic-chameleon', undefined, useSelectorButtonMenuOption),
   asBodilessChameleon('basic-chameleon'),
   withDesign(basicChameleonDesign),
 )(BaseComponent);
@@ -294,7 +289,7 @@ export default (props: any) => (
             </Description>
           </Example>
           <Example>
-            <H2>Basic with Comopnent Selector</H2>
+            <H2>Basic with Component Selector</H2>
             <SelectorChameleon>
               <div>Chameleons!</div>
               <div>Available Now!</div>

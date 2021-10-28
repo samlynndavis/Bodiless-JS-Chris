@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2021 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,7 +74,6 @@ const StyleGuide = asToken(
     onSelect: () => null,
   }),
 )(StyleGuideBase);
-// )(PropPrinter);
 
 export default (props: any) => (
   <Page {...props}>
