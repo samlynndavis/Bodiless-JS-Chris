@@ -13,7 +13,6 @@
  */
 
 import React, { FC } from 'react';
-import MaterialIcon, { MaterialIconDefaultProps } from '@material/react-material-icon';
 import { addClasses } from '@bodiless/fclasses';
 import {
   SubmitButton as SubmitButtonBase, Div, Span, Label, Input,
@@ -120,11 +119,11 @@ export const ui: ComponentSelectorUI = {
   )(Label),
 
   AccordionIconContract: () => (
-    <MaterialIcon className="bl-mr-2" icon="expand_less" />
+    <span className="material-icons bl-mr-2">expand_less</span>
   ),
 
   AccordionIconExpand: () => (
-    <MaterialIcon className="bl-mr-2" icon="expand_more" />
+    <span className="material-icons bl-mr-2">expand_more</span>
   ),
 
   ComponentDescriptionWrapper: addClasses(
@@ -144,9 +143,9 @@ export const ui: ComponentSelectorUI = {
   )(Button),
 
   ScalingHeader: addClasses('bl-w-full bl-cursor-pointer bl-justify-end bl-text-gray-900 bl-p-grid-2 bl-flex')(Div),
-  ScalingButtonFull: (props:MaterialIconDefaultProps) => <MaterialIcon {...props} icon="view_stream" />,
-  ScalingButtonHalf: (props:MaterialIconDefaultProps) => <MaterialIcon {...props} icon="view_module" />,
-  ScalingButtonQuarter: (props:MaterialIconDefaultProps) => <MaterialIcon {...props} icon="view_comfy" />,
+  ScalingButtonFull: (props) => <span className="material-icons"><span {...props}>view_stream</span></span>,
+  ScalingButtonHalf: (props) => <span className="material-icons"><span {...props}>view_module</span></span>,
+  ScalingButtonQuarter: (props) => <span className="material-icons"><span {...props}>view_comfy</span></span>,
 };
 
 const ComponentSelector: FC<ComponentSelectorProps> = props => (
