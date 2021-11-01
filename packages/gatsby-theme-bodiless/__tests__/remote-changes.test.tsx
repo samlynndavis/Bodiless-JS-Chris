@@ -25,15 +25,12 @@ const mockBackendResponse = (data: ResponseData, status = 200) => ({
   status,
   data: {
     upstream: {
-      branch: 'null',
       ...data.upstream,
     },
     production: {
-      branch: 'origin/main',
       ...data.production,
     },
     local: {
-      branch: 'origin/test',
       ...data.local,
     },
   },
