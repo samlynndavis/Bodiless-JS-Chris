@@ -28,6 +28,8 @@
     "@bodiless/components": "^0.2.10",
     "@bodiless/core": "^0.2.10",
     "@bodiless/fclasses": "^0.2.10",
+    "@bodiless/layouts": "^0.2.10",
+    "@bodiless/layouts-ui": "^0.2.10",
     "@bodiless/ui": "^0.2.10",
     "lodash": "^4.17.19"
   },

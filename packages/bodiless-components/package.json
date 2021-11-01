@@ -30,8 +30,6 @@
     "@bodiless/core": "^0.2.10",
     "@bodiless/fclasses": "^0.2.10",
     "@bodiless/layouts": "^0.2.10",
-    "@bodiless/layouts-ui": "^0.2.10",
-    "@bodiless/ui": "^0.2.10",
     "@types/react-helmet": "^5.0.14",
     "axios": "^0.21.0",
     "common-tags": "^1.8.0",
