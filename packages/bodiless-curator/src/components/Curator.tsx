@@ -12,10 +12,12 @@
  * limitations under the License.
  */
 
-import React, { FC, useEffect } from 'react';
+import React, { createContext, FC, useEffect } from 'react';
 import { designable, A, Div } from '@bodiless/fclasses';
 import { CuratorComponents, CuratorProps } from './types';
 import withCuratorLoader from './CuratorLoader';
+
+export const CuratorContext = createContext(undefined);
 
 const CuratorComponentsStart: CuratorComponents = {
   Wrapper: Div,
@@ -39,15 +41,17 @@ const CuratorBase: FC<CuratorProps> = ({
   });
 
   return (
-    <Wrapper>
-      <Content>
-        <>
-          <Div id={scriptId}>
-            <A href="https://curator.io" target="_blank" className="crt-logo crt-tag">Powered by Curator.io</A>
-          </Div>
-        </>
-      </Content>
-    </Wrapper>
+    <CuratorContext.Provider value={undefined}>
+      <Wrapper>
+        <Content>
+          <>
+            <Div id={scriptId}>
+              <A href="https://curator.io" target="_blank" className="crt-logo crt-tag">Powered by Curator.io</A>
+            </Div>
+          </>
+        </Content>
+      </Wrapper>
+    </CuratorContext.Provider>
   );
 };
 
