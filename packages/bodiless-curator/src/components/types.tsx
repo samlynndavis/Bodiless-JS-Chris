@@ -15,9 +15,20 @@
 import { ComponentType, HTMLProps } from 'react';
 import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
 
-export type CuratorComponents = {
+type CuratorComponents = {
   Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
   Content: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
 };
 
-export type CuratorProps = DesignableComponentsProps<CuratorComponents>;
+type CuratorProps = DesignableComponentsProps<CuratorComponents>;
+
+type CuratorContextData = {
+  isLoaded: boolean; 
+};
+
+export {
+  CuratorComponents,
+  CuratorProps,
+  CuratorContextData,
+};
+

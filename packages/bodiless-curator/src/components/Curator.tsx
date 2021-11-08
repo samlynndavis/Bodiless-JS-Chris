@@ -12,12 +12,10 @@
  * limitations under the License.
  */
 
-import React, { createContext, FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { designable, A, Div } from '@bodiless/fclasses';
 import { CuratorComponents, CuratorProps } from './types';
-import withCuratorLoader from './CuratorLoader';
-
-export const CuratorContext = createContext(undefined);
+import CuratorProvider from './CuratorLoader';
 
 const CuratorComponentsStart: CuratorComponents = {
   Wrapper: Div,
@@ -36,22 +34,16 @@ const CuratorBase: FC<CuratorProps> = ({
     })();`;
   const scriptId = 'curator-feed-default-feed-layout';
 
-  useEffect(() => {
-    withCuratorLoader(script, scriptId);
-  });
-
   return (
-    <CuratorContext.Provider value={undefined}>
+    <CuratorProvider scriptFunction={script}>
       <Wrapper>
         <Content>
-          <>
-            <Div id={scriptId}>
-              <A href="https://curator.io" target="_blank" className="crt-logo crt-tag">Powered by Curator.io</A>
-            </Div>
-          </>
+          <Div id={scriptId}>
+            <A href="https://curator.io" target="_blank" className="crt-logo crt-tag">Powered by Curator.io</A>
+          </Div>
         </Content>
       </Wrapper>
-    </CuratorContext.Provider>
+    </CuratorProvider>
   );
 };
 
