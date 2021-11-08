@@ -26,6 +26,7 @@ import {
 import {
   ifEditable,
   withExtendHandler,
+  useEditToggle,
 } from '@bodiless/core';
 import {
   isAccordionExpanded,
@@ -143,16 +144,11 @@ const asNonExpandingAccordion = asToken(
   withDesign({
     Wrapper: asToken(
       asAccordionDefaultExpanded,
-      addClasses('pointer-events-none'),
       addPropsIf(isAccordionExpanded)({ 'aria-disabled': 'true' }),
-      // Pointer events none blocks user to perform any interations on
-      // the component, so it must be removed from edit mode
-      ifEditable(
-        removeClasses('pointer-events-none'),
-      ),
     ),
     // Removes icon wrapper from accordion title
     Title: withDesign({
+      Wrapper: addClassesIf(() => !useEditToggle())('pointer-events-none'),
       Icon: asToken(
         // Using replaceWith instead of remove because the last
         // only pulls out the span tag, but keeps the text currently inside
