@@ -16,6 +16,7 @@ import withCuratorLoader from './components/CuratorLoader';
 import asCuratorWrapper from './components/CuratorToken';
 
 export * from './components/Curator';
+export * from './components/CuratorForm';
 export * from './components/types';
 
 export {
