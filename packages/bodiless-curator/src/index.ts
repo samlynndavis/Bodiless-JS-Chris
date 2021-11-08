@@ -14,16 +14,13 @@
 
 import withCuratorLoader from './components/CuratorLoader';
 import asCuratorWrapper from './components/CuratorToken';
-import {
-  CuratorBase,
-  CuratorClean
-} from './components/Curator';
 
+
+export * from './components/Curator';
+export * from './components/CuratorForm';
 export * from './components/types';
 
 export {
-  CuratorClean,
-  CuratorBase,
   withCuratorLoader,
   asCuratorWrapper,
 };
