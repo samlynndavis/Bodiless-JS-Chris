@@ -23,7 +23,10 @@ const CuratorOptions = {
   global: false,
   local: true,
   nodeKeys: 'curator',
-  defaultData: { 'feed-id': '' },
+  defaultData: {
+    'feed-id': 'b59be9ca-afe7-47cf-9199-c2123491ca41',
+    'container-id': 'curator-feed-default-feed-layout',
+  },
   renderForm: () => {
     const {
       ComponentFormLabel,
@@ -36,7 +39,15 @@ const CuratorOptions = {
         <ComponentFormLabel htmlFor="feed-id">Feed ID</ComponentFormLabel>
         <ComponentFormText
           field="feed-id"
-          placeholder="b59be9ca-afe7-47cf-9199-c2123491ca41.js"
+          placeholder="Feed ID..."
+          validate={() => {}}
+          validateOnChange
+          validateOnBlur
+        />
+        <ComponentFormLabel htmlFor="container-id">Container ID</ComponentFormLabel>
+        <ComponentFormText
+          field="container-id"
+          placeholder="Container ID..."
           validate={() => {}}
           validateOnChange
           validateOnBlur
