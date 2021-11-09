@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 import { designable, A, Div } from '@bodiless/fclasses';
 import { CuratorComponents, CuratorProps } from './types';
-import CuratorProvider from './CuratorLoader';
+import CuratorProvider from './CuratorProvider';
 
 const CuratorComponentsStart: CuratorComponents = {
   Wrapper: Div,

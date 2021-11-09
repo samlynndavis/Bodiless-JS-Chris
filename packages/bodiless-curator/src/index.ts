@@ -14,14 +14,13 @@
 
 import CuratorContext from './components/CuratorContext';
 import CuratorProvider from './components/CuratorProvider';
-import asCuratorWrapper from './components/CuratorToken';
 
 export * from './components/Curator';
-export * from './components/CuratorForm';
+export * from './components/CuratorFormOptions';
+export * from './components/CuratorToken';
 export * from './components/types';
 
 export {
   CuratorContext,
   CuratorProvider,
-  asCuratorWrapper,
 };
