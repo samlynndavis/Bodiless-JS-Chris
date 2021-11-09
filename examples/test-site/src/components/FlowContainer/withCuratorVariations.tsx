@@ -1,5 +1,5 @@
-import { asToken, replaceWith, withDesign } from '@bodiless/fclasses';
 import { CuratorClean, asCurator } from '@bodiless/curator';
+import { asToken, replaceWith, withDesign } from '@bodiless/fclasses';
 import { withDesc } from '@bodiless/layouts';
 import { withType } from './Categories';
 
