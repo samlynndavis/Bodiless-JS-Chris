@@ -24,8 +24,8 @@ const CuratorOptions = {
   local: true,
   nodeKeys: 'curator',
   defaultData: {
-    'feed-id': 'b59be9ca-afe7-47cf-9199-c2123491ca41',
-    'container-id': 'curator-feed-default-feed-layout',
+    'feed-id': '',
+    'container-id': '',
   },
   renderForm: () => {
     const {

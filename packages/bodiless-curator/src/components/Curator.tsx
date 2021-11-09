@@ -13,9 +13,11 @@
  */
 
 import React, { FC } from 'react';
+import { flow } from 'lodash';
 import { designable, A, Div } from '@bodiless/fclasses';
 import { CuratorComponents, CuratorProps } from './types';
 import CuratorProvider from './CuratorProvider';
+import { useNode, WithNodeProps } from '@bodiless/core';
 
 const CuratorComponentsStart: CuratorComponents = {
   Wrapper: Div,
@@ -24,30 +26,41 @@ const CuratorComponentsStart: CuratorComponents = {
 
 const CuratorBase: FC<CuratorProps> = ({
   components,
+  ...props
 }) => {
   const { Wrapper, Content } = components;
+  const {
+    // @ts-ignore non-existing type.
+    'feed-id': feedId,
+    // @ts-ignore non-existing type.
+    'container-id': containerId,
+  } = props;
+  console.log(Content);
 
-  const script = `(function(){
-    var i, e, d = document, s = "script";i = d.createElement("script");i.async = 1;
-    i.src = "https://cdn.curator.io/published/b59be9ca-afe7-47cf-9199-c2123491ca41.js";
-    e = d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
-    })();`;
-  const scriptId = 'curator-feed-default-feed-layout';
+  const script = (
+    feedId
+      ? `(function(){
+          var i, e, d = document, s = "script";i = d.createElement("script");i.async = 1;
+          i.src = "https://cdn.curator.io/published/${feedId}.js";
+          e = d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
+        })();`
+      : ''
+  );
 
   return (
     <CuratorProvider scriptFunction={script}>
       <Wrapper>
-        <Content>
-          <Div id={scriptId}>
-            <A href="https://curator.io" target="_blank" className="crt-logo crt-tag">Powered by Curator.io</A>
-          </Div>
+        <Content id={containerId}>
+          <A href="https://curator.io" target="_blank" className="crt-logo crt-tag">Powered by Curator.io</A>
         </Content>
       </Wrapper>
     </CuratorProvider>
   );
 };
 
-const CuratorClean = designable(CuratorComponentsStart, 'Curator')(CuratorBase);
+const CuratorClean = flow(
+  designable(CuratorComponentsStart, 'Curator'),
+)(CuratorBase);
 
 export {
   CuratorBase,
