@@ -12,28 +12,13 @@
  * limitations under the License.
  */
 
-import { flowRight } from 'lodash';
-// import { withoutPointerEvents } from '@bodiless/components';
-import { addClasses, withDesign } from '@bodiless/fclasses';
-import { asBodilessCurator } from './Curator';
+import { withoutPointerEvents } from '@bodiless/components';
+import { ifEditable } from '@bodiless/core';
+import { withDesign } from '@bodiless/fclasses';
 
-// const asBodilessCurator = asBodilessComponent({
-//   ...useCuratorOptions(),
-//   defaultData: {
-//     'feed-id': 'b59be9ca-afe7-47cf-9199-c2123491ca41',
-//     'container-id': 'curator-feed-default-feed-layout',
-//   },
-// });
-
-const asCurator = flowRight(
-  asBodilessCurator(),
-  withDesign({
-    Wrapper: addClasses('block'),
-    Content: flowRight(
-      // ifEditable(withoutPointerEvents),
-    ),
-  }),
-);
+const asCurator = withDesign({
+  Container: ifEditable(withoutPointerEvents),
+});
 
 export {
   asCurator,

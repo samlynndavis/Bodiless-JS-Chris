@@ -13,53 +13,59 @@
  */
 
 import React from 'react';
-import { useMenuOptionUI } from '@bodiless/core';
+import { withFormSnippet } from '@bodiless/components';
+import { BodilessOptions, useMenuOptionUI } from '@bodiless/core';
+import { CuratorData, CuratorProps } from './types';
 
-const CuratorOptions = {
+// Options used to create an edit button.
+const options: BodilessOptions<CuratorProps, CuratorData> = {
   icon: 'settings',
   groupLabel: 'Curator',
   label: 'Settings',
   name: 'curator-settings',
   global: false,
   local: true,
-  nodeKeys: 'curator',
-  defaultData: {
-    'feed-id': '',
-    'container-id': '',
-  },
-  renderForm: () => {
-    const {
-      ComponentFormLabel,
-      ComponentFormText,
-    } = useMenuOptionUI();
-
-    // @TODO: Implement validation callback for Feed ID.
-    return (
-      <>
-        <ComponentFormLabel htmlFor="feed-id">Feed ID</ComponentFormLabel>
-        <ComponentFormText
-          field="feed-id"
-          placeholder="Feed ID..."
-          validate={() => {}}
-          validateOnChange
-          validateOnBlur
-        />
-        <ComponentFormLabel htmlFor="container-id">Container ID</ComponentFormLabel>
-        <ComponentFormText
-          field="container-id"
-          placeholder="Container ID..."
-          validate={() => {}}
-          validateOnChange
-          validateOnBlur
-        />
-      </>
-    );
-  },
+  Wrapper: 'div',
+  renderForm: () => true,
 };
 
-const useCuratorOptions = () => CuratorOptions;
+const useCuratorFormOptions = () => options;
+
+const withCuratorFormSnippet = withFormSnippet({
+  nodeKeys: 'curator',
+  defaultData: { feedId: '', containerId: '' },
+  snippetOptions: {
+    renderForm: ({ formState, scope }) => {
+      const errors = scope ? formState.errors[scope] : formState.error;
+      const {
+        ComponentFormLabel,
+        ComponentFormText,
+        ComponentFormWarning,
+      } = useMenuOptionUI();
+
+      // @TODO Implements validation to avoid duplicated entries.
+      return (
+        <React.Fragment key="curator">
+          <ComponentFormLabel htmlFor="feedId">Feed ID</ComponentFormLabel>
+          <ComponentFormText
+            field="feedId"
+            placeholder="Feed ID..."
+          />
+          <ComponentFormLabel htmlFor="containerId">Container ID</ComponentFormLabel>
+          <ComponentFormText
+            field="containerId"
+            placeholder="Container ID..."
+          />
+          {errors && errors.feedID && (
+            <ComponentFormWarning>{errors.feedID}</ComponentFormWarning>
+          )}
+        </React.Fragment>
+      );
+    },
+  },
+});
 
 export {
-  CuratorOptions,
-  useCuratorOptions,
+  useCuratorFormOptions,
+  withCuratorFormSnippet,
 };

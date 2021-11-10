@@ -16,7 +16,13 @@ import { ComponentType, HTMLProps } from 'react';
 import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
 
 type CuratorComponents = {
-  Content: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+  Container: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
+};
+
+type CuratorData = {
+  containerId: string;
+  curatorSrc: string;
+  feedId: string;
 };
 
 type CuratorProps = DesignableComponentsProps<CuratorComponents>;
@@ -27,6 +33,7 @@ type CuratorContextData = {
 
 export {
   CuratorComponents,
+  CuratorData,
   CuratorProps,
   CuratorContextData,
 };
