@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType, FC } from 'react';
-import { flow, flowRight } from 'lodash';
+import flow from 'lodash/flow';
 import { AsBodiless, asBodilessComponent, useEditContext } from '@bodiless/core';
 import { designable, A, Div } from '@bodiless/fclasses';
 import { useCuratorFormOptions, withCuratorFormSnippet } from './CuratorFormOptions';
@@ -69,10 +69,10 @@ const asBodilessCurator: AsBodiless<CuratorProps, CuratorData> = (
   nodeKeys?,
   defaultData?,
   useOverrides?,
-) => flowRight(
-  asBodilessComponent(useCuratorFormOptions())(nodeKeys, defaultData, useOverrides),
-  withCuratorFormSnippet,
+) => flow(
   withCuratorTransformer,
+  withCuratorFormSnippet,
+  asBodilessComponent(useCuratorFormOptions())(nodeKeys, defaultData, useOverrides),
 );
 
 const CuratorClean = flow(
