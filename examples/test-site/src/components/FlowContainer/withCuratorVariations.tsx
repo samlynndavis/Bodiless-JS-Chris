@@ -3,7 +3,7 @@ import { asToken, replaceWith, withDesign } from '@bodiless/fclasses';
 import { withDesc } from '@bodiless/layouts';
 import { withType } from './Categories';
 
-const baseVariation = {
+const curatorVariation = {
   Curator: asToken(
     replaceWith(CuratorClean),
     withDesc('A way to promote a Social wall'),
@@ -12,5 +12,5 @@ const baseVariation = {
 };
 
 export default withDesign(
-  baseVariation,
+  curatorVariation,
 );

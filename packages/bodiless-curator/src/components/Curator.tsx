@@ -12,48 +12,119 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import { flow } from 'lodash';
+import React, { ComponentType, FC, useCallback } from 'react';
+import { flow, flowRight } from 'lodash';
 import { designable, A, Div } from '@bodiless/fclasses';
+import { asBaseBodilessIframe, withFormHeader, withFormSnippet } from '@bodiless/components';
 import { CuratorComponents, CuratorProps } from './types';
 import CuratorProvider from './CuratorProvider';
-import { useNode, WithNodeProps } from '@bodiless/core';
+import { AsBodiless, useMenuOptionUI } from '@bodiless/core';
 
 const CuratorComponentsStart: CuratorComponents = {
-  Wrapper: Div,
   Content: Div,
 };
+
+const extreactFromUrl = (url: string) => {
+  const regExp = /^.*(cdn\.curator\.io\/published\/)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2] ? match[2] : undefined;
+};
+const isValidUrl = extreactFromUrl;
+
+const withCuratorTransformer = (Component: ComponentType<any>) => {
+  const WithCuratorTransformer = (props: any) => {
+    const { feedID, ...rest } = props;
+    const feedId = feedID ? extreactFromUrl(feedID) : '';
+    const src$ = `https://cdn.curator.io/published/${feedId}`;
+    const url = new URL(src$);
+    return <Component {...rest} feedID={url.toString()} />;
+  };
+  WithCuratorTransformer.displayName = 'WithCuratorTransformer';
+  return WithCuratorTransformer;
+};
+
+const withCuratorFormSrcSnippet = withFormSnippet({
+  nodeKeys: 'curator',
+  defaultData: { feedID: '', containerId: '' },
+  snippetOptions: {
+    renderForm: ({ formState, scope }) => {
+      const errors = scope ? formState.errors[scope] : formState.error;
+      const {
+        ComponentFormLabel,
+        ComponentFormText,
+        ComponentFormWarning,
+      } = useMenuOptionUI();
+      const validate = useCallback(
+        (value: string) => (!value || !isValidUrl(value)
+          ? 'Invalid Curator URL specified.'
+          : undefined),
+        [],
+      );
+      return (
+        <React.Fragment key="curator">
+          <ComponentFormLabel htmlFor="feedID">URL</ComponentFormLabel>
+          <ComponentFormText
+            field="feedID"
+            placeholder="https://cdn.curator.io/published/YourKeyHere"
+            validate={validate}
+            validateOnChange
+            validateOnBlur
+          />
+          {errors && errors.feedID && (
+            <ComponentFormWarning>{errors.feedID}</ComponentFormWarning>
+          )}
+          <ComponentFormLabel htmlFor="containerId">Container ID</ComponentFormLabel>
+          <ComponentFormText
+            field="containerId"
+            placeholder="Container ID"
+          />
+        </React.Fragment>
+
+      );
+    },
+  },
+});
+
+const withCuratorFormHeader = withFormHeader({
+  title: 'Curator Configuration',
+});
+
+const asBaseBodilessCurator: AsBodiless<any, any> = asBaseBodilessIframe;
+
+const asBodilessCurator: AsBodiless<any, any> = (
+  nodeKeys?,
+  defaultData?,
+  useOverrides?,
+) => flowRight(
+  asBaseBodilessCurator(nodeKeys, defaultData, useOverrides),
+  withCuratorFormHeader,
+  withCuratorFormSrcSnippet,
+  withCuratorTransformer,
+);
 
 const CuratorBase: FC<CuratorProps> = ({
   components,
   ...props
 }) => {
-  const { Wrapper, Content } = components;
-  const {
-    // @ts-ignore non-existing type.
-    'feed-id': feedId,
-    // @ts-ignore non-existing type.
-    'container-id': containerId,
-  } = props;
-  console.log(Content);
+  const { Content } = components;
+  // @ts-ignore
+  const { feedID, containerId } = props;
+  console.log(props);
+
 
   const script = (
-    feedId
-      ? `(function(){
-          var i, e, d = document, s = "script";i = d.createElement("script");i.async = 1;
-          i.src = "https://cdn.curator.io/published/${feedId}.js";
-          e = d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
-        })();`
-      : ''
+    `(function(){
+        var i, e, d = document, s = "script";i = d.createElement("script");i.async = 1;
+        i.src = "${feedID}.js";
+        e = d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
+      })();`
   );
 
   return (
     <CuratorProvider scriptFunction={script}>
-      <Wrapper>
-        <Content id={containerId}>
-          <A href="https://curator.io" target="_blank" className="crt-logo crt-tag">Powered by Curator.io</A>
-        </Content>
-      </Wrapper>
+      <Content id={containerId}>
+        <A href="https://curator.io" target="_blank" className="crt-logo crt-tag">Powered by Curator.io</A>
+      </Content>
     </CuratorProvider>
   );
 };
@@ -62,7 +133,11 @@ const CuratorClean = flow(
   designable(CuratorComponentsStart, 'Curator'),
 )(CuratorBase);
 
+const Curator = asBodilessCurator()('iframe');
+
 export {
+  asBodilessCurator,
+  Curator,
   CuratorBase,
   CuratorClean,
 };

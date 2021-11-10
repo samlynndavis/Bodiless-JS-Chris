@@ -16,14 +16,13 @@ import { ComponentType, HTMLProps } from 'react';
 import { StylableProps, DesignableComponentsProps } from '@bodiless/fclasses';
 
 type CuratorComponents = {
-  Wrapper: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
   Content: ComponentType<StylableProps & HTMLProps<HTMLDivElement>>,
 };
 
 type CuratorProps = DesignableComponentsProps<CuratorComponents>;
 
 type CuratorContextData = {
-  isLoaded: boolean; 
+  isLoaded: boolean;
 };
 
 export {

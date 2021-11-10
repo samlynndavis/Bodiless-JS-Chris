@@ -14,33 +14,27 @@
 
 import { flowRight } from 'lodash';
 // import { withoutPointerEvents } from '@bodiless/components';
-import {
-  asBodilessComponent,
-  // ifEditable,
-  // ifEditable, withNode, withNodeKey,
-} from '@bodiless/core';
 import { addClasses, withDesign } from '@bodiless/fclasses';
-import { useCuratorOptions } from './CuratorFormOptions';
+import { asBodilessCurator } from './Curator';
 
-const asBodilessCurator = asBodilessComponent({
-  ...useCuratorOptions(),
-  defaultData: {
-    'feed-id': 'b59be9ca-afe7-47cf-9199-c2123491ca41',
-    'container-id': 'curator-feed-default-feed-layout',
-  },
-});
+// const asBodilessCurator = asBodilessComponent({
+//   ...useCuratorOptions(),
+//   defaultData: {
+//     'feed-id': 'b59be9ca-afe7-47cf-9199-c2123491ca41',
+//     'container-id': 'curator-feed-default-feed-layout',
+//   },
+// });
 
 const asCurator = flowRight(
+  asBodilessCurator(),
   withDesign({
     Wrapper: addClasses('block'),
     Content: flowRight(
       // ifEditable(withoutPointerEvents),
-      asBodilessCurator(),
     ),
   }),
 );
 
 export {
-  asBodilessCurator,
   asCurator,
 };
