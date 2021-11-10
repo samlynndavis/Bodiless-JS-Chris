@@ -14,11 +14,12 @@
 
 import React, { ComponentType, FC } from 'react';
 import { flow, flowRight } from 'lodash';
-import { AsBodiless, asBodilessComponent } from '@bodiless/core';
+import { AsBodiless, asBodilessComponent, useEditContext } from '@bodiless/core';
 import { designable, A, Div } from '@bodiless/fclasses';
 import { useCuratorFormOptions, withCuratorFormSnippet } from './CuratorFormOptions';
 import CuratorProvider from './CuratorProvider';
 import { CuratorComponents, CuratorData, CuratorProps } from './types';
+import CuratorPlaceholder from './CuratorPlaceHolder';
 
 const CuratorComponentsStart: CuratorComponents = {
   Container: Div,
@@ -38,6 +39,7 @@ const CuratorBase: FC<CuratorProps> = ({
   components,
   ...props
 }) => {
+  const { isEdit } = useEditContext();
   const { Container } = components;
   // @ts-ignore non-defined props.
   const { curatorSrc, containerId } = props;
@@ -49,7 +51,11 @@ const CuratorBase: FC<CuratorProps> = ({
         e = d.getElementsByTagName(s)[0];e.parentNode.insertBefore(i, e);
       })();`
   );
-
+  if (isEdit) {
+    return (
+      <CuratorPlaceholder {...props} />
+    );
+  }
   return (
     <CuratorProvider scriptFunction={script}>
       <Container id={containerId}>

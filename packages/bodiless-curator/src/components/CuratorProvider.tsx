@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { useEditContext } from '@bodiless/core';
 import React, { ComponentType, useEffect, useState } from 'react';
 import CuratorContext from './CuratorContext';
 declare global {
@@ -29,13 +30,16 @@ const CuratorProvider: ComponentType<any> = ({
   children,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const { isEdit } = useEditContext();
 
   useEffect(() => {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.async = true;
-    script.innerHTML = scriptFunction;
-    document.getElementsByTagName('body')[0].appendChild(script);
+    if (!isEdit) {
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.async = true;
+      script.innerHTML = scriptFunction;
+      document.getElementsByTagName('body')[0].appendChild(script);
+    }
   });
 
   useEffect(() => {
