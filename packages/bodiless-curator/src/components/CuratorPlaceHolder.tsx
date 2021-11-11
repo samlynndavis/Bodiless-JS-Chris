@@ -21,14 +21,12 @@ export type Props = DivProps;
 
 const CuratorPlaceholder: FC<Props> = (props: any) => {
   const { curatorSrc, containerId } = props;
-  const regexp = /^([^-]*-){2}[^\w]*/;
-  const layoutName = containerId.replace(regexp, '');
   return (
     <Div>
       {`
-        ${layoutName} with container Id: "${containerId}" 
+        The Social Wall with Container Id: "${containerId}" 
         and the Curator URL: "${curatorSrc}" 
-        will be rendered here.
+        will render here on review mode or the preview site.
       `}
     </Div>
   );
