@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, FC } from 'react';
 import { Link, graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 
@@ -20,8 +20,9 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { Editable } from '@bodiless/components';
 import Layout from '../../../components/Layout';
 import { FlowContainerDefault } from '../../../components/FlowContainer';
-import { addClasses, Div, asToken, startWith, varyDesigns, withDesign, addProps } from '@bodiless/fclasses';
+import { addClasses, Div, asToken, startWith, varyDesigns, withDesign, addProps, HOC } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
+import { pick, identity } from 'lodash';
 
 // const getContainers = (n: number) => new Array(n)
 //   .map((_, i) => <FlowContainerDefault nodeKey={`fc-${i}`} key={i} />);
@@ -50,7 +51,7 @@ const createTextDesign = (n: number) => {
   for (var i = 0; i < n; i++) {
     design[`Text${i}`] = asToken(
       addProps({ children: `Foo ${i}` }),
-      asToken.meta.term('Text')(i),
+      asToken.meta.term('Copy')(`${i}`),
     );
   }
   return design;
@@ -64,10 +65,26 @@ const finalDesign = varyDesigns(
   createColorDesign('bg'),
   createColorDesign('border'),
   createColorDesign('text'),
-  // createTextDesign(10),
+  createTextDesign(10),
 );
+console.log(finalDesign);
 
-const HeavyFlowContainer = withDesign(finalDesign)(FlowContainer);
+const withPrunedDesign: HOC = Component => {
+  const WithPrunedDesign: FC<any> = props => {
+    const { design } = props;
+    const newDesign = {
+      Wrapper: design.Wrapper || identity,
+      ComponentWrapper: design.ComponentWrapper || identity,
+    };
+    return <Component {...props} design={newDesign} />;
+  };
+  return WithPrunedDesign;
+}
+
+const HeavyFlowContainer = asToken(
+  withPrunedDesign,
+  withDesign(finalDesign),
+)(FlowContainer);
 
 const getContainers = (n: number) => {
   let nodes: ReactNode[] = [];
@@ -96,7 +113,7 @@ export default (props: any) => (
       </div>
       <div>
         Containers
-        {getContainers(1)}
+        {getContainers(20)}
       </div>
     </Layout>
   </Page>
