@@ -54,7 +54,7 @@ const finalDesign = varyDesigns(
   createTextDesign(10),
 );
 
-const withPrunedDesign: HOC = Component => {
+export const withPrunedDesign: HOC = Component => {
   const WithPrunedDesign: FC<any> = props => {
     const { design } = props;
     const newDesign = pick(design, 'Wrapper', 'ComponentWrapper');
