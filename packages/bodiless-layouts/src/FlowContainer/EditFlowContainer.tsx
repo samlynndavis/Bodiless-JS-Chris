@@ -16,12 +16,12 @@ import React, { FC } from 'react';
 import { createHash } from 'crypto';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
-import { flowRight } from 'lodash';
+import { flowRight, uniq, pick, omit } from 'lodash';
 import {
   withNode, withMenuOptions, withResizeDetector, withActivateOnEffect,
 } from '@bodiless/core';
 import {
-  designable, stylable, ComponentOrTag,
+  designable, stylable, ComponentOrTag, HOC,
 } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';
@@ -62,6 +62,7 @@ const withKeyFromDesign = (Component: ComponentOrTag<any>) => {
   };
   return WithKeyFromDesign;
 };
+
 
 /**
  * An editable version of the FlowContainer container.
