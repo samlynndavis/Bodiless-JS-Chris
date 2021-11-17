@@ -89,6 +89,7 @@ export const initUserManager = (props: AuthProviderProps): UserManager => {
     scope: scope || 'openid',
     loadUserInfo: loadUserInfo !== undefined ? loadUserInfo : true,
     popup_redirect_uri: popupRedirectUri,
+    // @ts-ignore
     popupWindowFeatures,
     popupWindowTarget,
     automaticSilentRenew,
