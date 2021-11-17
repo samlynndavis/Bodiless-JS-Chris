@@ -16,12 +16,12 @@ import React, { FC } from 'react';
 import { createHash } from 'crypto';
 import { arrayMove, SortEnd } from 'react-sortable-hoc';
 import { observer } from 'mobx-react-lite';
-import { flowRight, uniq, pick, omit } from 'lodash';
+import { flowRight } from 'lodash';
 import {
   withNode, withMenuOptions, withResizeDetector, withActivateOnEffect,
 } from '@bodiless/core';
 import {
-  designable, stylable, ComponentOrTag, HOC,
+  designable, stylable, ComponentOrTag,
 } from '@bodiless/fclasses';
 import SortableChild from './SortableChild';
 import SortableContainer, { SortableListProps } from './SortableContainer';

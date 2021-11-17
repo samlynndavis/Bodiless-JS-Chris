@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { contextMenuForm } from '@bodiless/core';
-import { DesignableComponents, Design, startWith, asToken, applyDesign } from '@bodiless/fclasses';
+import { DesignableComponents, Design, applyDesign } from '@bodiless/fclasses';
 import { ComponentSelectorProps, ComponentSelectorUI, ComponentWithMeta } from './types';
 import ComponentSelector from '.';
 

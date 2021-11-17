@@ -41,7 +41,7 @@ const createTextDesign = (n: number) => {
     );
   }
   return design;
-}
+};
 
 const baseDesign = {
   Box: startWith(Box),
@@ -61,7 +61,7 @@ const withPrunedDesign: HOC = Component => {
     return <Component {...props} design={newDesign} />;
   };
   return WithPrunedDesign;
-}
+};
 
 const HeavyFlowContainer = asToken(
   // withPrunedDesign,
@@ -76,7 +76,7 @@ const getContainers = (n: number) => {
     );
   }
   return nodes;
-}
+};
 
 
 export default (props: any) => (
