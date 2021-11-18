@@ -13,14 +13,14 @@
  */
 
 import React, {
-  createContext, useContext, FC,
+  createContext, useContext, FC, ComponentType, useRef,
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  applyDesign, extendDesignable, ComponentOrTag, Token, Fragment,
+  applyDesign, extendDesignable, ComponentOrTag, Token, Fragment, DesignableComponents,
 } from '@bodiless/fclasses';
 import type { Designable, Design } from '@bodiless/fclasses';
-import { omit } from 'lodash';
+import { omit, pick } from 'lodash';
 import type {
   ChameleonState, ChameleonData, ChameleonButtonProps, ChameleonComponents,
 } from './types';
@@ -28,13 +28,6 @@ import type {
 const ChameleonContext = createContext<ChameleonState|undefined>(undefined);
 
 export const DEFAULT_KEY = '_default';
-
-const getSelectableComponents = (props: ChameleonButtonProps) => {
-  const { components } = props;
-  // @ts-ignore @TODO need to add metadata to component type
-  if (components[DEFAULT_KEY].title) return components;
-  return omit(components, DEFAULT_KEY);
-};
 
 const getActiveComponent = (props: ChameleonButtonProps) => {
   const { componentData: { component } } = props;
@@ -56,22 +49,46 @@ const useChameleonContext = (): ChameleonState => {
 };
 
 /**
- * @private
+ * Creates a components object which appies the specified design for a component
+ * only when it is needed.
  *
- * HOC makes the wrapped component designable using the wrapped component itself as the start
- * for every key in the design.
+ * @param design
+ * The design used to create all components.
  *
- * @param Component
+ * @param defaultComponent
+ * The default component to apply 
  */
-const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
-  const apply = (design: Design<ChameleonComponents> = {}) => {
-    const start = Object.keys(design).reduce((acc, key) => ({
-      ...acc,
-      [key]: Component,
-    }), { [DEFAULT_KEY]: Component });
-    return applyDesign(start)(design);
-  };
-  return extendDesignable()(apply, 'Chameleon');
+const useComponentsProxy = (
+  design: Design, p
+  defaultComponent: ComponentOrTag<any> = Fragment,
+): DesignableComponents => {
+  const components = useRef<DesignableComponents>({});
+  return new Proxy(design, {
+    get: (target, prop: string) => {
+      if (!components.current[prop] && target[prop]) {
+        const cDesign = pick(target, prop);
+        const c: DesignableComponents = applyDesign({}, defaultComponent as ComponentType<any>)(cDesign);
+        components.current[prop] = c[prop];
+      }
+      return components.current[prop];
+    },
+  }) as any as DesignableComponents;
+};
+
+const getSelectableComponents = (components: DesignableComponents) => {
+  // The default key is selectable if the associated component has a title.
+  // @ts-ignore @TODO need to add metadata to component type
+  const defaultSelectable = components[DEFAULT_KEY].title ? components[DEFAULT_KEY] : undefined;
+  return new Proxy(components, {
+    get: (target, prop: string) => (
+      prop === DEFAULT_KEY ? defaultSelectable : target[prop]
+    ),
+    ownKeys: target => (
+      defaultSelectable 
+        ? Object.keys(target)
+        : Object.keys(target).filter(k => k !== DEFAULT_KEY)
+    ),
+  });
 };
 
 const withChameleonContext = (
@@ -80,13 +97,18 @@ const withChameleonContext = (
   /** */
   RootComponent: ComponentOrTag<any> = Fragment,
 ): Token => Component => {
-  const WithChameleonContext: FC<any> = props => (
+  const WithChameleonContext: FC<any> = props => {
+    const components = useComponentsProxy(props.design, RootComponent);
+    const selectableComponents = getSelectableComponents(components);
+    const { componentData: { component } } = props;
+    const activeComponent = component && Object.keys(components).includes(component)
+      ? component : DEFAULT_KEY;
+    return (
     <ChameleonContext.Provider value={{
       isOn: getIsOn(props),
-      activeComponent: getActiveComponent(props),
-      // eslint-disable-next-line react/destructuring-assignment
-      components: props.components,
-      selectableComponents: getSelectableComponents(props),
+      components,
+      selectableComponents,
+      activeComponent,
       setActiveComponent: (component: string|null) => props.setComponentData({ component }),
     }}
     >
@@ -95,9 +117,9 @@ const withChameleonContext = (
       />
     </ChameleonContext.Provider>
   );
+  };
 
   return withSidecarNodes(
-    applyChameleonDesign(RootComponent),
     withBodilessData(nodeKeys, defaultData),
   )(WithChameleonContext);
 };
