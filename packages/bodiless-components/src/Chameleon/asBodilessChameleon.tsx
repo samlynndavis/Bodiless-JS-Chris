@@ -22,13 +22,15 @@ import type {
   WithNodeKeyProps, UseBodilessOverrides,
 } from '@bodiless/core';
 import {
-  Token, asToken, Enhancer,
+  Token, asToken, Enhancer, HOC,
 } from '@bodiless/fclasses';
 import { ComponentSelectorOptions } from '@bodiless/layouts';
 import { ChameleonData } from './types';
 import withChameleonButton, { withoutChameleonButtonProps } from './withChameleonButton';
 import applyChameleon from './applyChameleon';
 import withChameleonContext from './withChameleonContext';
+import { useChameleonContext } from '.';
+import pick from 'lodash/pick';
 
 /**
  * Ensures that sublist data is purged when sublists are removed.
@@ -52,6 +54,16 @@ const withDeleteNodeOnUnwrap = (
     return <Component {...rest} unwrap={unwrap$} />;
   };
   return WithDeleteOnUnwrap;
+};
+
+const withSplitDesign: HOC = Component => {
+  const WithSplitDesign: FC<any> = (props: any) => {
+    const { design, ...rest } = props;
+    const component = useChameleonContext().activeComponent;
+    const newDesign = pick(design, component);
+    return <Component {...rest} design={newDesign} csDesign={design} />;
+  };
+  return WithSplitDesign;
 };
 
 /**

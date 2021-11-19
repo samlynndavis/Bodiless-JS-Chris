@@ -13,29 +13,21 @@
  */
 
 import React, {
-  createContext, useContext, FC, ComponentType, useRef,
+  createContext, useContext, FC, ComponentType, useRef, useMemo,
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  applyDesign, extendDesignable, ComponentOrTag, Token, Fragment, DesignableComponents,
+  applyDesign, ComponentOrTag, Token, Fragment, DesignableComponents,
 } from '@bodiless/fclasses';
-import type { Designable, Design } from '@bodiless/fclasses';
-import { omit, pick } from 'lodash';
+import type { Design } from '@bodiless/fclasses';
+import { omit, pick, identity } from 'lodash';
 import type {
-  ChameleonState, ChameleonData, ChameleonButtonProps, ChameleonComponents,
+  ChameleonState, ChameleonData, ChameleonButtonProps,
 } from './types';
 
 const ChameleonContext = createContext<ChameleonState|undefined>(undefined);
 
 export const DEFAULT_KEY = '_default';
-
-const getActiveComponent = (props: ChameleonButtonProps) => {
-  const { componentData: { component } } = props;
-  const components = getSelectableComponents(props);
-  return (component && components[component]) ? component : DEFAULT_KEY;
-};
-
-const getIsOn = (props: ChameleonButtonProps) => getActiveComponent(props) !== DEFAULT_KEY;
 
 /**
  * Gets the current chameleon context value.
@@ -49,6 +41,7 @@ const useChameleonContext = (): ChameleonState => {
 };
 
 /**
+ * @private
  * Creates a components object which appies the specified design for a component
  * only when it is needed.
  *
@@ -59,7 +52,7 @@ const useChameleonContext = (): ChameleonState => {
  * The default component to apply 
  */
 const useComponentsProxy = (
-  design: Design, p
+  design: Design,
   defaultComponent: ComponentOrTag<any> = Fragment,
 ): DesignableComponents => {
   const components = useRef<DesignableComponents>({});
@@ -75,7 +68,14 @@ const useComponentsProxy = (
   }) as any as DesignableComponents;
 };
 
-const getSelectableComponents = (components: DesignableComponents) => {
+/**
+ * @private
+ * Wraps a second proxy around the list of components which excludds the default key if
+ * it does not have a title.
+ *
+ * @param components 
+ */
+const getSelectableComponentsProxy = (components: DesignableComponents) => {
   // The default key is selectable if the associated component has a title.
   // @ts-ignore @TODO need to add metadata to component type
   const defaultSelectable = components[DEFAULT_KEY].title ? components[DEFAULT_KEY] : undefined;
@@ -91,6 +91,34 @@ const getSelectableComponents = (components: DesignableComponents) => {
   });
 };
 
+/**
+ * @private
+ * Provides a memoized value for the Chameleon context.
+ *
+ * @param props 
+ * @param RootComponent 
+ */
+const useValue = (props: ChameleonButtonProps, RootComponent: ComponentOrTag<any>) => {
+  const {
+    design = { [DEFAULT_KEY]: identity },
+    componentData: { component },
+  } = props;
+  return useMemo(() => {
+    const components = useComponentsProxy(design, RootComponent);
+    const selectableComponents = getSelectableComponentsProxy(components);
+    const activeComponent = component && Object.keys(components).includes(component)
+      ? component : DEFAULT_KEY;
+    const isOn = activeComponent !== DEFAULT_KEY;
+    return {
+      isOn,
+      components,
+      selectableComponents,
+      activeComponent,
+      setActiveComponent: (component: string|null) => props.setComponentData({ component }),
+    };
+  }, [component, design, RootComponent]);
+};
+
 const withChameleonContext = (
   nodeKeys: WithNodeKeyProps,
   defaultData?: ChameleonData,
@@ -98,25 +126,14 @@ const withChameleonContext = (
   RootComponent: ComponentOrTag<any> = Fragment,
 ): Token => Component => {
   const WithChameleonContext: FC<any> = props => {
-    const components = useComponentsProxy(props.design, RootComponent);
-    const selectableComponents = getSelectableComponents(components);
-    const { componentData: { component } } = props;
-    const activeComponent = component && Object.keys(components).includes(component)
-      ? component : DEFAULT_KEY;
+    const value = useValue(props, RootComponent);
     return (
-    <ChameleonContext.Provider value={{
-      isOn: getIsOn(props),
-      components,
-      selectableComponents,
-      activeComponent,
-      setActiveComponent: (component: string|null) => props.setComponentData({ component }),
-    }}
-    >
-      <Component
-        {...omit(props, 'componentData', 'components', 'setComponentData') as any}
-      />
-    </ChameleonContext.Provider>
-  );
+      <ChameleonContext.Provider value={value}>
+        <Component
+          {...omit(props, 'componentData', 'components', 'setComponentData') as any}
+        />
+      </ChameleonContext.Provider>
+    );
   };
 
   return withSidecarNodes(
@@ -125,4 +142,4 @@ const withChameleonContext = (
 };
 
 export default withChameleonContext;
-export { useChameleonContext, applyChameleonDesign };
+export { useChameleonContext };
