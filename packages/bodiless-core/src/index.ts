@@ -86,6 +86,7 @@ import {
 export * from './components';
 export * from './Contentful';
 export * from './Store';
+export { BodilessBackendClient } from './BackendClient';
 export {
   asBodilessComponent,
   withBodilessData,

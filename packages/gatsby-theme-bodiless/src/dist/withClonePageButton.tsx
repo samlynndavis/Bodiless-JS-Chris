@@ -22,7 +22,7 @@ import {
   withMenuOptions,
   useNode,
 } from '@bodiless/core';
-import BackendClient from './BackendClient';
+import { BodilessBackendClient } from '@bodiless/core';
 import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
 import {
@@ -107,7 +107,7 @@ const formPageClone = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BackendClient();
+const defaultClient = new BodilessBackendClient();
 
 const useMenuOptions = () => {
   const context = useEditContext();

@@ -32,7 +32,7 @@ import {
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import flow from 'lodash/flow';
-import BackendClient from './BackendClient';
+import { BodilessBackendClient } from '@bodiless/core';
 import handle from './ResponseHandler';
 import {
   PageURLField as NewPageURLField,
@@ -238,7 +238,7 @@ const formPageDel = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BackendClient();
+const defaultClient = new BodilessBackendClient();
 
 const useMenuOptions = () => {
   const context = useEditContext();

@@ -25,9 +25,7 @@ import { withShowDesignKeys } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import { withPageDisableButton } from '@bodiless/components';
-import GatsbyNodeProvider, {
-  Props as NodeProviderProps,
-} from './GatsbyNodeProvider';
+import GatsbyNodeProvider from './GatsbyNodeProvider';
 import GatsbyPageProvider, { PageProviderProps } from './GatsbyPageProvider';
 import withNewPageButton from './withNewPageButton';
 import withClonePageButton from './withClonePageButton';
@@ -40,7 +38,7 @@ type FinalUI = {
 };
 type UI = Partial<FinalUI>;
 
-export type PageProps = NodeProviderProps & PageProviderProps & {
+export type PageProps = React.ComponentProps<typeof GatsbyNodeProvider> & PageProviderProps & {
   ui?: UI,
 };
 

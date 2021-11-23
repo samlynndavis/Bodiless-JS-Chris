@@ -14,7 +14,7 @@
 
 import GatsbyMobxStoreItem, { DEFAULT_REQUEST_DELAY } from '../src/dist/GatsbyMobxStoreItem';
 import GatsbyMobxStore from '../src/dist/GatsbyMobxStore';
-import BackendClient from '../src/dist/BackendClient';
+import { BodilessBackendClient } from '@bodiless/core';
 import { ItemStateEvent } from '../src/dist/types';
 
 class RequestsMock {
@@ -49,7 +49,7 @@ const deletePathMock = jest.fn().mockImplementation(
     requestsMock.add({ resolve, reject });
   }),
 );
-jest.mock('../src/dist/BackendClient', () => () => ({
+jest.mock('@bodiless/core/BackendClient', () => () => ({
   savePath: savePathMock,
   deletePath: deletePathMock,
 }));

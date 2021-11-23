@@ -26,7 +26,7 @@ import {
   ContextSubMenu,
   useGetter,
 } from '@bodiless/core';
-import BackendClient from './BackendClient';
+import { BodilessBackendClient } from '@bodiless/core';
 import CommitsList from './CommitsList';
 import RemoteChanges from './RemoteChanges';
 import Reset from './Reset';
@@ -125,7 +125,7 @@ const formGitReset = (client: GitClient) => contextMenuForm({
   },
 );
 
-const defaultClient = new BackendClient();
+const defaultClient = new BodilessBackendClient();
 
 const getMenuOptions = (
   client: GitClient = defaultClient,
