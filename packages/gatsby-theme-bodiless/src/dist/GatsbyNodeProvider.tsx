@@ -16,7 +16,8 @@ import React, { Component } from 'react';
 import pick from 'lodash/pick';
 import path from 'path';
 import { DefaultContentNode, NodeProvider } from '@bodiless/core';
-import GatsbyMobxStore, { DataSource } from './GatsbyMobxStore';
+import GatsbyMobxStore from './GatsbyMobxStore';
+import BodilessBackendClient from './BackendClient';
 
 type State = {
   store: GatsbyMobxStore,
@@ -29,11 +30,11 @@ export type Props = {
   }
 };
 
-class GatsbyNodeProvider extends Component<Props, State> implements DataSource {
+class GatsbyNodeProvider extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      store: new GatsbyMobxStore(this),
+      store: new GatsbyMobxStore({ slug: this.slug, client: new BodilessBackendClient() }),
     };
   }
 

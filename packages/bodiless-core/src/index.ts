@@ -85,6 +85,7 @@ import {
 
 export * from './components';
 export * from './Contentful';
+export * from './Store';
 export {
   asBodilessComponent,
   withBodilessData,

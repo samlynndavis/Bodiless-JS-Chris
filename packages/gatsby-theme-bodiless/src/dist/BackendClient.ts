@@ -14,6 +14,7 @@
 
 import path from 'path';
 import axios from 'axios';
+import { BackendClient } from '@bodiless/core';
 
 const backendPort = process.env.GATSBY_BODILESS_BACKEND_PORT || 8001;
 
@@ -22,7 +23,7 @@ type BackendClientConf = {
   prefix?: string,
 };
 
-export default class BackendClient {
+export default class BodilessBackendClient implements BackendClient {
   private root: string;
 
   private prefix: string;
