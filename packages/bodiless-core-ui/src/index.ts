@@ -14,10 +14,11 @@
 
 import ContextWrapper from './ContextWrapper';
 import PageEditor from './PageEditor';
+import LocalContextMenu from './LocalContextMenu';
 import PageOverlay from './PageOverlay';
 import ReactTagsField from './ReactTags';
 
 export {
   ContextWrapper, PageEditor, PageOverlay,
-  ReactTagsField,
+  ReactTagsField, LocalContextMenu
 };
