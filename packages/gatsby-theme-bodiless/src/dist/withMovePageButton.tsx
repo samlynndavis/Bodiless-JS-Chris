@@ -35,7 +35,7 @@ import {
   addClasses, removeClasses, StylableProps,
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
-import BackendClient from './BackendClient';
+import { BodilessBackendClient } from '@bodiless/core';
 import handle from './ResponseHandler';
 import { getPathValue, MovePageURLField } from './PageOperations';
 
@@ -283,7 +283,7 @@ const formPageMove = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BackendClient();
+const defaultClient = new BodilessBackendClient();
 
 const useMenuOptions = () => {
   const context = useEditContext();
