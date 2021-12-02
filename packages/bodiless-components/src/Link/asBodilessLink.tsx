@@ -143,7 +143,7 @@ const options: BodilessOptions<Props, LinkData> = {
   local: true,
   defaultData: {
     href: '',
-    ariaLabel: '',
+    ariaLabel: undefined,
   },
 };
 
