@@ -25,6 +25,7 @@ import {
   ContentNode,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
+import { flow } from 'lodash';
 import flowRight from 'lodash/flowRight';
 import identity from 'lodash/identity';
 import {
@@ -219,6 +220,14 @@ const useIsLinkDisabled = () => {
   return false;
 };
 
+// TODO: Implement hook to get node link aria label value.
+const useAriaLabel = () => {
+  // Example:
+  const { node } = useNode() as SlateNodeWithParentGetters<LinkData>;
+  const ariaLabel = node.data.ariaLabel;
+  return ariaLabel;
+};
+
 /**
  * Token that disables non-menu links on the page.
  */
@@ -228,6 +237,13 @@ const asDisabledPageLink = flowIf(useIsLinkDisabled)(
     title: 'Link Disabled'
   }),
   addClassesIf(() => useEditContext().isEdit)('bl-link-disabled'),
+);
+
+// TODO: Finish implementation to turn 'ariaLabel' into 'aria-label' props.
+// Ideally, create hook to parse any given generic attribute in camelCase and turn into props.
+const asAriaLabel = flow(
+  withoutProps('ariaLabel'),
+  addProps({ 'aria-label': useAriaLabel() }),
 );
 
 const asBodilessLink: AsBodilessLink = (
@@ -248,6 +264,7 @@ const asBodilessLink: AsBodilessLink = (
   withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
   withLinkTarget(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
   asDisabledPageLink,
+  asAriaLabel,
 );
 
 export default asBodilessLink;
