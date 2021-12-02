@@ -62,7 +62,7 @@ const TaggableFilterSelector = () => {
         </div>
       </div>
       <label className="py-4 block">
-        <input className="mr-2" type="checkbox" checked={showAll} onClick={() => setShowAll(v => !v)} />
+        <input className="mr-2" type="checkbox" defaultChecked={showAll} onClick={() => setShowAll(v => !v)} />
         Show all items when no tag selected.
       </label>
       <div>
