@@ -36,6 +36,7 @@ import {
   asToken,
   flowIf,
   addClassesIf,
+  addPropsIf,
 } from '@bodiless/fclasses';
 import { withFieldApi } from 'informed';
 import { useGetDisabledPages } from '../PageDisable';
@@ -220,12 +221,21 @@ const useIsLinkDisabled = () => {
   return false;
 };
 
-// TODO: Implement hook to get node link aria label value.
+/**
+ * Hook to get node link aria label value.
+ */
 const useAriaLabel = () => {
-  // Example:
   const { node } = useNode() as SlateNodeWithParentGetters<LinkData>;
-  const ariaLabel = node.data.ariaLabel;
-  return ariaLabel;
+  const ariaLabel = node.data.ariaLabel || '';
+  return { 'aria-label' : ariaLabel };
+};
+
+/**
+ * Hook to check if node aria label value is set.
+ */
+const hasAriaLabel = () => {
+  const { node } = useNode() as SlateNodeWithParentGetters<LinkData>;
+  return (typeof node.data.ariaLabel !== 'undefined');
 };
 
 /**
@@ -243,7 +253,7 @@ const asDisabledPageLink = flowIf(useIsLinkDisabled)(
 // Ideally, create hook to parse any given generic attribute in camelCase and turn into props.
 const asAriaLabel = flow(
   withoutProps('ariaLabel'),
-  addProps({ 'aria-label': useAriaLabel() }),
+  addPropsIf(() => hasAriaLabel())(() => useAriaLabel()),
 );
 
 const asBodilessLink: AsBodilessLink = (
