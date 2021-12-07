@@ -235,6 +235,7 @@ const useAriaLabel = () => {
  */
 const hasAriaLabel = () => {
   const { node } = useNode() as SlateNodeWithParentGetters<LinkData>;
+  //console.log('node.data', typeof node.data.ariaLabel !== 'undefined');
   return (typeof node.data.ariaLabel !== 'undefined');
 };
 
@@ -278,4 +279,4 @@ const asBodilessLink: AsBodilessLink = (
 );
 
 export default asBodilessLink;
-export { withoutLinkWhenLinkDataEmpty, useIsLinkDisabled };
+export { withoutLinkWhenLinkDataEmpty, useIsLinkDisabled, useAriaLabel, hasAriaLabel };

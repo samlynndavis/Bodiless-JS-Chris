@@ -33,11 +33,14 @@ import {
   startWith,
   Button,
   withFinalDesign,
+  addPropsIf,
 } from '@bodiless/fclasses';
 
 import { useMenuContext } from './withMenuContext';
 import { useSubmenuContext } from './withMenuItemContext';
 import { DEFAULT_NODE_KEYS } from './MenuTitles';
+import { useAriaLabel, hasAriaLabel } from '@bodiless/components/lib/Link/asBodilessLink';
+import { flow } from 'lodash';
 
 const useHasSubmenu = () => useSubmenuContext().hasSubmenu;
 const useHasLink = () => {
@@ -87,11 +90,28 @@ const asAccessibleMenuTitle = (
 ) => (Component: ComponentType<any> | string) => ({ ariaLabelSuffix, ...rest }: any) => {
   const { node } = useNode();
   const titleText = node.child<{ text: string }>(DEFAULT_NODE_KEYS.titleNodeKey).data.text;
+
   const ariaLabel = isSubmenuIndicator
     ? `${titleText} - ${ariaLabelSuffix || 'More'}`
     : titleText;
 
-  return <Component role="menuitem" aria-label={ariaLabel} {...rest} />;
+  const ariaLabelOverwrite = flow(
+    addPropsIf(() => hasAriaLabel())(() => useAriaLabel()),
+    //addPropsIf(() => !hasAriaLabel())(ariaLabel)
+  );
+
+  //const arialabel2 = hasAriaLabel();
+  //console.log('hasAriaLabel', arialabel2);
+  //console.log('ariaLabelOverwrite', ariaLabelOverwrite().value);
+
+  //TODO: use arialLabelOverwrite (from aria label field) value, if it exists, otherwise use ariaLabel
+  if (ariaLabelOverwrite) {
+    return <Component role="menuitem" {...ariaLabelOverwrite} {...rest} />;
+  } else {
+    return <Component role="menuitem" aria-label={ariaLabel} {...rest} />;
+  }
+  
+  // return <Component role="menuitem" aria-label={ariaLabelOverwrite || ariaLabel} {...rest} />;
 };
 
 const asAccessibleSubMenuTitle = (Component: ComponentType<any> | string) => (props: any) => {
