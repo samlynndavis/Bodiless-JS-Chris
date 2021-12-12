@@ -31,6 +31,7 @@ export const DEFAULT_KEY = '_default';
 
 const getSelectableComponents = (props: ChameleonButtonProps) => {
   const { components } = props;
+  console.log('components', components);
   // @ts-ignore @TODO need to add metadata to component type
   if (components[DEFAULT_KEY].title) return components;
   return omit(components, DEFAULT_KEY);
@@ -64,10 +65,12 @@ const useChameleonContext = (): ChameleonState => {
  * @param Component
  */
 const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
-  const apply = (design: Design<ChameleonComponents> = {}) => {
-    const start = Object.keys(design).reduce((acc, key) => ({
+  const apply = (design: Design<ChameleonComponents> = {}, props: any = {}) => {
+    const { startComponents = {} } = props;
+    const keys = Object.keys({ ...design, ...startComponents });
+    const start = keys.reduce((acc, key) => ({
       ...acc,
-      [key]: Component,
+      [key]: startComponents[key] || Component,
     }), { [DEFAULT_KEY]: Component });
     return applyDesign(start)(design);
   };
