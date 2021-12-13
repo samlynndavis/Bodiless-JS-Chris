@@ -17,24 +17,55 @@ import React, {
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  applyDesign, extendDesignable, ComponentOrTag, Token, Fragment,
+  applyDesign, extendDesignable, ComponentOrTag, Token, Fragment, DesignableComponents, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import type { Designable, Design } from '@bodiless/fclasses';
 import omit from 'lodash/omit';
 import type {
-  ChameleonState, ChameleonData, ChameleonButtonProps, ChameleonComponents,
+  ChameleonState, ChameleonData, ChameleonButtonProps, ChameleonComponents, ChameleonProps,
 } from './types';
 
 const ChameleonContext = createContext<ChameleonState|undefined>(undefined);
 
 export const DEFAULT_KEY = '_default';
 
-const getSelectableComponents = (props: ChameleonButtonProps) => {
-  const { components } = props;
+class ChameleonContextValue implements ChameleonState {
+  readonly components: DesignableComponents;
+  protected rootComponent: ComponentOrTag<any>;
+
+  constructor(props: ChameleonProps, Component: ComponentOrTag<any>) {
+    this.rootComponent = Component;
+    const { design = {}, startComponents = {}, componentData: { component } } = this.props;
+    const start = {
+      [component]: startComponents[component] || Component,
+    };
+    this.components = applyDesign(start)(design);
+  }
+
+  protected _selectableComponents: DesignableComponents|undefined = undefined;
+  get selectableComponents() {
+    if (this._selectableComponents) return this._selectableComponents;
+    const { design = {}, startComponents } = this.props;
+    const start = startComponents || Object.keys(design).map
+
+
   console.log('components', components);
   // @ts-ignore @TODO need to add metadata to component type
   if (components[DEFAULT_KEY].title) return components;
   return omit(components, DEFAULT_KEY);
+  }
+
+  get isOn() {
+
+  }
+  isOn: boolean;
+  activeComponent: string;
+  setActiveComponent: (key: string | null) => void;
+  selectableComponents: Partial<import("@bodiless/fclasses").DesignableComponents>;
+  
+}
+
+const getSelectableComponents = (props: ChameleonButtonProps) => {
 };
 
 const getActiveComponent = (props: ChameleonButtonProps) => {
@@ -64,9 +95,8 @@ const useChameleonContext = (): ChameleonState => {
  *
  * @param Component
  */
-const applyChameleonDesign = (Component: ComponentOrTag<any>): Designable => {
-  const apply = (design: Design<ChameleonComponents> = {}, props: any = {}) => {
-    const { startComponents = {} } = props;
+const esign = (props: ChameleonButtonProps, Component: ComponentOrTag<any>) => {
+    const { design = {}, startComponents = {} } = props;
     const keys = Object.keys({ ...design, ...startComponents });
     const start = keys.reduce((acc, key) => ({
       ...acc,
