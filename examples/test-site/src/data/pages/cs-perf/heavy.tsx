@@ -3,10 +3,10 @@ import {
   asToken, addClasses, Div, addProps, startWith, varyDesigns, HOC, withDesign
 } from '@bodiless/fclasses';
 import type { FC, ReactNode } from 'react';
-import { pick } from 'lodash';
-import { FlowContainer } from '@bodiless/layouts/src';
+import pick from 'lodash/pick';
+import { FlowContainer } from '@bodiless/layouts-ui';
 import { asBodilessChameleon } from '@bodiless/components';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey, withParent } from '@bodiless/core';
 
 const colors = ['red', 'blue', 'teal', 'green', 'yellow', 'purple', 'orange'];
 const createColorDesign = (prefix: string) => colors.reduce(
@@ -40,7 +40,7 @@ export const heavyDesign = varyDesigns(
   createColorDesign('bg'),
   createColorDesign('border'),
   createColorDesign('text'),
-  createTextDesign(10),
+  createTextDesign(5),
 );
 
 export const withPrunedDesign: HOC = Component => {
@@ -57,6 +57,10 @@ export const createHeavyFlowContainer = (n: number = 1) => asToken(
   withDesign(heavyDesign),
   withNodeKey(`fc-${n}`),
   addProps({ key: `fc-${n}` }),
+  withParent(Div),
+  withDesign({
+    Parent: addClasses('w-1/4'),
+  })
 )(FlowContainer);
 
 export const createHeavyChameleon = (n: number = 1) => asToken(

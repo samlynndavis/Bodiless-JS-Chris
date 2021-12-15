@@ -16,17 +16,25 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { createHeavyElements } from './heavy';
-
-import { Editable } from '@bodiless/components';
 import Layout from '../../../components/Layout';
 
 export default (props: any) => (
   <Page {...props}>
     <Layout>
-      <h1 className="text-3xl font-bold">Page with heavy chameleons</h1>
-      <h3 className="text-lg font-bold">Chameleons</h3>
+      <h1 className="text-3xl font-bold">Page with heavy component selectors</h1>
       <div>
-        {createHeavyElements('chameleon', 1)}
+        This page is designed to demostrate/test the performance of flow containers
+        and Chameleons with a very large number of available components. If the system
+        is operating properly, this page should load fairly quickly. Note that there
+        will be a slight delay when opening the component selector.
+      </div>
+      <h3 className="text-lg font-bold">Chameleons</h3>
+      <div className="flex flex-wrap">
+        {createHeavyElements('chameleon', 20)}
+      </div>
+      <h3 className="text-lg font-bold">Flow Containers</h3>
+      <div className="flex flex-wrap">
+        {createHeavyElements('fc', 20)}
       </div>
     </Layout>
   </Page>
