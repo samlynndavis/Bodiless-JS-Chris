@@ -90,6 +90,10 @@ export class SelectorComponents implements SelectorComponentsInterface {
         }),
         {});
     }
+    // @ts-ignore
+    const name = DefaultComponent.name || DefaultComponent.displayName;
+    console.log('getSelectableComponents', name, Object.keys(start).length);
+    console.trace();
     return applyDesign(start)(pick(design, Object.keys(start)));
   }
 }
