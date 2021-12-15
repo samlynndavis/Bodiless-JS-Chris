@@ -61,7 +61,6 @@ describe('SelectorComponents', () => {
     });
     const S = test.selectableComponents;
     let wrapper = mount(<><S.Foo /><S.Bar /><S.Baz /></>);
-    console.log(wrapper.debug());
     ['foo', 'bar', 'baz'].forEach(
       id => expect(wrapper.find(`div#${id}`).prop('title')).toEqual('base'),
     );
@@ -88,5 +87,25 @@ describe('SelectorComponents', () => {
     expect(wrapper.find('div#foo').prop('title')).toEqual('foo-base');
     expect(wrapper.find('div#bar').prop('title')).toEqual('bar-base');
     expect(wrapper.find('div#baz').prop('title')).toEqual('base');
+  });
+
+  it('Does not invoke unnecessary designs until selectableComponents is accessed', () => {
+    const mockDesign = {
+      Foo: jest.fn(),
+      Bar: jest.fn(),
+      Baz: jest.fn(),
+    };
+    const test = new SelectorComponents({
+      design: mockDesign,
+      selectedComponents: ['Foo'],
+    });
+    const { components } = test;
+    expect(mockDesign.Foo).toHaveBeenCalledTimes(1);
+    expect(mockDesign.Bar).not.toHaveBeenCalled();
+    expect(mockDesign.Baz).not.toHaveBeenCalled();
+    const { selectableComponents } = test;
+    expect(mockDesign.Foo).toHaveBeenCalledTimes(2);
+    expect(mockDesign.Bar).toHaveBeenCalledTimes(1);
+    expect(mockDesign.Baz).toHaveBeenCalledTimes(1);
   });
 });
