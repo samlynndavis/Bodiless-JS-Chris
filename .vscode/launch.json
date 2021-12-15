@@ -112,7 +112,6 @@
             ],
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "runtimeExecutable": "/Users/coden/.nvm/versions/node/v16.13.1/bin/node",
             "windows": {
                 "program": "${workspaceFolder}/node_modules/jest/bin/jest",
             }
