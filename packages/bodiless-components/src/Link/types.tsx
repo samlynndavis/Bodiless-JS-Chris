@@ -20,7 +20,7 @@ import { FileUploadPickerUI } from '../FileUpload';
 
 export type LinkData = {
   href: string;
-  ariaLabel?: string;
+  'aria-label'?: string;
 };
 
 export type UI = {

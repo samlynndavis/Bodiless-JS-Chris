@@ -25,7 +25,6 @@ import {
   ContentNode,
 } from '@bodiless/core';
 import type { BodilessOptions } from '@bodiless/core';
-import { flow } from 'lodash';
 import flowRight from 'lodash/flowRight';
 import identity from 'lodash/identity';
 import {
@@ -36,7 +35,6 @@ import {
   asToken,
   flowIf,
   addClassesIf,
-  addPropsIf,
 } from '@bodiless/fclasses';
 import { withFieldApi } from 'informed';
 import { useGetDisabledPages } from '../PageDisable';
@@ -82,9 +80,9 @@ const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkO
       fileUpload = {},
     } = overrides;
     const { accept: fileUploadAccept = DEFAULT_ALLOWED_FILE_TYPES } = fileUpload;
-    const submitValueHandler = ({ href, ariaLabel }: LinkData) => submitValueHandler$({
+    const submitValueHandler = ({ href, 'aria-label': ariaLabel }: LinkData) => submitValueHandler$({
       href: normalizeHref(href),
-      ariaLabel,
+      'aria-label': ariaLabel,
     });
     const finalOverrides: Partial<EditButtonOptions<Props, LinkData>> & ExtraLinkOptions = {
       ...overrides,
@@ -117,7 +115,7 @@ const useLinkOverrides = (useOverrides: UseLinkOverrides = () => ({})): UseLinkO
               {instructions}
             </ComponentFormDescription>
             <ComponentFormLabel htmlFor="aria-label">Aria Label</ComponentFormLabel>
-            <ComponentFormText field="ariaLabel" id="aria-label" aria-describedby="description" placeholder="aria-label" />
+            <ComponentFormText field="aria-label" id="aria-label" aria-describedby="description" placeholder="aria-label" />
             <ComponentFormLabel>File Upload</ComponentFormLabel>
             <FileUpload ui={fileUploadUI} accept={fileUploadAccept} />
             {unwrap && (
@@ -145,7 +143,7 @@ const options: BodilessOptions<Props, LinkData> = {
   local: true,
   defaultData: {
     href: '',
-    ariaLabel: undefined,
+    'aria-label': undefined,
   },
 };
 
@@ -222,24 +220,6 @@ const useIsLinkDisabled = () => {
 };
 
 /**
- * Hook to get node link aria label value.
- */
-const useAriaLabel = () => {
-  const { node } = useNode() as SlateNodeWithParentGetters<LinkData>;
-  const ariaLabel = node.data.ariaLabel || '';
-  return { 'aria-label' : ariaLabel };
-};
-
-/**
- * Hook to check if node aria label value is set.
- */
-const hasAriaLabel = () => {
-  const { node } = useNode() as SlateNodeWithParentGetters<LinkData>;
-  //console.log('node.data', typeof node.data.ariaLabel !== 'undefined');
-  return (typeof node.data.ariaLabel !== 'undefined');
-};
-
-/**
  * Token that disables non-menu links on the page.
  */
 const asDisabledPageLink = flowIf(useIsLinkDisabled)(
@@ -248,13 +228,6 @@ const asDisabledPageLink = flowIf(useIsLinkDisabled)(
     title: 'Link Disabled'
   }),
   addClassesIf(() => useEditContext().isEdit)('bl-link-disabled'),
-);
-
-// TODO: Finish implementation to turn 'ariaLabel' into 'aria-label' props.
-// Ideally, create hook to parse any given generic attribute in camelCase and turn into props.
-const asAriaLabel = flow(
-  withoutProps('ariaLabel'),
-  addPropsIf(() => hasAriaLabel())(() => useAriaLabel()),
 );
 
 const asBodilessLink: AsBodilessLink = (
@@ -275,8 +248,7 @@ const asBodilessLink: AsBodilessLink = (
   withNormalHref(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
   withLinkTarget(useLinkOverrides(useOverrides) as () => ExtraLinkOptions),
   asDisabledPageLink,
-  asAriaLabel,
 );
 
 export default asBodilessLink;
-export { withoutLinkWhenLinkDataEmpty, useIsLinkDisabled, useAriaLabel, hasAriaLabel };
+export { withoutLinkWhenLinkDataEmpty, useIsLinkDisabled };
