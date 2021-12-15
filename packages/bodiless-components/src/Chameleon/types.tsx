@@ -17,6 +17,7 @@ import type {
   DesignableComponents,
   DesignableProps,
   DesignableComponentsProps,
+  HOC,
 } from '@bodiless/fclasses';
 import type { ComponentSelectorOptions } from '@bodiless/layouts';
 
@@ -28,10 +29,12 @@ export type ChameleonComponents = DesignableComponents;
 
 export type ChameleonState = {
   isOn: boolean,
+  isToggle: boolean,
   activeComponent: string,
   setActiveComponent: (key: string|null) => void,
   selectableComponents: Partial<ChameleonComponents>,
   components: ChameleonComponents,
+  apply: HOC,
 };
 
 export type ChameleonProps =

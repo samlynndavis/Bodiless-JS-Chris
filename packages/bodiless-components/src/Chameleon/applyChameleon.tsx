@@ -14,8 +14,7 @@
 
 import React, { FC } from 'react';
 import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
-import { applyChameleonDesign, useChameleonContext } from './withChameleonContext';
-import { ChameleonProps } from './types';
+import { useChameleonContext } from './withChameleonContext';
 import { ComponentType } from 'enzyme';
 
 /**
@@ -45,15 +44,13 @@ import { ComponentType } from 'enzyme';
  * @return The wrapped component enhanced by the appropriate HOC's from the design.
  */
 const applyChameleon: HOC = Component => {
-  const Chameleon: FC<Pick<ChameleonProps, 'components'>> = props => {
-    const { activeComponent } = useChameleonContext();
-    const { components, ...rest } = props;
-    const ActiveComponent = components[activeComponent];
-    return <ActiveComponent {...rest} />;
+  const Chameleon: FC<any> = props => {
+    const { apply } = useChameleonContext();
+    const ActiveComponent = apply(Component);
+    return <ActiveComponent {...props} />;
   };
   return asToken(
     withoutProps('design'),
-    applyChameleonDesign(Component),
   )(Chameleon) as ComponentType<any>;
 };
 

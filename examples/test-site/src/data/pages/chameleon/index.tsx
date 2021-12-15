@@ -157,7 +157,7 @@ const toggleVisibilityDesign = {
 const VisibilityToggle = asToken(
   addClasses('invisible'),
   applyChameleon,
-  withDesign(toggleVisibilityDesign),
+  // withDesign(toggleVisibilityDesign),
 )(BaseAvailability);
 
 const VisibilityTogglerapper = asToken(
@@ -172,7 +172,6 @@ const VisibilityTogglerapper = asToken(
 
 type AddToCartProps = { productId?: string };
 const AddToCartBase = observer(({ productId, ...rest }: AddToCartProps) => {
-  const { isEdit } = useEditContext();
   const onClick = useCallback(() => {
     // @TODO: Wire this to your cart provider...
     // eslint-disable-next-line no-alert
@@ -180,7 +179,7 @@ const AddToCartBase = observer(({ productId, ...rest }: AddToCartProps) => {
   }, [productId]);
   return (
     <div {...rest}>
-      <button type="button" onClick={isEdit ? onClick : undefined}>Add to cart</button>
+      <button type="button" onClick={onClick}>Add to cart</button>
     </div>
   );
 });

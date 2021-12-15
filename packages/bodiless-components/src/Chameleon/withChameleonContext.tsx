@@ -17,64 +17,19 @@ import React, {
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  applyDesign, extendDesignable, ComponentOrTag, Token, Fragment, DesignableComponents, DesignableComponentsProps,
+  ComponentOrTag, Token, Fragment, DesignableComponents, Design, HOC,
 } from '@bodiless/fclasses';
-import type { Designable, Design } from '@bodiless/fclasses';
+import { SelectorComponents } from '@bodiless/layouts';
+
 import omit from 'lodash/omit';
 import type {
-  ChameleonState, ChameleonData, ChameleonButtonProps, ChameleonComponents, ChameleonProps,
+  ChameleonState, ChameleonData, ChameleonProps,
 } from './types';
+import { identity } from 'lodash';
 
 const ChameleonContext = createContext<ChameleonState|undefined>(undefined);
 
 export const DEFAULT_KEY = '_default';
-
-class ChameleonContextValue implements ChameleonState {
-  readonly components: DesignableComponents;
-  protected rootComponent: ComponentOrTag<any>;
-
-  constructor(props: ChameleonProps, Component: ComponentOrTag<any>) {
-    this.rootComponent = Component;
-    const { design = {}, startComponents = {}, componentData: { component } } = this.props;
-    const start = {
-      [component]: startComponents[component] || Component,
-    };
-    this.components = applyDesign(start)(design);
-  }
-
-  protected _selectableComponents: DesignableComponents|undefined = undefined;
-  get selectableComponents() {
-    if (this._selectableComponents) return this._selectableComponents;
-    const { design = {}, startComponents } = this.props;
-    const start = startComponents || Object.keys(design).map
-
-
-  console.log('components', components);
-  // @ts-ignore @TODO need to add metadata to component type
-  if (components[DEFAULT_KEY].title) return components;
-  return omit(components, DEFAULT_KEY);
-  }
-
-  get isOn() {
-
-  }
-  isOn: boolean;
-  activeComponent: string;
-  setActiveComponent: (key: string | null) => void;
-  selectableComponents: Partial<import("@bodiless/fclasses").DesignableComponents>;
-  
-}
-
-const getSelectableComponents = (props: ChameleonButtonProps) => {
-};
-
-const getActiveComponent = (props: ChameleonButtonProps) => {
-  const { componentData: { component } } = props;
-  const components = getSelectableComponents(props);
-  return (component && components[component]) ? component : DEFAULT_KEY;
-};
-
-const getIsOn = (props: ChameleonButtonProps) => getActiveComponent(props) !== DEFAULT_KEY;
 
 /**
  * Gets the current chameleon context value.
@@ -87,24 +42,54 @@ const useChameleonContext = (): ChameleonState => {
   return value;
 };
 
-/**
- * @private
- *
- * HOC makes the wrapped component designable using the wrapped component itself as the start
- * for every key in the design.
- *
- * @param Component
- */
-const esign = (props: ChameleonButtonProps, Component: ComponentOrTag<any>) => {
-    const { design = {}, startComponents = {} } = props;
-    const keys = Object.keys({ ...design, ...startComponents });
-    const start = keys.reduce((acc, key) => ({
-      ...acc,
-      [key]: startComponents[key] || Component,
-    }), { [DEFAULT_KEY]: Component });
-    return applyDesign(start)(design);
-  };
-  return extendDesignable()(apply, 'Chameleon');
+class ChameleonContextValue extends SelectorComponents implements ChameleonState {
+  isOn: boolean;
+
+  apply: HOC;
+
+  activeComponent: string;
+
+  setActiveComponent: (key: string | null) => void;
+
+  constructor(props: ChameleonProps, DefaultComponent: ComponentOrTag<any>) {
+    const { design = {}, startComponents, componentData: { component }, setComponentData } = props;
+    const defaultDesign: Design<DesignableComponents> = {
+      [DEFAULT_KEY]: identity,
+    };
+    super({
+      DefaultComponent,
+      selectedComponents: component ? [component, DEFAULT_KEY] : [DEFAULT_KEY],
+      startComponents,
+      design: {
+        ...defaultDesign,
+        ...design,
+      }
+    });
+    this.activeComponent = component || DEFAULT_KEY;
+    this.isOn = this.activeComponent !== DEFAULT_KEY;
+    this.setActiveComponent = (component: string|null) => setComponentData({ component });
+    this.apply = design[this.activeComponent] || identity;
+  }
+
+  getSelectableComponents() {
+    const components = super.getSelectableComponents();
+    // @ts-ignore Add metadata to DesignableCompoennts type
+    return components[DEFAULT_KEY]?.title ? components : omit(components, DEFAULT_KEY);
+  }
+
+  get isToggle() {
+    const { design, startComponents } = this.props;
+    const keys = startComponents ? Object.keys(startComponents) : Object.keys(design);
+    if (keys.length > 2) return false;
+    if (!keys.includes(DEFAULT_KEY)) return false;
+    if (!design[DEFAULT_KEY]) return true;
+    const def = design[DEFAULT_KEY]!(Fragment);
+    return def.title === undefined;
+  }
+}
+
+const createChameleonContextValue = (props: ChameleonProps, DefaultComponent: ComponentOrTag<any>) => {
+  return new ChameleonContextValue(props, DefaultComponent);
 };
 
 const withChameleonContext = (
@@ -114,15 +99,7 @@ const withChameleonContext = (
   RootComponent: ComponentOrTag<any> = Fragment,
 ): Token => Component => {
   const WithChameleonContext: FC<any> = props => (
-    <ChameleonContext.Provider value={{
-      isOn: getIsOn(props),
-      activeComponent: getActiveComponent(props),
-      // eslint-disable-next-line react/destructuring-assignment
-      components: props.components,
-      selectableComponents: getSelectableComponents(props),
-      setActiveComponent: (component: string|null) => props.setComponentData({ component }),
-    }}
-    >
+    <ChameleonContext.Provider value={createChameleonContextValue(props, RootComponent)}>
       <Component
         {...omit(props, 'componentData', 'components', 'setComponentData') as any}
       />
@@ -130,10 +107,9 @@ const withChameleonContext = (
   );
 
   return withSidecarNodes(
-    applyChameleonDesign(RootComponent),
     withBodilessData(nodeKeys, defaultData),
   )(WithChameleonContext);
 };
 
 export default withChameleonContext;
-export { useChameleonContext, applyChameleonDesign };
+export { useChameleonContext };

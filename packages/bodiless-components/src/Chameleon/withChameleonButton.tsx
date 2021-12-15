@@ -157,10 +157,8 @@ const withChameleonButton = <P extends object, D extends object>(
   const useMenuOptions = (props: P & EditButtonProps<D>) => {
     const overrides = useOverrides(props);
     // if useOverrides returns falsy, it means not to provide the button.
-    const { selectableComponents } = useChameleonContext();
-    const extMenuOptions = Object.keys(selectableComponents).length > 1
-      ? useChameleonSwapForm
-      : useToggleButtonMenuOption;
+    const { isToggle } = useChameleonContext();
+    const extMenuOptions = isToggle ? useToggleButtonMenuOption : useChameleonSwapForm;
     const baseDefinition:TMenuOption = {
       name: `chameleon-${v1()}`,
       ...extMenuOptions(),
