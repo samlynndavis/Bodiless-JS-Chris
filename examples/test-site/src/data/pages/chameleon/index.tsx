@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, useState, useCallback, createContext, useContext, ComponentType, Fragment, ReactNode,
+  FC, useState, useCallback, createContext, useContext, ComponentType, ReactNode,
 } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
@@ -40,7 +40,7 @@ import {
 import { withAllTitlesFromTerms, ComponentSelectorScale } from '@bodiless/layouts';
 
 import {
-  useMenuOptionUI, asBodilessComponent, useEditContext,
+  useMenuOptionUI, asBodilessComponent,
 } from '@bodiless/core';
 import { asHeader1, asHeader2 } from '../../../components/Elements.token';
 import Layout from '../../../components/Layout';
