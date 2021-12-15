@@ -61,39 +61,35 @@ export class SelectorComponents implements SelectorComponentsInterface {
 
   protected getComponents(): DesignableComponents {
     const {
-      design, startComponents, selectedComponents, DefaultComponent, } = this.props;
-    let start: DesignableComponents;
-    if (startComponents) {
-      start = pick(startComponents, ...selectedComponents);
-    } else {
-      start = selectedComponents.reduce(
-        (acc, next) => ({
-          ...acc,
-          [next]: DefaultComponent,
-        }),
-        {});
-    }
+      design, startComponents = {}, selectedComponents, DefaultComponent
+    } = this.props;
+    const start = selectedComponents.reduce(
+      (acc, next) => ({
+        ...acc,
+        [next]: startComponents[next] || DefaultComponent,
+      }),
+      {},
+    );
     return applyDesign(start)(pick(design, Object.keys(start)));
   }
 
   protected getSelectableComponents(): DesignableComponents {
     const {
-      design, startComponents, DefaultComponent, } = this.props;
-    let start: DesignableComponents;
-    if (startComponents) {
-      start = startComponents;
-    } else {
-      start = Object.keys(design).reduce(
+      design, startComponents, DefaultComponent
+    } = this.props;
+    const start: DesignableComponents = {
+      ... Object.keys(design).reduce(
         (acc, next) => ({
           ...acc,
           [next]: DefaultComponent,
         }),
-        {});
-    }
+        {}),
+      ...startComponents,
+    };
     // @ts-ignore
     const name = DefaultComponent.name || DefaultComponent.displayName;
-    console.log('getSelectableComponents', name, Object.keys(start).length);
-    console.trace();
-    return applyDesign(start)(pick(design, Object.keys(start)));
+    // console.log('getSelectableComponents', name, Object.keys(start).length);
+    // console.trace();
+    return applyDesign(start)(design);
   }
 }

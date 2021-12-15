@@ -29,7 +29,7 @@ describe('SelectorComponents', () => {
     expect(Object.keys(test.components)).toEqual(['Foo']);
   });
 
-  it('Limits components when start components is specified', () => {
+  it('Returns all components when start components is specified', () => {
     const test = new SelectorComponents({
       design,
       startComponents: {
@@ -38,10 +38,10 @@ describe('SelectorComponents', () => {
       },
       selectedComponents: ['Foo'],
     });
-    expect(Object.keys(test.components)).toEqual([]);
+    expect(Object.keys(test.components)).toEqual(['Foo']);
   });
 
-  it('Limits selectableComponents when start components is specified', () => {
+  it('Returns all selectableComponents when start components is specified', () => {
     const test = new SelectorComponents({
       design,
       startComponents: {
@@ -50,7 +50,7 @@ describe('SelectorComponents', () => {
       },
       selectedComponents: ['Foo'],
     });
-    expect(Object.keys(test.selectableComponents)).toEqual(['Bar', 'Baz']);
+    expect(Object.keys(test.selectableComponents)).toEqual(['Foo', 'Bar', 'Baz']);
   });
 
   it('Uses the default component when no startComponents are specified', () => {
@@ -84,8 +84,9 @@ describe('SelectorComponents', () => {
     let wrapper = mount(<C.Foo />); 
     expect(wrapper.find('div#foo').prop('title')).toEqual('foo-base');
     const S = test.selectableComponents;
-    wrapper = mount(<><S.Foo /><S.Bar /></>);
+    wrapper = mount(<><S.Foo /><S.Bar /><S.Baz /></>);
     expect(wrapper.find('div#foo').prop('title')).toEqual('foo-base');
     expect(wrapper.find('div#bar').prop('title')).toEqual('bar-base');
+    expect(wrapper.find('div#baz').prop('title')).toEqual('base');
   });
 });
