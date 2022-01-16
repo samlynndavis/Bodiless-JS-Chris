@@ -1,6 +1,6 @@
 import { Enhancer, ComponentOrTag } from '@bodiless/fclasses';
-import { WithNodeProps, WithNodeKeyProps } from './Types/NodeTypes';
-import { EditButtonOptions, UseBodilessOverrides } from './Types/EditButtonTypes';
+import { WithNodeProps, WithNodeKeyProps } from '../Types/NodeTypes';
+import { EditButtonOptions, UseBodilessOverrides } from '../Types/EditButtonTypes';
 /**
  * Options for making a component "bodiless".
  */

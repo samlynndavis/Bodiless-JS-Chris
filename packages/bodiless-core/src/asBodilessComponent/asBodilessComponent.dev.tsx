@@ -25,7 +25,7 @@ import {
 import { ifReadOnly, ifEditable } from '../withEditToggle';
 import withEditButton from '../withEditButton';
 import withData from '../withData';
-import type { EditButtonProps, UseBodilessOverrides } from './Types/EditButtonTypes';
+import type { EditButtonProps, UseBodilessOverrides } from '../Types/EditButtonTypes';
 import { useContextActivator } from '../hooks';
 import { ifToggledOn } from '../withFlowToggle';
 import { Options, AsBodiless } from './types';
