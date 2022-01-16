@@ -20,6 +20,7 @@
  */
 const pathUtil = require('path');
 const fs = require('fs');
+const webpack = require('webpack');
 
 const { getDisabledPages } = require('@bodiless/components/node-api');
 const { createFilePath } = require('gatsby-source-filesystem');
@@ -257,6 +258,19 @@ exports.onCreateWebpackConfig = (
     const defaultAdminCSS = /.\/bodiless\.index\.css$/;
     const adminCssFiles = process.env.BODILESS_ADMIN_ONLY_CSS_FILES || defaultAdminCSS;
     actions.setWebpackConfig({
+      plugins: [
+        new webpack.NormalModuleReplacementPlugin(
+          // @todo we shoud probably have a less generic pattern
+          /\.edit/,
+          resource => {
+            // eslint-disable-next-line no-param-reassign
+            const newRequest = resource.request.replace(/\.edit/, '.prod');
+            console.log('Replacing module in', resource.contextInfo.issuer);
+            console.log('  ', resource.request, '-->', replaced);
+            resource.request = newRequest;
+          },
+        ),
+      ],
       module: {
         rules: [
           {

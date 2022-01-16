@@ -13,12 +13,13 @@
  */
 
 import flowRight from 'lodash/flowRight';
+import identity from 'lodash/identity';
 import { withoutProps } from '@bodiless/fclasses';
 import withData from '../withData';
 import { Options, AsBodiless } from './types';
 import { withBodilessData } from './withBodilessData';
 
-export const withActivatorWrapper = null;
+export const withActivatorWrapper = identity;
 
 const asBodilessComponent = <P extends object, D extends object>(options: Options<P, D>): AsBodiless<P, D> => (
   (

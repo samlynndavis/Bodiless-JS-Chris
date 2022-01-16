@@ -1,5 +1,5 @@
-import asBodilessComponent from './asBodilessComponent.dev';
+import asBodilessComponent from './asBodilessComponent.edit';
 export default asBodilessComponent;
-export * from './asBodilessComponent.dev';
+export { withActivatorWrapper } from './asBodilessComponent.edit';
 export * from './types';
 export * from './withBodilessData';
