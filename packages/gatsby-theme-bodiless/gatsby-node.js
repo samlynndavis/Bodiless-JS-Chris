@@ -20,6 +20,8 @@
  */
 const pathUtil = require('path');
 const fs = require('fs');
+// webpack will always be present bc it is a dependency of gatsby
+// eslint-disable-next-line import/no-extraneous-dependencies
 const webpack = require('webpack');
 
 const { getDisabledPages } = require('@bodiless/components/node-api');
