@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.4...v0.3.5) (2021-12-29)
+
+
+### Bug Fixes
+
+* **GTM:** nested GTM DataLayer ([#1288](https://github.com/johnsonandjohnson/bodiless-js/issues/1288)) ([683e5a8](https://github.com/johnsonandjohnson/bodiless-js/commit/683e5a8ec130ee63abe6b4c5af7df6fe0be10b31))
+
+
+### Features
+
+* **component:** Redirect via clientside ([#1272](https://github.com/johnsonandjohnson/bodiless-js/issues/1272)) ([0aa63e4](https://github.com/johnsonandjohnson/bodiless-js/commit/0aa63e4c292dda4ec60252c36885b237feb13cf5))
+
+
+
+
+
+## [0.3.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.3...v0.3.4) (2021-12-16)
+
+**Note:** Version bump only for package @bodiless/components
+
+
+
+
+
+## [0.3.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.2...v0.3.3) (2021-12-15)
+
+
+### Bug Fixes
+
+* **adminui:** Fix admin ui issue ([#1307](https://github.com/johnsonandjohnson/bodiless-js/issues/1307)) ([df9df32](https://github.com/johnsonandjohnson/bodiless-js/commit/df9df323b7561c255db4899828a9173e8ca5b35a))
+* **bodiless-components:** Allow digits in anchor id ([#1291](https://github.com/johnsonandjohnson/bodiless-js/issues/1291)) ([12d7a67](https://github.com/johnsonandjohnson/bodiless-js/commit/12d7a674898f07a5c3fa0f673d07b7b7af7001da))
+
+
+
+
+
 ## [0.3.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v0.3.2) (2021-12-13)
 
 

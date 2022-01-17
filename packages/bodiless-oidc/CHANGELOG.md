@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.4...v0.3.5) (2021-12-29)
+
+
+### Bug Fixes
+
+* **bodiless-oidc:** Lock oidc-client-ts dependency to v2.0.0-rc.2 ([#1318](https://github.com/johnsonandjohnson/bodiless-js/issues/1318)) ([91fb1d1](https://github.com/johnsonandjohnson/bodiless-js/commit/91fb1d16fe901a93d2fbdf4284a0f2114d0924dc))
+
+
+
+
+
+## [0.3.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.3...v0.3.4) (2021-12-16)
+
+**Note:** Version bump only for package @bodiless/oidc
+
+
+
+
+
+## [0.3.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.2...v0.3.3) (2021-12-15)
+
+**Note:** Version bump only for package @bodiless/oidc
+
+
+
+
+
 ## [0.3.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v0.3.2) (2021-12-13)
 
 
