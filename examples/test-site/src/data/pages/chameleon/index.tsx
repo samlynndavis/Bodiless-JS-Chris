@@ -76,7 +76,7 @@ const YellowStart = asToken(
   addProps({
     children: <><div>Yellow Chameleons!</div><div>Available now!</div></> as ReactNode,
   }),
-  addClasses('border-yellow-500'),
+  addClasses('border-yellow-500 text-yellow-500'),
 )(BaseComponent);
 
 const DynamicStartChameleon = asToken(

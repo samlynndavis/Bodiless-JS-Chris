@@ -17,7 +17,7 @@ import React, {
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  ComponentOrTag, Token, Fragment, DesignableComponents, Design, HOC,
+  ComponentOrTag, Token, Fragment, DesignableComponents, Design, HOC, asToken, replaceWith,
 } from '@bodiless/fclasses';
 import { SelectorComponents } from '@bodiless/layouts';
 
@@ -68,7 +68,9 @@ class ChameleonContextValue extends SelectorComponents implements ChameleonState
     this.activeComponent = component || DEFAULT_KEY;
     this.isOn = this.activeComponent !== DEFAULT_KEY;
     this.setActiveComponent = (component: string|null) => setComponentData({ component });
-    this.apply = design[this.activeComponent] || identity;
+    const apply = design[this.activeComponent] || identity;
+    this.apply = startComponents?.[this.activeComponent]
+      ? asToken(replaceWith(startComponents[this.activeComponent]), apply) : apply;
   }
 
   getSelectableComponents() {
@@ -101,7 +103,10 @@ const withChameleonContext = (
   const WithChameleonContext: FC<any> = props => (
     <ChameleonContext.Provider value={createChameleonContextValue(props, RootComponent)}>
       <Component
-        {...omit(props, 'componentData', 'components', 'setComponentData') as any}
+        {...omit(
+          props,
+          'componentData', 'components', 'setComponentData', 'startComponents',
+        ) as any}
       />
     </ChameleonContext.Provider>
   );
