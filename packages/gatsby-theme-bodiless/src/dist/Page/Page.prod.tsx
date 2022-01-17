@@ -12,23 +12,23 @@
  * limitations under the License.
  */
 
-import GatsbyMobxStore from './dist/GatsbyMobxStore';
-import GatsbyNodeProvider from './dist/GatsbyNodeProvider';
-import BackendClient from './dist/BackendClient';
-import useGitButtons from './dist/useGitButtons';
-import GatsbyPageProvider, { useGatsbyPageContext } from './dist/GatsbyPageProvider';
-import Page from './dist/Page';
+import React, { FC, Fragment } from 'react';
+import {
+  StaticPage,
+} from '@bodiless/core';
+import { withShowDesignKeys } from '@bodiless/fclasses';
+import GatsbyNodeProvider from '../GatsbyNodeProvider';
 
-export {
-  GatsbyMobxStore,
-  GatsbyNodeProvider,
-  BackendClient,
-  useGitButtons,
-  GatsbyPageProvider,
-  useGatsbyPageContext,
-  Page,
-};
+const ShowDesignKeys = (
+  process.env.NODE_ENV === 'development' || process.env.BODILESS_SHOWDESIGNKEYS === '1'
+) ? withShowDesignKeys()(Fragment) : Fragment;
 
-export type { PageProps } from './dist/Page/types';
-export * from './dist/GatsbyLink';
-export * from './dist/GatsbyImage';
+const Page: FC<any> = ({ children, ui, ...rest }) => (
+    <GatsbyNodeProvider {...rest}>
+      <ShowDesignKeys>
+        <StaticPage>{children}</StaticPage>
+      </ShowDesignKeys>
+    </GatsbyNodeProvider>
+);
+
+export default Page;

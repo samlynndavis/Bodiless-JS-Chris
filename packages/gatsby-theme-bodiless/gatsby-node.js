@@ -268,7 +268,7 @@ exports.onCreateWebpackConfig = (
             // eslint-disable-next-line no-param-reassign
             const newRequest = resource.request.replace(/\.edit/, '.prod');
             console.log('Replacing module in', resource.contextInfo.issuer);
-            console.log('  ', resource.request, '-->', replaced);
+            console.log('  ', resource.request, '-->', newRequest);
             resource.request = newRequest;
           },
         ),

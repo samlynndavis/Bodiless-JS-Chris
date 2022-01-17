@@ -25,25 +25,20 @@ import { withShowDesignKeys } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import { withPageDisableButton } from '@bodiless/components';
-import GatsbyNodeProvider, {
-  Props as NodeProviderProps,
-} from './GatsbyNodeProvider';
-import GatsbyPageProvider, { PageProviderProps } from './GatsbyPageProvider';
-import withNewPageButton from './withNewPageButton';
-import withMovePageButton from './withMovePageButton';
-import withClonePageButton from './withClonePageButton';
-import withDeletePageButton from './withDeletePageButton';
-import useGitButtons from './useGitButtons';
+import GatsbyNodeProvider from '../GatsbyNodeProvider';
+import GatsbyPageProvider from '../GatsbyPageProvider';
+import withNewPageButton from '../withNewPageButton';
+import withMovePageButton from '../withMovePageButton';
+import withClonePageButton from '../withClonePageButton';
+import withDeletePageButton from '../withDeletePageButton';
+import useGitButtons from '../useGitButtons';
+import { PageProps } from './types';
 
 type FinalUI = {
   ContextWrapper: ComponentType<ContextWrapperProps>;
   PageEditor: ComponentType;
 };
-type UI = Partial<FinalUI>;
-
-export type PageProps = NodeProviderProps & PageProviderProps & {
-  ui?: UI,
-};
+export type UI = Partial<FinalUI>;
 
 const defaultUI: FinalUI = {
   ContextWrapper,
