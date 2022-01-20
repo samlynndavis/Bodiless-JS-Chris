@@ -1,10 +1,33 @@
 import React from 'react';
-import { SelectorComponents, withDirection } from '../../src';
-import { HOC, Div, Fragment } from '@bodiless/fclasses';
+import { SelectorComponents, withDirection, useSelectorComponents, SelectorComponentsProps } from '../../src';
+import { HOC, Div, Fragment, replaceWith } from '@bodiless/fclasses';
 import { mount } from 'enzyme';
+import { DesignableComponents } from '@bodiless/fclasses/src';
 
 const addTitle = (t: string): HOC => Component => props => <Component {...props} title={t} />;
 const addId = (id: string): HOC => Component => props => <Component {...props} id={id} />;
+
+describe('useSelectorComponents', () => {
+  it('Does not regenerate comonents across renders', () => {
+    let componentsToCheck: DesignableComponents = {};
+    const Test = (props: Partial<SelectorComponentsProps>) => {
+      componentsToCheck = useSelectorComponents(props).components;
+      return null;
+    };
+    const Foo = () => <>Foo</>;
+    const Bar = () => <>Bar</>;
+    const design = {
+      Foo: replaceWith(Foo),
+      Bar: replaceWith(Bar),
+    };
+    const wrapper = mount(<Test design={design} />);
+    expect(componentsToCheck).toEqual({});
+    wrapper.setProps({ design, selectedComponents: ['Foo'] });
+    const check = { ...componentsToCheck };
+    wrapper.setProps({ design, selectedComponents: ['Foo', 'Bar'] });
+    expect(componentsToCheck.Foo).toBe(check.Foo);
+  });
+});
 
 describe('SelectorComponents', () => {
   const design = {

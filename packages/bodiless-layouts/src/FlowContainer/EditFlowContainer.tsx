@@ -36,7 +36,7 @@ import {
   SortableChildProps,
 } from './types';
 import { ComponentDisplayModeProvider, ComponentDisplayMode } from './ComponentDisplayMode';
-import { SelectorComponents } from '../ComponentSelector/SelectorComponents';
+import { useSelectorComponents } from '../ComponentSelector/SelectorComponents';
 
 const ChildNodeProvider = withNode(React.Fragment);
 
@@ -73,7 +73,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
     design, ui, snapData, getDefaultWidth, itemButtonGroupLabel,
   } = props;
   const items = useItemHandlers().getItems();
-  const { components } = new SelectorComponents({
+  const { components } = useSelectorComponents({
     design,
     startComponents: EditFlowContainerComponents,
     selectedComponents: [

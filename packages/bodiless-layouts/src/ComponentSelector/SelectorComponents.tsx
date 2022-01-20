@@ -1,6 +1,7 @@
 import { applyDesign, Fragment } from '@bodiless/fclasses';
 import type { Design, ComponentOrTag, DesignableComponents } from '@bodiless/fclasses';
 import pick from 'lodash/pick';
+import { useRef } from 'react';
 
 /**
  * Interface for an object which exposes two sets of components: those
@@ -41,7 +42,7 @@ const selectorComponentsDefaultProps: SelectorComponentsProps = {
 export class SelectorComponents implements SelectorComponentsInterface {
   props: SelectorComponentsProps;
 
-  protected _components: DesignableComponents | undefined;
+  protected _components: DesignableComponents = {}; 
 
   protected _selectableComponents: DesignableComponents | undefined;
 
@@ -49,8 +50,15 @@ export class SelectorComponents implements SelectorComponentsInterface {
     this.props = { ...selectorComponentsDefaultProps, ...props };
   }
 
+  spawn(props: Partial<SelectorComponentsProps>) {
+    const offspring = new SelectorComponents(props);
+    // Initialize the components of the offspring so they are not recreated.
+    offspring._components = this._components;
+    return offspring;
+  }
+
   get components() {
-    if (!this._components) this._components = this.getComponents();
+    this._components = this.getComponents();
     return this._components;
   }
 
@@ -61,16 +69,22 @@ export class SelectorComponents implements SelectorComponentsInterface {
 
   protected getComponents(): DesignableComponents {
     const {
-      design, startComponents = {}, selectedComponents, DefaultComponent
+      design, startComponents = {}, selectedComponents = [], DefaultComponent
     } = this.props;
-    const start = selectedComponents.reduce(
-      (acc, next) => ({
-        ...acc,
-        [next]: startComponents[next] || DefaultComponent,
-      }),
-      {},
-    );
-    return applyDesign(start)(pick(design, Object.keys(start)));
+    const start = selectedComponents
+      // Only apply design for components which haven't aleady been created.
+      .filter(c => !this._components[c])
+      .reduce(
+        (acc, next) => ({
+          ...acc,
+          [next]: startComponents[next] || DefaultComponent,
+        }),
+        {},
+      );
+    return {
+      ...this._components,
+      ...applyDesign(start)(pick(design, Object.keys(start))),
+    };
   }
 
   protected getSelectableComponents(): DesignableComponents {
@@ -91,3 +105,9 @@ export class SelectorComponents implements SelectorComponentsInterface {
     return applyDesign(start)(design);
   }
 }
+
+export const useSelectorComponents = (props: Partial<SelectorComponentsProps>) => {
+  const ref = useRef<SelectorComponents>();
+  ref.current = ref.current ? ref.current.spawn(props) : new SelectorComponents(props);
+  return ref.current;
+};

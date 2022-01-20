@@ -13,19 +13,19 @@
  */
 
 import React, {
-  createContext, useContext, FC,
+  createContext, useContext, FC, useRef,
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
   ComponentOrTag, Token, Fragment, DesignableComponents, Design, HOC, asToken, replaceWith,
 } from '@bodiless/fclasses';
-import { SelectorComponents } from '@bodiless/layouts';
+import { SelectorComponents, SelectorComponentsProps } from '@bodiless/layouts';
 
 import omit from 'lodash/omit';
 import type {
   ChameleonState, ChameleonData, ChameleonProps,
 } from './types';
-import { identity } from 'lodash';
+import identity from 'lodash/identity';
 
 const ChameleonContext = createContext<ChameleonState|undefined>(undefined);
 
@@ -42,35 +42,56 @@ const useChameleonContext = (): ChameleonState => {
   return value;
 };
 
+type ChameleonContextValueProps =
+  SelectorComponentsProps & Omit<ChameleonState, 'isToggle'|'selectableComponents'|'components'>;
+
 class ChameleonContextValue extends SelectorComponents implements ChameleonState {
-  isOn: boolean;
+  isOn: boolean = false;
 
-  apply: HOC;
+  apply: HOC = identity;
 
-  activeComponent: string;
+  activeComponent: string = '_default';
 
-  setActiveComponent: (key: string | null) => void;
+  setActiveComponent: (key: string | null) => void = () => undefined;
 
-  constructor(props: ChameleonProps, DefaultComponent: ComponentOrTag<any>) {
+  static createProps(
+    props: ChameleonProps,
+    DefaultComponent: ComponentOrTag<any>
+  ): ChameleonContextValueProps {
     const { design = {}, startComponents, componentData: { component }, setComponentData } = props;
     const defaultDesign: Design<DesignableComponents> = {
       [DEFAULT_KEY]: identity,
     };
-    super({
+    const activeComponent = component || DEFAULT_KEY;
+    const apply = design[activeComponent] || identity;
+    return {
       DefaultComponent,
       selectedComponents: component ? [component, DEFAULT_KEY] : [DEFAULT_KEY],
       startComponents,
       design: {
         ...defaultDesign,
         ...design,
-      }
-    });
-    this.activeComponent = component || DEFAULT_KEY;
-    this.isOn = this.activeComponent !== DEFAULT_KEY;
-    this.setActiveComponent = (component: string|null) => setComponentData({ component });
-    const apply = design[this.activeComponent] || identity;
-    this.apply = startComponents?.[this.activeComponent]
-      ? asToken(replaceWith(startComponents[this.activeComponent]), apply) : apply;
+      },
+      activeComponent,
+      isOn: activeComponent !== DEFAULT_KEY,
+      setActiveComponent: (component: string|null) => setComponentData({ component }),
+      apply: startComponents?.[activeComponent]
+        ? asToken(replaceWith(startComponents[activeComponent]), apply) : apply,
+    };
+  }
+
+  constructor(props: ChameleonContextValueProps) {
+    super(props);
+    this.activeComponent = props.activeComponent;
+    this.isOn = props.isOn;
+    this.setActiveComponent = props.setActiveComponent;
+    this.apply = props.apply;
+  }
+
+  spawn(props: ChameleonContextValueProps) {
+    const offspring = new ChameleonContextValue(props);
+    offspring._components = this._components;
+    return offspring;
   }
 
   getSelectableComponents() {
@@ -90,8 +111,11 @@ class ChameleonContextValue extends SelectorComponents implements ChameleonState
   }
 }
 
-const createChameleonContextValue = (props: ChameleonProps, DefaultComponent: ComponentOrTag<any>) => {
-  return new ChameleonContextValue(props, DefaultComponent);
+const useChameleonContextValue = (props: ChameleonProps, DefaultComponent: ComponentOrTag<any>) => {
+  const cvProps = ChameleonContextValue.createProps(props, DefaultComponent);
+  const ref = useRef<ChameleonContextValue>();
+  ref.current = ref.current ? ref.current.spawn(cvProps) : new ChameleonContextValue(cvProps);
+  return ref.current;
 };
 
 const withChameleonContext = (
@@ -101,7 +125,7 @@ const withChameleonContext = (
   RootComponent: ComponentOrTag<any> = Fragment,
 ): Token => Component => {
   const WithChameleonContext: FC<any> = props => (
-    <ChameleonContext.Provider value={createChameleonContextValue(props, RootComponent)}>
+    <ChameleonContext.Provider value={useChameleonContextValue(props, RootComponent)}>
       <Component
         {...omit(
           props,

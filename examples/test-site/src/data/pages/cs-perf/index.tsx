@@ -22,12 +22,16 @@ export default (props: any) => (
   <Page {...props}>
     <Layout>
       <h1 className="text-3xl font-bold">Page with heavy component selectors</h1>
-      <div>
+      <p>
         This page is designed to demostrate/test the performance of flow containers
         and Chameleons with a very large number of available components. If the system
         is operating properly, this page should load fairly quickly. Note that there
         will be a slight delay when opening the component selector.
-      </div>
+      </p>
+      <p>
+        NOTE: The classes used to style these variations are generated dynamically, and
+        will be purged on the static version of this page.
+      </p>
       <h3 className="text-lg font-bold">Chameleons</h3>
       <div className="flex flex-wrap">
         {createHeavyElements('chameleon', 20)}
