@@ -1,10 +1,10 @@
 /* eslint-disable jest/expect-expect */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { ComponentType, FC } from 'react';
+import React, { ComponentType, FC, Fragment } from 'react';
 import {
   DesignableComponentsProps, Span, designable, Div, addClasses, removeClasses,
   withDesign, Token, asToken, flowIf, withoutProps,
-  asTokenSpec, as, extendMeta, extend,
+  asTokenSpec, as, extendMeta, extend, createUtilities,
 } from '../src';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount, shallow, render } from 'enzyme';
@@ -203,17 +203,11 @@ describe('as', () => {
     console.log(test1.debug());
   });
   // eslint-disable-next-line jest/expect-expect
-  it('Type checks design keys', () => {
-    asTestTokenSpec({
-      Theme: {
-        // @ts-expect-error
+  it('Type checks domains', () => {
+    as({
+      // @ts-expect-error
+      Bizzle: {
         Baz: 'bing',
-      },
-    });
-    asTestTokenSpec({
-      Theme: {
-        // @ts-expect-error
-        B: 3,
       },
     });
   });
@@ -280,5 +274,36 @@ describe('as', () => {
     expect(wrapper.find('div#test-wrapper').prop('className')).toBe('foo');
     expect(wrapper.find('span#test-a').prop('className')).toBe('bar');
     expect(wrapper.find('span#test-b').prop('className')).toBeUndefined();
+  });
+});
+
+describe('createUtilities', () => {
+  it('Requires a Core domain', () => {
+    const domains = {
+      Foo: {},
+      Bar: {},
+    };
+    // @ts-expect-error
+    createUtilities(domains);
+  });
+
+  it('Enforces custom domains', () => {
+    const domains = {
+      Core: {},
+      Foo: {},
+    };
+    const { as, on, asTokenSpec } = createUtilities(domains);
+    // @ts-expect-error
+    asTokenSpec<any>()({ Theme: {} });
+    asTokenSpec<any>()({ Core: {} });
+    asTokenSpec<any>()({ Foo: {} });
+    // @ts-expect-error
+    as({ Theme: {} });
+    as({ Core: {} });
+    as({ Foo: {} });
+    // @ts-expect-error
+    on(Fragment)({ Theme: {} });
+    on(Fragment)({ Core: {} });
+    on(Fragment)({ Foo: {} });
   });
 });
