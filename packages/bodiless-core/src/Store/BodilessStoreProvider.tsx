@@ -17,7 +17,7 @@ import pick from 'lodash/pick';
 import path from 'path';
 import NodeProvider from '../NodeProvider';
 import { DefaultContentNode } from '../ContentNode';
-import { BodilessBackendClient } from '../BackendClient';
+import { BodilessBackendClient } from '../BodilessBackendClient';
 import { BodilessMobxStore } from './BodilessMobxStore';
 import { BodilessStore } from './types';
 

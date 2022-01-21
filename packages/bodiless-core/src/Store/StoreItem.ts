@@ -126,7 +126,7 @@ export class StoreItem {
 
   private request() {
     this.updateState(ItemStateEvent.OnRequestStart);
-    if (this.shouldSave()) {
+    if (this.storeConfig.client && this.shouldSave()) {
       const requestPromise = this.isDeleted
         ? this.storeConfig.client.deletePath(this.getResoucePath())
         : this.storeConfig.client.savePath(this.getResoucePath(), this.data);

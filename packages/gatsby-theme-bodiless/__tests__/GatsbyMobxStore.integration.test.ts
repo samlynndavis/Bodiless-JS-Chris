@@ -13,12 +13,7 @@
  */
 
 import GatsbyMobxStore from '../src/dist/GatsbyMobxStore';
-import { ItemStateEvent } from '../src/dist/types';
-
-jest.mock('../src/dist/BackendClient', () => () => ({
-  savePath: jest.fn().mockResolvedValue(true),
-  deletePath: jest.fn().mockResolvedValue(true),
-}));
+import { ItemStateEvent } from '@bodiless/core';
 
 const flushPromises = () => new Promise(setImmediate);
 

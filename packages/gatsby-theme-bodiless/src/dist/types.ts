@@ -14,16 +14,6 @@
 
 import { AxiosPromise } from 'axios';
 
-export enum ItemStateEvent {
-  UpdateFromServer,
-  UpdateFromBrowser,
-  DeleteFromBrowser,
-  OnLockTimeout,
-  OnRequestEnd,
-  OnRequestStart,
-  OnRequestError,
-}
-
 export type ConflictsResponseType = {
   hasConflict: boolean,
   files?: string[],

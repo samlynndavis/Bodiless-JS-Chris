@@ -18,6 +18,7 @@ import {
 import { StoreItem } from './StoreItem';
 import type { BodilessStoreBackend, BodilessStoreConfig, BodilessStore } from './types';
 import { ItemStateEvent } from './types';
+import addPageLeaver from './addPageLeaver';
   
 export type DataSource = {
   slug: string,
@@ -43,15 +44,16 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
 
   @observable store = new Map<string, StoreItem>();
   
-  client: BodilessStoreBackend;
+  client: BodilessStoreBackend|undefined;
   
-  slug: string | null = null;
+  slug: string|undefined;
   
   data: any = {};
   
-  constructor(config: BodilessStoreConfig) {
+  constructor(config: BodilessStoreConfig = {}) {
     this.slug = config.slug;
     this.client = config.client;
+    addPageLeaver(this.getPendingItems.bind(this));
   }
 
   /**

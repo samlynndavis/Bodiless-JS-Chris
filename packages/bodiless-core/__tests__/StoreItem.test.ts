@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
-import GatsbyMobxStoreItem, { DEFAULT_REQUEST_DELAY } from '../src/dist/GatsbyMobxStoreItem';
-import GatsbyMobxStore from '../src/dist/GatsbyMobxStore';
-import { BodilessBackendClient } from '@bodiless/core';
-import { ItemStateEvent } from '../src/dist/types';
+import { StoreItem, DEFAULT_REQUEST_DELAY } from '../src/Store/StoreItem';
+import { BodilessMobxStore } from '../src/Store/BodilessMobxStore';
+import { BodilessBackendClient } from '../src/BodilessBackendClient';
+import { ItemStateEvent } from '../src/Store/types';
 
 class RequestsMock {
   requests: any[] = [];
@@ -49,13 +49,24 @@ const deletePathMock = jest.fn().mockImplementation(
     requestsMock.add({ resolve, reject });
   }),
 );
-jest.mock('@bodiless/core/BackendClient', () => () => ({
-  savePath: savePathMock,
-  deletePath: deletePathMock,
+jest.mock('../src/BodilessBackendClient', () => ({
+  BodilessBackendClient: () => ({
+    savePath: savePathMock,
+    deletePath: deletePathMock,
+  }),
 }));
-jest.mock('../src/dist/GatsbyMobxStore', () => () => ({
-  client: new BackendClient(),
+
+jest.mock('../src/Store/BodilessMobxStore', () => ({
+  BodilessMobxStore: () => ({
+    client: new BodilessBackendClient(),
+  }),
 }));
+
+class TestStore extends BodilessMobxStore<Map<string, any>> {
+  parseData(d: Map<string, any>) {
+    return d;
+  }
+}
 
 const dataSource = {
   slug: 'slug',
@@ -70,14 +81,14 @@ const defaultData = {
 const createItem = (key?: string, data?: any) => {
   const key$ = key || defaultKey;
   const data$ = data || defaultData;
-  return new GatsbyMobxStoreItem(new GatsbyMobxStore(dataSource), key$, data$);
+  return new StoreItem(new TestStore(dataSource), key$, data$);
 };
 
 const flushPromises = () => new Promise(setImmediate);
 const flushItems = () => jest.runAllTimers();
 const processResponse = flushPromises;
 
-describe('GatsbyMobxStoreItem', () => {
+describe('StoreItem', () => {
   beforeEach(() => {
     requestsMock.clear();
     jest.useFakeTimers();
@@ -263,7 +274,7 @@ describe('GatsbyMobxStoreItem', () => {
   describe('delete', () => {
     describe('when item is deleted from browser', () => {
       it('should invoke backendClient delete', () => {
-        const item = new GatsbyMobxStoreItem(new GatsbyMobxStore(dataSource), 'Page$foo$bar');
+        const item = new StoreItem(new TestStore(dataSource), 'Page$foo$bar');
         item.delete();
         jest.runAllTimers();
         expect(deletePathMock.mock.calls[0][0]).toBe('pages/foo$bar');
@@ -282,9 +293,9 @@ describe('GatsbyMobxStoreItem', () => {
     describe('when item updated by browser', () => {
       it('should be sent to the server', async () => {
         // eslint-disable-next-line global-require
-        const GatsbyMobxStoreItem$ = require('../src/dist/GatsbyMobxStoreItem').default;
+        const StoreItem$ = require('../src/Store/StoreItem').StoreItem;
         // eslint-disable-next-line no-new
-        new GatsbyMobxStoreItem$(new GatsbyMobxStore(dataSource), defaultKey, defaultData);
+        new StoreItem$(new TestStore(dataSource), defaultKey, defaultData);
         jest.runAllTimers();
         expect(savePathMock.mock.calls.length).toBe(0);
       });
@@ -292,9 +303,9 @@ describe('GatsbyMobxStoreItem', () => {
     describe('when item deleted by browser', () => {
       it('should not be sent to the server', async () => {
         // eslint-disable-next-line global-require
-        const GatsbyMobxStoreItem$ = require('../src/dist/GatsbyMobxStoreItem').default;
+        const StoreItem$ = require('../src/Store/StoreItem').StoreItem;
         // eslint-disable-next-line max-len
-        const item = new GatsbyMobxStoreItem$(new GatsbyMobxStore(dataSource), defaultKey, defaultData);
+        const item = new StoreItem$(new TestStore(dataSource), defaultKey, defaultData);
         item.delete();
         jest.runAllTimers();
         expect(deletePathMock.mock.calls.length).toBe(0);

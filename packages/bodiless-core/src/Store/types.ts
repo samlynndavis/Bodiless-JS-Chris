@@ -21,8 +21,8 @@ export type BodilessStoreBackend = {
 };
 
 export type BodilessStoreConfig = {
-  client: BodilessStoreBackend,
-  slug: string | null,
+  client?: BodilessStoreBackend,
+  slug?: string,
 };
 
 export type BodilessStore<D> = {

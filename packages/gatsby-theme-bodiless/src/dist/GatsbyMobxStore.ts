@@ -13,9 +13,6 @@
  */
 
 import { BodilessMobxStore } from '@bodiless/core';
-import type { BodilessStoreConfig } from '@bodiless/core';
-
-import addPageLeaver from './addPageLeaver';
 
 type GatsbyNode = {
   node: {
@@ -31,11 +28,6 @@ export type GatsbyData = {
 };
 
 export default class GatsbyMobxStore extends BodilessMobxStore<GatsbyData>{
-
-  constructor(config: BodilessStoreConfig) {
-    super(config);
-    addPageLeaver(this.getPendingItems.bind(this));
-  }
 
   // eslint-disable-next-line class-methods-use-this
   protected parseData(gatsbyData: GatsbyData) {
