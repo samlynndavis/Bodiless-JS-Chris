@@ -151,3 +151,156 @@ export type AsToken<A = {}> =
     ...t: TokenDef<any, any, any>[]
     // eslint-disable-next-line max-len
   ) => Token<B1, A & A1 & A2 & A3 & A4 & A5 & A6 & A7 & A8 & A9, R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9>;
+
+/**
+ * This is the type to use for the components prop of a component with a fluid design.
+ */
+export type DesignableComponents = {
+  [key: string]: ComponentOrTag<any>,
+};
+
+/**
+ * This is the type of a design which can be applied to a component which accepts
+ * a components prop of type "C".
+ */
+export type HocDesign<C extends DesignableComponents = DesignableComponents> = {
+  [Key in keyof C]?: Token
+} & { _final?: HocDesign<Omit<C, '_final'>> };
+
+/**
+ * This is the type of the props for a designable whose underlying component
+ * accepts a components prop of type "C".
+ */
+export type DesignableProps<C extends DesignableComponents = DesignableComponents> = {
+  design?: Design<C>;
+};
+
+export type DesignableComponentsProps<C extends DesignableComponents = DesignableComponents> = {
+  components: C,
+};
+
+/**
+ * This is the type of a  Higher order design which can be applied to a component which accepts
+ * a components prop of type "C".
+ */
+export type HOD<
+  C extends DesignableComponents, 
+  D extends RequiredDomains = any
+> = (design?:Design<C, D>) => Design<C, D>;
+
+/**
+ * This is a GOD that accepts any DesignableComponents
+ */
+export type FluidHOD = HOD<DesignableComponents>;
+export type FluidDesign = HocDesign<DesignableComponents>;
+
+export type Designable<C extends DesignableComponents = DesignableComponents>
+  = HOC<{}, DesignableProps<C>, DesignableComponentsProps<C>>;
+
+export type RequiredDomains = {
+  Core: any,
+};
+
+export type Domains<C extends DesignableComponents, D extends RequiredDomains> = {
+  [k in keyof D]: Design<C>
+};
+
+export type ReservedDomains<
+C extends DesignableComponents,
+P = any,
+D extends RequiredDomains = RequiredDomains,
+> = {
+  /**
+     * A list of other tokens which should be applied.
+     */
+  Compose: {
+    [key: string]: TokenX<C, D>,
+  },
+  /**
+     * If specified, the entire token will be wrapped in a flow toggle using
+     * this condition hook. Note, the condition is applied to the whole token,
+     * so it will not have access to any contexts or content nodes provided by
+     * the token itself.
+     */
+  Flow?: AsToken<P>,
+  /**
+     * Metadata which should be attached to this token (and to any component to
+     * to which the token is applied).
+     */
+  Meta: TokenMeta,
+};
+  
+/**
+   * Type of a token specification, a token expressed in the
+   * Token Object Notation.
+   *
+   * This is a nested object with two levels of keys:
+   * - The inner keys are to the design keys of the target component, and their
+   *   values extended CanvasX token definitions which should be applied to
+   *   each key. In addition to the design keys of the component, the special `_`
+   *   key is supported to denote a token which should be applied to the component
+   *   as a whole.
+   * - The top-level keys are "domains" -- areas of styling or behavior which can
+   *   be individually reused, extended or overridden by downstream consumers.
+   *
+   * @param C
+   * The type of the design elements for the target componetn.
+   *
+   * @param D
+   * An object type describing the domain keys available in this token.
+   */
+export type TokenSpec<
+  C extends DesignableComponents,
+  D extends RequiredDomains = any,
+  B = {},
+  A = {},
+  R = {},
+> = Domains<C, D> & ReservedDomains<C, D>;
+
+/**
+ * Type of an argument to `as` and/or the value of a key in an Extended Design.
+ * May be:
+ * - A token specified in token object notation
+ * - A token specified as an HOC
+ * - A token specified as a string of classes.
+ */
+export type TokenX<
+  C extends DesignableComponents,
+  D extends RequiredDomains = any,
+> = Partial<TokenSpec<C, D>> | HOC | string | undefined;
+
+  
+/**
+   * Type of a collection of tokens which apply to a specific designable component.
+   *
+   * @param C
+   * The designable components which are exposed by the component to which these
+   * tokens apply.
+   */
+export type TokenCollection<
+  C extends DesignableComponents,
+  D extends RequiredDomains = RequiredDomains,
+> = {
+  [name: string]: Partial<TokenSpec<C, any, D>>,
+};
+  
+type FinalDesign<
+  C extends DesignableComponents = DesignableComponents,
+  D extends RequiredDomains = RequiredDomains,
+> = {
+  [k in keyof Partial<C & { _?: TokenX<C, D> }>]: TokenX<C, D>
+};
+  
+/**
+   * A Design is a keyed set of tokens which can apply to a designable
+   * component. The keys correspond to the design elements 
+   * - includes a special key which contains tokens to be applied to the
+   *   component as a whole.
+   * - Allows each value to be speciried as a CanvasX extened token definition.
+   */
+export type Design<
+  C extends DesignableComponents = DesignableComponents,
+  D extends RequiredDomains = RequiredDomains,
+> = FinalDesign<C, D> & {
+  _final?: FinalDesign<C, D>
+};

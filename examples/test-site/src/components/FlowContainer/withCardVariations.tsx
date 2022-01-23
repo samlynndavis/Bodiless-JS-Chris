@@ -22,6 +22,7 @@ import {
   replaceWith,
   withDesign,
   asToken,
+  varyDesigns,
 } from '@bodiless/fclasses';
 import Card from '../Card';
 import {
@@ -47,7 +48,7 @@ const baseVariation = {
 };
 
 // Lets make Card version that are Vertical and vary the fields that are used
-const verticalVariations = varyDesign(
+const verticalVariations = varyDesigns(
   {
     Vertical: withOrientationFacet('Vertical')(asCardVertical),
   },
@@ -59,7 +60,7 @@ const verticalVariations = varyDesign(
   },
 );
 // Lets make Card version that are Horizontal and vary the fields that are used
-const horizontalVariations = varyDesign(
+const horizontalVariations = varyDesigns(
   {
     Horizontal: withOrientationFacet('Horizontal')(asCardHorizontal),
   },
@@ -80,8 +81,8 @@ const ctaVariations = {
   NoCTA: withStructureFacet('No CTA')(asCardNoCta),
 };
 
-export default withDesign(varyDesign(
+export default withDesign(varyDesigns(
   baseVariation,
   orientationVariations,
   ctaVariations,
-)());
+));

@@ -189,4 +189,23 @@ asToken.meta = {
   }),
 };
 
-export { asToken, withTokenFilter };
+/**
+   * Merges token metadata objects. Keys are merged normally, except that
+   * arrays are combined via `union`.
+   *
+   * @param args
+   * A list of token meta objects
+   *
+   * @returns
+   * A single token meta object which merges the arguments.
+   */
+const extendMeta = (
+  ...args: (TokenMeta|undefined)[]
+) => mergeWith({}, ...args.map(a => (a === undefined ? {} : a)), (objValue: any, srcValue: any) => {
+  if (isArray(objValue) && isArray(srcValue)) {
+    return union(objValue, srcValue);
+  }
+  return undefined;
+});
+
+export { asToken, withTokenFilter, extendMeta };

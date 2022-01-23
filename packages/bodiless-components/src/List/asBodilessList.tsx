@@ -22,7 +22,7 @@ import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import {
   replaceWith, withDesign, asComponent, DesignableComponentsProps, designable, HOC,
-  withoutProps, stylable, Design, asToken, Enhancer, Token, Fragment,
+  withoutProps, stylable, Design, asToken, Enhancer, Token, Fragment, as,
 } from '@bodiless/fclasses';
 
 import { useGetLinkHref } from '../Link';
@@ -149,8 +149,8 @@ const passWrapperDesignToSubList = (SubList: ComponentType<SubListProps>) => {
     const newDesign = {
       ...restDesign,
       Wrapper: asToken(
-        OuterWrapper || identity,
-        withDesign({
+        as(OuterWrapper || identity),
+        withDesign<any>({
           List: Wrapper || identity,
         }),
       ),

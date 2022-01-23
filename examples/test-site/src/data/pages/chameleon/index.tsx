@@ -71,7 +71,7 @@ const borderDesign = {
 };
 
 const selectorDesign = varyDesigns(
-  extendDesign(basicChameleonDesign)({
+  extendDesign(basicChameleonDesign, {
     Red: asToken(asToken.meta.term('Color')('Red')),
     Blue: asToken(asToken.meta.term('Color')('Blue')),
     Green: asToken(asToken.meta.term('Color')('Green')),

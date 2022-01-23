@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import { asToken } from './Tokens';
 import type { Token, TokenMeta } from './types';
-import { Design, withDesign, DesignableComponents } from './Design';
+import { withDesign, as } from './tokenSpec';
+import type { Design, DesignableComponents } from './types';
 
 type DesignPath = string[];
 
@@ -23,7 +23,7 @@ const withDesignAtSingle = <C extends DesignableComponents = DesignableComponent
   designOrToken: Design<C>|Token,
 ): Token => {
   const token: Token = typeof designOrToken === 'function'
-    ? designOrToken : withDesign(designOrToken as Design<C>);
+    ? designOrToken : withDesign(designOrToken as Design);
   const [next, ...rest] = path;
   if (rest.length > 0) {
     return withDesign({
@@ -91,9 +91,9 @@ const withDesignAt = <C extends DesignableComponents = DesignableComponents>(
 ) => (
     designOrToken: Design<C>|Token,
     ...meta: TokenMeta[]
-  ) => asToken(
+  ) => as(
     {}, // necessary bc of typescript bug, see https://github.com/microsoft/TypeScript/issues/28010
-    ...meta,
+    ...meta.map(m => ({ Meta: m })),
     ...(paths || [[]]).map(p => withDesignAtSingle(p, designOrToken)),
   );
 

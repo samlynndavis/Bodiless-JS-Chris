@@ -336,7 +336,7 @@ const apply = (design: Design<DesignableComponents>) => {
       {},
     );
   const finalDesign = pick(lastDesign, Object.getOwnPropertyNames(design));
-  return applyDesign(start)(extendDesign(finalDesign)(design));
+  return applyDesign(start)(extendDesign(design, finalDesign));
 };
 
 const RichText = flow(

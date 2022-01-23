@@ -24,34 +24,29 @@ import type {
 
 import addProps, { addPropsIf } from './addProps';
 import {
-  asComponent,
   applyDesign,
-  withDesign,
-  replaceWith,
-  startWith,
-  remove,
   designable,
   extendDesignable,
+  withFinalDesign,
   varyDesign,
   varyDesigns,
-  extendDesign,
-  extendDesigns,
-  withFinalDesign,
+  extendDesigns
 } from './Design';
+
 import type {
-  Design,
   Designable,
   DesignableProps,
   DesignableComponentsProps,
   DesignableComponents,
-} from './Design';
+} from './types';
 import {
   flowIf, hasProp, withoutProps, withOnlyProps, replaceOnEffect,
-  withDisplayName, or, and, not,
+  withDisplayName, or, and, not, replaceWith, startWith, remove, asComponent,
 } from './hoc-util';
 import type { Condition } from './hoc-util';
 import Fragment from './Fragment';
 import withDesignAt from './withDesignAt';
+import { extendDesign } from './tokenSpec';
 
 export * from './StyledHTML';
 
@@ -67,7 +62,6 @@ export {
   stylable,
   addClasses,
   removeClasses,
-  withDesign,
   withFinalDesign,
   withDesignAt,
   applyDesign,
@@ -97,7 +91,6 @@ export {
 
 export type {
   StylableProps,
-  Design,
   Designable,
   DesignableProps,
   DesignableComponentsProps,
