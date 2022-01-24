@@ -207,7 +207,6 @@ export type Domains<C extends DesignableComponents, D extends RequiredDomains> =
 
 export type ReservedDomains<
 C extends DesignableComponents,
-P = any,
 D extends RequiredDomains = RequiredDomains,
 > = {
   /**
@@ -222,7 +221,7 @@ D extends RequiredDomains = RequiredDomains,
      * so it will not have access to any contexts or content nodes provided by
      * the token itself.
      */
-  Flow?: AsToken<P>,
+  Flow?: AsToken,
   /**
      * Metadata which should be attached to this token (and to any component to
      * to which the token is applied).
@@ -252,9 +251,6 @@ D extends RequiredDomains = RequiredDomains,
 export type TokenSpec<
   C extends DesignableComponents,
   D extends RequiredDomains = any,
-  B = {},
-  A = {},
-  R = {},
 > = Domains<C, D> & ReservedDomains<C, D>;
 
 /**
@@ -281,7 +277,7 @@ export type TokenCollection<
   C extends DesignableComponents,
   D extends RequiredDomains = RequiredDomains,
 > = {
-  [name: string]: Partial<TokenSpec<C, any, D>>,
+  [name: string]: Partial<TokenSpec<C, D>>,
 };
   
 type FinalDesign<

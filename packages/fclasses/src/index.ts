@@ -50,7 +50,7 @@ import { extendDesign } from './tokenSpec';
 
 export * from './StyledHTML';
 
-export { asToken, withTokenFilter } from './Tokens';
+export { asToken, withTokenFilter, extendMeta } from './Tokens';
 export * from './types';
 export * from './tokenSpec';
 
