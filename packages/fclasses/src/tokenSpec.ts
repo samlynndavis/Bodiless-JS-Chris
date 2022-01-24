@@ -19,7 +19,7 @@ const defaultDomains = {
 const {
   as, asTokenSpec, extend, extendDesign, asElementToken, asSimpleToken, on,
   designToTokens, tokensToDesign, withDesign, 
-} = createUtilities(defaultDomains);
+} = createUtilities<any>();
 
 export {
   as, asTokenSpec, extend, extendDesign, asElementToken, asSimpleToken, on,

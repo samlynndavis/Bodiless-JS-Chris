@@ -12,6 +12,7 @@ import flow from 'lodash/flow';
 import { ComponentType } from 'react';
 import identity from 'lodash/identity';
 import { extendMeta } from './Tokens';
+import omit from 'lodash/omit';
 
 /**
  * Creates token manipulation utilites using the supplied set of domains.
@@ -25,7 +26,7 @@ import { extendMeta } from './Tokens';
  */
 
 
-export function createUtilities<D extends RequiredDomains = RequiredDomains>(baseDomains: D) {
+export function createUtilities<D extends RequiredDomains>(baseDomains?: D) {
   /**
      * Helper function to improve type inference in token specifications, and to ensure that
      * the order of domains is consistent for all tokens.
@@ -70,12 +71,15 @@ export function createUtilities<D extends RequiredDomains = RequiredDomains>(bas
 
 
   /**
-     * Converts a list of token specifications into a token hoc which can be applied to
+     * Converts a list of token into an HOC which can be applied to
      * a component. Tokens to apply may be expressed in token object notation, as HOC's
      * or as className strings.
      *
      * @param specs
-     * A list of token specifications to be composed into a single Token HOC.
+     * A list of token to be composed.
+     *
+     * @returns
+     * An HOC which can be applied to a component.
      */
   const as = <C extends DesignableComponents>(...args$: TokenX<C, D>[]) => {
     const args = args$.filter(Boolean);
@@ -87,7 +91,7 @@ export function createUtilities<D extends RequiredDomains = RequiredDomains>(bas
       const specTokens: TokenDef[] = [];
       // Use keys of the base token spec to ensure correct order of domains.
       const keys = [
-        ...Object.keys(baseDomains),
+        ...Object.keys(baseDomains || omit(arg, 'Meta', 'Compose', 'Flow')),
         'Meta',
         'Compose',
         'Flow',
@@ -114,19 +118,20 @@ export function createUtilities<D extends RequiredDomains = RequiredDomains>(bas
      * @returns
      * A token hoc which applies the design.
      */
-  function withDesign<C extends DesignableComponents = any>(designx: Design<C, D>) {
-    const design: HocDesign<C> = Object.keys(designx)
+  function withDesign<C extends DesignableComponents = any>(design: Design<C, D>) {
+    const hocDesign: HocDesign<C> = Object.keys(design)
       .filter(k => k !== '_')
       .reduce(
         (d, k) => ({
           ...d,
-          [k]: as(designx[k]),
+          [k]: as(design[k]),
         }),
         {} as HocDesign<any>);
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     return as(
-      designx._,
-      withHocDesign(design));
+      design._,
+      withHocDesign(hocDesign)
+    );
   }
 
   /**

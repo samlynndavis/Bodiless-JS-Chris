@@ -286,7 +286,7 @@ export type TokenCollection<
   
 type FinalDesign<
   C extends DesignableComponents = DesignableComponents,
-  D extends RequiredDomains = RequiredDomains,
+  D extends RequiredDomains = any,
 > = {
   [k in keyof Partial<C & { _?: TokenX<C, D> }>]: TokenX<C, D>
 };
@@ -300,7 +300,7 @@ type FinalDesign<
    */
 export type Design<
   C extends DesignableComponents = DesignableComponents,
-  D extends RequiredDomains = RequiredDomains,
+  D extends RequiredDomains = any,
 > = FinalDesign<C, D> & {
   _final?: FinalDesign<C, D>
 };
