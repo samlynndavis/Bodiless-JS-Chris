@@ -19,7 +19,7 @@ import React, {
   ComponentType, Fragment, FC,
 } from 'react';
 import type {
-  Token, Design, DesignableComponents, HocDesign, DesignableProps,
+  Token, Design, DesignableComponents, DesignableProps,
   DesignableComponentsProps, HOD, Designable,
 } from './types';
 import { addPropsIf } from './addProps';
@@ -28,7 +28,7 @@ import { withDisplayName, replaceable } from './hoc-util';
 import { withHocDesign } from './withHocDesigh';
 import { withTransformer } from './Transformer';
 
-import { as, extendDesign } from './tokenSpec';
+import { as, extendDesign } from './createUtilities';
 
 /**
  * Given a set of starting components and a default component,
@@ -207,7 +207,7 @@ const varyDesign$ = <C extends DesignableComponents> (design:Design<C>):HOD<C> =
 
 type DesignOrHod<C extends DesignableComponents> = Design<C> | HOD<C>;
 const flowDesignsWith = <C extends DesignableComponents> (func: (d:Design<C>) => HOD<C>) => (
-  (...designs: DesignOrHod<C>[]) => (baseDesign: HocDesign<C> = {}) => (
+  (...designs: DesignOrHod<C>[]) => (baseDesign: Design<C> = {} as any) => (
     flow(
       ...designs
         .filter(design => Object.getOwnPropertyNames(design).length > 0)

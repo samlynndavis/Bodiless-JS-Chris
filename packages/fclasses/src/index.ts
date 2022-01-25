@@ -46,13 +46,13 @@ import {
 import type { Condition } from './hoc-util';
 import Fragment from './Fragment';
 import withDesignAt from './withDesignAt';
-import { extendDesign } from './tokenSpec';
+export { withHocDesign } from './withHocDesigh';
 
 export * from './StyledHTML';
 
 export { asToken, withTokenFilter, extendMeta } from './Tokens';
 export * from './types';
-export * from './tokenSpec';
+export * from './createUtilities';
 
 export { withShowDesignKeys } from './Context';
 
@@ -77,7 +77,6 @@ export {
   extendDesignable,
   varyDesign,
   varyDesigns,
-  extendDesign,
   extendDesigns,
   asComponent,
   addClassesIf,

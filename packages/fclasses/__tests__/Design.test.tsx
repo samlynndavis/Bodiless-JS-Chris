@@ -28,7 +28,8 @@ import {
   withFinalDesign,
   startWith,
   replaceWith,
-} from '../src/Design';
+  as,
+} from '../src';
 import { withShowDesignKeys, asToken, HOC } from '../src';
 
 type SpanType = ComponentType<any>;
@@ -55,13 +56,13 @@ const DesignPrinter: FC<DesignableProps<MyDesignableComponents>> = ({ design }) 
   const components = { ...myStartComponents };
   if (design) {
     if (design.foo) {
-      components.foo = design.foo(components.foo);
+      components.foo = as(design.foo)(components.foo);
     }
     if (design.bar) {
-      components.bar = design.bar(components.bar);
+      components.bar = as(design.bar)(components.bar);
     }
     if (design.baz) {
-      components.baz = design.baz(components.baz);
+      components.baz = as(design.baz)(components.baz);
     }
   }
   const Foo = components.foo;

@@ -1,14 +1,14 @@
 /* eslint-disable jest/expect-expect */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import React, { ComponentType, FC, Fragment } from 'react';
+import React, { ComponentType, FC } from 'react';
 import {
   DesignableComponentsProps, Span, designable, Div, addClasses, removeClasses,
   withDesign, Token, asToken, flowIf, withoutProps,
-  asTokenSpec, as, extendMeta, extend
+  asTokenSpec, as, extendMeta,
 } from '../src';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { mount, shallow, render } from 'enzyme';
-import { pick } from 'lodash';
+import { mount, shallow } from 'enzyme';
+import { identity, flow } from 'lodash';
 
 const defaultDomains = {
   Core: {},
@@ -118,7 +118,7 @@ describe('extend', () => {
       A: 'a2',
     },
   });
-  const Test = extend(Left, Right);
+  const Test = asTestTokenSpec(Left, Right);
   const Expected = asTestTokenSpec({
     Layout: {
       B: as('b', 'b1'),
@@ -174,19 +174,18 @@ describe('extend', () => {
     const Bar = asTestTokenSpec({
       Flow: flowIf(({ bar }: any) => Boolean(bar)),
     });
-    const FooBar = extend(Foo, Bar);
+    const FooBar = asTestTokenSpec(Foo, Bar);
     const T = as(FooBar)(TestClean);
   
     let wrapper = mount(<T foo />);
-    // console.log(wrapper.debug());
-    // console.log(wrapper.find('div#test-a').debug());
     expect(wrapper.find('span#test-a').prop('className')).toBeUndefined();
   });
-  it('Comgines metadata properly', () => {
+
+  it('Combines metadata properly', () => {
     const A = asTestTokenSpec({ Meta: asToken.meta.term('Foo')('Bar') });
     const B = asTestTokenSpec({ Meta: asToken.meta.term('Foo')('Baz') });
     const C = asTestTokenSpec({ Meta: { title: 'Title' }});
-    const Test = extend(A, B, C);
+    const Test = asTestTokenSpec(A, B, C);
     expect(Test).toEqual({
       Meta: {
         title: 'Title',
@@ -199,7 +198,7 @@ describe('extend', () => {
 });
 
 describe('as', () => {
-  it('Applies a condition properly', () => {
+  it.only('Applies a condition properly', () => {
     const Test = asTestTokenSpec({
       Flow: flowIf(({ doIt }: any) => Boolean(doIt)),
       Core: {
@@ -210,13 +209,12 @@ describe('as', () => {
       },
     });
     const TestC = as(Test)(TestClean);
-    // @ts-ignore
     const test = mount(<TestC doIt={true} />);
     expect(test.find('div#test-wrapper').prop('className')).toBe('foo');
     const test1 = mount(<TestC />);
     expect(test1.find('div#test-wrapper').prop('className')).toBeUndefined();
-    console.log(test1.debug());
   });
+
   // eslint-disable-next-line jest/expect-expect
   it('Type checks domains', () => {
     as({
@@ -226,22 +224,6 @@ describe('as', () => {
       },
     });
   });
-
-  // it('Propagates metadata from _ key of mulitple domains', () => {
-  //   const spec = asTestTokenSpec({
-  //     Meta: asToken.meta.term('Foo')('Bar'),
-  //     Meta2: {
-  //       _: asToken.meta.term('Foo')('Baz'),
-  //       A: asToken.meta.term('Foo')('Bing'),
-  //     },
-  //   });
-  //   const asSpec = as(spec);
-  //   expect(asSpec.meta?.categories?.Foo).toEqual(['Bar', 'Baz']);
-  //   const Test = asSpec(TestClean);
-  //   // Metadata associated with tokens applied to individual design keys
-  //   // are not attache to the final component.
-  //   expect(Test.categories?.Foo).toEqual(['Bar', 'Baz']);
-  // });
 
   it('Removes classes applied by an external design', () => {
     const withClass = withDesign({
@@ -291,34 +273,3 @@ describe('as', () => {
     expect(wrapper.find('span#test-b').prop('className')).toBeUndefined();
   });
 });
-
-// describe('createUtilities', () => {
-//   it('Requires a Core domain', () => {
-//     const domains = {
-//       Foo: {},
-//       Bar: {},
-//     };
-//     // @ts-expect-error
-//     createUtilities(domains);
-//   });
-// 
-//   it('Enforces custom domains', () => {
-//     const domains = {
-//       Core: {},
-//       Foo: {},
-//     };
-//     const { as, on, asTokenSpec } = createUtilities(domains);
-//     // @ts-expect-error
-//     asTokenSpec<any>()({ Theme: {} });
-//     asTokenSpec<any>()({ Core: {} });
-//     asTokenSpec<any>()({ Foo: {} });
-//     // @ts-expect-error
-//     as({ Theme: {} });
-//     as({ Core: {} });
-//     as({ Foo: {} });
-//     // @ts-expect-error
-//     on(Fragment)({ Theme: {} });
-//     on(Fragment)({ Core: {} });
-//     on(Fragment)({ Foo: {} });
-//   });
-// });

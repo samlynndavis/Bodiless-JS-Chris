@@ -32,7 +32,7 @@ import {
   withDesign,
   replaceWith,
   DesignableProps,
-} from '../src/Design';
+} from '../src';
 
 type CardComponents = {
   Wrapper: ComponentType<any>,

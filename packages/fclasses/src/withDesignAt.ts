@@ -13,7 +13,7 @@
  */
 
 import type { Token, TokenMeta } from './types';
-import { withDesign, as } from './tokenSpec';
+import { withDesign, as } from './createUtilities';
 import type { Design, DesignableComponents } from './types';
 
 type DesignPath = string[];

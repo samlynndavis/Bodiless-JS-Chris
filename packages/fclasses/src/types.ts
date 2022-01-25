@@ -192,7 +192,7 @@ export type HOD<
  * This is a GOD that accepts any DesignableComponents
  */
 export type FluidHOD = HOD<DesignableComponents>;
-export type FluidDesign = HocDesign<DesignableComponents>;
+export type FluidDesign = Design<DesignableComponents>;
 
 export type Designable<C extends DesignableComponents = DesignableComponents>
   = HOC<{}, DesignableProps<C>, DesignableComponentsProps<C>>;

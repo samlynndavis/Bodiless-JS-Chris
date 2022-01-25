@@ -17,10 +17,11 @@ import ReactDOMServer from 'react-dom/server';
 import flow from 'lodash/flow';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import cheerio from 'cheerio';
-import { replaceWith, withDesign } from '@bodiless/fclasses';
+import { replaceWith, withDesign, Enhancer } from '@bodiless/fclasses';
 import withResponsiveVariants from '../src/withResponsiveVariants';
 // eslint-disable-next-line import/order
 import { mount } from 'enzyme';
+import { identity } from 'lodash';
 
 const defaultPageDimensions = {
   height: 0,
@@ -46,6 +47,7 @@ describe('withResponsiveVariants', () => {
   const Medium = () => <span id="medium">medium</span>;
   const Large = () => <span id="large">large</span>;
   const breakpoints = { sm: 0, md: 100, lg: 200 };
+
 
   const Test = flow(
     withResponsiveVariants({ breakpoints }),
@@ -81,6 +83,7 @@ describe('withResponsiveVariants', () => {
       width: 200,
       size: 'lg',
     };
+    // @ts-ignore The pageDimensions prop is accepted by our mock.
     const wrapper = mount(<Test pageDimensions={medium} />);
     expect(wrapper.find('span#medium').text()).toBe('medium');
     wrapper.setProps({ pageDimensions: large });

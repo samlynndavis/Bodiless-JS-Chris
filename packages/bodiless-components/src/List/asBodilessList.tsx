@@ -132,7 +132,7 @@ const asBodilessList = (
 )(Component);
 
 // This ensures that the original item is used as the sublist wrapper item.
-const asSubListWrapper:HOC = Component => withDesign<SubListWrapperComponents>({
+const asSubListWrapper: HOC = Component => withDesign<SubListWrapperComponents>({
   WrapperItem: replaceWith(Component),
 })(SubListWrapper as ComponentType<any>);
 
