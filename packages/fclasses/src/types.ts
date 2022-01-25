@@ -213,7 +213,7 @@ D extends RequiredDomains = RequiredDomains,
      * A list of other tokens which should be applied.
      */
   Compose: {
-    [key: string]: TokenX<C, D>,
+    [key: string]: Token<C, D>,
   },
   /**
      * If specified, the entire token will be wrapped in a flow toggle using
@@ -260,7 +260,7 @@ export type TokenSpec<
  * - A token specified as an HOC
  * - A token specified as a string of classes.
  */
-export type TokenX<
+export type Token<
   C extends DesignableComponents,
   D extends RequiredDomains = any,
 > = Partial<TokenSpec<C, D>> | HOC | string | undefined;
@@ -284,7 +284,7 @@ type FinalDesign<
   C extends DesignableComponents = DesignableComponents,
   D extends RequiredDomains = any,
 > = {
-  [k in keyof Partial<C & { _?: TokenX<C, D> }>]: TokenX<C, D>
+  [k in keyof Partial<C & { _?: Token<C, D> }>]: Token<C, D>
 };
   
 /**

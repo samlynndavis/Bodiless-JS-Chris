@@ -1,7 +1,7 @@
 // import { ComponentType } from 'react';
 // import { asTokenSpec, as } from '../src/tokenSpec';
 // import { DesignableComponents, TokenSpec } from '../lib';
-// import { TokenX } from '../src/types';
+// import { Token } from '../src/types';
 // 
 // type TestDomains = {
 //   Core: any,
@@ -44,7 +44,7 @@
 //   },
 // });
 // 
-// const asBase = (...tokens: TokenX<any, TestDomains>[]) => as(...tokens);
+// const asBase = (...tokens: Token<any, TestDomains>[]) => as(...tokens);
 // 
 // asBase({
 //   Bar: {

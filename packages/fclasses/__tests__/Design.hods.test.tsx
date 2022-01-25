@@ -1,7 +1,7 @@
 import React, { ComponentType, Fragment } from 'react';
 import {
   varyDesign, extendDesignWith, FluidDesign, HOC,
-  as, TokenX, HOD,
+  as, Token, HOD,
 } from '../src';
 
 /**
@@ -25,7 +25,7 @@ const testHOC = (text: string): HOC => ((Component: TestComponent) => {
   ReturnComponent.testText = (Component.testText || '') + text;
   return ReturnComponent;
 }) as HOC;
-const getTestText = (token: TokenX<any, any>) => {
+const getTestText = (token: Token<any, any>) => {
   if (typeof token === 'undefined') return '';
   const Item1 = as(token)(Fragment) as TestComponent;
   return Item1.testText;

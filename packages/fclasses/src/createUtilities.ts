@@ -2,7 +2,7 @@ import { startWith } from './replaceable';
 import {
   TokenDef, // AsToken, 
   DesignableComponents, HocDesign, RequiredDomains, TokenSpec,
-  ReservedDomains, Design, TokenX, HOC, HOD,
+  ReservedDomains, Design, Token, HOC, HOD,
 } from './types';
 import { asToken } from './Tokens';
 import { addClasses } from './FClasses';
@@ -55,7 +55,7 @@ function getHocForDomain<C extends DesignableComponents, D extends RequiredDomai
      * An HOC which can be applied to a component.
      */
 function as<D extends RequiredDomains = any>(
-  ...args$: TokenX<any, D>[]
+  ...args$: Token<any, D>[]
   
 ): HOC<any, any, any> {
   const args = args$.filter(Boolean);
@@ -245,7 +245,7 @@ const extendDesignWith = (
 const on = (
   CleanComponent: ComponentType<any>
 ) => <C extends DesignableComponents, D extends RequiredDomains = any>(
-  ...specs: TokenX<C, D>[]
+  ...specs: Token<C, D>[]
 ) => as(
     startWith(CleanComponent),
     ...specs);
