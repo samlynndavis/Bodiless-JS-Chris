@@ -198,7 +198,7 @@ describe('extend', () => {
 });
 
 describe('as', () => {
-  it.only('Applies a condition properly', () => {
+  it('Applies a condition properly', () => {
     const Test = asTestTokenSpec({
       Flow: flowIf(({ doIt }: any) => Boolean(doIt)),
       Core: {
