@@ -15,7 +15,7 @@
 import { observer } from 'mobx-react-lite';
 import { useListContext } from '@bodiless/components';
 import { useEditContext } from '@bodiless/core';
-import type { HocWithMeta } from '@bodiless/fclasses';
+import type { HOC } from '@bodiless/fclasses';
 import {
   addClasses,
   removeClassesIf,
@@ -84,14 +84,14 @@ const useIsSubmenuContracted = () => {
 const withHoverStyles = withDesign({
   OuterWrapper: asToken(
     addClassesIf(useIsHoverEnabled)('group'),
-    observer as HocWithMeta,
+    observer as HOC,
   ),
   Wrapper: asToken(
     addClasses('group-hover:flex'),
     addClassesIf(useIsSubmenuContracted)('hidden'),
-    observer as HocWithMeta,
+    observer as HOC,
     addClassesIf(useIsSubmenuExpanded)('flex'),
-    observer as HocWithMeta,
+    observer as HOC,
   ),
 });
 
@@ -144,10 +144,10 @@ const asFullWidthSubMenu = asToken(
  *
  * @param keys List of the submenu key(s) to which the default menu styles be applied to.
  *
- * @return HocWithMeta that applies default top navigation styles based on provided keys.
+ * @return HOC that applies default top navigation styles based on provided keys.
  */
 const asTopNav = (...keys: string[]) => {
-  const TopNavDesign: { [key: string]: HocWithMeta } = {
+  const TopNavDesign: { [key: string]: HOC } = {
     Main: withMenuDesign('Main')(withBaseMenuStyles, asAccessibleMenu),
     List: withMenuDesign('List')(asListSubMenu),
     Cards: withMenuDesign('Cards')(asFullWidthSubMenu),

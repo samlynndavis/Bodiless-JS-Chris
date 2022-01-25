@@ -15,7 +15,7 @@
 import React, {
   createContext, useContext, useState,
 } from 'react';
-import { HocWithMeta } from '@bodiless/fclasses';
+import { HOC } from '@bodiless/fclasses';
 
 /**
  * Type of a Burger Menu Context.
@@ -51,7 +51,7 @@ const useBurgerMenuContext = () => useContext(BurgerMenuContext);
  *  - `setIsTransitionComplete()` - Transition state toggle function.
  *
  */
-const withBurgerMenuProvider: HocWithMeta = Component => props => {
+const withBurgerMenuProvider: HOC = Component => props => {
   const [isVisible, toggle] = useState<boolean>(false);
   const [isTransitionComplete, setIsTransitionComplete] = useState<boolean>(false);
 

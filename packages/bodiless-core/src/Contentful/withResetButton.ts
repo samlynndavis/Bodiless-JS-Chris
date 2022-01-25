@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import flowRight from 'lodash/flowRight';
 import {
   withContextActivator,
   withLocalContextMenu,
@@ -20,6 +19,7 @@ import {
 import { withMenuOptions } from '../PageContextProvider';
 import { useNode } from '../NodeProvider';
 import { TMenuOption } from '../Types/ContextMenuTypes';
+import { asToken, HOC } from '@bodiless/fclasses';
 
 type MenuOptionWithNodeKey = (Partial<TMenuOption> & {
   nodeKey?: string | string[];
@@ -56,13 +56,13 @@ const useMenuOptions = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => () => 
   return menuOptions;
 };
 
-const withResetButton = (menuOptionWithNodeKey?: MenuOptionWithNodeKey) => flowRight(
+const withResetButton = (menuOptionWithNodeKey?: MenuOptionWithNodeKey): HOC => asToken(
+  withLocalContextMenu,
+  withContextActivator('onClick'),
   withMenuOptions({
     useMenuOptions: useMenuOptions(menuOptionWithNodeKey),
     name: 'Default Content',
   }),
-  withContextActivator('onClick'),
-  withLocalContextMenu,
 );
 
 export default withResetButton;

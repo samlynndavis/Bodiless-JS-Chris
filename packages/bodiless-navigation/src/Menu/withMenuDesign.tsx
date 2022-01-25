@@ -16,7 +16,7 @@ import {
   withDesignAt,
   TokenDef,
   asToken,
-  HocWithMeta,
+  HOC,
 } from '@bodiless/fclasses';
 
 const withSecondLevelDesign = (keys: string[]) => keys.reduce((result, item) => {
@@ -63,7 +63,7 @@ const depthDesignPathOptions = [() => [], withSecondLevelDesign, withThirdLevelD
 const withMenuDesign = (
   keys: string|string[] = ['Main', 'List', 'Columns', 'Cards'],
   depths: number|number[] = [0, 1, 2],
-) => (...tokenDefs: TokenDef[]): HocWithMeta => {
+) => (...tokenDefs: TokenDef[]): HOC => {
   const keys$ = Array.isArray(keys) ? keys : [keys];
   const depths$ = Array.isArray(depths) ? depths : [depths];
 

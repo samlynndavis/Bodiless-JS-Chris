@@ -18,9 +18,9 @@ import identity from 'lodash/identity';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import type { ListData } from '@bodiless/components';
 import { observer } from 'mobx-react-lite';
-import { HocWithMeta } from '@bodiless/fclasses';
+import { HOC } from '@bodiless/fclasses';
 
-const withTotalSlides = (nodeKeys?: WithNodeKeyProps): HocWithMeta => Component => {
+const withTotalSlides = (nodeKeys?: WithNodeKeyProps): HOC => Component => {
   if (nodeKeys === undefined) return identity;
   const nodeKeys$ = typeof nodeKeys === 'string'
     ? { nodeKey: nodeKeys, nodeCollection: undefined }

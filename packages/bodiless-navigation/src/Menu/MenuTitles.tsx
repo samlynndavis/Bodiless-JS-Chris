@@ -13,7 +13,6 @@
  */
 
 import React, { ComponentType, FC } from 'react';
-import flow from 'lodash/flow';
 import {
   withSidecarNodes, withNode, withNodeKey,
 } from '@bodiless/core';
@@ -21,7 +20,7 @@ import { asEditable, withBodilessLinkToggle } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { CardClean } from '@bodiless/card';
 import {
-  A, HocWithMeta, asToken, Fragment, designable, TokenDef,
+  A, HOC, asToken, Fragment, designable, TokenDef,
   withDesign, startWith, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 
@@ -66,7 +65,7 @@ const asMenuLink = (asEditableLink: typeof asBodilessLink) => asToken(
 );
 
 /**
- * HocWithMeta that adds a default Editors to the menu Title and Link.
+ * HOC that adds a default Editors to the menu Title and Link.
  * Transforms Link into Editable Bodiless Link Toggle and Title to Editable.
  */
 const withDefaultMenuTitleEditors = withDesign({
@@ -78,30 +77,30 @@ const withDefaultMenuTitleEditors = withDesign({
 });
 
 /**
- * A helper to apply provided `withTitleEditors` HocWithMeta to the Title menu key.
+ * A helper to apply provided `withTitleEditors` HOC to the Title menu key.
  * Applies `withDefaultMenuTitleEditors` token by default.
  *
- * @param withTitleEditors HocWithMeta that will be applied to the Title key
+ * @param withTitleEditors HOC that will be applied to the Title key
  */
 const withMenuTitleEditors = <P extends object>(
-  withTitleEditors: HocWithMeta = withDefaultMenuTitleEditors,
+  withTitleEditors: HOC = withDefaultMenuTitleEditors,
   ...tokenDefs: TokenDef[]
 ) => withDesign({
     Title: asToken(withTitleEditors, ...tokenDefs),
   });
 
 /**
- * HocWithMeta that transforms component into MenuTitle with node and 'title' nodeKey.
+ * HOC that transforms component into MenuTitle with node and 'title' nodeKey.
  * MenuTitle has Link and Title design keys. Can be applied to the Title design key.
  */
-const asMenuTitle = flow(
+const asMenuTitle = asToken(
   startWith(MenuTitle),
   withNode,
   withNodeKey('title'),
 );
 
 /**
- * HocWithMeta that transforms component into Menu Card with node and 'title' nodeKey.
+ * HOC that transforms component into Menu Card with node and 'title' nodeKey.
  * Can be applied to the Title design key.
  */
 const asMenuCard = asToken(

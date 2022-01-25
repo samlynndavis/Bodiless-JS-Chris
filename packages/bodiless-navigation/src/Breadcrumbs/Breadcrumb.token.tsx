@@ -42,7 +42,7 @@ export const asStylableBreadcrumbs = withDesign({
 /**
  * Applies supplied tokenDefs to all breadcrumb items.
  *
- * @returns HocWithMeta - a token that applies provided tokenDefs to all breadcrumb items.
+ * @returns HOC - a token that applies provided tokenDefs to all breadcrumb items.
  */
 export const withBreadcrumbItemToken = (...tokenDefs: TokenDef[]) => withDesign({
   // dummy arg is needed bc of ts bug, see https://github.com/microsoft/TypeScript/issues/28010

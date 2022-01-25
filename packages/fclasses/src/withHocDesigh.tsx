@@ -1,5 +1,5 @@
 import React from 'react';
-import type { HocDesign, DesignableComponents, TokenMeta, HOC } from './types';
+import type { HocDesign, DesignableComponents, TokenMeta, HOCBase } from './types';
 import { asToken } from './Tokens';
 import { intersection } from 'lodash';
 
@@ -19,13 +19,13 @@ import { intersection } from 'lodash';
  *
  *
  * @return
- * HocWithMeta which applies the design to the wrapped component.
+ * HOC which applies the design to the wrapped component.
  *
  */
 export const withHocDesign = <C extends DesignableComponents = any>(
   design: HocDesign<C>,
   ...meta: TokenMeta[]
-): HOC => asToken(
+): HOCBase => asToken(
     Component => {
       const WithDesign = (props: any) => {
         const { design: designFromProps } = props;

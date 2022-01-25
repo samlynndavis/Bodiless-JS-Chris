@@ -21,8 +21,8 @@ import React, {
 import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import {
-  replaceWith, withDesign, asComponent, DesignableComponentsProps, designable, HOC,
-  withoutProps, stylable, Design, asToken, Enhancer, HocWithMeta, Fragment, as,
+  replaceWith, withDesign, asComponent, DesignableComponentsProps, designable,
+  withoutProps, stylable, Design, asToken, Enhancer, HOC, Fragment, as,
 } from '@bodiless/fclasses';
 
 import { useGetLinkHref } from '../Link';
@@ -88,7 +88,7 @@ const SubListWrapper = designable(sublistWrapperComponents, 'SubList')(SubListWr
  * Don't render the list item if the target page
  * is disabled by a user.
  */
-const asDisabledListItem: HocWithMeta = Component => props => {
+const asDisabledListItem: HOC = Component => props => {
   const { node } = useNode();
   const { isEdit } = useEditContext();
   // Let's consider the lists stored at site level as menu lists.

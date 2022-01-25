@@ -19,7 +19,7 @@ import {
   withDesign,
   replaceWith,
   addPropsIf,
-  HocWithMeta,
+  HOC,
   asToken,
 } from '@bodiless/fclasses';
 import flow from 'lodash/flow';
@@ -151,7 +151,7 @@ const withAutoPlayButtonStyles = asToken(
   }),
 );
 
-const withSlideItemAriaLabel: HocWithMeta = Component => props => {
+const withSlideItemAriaLabel: HOC = Component => props => {
   const isSlideActive = useIsCarouselItemActive();
   const slideIndex = useCarouselSlideIndex() + 1;
   const ariaLabel = isSlideActive ? `Current Slide: Slide ${slideIndex}` : `Slide ${slideIndex}`;

@@ -5,7 +5,7 @@ import React, {
 
   useContext
 } from 'react';
-import { HOC, ComponentOrTag, HocWithMeta } from './types';
+import { HOCBase, ComponentOrTag, HOC } from './types';
 import { asToken } from './Tokens';
 const designContextDefault = undefined as undefined | ComponentType<any>;
 const DesignContext = React.createContext(designContextDefault);
@@ -51,7 +51,7 @@ export const replaceable = <P extends object>(Component: ComponentOrTag<P>): Com
  *  ```
  */
 
-export const startWith = (ReplacementComponent: ComponentType<any>): HOC => Component => {
+export const startWith = (ReplacementComponent: ComponentType<any>): HOCBase => Component => {
   const StartWith: FC<any> = props => {
     const UpstreamComponent = useContext(DesignContext);
     return UpstreamComponent
@@ -65,7 +65,7 @@ export const startWith = (ReplacementComponent: ComponentType<any>): HOC => Comp
   return StartWith;
 };
 /**
- * Returns a HocWithMeta which replaces the component to which it is applied with another.
+ * Returns a HOC which replaces the component to which it is applied with another.
  * Unlike `startWith`, this replaces the component along with any hoc's which
  * had previously been applied.
  *
@@ -90,7 +90,7 @@ export const replaceWith = <P extends object>(Replacement: ComponentOrTag<P>) =>
   (() => {
     const ReplaceWith = (props: P) => <Replacement {...props} />;
     return ReplaceWith;
-  }) as HocWithMeta);
+  }) as HOC);
 /**
  * HOC which replaces the component with a fragment.  Note that the children of
  * the component (if any) will still be rendered.  If you want to completely remove

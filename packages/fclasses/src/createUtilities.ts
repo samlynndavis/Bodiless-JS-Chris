@@ -2,7 +2,7 @@ import { startWith } from './replaceable';
 import {
   TokenDef, // AsToken, 
   DesignableComponents, HocDesign, RequiredDomains, TokenSpec,
-  ReservedDomains, Design, Token, HOC, HOD,
+  ReservedDomains, Design, Token, HOCBase, HOD,
 } from './types';
 import { asToken } from './Tokens';
 import { addClasses } from './FClasses';
@@ -57,7 +57,7 @@ function getHocForDomain<C extends DesignableComponents, D extends RequiredDomai
 function as<D extends RequiredDomains = any>(
   ...args$: Token<any, D>[]
   
-): HOC<any, any, any> {
+): HOCBase<any, any, any> {
   const args = args$.filter(Boolean);
   const tokens: TokenDef[] = args.map(arg => {
     if (typeof arg === 'function' || typeof arg === 'undefined')
@@ -97,7 +97,7 @@ function as<D extends RequiredDomains = any>(
  */
 function withDesign<C extends DesignableComponents = any, D extends RequiredDomains = any>(
   design: Design<C, D>
-): HOC {
+): HOCBase {
 
   const hocDesign: HocDesign<C> = Object.keys(design)
     .filter(k => k !== '_')
@@ -108,7 +108,7 @@ function withDesign<C extends DesignableComponents = any, D extends RequiredDoma
       }),
       {} as HocDesign<any>);
   return asToken(
-    as(design._) as HOC,
+    as(design._) as HOCBase,
     withHocDesign(hocDesign)
   );
   // return withHocDesign(hocDesign);
@@ -142,7 +142,7 @@ const tokenMergeCustomizer = (...args: any) => {
      * Utiity to merge two tokens. inner key values are composed together via `t`.
      *
      * @param a, b
-     * HocWithMeta specifications to merge.
+     * HOC specifications to merge.
      *
      * @return
      * A new token specification containing the merged keys.

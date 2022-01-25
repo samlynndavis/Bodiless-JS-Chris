@@ -19,8 +19,8 @@ import union from 'lodash/union';
 import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import type {
-  TokenDef, HOC, ComponentOrTag, ComponentWithMeta, TokenMeta,
-  HocWithMeta, TokenFilterTest, AsToken as AsTokenBase,
+  TokenDef, HOCBase, ComponentOrTag, ComponentWithMeta, TokenMeta,
+  HOC, TokenFilterTest, AsToken as AsTokenBase,
 } from './types';
 
 const isToken = (def: TokenDef<any, any, any>) => typeof def === 'function';
@@ -37,7 +37,7 @@ function mergeMeta(objValue:any, srcValue:any) {
  * @private
  * Enhances an HOC so as to reserve metadata attached to the component it wraps.
  */
-const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>(
+const preserveMeta = (hoc: HOCBase): HOCBase => <P extends object, Q extends object = P>(
   Component: ComponentOrTag<P>,
 ): ComponentWithMeta<Q> => {
   const NewComponent = hoc(Component) as ComponentWithMeta<Q>;
@@ -51,13 +51,13 @@ const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>
  *
  * @param meta The metadata to attach.
  */
-export const withMeta = (meta: TokenMeta): HOC => Component => {
+export const withMeta = (meta: TokenMeta): HOCBase => Component => {
   const WithMeta = (props: any) => <Component {...props} />;
   return Object.assign(WithMeta, meta);
 };
 
-type TokenWithParents = HocWithMeta & {
-  parents?: HocWithMeta[],
+type TokenWithParents = HOC & {
+  parents?: HOC[],
 };
 
 /**
@@ -69,7 +69,7 @@ type TokenWithParents = HocWithMeta & {
  * @param parents The current list of parents
  */
 const flattenTokens = <P extends object>(
-  tokens: HocWithMeta[] = [], parents: HocWithMeta[] = [],
+  tokens: HOC[] = [], parents: HOC[] = [],
 ): TokenWithParents[] => tokens.reduce(
     (acc, token) => [
       ...acc,
@@ -91,7 +91,7 @@ const flattenTokens = <P extends object>(
  * The token filter to apply
  *
  * @return
- * A TokenFilter which which applies the supplied filter to a HocWithMeta and
+ * A TokenFilter which which applies the supplied filter to a HOC and
  * all its parents.
  */
 const createTokenAndParentFilter = <P extends object>(
@@ -106,8 +106,8 @@ const createTokenAndParentFilter = <P extends object>(
  * @param tokens The list of tokens to filter.
  * @return A flat list of filtered tokens
  */
-const filterMembers = <P extends object>(tokens: HocWithMeta[]): HocWithMeta[] => {
-  const filtered: HOC[] = [];
+const filterMembers = <P extends object>(tokens: HOC[]): HOC[] => {
+  const filtered: HOCBase[] = [];
   let rest = flattenTokens(tokens).reverse();
   while (rest.length > 0) {
     const [next, ...nextRest] = rest;
@@ -149,8 +149,8 @@ const asToken: AsToken = (...args) => {
   const args$ = args.filter(a => a !== undefined);
   const metaBits: TokenMeta[] = args$.filter(a => !isToken(a)) as TokenMeta[];
   const meta = mergeWith({}, ...metaBits, mergeMeta);
-  const members: HocWithMeta[] = [
-    ...args$.filter(a => isToken(a)) as HocWithMeta[],
+  const members: HOC[] = [
+    ...args$.filter(a => isToken(a)) as HOC[],
     withMeta(meta),
   ];
   const hocs = filterMembers(members);
@@ -169,7 +169,7 @@ const asToken: AsToken = (...args) => {
  * @returns
  * A token filter.
  */
-const withTokenFilter = <P extends object>(test: TokenFilterTest): HocWithMeta => (
+const withTokenFilter = <P extends object>(test: TokenFilterTest): HOC => (
   Object.assign(identity, { filter: test })
 );
 

@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 
 import {
-  HocWithMeta, withDesign, addProps, replaceWith, withoutProps, Tag, asToken,
+  HOC, withDesign, addProps, replaceWith, withoutProps, Tag, asToken,
 } from '@bodiless/fclasses';
 import { withDefaultContent } from '@bodiless/core';
 import flow from 'lodash/flow';
@@ -27,7 +27,7 @@ const withItemTitle = (title: string) => withDesign({
   Title: flow(
     () => (props: any) => <span {...props}>{title}</span>,
   ),
-}) as HocWithMeta;
+}) as HOC;
 
 describe('list styling', () => {
   const TestList = asToken(
@@ -135,7 +135,7 @@ describe('list styling', () => {
                 replaceWith(TitledSubList),
                 // @todo find a way to avoid this.
                 withoutProps(['addItem', 'deleteItem', 'canDelete', 'unwrap']),
-              ) as HocWithMeta,
+              ) as HOC,
             }),
           }),
         ),

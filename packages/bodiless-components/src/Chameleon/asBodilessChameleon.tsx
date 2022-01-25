@@ -22,7 +22,7 @@ import type {
   WithNodeKeyProps, UseBodilessOverrides,
 } from '@bodiless/core';
 import {
-  HocWithMeta, asToken, Enhancer,
+  HOC, asToken, Enhancer,
 } from '@bodiless/fclasses';
 import { ComponentSelectorOptions } from '@bodiless/layouts';
 import { ChameleonData } from './types';
@@ -37,7 +37,7 @@ import withChameleonContext from './withChameleonContext';
  */
 const withDeleteNodeOnUnwrap = (
   nodeKey?: WithNodeKeyProps,
-): HocWithMeta => Component => {
+): HOC => Component => {
   const WithDeleteOnUnwrap: FC<any> = props => {
     const { node } = useNode();
     const { unwrap, ...rest } = props;

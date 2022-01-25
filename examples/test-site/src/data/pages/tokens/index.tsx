@@ -15,7 +15,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
-  H1, addProps, withDesign, replaceWith, H3, H2, addClasses, asToken, HocWithMeta, ComponentWithMeta,
+  H1, addProps, withDesign, replaceWith, H3, H2, addClasses, asToken, HOC, ComponentWithMeta,
 } from '@bodiless/fclasses';
 import {
   CardClean,
@@ -59,7 +59,7 @@ const TokenPanel = asFancyWrapper(TokenPanelClean);
 
 const withFlowContainerFirstItemNode = (
   nodeKey: string,
-): HocWithMeta<{}, Partial<WithNodeProps>> => Component => {
+): HOC<{}, Partial<WithNodeProps>> => Component => {
   const ComponentWithNode = withNode(Component);
   const WithFlowContainerFirstItemNode = (props: any) => {
     const { node } = useNode<any>();

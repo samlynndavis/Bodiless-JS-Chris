@@ -14,7 +14,7 @@
 
 import React, { FC } from 'react';
 import { useNode } from '@bodiless/core';
-import { HocWithMeta } from '@bodiless/fclasses';
+import { HOC } from '@bodiless/fclasses';
 import { log } from '../fsLogHandler';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
@@ -22,7 +22,7 @@ type Props = {
   preset: GatsbyImagePresets
 };
 
-const withGatsbyImageLogger = (preset?: GatsbyImagePresets): HocWithMeta => Component => {
+const withGatsbyImageLogger = (preset?: GatsbyImagePresets): HOC => Component => {
   const WithGatsbyImageLogger: FC<any> = props => {
     const { node } = useNode<any>();
     const { preset: presetFromProps } = props as Props;

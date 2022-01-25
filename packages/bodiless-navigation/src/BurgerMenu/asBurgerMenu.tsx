@@ -16,7 +16,7 @@ import isEmpty from 'lodash/isEmpty';
 import { useNode, withDefaultContent } from '@bodiless/core';
 import { asAccordionWrapper, asAccordionTitle, asAccordionBody } from '@bodiless/accordion';
 import {
-  Fragment, withDesign, replaceWith, asToken, addProps, HocWithMeta, flowIf, startWith,
+  Fragment, withDesign, replaceWith, asToken, addProps, HOC, flowIf, startWith,
 } from '@bodiless/fclasses';
 import { LinkData } from '@bodiless/components';
 import BurgerMenuClean from './BurgerMenuClean';
@@ -40,7 +40,7 @@ import { ComponentType } from 'react';
  * that editor.
  *
  * @return
- * HocWithMeta that adds an OverviewLink to the menu list.
+ * HOC that adds an OverviewLink to the menu list.
  */
 const withOverviewLink = (
   overviewText: any = 'Overview',
@@ -95,7 +95,7 @@ const withBurgerMenuSchema = asToken(
  *
  * @return Original component wrapped in the burger menu chrome with 'Menu' design key.
  */
-const withBurgerMenuWrapper: HocWithMeta = Component => asToken(
+const withBurgerMenuWrapper: HOC = Component => asToken(
   replaceWith(BurgerMenuClean),
   withDesign({
     Menu: replaceWith(Component),
@@ -109,7 +109,7 @@ const withBurgerMenuWrapper: HocWithMeta = Component => asToken(
  *
  * @param keys List of the submenu key(s) to which the default styles will be applied to.
  *
- * @return HocWithMeta that applies default burger menu styles based on provided keys.
+ * @return HOC that applies default burger menu styles based on provided keys.
  */
 const asBurgerMenu = (...keys: string[]) => asToken(
   // We need to replace Card with the MenuTitle in burger menu.

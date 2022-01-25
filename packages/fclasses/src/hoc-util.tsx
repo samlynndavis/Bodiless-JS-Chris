@@ -21,7 +21,7 @@ import React, {
 import omit from 'lodash/omit';
 import pick from 'lodash/pick';
 import mergeWith from 'lodash/mergeWith';
-import type { HOC, AsToken } from './types';
+import type { HOCBase, AsToken } from './types';
 import { asToken } from './Tokens';
 
 export type Condition<P = any> = (props: P) => boolean;
@@ -89,7 +89,7 @@ export const not = <A extends object> (...funcs:FlowIfFunc<A>[]) => (props:A) =>
  */
 export const withoutProps = <A extends object>(
   keys: (keyof A)|(keyof A)[], ...restKeys: (keyof A)[]
-):HOC<{}, Partial<A>> => Component => {
+):HOCBase<{}, Partial<A>> => Component => {
     const keys$ = typeof keys === 'string' ? [keys, ...restKeys] : keys;
     const WithoutProps = (props: any) => <Component {...omit(props, keys$) as any} />;
     return WithoutProps;

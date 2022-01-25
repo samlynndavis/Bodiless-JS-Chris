@@ -135,7 +135,7 @@ const withTokenEditorFlowContainerItem = (
         categories: {
           Type: ['Token Browser'],
         },
-        title: `"${name}" HocWithMeta Browser`,
+        title: `"${name}" HOC Browser`,
       },
     ),
   });

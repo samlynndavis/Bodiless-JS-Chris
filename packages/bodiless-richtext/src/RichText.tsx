@@ -53,7 +53,7 @@ import {
   DesignableComponents,
   withDisplayName,
   Fragment,
-  HocWithMeta,
+  HOC,
 } from '@bodiless/fclasses';
 import { withHistory } from 'slate-history';
 import {
@@ -124,7 +124,7 @@ const withSlateSchema = <P extends object>(Component: ComponentType<P>) => (
   }
 );
 // create item to activate the context not sure whats up with all the old vs new
-const withSlateActivator: HocWithMeta = Component => props => {
+const withSlateActivator: HOC = Component => props => {
   const previousSlateContext = useSlateContext();
   const previousEditorProps = previousSlateContext!.editorProps;
 
