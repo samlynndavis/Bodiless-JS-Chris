@@ -17,7 +17,6 @@ import {
   withDesc,
 } from '@bodiless/layouts';
 import {
-  varyDesign,
   extendDesign,
   replaceWith,
   withDesign,
