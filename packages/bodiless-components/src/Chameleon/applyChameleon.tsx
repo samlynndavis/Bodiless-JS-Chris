@@ -45,8 +45,9 @@ import { ComponentType } from 'enzyme';
  */
 const applyChameleon: HOC = Component => {
   const Chameleon: FC<any> = props => {
-    const { apply } = useChameleonContext();
-    const ActiveComponent = apply(Component);
+    const { apply, activeComponent } = useChameleonContext();
+    // Memoize the component so we don't recreate it on every render.
+    const ActiveComponent = React.useMemo(() => apply(Component), [activeComponent]);
     return <ActiveComponent {...props} />;
   };
   return asToken(
