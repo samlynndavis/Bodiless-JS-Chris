@@ -20,7 +20,7 @@ import React, {
   useContext,
 } from 'react';
 import throttle from 'lodash/throttle';
-import { Token } from '@bodiless/fclasses';
+import { HocWithMeta } from '@bodiless/fclasses';
 
 type PageDimensions = {
   width: number,
@@ -94,7 +94,7 @@ const PageDimensionsProvider: FC<PageDimensionsProviderProps> = ({ children, bre
  */
 const withPageDimensionsContext = (
   { breakpoints }: PageDimensionsProviderProps,
-): Token => Component => {
+): HocWithMeta => Component => {
   const WithPageDimensionsContext: FC<any> = props => (
     <PageDimensionsProvider breakpoints={breakpoints}>
       <Component {...props} />

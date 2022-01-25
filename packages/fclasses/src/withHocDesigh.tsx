@@ -19,7 +19,7 @@ import { intersection } from 'lodash';
  *
  *
  * @return
- * Token which applies the design to the wrapped component.
+ * HocWithMeta which applies the design to the wrapped component.
  *
  */
 export const withHocDesign = <C extends DesignableComponents = any>(

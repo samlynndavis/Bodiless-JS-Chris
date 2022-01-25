@@ -19,7 +19,7 @@ import React, {
   ComponentType, Fragment, FC,
 } from 'react';
 import type {
-  Token, Design, DesignableComponents, DesignableProps,
+  HocWithMeta, Design, DesignableComponents, DesignableProps,
   DesignableComponentsProps, HOD, Designable,
 } from './types';
 import { addPropsIf } from './addProps';
@@ -100,7 +100,7 @@ export const applyDesign = <C extends DesignableComponents> (
  */
 export const withFinalDesign = <C extends DesignableComponents>(
   design: Design<C>,
-): Token<DesignableProps<C>> => Component => {
+): HocWithMeta<DesignableProps<C>> => Component => {
     const WithFinalDesign: FC<any> = (props: DesignableProps<C>) => {
       const { design: designFromProps } = props;
       const { _final: finalFromProps } = designFromProps || {} as Design<C>;

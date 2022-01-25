@@ -21,7 +21,7 @@ import { asEditable, withBodilessLinkToggle } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { CardClean } from '@bodiless/card';
 import {
-  A, Token, asToken, Fragment, designable, TokenDef,
+  A, HocWithMeta, asToken, Fragment, designable, TokenDef,
   withDesign, startWith, DesignableComponentsProps,
 } from '@bodiless/fclasses';
 
@@ -66,7 +66,7 @@ const asMenuLink = (asEditableLink: typeof asBodilessLink) => asToken(
 );
 
 /**
- * Token that adds a default Editors to the menu Title and Link.
+ * HocWithMeta that adds a default Editors to the menu Title and Link.
  * Transforms Link into Editable Bodiless Link Toggle and Title to Editable.
  */
 const withDefaultMenuTitleEditors = withDesign({
@@ -78,20 +78,20 @@ const withDefaultMenuTitleEditors = withDesign({
 });
 
 /**
- * A helper to apply provided `withTitleEditors` Token to the Title menu key.
+ * A helper to apply provided `withTitleEditors` HocWithMeta to the Title menu key.
  * Applies `withDefaultMenuTitleEditors` token by default.
  *
- * @param withTitleEditors Token that will be applied to the Title key
+ * @param withTitleEditors HocWithMeta that will be applied to the Title key
  */
 const withMenuTitleEditors = <P extends object>(
-  withTitleEditors: Token = withDefaultMenuTitleEditors,
+  withTitleEditors: HocWithMeta = withDefaultMenuTitleEditors,
   ...tokenDefs: TokenDef[]
 ) => withDesign({
     Title: asToken(withTitleEditors, ...tokenDefs),
   });
 
 /**
- * Token that transforms component into MenuTitle with node and 'title' nodeKey.
+ * HocWithMeta that transforms component into MenuTitle with node and 'title' nodeKey.
  * MenuTitle has Link and Title design keys. Can be applied to the Title design key.
  */
 const asMenuTitle = flow(
@@ -101,7 +101,7 @@ const asMenuTitle = flow(
 );
 
 /**
- * Token that transforms component into Menu Card with node and 'title' nodeKey.
+ * HocWithMeta that transforms component into Menu Card with node and 'title' nodeKey.
  * Can be applied to the Title design key.
  */
 const asMenuCard = asToken(

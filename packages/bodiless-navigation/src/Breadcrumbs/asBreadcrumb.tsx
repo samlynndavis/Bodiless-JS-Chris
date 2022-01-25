@@ -18,7 +18,7 @@ import React, {
 import { useNode } from '@bodiless/core';
 import type { LinkData } from '@bodiless/components';
 import { observer } from 'mobx-react-lite';
-import { HOC, Token } from '@bodiless/fclasses';
+import { HOC, HocWithMeta } from '@bodiless/fclasses';
 import { BreadcrumbItem } from './BreadcrumbStore';
 import type { BreadcrumbItemType } from './BreadcrumbStore';
 import { useBreadcrumbStore, asHiddenBreadcrumbSource } from './BreadcrumbStoreProvider';
@@ -134,7 +134,7 @@ const asBreadcrumb = ({
  * @see asHiddenBreadcrumbSource
  * @see asBreadcrumb
  */
-const asBreadcrumbSource: Token = Component => {
+const asBreadcrumbSource: HocWithMeta = Component => {
   const SSRSource = asHiddenBreadcrumbSource(Component);
 
   const AsBreadcrumbSource: FC<any> = props => (

@@ -22,7 +22,7 @@ import {
   Li,
   addPropsIf,
   asToken,
-  Token,
+  HocWithMeta,
 } from '@bodiless/fclasses';
 import { ifEditable, withChild } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';
@@ -106,7 +106,7 @@ const withAutoPlayInterval = (interval: number = 3000) => withDesign({
   }),
 });
 
-const withCarouselItemTabIndex: Token = Component => {
+const withCarouselItemTabIndex: HocWithMeta = Component => {
   const WithCarouselItemTabIndex: FC<any> = props => {
     const isItemActive = useIsCarouselItemActive();
     const tabIndex = isItemActive ? 0 : -1;

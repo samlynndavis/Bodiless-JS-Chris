@@ -14,7 +14,7 @@
 
 import { WithNodeKeyProps } from '@bodiless/core';
 import { addProps, asToken } from '@bodiless/fclasses';
-import type { Token } from '@bodiless/fclasses';
+import type { HocWithMeta } from '@bodiless/fclasses';
 import React, { FC } from 'react';
 import {
   withTokenPanelPane, useTokenLibrary, withTokensFromProps,
@@ -52,7 +52,7 @@ const availableTokens = {
   // asTextWhite: asToken('Clor')(addClasses('text-white')),
 };
 
-const withDataTokens = (target: string): Token => Component => {
+const withDataTokens = (target: string): HocWithMeta => Component => {
   const WithDataTokens: FC<any> = props => {
     const dataTokens = useTokenLibrary(target);
     const { availableTokens: propTokens, ...rest } = props as TokenSelectorProps;

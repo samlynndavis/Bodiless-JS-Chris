@@ -15,7 +15,7 @@
 import React, { ComponentType, Fragment, FC } from 'react';
 import {
   Div, designable, addClasses, replaceWith, DesignableComponentsProps, asToken, flowIf,
-  Token,
+  HocWithMeta,
 } from '@bodiless/fclasses';
 import { useNode, withNodeKey } from '@bodiless/core';
 import { withSearchResult } from '@bodiless/search';
@@ -52,7 +52,7 @@ const oidcConfig = {
 const SiteProviders = asToken(
   withBreadcrumbStore,
   withBurgerMenuProvider,
-  withOidcProvider(oidcConfig) as Token,
+  withOidcProvider(oidcConfig) as HocWithMeta,
 )(Fragment);
 
 type LayoutComponents = {

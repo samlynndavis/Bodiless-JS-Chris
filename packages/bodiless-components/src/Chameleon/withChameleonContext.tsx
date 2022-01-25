@@ -17,7 +17,7 @@ import React, {
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  applyDesign, extendDesignable, ComponentOrTag, Token, Fragment,
+  applyDesign, extendDesignable, ComponentOrTag, HocWithMeta, Fragment,
 } from '@bodiless/fclasses';
 import type { Designable, Design } from '@bodiless/fclasses';
 import omit from 'lodash/omit';
@@ -79,7 +79,7 @@ const withChameleonContext = (
   defaultData?: ChameleonData,
   /** */
   RootComponent: ComponentOrTag<any> = Fragment,
-): Token => Component => {
+): HocWithMeta => Component => {
   const WithChameleonContext: FC<any> = props => (
     <ChameleonContext.Provider value={{
       isOn: getIsOn(props),

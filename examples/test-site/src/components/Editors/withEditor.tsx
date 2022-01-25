@@ -15,12 +15,12 @@
 import { ComponentType } from 'react';
 import { withChild, withNodeKey } from '@bodiless/core';
 import {
-  addClasses, withoutProps, asToken, addProps, Token,
+  addClasses, withoutProps, asToken, addProps, HocWithMeta,
 } from '@bodiless/fclasses';
 
 const withPlaceholder = (
   placeholder?: string,
-): Token|undefined => (placeholder === undefined ? undefined : addProps({ placeholder }));
+): HocWithMeta|undefined => (placeholder === undefined ? undefined : addProps({ placeholder }));
 
 const withEditor = (Editor:ComponentType<any>) => (nodeKey?: string, placeholder?: string) => (
   asToken(

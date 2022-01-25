@@ -13,7 +13,7 @@
  */
 
 import React, { createContext, useContext } from 'react';
-import type { HOC, Token } from '@bodiless/fclasses';
+import type { HOC, HocWithMeta } from '@bodiless/fclasses';
 import flowRight from 'lodash/flowRight';
 import { NodeContext } from './NodeProvider';
 import type { NodeMap } from './NodeProvider';
@@ -28,7 +28,7 @@ const SidecarNodeContext = createContext<NodeMap<any>[]>([]);
  *
  * @param Component Any component which uses the Bodiless ContentNode system.
  */
-const startSidecarNodes: Token = Component => {
+const startSidecarNodes: HocWithMeta = Component => {
   const StartSidecarNodes = (props: any) => {
     const oldValue = useContext(SidecarNodeContext);
     const newValue = [...oldValue, useContext(NodeContext)];
@@ -50,7 +50,7 @@ const startSidecarNodes: Token = Component => {
  *
  * @param Component Any component which uses the Bodiless ContentNode system.
  */
-const endSidecarNodes: Token = Component => {
+const endSidecarNodes: HocWithMeta = Component => {
   const EndSidecarNodes = (props: any) => {
     const oldValue = useContext(SidecarNodeContext);
     if (oldValue.length === 0) return <Component {...props} />;
@@ -96,7 +96,7 @@ const withSidecarNodes = (...hocs: HOC[]) => flowRight(
   startSidecarNodes,
   ...hocs,
   endSidecarNodes,
-) as Token;
+) as HocWithMeta;
 
 export default withSidecarNodes;
 export { startSidecarNodes, endSidecarNodes };

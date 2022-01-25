@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 import React, { ComponentType } from 'react';
-import type { Token, Injector } from './types';
+import type { HocWithMeta, Injector } from './types';
 import { Condition } from './hoc-util';
 
 type NotAFunction = { [key: string]: any, bind?: never, call?: never };
@@ -49,7 +49,7 @@ export const addPropsIf = <A extends object>(
   conditionHook: Condition<A>,
 ) => <I extends NotAFunction>(
     propsToAdd: I | ((props: A) => I),
-  ): Token<I, A, I> => Component => {
+  ): HocWithMeta<I, A, I> => Component => {
       const AddPropsIf: ComponentType<any> = (props: A) => {
         if (!conditionHook(props)) return <Component {...props as any} />;
         const propsToAdd$ = typeof propsToAdd === 'function' ? propsToAdd(props) : propsToAdd;

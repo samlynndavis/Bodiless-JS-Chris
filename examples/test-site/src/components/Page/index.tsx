@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { asToken, Token } from '@bodiless/fclasses';
+import { asToken, HocWithMeta } from '@bodiless/fclasses';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
 import { withPageDimensionsContext, BreakpointsType } from '@bodiless/components';
 import Helmet from 'react-helmet';
@@ -37,14 +37,14 @@ const asResponsivePage = asToken(
   withPageDimensionsContext({ breakpoints }),
 )(Page);
 
-const asRtlPage: Token = PageComponent => props => (
+const asRtlPage: HocWithMeta = PageComponent => props => (
   <>
     <PageComponent {...props} />
     <Helmet htmlAttributes={{ dir: 'rtl' }} />
   </>
 );
 
-const asLtrPage: Token = PageComponent => props => (
+const asLtrPage: HocWithMeta = PageComponent => props => (
   <>
     <PageComponent {...props} />
     <Helmet htmlAttributes={{ dir: 'ltr' }} />

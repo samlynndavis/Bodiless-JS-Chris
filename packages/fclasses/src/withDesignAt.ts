@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import type { Token, TokenMeta } from './types';
+import type { HocWithMeta, TokenMeta } from './types';
 import { withDesign, as } from './createUtilities';
 import type { Design, DesignableComponents } from './types';
 
@@ -20,9 +20,9 @@ type DesignPath = string[];
 
 const withDesignAtSingle = <C extends DesignableComponents = DesignableComponents>(
   path: DesignPath,
-  designOrToken: Design<C>|Token,
-): Token => {
-  const token: Token = typeof designOrToken === 'function'
+  designOrToken: Design<C>|HocWithMeta,
+): HocWithMeta => {
+  const token: HocWithMeta = typeof designOrToken === 'function'
     ? designOrToken : withDesign(designOrToken as Design);
   const [next, ...rest] = path;
   if (rest.length > 0) {
@@ -89,7 +89,7 @@ const withDesignAtSingle = <C extends DesignableComponents = DesignableComponent
 const withDesignAt = <C extends DesignableComponents = DesignableComponents>(
   ...paths: DesignPath[]
 ) => (
-    designOrToken: Design<C>|Token,
+    designOrToken: Design<C>|HocWithMeta,
     ...meta: TokenMeta[]
   ) => as(
     {}, // necessary bc of typescript bug, see https://github.com/microsoft/TypeScript/issues/28010

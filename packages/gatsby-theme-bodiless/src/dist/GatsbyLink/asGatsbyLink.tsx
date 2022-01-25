@@ -21,7 +21,7 @@ import {
   withDesign,
   A,
   addProps,
-  Token,
+  HocWithMeta,
   ComponentOrTag,
   DesignableProps,
   asToken,
@@ -44,7 +44,7 @@ const isLocalLink = (path: string) => path
 
 const isFile = (path: string) => /\.[0-9a-z]+$/i.test(path);
 
-const asGatsbyLink$:Token<BodilessLinkProps, DesignableProps<Components>> = Component => {
+const asGatsbyLink$: HocWithMeta<BodilessLinkProps, DesignableProps<Components>> = Component => {
   const startComponents: Components = {
     GatsbyLink: BaseGatsbyLink,
     Link: Component as ComponentOrTag<BodilessLinkProps>,

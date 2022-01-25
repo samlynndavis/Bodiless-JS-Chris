@@ -142,7 +142,7 @@ const tokenMergeCustomizer = (...args: any) => {
      * Utiity to merge two tokens. inner key values are composed together via `t`.
      *
      * @param a, b
-     * Token specifications to merge.
+     * HocWithMeta specifications to merge.
      *
      * @return
      * A new token specification containing the merged keys.

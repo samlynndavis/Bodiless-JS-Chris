@@ -67,7 +67,7 @@ export type TokenProps = {
   /**
    * The tokens and/or filters which compose this token.
    */
-  members?: Token[];
+  members?: HocWithMeta[];
   /**
    * The metadata attached to this token. This metadata will be merged recursively with
    * any metadata provided by any other tokens which this token composes, and attached to any
@@ -81,7 +81,7 @@ export type TokenProps = {
  *
  * Tokens may be composed of other tokens using the `asToken` utility.
  */
-export type Token<B = {}, A = {}, R = {}> = HOC<B, A, R> & TokenProps;
+export type HocWithMeta<B = {}, A = {}, R = {}> = HOC<B, A, R> & TokenProps;
 
 /**
  * An "Enhancer" is a token which produces a component which accepts additional props.
@@ -94,7 +94,7 @@ export type Token<B = {}, A = {}, R = {}> = HOC<B, A, R> & TokenProps;
  * Optional constraint to put on the props signature of the base component. If specified,
  * the token will only apply to a base component which has this signature.
 */
-export type Enhancer<A, B = {}> = Token<B, A>;
+export type Enhancer<A, B = {}> = HocWithMeta<B, A>;
 
 /**
  * In "Injector" is a token which provides values for the existing props of a component.
@@ -108,20 +108,20 @@ export type Enhancer<A, B = {}> = Token<B, A>;
  * Optional constraint to put on the props signature of the base component. If specified,
  * the token will only apply to a base component which has this signature.
  */
-export type Injector<R, B = {}> = Token<B & R, {}, R>;
+export type Injector<R, B = {}> = HocWithMeta<B & R, {}, R>;
 
 /**
  * Type of the filter function which should be passed to `withTokenFilter`
  *
  * @see withTokenFilter
  */
-export type TokenFilterTest = (token: Token) => boolean;
+export type TokenFilterTest = (token: HocWithMeta) => boolean;
 
 /**
  * Type of the parameters to asToken.  Overloaded to accept metadata
  * objects (or undefined) in addition to tokens.
  */
-export type TokenDef<B = {}, A = {}, R = {}> = Token<B, A, R> | TokenMeta | undefined;
+export type TokenDef<B = {}, A = {}, R = {}> = HocWithMeta<B, A, R> | TokenMeta | undefined;
 
 /**
  * Type of a token composition function.
@@ -150,7 +150,7 @@ export type AsToken<A = {}> =
     t9?: TokenDef<{}, A9, R9>,
     ...t: TokenDef<any, any, any>[]
     // eslint-disable-next-line max-len
-  ) => Token<B1, A & A1 & A2 & A3 & A4 & A5 & A6 & A7 & A8 & A9, R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9>;
+  ) => HocWithMeta<B1, A & A1 & A2 & A3 & A4 & A5 & A6 & A7 & A8 & A9, R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9>;
 
 /**
  * This is the type to use for the components prop of a component with a fluid design.
@@ -164,7 +164,7 @@ export type DesignableComponents = {
  * a components prop of type "C".
  */
 export type HocDesign<C extends DesignableComponents = DesignableComponents> = {
-  [Key in keyof C]?: Token
+  [Key in keyof C]?: HocWithMeta
 } & { _final?: HocDesign<Omit<C, '_final'>> };
 
 /**
@@ -231,7 +231,7 @@ D extends RequiredDomains = RequiredDomains,
   
 /**
    * Type of a token specification, a token expressed in the
-   * Token Object Notation.
+   * HocWithMeta Object Notation.
    *
    * This is a nested object with two levels of keys:
    * - The inner keys are to the design keys of the target component, and their

@@ -180,7 +180,7 @@ const SubmenuIndicator = asToken(
 )(SubmenuIndicatorClean);
 
 /**
- * Token that adds SubmenuIndicator to the Menu Item if
+ * HocWithMeta that adds SubmenuIndicator to the Menu Item if
  * it has a submenu and it's title is a link.
  */
 const withSubmenuIndicator = flowIf(useHasLink)(
@@ -202,7 +202,7 @@ const withMenuNav = asToken(
 );
 
 /**
- * Token that adds an accessibility attributes to the menu
+ * HocWithMeta that adds an accessibility attributes to the menu
  */
 const withAccessibleMenuAttr = withDesign({
   Wrapper: addProps({ role: 'menubar', 'aria-label': 'Navigation Menu' }),
@@ -222,7 +222,7 @@ const withAccessibleMenuAttr = withDesign({
 });
 
 /**
- * Token that wraps menu in the Nav tag and adds an ability
+ * HocWithMeta that wraps menu in the Nav tag and adds an ability
  * to toggle submenus with a keyboard.
  */
 const withAccessibleMenuInteractions = withDesign({
@@ -233,7 +233,7 @@ const withAccessibleMenuInteractions = withDesign({
 });
 
 /**
- * Token that makes menu accessible.
+ * HocWithMeta that makes menu accessible.
  * Wraps menu in Nav tag and adds keyboard interactions.
  */
 const asAccessibleMenu = asToken(
@@ -253,7 +253,7 @@ const withSubmenuWrapperAttrs = <P extends Object>(
   );
 
 /**
- * Token that adds an accessibility attributes to the Sub Menu.
+ * HocWithMeta that adds an accessibility attributes to the Sub Menu.
  */
 const withAccessibleSubMenuAttr = withDesign({
   Wrapper: withSubmenuWrapperAttrs,
@@ -262,7 +262,7 @@ const withAccessibleSubMenuAttr = withDesign({
 });
 
 /**
- * Token that makes Sub Menu accessible.
+ * HocWithMeta that makes Sub Menu accessible.
  * It adds Sub Menu indicator to the main menu items that have submenus
  * and accessibility attributes to the submenu items.
  */

@@ -16,11 +16,11 @@ import React, { Fragment } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
 import { asToken, withTokenFilter } from '../src';
-import type { Token } from '../src';
+import type { HocWithMeta } from '../src';
 
 const { meta } = asToken;
 
-const addProp = (name?: string, value?: string): Token => Comp => (props: any) => {
+const addProp = (name?: string, value?: string): HocWithMeta => Comp => (props: any) => {
   if (!name) return <Comp {...props} />;
   const propsToAdd = {
     [name]: value || name,
@@ -94,7 +94,7 @@ describe('asToken', () => {
     });
 
     it('Ignores undefined tokens', () => {
-      const withPossiblyUndefinedToken = (token?: Token) => asToken(
+      const withPossiblyUndefinedToken = (token?: HocWithMeta) => asToken(
         token,
         addProp('bar'),
       );

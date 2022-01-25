@@ -3,7 +3,7 @@
 import React, { ComponentType, FC } from 'react';
 import {
   DesignableComponentsProps, Span, designable, Div, addClasses, removeClasses,
-  withDesign, Token, asToken, flowIf, withoutProps,
+  withDesign, HocWithMeta, asToken, flowIf, withoutProps,
   asTokenSpec, as, extendMeta,
 } from '../src';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -228,7 +228,7 @@ describe('as', () => {
   it('Removes classes applied by an external design', () => {
     const withClass = withDesign({
       A: addClasses('bar'),
-    }) as Token;
+    }) as HocWithMeta;
     const spec = asTestTokenSpec({
       Core: {
         _: withClass,

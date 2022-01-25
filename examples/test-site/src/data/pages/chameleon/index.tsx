@@ -22,7 +22,7 @@ import {
   addProps, Div, removeClasses, replaceWith, withoutProps,
   Section, asToken,
   P,
-  Token,
+  HocWithMeta,
   extendDesign,
   varyDesigns,
 } from '@bodiless/fclasses';
@@ -221,7 +221,7 @@ const AvailabilityAccordion = ({ isAvailable, ...rest }: any) => {
 //   withDesign(toggleDesign),
 // )(AvailabilityAccordion);
 
-const withChameleonAvailability:Token = Component => (props: any) => (
+const withChameleonAvailability: HocWithMeta = Component => (props: any) => (
   <Component {...props} isAvailable={useChameleonContext().isOn} />
 );
 

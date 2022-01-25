@@ -21,7 +21,7 @@
 
 import React, { FC } from 'react';
 import {
-  Token, ComponentOrTag, asToken, Enhancer, Injector, flowIf,
+  HocWithMeta, ComponentOrTag, asToken, Enhancer, Injector, flowIf,
 } from '../src';
 import { FormBodyProps } from '../../bodiless-tokens/node_modules/@bodiless/core/lib';
 
@@ -39,7 +39,7 @@ const Base2: FC<Base2Props> = () => null;
 const Base3: FC<BaseProps & Base2Props> = () => null;
 
 describe('Token', () => {
-  const withChild = (Child: ComponentOrTag<any>): Token => C => {
+  const withChild = (Child: ComponentOrTag<any>): HocWithMeta => C => {
     // Always define the enhanced component explicitly and give it a name
     // Webpack will ensure that
     const WithChild: FC<any> = props => <C {...props}><Child /></C>;
@@ -58,7 +58,7 @@ describe('Token', () => {
   });
 
   test('Constraining the signature of the component to which a token can be applied', () => {
-    const withLowercaseFoo: Token<BaseProps> = C => {
+    const withLowercaseFoo: HocWithMeta<BaseProps> = C => {
       const WithLowercaseFoo: FC<any> = (props: BaseProps) => {
         const { foo } = props;
         return <C {...props as any} foo={foo.toLowerCase()} />;
@@ -153,7 +153,7 @@ describe('Injectors', () => {
   test('An injector accepts additional prop constraints', () => {
     const injector:Injector<FooProps, Base2Props> = () => () => null;
     const R1 = injector(Base3);
-    // Token applies to Base2 even though Base2 doesn't have "foo".  Why?
+    // HocWithMeta applies to Base2 even though Base2 doesn't have "foo".  Why?
     const R2 = injector(Base2);
     // @ts-expect-error Does not apply to component which does not accept Base2Props
     const R3 = injector(Base);
@@ -161,10 +161,10 @@ describe('Injectors', () => {
 });
 
 describe('Composed token type inference', () => {
-  const generic: Token = () => () => null;
+  const generic: HocWithMeta = () => () => null;
   const enhancer: Enhancer<Base2Props> = () => () => null;
   const injector: Injector<Pick<BaseProps, 'foo'>> = () => () => null;
-  const constrainer: Token<BaseProps> = () => () => null;
+  const constrainer: HocWithMeta<BaseProps> = () => () => null;
 
   test('asToken correctly infers types when composing all token types', () => {
     const composed = asToken(
@@ -182,7 +182,7 @@ describe('Composed token type inference', () => {
     const T3 = <R foo="foo" bar="bar" />;
     // @ts-expect-error Non-injected base prop is still required
     const T4 = <R foo="foo" baz="bar" />;
-    // @ts-expect-error Token is constrained by constraint of first token
+    // @ts-expect-error HocWithMeta is constrained by constraint of first token
     const R2 = composed(Base2);
   });
 

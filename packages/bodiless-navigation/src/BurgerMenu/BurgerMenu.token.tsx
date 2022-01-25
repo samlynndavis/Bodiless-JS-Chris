@@ -51,10 +51,10 @@ const withDefaultBackground = withDesign({
 });
 
 /**
- * A Token that adds styles to the Button component of Burger Menu Toggler.
+ * A HocWithMeta that adds styles to the Button component of Burger Menu Toggler.
  * Adds a material-icon class and pointer styles.
  *
- * @return Token that adds styles to the Button component.
+ * @return HocWithMeta that adds styles to the Button component.
  */
 const withBurgerMenuTogglerStyles = withDesign({
   Button: asToken(
@@ -64,18 +64,18 @@ const withBurgerMenuTogglerStyles = withDesign({
 });
 
 /**
- * A Token that disables pointer events on the accordion Label element.
+ * A HocWithMeta that disables pointer events on the accordion Label element.
  *
- * @return Token that disables pointer events on the accordion Label element.
+ * @return HocWithMeta that disables pointer events on the accordion Label element.
  */
 const withDisabledTitleLink = withDesign({
   Label: asDisabled,
 });
 
 /**
- * A Token that adds styles and transitions needed for a slide-in animation for the Burger menu.
+ * A HocWithMeta that adds styles and transitions needed for a slide-in animation for the Burger menu.
  *
- * @return Token that applies required styles for slide-in animation.
+ * @return HocWithMeta that applies required styles for slide-in animation.
  */
 const asSlideLeft = asToken(
   withSlideInOutAnimation,

@@ -33,7 +33,7 @@ import {
   asToken,
   withOnlyProps,
   HOC,
-  Token,
+  HocWithMeta,
 } from '@bodiless/fclasses';
 import type {
   ContextMenuFormProps,
@@ -221,7 +221,7 @@ const useMenuOptions = (): TMenuOption[] => {
   return menuOptions$;
 };
 
-const withNodeObserver: Token = Component => observer(props => {
+const withNodeObserver: HocWithMeta = Component => observer(props => {
   const { node } = useNode();
   const isPageDisabledActive = useIsAnyPageOptionDisabled(node);
   // Update component's prop on data change to force re-rendering.

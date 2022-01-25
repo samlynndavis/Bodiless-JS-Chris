@@ -1,6 +1,6 @@
 import omit from 'lodash/omit';
 import React, { ComponentType, PropsWithChildren } from 'react';
-import { Token, DesignableComponentsProps, extendDesignable } from '@bodiless/fclasses';
+import { HocWithMeta, DesignableComponentsProps, extendDesignable } from '@bodiless/fclasses';
 
 /**
  * Utility function to add a Parent component to the given Child component
@@ -25,7 +25,7 @@ import { Token, DesignableComponentsProps, extendDesignable } from '@bodiless/fc
  * )(Child);
  * ```
  */
-const withParent = (Parent: ComponentType, designKey: string = 'Parent'): Token => (
+const withParent = (Parent: ComponentType, designKey: string = 'Parent'): HocWithMeta => (
   Component,
 ) => {
   type Components = { [Parent: string]: ComponentType };

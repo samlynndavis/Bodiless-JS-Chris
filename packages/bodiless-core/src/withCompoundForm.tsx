@@ -16,7 +16,7 @@ import React, {
   createContext, useRef, useContext, MutableRefObject, FC,
 } from 'react';
 import { useFormState, useFormApi, Scope } from 'informed';
-import { Token } from '@bodiless/fclasses';
+import { HocWithMeta } from '@bodiless/fclasses';
 import { ContextMenuForm, FormBodyProps, FormBodyRenderer } from './contextMenuForm';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 import type { MenuOptionsDefinition } from './Types/PageContextProviderTypes';
@@ -157,7 +157,7 @@ const createMenuOptionDefinition = <P extends object>(def$: MenuOptionsDefinitio
  */
 const withCompoundForm = <P extends object>(
   def$: MenuOptionsDefinition$<P>,
-): Token => Component => {
+): HocWithMeta => Component => {
     const useMenuOptionDefinition = createMenuOptionDefinition(def$);
     const ComponentWithButton = withMenuOptions(useMenuOptionDefinition)(Component);
 

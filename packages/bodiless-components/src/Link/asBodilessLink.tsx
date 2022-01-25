@@ -220,7 +220,7 @@ const useIsLinkDisabled = () => {
 };
 
 /**
- * Token that disables non-menu links on the page.
+ * HocWithMeta that disables non-menu links on the page.
  */
 const asDisabledPageLink = flowIf(useIsLinkDisabled)(
   withoutProps('href'),

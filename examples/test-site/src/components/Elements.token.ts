@@ -14,7 +14,7 @@
 
 import { WithNodeKeyProps } from '@bodiless/core';
 import {
-  addClasses, removeClasses, asToken, Token,
+  addClasses, removeClasses, asToken, HocWithMeta,
 } from '@bodiless/fclasses';
 import {
   asEditable as asEditableCore,
@@ -34,7 +34,7 @@ import {
   asAlignJustify,
 } from './ElementDefault.token';
 
-export const withCategory = <P extends object>(category?: string) => (...hocs: Token[]) => (
+export const withCategory = <P extends object>(category?: string) => (...hocs: HocWithMeta[]) => (
   asToken(
     {}, // see https://github.com/microsoft/TypeScript/issues/28010
     ...hocs,

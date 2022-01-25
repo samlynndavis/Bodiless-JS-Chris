@@ -16,7 +16,7 @@ import { withTokenEditorFlowContainerItem } from '@bodiless/tokens';
 import type { TokenEditorComponentDef } from '@bodiless/tokens';
 
 import {
-  withDesign, addProps, Token, asToken,
+  withDesign, addProps, HocWithMeta, asToken,
 } from '@bodiless/fclasses';
 import { CardComponents, CardClean } from '@bodiless/card';
 import { asEditableCard } from '.';
@@ -40,7 +40,7 @@ const Component = withDemoContent(CardClean);
 
 const def = {
   Component,
-  tokens: tokens as { [key: string]: Token },
+  tokens: tokens as { [key: string]: HocWithMeta },
   name: 'Card',
 };
 

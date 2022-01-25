@@ -15,7 +15,7 @@
 import React, { FC, ComponentType } from 'react';
 import {
   Div, H2, designable, H3, asToken,
-  withDesign, addProps, flowIf, replaceWith, Token,
+  withDesign, addProps, flowIf, replaceWith, HocWithMeta,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import {
@@ -67,7 +67,7 @@ const TokenEditorClean = designable<TokenEditorComponents>(
  */
 const withFlowContainerFirstItemNode = (
   nodeKey: string,
-):Token<{}, Partial<WithNodeProps>> => Component => {
+): HocWithMeta<{}, Partial<WithNodeProps>> => Component => {
   const ComponentWithNode = withNode(Component);
   const WithFlowContainerFirstItemNode = (props: any) => {
     const { node } = useNode<any>();
@@ -108,7 +108,7 @@ const withTokenEditorData = (nodeKey?: WithNodeKeyProps) => asToken(
 );
 
 /**
- * A Token editor is a tool for displaying and selecting among thetokens
+ * A HocWithMeta editor is a tool for displaying and selecting among thetokens
  * which are available for a component. Selected tokens are saved as data.
  */
 const TokenEditor = withTokenEditorData()(TokenEditorClean);

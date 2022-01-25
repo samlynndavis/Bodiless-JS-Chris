@@ -18,12 +18,12 @@ import {
   useNode,
   WithNodeProps,
 } from '@bodiless/core';
-import { Token } from '@bodiless/fclasses';
+import { HocWithMeta } from '@bodiless/fclasses';
 import GatsbyImagePresets from './GatsbyImagePresets';
 
 const withGatsbyImageNode = (
   preset: GatsbyImagePresets,
-): Token => Component => {
+): HocWithMeta => Component => {
   const WithGatsbyImageNode: FC<any> = props => {
     const { nodeKey, nodeCollection, ...rest } = props as WithNodeProps;
     if (!nodeKey) return <Component {...rest as any} />;

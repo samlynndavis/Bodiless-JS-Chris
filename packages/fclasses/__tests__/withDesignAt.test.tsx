@@ -16,7 +16,7 @@ import React, { ComponentType, FC } from 'react';
 import flow from 'lodash/flow';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from 'enzyme';
-import type { DesignableComponentsProps, Token, HOC } from '../src';
+import type { DesignableComponentsProps, HocWithMeta, HOC } from '../src';
 import {
   designable, replaceWith, withDesign, withDesignAt,
 } from '../src';
@@ -38,11 +38,11 @@ const Base: FC<DesignableComponentsProps<Components>> = ({ components: C, ...res
   </div>
 );
 
-const withAttr = (name: string, value: string|boolean = true): Token => (
+const withAttr = (name: string, value: string|boolean = true): HocWithMeta => (
   (C: ComponentType<any>) => (
     (props: any) => <C {...props} {...{ [`data-${name}`]: value }} />
   )
-) as Token;
+) as HocWithMeta;
 
 const Inner = flow(
   designable<Components>(startComponents),

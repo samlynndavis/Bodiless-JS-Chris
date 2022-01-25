@@ -15,11 +15,11 @@
 import React, { ComponentType } from 'react';
 
 import {
-  ComponentOrTag, Token, asToken, Enhancer,
+  ComponentOrTag, HocWithMeta, asToken, Enhancer,
 } from '@bodiless/fclasses';
 
-export type Tokens = { [key: string]: Token };
-export type TokensProps = { tokens: Token[] };
+export type Tokens = { [key: string]: HocWithMeta };
+export type TokensProps = { tokens: HocWithMeta[] };
 
 /**
  * HOC which adds a "tokens" prop to any component. This prop accepts an array of
