@@ -41,8 +41,9 @@ import type {
 } from './types';
 import {
   flowIf, hasProp, withoutProps, withOnlyProps, replaceOnEffect,
-  withDisplayName, or, and, not, replaceWith, startWith, remove, asComponent,
+  withDisplayName, or, and, not, asComponent,
 } from './hoc-util';
+import { replaceWith, startWith, remove } from './replaceable';
 import type { Condition } from './hoc-util';
 import Fragment from './Fragment';
 import withDesignAt from './withDesignAt';

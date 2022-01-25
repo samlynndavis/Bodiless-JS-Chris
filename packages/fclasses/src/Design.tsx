@@ -24,7 +24,8 @@ import type {
 } from './types';
 import { addPropsIf } from './addProps';
 import { useShowDesignKeys, useDesignKeysAttribute } from './Context';
-import { withDisplayName, replaceable } from './hoc-util';
+import { withDisplayName } from './hoc-util';
+import { replaceable } from './replaceable';
 import { withHocDesign } from './withHocDesigh';
 import { withTransformer } from './Transformer';
 

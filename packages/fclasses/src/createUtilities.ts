@@ -1,4 +1,4 @@
-import { startWith } from './hoc-util';
+import { startWith } from './replaceable';
 import {
   TokenDef, // AsToken, 
   DesignableComponents, HocDesign, RequiredDomains, TokenSpec,
