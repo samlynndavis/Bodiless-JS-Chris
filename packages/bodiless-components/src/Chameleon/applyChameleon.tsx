@@ -14,13 +14,7 @@
 
 import React, { FC, ComponentType } from 'react';
 import { withoutProps, asToken, HOC } from '@bodiless/fclasses';
-<<<<<<< HEAD
 import { useChameleonContext } from './withChameleonContext';
-import { ComponentType } from 'enzyme';
-=======
-import { applyChameleonDesign, useChameleonContext } from './withChameleonContext';
-import { ChameleonProps } from './types';
->>>>>>> upstream/main
 
 /**
  * Applies the appropriate design to the wrapped component depending on the
