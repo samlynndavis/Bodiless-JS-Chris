@@ -40,7 +40,7 @@ type PropsWithFormApi = {
 };
 
 type PropsWithUi = {
-  ui: ContextMenuUI;
+  ui?: ContextMenuUI;
 };
 
 type PropsWithNotify = {

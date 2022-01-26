@@ -14,7 +14,7 @@
 
 import { StoreItem, DEFAULT_REQUEST_DELAY } from '../src/Store/StoreItem';
 import { BodilessMobxStore } from '../src/Store/BodilessMobxStore';
-import { BodilessBackendClient } from '../src/BackendClient';
+import { BodilessBackendClient } from '../src/BackendClient/BodilessBackendClient';
 import { ItemStateEvent } from '../src/Store/types';
 
 class RequestsMock {
@@ -49,7 +49,7 @@ const deletePathMock = jest.fn().mockImplementation(
     requestsMock.add({ resolve, reject });
   }),
 );
-jest.mock('../src/BodilessBackendClient', () => ({
+jest.mock('../src/BackendClient/BodilessBackendClient', () => ({
   BodilessBackendClient: () => ({
     savePath: savePathMock,
     deletePath: deletePathMock,

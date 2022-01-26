@@ -14,8 +14,12 @@
 
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { mount } from 'enzyme';
-import CommitsList from '../src/dist/CommitsList';
+import { mount, ReactWrapper } from 'enzyme';
+// eslint-disable-next-line import/no-extraneous-dependencies
+// import TestRenderer from 'react-test-renderer';
+import { act } from 'react-dom/test-utils';
+import CommitsList from '../src/Git/CommitsList';
+// const { act } = TestRenderer;
 
 const mockedGitLogOutput = `
   hash 1
@@ -41,7 +45,7 @@ const mockedClient = {
 describe('CommitsList component', () => {
   it('should show a spinner while a request to the back-end is processed', () => {
     const wrapper = mount(<CommitsList client={mockedClient} />);
-    expect(wrapper.find('.bodiless-spinner').length > 0).toBe(true);
+    expect(wrapper!.find('.bodiless-spinner').length > 0).toBe(true);
   });
   it('should render a list of selectable items once a responce is recieved', async () => {
     const wrapper = mount(<CommitsList client={mockedClient} />);

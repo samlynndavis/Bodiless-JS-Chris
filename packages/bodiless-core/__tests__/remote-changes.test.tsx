@@ -19,7 +19,7 @@ import {
   FetchChanges,
   PullChanges,
   ResponseData,
-} from '../src/dist/RemoteChanges';
+} from '../src/Git/RemoteChanges';
 
 const mockBackendResponse = (data: ResponseData, status = 200) => ({
   status,
@@ -98,6 +98,7 @@ describe('Fetch Changes component', () => {
         client={noChangesClient}
         formApi={mockFormApi}
         notifyOfChanges={jest.fn()}
+        ui={{}}
       />,
     );
     return new Promise(resolve => setImmediate(resolve)).then(() => {
@@ -112,6 +113,7 @@ describe('Fetch Changes component', () => {
         client={upstreamChangesOnlyClient}
         formApi={mockFormApi}
         notifyOfChanges={jest.fn()}
+        ui={{}}
       />,
     );
     return new Promise(resolve => setImmediate(resolve)).then(() => {
@@ -126,6 +128,7 @@ describe('Fetch Changes component', () => {
         client={mockChangesClient}
         formApi={mockFormApi}
         notifyOfChanges={jest.fn()}
+        ui={{}}
       />,
     );
     expect(wrapper.find('.bodiless-spinner').length > 0).toBe(true);
@@ -136,6 +139,7 @@ describe('Fetch Changes component', () => {
         client={mockChangesClient}
         formApi={mockFormApi}
         notifyOfChanges={jest.fn()}
+        ui={{}}
       />,
     );
     return new Promise(resolve => setImmediate(resolve)).then(() => {
@@ -152,6 +156,9 @@ describe('Fetch Changes component', () => {
         client={nonPullableChangesClient}
         formApi={mockFormApi}
         notifyOfChanges={jest.fn()}
+        ui={{
+
+        }}
       />,
     );
     return new Promise(resolve => setImmediate(resolve)).then(() => {
