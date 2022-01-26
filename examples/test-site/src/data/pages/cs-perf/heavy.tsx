@@ -22,7 +22,7 @@ const Box = asToken(
 
 const createTextDesign = (n: number) => {
   const design: any = {};
-  for (var i = 0; i < n; i++) {
+  for (let i = 0; i < n; i += 1) {
     design[`Text${i}`] = asToken(
       addProps({ children: `Foo ${i}` }),
       asToken.meta.term('Copy')(`${i}`),
@@ -72,8 +72,8 @@ export const createHeavyChameleon = (n: number = 1) => asToken(
 
 export const createHeavyElements = (type: 'fc'|'chameleon', n: number = 1) => {
   const nodes: ReactNode[] = [];
-  for (var i = 0; i < n; i++) {
-    const C =  type === 'fc' ? createHeavyFlowContainer(i) : createHeavyChameleon(i);
+  for (let i = 0; i < n; i += 1) {
+    const C = type === 'fc' ? createHeavyFlowContainer(i) : createHeavyChameleon(i);
     nodes.push(<C />);
   }
   return nodes;

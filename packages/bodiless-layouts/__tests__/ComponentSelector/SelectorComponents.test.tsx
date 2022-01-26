@@ -1,8 +1,12 @@
 import React from 'react';
-import { SelectorComponents, withDirection, useSelectorComponents, SelectorComponentsProps } from '../../src';
-import { HOC, Div, Fragment, replaceWith } from '@bodiless/fclasses';
+import {
+  HOC, Div, Fragment, replaceWith
+} from '@bodiless/fclasses';
 import { mount } from 'enzyme';
 import { DesignableComponents } from '@bodiless/fclasses/src';
+import {
+  SelectorComponents, withDirection, useSelectorComponents, SelectorComponentsProps
+} from '../../src';
 
 const addTitle = (t: string): HOC => Component => props => <Component {...props} title={t} />;
 const addId = (id: string): HOC => Component => props => <Component {...props} id={id} />;
@@ -33,7 +37,7 @@ describe('SelectorComponents', () => {
   const design = {
     Foo: addId('foo'),
     Bar: addId('bar'),
-    Baz:addId('baz'),
+    Baz: addId('baz'),
   };
 
   it('Returns all components as selectable', () => {
@@ -83,7 +87,13 @@ describe('SelectorComponents', () => {
       DefaultComponent: addTitle('base')('div'),
     });
     const S = test.selectableComponents;
-    let wrapper = mount(<><S.Foo /><S.Bar /><S.Baz /></>);
+    let wrapper = mount(
+      <>
+        <S.Foo />
+        <S.Bar />
+        <S.Baz />
+      </>
+    );
     ['foo', 'bar', 'baz'].forEach(
       id => expect(wrapper.find(`div#${id}`).prop('title')).toEqual('base'),
     );
@@ -103,10 +113,16 @@ describe('SelectorComponents', () => {
       },
     });
     const C = test.components;
-    let wrapper = mount(<C.Foo />); 
+    let wrapper = mount(<C.Foo />);
     expect(wrapper.find('div#foo').prop('title')).toEqual('foo-base');
     const S = test.selectableComponents;
-    wrapper = mount(<><S.Foo /><S.Bar /><S.Baz /></>);
+    wrapper = mount(
+      <>
+        <S.Foo />
+        <S.Bar />
+        <S.Baz />
+      </>
+    );
     expect(wrapper.find('div#foo').prop('title')).toEqual('foo-base');
     expect(wrapper.find('div#bar').prop('title')).toEqual('bar-base');
     expect(wrapper.find('div#baz').prop('title')).toEqual('base');

@@ -78,7 +78,7 @@ const EditFlowContainer: FC<EditFlowContainerProps> = (props: EditFlowContainerP
     startComponents: EditFlowContainerComponents,
     selectedComponents: [
       ...items.map(item => item.type),
-      'ComponentWrapper', 
+      'ComponentWrapper',
       'Wrapper',
     ],
   });

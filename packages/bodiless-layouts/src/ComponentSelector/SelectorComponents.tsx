@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { applyDesign, Fragment } from '@bodiless/fclasses';
 import type { Design, ComponentOrTag, DesignableComponents } from '@bodiless/fclasses';
 import pick from 'lodash/pick';
@@ -42,7 +43,7 @@ const selectorComponentsDefaultProps: SelectorComponentsProps = {
 export class SelectorComponents implements SelectorComponentsInterface {
   props: SelectorComponentsProps;
 
-  protected _components: DesignableComponents = {}; 
+  protected _components: DesignableComponents = {};
 
   protected _selectableComponents: DesignableComponents | undefined;
 
@@ -92,12 +93,13 @@ export class SelectorComponents implements SelectorComponentsInterface {
       design, startComponents, DefaultComponent
     } = this.props;
     const start: DesignableComponents = {
-      ... Object.keys(design).reduce(
+      ...Object.keys(design).reduce(
         (acc, next) => ({
           ...acc,
           [next]: DefaultComponent,
         }),
-        {}),
+        {}
+      ),
       ...startComponents,
     };
     // @ts-ignore

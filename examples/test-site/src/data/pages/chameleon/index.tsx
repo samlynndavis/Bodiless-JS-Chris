@@ -65,16 +65,31 @@ const BasicChameleon = asToken(
  * Chameleon with dynamic start components
  */
 const DefaultStart = addProps({
-  children: <><div>Chameleons!</div><div>Available now!</div></> as ReactNode,
+  children: (
+    <>
+      <div>Chameleons!</div>
+      <div>Available now!</div>
+    </>
+  ) as ReactNode,
 })(BaseComponent);
 // This is the starting component to be used when the Red key is applied.
 const RedStart = addProps({
-  children: <><div>Red Chameleons!</div><div>Available now!</div></> as ReactNode,
+  children: (
+    <>
+      <div>Red Chameleons!</div>
+      <div>Available now!</div>
+    </>
+  ) as ReactNode,
 })(BaseComponent);
 // This starting component does not exist in the design.
 const YellowStart = asToken(
   addProps({
-    children: <><div>Yellow Chameleons!</div><div>Available now!</div></> as ReactNode,
+    children: (
+      <>
+        <div>Yellow Chameleons!</div>
+        <div>Available now!</div>
+      </>
+    ) as ReactNode,
   }),
   addClasses('border-yellow-500 text-yellow-500'),
 )(BaseComponent);
@@ -334,7 +349,8 @@ export default (props: any) => (
             <DynamicStartChameleon />
             <Description>
               In this example, starting components for some keys are provided dynamically
-              as a prop. When you select 'Red' or 'Yellow', a custom starting component
+              as a prop. When you select &lsquo;Red&rsquo; or &lsquo;Yellow&rsquo;,
+              a custom starting component
               will be displayed.
             </Description>
           </Example>

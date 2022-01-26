@@ -17,6 +17,7 @@ import omit from 'lodash/omit';
 import {
   useEditContext, useActivateOnEffect, useGetter, TMenuOption,
 } from '@bodiless/core';
+import { DesignableComponents } from '@bodiless/fclasses';
 import { EditFlowContainerProps, FlowContainerItem } from './types';
 import type { FlowContainerDataHandlers, FlowContainerItemHandlers } from './model';
 import { useFlowContainerDataHandlers, useItemHandlers } from './model';
@@ -26,7 +27,6 @@ import { FALLBACK_SNAP_CLASSNAME } from './SortableChild';
 import { defaultSnapData } from './utils/appendTailwindWidthClass';
 import { FC_ITEM_CONTEXT_TYPE } from '../SlateSortableResizable';
 import { SelectorComponents } from '../ComponentSelector/SelectorComponents';
-import { DesignableComponents } from '@bodiless/fclasses';
 
 type Handlers = FlowContainerDataHandlers & FlowContainerItemHandlers;
 
@@ -39,7 +39,7 @@ type ButtonProps = Omit<EditFlowContainerProps, 'design'> & {
  *
  * Replaces the `design` prop with a `components` prop which
  * is a set of selectable components, created by applying the design.
- * 
+ *
  * Should only be executed in a button handler to avoid creating
  * unnecessary components on render.
  *
@@ -222,7 +222,7 @@ const useSwapButton = (
       onSelect: replaceItem
     }),
     activateContext: false,
-    isHidden: !context.isEdit, 
+    isHidden: !context.isEdit,
     formTitle: 'Replace Component',
   };
 };

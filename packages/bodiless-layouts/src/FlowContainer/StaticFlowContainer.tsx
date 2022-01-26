@@ -38,7 +38,7 @@ const StaticFlowContainer: FC<DesignableProps> = ({ design }) => {
     startComponents: flowContainerComponentStart,
     selectedComponents: [
       ...items.map(item => item.type),
-      'ComponentWrapper', 
+      'ComponentWrapper',
       'Wrapper',
     ],
   });

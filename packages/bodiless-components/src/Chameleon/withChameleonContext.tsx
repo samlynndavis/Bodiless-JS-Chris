@@ -11,6 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+/* eslint-disable no-underscore-dangle */
 
 import React, {
   createContext, useContext, FC, useRef,
@@ -22,10 +23,10 @@ import {
 import { SelectorComponents, SelectorComponentsProps } from '@bodiless/layouts';
 
 import omit from 'lodash/omit';
+import identity from 'lodash/identity';
 import type {
   ChameleonState, ChameleonData, ChameleonProps,
 } from './types';
-import identity from 'lodash/identity';
 
 const ChameleonContext = createContext<ChameleonState|undefined>(undefined);
 
@@ -58,7 +59,9 @@ class ChameleonContextValue extends SelectorComponents implements ChameleonState
     props: ChameleonProps,
     DefaultComponent: ComponentOrTag<any>
   ): ChameleonContextValueProps {
-    const { design = {}, startComponents, componentData: { component }, setComponentData } = props;
+    const {
+      design = {}, startComponents, componentData: { component }, setComponentData
+    } = props;
     const defaultDesign: Design<DesignableComponents> = {
       [DEFAULT_KEY]: identity,
     };
