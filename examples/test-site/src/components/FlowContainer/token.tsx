@@ -14,7 +14,7 @@
 
 import { addClasses, withDesign, addProps } from '@bodiless/fclasses';
 import {
-  withDirection, DIRECTIONS, getSnapFrom, withTailwindClasses,
+  withDirection, DIRECTIONS, getSnapFrom, withTailwindClasses, FlowContainerProps,
 } from '@bodiless/layouts';
 // @ts-ignore Could not find a declaration file
 import resolvedConfigs from
@@ -36,7 +36,7 @@ const asFlowContainerRTL = withDesign({
   ComponentWrapper: withDirection(DIRECTIONS.RTL),
 });
 
-const withFullWidthConstraint = addProps({
+const withFullWidthConstraint = addProps<FlowContainerProps, Pick<FlowContainerProps, 'snapData'>>({
   snapData: getSnapFrom(
     withTailwindClasses(resolvedConfigs)('w-full'),
   ),

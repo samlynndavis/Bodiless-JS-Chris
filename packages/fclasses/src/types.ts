@@ -299,3 +299,8 @@ export type Design<
 > = FinalDesign<C, D> & {
   _final?: FinalDesign<C, D>
 };
+
+/**
+ * Type of a condition suitable for use with `flowIf`, `addPropsIf`, `addClassesIf`
+ */
+export type Condition<P = any> = (props: P) => boolean;

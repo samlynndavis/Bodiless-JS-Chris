@@ -24,14 +24,9 @@ import {
   withDesign,
   replaceWith,
   DesignableProps,
-} from '../src';
-
-import {
   addClasses, removeClasses, stylable,
-} from '../src/FClasses';
-import {
   flowIf, hasProp, withoutProps,
-} from '../src/hoc-util';
+} from '../src';
 
 type CardComponents = {
   Wrapper: ComponentType<any>,
@@ -185,7 +180,7 @@ const ContextMenuButton = flow(
   flowIf(hasProp('isFirst'))(
     removeClasses('pl-2'),
   ),
-)(Div);
+)(Div) as ComponentType<any>;
 
 describe('flowIf', () => {
   it('Adds and removes classes based on conditional props', () => {

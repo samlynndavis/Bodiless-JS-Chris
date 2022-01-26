@@ -120,7 +120,7 @@ const filterMembers = <P extends object>(tokens: HOC[]): HOC[] => {
   return filtered.reverse();
 };
 
-export type AsToken<B = {}> = AsTokenBase<B> & {
+type AsToken<B = {}> = AsTokenBase<B> & {
   meta: {
     term: (c: string) => (t: string) => TokenMeta;
     cat: (c: string) => TokenMeta;

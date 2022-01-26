@@ -15,7 +15,7 @@
 import type {
   HOC, TokenMeta, Design, DesignableComponents
 } from './types';
-import { withDesign, as } from './createUtilities';
+import { withDesign, as } from './tokenSpec';
 
 type DesignPath = string[];
 
@@ -87,7 +87,7 @@ const withDesignAtSingle = <C extends DesignableComponents = DesignableComponent
  * }
  * ```
  */
-const withDesignAt = <C extends DesignableComponents = DesignableComponents>(
+export const withDesignAt = <C extends DesignableComponents = DesignableComponents>(
   ...paths: DesignPath[]
 ) => (
     designOrToken: Design<C>|HOC,
@@ -97,5 +97,3 @@ const withDesignAt = <C extends DesignableComponents = DesignableComponents>(
     ...meta.map(m => ({ Meta: m })),
     ...(paths || [[]]).map(p => withDesignAtSingle(p, designOrToken)),
   );
-
-export default withDesignAt;

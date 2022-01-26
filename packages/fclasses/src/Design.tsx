@@ -18,18 +18,29 @@ import flow from 'lodash/flow';
 import React, {
   ComponentType, Fragment, FC,
 } from 'react';
+import mergeWith from 'lodash/mergeWith';
 import type {
   HOC, Design, DesignableComponents, DesignableProps,
   DesignableComponentsProps, HOD, Designable,
 } from './types';
 import { addPropsIf } from './addProps';
-import { useShowDesignKeys, useDesignKeysAttribute } from './Context';
-import { withDisplayName } from './hoc-util';
+import { useShowDesignKeys, useDesignKeysAttribute } from './withShowDesignKeys';
 import { replaceable } from './replaceable';
-import { withHocDesign } from './withHocDesigh';
+import { withHocDesign } from './withHocDesign';
 import { withTransformer } from './Transformer';
+import { as, extendDesign } from './tokenSpec';
 
-import { as, extendDesign } from './createUtilities';
+/**
+ * is an HOC that will attach a displayName to an object
+ * @param name the name of the displayName.
+ */
+export const withDisplayName = <P extends Object> (name: string) => (
+  Component: ComponentType<P>,
+) => {
+  const WithDisplayName = (props: P) => <Component {...props} />;
+  const newMeta = mergeWith({}, Component, { displayName: name });
+  return Object.assign(WithDisplayName, newMeta);
+};
 
 /**
  * Given a set of starting components and a default component,

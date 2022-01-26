@@ -12,79 +12,15 @@
  * limitations under the License.
  */
 
-import {
-  stylable, addClasses, removeClasses,
-  addClassesIf,
-  removeClassesIf,
-} from './FClasses';
-
-import type {
-  StylableProps,
-} from './FClasses';
-
-import addProps, { addPropsIf } from './addProps';
-import {
-  applyDesign,
-  designable,
-  extendDesignable,
-  withFinalDesign,
-  varyDesign,
-  varyDesigns,
-  extendDesigns
-} from './Design';
-
-import {
-  flowIf, hasProp, withoutProps, withOnlyProps, replaceOnEffect,
-  withDisplayName, or, and, not, asComponent,
-} from './hoc-util';
-import { replaceWith, startWith, remove } from './replaceable';
-import type { Condition } from './hoc-util';
-import Fragment from './Fragment';
-import withDesignAt from './withDesignAt';
-
-export { withHocDesign } from './withHocDesigh';
-
+export * from './withDesignAt';
+export * from './addClasses';
+export * from './Design';
+export * from './replaceable';
+export * from './withHocDesign';
 export * from './StyledHTML';
-
-export { asToken, withTokenFilter, extendMeta } from './Tokens';
+export * from './addProps';
+export * from './flowIf';
+export * from './flowHoc';
 export * from './types';
-export * from './createUtilities';
-
-export { withShowDesignKeys } from './Context';
-
-export {
-  addProps,
-  addPropsIf,
-  stylable,
-  addClasses,
-  removeClasses,
-  withFinalDesign,
-  withDesignAt,
-  applyDesign,
-  replaceWith,
-  replaceOnEffect,
-  startWith,
-  remove,
-  flowIf,
-  hasProp,
-  withoutProps,
-  withOnlyProps,
-  designable,
-  extendDesignable,
-  varyDesign,
-  varyDesigns,
-  extendDesigns,
-  asComponent,
-  addClassesIf,
-  removeClassesIf,
-  Fragment,
-  withDisplayName,
-  and,
-  or,
-  not,
-};
-
-export type {
-  StylableProps,
-  Condition,
-};
+export * from './tokenSpec';
+export * from './withShowDesignKeys';

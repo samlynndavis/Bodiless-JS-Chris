@@ -16,8 +16,7 @@ import React, { FC } from 'react';
 import union from 'lodash/union';
 import difference from 'lodash/difference';
 import capitalize from 'lodash/capitalize';
-import type { ComponentOrTag, Enhancer } from './types';
-import type { Condition } from './hoc-util';
+import type { ComponentOrTag, Enhancer, Condition } from './types';
 
 type Classes = string | string[];
 

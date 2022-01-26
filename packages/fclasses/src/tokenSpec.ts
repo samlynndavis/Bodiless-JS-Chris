@@ -9,9 +9,9 @@ import {
   DesignableComponents, HocDesign, RequiredDomains, TokenSpec,
   ReservedDomains, Design, Token, HOCBase, HOD,
 } from './types';
-import { asToken, extendMeta } from './Tokens';
-import { addClasses } from './FClasses';
-import { withHocDesign } from './withHocDesigh';
+import { asToken, extendMeta } from './flowHoc';
+import { addClasses } from './addClasses';
+import { withHocDesign } from './withHocDesign';
 // import omit from 'lodash/omit';
 
 /**
@@ -117,7 +117,6 @@ const tokenMergeCustomizer = (...args: any) => {
   if (stack.size === 0) {
     if (key === 'Meta') return extendMeta(a, b);
     if (key === 'Flow') {
-      console.log(a, b);
       if (a && b) return flow(a, b);
       if (a) return a;
       if (b) return b;

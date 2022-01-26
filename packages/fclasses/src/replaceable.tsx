@@ -1,11 +1,12 @@
 import React, {
   ComponentType,
   FC,
-
-  useContext
+  useContext,
+  useState,
+  useEffect,
 } from 'react';
 import { HOCBase, ComponentOrTag, HOC } from './types';
-import { asToken } from './Tokens';
+import { asToken } from './flowHoc';
 
 const designContextDefault = undefined as undefined | ComponentType<any>;
 const DesignContext = React.createContext(designContextDefault);
@@ -108,3 +109,23 @@ export const remove = <P extends React.HTMLAttributes<HTMLBaseElement>>() => (pr
   const { children } = props;
   return <>{children}</>;
 };
+
+/**
+ * Like replaceWith, but performs the replacement on effect. Useful when you need to
+ * ensure that both versions of a component are rendered during SSR, but want to
+ * remove one when displayed in the browser (eg for responsive design).
+ *
+ * @param Replacement The component to replace with.
+ */
+export const replaceOnEffect = <P extends object>(
+  Replacement: ComponentType<P>,
+) => (
+    Component: ComponentType<P>,
+  ) => {
+    const ReplaceOnEffect = (props: P) => {
+      const [replaced, setReplaced] = useState(false);
+      useEffect(() => setReplaced(true), []);
+      return replaced ? <Replacement {...props} /> : <Component {...props} />;
+    };
+    return ReplaceOnEffect;
+  };

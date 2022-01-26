@@ -21,7 +21,7 @@ import flow from 'lodash/flow';
 import { observer } from 'mobx-react-lite';
 import { withNode } from '@bodiless/core';
 import {
-  designable, asComponent, addProps, withDesign, Fragment,
+  designable, addProps, withDesign, Fragment,
 } from '@bodiless/fclasses';
 import { useItemsMutators, useItemsAccessors } from './model';
 import {
@@ -34,8 +34,8 @@ const useListContext = () => React.useContext(ListContext);
 const ListItemNodeProvider = withNode(Fragment);
 
 const listComponents: ListComponents = {
-  Wrapper: asComponent('ul'),
-  Item: asComponent('li'),
+  Wrapper: 'ul',
+  Item: 'li',
   Title: Fragment,
 };
 

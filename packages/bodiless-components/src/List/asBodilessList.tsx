@@ -21,8 +21,8 @@ import React, {
 import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import {
-  replaceWith, withDesign, asComponent, DesignableComponentsProps, designable,
-  withoutProps, stylable, Design, asToken, Enhancer, HOC, Fragment, as,
+  replaceWith, withDesign, DesignableComponentsProps, designable,
+  withoutProps, stylable, Design, asToken, Enhancer, HOC, Fragment, as, ComponentOrTag,
 } from '@bodiless/fclasses';
 
 import { useGetLinkHref } from '../Link';
@@ -54,14 +54,14 @@ const asTitledItem: Enhancer<TitledItemProps> = Item => {
 };
 
 type SubListWrapperComponents = {
-  WrapperItem: ComponentType<any>,
-  List: ComponentType<any>,
-  Title: ComponentType<any>
+  WrapperItem: ComponentOrTag<any>,
+  List: ComponentOrTag<any>,
+  Title: ComponentOrTag<any>
 };
 
 const sublistWrapperComponents: SubListWrapperComponents = {
-  WrapperItem: asComponent('li'),
-  List: asComponent('ul'),
+  WrapperItem: 'li',
+  List: 'ul',
   Title: withOnlyProps('key', 'children')(Fragment),
 };
 
@@ -121,7 +121,7 @@ const asBodilessList = (
   replaceWith(BodilessList),
   withListButtons(useOverrides),
   withDesign({
-    Wrapper: replaceWith(asComponent(Component)),
+    Wrapper: replaceWith(Component),
     Item: asToken(
       asDisabledListItem,
       withoutProps(['addItem', 'deleteItem', 'canDelete', 'unwrap']),
