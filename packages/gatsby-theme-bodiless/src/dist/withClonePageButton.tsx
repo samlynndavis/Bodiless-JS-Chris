@@ -21,9 +21,9 @@ import {
   useEditContext,
   withMenuOptions,
   useNode,
+  BodilessBackendClient,
+  handleBackendResponse,
 } from '@bodiless/core';
-import { BodilessBackendClient } from '@bodiless/core';
-import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
 import {
   PageState,
@@ -35,7 +35,7 @@ import {
 
 const clonePage = async ({ origin, destination, client } : any) => {
   // Clone the page.
-  const result = await handle(client.clonePage(origin, destination));
+  const result = await handleBackendResponse(client.clonePage(origin, destination));
 
   // If the page was cloned successfully:
   if (result.response) {

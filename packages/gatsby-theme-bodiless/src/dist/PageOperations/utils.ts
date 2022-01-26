@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { useNode } from '@bodiless/core';
+import { useNode, handleBackendResponse as handle } from '@bodiless/core';
 import { useField } from 'informed';
 import type {
   FormValue,
@@ -22,7 +22,6 @@ import path from 'path';
 import type {
   FieldValidate,
 } from './types';
-import handle from '../ResponseHandler';
 
 const BASE_PATH_FIELD_NAME = 'basePath';
 const PAGE_URL_FIELD_NAME = 'pagePath';

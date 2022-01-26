@@ -20,6 +20,7 @@ import {
   withNotificationButton,
   withSwitcherButton,
   OnNodeErrorNotification,
+  useGitButtons,
 } from '@bodiless/core';
 import { withShowDesignKeys } from '@bodiless/fclasses';
 import { observer } from 'mobx-react-lite';
@@ -31,7 +32,6 @@ import withNewPageButton from './withNewPageButton';
 import withMovePageButton from './withMovePageButton';
 import withClonePageButton from './withClonePageButton';
 import withDeletePageButton from './withDeletePageButton';
-import useGitButtons from './useGitButtons';
 
 type FinalUI = {
   ContextWrapper: ComponentType<ContextWrapperProps>;

@@ -29,14 +29,14 @@ import {
   ContextMenuProvider,
   ContextSubMenu,
   useNode,
+  handleBackendResponse as handle,
+  BodilessBackendClient,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import {
   addClasses, removeClasses, StylableProps,
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
-import { BodilessBackendClient } from '@bodiless/core';
-import handle from './ResponseHandler';
 import { getPathValue, MovePageURLField } from './PageOperations';
 
 type Client = {
@@ -75,8 +75,8 @@ const movePage = async ({ origin, destination, client } : any) => {
   if (directoryExists.message !== 'The page cannot be moved. Directory exists') {
     try {
       await handle(client.clonePage(origin, destination));
-    } catch (e: any) {
-      return Promise.reject(new Error(e.message));
+    } catch (e) {
+      return Promise.reject(new Error((e as Error).message));
     }
 
     const hasChild = await handle(client.directoryChild(origin));
@@ -86,14 +86,14 @@ const movePage = async ({ origin, destination, client } : any) => {
     if (hasChild.response && hasChild.message === 'Success') {
       try {
         deleteResult = await handle(client.deletePage(origin));
-      } catch (e: any) {
-        return Promise.reject(new Error(e.message));
+      } catch (e) {
+        return Promise.reject(new Error((e as Error).message));
       }
     } else {
       try {
         deleteResult = await handle(client.removeFile(origin));
-      } catch (e: any) {
-        return Promise.reject(new Error(e.message));
+      } catch (e) {
+        return Promise.reject(new Error((e as Error).message));
       }
     }
 

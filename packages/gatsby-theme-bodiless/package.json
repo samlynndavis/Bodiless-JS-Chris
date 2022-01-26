@@ -103,7 +103,6 @@
     "slash": "^2.0.0",
     "sleep-promise": "^8.0.1",
     "stream-browserify": "^3.0.0",
-    "universal-cookie": "^4.0.3",
     "walk": "^2.3.14",
     "walkdir": "^0.4.1"
   },

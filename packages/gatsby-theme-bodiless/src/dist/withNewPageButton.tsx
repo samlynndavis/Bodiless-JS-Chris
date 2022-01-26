@@ -24,9 +24,9 @@ import {
   useEditContext,
   withMenuOptions,
   ContextSubMenu,
+  BodilessBackendClient,
+  handleBackendResponse as handle,
 } from '@bodiless/core';
-import { BodilessBackendClient } from '@bodiless/core';
-import handle from './ResponseHandler';
 import verifyPage from './PageVerification';
 import { useGatsbyPageContext } from './GatsbyPageProvider';
 import {

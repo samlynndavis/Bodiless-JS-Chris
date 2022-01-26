@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { FormApi, FormState } from 'informed';
 
-import { getUI, useEditContext } from '@bodiless/core';
-import { ComponentFormSpinner } from '@bodiless/ui';
 import { AxiosError, AxiosPromise } from 'axios';
 import Cookies from 'universal-cookie';
+
 import { GitClient } from './types';
+import { getUI, ContextMenuUI } from '../components';
+import { useEditContext } from '../hooks';
 
 enum SaveState {
   Init,
@@ -20,7 +21,7 @@ type SaveStatus = {
 };
 
 type Props = {
-  ui: any,
+  ui: ContextMenuUI,
   formState: FormState,
   formApi: FormApi,
   client: GitClient
@@ -75,6 +76,7 @@ const SaveChanges = (props: Props) => {
     ComponentFormLabel,
     ComponentFormWarning,
     ComponentFormText,
+    Spinner,
   } = getUI(ui);
   const { submits, invalid } = formState;
   const [state, setState] = useState<SaveStatus>({
@@ -114,7 +116,7 @@ const SaveChanges = (props: Props) => {
       return (
         <>
           <ComponentFormTitle>Uploading...</ComponentFormTitle>
-          <ComponentFormSpinner />
+          <Spinner />
         </>
       );
     case SaveState.Complete:

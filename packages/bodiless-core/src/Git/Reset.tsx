@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FormApi, FormState } from 'informed';
-import { getUI, useEditContext } from '@bodiless/core';
-import { ComponentFormSpinner } from '@bodiless/ui';
 import { AxiosError } from 'axios';
 import { GitClient } from './types';
+import { getUI, ContextMenuUI } from '../components';
+import { useEditContext } from '../hooks';
 
 enum ResetState {
   Init,
@@ -18,7 +18,7 @@ type ResetStatus = {
 };
 
 type Props = {
-  ui: any,
+  ui: ContextMenuUI,
   formState: FormState,
   formApi: FormApi,
   client: GitClient
@@ -41,6 +41,7 @@ const Reset = (props: Props) => {
     ComponentFormLabel,
     ComponentFormWarning,
     ComponentFormDescription,
+    Spinner,
   } = getUI(ui);
   const { submits, invalid } = formState;
   const [state, setState] = useState<ResetStatus>({
@@ -83,7 +84,7 @@ const Reset = (props: Props) => {
       return (
         <>
           <ComponentFormTitle>Resetting...</ComponentFormTitle>
-          <ComponentFormSpinner />
+          <Spinner />
         </>
       );
     case ResetState.Complete:

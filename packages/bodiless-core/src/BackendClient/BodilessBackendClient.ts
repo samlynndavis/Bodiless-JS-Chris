@@ -14,11 +14,11 @@
 
 import path from 'path';
 import axios from 'axios';
-import type { BodilessStoreBackend } from './Store';
+import type { BodilessStoreBackend } from '../Store';
 
 const backendPort = process.env.GATSBY_BODILESS_BACKEND_PORT || 8001;
 
-type BackendClientConf = {
+export type BackendClientConf = {
   baseUrl?: string,
   prefix?: string,
 };

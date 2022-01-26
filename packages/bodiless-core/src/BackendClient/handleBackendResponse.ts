@@ -21,7 +21,7 @@ const isResponseSuccessful = (res: AxiosResponse<any>): boolean => {
   return res.status === 200 || res.status === 201;
 };
 
-const handle = (promise: AxiosPromise<any>) => promise
+export const handleBackendResponse = (promise: AxiosPromise<any>) => promise
   .then(res => {
     if (!isResponseSuccessful(res)) {
       return {
@@ -47,5 +47,3 @@ const handle = (promise: AxiosPromise<any>) => promise
       message: err.message,
     };
   });
-
-export default handle;

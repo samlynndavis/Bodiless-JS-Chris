@@ -16,17 +16,14 @@
 import React, {
   useState, useEffect, useCallback, useMemo,
 } from 'react';
-import {
-  contextMenuForm,
-  getUI,
-  TMenuOption,
-  useEditContext,
-  useNotify,
-  useRegisterMenuOptions,
-  ContextSubMenu,
-  useGetter,
-} from '@bodiless/core';
-import { BodilessBackendClient } from '@bodiless/core';
+import type { TMenuOption } from '../types/ContextMenuTypes';
+import ContextSubMenu from '../ContextMenu/ContextSubMenu';
+import { useRegisterMenuOptions } from '../PageContextProvider';
+import { contextMenuForm } from '../contextMenuForm';
+import { getUI } from '../components';
+import { useEditContext, useGetter } from '../hooks';
+import { useNotify } from '../NotificationProvider';
+import { BodilessBackendClient } from '../BackendClient';
 import CommitsList from './CommitsList';
 import RemoteChanges from './RemoteChanges';
 import Reset from './Reset';
@@ -95,7 +92,7 @@ const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => cont
       <ComponentFormText type="hidden" field="keepOpen" initialValue={false} />
       <ComponentFormText type="hidden" field="mergeMain" initialValue={false} />
       <ComponentFormText type="hidden" field="refreshWhenDone" initialValue={false} />
-      <RemoteChanges client={client} notifyOfChanges={notifyOfChanges} />
+      <RemoteChanges client={client} notifyOfChanges={notifyOfChanges} ui={ui} />
     </>
   );
 });

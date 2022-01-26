@@ -17,7 +17,7 @@ import pick from 'lodash/pick';
 import path from 'path';
 import NodeProvider from '../NodeProvider';
 import { DefaultContentNode } from '../ContentNode';
-import { BodilessBackendClient } from '../BodilessBackendClient';
+import { BodilessBackendClient } from '../BackendClient/BodilessBackendClient';
 import { BodilessMobxStore } from './BodilessMobxStore';
 import { BodilessStore } from './types';
 
@@ -32,7 +32,10 @@ export type Props = {
   }
 };
 
-class DefaultStore extends BodilessMobxStore<Map<string, any>> implements BodilessStore<Map<string, any>> {
+class DefaultStore
+  extends BodilessMobxStore<Map<string, any>>
+  implements BodilessStore<Map<string, any>> {
+  // eslint-disable-next-line class-methods-use-this
   parseData(rawData: Map<string, any>) {
     return rawData;
   }
@@ -44,15 +47,6 @@ export class BodilessStoreProvider extends Component<Props, State> {
     this.state = {
       store: this.createStore(),
     };
-  }
-
-  /**
-   * Creates the store which will be provided.
-   *
-   * @param config 
-   */
-  protected createStore(): BodilessStore<any> {
-    return new DefaultStore({ slug: this.slug, client: new BodilessBackendClient() });
   }
 
   // eslint-disable-next-line react/state-in-constructor
@@ -92,6 +86,15 @@ export class BodilessStoreProvider extends Component<Props, State> {
 
     const node = new DefaultContentNode(actions, getters, collection);
     return node;
+  }
+
+  /**
+   * Creates the store which will be provided.
+   *
+   * @param config
+   */
+  protected createStore(): BodilessStore<any> {
+    return new DefaultStore({ slug: this.slug, client: new BodilessBackendClient() });
   }
 
   render() {

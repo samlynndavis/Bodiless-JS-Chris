@@ -39,6 +39,7 @@
     "rc-tooltip": "^5.1.1",
     "react-tag-autocomplete": "^5.12.1",
     "resize-observer-polyfill": "^1.5.1",
+    "universal-cookie": "^4.0.3",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {

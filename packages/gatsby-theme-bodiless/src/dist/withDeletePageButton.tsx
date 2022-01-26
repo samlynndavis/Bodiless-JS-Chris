@@ -25,6 +25,8 @@ import {
   withMenuOptions,
   ContextMenuProvider,
   ContextSubMenu,
+  BodilessBackendClient,
+  handleBackendResponse as handle,
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import {
@@ -32,8 +34,6 @@ import {
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import flow from 'lodash/flow';
-import { BodilessBackendClient } from '@bodiless/core';
-import handle from './ResponseHandler';
 
 type Client = {
   deletePage: (path: string) => AxiosPromise<any>;
@@ -69,8 +69,8 @@ const deletePage = async ({ path, client } : any) => {
     }
     try {
       await handle(client.deleteStaticAssets(path));
-    } catch (e: any) {
-      return Promise.reject(new Error(e.message));
+    } catch (e) {
+      return Promise.reject(new Error((e as Error).message));
     }
     return Promise.resolve();
   }

@@ -14,10 +14,10 @@
 
 import React, { useState, useEffect } from 'react';
 import uniq from 'lodash/uniq';
-import { useEditContext } from '@bodiless/core';
-import { ComponentFormSpinner, ComponentFormWarning } from '@bodiless/ui';
 import { useFormApi } from 'informed';
+import { useEditContext } from '../hooks';
 import type { ChangeNotifier } from './useGitButtons';
+import { ContextMenuUI, getUI } from '../components';
 
 export type BranchUpdateType = {
   branch: string | null,
@@ -37,6 +37,10 @@ type PropsWithGitClient = {
 
 type PropsWithFormApi = {
   formApi: any;
+};
+
+type PropsWithUi = {
+  ui: ContextMenuUI;
 };
 
 type PropsWithNotify = {
@@ -70,7 +74,9 @@ enum MessageCode {
  * @param {BackendClient} client
  * @constructor
  */
-const RemoteChanges = ({ client, notifyOfChanges }: PropsWithGitClient & PropsWithNotify) => {
+const RemoteChanges = (
+  { client, notifyOfChanges, ui }: PropsWithGitClient & PropsWithNotify & PropsWithUi
+) => {
   const formApi = useFormApi();
   // @Todo revise the use of formState, possibly use informed multistep.
   if (formApi.getState().submits === 0) {
@@ -79,6 +85,7 @@ const RemoteChanges = ({ client, notifyOfChanges }: PropsWithGitClient & PropsWi
         client={client}
         formApi={formApi}
         notifyOfChanges={notifyOfChanges}
+        ui={ui}
       />
     );
   }
@@ -87,6 +94,7 @@ const RemoteChanges = ({ client, notifyOfChanges }: PropsWithGitClient & PropsWi
       client={client}
       formApi={formApi}
       notifyOfChanges={notifyOfChanges}
+      ui={ui}
     />
   );
 };
@@ -104,7 +112,8 @@ const getRemoteStatus = (responseData: ResponseData) => ({
 
 const isContentOnly = (files: string[]) => files.every(file => file.search(/\.json$/g) !== -1);
 
-const FormMessages = ({ messageCode, messageData } : MessageProps) => {
+const FormMessages = ({ messageCode, messageData, ui } : MessageProps & PropsWithUi) => {
+  const { ComponentFormWarning, Spinner } = getUI(ui);
   switch (messageCode) {
     case MessageCode.PullMainAvailable:
       return (<>There are main changes available to be pulled. Click check (✓) to initiate.</>);
@@ -200,7 +209,7 @@ assistance. (code ${MessageCode.PullNonContentOnly})`
       );
 
     default:
-      return <ComponentFormSpinner />;
+      return <Spinner />;
   }
 };
 
@@ -213,8 +222,11 @@ assistance. (code ${MessageCode.PullNonContentOnly})`
  * @constructor
  */
 const FetchChanges = (
-  { client, formApi, notifyOfChanges }: PropsWithFormApi & PropsWithGitClient & PropsWithNotify,
+  props: PropsWithFormApi & PropsWithGitClient & PropsWithNotify & PropsWithUi,
 ) => {
+  const {
+    client, formApi, notifyOfChanges, ui
+  } = props;
   const [state, setState] = useState<MessageProps>({
     messageCode: MessageCode.Default,
     messageData: '',
@@ -310,10 +322,10 @@ const FetchChanges = (
           formApi.setValue('mergeMain', false);
           formApi.setValue('keepOpen', false);
         }
-      } catch (error: any) {
+      } catch (error) {
         setState({
           messageCode: MessageCode.PullErrored,
-          messageData: error.message,
+          messageData: (error as any).message,
         });
       } finally {
         notifyOfChanges();
@@ -322,7 +334,7 @@ const FetchChanges = (
     })();
   }, []);
   const { messageCode, messageData } = state;
-  return <FormMessages messageCode={messageCode} messageData={messageData} />;
+  return <FormMessages messageCode={messageCode} messageData={messageData} ui={ui} />;
 };
 
 type PullStatus = {
@@ -339,8 +351,12 @@ type PullStatus = {
  * @constructor
  */
 const PullChanges = (
-  { client, formApi, notifyOfChanges }: PropsWithFormApi & PropsWithGitClient & PropsWithNotify,
+  props: PropsWithFormApi & PropsWithGitClient & PropsWithNotify & PropsWithUi,
 ) => {
+  const {
+    client, formApi, notifyOfChanges, ui,
+  } = props;
+  const { Spinner } = getUI(ui);
   const [pullStatus, setPullStatus] = useState<PullStatus>({
     complete: false,
     error: '',
@@ -368,10 +384,10 @@ const PullChanges = (
         }
         setPullStatus({ complete: true });
         formApi.setValue('refreshWhenDone', true);
-      } catch (error: any) {
+      } catch (error) {
         setPullStatus({
           complete: false,
-          error: error.message || 'An unexpected error has occurred.',
+          error: (error as any).message || 'An unexpected error has occurred.',
         });
       } finally {
         formApi.setValue('keepOpen', false);
@@ -386,7 +402,7 @@ const PullChanges = (
   if (complete) {
     return <>Pull success, your Edit Environment is up to date!</>;
   }
-  return <ComponentFormSpinner />;
+  return <Spinner />;
 };
 
 export default RemoteChanges;
