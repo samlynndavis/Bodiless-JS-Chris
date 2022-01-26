@@ -14,7 +14,7 @@
 
 import { StoreItem, DEFAULT_REQUEST_DELAY } from '../src/Store/StoreItem';
 import { BodilessMobxStore } from '../src/Store/BodilessMobxStore';
-import { BodilessBackendClient } from '../src/BodilessBackendClient';
+import { BodilessBackendClient } from '../src/BackendClient';
 import { ItemStateEvent } from '../src/Store/types';
 
 class RequestsMock {
@@ -63,6 +63,7 @@ jest.mock('../src/Store/BodilessMobxStore', () => ({
 }));
 
 class TestStore extends BodilessMobxStore<Map<string, any>> {
+  // eslint-disable-next-line class-methods-use-this
   parseData(d: Map<string, any>) {
     return d;
   }

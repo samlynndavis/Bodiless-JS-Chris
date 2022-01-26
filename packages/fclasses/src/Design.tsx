@@ -35,9 +35,9 @@ import { as, extendDesign } from './createUtilities';
  * Given a set of starting components and a default component,
  * returns an function which applies a design to those components.
  *
- * @param components 
+ * @param components
  * A set of components to which the design should be applied.
- * @param DefaultComponent 
+ * @param DefaultComponent
  * The default component to use for any key in the design which
  * is not in the set of components.
  *
@@ -79,7 +79,6 @@ export const applyDesign = <C extends DesignableComponents> (
       );
     }
   );
-
 
 /**
  * Specifies a design which should be applied to a component "finally" (ie after

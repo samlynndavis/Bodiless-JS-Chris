@@ -1,14 +1,14 @@
 /* eslint-disable jest/expect-expect */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { ComponentType, FC } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { mount, shallow } from 'enzyme';
+import { identity, flow } from 'lodash';
 import {
   DesignableComponentsProps, Span, designable, Div, addClasses, removeClasses,
   withDesign, HOC, asToken, flowIf, withoutProps,
   asTokenSpec, as, extendMeta,
 } from '../src';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { mount, shallow } from 'enzyme';
-import { identity, flow } from 'lodash';
 
 const defaultDomains = {
   Core: {},
@@ -48,7 +48,7 @@ const TestClean = designable(TestComponents)(TestBase);
 const asTestTokenSpec = asTokenSpec<TestComponents, typeof defaultDomains>(defaultDomains);
 
 describe('extendMeta', () => {
-  it('Merges categories properly',  () => {
+  it('Merges categories properly', () => {
     const foobar = asToken.meta.term('Foo')('Bar');
     const foobaz = asToken.meta.term('Foo')('Baz');
     const bingbang = asToken.meta.term('Bing')('Bang');
@@ -176,8 +176,8 @@ describe('extend', () => {
     });
     const FooBar = asTestTokenSpec(Foo, Bar);
     const T = as(FooBar)(TestClean);
-  
-    let wrapper = mount(<T foo />);
+
+    const wrapper = mount(<T foo />);
     expect(wrapper.find('span#test-a').prop('className')).toBeUndefined();
   });
 
@@ -209,7 +209,7 @@ describe('as', () => {
       },
     });
     const TestC = as(Test)(TestClean);
-    const test = mount(<TestC doIt={true} />);
+    const test = mount(<TestC doIt />);
     expect(test.find('div#test-wrapper').prop('className')).toBe('foo');
     const test1 = mount(<TestC />);
     expect(test1.find('div#test-wrapper').prop('className')).toBeUndefined();

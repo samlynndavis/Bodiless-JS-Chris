@@ -30,6 +30,7 @@ jest.mock('../src/Store/StoreItem', () => ({
 }));
 
 class TestStore extends BodilessMobxStore<Map<string, any>> {
+  // eslint-disable-next-line class-methods-use-this
   parseData(d: Map<string, any>) {
     return d;
   }

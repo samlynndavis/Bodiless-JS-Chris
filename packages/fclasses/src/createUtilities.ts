@@ -1,20 +1,18 @@
-import { startWith } from './replaceable';
-import {
-  TokenDef, // AsToken, 
-  DesignableComponents, HocDesign, RequiredDomains, TokenSpec,
-  ReservedDomains, Design, Token, HOCBase, HOD,
-} from './types';
-import { asToken } from './Tokens';
-import { addClasses } from './FClasses';
-import { withHocDesign } from './withHocDesigh';
 import mergeWith from 'lodash/mergeWith';
 import flow from 'lodash/flow';
 import { ComponentType } from 'react';
 import identity from 'lodash/identity';
-import { extendMeta } from './Tokens';
-// import omit from 'lodash/omit';
 import { pick } from 'lodash';
-
+import { startWith } from './replaceable';
+import {
+  TokenDef, // AsToken,
+  DesignableComponents, HocDesign, RequiredDomains, TokenSpec,
+  ReservedDomains, Design, Token, HOCBase, HOD,
+} from './types';
+import { asToken, extendMeta } from './Tokens';
+import { addClasses } from './FClasses';
+import { withHocDesign } from './withHocDesigh';
+// import omit from 'lodash/omit';
 
 /**
      * @private
@@ -28,20 +26,16 @@ import { pick } from 'lodash';
 function getHocForDomain<C extends DesignableComponents, D extends RequiredDomains = any>(
   domainName: keyof TokenSpec<C, D>,
   domain?: Design<C> | ReservedDomains<C, D>[keyof ReservedDomains<C, D>]
-): TokenDef | undefined  {
-  if (!domain)
-    return undefined;
-  if (domainName === 'Flow')
-    return undefined;
-  if (domainName === 'Meta')
-    return Array.isArray(domain) ? extendMeta(...domain) : domain;
+): TokenDef | undefined {
+  if (!domain) return undefined;
+  if (domainName === 'Flow') return undefined;
+  if (domainName === 'Meta') return Array.isArray(domain) ? extendMeta(...domain) : domain;
   if (domainName === 'Compose') {
     const compose = domain as ReservedDomains<C, D>['Compose'];
     return as(...Object.values(compose));
   }
   return withDesign(domain as Design<C, D>);
 }
-
 
 /**
      * Converts a list of token into an HOC which can be applied to
@@ -56,14 +50,12 @@ function getHocForDomain<C extends DesignableComponents, D extends RequiredDomai
      */
 function as<D extends RequiredDomains = any>(
   ...args$: Token<any, D>[]
-  
+
 ): HOCBase<any, any, any> {
   const args = args$.filter(Boolean);
   const tokens: TokenDef[] = args.map(arg => {
-    if (typeof arg === 'function' || typeof arg === 'undefined')
-      return arg;
-    if (typeof arg === 'string')
-      return addClasses(arg);
+    if (typeof arg === 'function' || typeof arg === 'undefined') return arg;
+    if (typeof arg === 'string') return addClasses(arg);
     const specTokens: TokenDef[] = [];
     // Use keys of the base token spec to ensure correct order of domains.
     // const keys = [
@@ -76,7 +68,8 @@ function as<D extends RequiredDomains = any>(
     specTokens.push(...keys
       .map(domainName => getHocForDomain(
         domainName as keyof TokenSpec<any, D>,
-        arg[domainName as keyof TokenSpec<any, D>])));
+        arg[domainName as keyof TokenSpec<any, D>]
+      )));
 
     if (arg.Flow) {
       return arg.Flow(...specTokens);
@@ -98,7 +91,6 @@ function as<D extends RequiredDomains = any>(
 function withDesign<C extends DesignableComponents = any, D extends RequiredDomains = any>(
   design: Design<C, D>
 ): HOCBase {
-
   const hocDesign: HocDesign<C> = Object.keys(design)
     .filter(k => k !== '_')
     .reduce(
@@ -106,7 +98,8 @@ function withDesign<C extends DesignableComponents = any, D extends RequiredDoma
         ...d,
         [k]: as(design[k]),
       }),
-      {} as HocDesign<any>);
+      {} as HocDesign<any>
+    );
   return asToken(
     as(design._) as HOCBase,
     withHocDesign(hocDesign)
@@ -122,19 +115,17 @@ const tokenMergeCustomizer = (...args: any) => {
   const stack = args[5];
   const [a, b, key] = args;
   if (stack.size === 0) {
-    if (key === 'Meta')
-      return extendMeta(a, b);
+    if (key === 'Meta') return extendMeta(a, b);
     if (key === 'Flow') {
       console.log(a, b);
       if (a && b) return flow(a, b);
-      else if (a) return a;
-      else if (b) return b;
+      if (a) return a;
+      if (b) return b;
       return identity;
     }
     return undefined;
   }
-  if (!a || !b)
-    return undefined;
+  if (!a || !b) return undefined;
   return as(a, b);
 };
 
@@ -208,12 +199,12 @@ function extendDesign<C extends DesignableComponents, D extends RequiredDomains 
  * Takes a set of designs or HODs and returns a single HOD which extends
  * its argument (a design) with the supplied designs. HODs in the argument
  * list will be converted to designs by invoking them on an empty design.
- * 
+ *
  * @param dx
  * List of designs or HODs which will be used as extensons
  *
  * @returns
- * An HOD which will extend the base design with the supplied designs. 
+ * An HOD which will extend the base design with the supplied designs.
  */
 const extendDesignWith = (
   ...dx: (Design|HOD<any, any>)[]
@@ -222,7 +213,6 @@ const extendDesignWith = (
 ) => extendDesign(d, ...dx.map(
   dx$ => (typeof dx$ === 'function' ? dx$() : dx$)
 ));
-
 
 /**
      * Utility to apply tokens to a specified clean component.
@@ -248,7 +238,8 @@ const on = (
   ...specs: Token<C, D>[]
 ) => as(
     startWith(CleanComponent),
-    ...specs);
+    ...specs
+  );
 
 /**
  * Helper function to improve type inference in token specifications, and to ensure that

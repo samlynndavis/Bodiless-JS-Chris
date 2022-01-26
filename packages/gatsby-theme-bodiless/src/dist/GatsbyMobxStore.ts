@@ -27,8 +27,7 @@ export type GatsbyData = {
   };
 };
 
-export default class GatsbyMobxStore extends BodilessMobxStore<GatsbyData>{
-
+export default class GatsbyMobxStore extends BodilessMobxStore<GatsbyData> {
   // eslint-disable-next-line class-methods-use-this
   protected parseData(gatsbyData: GatsbyData) {
     const result = new Map();

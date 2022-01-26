@@ -19,15 +19,15 @@ import { StoreItem } from './StoreItem';
 import type { BodilessStoreBackend, BodilessStoreConfig, BodilessStore } from './types';
 import { ItemStateEvent } from './types';
 import addPageLeaver from './addPageLeaver';
-  
+
 export type DataSource = {
   slug: string,
 };
-  
+
 // const Logger = require('../service/Logger.js');
-  
+
 // const logger = new Logger('BodilessMobxStore', HttpService);
-  
+
 /**
  * The bodiless store manages a key-value collection of content nodes. These
  * are observable, so that observer components will re-render when relevant
@@ -43,13 +43,13 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
   static nodeChildDelimiter = '$';
 
   @observable store = new Map<string, StoreItem>();
-  
+
   client: BodilessStoreBackend|undefined;
-  
+
   slug: string|undefined;
-  
+
   data: any = {};
-  
+
   constructor(config: BodilessStoreConfig = {}) {
     this.slug = config.slug;
     this.client = config.client;
@@ -118,9 +118,9 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
       }
     });
   }
-  
+
   getKeys = () => Array.from(this.store.keys());
-  
+
   getNode = (keyPath: string[]) => {
     const key = keyPath.join(BodilessMobxStore.nodeChildDelimiter);
     const item = this.store.get(key);
@@ -128,11 +128,11 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
     const dataValue = this.data[key];
     return storeValue || dataValue || {};
   };
-  
+
   @action setItem = (key: string, item: StoreItem) => {
     this.store.set(key, item);
   };
-  
+
   @action deleteItem = (key: string, soft = true) => {
     if (soft) {
       const item = this.store.get(key);
@@ -140,9 +140,9 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
     }
     return this.store.delete(key);
   };
-  
+
   /**
-     * Mobx action saves or updates items. 
+     * Mobx action saves or updates items.
      */
   setNode = (keyPath: string[], value = {}, event = ItemStateEvent.UpdateFromBrowser) => {
     const key = keyPath.join(BodilessMobxStore.nodeChildDelimiter);
@@ -153,14 +153,14 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
       this.setItem(key, new StoreItem(this, key, value, event));
     }
   };
-  
+
   getChildrenNodes = (keyPath: string[]) => {
     const key = keyPath.join(BodilessMobxStore.nodeChildDelimiter);
     const children = Array.from(this.store)
       .filter(item => item[0].indexOf(key) === 0 && item[0] !== key);
     return children;
   };
-  
+
   deleteNode = (keyPath: string[]) => {
     const children = this.getChildrenNodes(keyPath);
     children.forEach(child => {
@@ -169,11 +169,10 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
     const key = keyPath.join(BodilessMobxStore.nodeChildDelimiter);
     this.deleteItem(key);
   };
-  
+
   hasError = () => {
     const itemsWithError = Array.from(this.store.values())
       .filter(item => item.hasFlushingError);
     return itemsWithError.length > 0;
   };
 }
-  

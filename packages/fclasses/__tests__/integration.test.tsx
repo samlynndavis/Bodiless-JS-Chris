@@ -18,7 +18,13 @@ import flowRight from 'lodash/flowRight';
 import flow from 'lodash/flow';
 import React, { HTMLProps, FC, ComponentType } from 'react';
 
-import { HOC, asToken } from '../src';
+import {
+  HOC, asToken,
+  applyDesign,
+  withDesign,
+  replaceWith,
+  DesignableProps,
+} from '../src';
 
 import {
   addClasses, removeClasses, stylable,
@@ -26,13 +32,6 @@ import {
 import {
   flowIf, hasProp, withoutProps,
 } from '../src/hoc-util';
-
-import {
-  applyDesign,
-  withDesign,
-  replaceWith,
-  DesignableProps,
-} from '../src';
 
 type CardComponents = {
   Wrapper: ComponentType<any>,

@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import GatsbyMobxStore from '../src/dist/GatsbyMobxStore';
 import { ItemStateEvent } from '@bodiless/core';
+import GatsbyMobxStore from '../src/dist/GatsbyMobxStore';
 
 const flushPromises = () => new Promise(setImmediate);
 

@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import GatsbyMobxStore from './GatsbyMobxStore';
 import { BodilessBackendClient, BodilessStoreProvider } from '@bodiless/core';
+import GatsbyMobxStore from './GatsbyMobxStore';
 
 class GatsbyNodeProvider extends BodilessStoreProvider {
   protected createStore() {

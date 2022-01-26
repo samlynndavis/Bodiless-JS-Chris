@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { asToken, HOC } from '@bodiless/fclasses';
 import {
   withContextActivator,
   withLocalContextMenu,
@@ -19,7 +20,6 @@ import {
 import { withMenuOptions } from '../PageContextProvider';
 import { useNode } from '../NodeProvider';
 import { TMenuOption } from '../Types/ContextMenuTypes';
-import { asToken, HOC } from '@bodiless/fclasses';
 
 type MenuOptionWithNodeKey = (Partial<TMenuOption> & {
   nodeKey?: string | string[];

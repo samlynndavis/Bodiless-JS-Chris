@@ -33,12 +33,6 @@ import {
   extendDesigns
 } from './Design';
 
-import type {
-  Designable,
-  DesignableProps,
-  DesignableComponentsProps,
-  DesignableComponents,
-} from './types';
 import {
   flowIf, hasProp, withoutProps, withOnlyProps, replaceOnEffect,
   withDisplayName, or, and, not, asComponent,
@@ -47,6 +41,7 @@ import { replaceWith, startWith, remove } from './replaceable';
 import type { Condition } from './hoc-util';
 import Fragment from './Fragment';
 import withDesignAt from './withDesignAt';
+
 export { withHocDesign } from './withHocDesigh';
 
 export * from './StyledHTML';
@@ -91,9 +86,5 @@ export {
 
 export type {
   StylableProps,
-  Designable,
-  DesignableProps,
-  DesignableComponentsProps,
-  DesignableComponents,
   Condition,
 };

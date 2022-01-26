@@ -184,7 +184,7 @@ export type DesignableComponentsProps<C extends DesignableComponents = Designabl
  * a components prop of type "C".
  */
 export type HOD<
-  C extends DesignableComponents, 
+  C extends DesignableComponents,
   D extends RequiredDomains = any
 > = (design?:Design<C, D>) => Design<C, D>;
 
@@ -228,7 +228,7 @@ D extends RequiredDomains = RequiredDomains,
      */
   Meta: TokenMeta,
 };
-  
+
 /**
    * Type of a token specification, a token expressed in the
    * HOC Object Notation.
@@ -265,7 +265,6 @@ export type Token<
   D extends RequiredDomains = any,
 > = Partial<TokenSpec<C, D>> | HOCBase | string | undefined;
 
-  
 /**
    * Type of a collection of tokens which apply to a specific designable component.
    *
@@ -279,17 +278,17 @@ export type TokenCollection<
 > = {
   [name: string]: Partial<TokenSpec<C, D>>,
 };
-  
+
 type FinalDesign<
   C extends DesignableComponents = DesignableComponents,
   D extends RequiredDomains = any,
 > = {
   [k in keyof Partial<C & { _?: Token<C, D> }>]: Token<C, D>
 };
-  
+
 /**
    * A Design is a keyed set of tokens which can apply to a designable
-   * component. The keys correspond to the design elements 
+   * component. The keys correspond to the design elements
    * - includes a special key which contains tokens to be applied to the
    *   component as a whole.
    * - Allows each value to be speciried as a CanvasX extened token definition.

@@ -29,8 +29,8 @@ import {
   startWith,
   replaceWith,
   as,
+  withShowDesignKeys, asToken, HOC
 } from '../src';
-import { withShowDesignKeys, asToken, HOC } from '../src';
 
 type SpanType = ComponentType<any>;
 type MyDesignableComponents = {

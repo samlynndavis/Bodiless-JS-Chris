@@ -12,9 +12,10 @@
  * limitations under the License.
  */
 
-import type { HOC, TokenMeta } from './types';
+import type {
+  HOC, TokenMeta, Design, DesignableComponents
+} from './types';
 import { withDesign, as } from './createUtilities';
-import type { Design, DesignableComponents } from './types';
 
 type DesignPath = string[];
 

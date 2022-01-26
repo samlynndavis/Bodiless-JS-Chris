@@ -18,10 +18,10 @@ import flow from 'lodash/flow';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import cheerio from 'cheerio';
 import { replaceWith, withDesign, Enhancer } from '@bodiless/fclasses';
-import withResponsiveVariants from '../src/withResponsiveVariants';
 // eslint-disable-next-line import/order
 import { mount } from 'enzyme';
 import { identity } from 'lodash';
+import withResponsiveVariants from '../src/withResponsiveVariants';
 
 const defaultPageDimensions = {
   height: 0,
@@ -47,7 +47,6 @@ describe('withResponsiveVariants', () => {
   const Medium = () => <span id="medium">medium</span>;
   const Large = () => <span id="large">large</span>;
   const breakpoints = { sm: 0, md: 100, lg: 200 };
-
 
   const Test = flow(
     withResponsiveVariants({ breakpoints }),

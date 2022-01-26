@@ -15,7 +15,7 @@
 import React, { ComponentType } from 'react';
 import flowRight from 'lodash/flowRight';
 import { mount } from 'enzyme';
-import type { HOC  } from '@bodiless/fclasses';
+import type { HOC } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from '../src/withNode';
 import { useNode } from '../src/NodeProvider';
 import withSidecarNodes, { endSidecarNodes } from '../src/withSidecarNodes';

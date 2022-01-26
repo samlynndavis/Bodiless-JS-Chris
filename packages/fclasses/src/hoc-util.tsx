@@ -160,4 +160,3 @@ export const asComponent = <P extends object>(
   const AsComponent = (props: P) => <Tag {...props} />;
   return AsComponent;
 };
-

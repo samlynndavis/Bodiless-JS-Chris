@@ -16,7 +16,7 @@ import React, { ComponentType, FC } from 'react';
 import flow from 'lodash/flow';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render } from 'enzyme';
-import type { DesignableComponentsProps, HOC  } from '../src';
+import type { DesignableComponentsProps, HOC } from '../src';
 import {
   designable, replaceWith, withDesign, withDesignAt,
 } from '../src';

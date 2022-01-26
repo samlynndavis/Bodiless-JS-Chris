@@ -28,7 +28,8 @@ export const withTransformer = <P, Q, X extends Object>(funcs: WithTransformerPr
   (Component: ComponentType<Q & X>) => (props: P) => {
     const {
       transformFixed,
-      transformPassthrough, } = funcs;
+      transformPassthrough,
+    } = funcs;
     const tprops = {
       Component,
       transformFixed,

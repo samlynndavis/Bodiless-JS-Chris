@@ -2,11 +2,11 @@ import React, {
   ComponentType,
   FC,
 
-
   useContext
 } from 'react';
 import { HOCBase, ComponentOrTag, HOC } from './types';
 import { asToken } from './Tokens';
+
 const designContextDefault = undefined as undefined | ComponentType<any>;
 const DesignContext = React.createContext(designContextDefault);
 export const replaceable = <P extends object>(Component: ComponentOrTag<P>): ComponentType<any> => {
@@ -90,7 +90,8 @@ export const replaceWith = <P extends object>(Replacement: ComponentOrTag<P>) =>
   (() => {
     const ReplaceWith = (props: P) => <Replacement {...props} />;
     return ReplaceWith;
-  }) as HOC);
+  }) as HOC
+);
 /**
  * HOC which replaces the component with a fragment.  Note that the children of
  * the component (if any) will still be rendered.  If you want to completely remove
