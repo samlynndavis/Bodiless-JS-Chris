@@ -128,7 +128,7 @@ describe('SelectorComponents', () => {
     expect(wrapper.find('div#baz').prop('title')).toEqual('base');
   });
 
-  it.only('Does not invoke unnecessary designs until selectableComponents is accessed', () => {
+  it('Does not invoke unnecessary designs until selectableComponents is accessed', () => {
     const mockDesign = {
       Foo: jest.fn((c: any) => c),
       Bar: jest.fn((c: any) => c),
