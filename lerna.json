@@ -1,6 +1,6 @@
 {
   "packages": [
-    "examples/*",
+    "sites/*",
     "packages/*"
   ],
   "lerna": "2.0.0",

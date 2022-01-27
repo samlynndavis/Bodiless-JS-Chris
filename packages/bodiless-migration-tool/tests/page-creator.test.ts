@@ -32,7 +32,7 @@ import { GatsbyApp } from '../src/jamstack-app';
 function getDefaultPageParams(): PageCreatorParams {
   jest.spyOn(fs, 'mkdirSync').mockImplementation(() => '/fake/path');
   const defaultPageUrl = 'https://localhost';
-  const sitePath = '/app/examples/test-site';
+  const sitePath = '/app/sites/test-site';
   return {
     pagesDir: path.join(sitePath, 'src/data/pages'),
     staticDir: path.join(sitePath, 'static'),

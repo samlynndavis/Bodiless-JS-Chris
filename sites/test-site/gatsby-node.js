@@ -17,7 +17,7 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
     // multiple react instances, which causes this invalid hook call warning
     // (https://reactjs.org/warnings/invalid-hook-call-warning.html)
     // so we ensure we always resolve to the same instance when present
-    // in node_modules.  When running from examples, react is hoisted and
+    // in node_modules.  When running from sites, react is hoisted and
     // won't be present in the test site's node_modules.
     const reactPath = path.resolve('./node_modules', 'react');
     const reactAlias = fs.existsSync(reactPath) ? { react: reactPath } : {};
