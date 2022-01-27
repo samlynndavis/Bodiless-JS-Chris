@@ -158,7 +158,7 @@ export const extendDesignable = (transformDesign: TransformDesign = identity) =>
           ? extendDesign(restDesign as Design<C>, _final) : restDesign as Design<C>;
         // if (typeof start !== 'function') throw new Error('Fix me!');
         const apply = typeof start === 'function' ? start : applyDesign(start);
-        return { components: apply(design$) } as DesignableComponentsProps<C>;
+        return { components: apply(design$, props) } as DesignableComponentsProps<C>;
       };
       const transformPassthrough = (props:DesignableProps<C>) => {
         const { design, ...rest } = props;
