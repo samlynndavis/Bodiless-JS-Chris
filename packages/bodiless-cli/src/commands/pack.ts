@@ -79,7 +79,7 @@ const getDepsToReplace = (map: PackageMap, explicitPackages?: string[], force: b
 export default class Pack extends Command {
   static description = 'Pack and install dependencies from a local monorepo.';
 
-  static sites = [
+  static examples = [
     '$ bodiless pack -r /path/to/local/monorepo',
     '$ bodiless pack -s /path/to/site',
   ];
