@@ -23,7 +23,6 @@ import React, { FC } from 'react';
 import {
   HOC, ComponentOrTag, asToken, Enhancer, Injector, flowIf,
 } from '../src';
-import { FormBodyProps } from '../../bodiless-tokens/node_modules/@bodiless/core/lib';
 
 type BaseProps = {
   foo: string,

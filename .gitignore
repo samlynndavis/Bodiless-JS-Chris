@@ -30,6 +30,7 @@ test-report.xml
 
 /cypress/videos
 /cypress/screenshots
+/sites-test
 
 # API doc
 **/doc/api
