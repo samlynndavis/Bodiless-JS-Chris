@@ -17,6 +17,6 @@ const rimraf = require('rimraf');
 
 const site = process.argv[2] || 'test-site';
 rimraf.sync(`./sites/${site}`);
-copySync(`./examples/${site}`, `./sites/${site}`, {
+copySync(`./sites/${site}`, `./sites/${site}`, {
   filter: name => !name.match(/node_modules/),
 });
