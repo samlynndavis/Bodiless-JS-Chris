@@ -45,8 +45,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
-        run: npm run setup
+      - name: Check dependency sync
+        run: npm run sync:check
+      
+      - name: Build packages
+        run: npm run build:packages
 
       - name: Lint
         run: npm run lint
