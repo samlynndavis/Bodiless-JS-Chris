@@ -114,7 +114,7 @@ export type Enhancer<A, B = {}> = HOC<B, A>;
  * Optional constraint to put on the props signature of the base component. If specified,
  * the token will only apply to a base component which has this signature.
  */
-export type Injector<R, B = {}> = HOC<B & R, {}, R>;
+export type Injector<R, B = {}> = HOC<B & Partial<R>, {}, R>;
 
 /**
  * Type of the filter function which should be passed to `withTokenFilter`
