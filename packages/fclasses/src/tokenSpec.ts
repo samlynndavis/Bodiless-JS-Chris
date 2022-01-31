@@ -4,11 +4,12 @@ import { ComponentType } from 'react';
 import identity from 'lodash/identity';
 import { pick } from 'lodash';
 import { startWith } from './replaceable';
-import {
+import type {
   TokenDef, // AsToken,
-  DesignableComponents, HocDesign, RequiredDomains, TokenSpec,
-  ReservedDomains, Design, Token, HOCBase, HOD,
+  DesignableComponents, HocDesign, TokenSpec,
+  ReservedDomains, Design, Token, HOCBase, HOD, TokenSpecBase,
 } from './types';
+import { $TokenSpec } from './types';
 import { asToken, extendMeta } from './flowHoc';
 import { addClasses } from './addClasses';
 import { withHocDesign } from './withHocDesign';
@@ -23,7 +24,7 @@ import { withHocDesign } from './withHocDesign';
      * @param domainName
      * @param domain
      */
-function getHocForDomain<C extends DesignableComponents, D extends RequiredDomains = any>(
+function getHocForDomain<C extends DesignableComponents, D extends object = any>(
   domainName: keyof TokenSpec<C, D>,
   domain?: Design<C> | ReservedDomains<C, D>[keyof ReservedDomains<C, D>]
 ): TokenDef | undefined {
@@ -32,7 +33,7 @@ function getHocForDomain<C extends DesignableComponents, D extends RequiredDomai
   if (domainName === 'Meta') return Array.isArray(domain) ? extendMeta(...domain) : domain;
   if (domainName === 'Compose') {
     const compose = domain as ReservedDomains<C, D>['Compose'];
-    return as(...Object.values(compose));
+    return as(...Object.values(compose || {}));
   }
   return withDesign(domain as Design<C, D>);
 }
@@ -48,11 +49,19 @@ function getHocForDomain<C extends DesignableComponents, D extends RequiredDomai
      * @returns
      * An HOC which can be applied to a component.
      */
-function as<D extends RequiredDomains = any>(
+function as<D extends object = any>(
   ...args$: Token<any, D>[]
 
 ): HOCBase<any, any, any> {
   const args = args$.filter(Boolean);
+
+  // Ensure that all token specs have been passed through `asTokenSpec`
+  args.forEach(a => {
+    if (typeof a !== 'function' && typeof a !== 'string' && !a![$TokenSpec]) {
+      throw new Error('All token specifications passed to "a" must be created by a version of "asTokenSpec"');
+    }
+  });
+
   const tokens: TokenDef[] = args.map(arg => {
     if (typeof arg === 'function' || typeof arg === 'undefined') return arg;
     if (typeof arg === 'string') return addClasses(arg);
@@ -88,7 +97,7 @@ function as<D extends RequiredDomains = any>(
  * @returns
  * An hoc which applies the design.
  */
-function withDesign<C extends DesignableComponents = any, D extends RequiredDomains = any>(
+function withDesign<C extends DesignableComponents = any, D extends object = any>(
   design: Design<C, D>
 ): HOCBase {
   const hocDesign: HocDesign<C> = Object.keys(design)
@@ -187,7 +196,7 @@ const tokenMergeCustomizer = (...args: any) => {
      * @param ...designs
      * Designs to extend the base design.
      */
-function extendDesign<C extends DesignableComponents, D extends RequiredDomains = any>(
+function extendDesign<C extends DesignableComponents, D extends object = any>(
   d: Design<C, D> = {} as any,
   ...designs: Design<C, D>[]
 ): Design<C, D> {
@@ -233,7 +242,7 @@ const extendDesignWith = (
      */
 const on = (
   CleanComponent: ComponentType<any>
-) => <C extends DesignableComponents, D extends RequiredDomains = any>(
+) => <C extends DesignableComponents, D extends object = any>(
   ...specs: Token<C, D>[]
 ) => as(
     startWith(CleanComponent),
@@ -253,15 +262,19 @@ const on = (
  *
  * @see https://stackoverflow.com/questions/54598322/how-to-make-typescript-infer-the-keys-of-an-object-but-define-type-of-its-value
  */
-const asTokenSpec = <C extends DesignableComponents, D extends RequiredDomains = any>(
+const asTokenSpec = <C extends DesignableComponents, D extends object>(
   d?: D,
-) => (...specs: Partial <TokenSpec<C, D>>[]): Partial<TokenSpec<C, D>> => {
+) => (...specs: TokenSpecBase<C, D>[]): TokenSpec<C, D> => {
     const [spec0, ...restSpecs] = specs;
-    const mergedSpec = mergeWith(spec0, ...restSpecs, tokenMergeCustomizer);
-    return d
+    const mergedSpec: TokenSpecBase<C, D> = mergeWith(spec0, ...restSpecs, tokenMergeCustomizer);
+    const orderedSpec = d
       // Ensure order of keys in resulting token matches order of domains.
       ? pick(mergedSpec, ...Object.getOwnPropertyNames(d), 'Meta', 'Compose', 'Flow')
       : mergedSpec;
+    // Add an identifying key to ensure that tokens passed through `as`
+    // have been defined with `asTokenSpec`, thus guaranteeing proper order
+    // of domain keys.
+    return { ...orderedSpec, [$TokenSpec]: true };
   };
 
 export {
@@ -272,3 +285,13 @@ export {
   extendDesign,
   extendDesignWith,
 };
+
+/**
+ * Type guard to ensure that a Token is a TokenSpec.
+ *
+ * @param a
+ * The Token to test.
+ */
+export const isTokenSpec = (a: Token<any, any>): a is TokenSpec<any, any> => (
+  typeof a !== 'function' && typeof a !== 'string'
+);

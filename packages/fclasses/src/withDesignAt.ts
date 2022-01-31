@@ -15,7 +15,7 @@
 import type {
   HOC, TokenMeta, Design, DesignableComponents
 } from './types';
-import { withDesign, as } from './tokenSpec';
+import { withDesign, as, asTokenSpec } from './tokenSpec';
 
 type DesignPath = string[];
 
@@ -93,7 +93,7 @@ export const withDesignAt = <C extends DesignableComponents = DesignableComponen
     designOrToken: Design<C>|HOC,
     ...meta: TokenMeta[]
   ) => as(
-    {}, // necessary bc of typescript bug, see https://github.com/microsoft/TypeScript/issues/28010
-    ...meta.map(m => ({ Meta: m })),
+    undefined, // necessary bc of typescript bug, see https://github.com/microsoft/TypeScript/issues/28010
+    ...meta.map(m => asTokenSpec()({ Meta: m })),
     ...(paths || [[]]).map(p => withDesignAtSingle(p, designOrToken)),
   );

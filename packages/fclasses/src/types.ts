@@ -1,4 +1,10 @@
 import { ComponentType, HTMLProps } from 'react';
+
+/**
+ * Symbol used to identify a tokenspec object.
+ */
+export const $TokenSpec = Symbol('TokenSpec');
+
 /**
  * Metadata which can be attached to a token.
  *
@@ -185,7 +191,7 @@ export type DesignableComponentsProps<C extends DesignableComponents = Designabl
  */
 export type HOD<
   C extends DesignableComponents,
-  D extends RequiredDomains = any
+  D extends object = any
 > = (design?:Design<C, D>) => Design<C, D>;
 
 /**
@@ -197,22 +203,18 @@ export type FluidDesign = Design<DesignableComponents>;
 export type Designable<C extends DesignableComponents = DesignableComponents>
   = HOCBase<{}, DesignableProps<C>, DesignableComponentsProps<C>>;
 
-export type RequiredDomains = {
-  Core: any,
-};
-
-export type Domains<C extends DesignableComponents, D extends RequiredDomains> = {
-  [k in keyof D]: Design<C>
+export type Domains<C extends DesignableComponents, D extends object> = {
+  [k in keyof D]?: Design<C>
 };
 
 export type ReservedDomains<
-C extends DesignableComponents,
-D extends RequiredDomains = RequiredDomains,
+  C extends DesignableComponents,
+  D extends object,
 > = {
   /**
      * A list of other tokens which should be applied.
      */
-  Compose: {
+  Compose?: {
     [key: string]: Token<C, D>,
   },
   /**
@@ -226,7 +228,7 @@ D extends RequiredDomains = RequiredDomains,
      * Metadata which should be attached to this token (and to any component to
      * to which the token is applied).
      */
-  Meta: TokenMeta,
+  Meta?: TokenMeta,
 };
 
 /**
@@ -248,10 +250,17 @@ D extends RequiredDomains = RequiredDomains,
    * @param D
    * An object type describing the domain keys available in this token.
    */
+export type TokenSpecBase<
+  C extends DesignableComponents,
+  D extends object,
+> = Domains<C, D> & ReservedDomains<C, D>;
+
 export type TokenSpec<
   C extends DesignableComponents,
-  D extends RequiredDomains = any,
-> = Domains<C, D> & ReservedDomains<C, D>;
+  D extends object,
+> = TokenSpecBase<C, D> & {
+  [$TokenSpec]: true,
+};
 
 /**
  * Type of an argument to `as` and/or the value of a key in an Extended Design.
@@ -262,8 +271,8 @@ export type TokenSpec<
  */
 export type Token<
   C extends DesignableComponents,
-  D extends RequiredDomains = any,
-> = Partial<TokenSpec<C, D>> | HOCBase | string | undefined;
+  D extends object,
+> = TokenSpec<C, D> | HOCBase | string | undefined;
 
 /**
    * Type of a collection of tokens which apply to a specific designable component.
@@ -274,14 +283,14 @@ export type Token<
    */
 export type TokenCollection<
   C extends DesignableComponents,
-  D extends RequiredDomains = RequiredDomains,
+  D extends object = object,
 > = {
-  [name: string]: Partial<TokenSpec<C, D>>,
+  [name: string]: TokenSpec<C, D>,
 };
 
 type FinalDesign<
   C extends DesignableComponents = DesignableComponents,
-  D extends RequiredDomains = any,
+  D extends object = any,
 > = {
   [k in keyof Partial<C & { _?: Token<C, D> }>]: Token<C, D>
 };
@@ -295,7 +304,7 @@ type FinalDesign<
    */
 export type Design<
   C extends DesignableComponents = DesignableComponents,
-  D extends RequiredDomains = any,
+  D extends object = any,
 > = FinalDesign<C, D> & {
   _final?: FinalDesign<C, D>
 };

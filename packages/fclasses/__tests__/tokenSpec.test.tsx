@@ -1,4 +1,3 @@
-/* eslint-disable jest/expect-expect */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import React, { ComponentType, FC } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -7,7 +6,7 @@ import { identity, flow } from 'lodash';
 import {
   DesignableComponentsProps, Span, designable, Div, addClasses, removeClasses,
   withDesign, HOC, asToken, flowIf, withoutProps,
-  asTokenSpec, as, extendMeta,
+  asTokenSpec, as, extendMeta, $TokenSpec,
 } from '../src';
 
 const defaultDomains = {
@@ -60,6 +59,7 @@ describe('extendMeta', () => {
       },
     });
   });
+  // eslint-disable-next-line jest/expect-expect
   it('Does not allow non-tokenmeta arguments', () => {
     // @ts-expect-error
     extendMeta({ Foo: 'Bar'});
@@ -73,12 +73,37 @@ describe('extendMeta', () => {
 });
 
 describe('asTokenSpec', () => {
+  it('Adds the $TokenSpec property', () => {
+    const t = asTestTokenSpec({ Core: { _: 'foo' } });
+    expect(t[$TokenSpec]).toBeTruthy();
+  });
+
+  // eslint-disable-next-line jest/expect-expect
+  it('Type checks reserved domains', () => {
+    asTestTokenSpec({
+      Meta: { title: 'Foo '}
+    });
+    asTestTokenSpec({
+      // @ts-expect-error
+      Meta: { foo: 'Bar' }
+    });
+    asTokenSpec()({
+      Meta: { title: 'Foo '}
+    });
+    asTokenSpec()({
+      // @ts-expect-error
+      Meta: { foo: 'Bar' }
+    });
+  });
+
+  // eslint-disable-next-line jest/expect-expect
   it('Does not allow invalid domains', () => {
     asTestTokenSpec({
       // @ts-expect-error
       Foo: 'bar',
     });
   });
+  // eslint-disable-next-line jest/expect-expect
   it('does not accept a design in the Meta key', () => {
     asTestTokenSpec({
       Meta: {
@@ -87,6 +112,7 @@ describe('asTokenSpec', () => {
       },
     });
   });
+  // eslint-disable-next-line jest/expect-expect
   it('does not accept invalid design keys', () => {
     asTestTokenSpec({
       Core: {
@@ -186,18 +212,26 @@ describe('extend', () => {
     const B = asTestTokenSpec({ Meta: asToken.meta.term('Foo')('Baz') });
     const C = asTestTokenSpec({ Meta: { title: 'Title' }});
     const Test = asTestTokenSpec(A, B, C);
-    expect(Test).toEqual({
+    expect(Test).toEqual(asTestTokenSpec({
       Meta: {
         title: 'Title',
         categories: {
           Foo: ['Bar', 'Baz'],
         },
       },
-    });
+    }));
   });
 });
 
 describe('as', () => {
+  it('Requires a true token spec object', () => {
+    const invalidTs = { Core: { _: 'bing' } };
+    // @ts-expect-error
+    expect(() => as(invalidTs)).toThrow();
+    const validTs = asTestTokenSpec(invalidTs);
+    as(validTs);
+  });
+
   it('Applies a condition properly', () => {
     const Test = asTestTokenSpec({
       Flow: flowIf(({ doIt }: any) => Boolean(doIt)),
@@ -213,16 +247,6 @@ describe('as', () => {
     expect(test.find('div#test-wrapper').prop('className')).toBe('foo');
     const test1 = mount(<TestC />);
     expect(test1.find('div#test-wrapper').prop('className')).toBeUndefined();
-  });
-
-  // eslint-disable-next-line jest/expect-expect
-  it('Type checks domains', () => {
-    as({
-      // @ts-expect-error
-      Bizzle: {
-        Baz: 'bing',
-      },
-    });
   });
 
   it('Removes classes applied by an external design', () => {
