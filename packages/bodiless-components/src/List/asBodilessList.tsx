@@ -197,7 +197,7 @@ const asStylableList = withDesign({
 });
 
 // @TODO: Should this be a part of asSubListWrapper?
-const asStylableSubList = flow(
+const asStylableSubList = asToken(
   stylable,
   withDesign({
     OuterWrapper: stylable,
