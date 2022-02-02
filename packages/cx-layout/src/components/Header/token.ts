@@ -13,17 +13,9 @@
  */
 
 import { withNodeKey } from '@bodiless/core';
-import {
-  withPrimaryBgColor,
-  withContainerLayout,
-  t,
-  as,
-} from '@canvasx/elements';
-import { withSearchDataLayer } from '@canvasx/gtm';
-import { cxResponsiveMenu, cxBurgerMenuToggler } from '@canvasx/navigation';
 
 import { asHeaderToken } from './HeaderClean';
-import { cxLogo } from '../Logo/token';
+import { cxLogo } from '../Logo';
 
 /**
  * Token that defines a basic CanvasX header.

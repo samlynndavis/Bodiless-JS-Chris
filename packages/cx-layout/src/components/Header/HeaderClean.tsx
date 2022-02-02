@@ -21,9 +21,9 @@ import {
   Fragment,
   designable,
 } from '@bodiless/fclasses';
-import { asTokenSpec } from '@canvasx/elements';
+import { asBcTokenSpec } from '@bodiless/cx-elements';
 import { MenuClean, BurgerMenuTogglerClean } from '@canvasx/navigation';
-import Logo from '../Logo/Logo';
+import Logo from '../Logo/LogoClean';
 
 export type HeaderComponents = {
   Wrapper: ComponentType<any>,
