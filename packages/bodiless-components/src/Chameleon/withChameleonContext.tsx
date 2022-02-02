@@ -68,7 +68,7 @@ class ChameleonContextValue extends SelectorComponents implements ChameleonState
     };
     const activeComponent = component || DEFAULT_KEY;
     const apply = design[activeComponent]
-      ? asToken(replaceable, design[activeComponent])
+      ? as(replaceable, design[activeComponent])
       : identity;
     return {
       DefaultComponent,
