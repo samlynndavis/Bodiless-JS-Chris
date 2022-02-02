@@ -224,7 +224,7 @@ describe('asBodilessChameleon', () => {
     expect(wrapper.find('span#test').prop('data-test-default')).toBe(true);
   });
 
-  it.only('Supports startWith', () => {
+  it('Supports startWith', () => {
     const Test = asToken(
       asBodilessChameleon('foo'),
       withDesign({
