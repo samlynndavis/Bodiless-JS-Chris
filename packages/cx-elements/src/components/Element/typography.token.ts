@@ -1,7 +1,5 @@
-import { asTokenSpec } from ''
+import { asTokenCollection } from '../../util';
 
-const Underline = asTokenSpec()({
-  Core: {
-    _: 'underline',
-  }
+export const bcTypography = asTokenCollection({
+  Underline: 'underline',
 });
