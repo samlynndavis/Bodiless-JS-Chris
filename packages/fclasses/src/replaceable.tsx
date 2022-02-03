@@ -10,8 +10,8 @@ import { asToken } from './flowHoc';
 
 const designContextDefault = undefined as undefined | ComponentType<any>;
 const DesignContext = React.createContext(designContextDefault);
-export const replaceable = <P extends object>(Component: ComponentOrTag<P>): ComponentType<any> => {
-  const Replaceable = (props: P) => {
+export const replaceable: HOC = Component => {
+  const Replaceable: FC<any> = props => {
     const UpstreamComponent = React.useContext(DesignContext);
     const FinalComponent = UpstreamComponent || Component;
     return (

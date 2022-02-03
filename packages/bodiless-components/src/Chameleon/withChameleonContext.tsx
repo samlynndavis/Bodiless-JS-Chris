@@ -19,6 +19,7 @@ import React, {
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
   ComponentOrTag, Fragment, DesignableComponents, Design, HOC, asToken, replaceWith, as,
+  replaceable,
 } from '@bodiless/fclasses';
 import { SelectorComponents, SelectorComponentsProps } from '@bodiless/layouts';
 
@@ -66,7 +67,9 @@ class ChameleonContextValue extends SelectorComponents implements ChameleonState
       [DEFAULT_KEY]: identity,
     };
     const activeComponent = component || DEFAULT_KEY;
-    const apply = as(design[activeComponent]) || identity;
+    const apply = design[activeComponent]
+      ? as(replaceable, design[activeComponent])
+      : identity;
     return {
       DefaultComponent,
       selectedComponents: component ? [component, DEFAULT_KEY] : [DEFAULT_KEY],

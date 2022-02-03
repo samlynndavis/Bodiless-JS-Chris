@@ -292,7 +292,7 @@ type FinalDesign<
   C extends DesignableComponents = DesignableComponents,
   D extends object = any,
 > = {
-  [k in keyof Partial<C & { _?: Token<C, D> }>]: Token<C, D>
+  [k in keyof Partial<C & { _?: Token<C, D> }>]: Token<any, D>
 };
 
 /**
