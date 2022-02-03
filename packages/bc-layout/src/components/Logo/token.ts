@@ -44,7 +44,7 @@ const Default = asLogoToken({
   Components: {
     // @todo This should use a bcImage token.
     Image: as(
-      asBodilessImage(),jj
+      asBodilessImage(),
       addProps({
         loading: 'eager',
       }),

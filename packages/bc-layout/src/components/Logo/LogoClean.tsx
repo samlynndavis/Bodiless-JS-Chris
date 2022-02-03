@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType, HTMLProps } from 'react';
+import React, { FC, HTMLProps } from 'react';
 
 import {
   A,
@@ -24,7 +24,7 @@ import {
 } from '@bodiless/fclasses';
 import {
   asBcTokenSpec,
-} from '../bc-elements/src';
+} from '@bodiless/bc-elements';
 
 export type LogoComponents = {
   Wrapper: ComponentOrTag<any>,

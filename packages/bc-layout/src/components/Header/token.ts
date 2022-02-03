@@ -14,8 +14,10 @@
 
 import { withNodeKey } from '@bodiless/core';
 
+import { bcElement } from '@bodiless/bc-elements';
+import { as } from '@bodiless/fclasses';
 import { asHeaderToken } from './HeaderClean';
-import { cxLogo } from '../Logo';
+import { bcLogo } from '../Logo';
 
 /**
  * Token that defines a basic CanvasX header.
@@ -25,12 +27,10 @@ const Base = asHeaderToken({
   //   Search: as(withSearchDataLayer),
   // },
   Components: {
-    SiteLogoReturn: cxLogo.Base,
-    Menu: cxResponsiveMenu.Default,
-    MenuToggler: cxBurgerMenuToggler.Default,
+    Logo: bcLogo.Default,
   },
   Theme: {
-    Wrapper: withPrimaryBgColor,
+    Wrapper: bcElement.WithPrimaryBgColor,
   },
   Schema: {
     Menu: withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
@@ -42,26 +42,14 @@ const Base = asHeaderToken({
   Layout: {
     // @todo move to spacing
     Wrapper: 'lg:pt-15px',
-    Container: t(
-      withContainerLayout,
+    Container: as(
+      bcElement.withContainerLayout,
       'flex items-center justify-between lg:items-start flex-wrap',
       // @todo move this to spacing
       'md:h-auto h-12',
     ),
     ButtonsWrapper: 'order-1',
     MenuContainer: 'lg:mt-9px absolute lg:static lg:w-full lg:order-1',
-  },
-});
-
-/**
- * Token which makes a header sticky.
- */
-const WithSticky = asHeaderToken({
-  Theme: {
-    Wrapper: 'shadow-sticky-header',
-  },
-  Layout: {
-    Wrapper: 'sticky top-0 z-10',
   },
 });
 

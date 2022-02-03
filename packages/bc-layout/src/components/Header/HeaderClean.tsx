@@ -23,7 +23,7 @@ import {
   ComponentOrTag,
 } from '@bodiless/fclasses';
 import { asBcTokenSpec } from '@bodiless/bc-elements';
-import { Logo } from '../Logo/LogoClean';
+import { LogoClean } from '../Logo';
 
 export type HeaderComponents = {
   Wrapper: ComponentOrTag<any>,
@@ -31,7 +31,7 @@ export type HeaderComponents = {
   MenuContainer: ComponentOrTag<any>,
   MenuToggler: ComponentOrTag<any>,
   Menu: ComponentOrTag<any>,
-  SiteLogoReturn: ComponentOrTag<any>,
+  Logo: ComponentOrTag<any>,
   UtilityMenu: ComponentOrTag<any>,
   SocialLinks: ComponentOrTag<any>,
   ButtonsMenuWrapper: ComponentOrTag<any>,
@@ -49,7 +49,7 @@ const headerComponents: HeaderComponents = {
   MenuContainer: Div,
   MenuToggler: Fragment,
   Menu: Fragment,
-  SiteLogoReturn: Logo,
+  Logo: LogoClean,
   UtilityMenu: Fragment,
   SocialLinks: Fragment,
   ButtonsMenuWrapper: Fragment,
@@ -67,7 +67,7 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components }) => {
     MenuContainer,
     MenuToggler,
     Menu,
-    SiteLogoReturn,
+    Logo,
     UtilityMenu,
     SocialLinks,
     ButtonsMenuWrapper,
@@ -83,7 +83,7 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components }) => {
       <Container>
         <MenuToggler />
         <SearchToggler />
-        <SiteLogoReturn />
+        <Logo />
         <UtilityMenu />
         <SocialLinks />
         <ButtonsMenuWrapper>
