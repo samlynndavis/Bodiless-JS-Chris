@@ -13,33 +13,33 @@
  */
 
 import React, {
-  FC, ComponentType, HTMLProps,
+  FC, HTMLProps,
 } from 'react';
 import {
   DesignableComponentsProps,
   Div,
   Fragment,
   designable,
+  ComponentOrTag,
 } from '@bodiless/fclasses';
 import { asBcTokenSpec } from '@bodiless/cx-elements';
-import { MenuClean, BurgerMenuTogglerClean } from '@canvasx/navigation';
 import Logo from '../Logo/LogoClean';
 
 export type HeaderComponents = {
-  Wrapper: ComponentType<any>,
-  Container: ComponentType<any>,
-  MenuContainer: ComponentType<any>,
-  MenuToggler: ComponentType<any>,
-  Menu: ComponentType<any>,
-  SiteLogoReturn: ComponentType<any>,
-  UtilityMenu: ComponentType<any>,
-  SocialLinks: ComponentType<any>,
-  ButtonsMenuWrapper: ComponentType<any>,
-  ButtonsWrapper: ComponentType<any>,
-  LanguageButton: ComponentType<any>,
-  UserRegistration: ComponentType<any>,
-  Search: ComponentType<any>,
-  SearchToggler: ComponentType<any>,
+  Wrapper: ComponentOrTag<any>,
+  Container: ComponentOrTag<any>,
+  MenuContainer: ComponentOrTag<any>,
+  MenuToggler: ComponentOrTag<any>,
+  Menu: ComponentOrTag<any>,
+  SiteLogoReturn: ComponentOrTag<any>,
+  UtilityMenu: ComponentOrTag<any>,
+  SocialLinks: ComponentOrTag<any>,
+  ButtonsMenuWrapper: ComponentOrTag<any>,
+  ButtonsWrapper: ComponentOrTag<any>,
+  LanguageButton: ComponentOrTag<any>,
+  UserRegistration: ComponentOrTag<any>,
+  Search: ComponentOrTag<any>,
+  SearchToggler: ComponentOrTag<any>,
 };
 type HeaderProps = DesignableComponentsProps<HeaderComponents> & HTMLProps<HTMLElement>;
 
@@ -47,8 +47,8 @@ const headerComponents: HeaderComponents = {
   Wrapper: Div,
   Container: Div,
   MenuContainer: Div,
-  MenuToggler: BurgerMenuTogglerClean,
-  Menu: MenuClean,
+  MenuToggler: Fragment,
+  Menu: Fragment,
   SiteLogoReturn: Logo,
   UtilityMenu: Fragment,
   SocialLinks: Fragment,
@@ -103,6 +103,6 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components }) => {
 
 export const HeaderClean = designable(headerComponents, 'Header')(HeaderCleanBase);
 
-const asHeaderToken = asTokenSpec<HeaderComponents>();
+const asHeaderToken = asBcTokenSpec<HeaderComponents>();
 
 export { asHeaderToken };
