@@ -13,44 +13,52 @@
  */
 
 import {
-  addProps,
+  addProps, as,
 } from '@bodiless/fclasses';
 import {
-  withFlexCenterXY,
-  t,
-} from '@canvasx/elements';
+  bcElement,
+} from '@bodiless/bc-elements';
 import {
+  withNode,
+  withNodeKey,
   withSidecarNodes,
 } from '@bodiless/core';
 import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
-import { asSchemaSource } from '@canvasx/structuredata';
+// import { asSchemaSource } from '@canvasx/structuredata';
 import { asLogoToken } from './LogoClean';
 
-const Base = asLogoToken({
+const Default = asLogoToken({
   Layout: {
-    Wrapper: t(
-      withFlexCenterXY,
+    Wrapper: as(
+      bcElement.WithFlexCenterXY,
       'order-1',
     ),
   },
-  SEO: {
-    Image: asSchemaSource('organization-logo'),
-  },
+  // SEO: {
+  //   Image: asSchemaSource('organization-logo'),
+  // },
   Spacing: {
     Link: 'h-44px lg:h-88px max-w-240px lg:max-w-441px',
     Image: 'max-h-full',
   },
-  Schema: {
-    Link: withSidecarNodes(
-      asBodilessLink({ nodeKey: 'SiteLink', nodeCollection: 'site' }),
-    ),
-    Image: t(
-      asBodilessImage({ nodeKey: 'SiteLogo', nodeCollection: 'site' }),
+  Components: {
+    // @todo This should use a bcImage token.
+    Image: as(
+      asBodilessImage(),jj
       addProps({
         loading: 'eager',
       }),
     ),
   },
+  Schema: {
+    Image: withNodeKey('image'),
+    // @todo should this be a bc-link?
+    // @todo can we separate sidecar nodekeys from editors?
+    Link: withSidecarNodes(
+      asBodilessLink('link'),
+    ),
+    _: withNode,
+  },
 });
 
-export const cxLogo = { Base };
+export const bcLogo = { Default };

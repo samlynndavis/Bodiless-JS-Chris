@@ -22,8 +22,8 @@ import {
   designable,
   ComponentOrTag,
 } from '@bodiless/fclasses';
-import { asBcTokenSpec } from '@bodiless/cx-elements';
-import Logo from '../Logo/LogoClean';
+import { asBcTokenSpec } from '@bodiless/bc-elements';
+import { Logo } from '../Logo/LogoClean';
 
 export type HeaderComponents = {
   Wrapper: ComponentOrTag<any>,

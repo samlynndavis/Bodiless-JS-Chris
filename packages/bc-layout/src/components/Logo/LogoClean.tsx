@@ -24,7 +24,7 @@ import {
 } from '@bodiless/fclasses';
 import {
   asBcTokenSpec,
-} from '@bodiless/cx-elements';
+} from '../bc-elements/src';
 
 export type LogoComponents = {
   Wrapper: ComponentOrTag<any>,

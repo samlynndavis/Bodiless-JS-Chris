@@ -1,5 +1,5 @@
 import { asTokenCollection } from '../../util';
 
-export const bcTypography = asTokenCollection({
+export const bcElementTypography = asTokenCollection({
   Underline: 'underline',
 });
