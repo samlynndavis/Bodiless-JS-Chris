@@ -21,9 +21,9 @@ import { cxLogo } from '../Logo';
  * Token that defines a basic CanvasX header.
  */
 const Base = asHeaderToken({
-  Analytics: {
-    Search: as(withSearchDataLayer),
-  },
+  // Analytics: {
+  //   Search: as(withSearchDataLayer),
+  // },
   Components: {
     SiteLogoReturn: cxLogo.Base,
     Menu: cxResponsiveMenu.Default,
@@ -94,14 +94,10 @@ const WithSticky = asHeaderToken({
 
 const Default = asHeaderToken({
   ...Base,
-  Compose: {
-    WithSticky,
-  },
 });
 
 export const cxHeader = {
   Base,
-  WithSticky,
   Default,
   // WithUtilityMenu,
   // WithResponsiveUtilityMenu,
