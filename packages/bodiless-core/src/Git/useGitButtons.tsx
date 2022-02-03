@@ -16,7 +16,7 @@
 import React, {
   useState, useEffect, useCallback, useMemo,
 } from 'react';
-import type { TMenuOption } from '../types/ContextMenuTypes';
+import type { TMenuOption } from '../Types/ContextMenuTypes';
 import ContextSubMenu from '../ContextMenu/ContextSubMenu';
 import { useRegisterMenuOptions } from '../PageContextProvider';
 import { contextMenuForm } from '../contextMenuForm';
