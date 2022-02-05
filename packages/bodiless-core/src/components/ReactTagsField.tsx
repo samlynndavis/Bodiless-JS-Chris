@@ -60,8 +60,8 @@ const ReactTagsField = (props: ReactTagsFieldProps) => {
       <ReactTags
         {...rest}
         tags={currentTags}
-        handleDelete={handleDelete}
-        handleAddition={handleAddition}
+        onDelete={handleDelete}
+        onAddition={handleAddition}
       />
     </>
   );
