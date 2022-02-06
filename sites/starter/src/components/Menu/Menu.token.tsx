@@ -13,7 +13,7 @@
  */
 
 import { flow } from 'lodash';
-import { asToken, withDesign, addClasses } from '@bodiless/fclasses';
+import { flowHoc, withDesign, addClasses } from '@bodiless/fclasses';
 import {
   asTopNav, withSubMenuToken, withColumnSubMenuDesign, useIsActiveTrail,
 } from '@bodiless/navigation';
@@ -41,7 +41,7 @@ const withHoverMenuBackground = asLightTealBackgroundOnHover;
  */
 
 const $withTitleStyles = withDesign({
-  Title: asToken(
+  Title: flowHoc(
     withHoverMenuBackground,
     asAlignLeft,
     asTextWhite,
@@ -99,7 +99,7 @@ const $withColumnsSublistStyles = withColumnSubMenuDesign(
   }),
 );
 
-const $asSiteNavStyles = asToken(
+const $asSiteNavStyles = flowHoc(
   asTopNav('List', 'Columns', 'Touts'),
   $withBaseMenuStyles,
   withSubMenuToken('Main', 'List', 'Columns', 'Touts')($withTitleStyles, $withBaseSubMenuStyles),

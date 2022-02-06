@@ -85,7 +85,7 @@ export type TokenProps = {
 /**
  * Type of a "Token", which is an HOC with optional metadata and filtering.
  *
- * Tokens may be composed of other tokens using the `asToken` utility.
+ * Tokens may be composed of other tokens using the `flowHoc` utility.
  */
 export type HOC<B = {}, A = {}, R = {}> = HOCBase<B, A, R> & TokenProps;
 
@@ -124,7 +124,7 @@ export type Injector<R, B = {}> = HOC<B & Partial<R>, {}, R>;
 export type TokenFilterTest = (token: HOC) => boolean;
 
 /**
- * Type of the parameters to asToken.  Overloaded to accept metadata
+ * Type of the parameters to flowHoc.  Overloaded to accept metadata
  * objects (or undefined) in addition to tokens.
  */
 export type TokenDef<B = {}, A = {}, R = {}> = HOC<B, A, R> | TokenMeta | undefined;

@@ -30,7 +30,7 @@ import {
 } from '@bodiless/core';
 import { AxiosPromise } from 'axios';
 import {
-  addClasses, asToken, removeClasses, StylableProps,
+  addClasses, flowHoc, removeClasses, StylableProps,
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import flow from 'lodash/flow';
@@ -99,7 +99,7 @@ const DeletePageForm = (props : DeletePageProps) => {
       const ui: object = {
         ...defaultUI,
         ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
-        ComponentFormLink: asToken(removeClasses('bl-block'), addClasses('bl-italic')),
+        ComponentFormLink: flowHoc(removeClasses('bl-block'), addClasses('bl-italic')),
         ComponentFormWarning: removeClasses('bl-float-left'),
         ComponentFormTitle: addClasses('bl-italic'),
       };

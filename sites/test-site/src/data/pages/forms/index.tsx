@@ -14,7 +14,7 @@
 import React, { HTMLProps } from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { asEditable } from '@bodiless/components';
 import ReactMarkdown from 'react-markdown';
 
@@ -23,7 +23,7 @@ import asBodilessMarkdown from './asBodilessMarkdown';
 import withLastModified from './withLastModified';
 import withMarkdownFetchButton from './withMarkdownFetchButton';
 
-const Markdown = asToken(
+const Markdown = flowHoc(
   withLastModified('last-modified'),
   withMarkdownFetchButton,
   asBodilessMarkdown('body', undefined, () => ({

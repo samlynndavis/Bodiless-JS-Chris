@@ -29,7 +29,7 @@ import {
   asBodilessImage,
 } from '@bodiless/components-ui';
 import {
-  asToken,
+  flowHoc,
   stylable,
   A,
   Img,
@@ -41,9 +41,9 @@ import {
 } from '@bodiless/gatsby-theme-bodiless';
 import landscapeImage from './landscape_image.png';
 
-export const asBaseEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
-  asToken.meta.term('Component')('Image'),
-  asToken.meta.term('Category')('Editors'),
+export const asBaseEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => flowHoc(
+  flowHoc.meta.term('Component')('Image'),
+  flowHoc.meta.term('Category')('Editors'),
   stylable,
   asBodilessImage(nodeKey, undefined, useOverrides),
   withImagePlaceholder(placeholder),
@@ -52,7 +52,7 @@ export const asBaseEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) 
 /**
  * util function to build a hoc for rendering a non-responsive image.
  */
-export const asEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => asToken(
+export const asEditableImagePlain = (nodeKey?, placeholder?, useOverrides?) => flowHoc(
   withoutGatsbyImageProps,
   asBaseEditableImagePlain.meta,
   asBaseEditableImagePlain(nodeKey, placeholder, useOverrides),

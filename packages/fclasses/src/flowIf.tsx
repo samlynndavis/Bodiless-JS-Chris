@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { AsToken, Condition } from './types';
-import { asToken } from './flowHoc';
+import { flowHoc } from './flowHoc';
 /**
  * Applies a set of HOC's if a condition is true.
  *
@@ -15,7 +15,7 @@ import { asToken } from './flowHoc';
 
 export const flowIf = <P extends object>(condition: Condition<P>): AsToken<P> => (
   (...tokens) => Component => {
-    const WrappedComponent = asToken(...tokens)(Component);
+    const WrappedComponent = flowHoc(...tokens)(Component);
     const FlowIf: FC<any> = props => (
       condition(props) ? <WrappedComponent {...props} /> : <Component {...props} />
     );

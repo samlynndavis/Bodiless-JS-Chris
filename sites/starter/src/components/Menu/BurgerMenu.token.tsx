@@ -14,7 +14,7 @@
 
 import { flow } from 'lodash';
 import {
-  Div, asToken, replaceWith, withDesign, addClasses,
+  Div, flowHoc, replaceWith, withDesign, addClasses,
 } from '@bodiless/fclasses';
 import {
   asBurgerMenu, withSubMenuToken, withColumnSubMenuDesign,
@@ -27,9 +27,9 @@ import {
   asTealBackground, asTextWhite, asMobileOnly, asBold,
 } from '../Elements.token';
 
-const $asSiteToggler = asToken(
+const $asSiteToggler = flowHoc(
   withDesign({
-    Button: asToken(asTextWhite, asMobileOnly),
+    Button: flowHoc(asTextWhite, asMobileOnly),
     Wrapper: flow(
       replaceWith(Div),
       asMobileOnly,
@@ -38,7 +38,7 @@ const $asSiteToggler = asToken(
   }),
 );
 
-const withTogglerWrapper = asToken(
+const withTogglerWrapper = flowHoc(
   withDesign({
     Wrapper: flow(
       asTealBackground,
@@ -82,7 +82,7 @@ const $withColumnSubMenuStyles = withColumnSubMenuDesign(
   $withBoldAccordionTitle,
 );
 
-const $withBurgerMenuStyles = asToken(
+const $withBurgerMenuStyles = flowHoc(
   asBurgerMenu('List', 'Columns', 'Touts'),
   withSubMenuToken('List', 'Columns', 'Touts')($withBaseSubMenuStyles, $withBoldAccordionTitle),
   withSubMenuToken('Columns')($withColumnSubMenuStyles),
