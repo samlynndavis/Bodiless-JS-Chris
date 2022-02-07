@@ -29,9 +29,9 @@ import {
 } from './PageForm';
 import verifyPage from '../PageVerification';
 import {
+  Client,
   PageState,
   PageStatus,
-  Client,
 } from '../types';
 import {
   getPathValue,

@@ -31,6 +31,8 @@ type PageStatus = {
 };
 
 type Client = {
+  deletePage: (path: string) => AxiosPromise<any>;
+  movePage: (origin: string, destination: string) => AxiosPromise<any>;
   savePage: (path: string, template?: string) => AxiosPromise<any>;
 };
 

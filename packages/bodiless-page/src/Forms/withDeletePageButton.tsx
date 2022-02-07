@@ -35,13 +35,10 @@ import {
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import {
+  Client,
   PageState,
   PageStatus,
 } from '../types';
-
-type Client = {
-  deletePage: (path: string) => AxiosPromise<any>;
-};
 
 let actualState: number = -1;
 

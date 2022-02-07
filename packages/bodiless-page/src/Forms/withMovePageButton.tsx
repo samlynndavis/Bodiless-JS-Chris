@@ -41,16 +41,13 @@ import {
   MovePageURLField,
 } from './PageURLField';
 import {
+  Client,
   PageState,
   PageStatus,
 } from '../types';
 import {
   getPathValue,
 } from '../utils';
-
-type Client = {
-  movePage: (origin: string, destination: string) => AxiosPromise<any>;
-};
 
 let actualState: number = -1;
 
