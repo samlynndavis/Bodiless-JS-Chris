@@ -21,6 +21,11 @@ import React, {
 } from 'react';
 import flow from 'lodash/flow';
 import {
+  convertAliasJsonToText,
+  convertAliasTextToJson,
+  useGetRedirectAliases,
+} from '@bodiless/components';
+import {
   BodilessBackendClient,
   ContextMenuProvider,
   ContextSubMenu,
@@ -160,7 +165,8 @@ const MovePageComp = (props : PageStatus) => {
             <ComponentFormLabel>
               <ComponentFormCheckBox
                 field="redirectEnabled"
-                initialValue="checked"
+                initialValue
+                keepState
               />
               Redirect
             </ComponentFormLabel>
@@ -215,6 +221,8 @@ const formPageMove = (client: Client) => contextMenuForm({
 })(({ formState, formApi } : any) => {
   const { ComponentFormText } = useMenuOptionUI();
 
+  const { node } = useNode();
+
   const origin = usePagePath();
 
   const {
@@ -223,9 +231,19 @@ const formPageMove = (client: Client) => contextMenuForm({
   const [state, setState] = useState<PageStatus>({
     status: PageState.Init,
   });
+
+  const createRedirect = (origin: string, destination: string) => {
+    const initialAliases = convertAliasJsonToText(useGetRedirectAliases(node));
+    const aliases = `${initialAliases}\n${origin} ${destination} 301`;
+
+    // Saves json file.
+    node.setData(convertAliasTextToJson(aliases as string));
+  };
+
   const context = useEditContext();
   const path = getPathValue(values);
   const pathChild = (typeof window !== 'undefined') ? window.location.pathname : '';
+  const { redirectEnabled } = values;
 
   useEffect(() => {
     if (pathChild === '/') {
@@ -268,6 +286,9 @@ const formPageMove = (client: Client) => contextMenuForm({
           client,
         })
           .then(() => {
+            if (redirectEnabled) {
+              createRedirect(originClear, destination);
+            }
             actualState = PageState.Complete;
             setState({ status: PageState.Complete });
           })
