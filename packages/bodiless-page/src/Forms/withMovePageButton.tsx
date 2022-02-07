@@ -41,23 +41,15 @@ import {
   MovePageURLField,
 } from './PageURLField';
 import {
+  PageState,
+  PageStatus,
+} from '../types';
+import {
   getPathValue,
 } from '../utils';
 
 type Client = {
   movePage: (origin: string, destination: string) => AxiosPromise<any>;
-};
-
-enum MovePageState {
-  Init,
-  Pending,
-  Complete,
-  Errored,
-}
-
-type MovePageProps = {
-  status: MovePageState;
-  errorMessage?: string;
 };
 
 let actualState: number = -1;
@@ -123,7 +115,7 @@ const movePage = async ({ origin, destination, client } : any) => {
   return Promise.reject(new Error('The page cannot be moved.'));
 };
 
-const MovePageComp = (props : MovePageProps) => {
+const MovePageComp = (props : PageStatus) => {
   const {
     status, errorMessage,
   } = props;
@@ -139,7 +131,7 @@ const MovePageComp = (props : MovePageProps) => {
   } = defaultUI;
   const formTitle = 'Move';
   switch (status) {
-    case MovePageState.Init: {
+    case PageState.Init: {
       const CustomComponentFormLabel = flow(
         removeClasses('bl-text-xs'),
         addClasses('bl-font-bold bl-text-sm'),
@@ -172,14 +164,14 @@ const MovePageComp = (props : MovePageProps) => {
         </>
       );
     }
-    case MovePageState.Pending:
+    case PageState.Pending:
       return (
         <>
           <ComponentFormTitle>Moving Page</ComponentFormTitle>
           <ComponentFormSpinner />
         </>
       );
-    case MovePageState.Complete:
+    case PageState.Complete:
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
@@ -189,7 +181,7 @@ const MovePageComp = (props : MovePageProps) => {
           </ComponentFormDescription>
         </>
       );
-    case MovePageState.Errored:
+    case PageState.Errored:
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
@@ -201,7 +193,7 @@ const MovePageComp = (props : MovePageProps) => {
 };
 
 const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
-  if (values.keepOpen || actualState === MovePageState.Errored || typeof window === 'undefined') {
+  if (values.keepOpen || actualState === PageState.Errored || typeof window === 'undefined') {
     actualState = -1;
     return;
   }
@@ -224,8 +216,8 @@ const formPageMove = (client: Client) => contextMenuForm({
   const {
     submits, invalid, values,
   } = formState;
-  const [state, setState] = useState<MovePageProps>({
-    status: MovePageState.Init,
+  const [state, setState] = useState<PageStatus>({
+    status: PageState.Init,
   });
   const context = useEditContext();
   const path = getPathValue(values);
@@ -233,14 +225,14 @@ const formPageMove = (client: Client) => contextMenuForm({
 
   useEffect(() => {
     if (pathChild === '/') {
-      actualState = MovePageState.Errored;
-      setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved.' });
+      actualState = PageState.Errored;
+      setState({ status: PageState.Errored, errorMessage: 'The page cannot be moved.' });
       formApi.setValue('keepOpen', false);
     } else {
       hasPageChild({ pathChild, client })
         .catch(() => {
-          actualState = MovePageState.Errored;
-          setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved while it has child pages.' });
+          actualState = PageState.Errored;
+          setState({ status: PageState.Errored, errorMessage: 'The page cannot be moved while it has child pages.' });
           formApi.setValue('keepOpen', false);
         });
     }
@@ -258,13 +250,13 @@ const formPageMove = (client: Client) => contextMenuForm({
       const originClear = origin.slice(0, -1);
 
       if (destination === originClear) {
-        actualState = MovePageState.Errored;
-        setState({ status: MovePageState.Errored, errorMessage: 'The page cannot be moved.' });
+        actualState = PageState.Errored;
+        setState({ status: PageState.Errored, errorMessage: 'The page cannot be moved.' });
         formApi.setValue('keepOpen', false);
       } else {
         context.showPageOverlay({ hasSpinner: false });
-        actualState = MovePageState.Pending;
-        setState({ status: MovePageState.Pending });
+        actualState = PageState.Pending;
+        setState({ status: PageState.Pending });
 
         movePage({
           origin,
@@ -272,12 +264,12 @@ const formPageMove = (client: Client) => contextMenuForm({
           client,
         })
           .then(() => {
-            actualState = MovePageState.Complete;
-            setState({ status: MovePageState.Complete });
+            actualState = PageState.Complete;
+            setState({ status: PageState.Complete });
           })
           .catch((err: Error) => {
-            actualState = MovePageState.Errored;
-            setState({ status: MovePageState.Errored, errorMessage: err.message });
+            actualState = PageState.Errored;
+            setState({ status: PageState.Errored, errorMessage: err.message });
           })
           .finally(() => {
             context.hidePageOverlay();

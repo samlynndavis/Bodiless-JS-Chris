@@ -34,21 +34,13 @@ import {
   addClasses, asToken, removeClasses, StylableProps,
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
+import {
+  PageState,
+  PageStatus,
+} from '../types';
 
 type Client = {
   deletePage: (path: string) => AxiosPromise<any>;
-};
-
-enum DeletePageState {
-  Init,
-  Pending,
-  Complete,
-  Errored,
-}
-
-type DeletePageProps = {
-  status: DeletePageState;
-  errorMessage?: string;
 };
 
 let actualState: number = -1;
@@ -77,7 +69,7 @@ const deletePage = async ({ path, client } : any) => {
   return Promise.reject(new Error('The page cannot be deleted.'));
 };
 
-const DeletePageForm = (props : DeletePageProps) => {
+const DeletePageForm = (props : PageStatus) => {
   const {
     status, errorMessage,
   } = props;
@@ -91,7 +83,7 @@ const DeletePageForm = (props : DeletePageProps) => {
   const formTitle = 'Delete Page';
 
   switch (status) {
-    case DeletePageState.Init: {
+    case PageState.Init: {
       const CustomComponentFormLabel = flow(
         removeClasses('bl-text-xs'),
         addClasses('bl-font-bold bl-text-base'),
@@ -114,14 +106,14 @@ const DeletePageForm = (props : DeletePageProps) => {
         </>
       );
     }
-    case DeletePageState.Pending:
+    case PageState.Pending:
       return (
         <>
           <ComponentFormTitle>Deleting Page</ComponentFormTitle>
           <ComponentFormSpinner />
         </>
       );
-    case DeletePageState.Complete: {
+    case PageState.Complete: {
       const CustomComponentFormLabel = flow(
         removeClasses('bl-text-xs'),
         addClasses('bl-font-bold bl-text-base'),
@@ -143,7 +135,7 @@ const DeletePageForm = (props : DeletePageProps) => {
         </>
       );
     }
-    case DeletePageState.Errored:
+    case PageState.Errored:
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
@@ -155,7 +147,7 @@ const DeletePageForm = (props : DeletePageProps) => {
 };
 
 const redirectPage = (values: {keepOpen: boolean, path?: string }) => {
-  if (values.keepOpen || actualState === DeletePageState.Errored || typeof window === 'undefined') {
+  if (values.keepOpen || actualState === PageState.Errored || typeof window === 'undefined') {
     actualState = -1;
     return;
   }
@@ -185,40 +177,40 @@ const formPageDel = (client: Client) => contextMenuForm({
   const {
     submits,
   } = formState;
-  const [state, setState] = useState<DeletePageProps>({
-    status: DeletePageState.Init,
+  const [state, setState] = useState<PageStatus>({
+    status: PageState.Init,
   });
   const context = useEditContext();
   const path = (typeof window !== 'undefined') ? window.location.pathname : '';
 
   useEffect(() => {
     if (path === '/') {
-      actualState = DeletePageState.Errored;
-      setState({ status: DeletePageState.Errored, errorMessage: 'The page cannot be deleted.' });
+      actualState = PageState.Errored;
+      setState({ status: PageState.Errored, errorMessage: 'The page cannot be deleted.' });
       formApi.setValue('keepOpen', false);
     } else {
       hasPageChild({ path, client })
         .catch((err: Error) => {
-          actualState = DeletePageState.Errored;
-          setState({ status: DeletePageState.Errored, errorMessage: err.message });
+          actualState = PageState.Errored;
+          setState({ status: PageState.Errored, errorMessage: err.message });
           formApi.setValue('keepOpen', false);
         });
     }
 
     if (submits && path) {
       context.showPageOverlay({ hasSpinner: false });
-      actualState = DeletePageState.Pending;
-      setState({ status: DeletePageState.Pending });
+      actualState = PageState.Pending;
+      setState({ status: PageState.Pending });
 
       // Delete the page.
       deletePage({ path, client })
         .then(() => {
-          actualState = DeletePageState.Complete;
-          setState({ status: DeletePageState.Complete });
+          actualState = PageState.Complete;
+          setState({ status: PageState.Complete });
         })
         .catch((err: Error) => {
-          actualState = DeletePageState.Errored;
-          setState({ status: DeletePageState.Errored, errorMessage: err.message });
+          actualState = PageState.Errored;
+          setState({ status: PageState.Errored, errorMessage: err.message });
         })
         .finally(() => {
           context.hidePageOverlay();
