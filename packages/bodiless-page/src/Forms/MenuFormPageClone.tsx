@@ -25,7 +25,7 @@ import {
 } from '@bodiless/core';
 import { verifyPage } from '../Operations';
 import {
-  Client,
+  PageClient,
   PageState,
   PageStatus,
 } from '../types';
@@ -54,7 +54,7 @@ const clonePage = async ({ origin, destination, client } : any) => {
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
-const menuFormPageClone = (client: Client) => contextMenuForm({
+const menuFormPageClone = (client: PageClient) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, formApi } : any) => {

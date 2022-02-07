@@ -17,7 +17,7 @@ import {
   ContextSubMenu,
   useEditContext,
 } from '@bodiless/core';
-import { PageMenuOptions } from './types';
+import { PageMenuOptions } from '../types';
 
 const usePageMenuOptions = (
   options: PageMenuOptions,

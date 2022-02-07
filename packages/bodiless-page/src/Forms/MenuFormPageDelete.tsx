@@ -34,7 +34,7 @@ import {
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import {
-  Client,
+  PageClient,
   PageState,
   PageStatus,
 } from '../types';
@@ -164,7 +164,7 @@ const redirectPage = (values: {keepOpen: boolean, path?: string }) => {
   window.location.replace(parentHref);
 };
 
-const menuFormPageDelete = (client: Client) => contextMenuForm({
+const menuFormPageDelete = (client: PageClient) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
   onClose: redirectPage,

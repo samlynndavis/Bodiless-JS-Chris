@@ -35,7 +35,7 @@ import {
 import { ComponentFormSpinner } from '@bodiless/ui';
 import { createRedirect } from '../Operations';
 import {
-  Client,
+  PageClient,
   PageState,
   PageStatus,
 } from '../types';
@@ -204,7 +204,7 @@ const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
   window.location.replace(destinationGlb);
 };
 
-const menuFormPageMove = (client: Client) => contextMenuForm({
+const menuFormPageMove = (client: PageClient) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
   onClose: redirectPage,

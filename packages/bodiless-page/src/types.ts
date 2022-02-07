@@ -10,8 +10,6 @@ import type {
   FormError,
 } from 'informed';
 
-const DEFAULT_PAGE_TEMPLATE = '_default';
-
 enum PageState {
   Init,
   Pending,
@@ -30,10 +28,24 @@ type PageStatus = {
   FormFields?: (Label: ComponentType<HTMLProps<HTMLLabelElement>>) => void,
 };
 
-type Client = {
+type PageMenuOptions = {
+  name: string,
+  icon: string,
+  label: string,
+  isDisabled: boolean,
+  isHidden: boolean,
+  handler: () => any,
+};
+
+type PageClient = {
   deletePage: (path: string) => AxiosPromise<any>;
   movePage: (origin: string, destination: string) => AxiosPromise<any>;
   savePage: (path: string, template?: string) => AxiosPromise<any>;
+};
+
+type PageData = {
+  pagePath: string;
+  retries?: number;
 };
 
 /**
@@ -46,10 +58,11 @@ type FieldProps = Omit<BaseFieldProps, 'field'>;
 type FieldValidate = (value: FormValue, values: FormValues) => FormError;
 
 export {
-  DEFAULT_PAGE_TEMPLATE,
+  PageClient,
+  PageData,
+  PageMenuOptions,
   PageState,
   PageStatus,
-  Client,
   FieldProps,
   FieldValidate,
 };

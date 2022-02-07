@@ -28,7 +28,7 @@ import { useGatsbyPageContext } from '@bodiless/gatsby-theme-bodiless';
 import { verifyPage } from '../Operations';
 import { DEFAULT_PAGE_TEMPLATE } from '../constants';
 import {
-  Client,
+  PageClient,
   PageState,
   PageStatus,
 } from '../types';
@@ -56,7 +56,7 @@ const createPage = async ({ path, client, template } : any) => {
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
-const menuFormPageNew = (client: Client) => contextMenuForm({
+const menuFormPageNew = (client: PageClient) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, formApi } : any) => {

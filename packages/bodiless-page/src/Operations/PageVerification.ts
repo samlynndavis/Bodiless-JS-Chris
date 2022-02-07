@@ -14,11 +14,7 @@
 
 import axios from 'axios';
 import sleep from 'sleep-promise';
-
-type PageData = {
-  pagePath: string;
-  retries?: number;
-};
+import { PageData } from '../types';
 
 const stripSurroundingSlashes = (path: string): string => {
   let path$ = path[0] === '/' ? path.slice(1) : path;
