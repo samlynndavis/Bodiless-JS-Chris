@@ -29,7 +29,7 @@ class Tag {
 
 export type ReactTagsFieldProps = {
   allowMultipleTags?: boolean,
-} & Omit<ReactTagsProps, 'handleDelete' | 'handleAddition'>;
+} & Omit<ReactTagsProps, 'onDelete' | 'onAddition'>;
 
 const ReactTagsField = (props: ReactTagsFieldProps) => {
   const formApi = useFormApi();
