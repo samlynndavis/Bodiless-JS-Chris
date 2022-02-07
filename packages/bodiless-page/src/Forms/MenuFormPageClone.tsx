@@ -13,29 +13,24 @@
  */
 
 import React, {
-  useCallback, useEffect, useState,
+  useEffect,
+  useState,
 } from 'react';
 import {
-  BodilessBackendClient,
   contextMenuForm,
   handleBackendResponse,
-  useMenuOptionUI,
   useEditContext,
+  useMenuOptionUI,
   useNode,
-  withMenuOptions,
 } from '@bodiless/core';
-import {
-  PageForm,
-} from './PageForm';
-import verifyPage from '../PageVerification';
+import { verifyPage } from '../Operations';
 import {
   Client,
   PageState,
   PageStatus,
 } from '../types';
-import {
-  getPathValue,
-} from '../utils';
+import { getPathValue } from '../utils';
+import { MenuFormPage } from './MenuFormPage';
 
 const clonePage = async ({ origin, destination, client } : any) => {
   // Clone the page.
@@ -59,7 +54,7 @@ const clonePage = async ({ origin, destination, client } : any) => {
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
-const formPageClone = (client: Client) => contextMenuForm({
+const menuFormPageClone = (client: Client) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, formApi } : any) => {
@@ -98,7 +93,7 @@ const formPageClone = (client: Client) => contextMenuForm({
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
-      <PageForm
+      <MenuFormPage
         formTitle="Clone (this) Page"
         status={status}
         errorMessage={errorMessage}
@@ -111,28 +106,6 @@ const formPageClone = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BodilessBackendClient();
-
-const useMenuOptions = () => {
-  const context = useEditContext();
-
-  const menuOptions = [
-    {
-      name: 'page-clone',
-      icon: 'collections',
-      label: 'Clone',
-      group: 'page-group',
-      isHidden: useCallback(() => !context.isEdit, []),
-      handler: () => formPageClone(defaultClient),
-    },
-  ];
-  return menuOptions;
+export {
+  menuFormPageClone,
 };
-
-const withClonePageButton = withMenuOptions({
-  useMenuOptions,
-  name: 'ClonePage',
-  root: true,
-});
-
-export default withClonePageButton;

@@ -69,4 +69,6 @@ const loadPageDataJson = (loadObj: PageData): Promise<boolean> => {
 const verifyPage = (pagePath: string): Promise<boolean> => sleep(2000)
   .then(() => loadPageDataJson({ pagePath }));
 
-export default verifyPage;
+export {
+  verifyPage,
+};

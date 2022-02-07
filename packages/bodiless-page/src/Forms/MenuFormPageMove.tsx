@@ -13,7 +13,6 @@
  */
 
 import React, {
-  useCallback,
   useEffect,
   useState,
   ComponentType,
@@ -21,34 +20,27 @@ import React, {
 } from 'react';
 import flow from 'lodash/flow';
 import {
-  BodilessBackendClient,
   ContextMenuProvider,
-  ContextSubMenu,
   contextMenuForm,
   handleBackendResponse,
   useEditContext,
   useMenuOptionUI,
   useNode,
-  withMenuOptions,
 } from '@bodiless/core';
 import {
-  addClasses, removeClasses, StylableProps,
+  StylableProps,
+  addClasses,
+  removeClasses,
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
-import {
-  MovePageURLField,
-} from './PageURLField';
-import {
-  createRedirect,
-} from '../Operations';
+import { createRedirect } from '../Operations';
 import {
   Client,
   PageState,
   PageStatus,
 } from '../types';
-import {
-  getPathValue,
-} from '../utils';
+import { getPathValue } from '../utils';
+import { MovePageURLField } from './MenuFormFields';
 
 let actualState: number = -1;
 
@@ -212,7 +204,7 @@ const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
   window.location.replace(destinationGlb);
 };
 
-const formPageMove = (client: Client) => contextMenuForm({
+const menuFormPageMove = (client: Client) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
   onClose: redirectPage,
@@ -305,34 +297,6 @@ const formPageMove = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BodilessBackendClient();
-
-const useMenuOptions = () => {
-  const context = useEditContext();
-
-  const menuOptions = [
-    {
-      name: 'page-group',
-      icon: 'description',
-      label: 'Page',
-      Component: ContextSubMenu,
-    },
-    {
-      name: 'move',
-      icon: 'drive_file_move',
-      label: 'Move',
-      group: 'page-group',
-      isHidden: useCallback(() => !context.isEdit, []),
-      handler: () => formPageMove(defaultClient),
-    },
-  ];
-  return menuOptions;
+export {
+  menuFormPageMove,
 };
-
-const withMovePageButton = withMenuOptions({
-  useMenuOptions,
-  name: 'MovePage',
-  root: true,
-});
-
-export default withMovePageButton;

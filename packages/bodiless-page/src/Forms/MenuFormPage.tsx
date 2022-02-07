@@ -3,20 +3,23 @@ import React, {
   HTMLProps,
 } from 'react';
 import {
-  useMenuOptionUI,
   ContextMenuProvider,
+  useMenuOptionUI,
 } from '@bodiless/core';
 import flow from 'lodash/flow';
-import { addClasses, removeClasses } from '@bodiless/fclasses';
+import {
+  addClasses,
+  removeClasses,
+} from '@bodiless/fclasses';
 import type { StylableProps } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
-import { PageURLField } from './PageURLField';
 import {
   PageState,
   PageStatus,
 } from '../types';
+import { PageURLField } from './MenuFormFields';
 
-const PageForm = (props : PageStatus) => {
+const MenuFormPage = (props : PageStatus) => {
   const {
     status,
     errorMessage,
@@ -95,6 +98,5 @@ const PageForm = (props : PageStatus) => {
 };
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
-  PageForm,
+  MenuFormPage,
 };

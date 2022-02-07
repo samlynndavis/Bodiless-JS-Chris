@@ -15,21 +15,22 @@
 import React, {
   ComponentType,
   HTMLProps,
-  useCallback, useEffect, useState,
+  useEffect,
+  useState,
 } from 'react';
 import flow from 'lodash/flow';
 import {
-  BodilessBackendClient,
   ContextMenuProvider,
-  ContextSubMenu,
   contextMenuForm,
   handleBackendResponse,
   useMenuOptionUI,
   useEditContext,
-  withMenuOptions,
 } from '@bodiless/core';
 import {
-  addClasses, asToken, removeClasses, StylableProps,
+  StylableProps,
+  addClasses,
+  asToken,
+  removeClasses,
 } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import {
@@ -163,7 +164,7 @@ const redirectPage = (values: {keepOpen: boolean, path?: string }) => {
   window.location.replace(parentHref);
 };
 
-const formPageDel = (client: Client) => contextMenuForm({
+const menuFormPageDelete = (client: Client) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
   onClose: redirectPage,
@@ -226,33 +227,6 @@ const formPageDel = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BodilessBackendClient();
-
-const useMenuOptions = () => {
-  const context = useEditContext();
-  const menuOptions = [
-    {
-      name: 'page-group',
-      icon: 'description',
-      label: 'Page',
-      Component: ContextSubMenu,
-    },
-    {
-      name: 'deletepage',
-      icon: 'delete',
-      label: 'Delete',
-      group: 'page-group',
-      isHidden: useCallback(() => !context.isEdit, []),
-      handler: () => formPageDel(defaultClient),
-    },
-  ];
-  return menuOptions;
+export {
+  menuFormPageDelete,
 };
-
-const withDeletePageButton = withMenuOptions({
-  useMenuOptions,
-  name: 'DeletePage',
-  root: true,
-});
-
-export default withDeletePageButton;

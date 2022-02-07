@@ -27,4 +27,6 @@ const createRedirect = (node: ContentNode<object>, origin: string, destination: 
   node.setData(convertAliasTextToJson(aliases as string));
 };
 
-export default createRedirect;
+export {
+  createRedirect,
+};

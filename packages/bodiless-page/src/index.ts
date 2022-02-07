@@ -13,6 +13,7 @@
  */
 
 export * from './Forms';
+export * from './MenuOptions';
 export * from './Operations';
 export * from './types';
 export * from './utils';

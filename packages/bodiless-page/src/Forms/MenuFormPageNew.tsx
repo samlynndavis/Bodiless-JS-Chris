@@ -13,25 +13,18 @@
  */
 
 import React, {
-  useCallback, useEffect, useState,
   ComponentType,
   HTMLProps,
+  useEffect,
+  useState,
 } from 'react';
 import {
-  BodilessBackendClient,
-  ContextSubMenu,
   contextMenuForm,
   handleBackendResponse,
   useMenuOptionUI,
   useEditContext,
-  withMenuOptions,
 } from '@bodiless/core';
-import {
-  useGatsbyPageContext,
-} from '@bodiless/gatsby-theme-bodiless';
-import {
-  PageForm,
-} from './PageForm';
+import { useGatsbyPageContext } from '@bodiless/gatsby-theme-bodiless';
 import { verifyPage } from '../Operations';
 import {
   DEFAULT_PAGE_TEMPLATE,
@@ -39,9 +32,8 @@ import {
   PageState,
   PageStatus,
 } from '../types';
-import {
-  getPathValue,
-} from '../utils';
+import { getPathValue } from '../utils';
+import { MenuFormPage } from './MenuFormPage';
 
 const createPage = async ({ path, client, template } : any) => {
   // Create the page.
@@ -64,7 +56,7 @@ const createPage = async ({ path, client, template } : any) => {
   return Promise.reject(new Error('An internal error occurred. Please try again later.'));
 };
 
-const formPageAdd = (client: Client) => contextMenuForm({
+const menuFormPageNew = (client: Client) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, formApi } : any) => {
@@ -105,7 +97,7 @@ const formPageAdd = (client: Client) => contextMenuForm({
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
-      <PageForm
+      <MenuFormPage
         formTitle="Add a Blank Page"
         status={status}
         errorMessage={errorMessage}
@@ -128,34 +120,6 @@ const formPageAdd = (client: Client) => contextMenuForm({
   );
 });
 
-const defaultClient = new BodilessBackendClient();
-
-const useMenuOptions = () => {
-  const context = useEditContext();
-
-  const menuOptions = [
-    {
-      name: 'page-group',
-      icon: 'description',
-      label: 'Page',
-      Component: ContextSubMenu,
-    },
-    {
-      name: 'newpage',
-      icon: 'note_add',
-      label: 'New',
-      group: 'page-group',
-      isDisabled: useCallback(() => !context.isEdit, []),
-      handler: () => formPageAdd(defaultClient),
-    },
-  ];
-  return menuOptions;
+export {
+  menuFormPageNew,
 };
-
-const withNewPageButton = withMenuOptions({
-  useMenuOptions,
-  name: 'NewPage',
-  root: true,
-});
-
-export default withNewPageButton;

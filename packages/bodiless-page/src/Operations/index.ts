@@ -1,7 +1,2 @@
-import createRedirect from './Redirect';
-import verifyPage from './PageVerification';
-
-export {
-  createRedirect,
-  verifyPage,
-};
+export * from './PageVerification';
+export * from './Redirect';

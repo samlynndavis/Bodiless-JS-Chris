@@ -15,9 +15,7 @@
 import React from 'react';
 import { useMenuOptionUI } from '@bodiless/core';
 import { useField } from 'informed';
-import type {
-  FieldProps,
-} from '../types';
+import type { FieldProps } from '../types';
 import {
   fieldValueToUrl,
   getPageUrlValidator,
