@@ -21,11 +21,6 @@ import React, {
 } from 'react';
 import flow from 'lodash/flow';
 import {
-  convertAliasJsonToText,
-  convertAliasTextToJson,
-  useGetRedirectAliases,
-} from '@bodiless/components';
-import {
   BodilessBackendClient,
   ContextMenuProvider,
   ContextSubMenu,
@@ -43,6 +38,9 @@ import { ComponentFormSpinner } from '@bodiless/ui';
 import {
   MovePageURLField,
 } from './PageURLField';
+import {
+  createRedirect,
+} from '../Operations';
 import {
   Client,
   PageState,
@@ -232,14 +230,6 @@ const formPageMove = (client: Client) => contextMenuForm({
     status: PageState.Init,
   });
 
-  const createRedirect = (origin: string, destination: string) => {
-    const initialAliases = convertAliasJsonToText(useGetRedirectAliases(node));
-    const aliases = `${initialAliases}\n${origin} ${destination} 301`;
-
-    // Saves json file.
-    node.setData(convertAliasTextToJson(aliases as string));
-  };
-
   const context = useEditContext();
   const path = getPathValue(values);
   const pathChild = (typeof window !== 'undefined') ? window.location.pathname : '';
@@ -287,7 +277,7 @@ const formPageMove = (client: Client) => contextMenuForm({
         })
           .then(() => {
             if (redirectEnabled) {
-              createRedirect(originClear, destination);
+              createRedirect(node, originClear, destination);
             }
             actualState = PageState.Complete;
             setState({ status: PageState.Complete });

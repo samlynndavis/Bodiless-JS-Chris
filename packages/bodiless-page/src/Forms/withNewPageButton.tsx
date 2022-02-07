@@ -32,7 +32,7 @@ import {
 import {
   PageForm,
 } from './PageForm';
-import verifyPage from '../PageVerification';
+import { verifyPage } from '../Operations';
 import {
   DEFAULT_PAGE_TEMPLATE,
   Client,

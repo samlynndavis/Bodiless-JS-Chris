@@ -13,5 +13,6 @@
  */
 
 export * from './Forms';
+export * from './Operations';
 export * from './types';
 export * from './utils';
