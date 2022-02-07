@@ -117,12 +117,14 @@ const MovePageComp = (props : PageStatus) => {
   const basePathValue = usePagePath();
 
   const defaultUI = useMenuOptionUI();
+
   const {
+    ComponentFormCheckBox,
+    ComponentFormDescription,
     ComponentFormLabel,
     ComponentFormLink,
-    ComponentFormDescription,
-    ComponentFormWarning,
     ComponentFormTitle,
+    ComponentFormWarning,
   } = defaultUI;
   const formTitle = 'Move';
   switch (status) {
@@ -155,6 +157,13 @@ const MovePageComp = (props : PageStatus) => {
               validateOnChange
               validateOnBlur
             />
+            <ComponentFormLabel>
+              <ComponentFormCheckBox
+                field="redirectEnabled"
+                initialValue="checked"
+              />
+              Redirect
+            </ComponentFormLabel>
           </ContextMenuProvider>
         </>
       );
