@@ -54,7 +54,11 @@ type PageData = {
  * if we decide to allow overriding it in the future
  * then also we need to allow overriding the second PageURLField input
  */
-type FieldProps = Omit<BaseFieldProps, 'field'>;
+type FieldLabel = {
+  fieldFull?: boolean,
+  fieldLabel?: string,
+};
+type FieldProps = Omit<BaseFieldProps, 'field'> & FieldLabel;
 type FieldValidate = (value: FormValue, values: FormValues) => FormError;
 
 export {

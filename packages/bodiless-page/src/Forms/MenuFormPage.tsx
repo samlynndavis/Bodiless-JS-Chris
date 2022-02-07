@@ -63,6 +63,7 @@ const MenuFormPage = (props : PageStatus) => {
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
             {FormFields && FormFields(CustomComponentFormLabel)}
             <PageURLField
+              fieldFull
               validateOnChange
               validateOnBlur
             />

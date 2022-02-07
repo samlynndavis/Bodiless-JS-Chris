@@ -53,7 +53,9 @@ const PageURLField = (props: FieldProps) => {
   const isBasePathEmpty = isEmptyValue(basePathValue) || basePathValue === BASE_PATH_EMPTY_VALUE;
   const isFullUrl = isBasePathEmpty;
 
-  const { validate, ...rest } = props;
+  const {
+    fieldLabel, fieldFull, validate, ...rest
+  } = props;
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
@@ -65,14 +67,15 @@ const PageURLField = (props: FieldProps) => {
   const { value } = fieldState;
   const { setValue, setError } = fieldApi;
   const { onChange, ...restUserProps } = userProps;
-  const fieldLabel = isFullUrl ? 'URL' : 'Page Path';
+
+  const label = fieldLabel || (isFullUrl ? 'URL' : 'Page Path');
   const inputClasses = isFullUrl ? INPUT_FIELD_BLOCK_CLASSES : INPUT_FIELD_INLINE_CLASSES;
 
   return render(
     <>
-      <ComponentFormLabel htmlFor="new-page-path">{fieldLabel}</ComponentFormLabel>
+      <ComponentFormLabel htmlFor="new-page-path">{label}</ComponentFormLabel>
       {
-        !isFullUrl
+        fieldFull && !isFullUrl
           ? (<span className="mr-1">{`${basePathValue}`}</span>)
           : null
       }

@@ -38,6 +38,7 @@ import {
   PageState,
   PageStatus,
 } from '../types';
+import { PageURLField } from './MenuFormFields';
 
 let actualState: number = -1;
 
@@ -98,6 +99,12 @@ const DeletePageForm = (props : PageStatus) => {
             <CustomComponentFormLabel>
               Are you sure you want to delete the current page?
             </CustomComponentFormLabel>
+            <PageURLField
+              fieldLabel="Add optional redirect"
+              placeholder="/redirectpage"
+              validateOnChange
+              validateOnBlur
+            />
           </ContextMenuProvider>
         </>
       );
