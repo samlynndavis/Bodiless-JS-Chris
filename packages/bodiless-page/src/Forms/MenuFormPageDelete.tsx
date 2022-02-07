@@ -96,9 +96,9 @@ const DeletePageForm = (props : PageStatus) => {
         <>
           <ContextMenuProvider ui={ui}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-            <CustomComponentFormLabel>
+            <ComponentFormLabel>
               Are you sure you want to delete the current page?
-            </CustomComponentFormLabel>
+            </ComponentFormLabel>
             <PageURLField
               fieldLabel="Add optional redirect"
               placeholder="/redirectpage"
@@ -129,7 +129,7 @@ const DeletePageForm = (props : PageStatus) => {
         <>
           <ContextMenuProvider ui={ui}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-            <CustomComponentFormLabel>Delete operation was successful.</CustomComponentFormLabel>
+            <ComponentFormLabel>Delete operation was successful.</ComponentFormLabel>
             <ComponentFormDescription>
               Upon closing this dialog you will be redirected to the deleted page’s parent page.
             </ComponentFormDescription>

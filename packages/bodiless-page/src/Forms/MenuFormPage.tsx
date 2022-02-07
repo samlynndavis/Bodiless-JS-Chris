@@ -61,7 +61,7 @@ const MenuFormPage = (props : PageStatus) => {
         <>
           <ContextMenuProvider ui={ui}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-            {FormFields && FormFields(CustomComponentFormLabel)}
+            {FormFields && FormFields(ComponentFormLabel)}
             <PageURLField
               fieldFull
               validateOnChange
