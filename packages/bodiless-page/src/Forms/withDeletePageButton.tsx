@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-alert */
 import React, {
   ComponentType,
   HTMLProps,
