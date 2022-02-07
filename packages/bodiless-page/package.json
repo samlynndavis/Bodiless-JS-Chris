@@ -1,0 +1,39 @@
+{
+  "name": "@bodiless/page",
+  "version": "0.3.6",
+  "description": "BodilessJS page operations",
+  "author": "Guilherme Zeni <gzeni@its.jnj.com>",
+  "license": "Apache-2.0",
+  "sideEffects": false,
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "npm run copy && tsc -p ./tsconfig.json && npm run build:api-doc",
+    "build:watch": "npm run build -- --watch",
+    "build:api-doc": "typedoc --out doc/api src",
+    "clean": "rimraf -rf \"dist\" && rimraf index* && rimraf \"doc/api\"",
+    "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\""
+  },
+  "dependencies": {
+    "@bodiless/core": "^0.3.6",
+    "@bodiless/fclasses": "^0.3.6",
+    "@bodiless/ui": "^0.3.6",
+    "@bodiless/gatsby-theme-bodiless": "^0.3.6",
+    "axios": "^0.21.0",
+    "informed": "^3.34.0",
+    "lodash": "^4.17.19",
+    "sleep-promise": "^8.0.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  }
+}
