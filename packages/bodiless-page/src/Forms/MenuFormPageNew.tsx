@@ -26,8 +26,8 @@ import {
 } from '@bodiless/core';
 import { useGatsbyPageContext } from '@bodiless/gatsby-theme-bodiless';
 import { verifyPage } from '../Operations';
+import { DEFAULT_PAGE_TEMPLATE } from '../constants';
 import {
-  DEFAULT_PAGE_TEMPLATE,
   Client,
   PageState,
   PageStatus,

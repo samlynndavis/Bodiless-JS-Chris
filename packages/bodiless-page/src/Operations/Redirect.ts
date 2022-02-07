@@ -18,10 +18,11 @@ import {
   useGetRedirectAliases,
 } from '@bodiless/components';
 import { ContentNode } from '@bodiless/core';
+import { DEFAULT_PAGE_REDIRECT_STATUS } from '../constants';
 
 const createRedirect = (node: ContentNode<object>, origin: string, destination: string) => {
   const initialAliases = convertAliasJsonToText(useGetRedirectAliases(node));
-  const aliases = `${initialAliases}\n${origin} ${destination} 301`;
+  const aliases = `${initialAliases}\n${origin} ${destination} ${DEFAULT_PAGE_REDIRECT_STATUS}`;
 
   // Saves json file.
   node.setData(convertAliasTextToJson(aliases as string));

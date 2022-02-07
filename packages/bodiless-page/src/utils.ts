@@ -22,13 +22,15 @@ import type {
   FormValues,
 } from 'informed';
 import path from 'path';
+import {
+  BASE_PATH_EMPTY_VALUE,
+  BASE_PATH_FIELD_NAME,
+  PAGE_URL_FIELD_NAME,
+  PAGE_URL_INVALID_MESSAGE,
+} from './constants';
 import type {
   FieldValidate,
 } from './types';
-
-const BASE_PATH_FIELD_NAME = 'basePath';
-const PAGE_URL_FIELD_NAME = 'pagePath';
-const BASE_PATH_EMPTY_VALUE = '/';
 
 const usePagePath = () => useNode().node.pagePath;
 
@@ -59,7 +61,6 @@ const validateEmptyField = (value: FormValue) => (isEmptyValue(value)
   : undefined
 );
 
-const VALIDATEMSG = 'No special characters, capital letters or spaces allowed, no beginning or ending with - or _';
 const pagePathReg = /^[a-z0-9](?:[_-]?[a-z0-9]+)*$/;
 const pagePathvalidate = (url: string) => {
   const hasInvalidParts = url.split('/').filter(item => {
@@ -78,7 +79,7 @@ const validatePageUrl = (
   value: FormValue,
 ) => (
   typeof value === 'string' && (pagePathvalidate(value) || !RegExp(/^[a-z0-9_/-]+$/).test(value))
-    ? VALIDATEMSG
+    ? PAGE_URL_INVALID_MESSAGE
     : undefined
 );
 
@@ -86,7 +87,7 @@ const validatePagePath = (
   value: FormValue,
 ) => (
   typeof value === 'string' && !RegExp(pagePathReg).test(value)
-    ? VALIDATEMSG
+    ? PAGE_URL_INVALID_MESSAGE
     : undefined
 );
 
