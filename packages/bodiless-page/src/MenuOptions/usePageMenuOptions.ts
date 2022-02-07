@@ -15,17 +15,16 @@
 import { useCallback } from 'react';
 import {
   ContextSubMenu,
-  BodilessBackendClient,
   useEditContext,
-  withMenuOptions,
 } from '@bodiless/core';
-import {
-  menuFormPageNew,
-} from '../Forms';
+import { PageMenuOptions } from './types';
 
-const defaultClient = new BodilessBackendClient();
-
-const useMenuOptions = () => {
+const usePageMenuOptions = (
+  options: PageMenuOptions,
+) => {
+  const {
+    name, icon, label, handler, isDisabled, isHidden,
+  } = options;
   const context = useEditContext();
 
   const menuOptions = [
@@ -36,23 +35,19 @@ const useMenuOptions = () => {
       Component: ContextSubMenu,
     },
     {
-      name: 'newpage',
-      icon: 'note_add',
-      label: 'New',
+      name,
+      icon,
+      label,
       group: 'page-group',
-      isDisabled: useCallback(() => !context.isEdit, []),
-      handler: () => menuFormPageNew(defaultClient),
+      handler,
+      isDisabled: isDisabled ? useCallback(() => !context.isEdit, []) : false,
+      isHidden: isHidden ? useCallback(() => !context.isEdit, []) : false,
     },
   ];
+
   return menuOptions;
 };
 
-const withNewPageButton = withMenuOptions({
-  useMenuOptions,
-  name: 'NewPage',
-  root: true,
-});
-
 export {
-  withNewPageButton,
+  usePageMenuOptions,
 };
