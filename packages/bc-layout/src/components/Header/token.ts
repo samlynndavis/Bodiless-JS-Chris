@@ -84,7 +84,7 @@ const Default = asHeaderToken({
   ...Base,
 });
 
-export const cxHeader = {
+export const bcHeader = {
   Base,
   Default,
   // WithUtilityMenu,
