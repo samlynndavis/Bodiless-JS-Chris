@@ -18,7 +18,6 @@ import React, {
   HTMLProps,
   useCallback, useEffect, useState,
 } from 'react';
-import { AxiosPromise } from 'axios';
 import flow from 'lodash/flow';
 import {
   BodilessBackendClient,

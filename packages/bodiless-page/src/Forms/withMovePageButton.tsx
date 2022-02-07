@@ -20,7 +20,6 @@ import React, {
   ComponentType,
   HTMLProps,
 } from 'react';
-import { AxiosPromise } from 'axios';
 import flow from 'lodash/flow';
 import {
   BodilessBackendClient,
