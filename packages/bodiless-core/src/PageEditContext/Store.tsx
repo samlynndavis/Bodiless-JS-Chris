@@ -13,7 +13,7 @@
  */
 
 import {
-  action, computed, observable, extendObservable,
+  action, computed, observable, extendObservable, configure,
 } from 'mobx';
 import type { ObservableMap } from 'mobx';
 import type {
@@ -27,6 +27,10 @@ import {
   saveToSessionStorage,
 } from '../SessionStorage';
 import type { TOverlaySettings } from '../Types/PageOverlayTypes';
+
+configure({
+  enforceActions: 'never',
+});
 
 export const defaultOverlaySettings: TOverlaySettings = {
   isActive: false,
@@ -57,7 +61,8 @@ export class PageEditStore implements PageEditStoreInterface {
   };
 
   @observable
-  optionMap = new Map() as ObservableMap<string, ObservableMap<string, TMenuOption>>;
+  optionMap = observable.map();
+  // optionMap = new Map() as ObservableMap<string, ObservableMap<string, TMenuOption>>;
 
   @action reset() {
     this.activeContext = undefined;
@@ -87,12 +92,14 @@ export class PageEditStore implements PageEditStoreInterface {
     for (let c = this.activeContext; c; c = c.parent) {
       keys.push(...this.updateMenuOptions(c));
     }
+    console.log('keys', keys);
 
     // Ensure order is correct and remove obsolete entries.
     const newTrail = new Map();
     keys.reverse().forEach(key => {
       newTrail.set(key, this.optionMap.get(key));
     });
+    console.log('optioonmap', this.optionMap);
     // Note: requires mobx >5.15.5 to set order correctly.
     // See https://github.com/mobxjs/mobx/issues/1980
     // And https://codesandbox.io/s/wizardly-resonance-u97jm?file=/src/index.js

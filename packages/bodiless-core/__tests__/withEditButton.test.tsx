@@ -17,7 +17,7 @@ import React, {
 } from 'react';
 import { shallow, mount } from 'enzyme';
 import { Text } from 'informed';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import omit from 'lodash/omit';
 import withEditButton from '../src/withEditButton';
 import { useEditContext } from '../src/hooks';

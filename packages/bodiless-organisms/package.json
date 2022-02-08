@@ -41,7 +41,6 @@
     "lodash": "^4.17.19",
     "mobx": "^6.0.0",
     "mobx-react": "^7.0.0",
-    "mobx-react-lite": "^3.0.0",
     "react-tag-autocomplete": "^6.0.0",
     "tailwindcss-aspect-ratio": "^3.0.0",
     "uuid": "^3.3.2"

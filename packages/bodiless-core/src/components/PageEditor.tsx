@@ -17,7 +17,7 @@
 import React, {
   FC, createContext, useContext, useEffect, useCallback,
 } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 
 import ContextMenu from './ContextMenu';
 import { useEditContext } from '../hooks';
@@ -49,6 +49,7 @@ const GlobalContextMenu: FC<Props> = observer(() => {
   const options = contextMenuOptions.filter(
     (op: TMenuOption) => op.global !== false,
   );
+  console.log('gcm', options);
   return (
     <Menu options={options} isPositionToggled={isPositionToggled} />
   );
@@ -87,13 +88,17 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
   };
 
   const { PageOverlay = () => null } = newUI;
+  console.log('pageditor');
 
   // Register buttons to the main menu.
   useRegisterMenuOptions({
     getMenuOptions,
     name: 'Editor',
   });
-  useEffect(() => { if (!context.isActive) context.activate(); }, []);
+  useEffect(() => {
+    console.log('effect', context, context.isActive);
+    if (!context.isActive) context.activate();
+  }, []);
 
   return (
     <uiContext.Provider value={newUI}>

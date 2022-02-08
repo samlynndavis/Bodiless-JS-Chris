@@ -13,7 +13,7 @@
  */
 
 import React, { FC, ComponentType, ReactElement } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import Tooltip from 'rc-tooltip';
 
 import flow from 'lodash/flow';

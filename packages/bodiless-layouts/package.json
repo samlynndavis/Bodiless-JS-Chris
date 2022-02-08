@@ -42,7 +42,6 @@
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
     "md5-hex": "^4.0.0",
-    "mobx-react-lite": "^3.0.0",
     "prop-types": "^15.7.2",
     "rc-tooltip": "^5.1.1",
     "re-resizable": "^4.11.0",

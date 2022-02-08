@@ -18,7 +18,7 @@
 import React, { HTMLProps, FC } from 'react';
 import { graphql } from 'gatsby';
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   flowIf, hasProp, addClasses, withoutProps, StylableProps,
   removeClasses, asToken,

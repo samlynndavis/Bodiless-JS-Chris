@@ -31,7 +31,7 @@ import {
 } from '@bodiless/fclasses';
 import { withContentLibrary } from '@bodiless/layouts';
 import { ComponentSelector } from '@bodiless/layouts-ui';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import Layout from '../../../components/Layout';
 import { asEditableImage } from '../../../components/Image';
 

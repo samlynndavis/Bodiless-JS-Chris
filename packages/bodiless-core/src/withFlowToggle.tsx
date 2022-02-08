@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { asToken } from '@bodiless/fclasses';
 import type {
   Condition, AsToken, ComponentWithMeta, ComponentOrTag,

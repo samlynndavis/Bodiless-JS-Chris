@@ -23,7 +23,7 @@ import {
   useGitButtons,
 } from '@bodiless/core';
 import { withShowDesignKeys } from '@bodiless/fclasses';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import { withPageDisableButton, withRedirectAliasButton } from '@bodiless/components';
 import GatsbyNodeProvider from './GatsbyNodeProvider';
@@ -71,6 +71,7 @@ const ShowDesignKeys = (
 const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   if (process.env.NODE_ENV === 'development') {
+    console.log('edit page');
     return (
       <GatsbyNodeProvider {...rest}>
         <ShowDesignKeys>

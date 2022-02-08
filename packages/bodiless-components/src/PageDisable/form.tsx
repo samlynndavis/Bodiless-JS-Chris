@@ -17,7 +17,7 @@ import React, {
   useCallback, useEffect,
 } from 'react';
 import { useFormApi, useFormState } from 'informed';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   withNode,
   useNode,

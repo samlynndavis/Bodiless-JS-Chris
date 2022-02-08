@@ -16,7 +16,7 @@ import React, {
   ClipboardEvent, useState, useRef, useCallback, FC,
 } from 'react';
 import ContentEditable from 'react-contenteditable';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import pickBy from 'lodash/pickBy';
 import identity from 'lodash/identity';
 import {

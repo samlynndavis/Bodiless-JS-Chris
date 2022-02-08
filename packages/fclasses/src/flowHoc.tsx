@@ -40,9 +40,15 @@ function mergeMeta(objValue:any, srcValue:any) {
 const preserveMeta = (hoc: HOCBase): HOCBase => <P extends object, Q extends object = P>(
   Component: ComponentOrTag<P>,
 ): ComponentWithMeta<Q> => {
-  const NewComponent = hoc(Component) as ComponentWithMeta<Q>;
-  const finalMeta = mergeWith({}, Component, NewComponent, mergeMeta);
-  return Object.assign(NewComponent, finalMeta);
+  try {
+    const NewComponent = hoc(Component) as ComponentWithMeta<Q>;
+    const finalMeta = mergeWith({}, Component, NewComponent, mergeMeta);
+    return Object.assign(NewComponent, finalMeta);
+  } catch (e) {
+    console.log(e);
+    console.log(Component);
+    return Component as ComponentWithMeta;
+  }
 };
 
 /**

@@ -21,7 +21,7 @@ import {
 } from '@bodiless/core';
 import { addClasses, asToken } from '@bodiless/fclasses';
 import { Option } from 'informed';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import flow from 'lodash/flow';
 import { Tokens } from './TokenMap';
 

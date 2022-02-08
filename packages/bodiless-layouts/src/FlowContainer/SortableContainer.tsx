@@ -13,7 +13,7 @@
  */
 
 import React, { ComponentType, HTMLProps, PropsWithChildren } from 'react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { SortableContainer, SortEndHandler } from 'react-sortable-hoc';
 import {
   useContextActivator, useEditContext, withLocalContextMenu, withContextActivator,

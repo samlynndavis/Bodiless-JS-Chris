@@ -39,7 +39,6 @@
     "enzyme": "^3.9.0",
     "lodash": "^4.17.19",
     "mobx": "^6.0.0",
-    "mobx-react-lite": "^3.0.0",
     "react-helmet": "^5.2.0",
     "uuid": "^3.3.2"
   },
