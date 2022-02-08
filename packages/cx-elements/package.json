@@ -1,5 +1,5 @@
 {
-  "name": "@bodiless/bc-layout",
+  "name": "@bodiless/cx-elements",
   "version": "0.3.6",
   "description": "Layout components for the bodiless cx design system",
   "author": "Chris Odem <coden@its.jnj.com>",
@@ -27,9 +27,7 @@
   },
   "dependencies": {
     "@bodiless/components": "^0.3.6",
-    "@bodiless/components-ui": "^0.3.6",
     "@bodiless/core": "^0.3.6",
-    "@bodiless/bc-elements": "^0.3.6",
     "@bodiless/fclasses": "^0.3.6",
     "@types/react-helmet": "^5.0.14",
     "lodash": "^4.17.19",

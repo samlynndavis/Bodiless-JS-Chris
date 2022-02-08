@@ -14,10 +14,10 @@
 
 import { withNodeKey } from '@bodiless/core';
 
-import { bcElement } from '@bodiless/bc-elements';
+import { cxElement } from '@bodiless/cx-elements';
 import { as } from '@bodiless/fclasses';
 import { asHeaderToken } from './HeaderClean';
-import { bcLogo } from '../Logo';
+import { cxLogo } from '../Logo';
 
 /**
  * Token that defines a basic CanvasX header.
@@ -27,10 +27,10 @@ const Base = asHeaderToken({
   //   Search: as(withSearchDataLayer),
   // },
   Components: {
-    Logo: bcLogo.Default,
+    Logo: cxLogo.Default,
   },
   Theme: {
-    Wrapper: bcElement.WithPrimaryBgColor,
+    Wrapper: cxElement.WithPrimaryBgColor,
   },
   Schema: {
     Menu: withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
@@ -43,7 +43,7 @@ const Base = asHeaderToken({
     // @todo move to spacing
     Wrapper: 'lg:pt-15px',
     Container: as(
-      bcElement.withContainerLayout,
+      cxElement.withContainerLayout,
       'flex items-center justify-between lg:items-start flex-wrap',
       // @todo move this to spacing
       'md:h-auto h-12',
@@ -84,7 +84,7 @@ const Default = asHeaderToken({
   ...Base,
 });
 
-export const bcHeader = {
+export const cxHeader = {
   Base,
   Default,
   // WithUtilityMenu,

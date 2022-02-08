@@ -1,5 +1,5 @@
 import { asTokenCollection } from '../../util';
 
-export const bcElementColor = asTokenCollection({
+export const cxElementColor = asTokenCollection({
   WithPrimaryBgColor: 'bg-white',
 });
