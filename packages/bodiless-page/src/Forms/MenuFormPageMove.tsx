@@ -42,14 +42,13 @@ import {
 import {
   getPathValue,
   hasPageChild,
+  usePagePath,
 } from '../utils';
 import { MovePageURLField } from './MenuFormFields';
 
 let actualState: number = -1;
 
 let destinationGlb: string = '';
-
-const usePagePath = () => useNode().node.pagePath;
 
 const movePage = async ({ origin, destination, client } : any) => {
   const directoryExists = await handleBackendResponse(client.directoryExists(destination));
