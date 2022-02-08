@@ -15,13 +15,15 @@ type BcTokenSpec<C extends DesignableComponents> = TokenSpecBase<C, DefaultDomai
 
 const defaultDomains = {
   Core: {},
+  Components: {},
+  A11y: {},
   Analytics: {},
   SEO: {},
-  Components: {},
   Layout: {},
   Spacing: {},
   Theme: {},
   Editors: {},
+  A11yContent: {},
   Content: {},
   Behavior: {},
   Schema: {},
