@@ -42,7 +42,6 @@ const getDependenciesFromPackageJson = (
   packageJsonPath: string,
 ): string[] => getVauleFromPackageJson(packageJsonPath, 'dependencies');
 
-
 const getPackageNameFromPackageJson = (
   packageJsonPath: string,
 ): string => getVauleFromPackageJson(packageJsonPath, 'name');
