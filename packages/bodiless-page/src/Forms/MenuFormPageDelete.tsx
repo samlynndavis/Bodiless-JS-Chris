@@ -38,17 +38,10 @@ import {
   PageState,
   PageStatus,
 } from '../types';
+import { hasPageChild } from '../utils';
 import { PageURLField } from './MenuFormFields';
 
 let actualState: number = -1;
-
-const hasPageChild = async ({ path, client } : any) => {
-  const result = await handleBackendResponse(client.directoryChild(path));
-  if (result.response && result.message === 'Success') {
-    return Promise.resolve();
-  }
-  return Promise.reject(new Error(result.message));
-};
 
 const deletePage = async ({ path, client } : any) => {
   const result = await handleBackendResponse(client.deletePage(path));
@@ -192,7 +185,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
       setState({ status: PageState.Errored, errorMessage: 'The page cannot be deleted.' });
       formApi.setValue('keepOpen', false);
     } else {
-      hasPageChild({ path, client })
+      hasPageChild({ pagePath: path, client })
         .catch((err: Error) => {
           actualState = PageState.Errored;
           setState({ status: PageState.Errored, errorMessage: err.message });

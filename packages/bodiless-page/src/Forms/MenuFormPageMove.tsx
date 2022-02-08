@@ -39,7 +39,10 @@ import {
   PageState,
   PageStatus,
 } from '../types';
-import { getPathValue } from '../utils';
+import {
+  getPathValue,
+  hasPageChild,
+} from '../utils';
 import { MovePageURLField } from './MenuFormFields';
 
 let actualState: number = -1;
@@ -47,14 +50,6 @@ let actualState: number = -1;
 let destinationGlb: string = '';
 
 const usePagePath = () => useNode().node.pagePath;
-
-const hasPageChild = async ({ pathChild, client } : any) => {
-  const result = await handleBackendResponse(client.directoryChild(pathChild));
-  if (result.response && result.message === 'Success') {
-    return Promise.resolve();
-  }
-  return Promise.reject(new Error(result.message));
-};
 
 const movePage = async ({ origin, destination, client } : any) => {
   const directoryExists = await handleBackendResponse(client.directoryExists(destination));
@@ -146,7 +141,7 @@ const MovePageComp = (props : PageStatus) => {
           <ContextMenuProvider ui={ui}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
             <ComponentFormDescription>Move this page to a new URL.</ComponentFormDescription>
-            <CustomComponentFormLabel>Current URL</CustomComponentFormLabel>
+            <ComponentFormLabel>Current URL</ComponentFormLabel>
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
             <MovePageURLField
               validateOnChange
@@ -233,7 +228,7 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
       setState({ status: PageState.Errored, errorMessage: 'The page cannot be moved.' });
       formApi.setValue('keepOpen', false);
     } else {
-      hasPageChild({ pathChild, client })
+      hasPageChild({ pagePath: pathChild, client })
         .catch(() => {
           actualState = PageState.Errored;
           setState({ status: PageState.Errored, errorMessage: 'The page cannot be moved while it has child pages.' });
