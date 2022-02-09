@@ -74,7 +74,7 @@ const DeletePageForm = (props : PageState) => {
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
             <ComponentFormFieldWrapper>
               <ComponentFormLabelBase>
-                Are you sure you want to delete the current page?
+                Click check to confirm delete of current page
               </ComponentFormLabelBase>
             </ComponentFormFieldWrapper>
             <PageURLField
