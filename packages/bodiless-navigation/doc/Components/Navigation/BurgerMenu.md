@@ -17,7 +17,7 @@ There are several burger-menu specific HOCs provided by `@bodiless/navigation` t
 ### Burger Menu Structure
 The Burger menu, as well as Bodiless Menu, is based on the List API. Burger menu is, in most cases, an extension of the site top menu. `withBurgerMenuWrapper` is used to wrap top-menu schema in the burger menu chrome.
 ```js
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import {
   asBodilessMenu, withListSubMenu, withColumnSubMenu, withMenuDesign,
   withCardsSubMenu, withBurgerMenuWrapper, withMenuTitleEditors,
@@ -190,7 +190,7 @@ See [Styling Bodiless Menu](./Menu.md) for more information on styling Menus.
 By default, there are no layout or interaction styles added to the Burger menu, and it is rendered as a plain list. There is a `asBurgerMenu` helper that can be used to transform menu items with submenus into accordions. It accepts a list of submenu keys.
 
 ```js
-import { withDesign, flowHoc} from '@bodiless/fclasses';
+import { withDesign, flowHoc } from '@bodiless/fclasses';
 import { asBurgerMenu } from '@bodiless/navigation';
 
 // Create Menu Token

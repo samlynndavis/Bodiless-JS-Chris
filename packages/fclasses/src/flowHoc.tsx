@@ -20,7 +20,7 @@ import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import type {
   TokenDef, HOCBase, ComponentOrTag, ComponentWithMeta, TokenMeta,
-  HOC, TokenFilterTest, AsToken as AsTokenBase,
+  HOC, TokenFilterTest, FlowHoc as AsTokenBase,
 } from './types';
 
 const isToken = (def: TokenDef<any, any, any>) => typeof def === 'function';
@@ -126,7 +126,7 @@ const filterMembers = <P extends object>(tokens: HOC[]): HOC[] => {
   return filtered.reverse();
 };
 
-type AsToken<B = {}> = AsTokenBase<B> & {
+type FlowHoc<B = {}> = AsTokenBase<B> & {
   meta: {
     term: (c: string) => (t: string) => TokenMeta;
     cat: (c: string) => TokenMeta;
@@ -150,7 +150,7 @@ type AsToken<B = {}> = AsTokenBase<B> & {
  * @return
  * A composed token.
  */
-const flowHoc: AsToken = (...args) => {
+const flowHoc: FlowHoc = (...args) => {
   // We allow "undefined" in args and simply ignore them.
   const args$ = args.filter(a => a !== undefined);
   const metaBits: TokenMeta[] = args$.filter(a => !isToken(a)) as TokenMeta[];

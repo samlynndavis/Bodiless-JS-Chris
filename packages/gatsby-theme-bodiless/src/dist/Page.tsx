@@ -22,7 +22,7 @@ import {
   OnNodeErrorNotification,
   useGitButtons,
 } from '@bodiless/core';
-import { 
+import {
   Fragment,
   withShowDesignKeys,
 } from '@bodiless/fclasses';

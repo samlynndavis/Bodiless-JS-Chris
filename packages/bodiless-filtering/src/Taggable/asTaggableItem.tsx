@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { withoutProps, flowHoc} from '@bodiless/fclasses';
+import { withoutProps, flowHoc } from '@bodiless/fclasses';
 import {
   withContextActivator,
   withNode,

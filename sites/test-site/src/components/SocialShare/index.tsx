@@ -23,7 +23,7 @@ import {
   ImageDropZone,
   TImagePickerUI,
 } from '@bodiless/components';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { SocialShare as SocialShareClean } from '@bodiless/organisms';
 import type { SocialShareProvider } from '@bodiless/organisms';
 import { useFieldApi } from 'informed';

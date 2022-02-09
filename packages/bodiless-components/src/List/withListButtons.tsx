@@ -19,7 +19,7 @@ import {
 } from '@bodiless/core';
 import { v1 } from 'uuid';
 
-import { withFinalDesign, flowHoc} from '@bodiless/fclasses';
+import { withFinalDesign, flowHoc } from '@bodiless/fclasses';
 import { UseListOverrides } from './types';
 import { useListContext } from './List';
 

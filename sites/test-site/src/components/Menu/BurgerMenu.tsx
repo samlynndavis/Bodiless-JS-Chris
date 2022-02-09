@@ -13,7 +13,7 @@
  */
 
 import { asStatic } from '@bodiless/core';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { withBurgerMenuWrapper, BurgerMenuDefaultToggler } from '@bodiless/navigation';
 
 import { $withBurgerMenuStyles, $withTogglerStyles } from './BurgerMenu.token';

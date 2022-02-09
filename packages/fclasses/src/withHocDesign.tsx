@@ -3,7 +3,7 @@ import { intersection } from 'lodash';
 import type {
   HocDesign, DesignableComponents, TokenMeta, HOCBase
 } from './types';
-import { flowHoc} from './flowHoc';
+import { flowHoc } from './flowHoc';
 
 /**
  * Creates an HOC which applies a specified design to the wrapped component.

@@ -15,7 +15,7 @@
 import { withNode } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import { asBodilessList } from '@bodiless/components';
-import { withDesign, replaceWith, flowHoc} from '@bodiless/fclasses';
+import { withDesign, replaceWith, flowHoc } from '@bodiless/fclasses';
 import { Slide } from 'pure-react-carousel';
 import withTotalSlides from './withTotalSlides';
 import { withIntrinsicHeight, withNoDragIfEditable, withNoAutoPlayIfEditable } from './token';

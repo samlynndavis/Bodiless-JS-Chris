@@ -15,7 +15,7 @@
 import {
   withNode,
 } from '@bodiless/core';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import {
   CarouselClean,
   asEditableCarousel,

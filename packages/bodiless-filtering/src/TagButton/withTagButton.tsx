@@ -22,7 +22,7 @@ import {
   TagType,
   useNodeDataHandlers,
 } from '@bodiless/core';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
 import { TagButtonProps, TagsNodeType, WithRegisterSuggestionsType } from './types';
 

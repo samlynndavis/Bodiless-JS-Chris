@@ -19,7 +19,7 @@ import {
   useContextActivator, useEditContext, withLocalContextMenu, withContextActivator,
 } from '@bodiless/core';
 import omit from 'lodash/omit';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 
 type FinalUI = {
   FlowContainerEmptyWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string,
