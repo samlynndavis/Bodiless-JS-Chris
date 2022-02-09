@@ -35,7 +35,7 @@
   "dependencies": {
     "@bodiless/core": "^0.3.6",
     "@bodiless/fclasses": "^0.3.6",
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^10.0.0",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
     "postcss": "^8.2.4"

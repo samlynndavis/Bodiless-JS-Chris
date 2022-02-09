@@ -75,7 +75,7 @@ export const tagButtonOptions: TagButtonType = {
         <ComponentFormLabel>{formBodyText}</ComponentFormLabel>
         <ReactTags
           suggestions={suggestions}
-          placeholder={placeholder}
+          placeholderText={placeholder}
           noSuggestionsText={noSuggestionsText}
           minQueryLength={minQueryLength}
           allowNew={allowNew}

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { useListContext } from '@bodiless/components';
 import { useEditContext } from '@bodiless/core';
 import type { HOC } from '@bodiless/fclasses';

@@ -12,54 +12,6 @@
  * limitations under the License.
  */
 
-import { validatePageUrl } from '../src/dist/PageOperations/utils';
-
-describe('validatePath', () => {
-  it('Should return undefined when the path is valid.', () => {
-    const path = 'shampoo_1';
-    expect(validatePageUrl(path)).toBeUndefined();
-  });
-  it('Should return a string warning when the path contains special chars', () => {
-    const path = 'sha##mpoo';
-    expect(typeof validatePageUrl(path)).toBe('string');
-  });
-  it('Should return a string warning when the path contains uppercase letters', () => {
-    const path = 'Shampoo';
-    expect(typeof validatePageUrl(path)).toBe('string');
-  });
-  it('Should return a string warning when the path contains spaces', () => {
-    const path = 'shampo o1';
-    expect(typeof validatePageUrl(path)).toBe('string');
-  });
-  it('Should return a string warning when the path starts/ends with _ or -', () => {
-    const path1 = 'shampoo_';
-    const path2 = '-shampoo';
-    expect(typeof validatePageUrl(path1)).toBe('string');
-    expect(typeof validatePageUrl(path2)).toBe('string');
-  });
-});
-
-describe('validateUrl', () => {
-  it('Should return undefined when the url is valid.', () => {
-    const url = '/products/shampoo_1';
-    expect(validatePageUrl(url)).toBeUndefined();
-  });
-  it('Should return a string warning when the url is empty.', () => {
-    const url = '';
-    expect(typeof validatePageUrl(url)).toBe('string');
-  });
-  it('Should return a string warning when the url contains special chars.', () => {
-    const url = '/products/shampoo@1';
-    expect(typeof validatePageUrl(url)).toBe('string');
-  });
-  it('Should return a string warning when the url starts/ends with _ or -', () => {
-    const url1 = '/products/shampoo_';
-    const url2 = '-/products/shampoo';
-    expect(typeof validatePageUrl(url1)).toBe('string');
-    expect(typeof validatePageUrl(url2)).toBe('string');
-  });
-});
-
 export {};
 
 const fs = require('fs');

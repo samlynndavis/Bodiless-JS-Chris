@@ -13,7 +13,7 @@
  */
 
 import {
-  action, computed, observable, extendObservable,
+  action, computed, observable, extendObservable, makeObservable,
 } from 'mobx';
 import type { ObservableMap } from 'mobx';
 import type {
@@ -73,6 +73,7 @@ export class PageEditStore implements PageEditStoreInterface {
   }
 
   constructor(activeContext?: PageEditContextInterface) {
+    makeObservable(this);
     if (activeContext) {
       this.setActiveContext(activeContext);
     }

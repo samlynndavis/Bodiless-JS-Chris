@@ -19,7 +19,7 @@ import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   withDesign, asToken, addClasses, H1 as H1$, H2 as H2$, Ul, Div,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import { useNode, withNode, withNodeKey } from '@bodiless/core';
 import {
   withBurgerMenuProvider, withOverviewLink, withMenuDesign,
