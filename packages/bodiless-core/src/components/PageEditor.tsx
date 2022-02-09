@@ -49,7 +49,7 @@ const GlobalContextMenu: FC<Props> = observer(() => {
   const options = contextMenuOptions.filter(
     (op: TMenuOption) => op.global !== false,
   );
-  console.log('gcm', options);
+
   return (
     <Menu options={options} isPositionToggled={isPositionToggled} />
   );
@@ -88,7 +88,6 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
   };
 
   const { PageOverlay = () => null } = newUI;
-  console.log('pageditor');
 
   // Register buttons to the main menu.
   useRegisterMenuOptions({
@@ -96,7 +95,6 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
     name: 'Editor',
   });
   useEffect(() => {
-    console.log('effect', context, context.isActive);
     if (!context.isActive) context.activate();
   }, []);
 

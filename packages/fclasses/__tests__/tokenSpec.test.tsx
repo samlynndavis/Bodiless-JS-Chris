@@ -60,7 +60,7 @@ describe('extendMeta', () => {
     });
   });
   // eslint-disable-next-line jest/expect-expect
-  it('Does not allow non-tokenmeta arguments', () => {
+  it('Does not allow non-token meta arguments', () => {
     // @ts-expect-error
     extendMeta({ Foo: 'Bar'});
     // @ts-expect-error
