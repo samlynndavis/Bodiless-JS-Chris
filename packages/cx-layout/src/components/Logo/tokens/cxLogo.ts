@@ -19,6 +19,9 @@ import {
   cxElement,
 } from '@bodiless/cx-elements';
 import {
+  cxImage
+} form '@bodiless/cx-image';
+import {
   withNode,
   withNodeKey,
   withSidecarNodes,
@@ -42,12 +45,9 @@ const Default = asLogoToken({
     Image: 'max-h-full',
   },
   Components: {
-    // @todo This should use a cxImage token.
     Image: as(
-      asBodilessImage(),
-      addProps({
-        loading: 'eager',
-      }),
+      cxImage.Default,
+      cxImage.WithEager,
     ),
   },
   Schema: {

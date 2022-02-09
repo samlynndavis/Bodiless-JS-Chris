@@ -19,7 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { asBodilessImage, withImagePlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
-import { asElementToken } from '@bodiless/cx-elements';
+import { asElementToken, asSimpleToken } from '@bodiless/cx-elements';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../assets/landscape_image.png';
@@ -166,6 +166,12 @@ const EditableTraced = asElementToken(Base, WithEditorTraced);
 */
 const EditableNoEffect = asElementToken(Base, WithEditorNoEffect);
 
+const WithEager = asElementToken({
+  Core: {
+    _: addProps({ loading: 'eager'}),
+  },
+});
+
 export const cxImage = {
   Base,
   Plain: EditablePlain,
@@ -178,4 +184,5 @@ export const cxImage = {
   EditableNoEffect,
   WithLandscapePlaceholder,
   WithLink,
+  WithEager,
 };
