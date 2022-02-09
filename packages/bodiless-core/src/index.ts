@@ -83,6 +83,11 @@ import {
   saveToSessionStorage,
 } from './SessionStorage';
 
+import { configure } from 'mobx';
+configure({
+  enforceActions: 'never',
+});
+
 export * from './components';
 export * from './Contentful';
 export * from './Store';

@@ -210,7 +210,7 @@ const useLocalOptions = () => {
  *
  * Renders children inside an rc-tooltip whose overlay contents contain all local menu option icons.
  */
-const ContextMenuOverlay = observer<{}>(() => {
+const ContextMenuOverlay = observer(() => {
   const { LocalContextMenu: Menu } = useUI();
   const options = useLocalOptions();
   return <Menu options={options} />;
