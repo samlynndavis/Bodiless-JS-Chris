@@ -34,7 +34,7 @@
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
     "mobx": "^6.0.0",
-    "mobx-react": "^7.0.0",
+    "mobx-react": "^7.2.1",
     "rc-tooltip": "^5.1.1",
     "react-tag-autocomplete": "^6.0.0",
     "resize-observer-polyfill": "^1.5.1",
