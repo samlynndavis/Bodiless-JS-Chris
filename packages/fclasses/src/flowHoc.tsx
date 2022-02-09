@@ -182,7 +182,7 @@ const withTokenFilter = <P extends object>(test: TokenFilterTest): HOC => (
 /**
  * Utilities for adding metadata to tokens.
  */
-flowHocmeta = {
+flowHoc.meta = {
   term: (c: string) => (t: string) => ({
     categories: {
       [c]: [t],

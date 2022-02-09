@@ -38,7 +38,7 @@ export const withCategory = <P extends object>(category?: string) => (...hocs: H
   flowHoc(
     {}, // see https://github.com/microsoft/TypeScript/issues/28010
     ...hocs,
-    category ? flowHocmeta.term('Category')(category) : undefined,
+    category ? flowHoc.meta.term('Category')(category) : undefined,
   )
 );
 

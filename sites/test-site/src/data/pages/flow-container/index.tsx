@@ -92,7 +92,7 @@ const regionContent = {
 
 const Region = flowHoc(
   startWith(FlowContainer),
-  flowHocmeta.term('Type')('Region'),
+  flowHoc.meta.term('Type')('Region'),
   withImageVariations,
   addProps({
     buttonGroupLabel: 'Content Block',

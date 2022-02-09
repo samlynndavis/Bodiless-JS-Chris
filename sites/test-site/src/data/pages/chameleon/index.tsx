@@ -110,17 +110,17 @@ const DynamicStartChameleon = flowHoc(
  */
 const borderDesign = {
   '': removeClasses('border-8'),
-  Thick: flowHoc(flowHocmeta.term('Border')('Thick')),
+  Thick: flowHoc(flowHoc.meta.term('Border')('Thick')),
   Thin: flowHoc(
-    removeClasses('border-8'), addClasses('border-2'), flowHocmeta.term('Border')('Thin'),
+    removeClasses('border-8'), addClasses('border-2'), flowHoc.meta.term('Border')('Thin'),
   ),
 };
 
 const selectorDesign = varyDesigns(
   extendDesign(basicChameleonDesign, {
-    Red: flowHoc(flowHocmeta.term('Color')('Red')),
-    Blue: flowHoc(flowHocmeta.term('Color')('Blue')),
-    Green: flowHoc(flowHocmeta.term('Color')('Green')),
+    Red: flowHoc(flowHoc.meta.term('Color')('Red')),
+    Blue: flowHoc(flowHoc.meta.term('Color')('Blue')),
+    Green: flowHoc(flowHoc.meta.term('Color')('Green')),
   }),
   borderDesign,
 );

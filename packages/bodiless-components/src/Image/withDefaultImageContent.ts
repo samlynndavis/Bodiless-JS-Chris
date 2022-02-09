@@ -31,7 +31,7 @@ const withDefaultImageContent = (
   const asImageHoc = asEditableImage(nodeKey, placeholder, useOverrides);
   return flowHoc(
     asImageHoc.meta,
-    flowHocmeta.term('Category')('Contentful'),
+    flowHoc.meta.term('Category')('Contentful'),
     asImageHoc,
     typeof nodeKey === 'string' ? withDefaultContent({
       [nodeKey]: nodeContent,

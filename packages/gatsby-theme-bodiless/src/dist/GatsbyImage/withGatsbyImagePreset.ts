@@ -29,7 +29,7 @@ const withGatsbyImagePreset = (preset: GatsbyImagePresets) => (
   useOverrides,
 ) => flowHoc(
   asEditableImage.meta || {},
-  flowHocmeta.term('Preset')(preset),
+  flowHoc.meta.term('Preset')(preset),
   asGatsbyImage as HOC,
   withGatsbyImageLogger(preset),
   asEditableImage(undefined, placeholder, useOverrides),

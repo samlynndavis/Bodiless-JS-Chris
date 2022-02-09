@@ -631,21 +631,21 @@ const design = {
       asGalleryTile,
       withBlueBorder,
       { title: 'Blue Image Tile' },
-      flowHocmeta.term('Color')('Blue'),
+      flowHoc.meta.term('Color')('Blue'),
     ),
     TealImageTile: flowHoc(
       replaceWith(CaptionedImage),
       asGalleryTile,
       withTealBorder,
       { title: 'Teal Image Tile' },
-      flowHocmeta.term('Color')('Teal'),
+      flowHoc.meta.term('Color')('Teal'),
     ),
     OrangeImageTile: flowHoc(
       replaceWith(CaptionedImage),
       asGalleryTile,
       withOrangeBorder,
       { title: 'Orange Image Tile' },
-      flowHocmeta.term('Color')('Orange'),
+      flowHoc.meta.term('Color')('Orange'),
     ),
   };
 ```

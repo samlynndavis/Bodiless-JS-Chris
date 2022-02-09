@@ -40,7 +40,7 @@ export const useTokenLibrary = (target: string, groupName = 'Group'): Tokens => 
     ...acc,
     [next.name]: flowHoc(
       addClasses(next.className),
-      next.category ? flowHocmeta.term(groupName)(next.category) : undefined,
+      next.category ? flowHoc.meta.term(groupName)(next.category) : undefined,
     ),
   }), {});
   return tokens;
