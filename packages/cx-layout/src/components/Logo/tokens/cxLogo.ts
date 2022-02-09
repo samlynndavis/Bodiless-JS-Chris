@@ -25,7 +25,7 @@ import {
 } from '@bodiless/core';
 import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
 // import { asSchemaSource } from '@canvasx/structuredata';
-import { asLogoToken } from './LogoClean';
+import { asLogoToken } from '../LogoClean';
 
 const Default = asLogoToken({
   Layout: {
@@ -61,4 +61,4 @@ const Default = asLogoToken({
   },
 });
 
-export const cxLogo = { Default };
+export default { Default };
