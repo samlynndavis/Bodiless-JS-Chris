@@ -13,7 +13,7 @@
  */
 
 import { ComponentType } from 'react';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import {
   asBodilessMenu, withListSubMenu, withColumnSubMenu, withCardsSubMenu,
 } from '@bodiless/navigation';

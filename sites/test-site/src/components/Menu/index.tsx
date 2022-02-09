@@ -14,7 +14,7 @@
 
 import { ComponentType } from 'react';
 import pick from 'lodash/pick';
-import { withDesign, replaceWith, flowHoc} from '@bodiless/fclasses';
+import { withDesign, replaceWith, flowHoc } from '@bodiless/fclasses';
 import { withResponsiveVariants } from '@bodiless/components';
 
 import { breakpoints as allBreakpoints } from '../Page';

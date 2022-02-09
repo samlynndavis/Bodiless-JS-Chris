@@ -13,7 +13,7 @@
  */
 
 import { withSidecarNodes } from '@bodiless/core';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { withTagProps } from './FilterByGroupContext';
 import withFilterByTags from './withFilterByTags';
 import { asTaggableItem } from '../Taggable/asTaggableItem';

@@ -13,7 +13,7 @@
  */
 
 import negate from 'lodash/negate';
-import { addClasses, flowHoc} from '@bodiless/fclasses';
+import { addClasses, flowHoc } from '@bodiless/fclasses';
 import { withChild, ifToggledOn } from '@bodiless/core';
 import { isSearchToggleButtonExpanded } from './ResponsiveSearchBox';
 import SearchIcon from '../icons/Search';

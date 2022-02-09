@@ -139,7 +139,7 @@ export type TokenDef<B = {}, A = {}, R = {}> = HOC<B, A, R> | TokenMeta | undefi
  *
  * > Type inference will only be correct for up to 10 composed tokens.
  */
-export type AsToken<A = {}> =
+export type FlowHoc<A = {}> =
   <B1, A1, R1, A2, R2, A3, R3, A4, R4, A5, R5, A6, R6, A7, R7, A8, R8, A9, R9>(
     t1?: TokenDef<B1, A1, R1>,
     // @todo Ensure that the output of each token matches the constraint of the next, eg
@@ -223,7 +223,7 @@ export type ReservedDomains<
      * so it will not have access to any contexts or content nodes provided by
      * the token itself.
      */
-  Flow?: AsToken,
+  Flow?: FlowHoc,
   /**
      * Metadata which should be attached to this token (and to any component to
      * to which the token is applied).

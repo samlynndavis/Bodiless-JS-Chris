@@ -27,7 +27,7 @@ import {
   withEditableFinalTrail,
   withMenuTitleEditors,
 } from '@bodiless/navigation';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 
 import { $withBreadcrumbStyles } from './MenuBreadcrumbs.token';
 
@@ -140,7 +140,7 @@ import {
   withEditableFinalTrail,
   withMenuTitleEditors,
 } from '@bodiless/navigation';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 
 import { $withBreadcrumbStyles } from './MenuBreadcrumbs.token';
 

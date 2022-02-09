@@ -36,7 +36,7 @@ export const DemoMenu = flow(
 #### Menu Sublists
 The `DemoMenu` above will create a simple one-level **unstyled** list with Editable menu titles by default. This menu may be extended with different types of submenus:
 ```js
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import {
   asBodilessMenu, withListSubMenu, withColumnSubMenu, withCardsSubMenu,
 } from '@bodiless/navigation';
@@ -165,7 +165,7 @@ const withActiveTitleStyles = ifToggledOn(useIsActiveTrail)(
 ### Bodiless Menu Example
 Here is the complete example of the demo bodiless menu:
 ```js
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import {
   asTopNav, withMenuDesign, asBodilessMenu, withColumnSubMenu, withCardsSubMenu,
   withMenuTitleEditors,

@@ -18,7 +18,7 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import type { ContentNode } from '@bodiless/core';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { withContentLibrary, ComponentSelector } from '@bodiless/layouts';
 import path from 'path';
 import type { AsBodilessImage } from './Image';

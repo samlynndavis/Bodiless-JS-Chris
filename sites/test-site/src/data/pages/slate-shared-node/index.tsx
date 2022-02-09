@@ -20,7 +20,7 @@ import {
   asReadOnly,
 } from '@bodiless/core';
 import type { StylableProps } from '@bodiless/fclasses';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import Tooltip from 'rc-tooltip';
 import Layout from '../../../components/Layout';
 import { withEditorSimple } from '../../../components/Editors';
