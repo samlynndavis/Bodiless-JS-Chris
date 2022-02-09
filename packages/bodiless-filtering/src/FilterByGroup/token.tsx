@@ -15,7 +15,7 @@
 import {
   withDesign,
   addClasses,
-  asToken,
+  flowHoc,
   addProps,
   replaceWith,
   addPropsIf,
@@ -32,14 +32,14 @@ import {
   withAnyTag, withoutAnyTag,
 } from './Filter.token';
 
-const asResponsiveAccordionTitle = asToken(
+const asResponsiveAccordionTitle = flowHoc(
   asAccordionTitle,
   withDesign({
     Icon: addClasses('lg:hidden'),
   }),
 );
 
-const asExpandedOnDesktopBody = asToken(
+const asExpandedOnDesktopBody = flowHoc(
   asAccordionBody,
   withDesign({
     Wrapper: addClasses('lg:block'),
@@ -54,7 +54,7 @@ const useRefineButtonProps = () => {
   };
 };
 
-const asResponsiveFilterByGroup = asToken(
+const asResponsiveFilterByGroup = flowHoc(
   ifViewportIsNot(['lg', 'xl', '2xl'])(
     withDesign({
       FilterWrapper: asAccordionWrapper,
@@ -72,23 +72,23 @@ const asResponsiveFilterByGroup = asToken(
   ),
 );
 
-export const withMultipleAllowedTags = asToken(
+export const withMultipleAllowedTags = flowHoc(
   addProps({
     multipleAllowedTags: true,
   }),
   withDesign({
-    Filter: asToken(
+    Filter: flowHoc(
       withoutAnyTag,
     ),
   }),
 );
 
-export const withSingleAllowedTag = asToken(
+export const withSingleAllowedTag = flowHoc(
   addProps({
     multipleAllowedTags: false,
   }),
   withDesign({
-    Filter: asToken(
+    Filter: flowHoc(
       withAnyTag,
     ),
   }),

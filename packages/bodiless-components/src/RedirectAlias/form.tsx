@@ -28,7 +28,7 @@ import {
   useNode,
 } from '@bodiless/core';
 import {
-  asToken,
+  flowHoc,
   withOnlyProps,
   HOC,
   addClasses,
@@ -209,7 +209,7 @@ const FormBodyBase = () => {
   );
 };
 
-const FormBody: any = asToken(
+const FormBody: any = flowHoc(
   withNode,
   withNodeKey({
     nodeKey: 'redirect-aliases',
@@ -245,7 +245,7 @@ const menuOptions: MenuOptionsDefinition<object> = {
   root: true,
 };
 
-const withRedirectAliasButton = asToken(
+const withRedirectAliasButton = flowHoc(
   withOnlyProps('key', 'children') as HOC,
   withMenuOptions(menuOptions),
   withToolsButton,

@@ -13,8 +13,8 @@
  */
 
 import React from 'react';
-import { observer } from 'mobx-react-lite';
-import { asToken } from '@bodiless/fclasses';
+import { observer } from 'mobx-react';
+import { flowHoc} from '@bodiless/fclasses';
 import type {
   Condition, AsToken, ComponentWithMeta, ComponentOrTag,
 } from '@bodiless/fclasses';
@@ -46,17 +46,17 @@ export const withFlowToggle = (useToggle: Condition) => <P extends object, Q ext
  * props.
  *
  * @returns
- * A function which will compose the provided tokens (like `asToken`) ony if the
+ * A function which will compose the provided tokens (like `flowHoc`) ony if the
  * condition evaluates to true.
  *
  * @see flowIf
- * @see asToken
+ * @see flowHoc
  */
 export const ifToggledOn = <P extends object>(
   useToggle: Condition<P>,
 ): AsToken<P> => (...hocs) => (Component: ComponentOrTag<any>) => {
     const reversed = [...hocs].reverse();
-    const Alt = asToken(...reversed)(Component);
+    const Alt = flowHoc(...reversed)(Component);
     return withFlowToggle(useToggle)(Alt, Component) as ComponentWithMeta<any>;
   };
 
@@ -70,7 +70,7 @@ export const ifToggledOn = <P extends object>(
  * props.
  *
  * @returns
- * A function which will compose the provided tokens (like `asToken`) only if the
+ * A function which will compose the provided tokens (like `flowHoc`) only if the
  * condition evaluates to false.
  *
  * @see ifToggledOn

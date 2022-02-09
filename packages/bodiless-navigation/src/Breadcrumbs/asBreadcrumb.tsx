@@ -17,7 +17,7 @@ import React, {
 } from 'react';
 import { useNode } from '@bodiless/core';
 import type { LinkData } from '@bodiless/components';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import type { HOC } from '@bodiless/fclasses';
 import { BreadcrumbItem } from './BreadcrumbStore';
 import type { BreadcrumbItemType } from './BreadcrumbStore';

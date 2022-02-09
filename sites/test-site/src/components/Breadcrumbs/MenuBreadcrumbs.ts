@@ -20,20 +20,20 @@ import {
   withEditableFinalTrail,
   withMenuTitleEditors,
 } from '@bodiless/navigation';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc} from '@bodiless/fclasses';
 
 import {
   $withBreadcrumbStyles,
   asAccessibleBreadcrumbs,
 } from './MenuBreadcrumbs.token';
 
-const $withBreadcrumbEditors = asToken(
+const $withBreadcrumbEditors = flowHoc(
   withMenuTitleEditors(undefined, asReadOnly),
   withEditableStartingTrail(undefined, { nodeCollection: 'site' }),
   withEditableFinalTrail(),
 );
 
-const Breadcrumbs = asToken(
+const Breadcrumbs = flowHoc(
   asBreadcrumbs,
   $withBreadcrumbEditors,
   $withBreadcrumbStyles,

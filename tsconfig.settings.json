@@ -20,6 +20,7 @@
     "declarationMap": true,
     "allowJs": false,
     "strictNullChecks": true,
+    "useDefineForClassFields": true,
     "baseUrl": "packages",
     "paths": {
       "@bodiless/accessibility": ["bodiless-accessibility/src"],
