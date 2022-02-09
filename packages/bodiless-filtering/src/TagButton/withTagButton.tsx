@@ -22,7 +22,7 @@ import {
   TagType,
   useNodeDataHandlers,
 } from '@bodiless/core';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc} from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
 import { TagButtonProps, TagsNodeType, WithRegisterSuggestionsType } from './types';
 
@@ -112,7 +112,7 @@ const withTagButton = (useOverrides?: UseTagButtonOverrides) => {
   const editButtonOptions = useOverrides
     ? (props: any) => ({ ...tagButtonOptions, ...useOverrides(props) })
     : tagButtonOptions;
-  return asToken(
+  return flowHoc(
     withEditButton(editButtonOptions),
     withRegisteredTags,
   );
