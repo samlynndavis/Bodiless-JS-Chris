@@ -21,9 +21,12 @@ import {
   contextMenuForm,
   handleBackendResponse,
   useEditContext,
+  useNode,
 } from '@bodiless/core';
 import { ComponentFormSpinner } from '@bodiless/ui';
 import { usePageMenuOptionUI } from '../MenuOptionUI';
+import { createRedirect } from '../Operations';
+import { PATTERN_INSENSITIVE_VALID_PATH_URL } from '../constants';
 import {
   PageClient,
   PageStatus,
@@ -149,12 +152,20 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
   const { ComponentFormText } = usePageMenuOptionUI();
   const {
     submits,
+    values,
   } = formState;
+  const {
+    pagePath,
+  } = values;
   const [state, setState] = useState<PageState>({
     status: PageStatus.Init,
   });
+
   const context = useEditContext();
+  const { node } = useNode();
+
   const path = (typeof window !== 'undefined') ? window.location.pathname : '';
+  const redirectPathInput = (typeof pagePath === 'string') ? pagePath : '';
 
   useEffect(() => {
     if (path === '/') {
@@ -178,6 +189,12 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
       // Delete the page.
       deletePage({ path, client })
         .then(() => {
+          if (redirectPathInput !== '') {
+            const redirectPath = redirectPathInput.match(PATTERN_INSENSITIVE_VALID_PATH_URL)
+              ? redirectPathInput
+              : `/${redirectPathInput}`;
+            createRedirect(node, path, redirectPath);
+          }
           actualState = PageStatus.Complete;
           setState({ status: PageStatus.Complete });
         })
