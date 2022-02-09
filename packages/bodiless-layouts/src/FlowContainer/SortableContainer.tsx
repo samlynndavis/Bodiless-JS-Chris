@@ -19,7 +19,7 @@ import {
   useContextActivator, useEditContext, withLocalContextMenu, withContextActivator,
 } from '@bodiless/core';
 import omit from 'lodash/omit';
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc} from '@bodiless/fclasses';
 
 type FinalUI = {
   FlowContainerEmptyWrapper: ComponentType<HTMLProps<HTMLDivElement>> | string,
@@ -54,7 +54,7 @@ const FlowContainerEmpty$ = (ui: UI) => {
   );
 };
 
-const FlowContainerEmpty = asToken(
+const FlowContainerEmpty = flowHoc(
   withContextActivator('onClick'),
   withLocalContextMenu,
 )(FlowContainerEmpty$);

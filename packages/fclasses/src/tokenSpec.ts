@@ -10,7 +10,7 @@ import type {
   ReservedDomains, Design, Token, HOCBase, HOD, TokenSpecBase,
 } from './types';
 import { $TokenSpec } from './types';
-import { asToken, extendMeta } from './flowHoc';
+import { flowHoc, extendMeta } from './flowHoc';
 import { addClasses } from './addClasses';
 import { withHocDesign } from './withHocDesign';
 // import omit from 'lodash/omit';
@@ -83,9 +83,9 @@ function as<D extends object = any>(
     if (arg.Flow) {
       return arg.Flow(...specTokens);
     }
-    return asToken(...specTokens);
+    return flowHoc(...specTokens);
   });
-  return asToken(...tokens);
+  return flowHoc(...tokens);
 }
 
 /**
@@ -109,7 +109,7 @@ function withDesign<C extends DesignableComponents = any, D extends object = any
       }),
       {} as HocDesign<any>
     );
-  return asToken(
+  return flowHoc(
     as(design._) as HOCBase,
     withHocDesign(hocDesign)
   );

@@ -19,7 +19,7 @@ import {
 import { useMenuOptionUI } from '@bodiless/core';
 import {
   addClasses,
-  asToken,
+  flowHoc,
   removeClasses,
   StylableProps,
 } from '@bodiless/fclasses';
@@ -32,22 +32,22 @@ const usePageMenuOptionUI = () => {
     ComponentFormLink,
   } = defaultUI;
 
-  const Label = asToken(
+  const Label = flowHoc(
     removeClasses('bl-text-xs'),
     addClasses('bl-font-bold bl-text-base'),
   )(ComponentFormLabel as ComponentType<StylableProps>);
 
-  const LabelSmall = asToken(
+  const LabelSmall = flowHoc(
     removeClasses('bl-text-xs'),
     addClasses('bl-font-bold bl-text-sm'),
   )(ComponentFormLabel as ComponentType<StylableProps>);
 
-  const Link = asToken(
+  const Link = flowHoc(
     removeClasses('bl-block'),
     addClasses('bl-italic'),
   )(ComponentFormLink as ComponentType<StylableProps>);
 
-  const Warning = asToken(
+  const Warning = flowHoc(
     removeClasses('bl-float-left'),
   )(ComponentFormWarning as ComponentType<StylableProps>);
 
