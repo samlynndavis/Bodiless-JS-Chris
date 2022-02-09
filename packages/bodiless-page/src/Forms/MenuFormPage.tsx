@@ -1,18 +1,9 @@
-import React, {
-  ComponentType,
-  HTMLProps,
-} from 'react';
+import React from 'react';
 import {
   ContextMenuProvider,
-  useMenuOptionUI,
 } from '@bodiless/core';
-import flow from 'lodash/flow';
-import {
-  addClasses,
-  removeClasses,
-} from '@bodiless/fclasses';
-import type { StylableProps } from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
+import { usePageMenuOptionUI } from '../MenuOptionUI';
 import {
   PageState,
   PageStatus,
@@ -30,38 +21,23 @@ const MenuFormPage = (props : PageStatus) => {
     linkId,
     FormFields,
   } = props;
-  const defaultUI = useMenuOptionUI();
+
+  const defaultUI = usePageMenuOptionUI();
   const {
-    ComponentFormLabel,
     ComponentFormDescription,
-    ComponentFormWarning,
-    ComponentFormTitle,
+    ComponentFormLabelSmall,
     ComponentFormLink,
+    ComponentFormTitle,
+    ComponentFormWarning,
   } = defaultUI;
+
   switch (status) {
     case PageState.Init: {
-      const CustomComponentFormLabel = flow(
-        removeClasses('bl-text-xs'),
-        addClasses('bl-font-bold bl-text-sm'),
-      )(ComponentFormLabel as ComponentType<StylableProps>);
-      const CustomComponentFormLink = flow(
-        removeClasses('bl-block'),
-        addClasses('bl-italic'),
-      )(ComponentFormLink as ComponentType<StylableProps>);
-      const CustomComponentFormWarning = flow(
-        removeClasses('bl-float-left'),
-      )(ComponentFormWarning);
-      const ui = {
-        ...defaultUI,
-        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
-        ComponentFormLink: CustomComponentFormLink as ComponentType<HTMLProps<HTMLAnchorElement>>,
-        ComponentFormWarning: CustomComponentFormWarning,
-      };
       return (
         <>
-          <ContextMenuProvider ui={ui}>
+          <ContextMenuProvider ui={defaultUI}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
-            {FormFields && FormFields(ComponentFormLabel)}
+            {FormFields && FormFields(ComponentFormLabelSmall)}
             <PageURLField
               fieldFull
               validateOnChange

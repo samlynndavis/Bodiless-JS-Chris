@@ -13,8 +13,8 @@
  */
 
 import React from 'react';
-import { useMenuOptionUI } from '@bodiless/core';
 import { useField } from 'informed';
+import { usePageMenuOptionUI } from '../MenuOptionUI';
 import {
   PAGE_URL_FIELD_NAME,
   BASE_PATH_EMPTY_VALUE,
@@ -40,10 +40,10 @@ import {
  */
 const PageURLField = (props: FieldProps) => {
   const {
-    ComponentFormLabel,
-    ComponentFormLink,
+    ComponentFormLabelSmall,
+    ComponentFormLinkEdit,
     ComponentFormWarning,
-  } = useMenuOptionUI();
+  } = usePageMenuOptionUI();
   const {
     value: basePathValue,
     setValue: setBasePathValue,
@@ -73,7 +73,7 @@ const PageURLField = (props: FieldProps) => {
 
   return render(
     <>
-      <ComponentFormLabel htmlFor="new-page-path">{label}</ComponentFormLabel>
+      <ComponentFormLabelSmall htmlFor="new-page-path">{label}</ComponentFormLabelSmall>
       {
         fieldFull && !isFullUrl
           ? (<span className="mr-1">{`${basePathValue}`}</span>)
@@ -98,12 +98,12 @@ const PageURLField = (props: FieldProps) => {
         }}
       />
       {
-        !isBasePathEmpty
+        fieldFull && !isBasePathEmpty
         && (
           <div
             className="bl-block"
           >
-            <ComponentFormLink
+            <ComponentFormLinkEdit
               onClick={() => {
                 setValue(joinPath(basePathValue, fieldValueToUrl(value)));
                 setBasePathValue(BASE_PATH_EMPTY_VALUE);
@@ -111,7 +111,7 @@ const PageURLField = (props: FieldProps) => {
               }}
             >
               Edit
-            </ComponentFormLink>
+            </ComponentFormLinkEdit>
           </div>
         )
       }
@@ -134,8 +134,8 @@ const PageURLField = (props: FieldProps) => {
 const MovePageURLField = (props: FieldProps) => {
   const {
     ComponentFormWarning,
-    ComponentFormLabel,
-  } = useMenuOptionUI();
+    ComponentFormLabelSmall,
+  } = usePageMenuOptionUI();
   const {
     value: basePathValue,
     setValue: setBasePathValue,
@@ -165,7 +165,7 @@ const MovePageURLField = (props: FieldProps) => {
   const inputClasses = INPUT_FIELD_INLINE_CLASSES;
   return render(
     <>
-      <ComponentFormLabel htmlFor="new-page-path">{fieldLabel}</ComponentFormLabel>
+      <ComponentFormLabelSmall htmlFor="new-page-path">{fieldLabel}</ComponentFormLabelSmall>
       <input
         {...restBasePathProps}
         type="hidden"

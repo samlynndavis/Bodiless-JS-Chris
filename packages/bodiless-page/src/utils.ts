@@ -103,7 +103,7 @@ const getPagePathValidator = (validate?: FieldValidate) => (
     || validatePagePath(value)
     || (validate && validate(value, values));
 
-const hasPageChild = async ({ pagePath, client } : any) => {
+const hasPageChild = async ({ pagePath, client }: any) => {
   const result = await handleBackendResponse(client.directoryChild(pagePath));
   if (result.response && result.message === 'Success') {
     return Promise.resolve();

@@ -21,10 +21,10 @@ import React, {
 import {
   contextMenuForm,
   handleBackendResponse,
-  useMenuOptionUI,
   useEditContext,
 } from '@bodiless/core';
 import { useGatsbyPageContext } from '@bodiless/gatsby-theme-bodiless';
+import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { verifyPage } from '../Operations';
 import { DEFAULT_PAGE_TEMPLATE } from '../constants';
 import {
@@ -60,7 +60,7 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, formApi } : any) => {
-  const { ComponentFormText } = useMenuOptionUI();
+  const { ComponentFormText } = usePageMenuOptionUI();
   const {
     submits, invalid, values,
   } = formState;

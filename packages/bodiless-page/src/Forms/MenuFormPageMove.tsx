@@ -15,24 +15,16 @@
 import React, {
   useEffect,
   useState,
-  ComponentType,
-  HTMLProps,
 } from 'react';
-import flow from 'lodash/flow';
 import {
   ContextMenuProvider,
   contextMenuForm,
   handleBackendResponse,
   useEditContext,
-  useMenuOptionUI,
   useNode,
 } from '@bodiless/core';
-import {
-  StylableProps,
-  addClasses,
-  removeClasses,
-} from '@bodiless/fclasses';
 import { ComponentFormSpinner } from '@bodiless/ui';
+import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { createRedirect } from '../Operations';
 import {
   PageClient,
@@ -105,42 +97,25 @@ const MovePageComp = (props : PageStatus) => {
   } = props;
   const basePathValue = usePagePath();
 
-  const defaultUI = useMenuOptionUI();
-
+  const defaultUI = usePageMenuOptionUI();
   const {
     ComponentFormCheckBox,
     ComponentFormDescription,
     ComponentFormLabel,
-    ComponentFormLink,
+    ComponentFormLabelSmall,
     ComponentFormTitle,
     ComponentFormWarning,
   } = defaultUI;
+
   const formTitle = 'Move';
   switch (status) {
     case PageState.Init: {
-      const CustomComponentFormLabel = flow(
-        removeClasses('bl-text-xs'),
-        addClasses('bl-font-bold bl-text-sm'),
-      )(ComponentFormLabel as ComponentType<StylableProps>);
-      const CustomComponentFormLink = flow(
-        removeClasses('bl-block'),
-        addClasses('bl-italic'),
-      )(ComponentFormLink as ComponentType<StylableProps>);
-      const CustomComponentFormWarning = flow(
-        removeClasses('bl-float-left'),
-      )(ComponentFormWarning);
-      const ui: object = {
-        ...defaultUI,
-        ComponentFormLabel: CustomComponentFormLabel as ComponentType<HTMLProps<HTMLLabelElement>>,
-        ComponentFormLink: CustomComponentFormLink as ComponentType<HTMLProps<HTMLAnchorElement>>,
-        ComponentFormWarning: CustomComponentFormWarning,
-      };
       return (
         <>
-          <ContextMenuProvider ui={ui}>
+          <ContextMenuProvider ui={defaultUI}>
             <ComponentFormTitle>{formTitle}</ComponentFormTitle>
             <ComponentFormDescription>Move this page to a new URL.</ComponentFormDescription>
-            <ComponentFormLabel>Current URL</ComponentFormLabel>
+            <ComponentFormLabelSmall>Current URL</ComponentFormLabelSmall>
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
             <MovePageURLField
               validateOnChange
@@ -203,7 +178,7 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
   hasSubmit: ({ keepOpen }: any) => keepOpen,
   onClose: redirectPage,
 })(({ formState, formApi } : any) => {
-  const { ComponentFormText } = useMenuOptionUI();
+  const { ComponentFormText } = usePageMenuOptionUI();
 
   const { node } = useNode();
 

@@ -20,9 +20,9 @@ import {
   contextMenuForm,
   handleBackendResponse,
   useEditContext,
-  useMenuOptionUI,
   useNode,
 } from '@bodiless/core';
+import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { verifyPage } from '../Operations';
 import {
   PageClient,
@@ -58,7 +58,7 @@ const menuFormPageClone = (client: PageClient) => contextMenuForm({
   submitValues: ({ keepOpen }: any) => keepOpen,
   hasSubmit: ({ keepOpen }: any) => keepOpen,
 })(({ formState, formApi } : any) => {
-  const { ComponentFormText } = useMenuOptionUI();
+  const { ComponentFormText } = usePageMenuOptionUI();
   const {
     submits, invalid, values,
   } = formState;
