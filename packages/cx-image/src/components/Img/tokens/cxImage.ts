@@ -10,7 +10,7 @@ import {
   withGatsbyImageNode,
 } from '@bodiless/gatsby-theme-bodiless';
 import {
-  asToken,
+  flowHoc,
   stylable,
   addProps,
   A,
@@ -19,7 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { asBodilessImage, withImagePlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
-import { asElementToken, asSimpleToken } from '@bodiless/cx-elements';
+import { asElementToken } from '@bodiless/cx-elements';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../assets/landscape_image.png';
@@ -49,7 +49,7 @@ const Base = asElementToken({
       withGatsbyImageLogger(),
     ),
   },
-  Meta: asToken.meta.term('Type')('Image'),
+  Meta: flowHoc.meta.term('Type')('Image'),
 });
 
 /**
@@ -65,7 +65,7 @@ const WithEditorPlain = asElementToken({
       withoutGatsbyImageProps,
     ),
   },
-  Meta: asToken.meta.term('Optimization')('Plain'),
+  Meta: flowHoc.meta.term('Optimization')('Plain'),
 });
 
 /**
@@ -79,8 +79,8 @@ const WithEditorBlurUp = asElementToken({
     _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebp),
   },
   Meta: extendMeta(
-    asToken.meta.term('Optimization')('Optimized'),
-    asToken.meta.term('Effect')('BlurUp'),
+    flowHoc.meta.term('Optimization')('Optimized'),
+    flowHoc.meta.term('Effect')('BlurUp'),
   ),
   Layout: {
     _: addProps(objectFitCoverProps),
@@ -98,8 +98,8 @@ const WithEditorTraced = asElementToken({
     _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebpTracedSVG),
   },
   Meta: extendMeta(
-    asToken.meta.term('Optimization')('Optimized'),
-    asToken.meta.term('Effect')('Traced'),
+    flowHoc.meta.term('Optimization')('Optimized'),
+    flowHoc.meta.term('Effect')('Traced'),
   ),
   Layout: {
     _: addProps(objectFitContainProps),
@@ -117,8 +117,8 @@ const WithEditorNoEffect = asElementToken({
     _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebpNoBase64),
   },
   Meta: extendMeta(
-    asToken.meta.term('Optimization')('Optimized'),
-    asToken.meta.term('Effect')('No Effect'),
+    flowHoc.meta.term('Optimization')('Optimized'),
+    flowHoc.meta.term('Effect')('No Effect'),
   ),
   Layout: {
     _: addProps(objectFitContainProps),
@@ -143,7 +143,7 @@ const WithLink = asElementToken({
   Core: {
     _: withParent(LinkBase, 'ImageLink'),
   },
-  Meta: asToken.meta.term('Link')('With Link'),
+  Meta: flowHoc.meta.term('Link')('With Link'),
 });
 
 /**

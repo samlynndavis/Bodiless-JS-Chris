@@ -13,20 +13,20 @@
  */
 
 import {
-  addProps, as,
+  as,
 } from '@bodiless/fclasses';
 import {
   cxElement,
 } from '@bodiless/cx-elements';
 import {
   cxImage
-} form '@bodiless/cx-image';
+} from '@bodiless/cx-image';
 import {
   withNode,
   withNodeKey,
   withSidecarNodes,
 } from '@bodiless/core';
-import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
+import { asBodilessLink } from '@bodiless/components-ui';
 // import { asSchemaSource } from '@canvasx/structuredata';
 import { asLogoToken } from '../LogoClean';
 

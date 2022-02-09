@@ -1,4 +1,4 @@
-import { asToken } from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { ContentNodePath, withDefaultContent, withResetButton } from '@bodiless/core';
 import { getImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
 
@@ -12,7 +12,7 @@ import { getImageContentFrom } from '@bodiless/gatsby-theme-bodiless';
 * @return
 * HOC which adds the default content to an image.
 */
-const withImageContentFrom = (nodePath: ContentNodePath) => asToken(
+const withImageContentFrom = (nodePath: ContentNodePath) => flowHoc(
   withDefaultContent({
     image: getImageContentFrom(nodePath),
   }),
