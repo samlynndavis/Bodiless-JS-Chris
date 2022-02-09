@@ -11,7 +11,7 @@ import {
   asTokenSpec,
 } from '@bodiless/fclasses';
 
-type BcTokenSpec<C extends DesignableComponents> = TokenSpecBase<C, DefaultDomains>;
+type CxTokenSpec<C extends DesignableComponents> = TokenSpecBase<C, DefaultDomains>;
 
 const defaultDomains = {
   Core: {},
@@ -32,28 +32,28 @@ const defaultDomains = {
 type DefaultDomains = typeof defaultDomains;
 
 /**
-   * Creates a token definition utility for a clean component.
-   *
-   * Use the type of the component's designable components as a type parameter
-   * to enable type checking and autocomplete for the domain keys.
-   */
-const asBcTokenSpec = <
+ * Creates a token definition utility for a clean component.
+ *
+ * Use the type of the component's designable components as a type parameter
+ * to enable type checking and autocomplete for the domain keys.
+ */
+const asCxTokenSpec = <
   C extends DesignableComponents
 >() => asTokenSpec<C, DefaultDomains>(defaultDomains);
 
 /**
- * Cretes an element level token (one in which only the _ design key is allowed);
+ * Creates an element level token (one in which only the _ design key is allowed);
  */
-const asElementToken = asBcTokenSpec<{}>();
+const asElementToken = asCxTokenSpec<{}>();
 
 /**
  * Creates a token for a component with a fluid design (one in which any
  * design key is allowed).
  */
-const asFluidToken = asBcTokenSpec<any>();
+const asFluidToken = asCxTokenSpec<any>();
 
 /**
- * Cretes a token which applies the given metadata.
+ * Creates a token which applies the given metadata.
  *
  * @param ...m
  * One or more token metadata objects.  These will be merged to produce
@@ -82,8 +82,8 @@ const asTokenCollection = (
 );
 
 export {
-  asBcTokenSpec, asMetaToken, asElementToken, asFluidToken,
+  asCxTokenSpec, asMetaToken, asElementToken, asFluidToken,
   asTokenCollection,
 };
 
-export type { BcTokenSpec };
+export type { CxTokenSpec };

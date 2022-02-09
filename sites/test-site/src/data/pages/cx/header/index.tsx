@@ -15,12 +15,12 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Page } from '@bodiless/gatsby-theme-bodiless';
-import { bcHeader, HeaderClean } from '@bodiless/bc-layout';
+import { cxHeader, HeaderClean } from '@bodiless/cx-layout';
 import { as } from '@bodiless/fclasses';
 import { withNode, withNodeKey } from '@bodiless/core';
 
 const Header = as(
-  bcHeader.Default,
+  cxHeader.Default,
   withNode,
   withNodeKey('header'),
 )(HeaderClean);

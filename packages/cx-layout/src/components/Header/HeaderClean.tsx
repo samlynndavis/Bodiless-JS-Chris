@@ -22,7 +22,7 @@ import {
   designable,
   ComponentOrTag,
 } from '@bodiless/fclasses';
-import { asBcTokenSpec } from '@bodiless/bc-elements';
+import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { LogoClean } from '../Logo';
 
 export type HeaderComponents = {
@@ -103,6 +103,6 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components }) => {
 
 export const HeaderClean = designable(headerComponents, 'Header')(HeaderCleanBase);
 
-const asHeaderToken = asBcTokenSpec<HeaderComponents>();
+const asHeaderToken = asCxTokenSpec<HeaderComponents>();
 
 export { asHeaderToken };

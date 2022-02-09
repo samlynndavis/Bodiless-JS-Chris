@@ -1,5 +1,5 @@
 import { asTokenCollection } from '../../util';
 
-export const bcElementLayout = asTokenCollection({
+export const cxElementLayout = asTokenCollection({
   WithFlexCenterXY: ''
 });

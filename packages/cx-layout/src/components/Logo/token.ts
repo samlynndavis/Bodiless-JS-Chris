@@ -16,8 +16,8 @@ import {
   addProps, as,
 } from '@bodiless/fclasses';
 import {
-  bcElement,
-} from '@bodiless/bc-elements';
+  cxElement,
+} from '@bodiless/cx-elements';
 import {
   withNode,
   withNodeKey,
@@ -30,7 +30,7 @@ import { asLogoToken } from './LogoClean';
 const Default = asLogoToken({
   Layout: {
     Wrapper: as(
-      bcElement.WithFlexCenterXY,
+      cxElement.WithFlexCenterXY,
       'order-1',
     ),
   },
@@ -42,7 +42,7 @@ const Default = asLogoToken({
     Image: 'max-h-full',
   },
   Components: {
-    // @todo This should use a bcImage token.
+    // @todo This should use a cxImage token.
     Image: as(
       asBodilessImage(),
       addProps({
@@ -52,7 +52,7 @@ const Default = asLogoToken({
   },
   Schema: {
     Image: withNodeKey('image'),
-    // @todo should this be a bc-link?
+    // @todo should this be a cx-link?
     // @todo can we separate sidecar nodekeys from editors?
     Link: withSidecarNodes(
       asBodilessLink('link'),
@@ -61,4 +61,4 @@ const Default = asLogoToken({
   },
 });
 
-export const bcLogo = { Default };
+export const cxLogo = { Default };
