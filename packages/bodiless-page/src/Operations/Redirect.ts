@@ -16,16 +16,26 @@ import {
   convertAliasJsonToText,
   convertAliasTextToJson,
   useGetRedirectAliases,
+  useSetRedirectAliases,
 } from '@bodiless/components';
 import { ContentNode } from '@bodiless/core';
 import { DEFAULT_PAGE_REDIRECT_STATUS } from '../constants';
 
 const createRedirect = (node: ContentNode<object>, origin: string, destination: string) => {
-  const initialAliases = convertAliasJsonToText(useGetRedirectAliases(node));
-  const aliases = `${initialAliases}\n${origin} ${destination} ${DEFAULT_PAGE_REDIRECT_STATUS}`;
+  // To save new redirect, needs to append to existing ones to avoid any data loss.
+  // If empty, only new aliases will be saved.
+  const aliasesJsonOld = useGetRedirectAliases(node);
+  const aliasesTextOld = convertAliasJsonToText(aliasesJsonOld);
+  const aliasesTextNew = `${origin} ${destination} ${DEFAULT_PAGE_REDIRECT_STATUS}`;
+  const aliasesText = (aliasesTextOld !== '')
+    ? `${aliasesTextOld}\n${aliasesTextNew}`
+    : aliasesTextNew;
+
+  // Aliases converted to json object.
+  const aliasesJson = convertAliasTextToJson(aliasesText as string);
 
   // Saves json file.
-  node.setData(convertAliasTextToJson(aliases as string));
+  useSetRedirectAliases(node, aliasesJson);
 };
 
 export {
