@@ -73,7 +73,6 @@ const ShowDesignKeys = (
 const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   if (process.env.NODE_ENV === 'development') {
-    console.log('edit page');
     return (
       <GatsbyNodeProvider {...rest}>
         <ShowDesignKeys>

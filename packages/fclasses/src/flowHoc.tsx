@@ -45,8 +45,6 @@ const preserveMeta = (hoc: HOCBase): HOCBase => <P extends object, Q extends obj
     const finalMeta = mergeWith({}, Component, NewComponent, mergeMeta);
     return Object.assign(NewComponent, finalMeta);
   } catch (e) {
-    console.log(e);
-    console.log(Component);
     return Component as ComponentWithMeta;
   }
 };
