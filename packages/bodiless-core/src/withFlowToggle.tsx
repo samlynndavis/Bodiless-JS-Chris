@@ -16,7 +16,7 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import { flowHoc } from '@bodiless/fclasses';
 import type {
-  Condition, AsToken, ComponentWithMeta, ComponentOrTag,
+  Condition, FlowHoc, ComponentWithMeta, ComponentOrTag,
 } from '@bodiless/fclasses';
 
 /**
@@ -54,7 +54,7 @@ export const withFlowToggle = (useToggle: Condition) => <P extends object, Q ext
  */
 export const ifToggledOn = <P extends object>(
   useToggle: Condition<P>,
-): AsToken<P> => (...hocs) => (Component: ComponentOrTag<any>) => {
+): FlowHoc<P> => (...hocs) => (Component: ComponentOrTag<any>) => {
     const reversed = [...hocs].reverse();
     const Alt = flowHoc(...reversed)(Component);
     return withFlowToggle(useToggle)(Alt, Component) as ComponentWithMeta<any>;
@@ -77,4 +77,4 @@ export const ifToggledOn = <P extends object>(
  */
 export const ifToggledOff = <P extends object>(
   useToggle: Condition<P>,
-): AsToken<P> => ifToggledOn((props: P) => !useToggle(props));
+): FlowHoc<P> => ifToggledOn((props: P) => !useToggle(props));
