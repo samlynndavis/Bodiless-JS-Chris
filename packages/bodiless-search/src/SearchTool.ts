@@ -13,6 +13,7 @@
  */
 
 import cheerio from 'cheerio';
+import type { Node as CheerioNode } from 'cheerio';
 import fs from 'fs';
 import glob from 'glob';
 import mime from 'mime';
@@ -160,7 +161,7 @@ class SearchTool implements SearchToolInterface {
       $(excluders.join(',')).remove();
     }
     // eslint-disable-next-line func-names
-    const body = $(selectors.join(',')).contents().map(function (this: cheerio.Element) {
+    const body = $(selectors.join(',')).contents().map(function (this: CheerioNode) {
       return (this.type === 'text') ? $(this).text().trim() : '';
     }).get()
       .join(' ')
