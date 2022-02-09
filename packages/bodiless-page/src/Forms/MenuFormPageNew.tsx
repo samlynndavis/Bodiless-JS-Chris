@@ -29,8 +29,8 @@ import { verifyPage } from '../Operations';
 import { DEFAULT_PAGE_TEMPLATE } from '../constants';
 import {
   PageClient,
-  PageState,
   PageStatus,
+  PageState,
 } from '../types';
 import { getPathValue } from '../utils';
 import { MenuFormPage } from './MenuFormPage';
@@ -64,8 +64,8 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
   const {
     submits, invalid, values,
   } = formState;
-  const [state, setState] = useState<PageStatus>({
-    status: PageState.Init,
+  const [state, setState] = useState<PageState>({
+    status: PageStatus.Init,
   });
   const context = useEditContext();
   const { template } = values;
@@ -74,16 +74,16 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
     // If the form is submitted and valid then lets try to creat a page.
     if (submits && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
-      setState({ status: PageState.Pending });
+      setState({ status: PageStatus.Pending });
       // Create the page.
       createPage({ path, client, template })
         .then((pagePath: string) => {
           if (pagePath) {
-            setState({ status: PageState.Complete, pagePath });
+            setState({ status: PageStatus.Complete, pagePath });
           }
         })
         .catch((err: Error) => {
-          setState({ status: PageState.Errored, errorMessage: err.message });
+          setState({ status: PageStatus.Errored, errorMessage: err.message });
         })
         .finally(() => {
           context.hidePageOverlay();

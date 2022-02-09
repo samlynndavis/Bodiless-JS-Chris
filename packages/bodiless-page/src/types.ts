@@ -10,15 +10,15 @@ import type {
   FormError,
 } from 'informed';
 
-enum PageState {
+enum PageStatus {
   Init,
   Pending,
   Complete,
   Errored,
 }
 
-type PageStatus = {
-  status: PageState;
+type PageState = {
+  status: PageStatus;
   pagePath?: string;
   errorMessage?: string;
   completeMessage?: string;
@@ -65,8 +65,8 @@ export {
   PageClient,
   PageData,
   PageMenuOptions,
-  PageState,
   PageStatus,
+  PageState,
   FieldProps,
   FieldValidate,
 };

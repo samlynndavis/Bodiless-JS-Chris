@@ -28,8 +28,8 @@ import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { createRedirect } from '../Operations';
 import {
   PageClient,
-  PageState,
   PageStatus,
+  PageState,
 } from '../types';
 import {
   getPathValue,
@@ -91,7 +91,7 @@ const movePage = async ({ origin, destination, client } : any) => {
   return Promise.reject(new Error('The page cannot be moved.'));
 };
 
-const MovePageComp = (props : PageStatus) => {
+const MovePageComp = (props : PageState) => {
   const {
     status, errorMessage,
   } = props;
@@ -109,7 +109,7 @@ const MovePageComp = (props : PageStatus) => {
 
   const formTitle = 'Move';
   switch (status) {
-    case PageState.Init: {
+    case PageStatus.Init: {
       return (
         <>
           <ContextMenuProvider ui={defaultUI}>
@@ -133,14 +133,14 @@ const MovePageComp = (props : PageStatus) => {
         </>
       );
     }
-    case PageState.Pending:
+    case PageStatus.Pending:
       return (
         <>
           <ComponentFormTitle>Moving Page</ComponentFormTitle>
           <ComponentFormSpinner />
         </>
       );
-    case PageState.Complete:
+    case PageStatus.Complete:
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
@@ -150,7 +150,7 @@ const MovePageComp = (props : PageStatus) => {
           </ComponentFormDescription>
         </>
       );
-    case PageState.Errored:
+    case PageStatus.Errored:
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
@@ -162,7 +162,7 @@ const MovePageComp = (props : PageStatus) => {
 };
 
 const redirectPage = (values: {keepOpen: boolean, path?: string}) => {
-  if (values.keepOpen || actualState === PageState.Errored || typeof window === 'undefined') {
+  if (values.keepOpen || actualState === PageStatus.Errored || typeof window === 'undefined') {
     actualState = -1;
     return;
   }
@@ -187,8 +187,8 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
   const {
     submits, invalid, values,
   } = formState;
-  const [state, setState] = useState<PageStatus>({
-    status: PageState.Init,
+  const [state, setState] = useState<PageState>({
+    status: PageStatus.Init,
   });
 
   const context = useEditContext();
@@ -198,14 +198,14 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
 
   useEffect(() => {
     if (pathChild === '/') {
-      actualState = PageState.Errored;
-      setState({ status: PageState.Errored, errorMessage: 'The page cannot be moved.' });
+      actualState = PageStatus.Errored;
+      setState({ status: PageStatus.Errored, errorMessage: 'The page cannot be moved.' });
       formApi.setValue('keepOpen', false);
     } else {
       hasPageChild({ pagePath: pathChild, client })
         .catch(() => {
-          actualState = PageState.Errored;
-          setState({ status: PageState.Errored, errorMessage: 'The page cannot be moved while it has child pages.' });
+          actualState = PageStatus.Errored;
+          setState({ status: PageStatus.Errored, errorMessage: 'The page cannot be moved while it has child pages.' });
           formApi.setValue('keepOpen', false);
         });
     }
@@ -223,13 +223,13 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
       const originClear = origin.slice(0, -1);
 
       if (destination === originClear) {
-        actualState = PageState.Errored;
-        setState({ status: PageState.Errored, errorMessage: 'The page cannot be moved.' });
+        actualState = PageStatus.Errored;
+        setState({ status: PageStatus.Errored, errorMessage: 'The page cannot be moved.' });
         formApi.setValue('keepOpen', false);
       } else {
         context.showPageOverlay({ hasSpinner: false });
-        actualState = PageState.Pending;
-        setState({ status: PageState.Pending });
+        actualState = PageStatus.Pending;
+        setState({ status: PageStatus.Pending });
 
         movePage({
           origin,
@@ -240,12 +240,12 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
             if (redirectEnabled) {
               createRedirect(node, originClear, destination);
             }
-            actualState = PageState.Complete;
-            setState({ status: PageState.Complete });
+            actualState = PageStatus.Complete;
+            setState({ status: PageStatus.Complete });
           })
           .catch((err: Error) => {
-            actualState = PageState.Errored;
-            setState({ status: PageState.Errored, errorMessage: err.message });
+            actualState = PageStatus.Errored;
+            setState({ status: PageStatus.Errored, errorMessage: err.message });
           })
           .finally(() => {
             context.hidePageOverlay();

@@ -26,8 +26,8 @@ import { ComponentFormSpinner } from '@bodiless/ui';
 import { usePageMenuOptionUI } from '../MenuOptionUI';
 import {
   PageClient,
-  PageState,
   PageStatus,
+  PageState,
 } from '../types';
 import { hasPageChild } from '../utils';
 import { PageURLField } from './MenuFormFields';
@@ -50,7 +50,7 @@ const deletePage = async ({ path, client } : any) => {
   return Promise.reject(new Error('The page cannot be deleted.'));
 };
 
-const DeletePageForm = (props : PageStatus) => {
+const DeletePageForm = (props : PageState) => {
   const {
     status, errorMessage,
   } = props;
@@ -67,7 +67,7 @@ const DeletePageForm = (props : PageStatus) => {
   const formTitle = 'Delete Page';
 
   switch (status) {
-    case PageState.Init: {
+    case PageStatus.Init: {
       return (
         <>
           <ContextMenuProvider ui={defaultUI}>
@@ -87,14 +87,14 @@ const DeletePageForm = (props : PageStatus) => {
         </>
       );
     }
-    case PageState.Pending:
+    case PageStatus.Pending:
       return (
         <>
           <ComponentFormTitle>Deleting Page</ComponentFormTitle>
           <ComponentFormSpinner />
         </>
       );
-    case PageState.Complete: {
+    case PageStatus.Complete: {
       return (
         <>
           <ContextMenuProvider ui={defaultUI}>
@@ -108,7 +108,7 @@ const DeletePageForm = (props : PageStatus) => {
         </>
       );
     }
-    case PageState.Errored:
+    case PageStatus.Errored:
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>
@@ -120,7 +120,7 @@ const DeletePageForm = (props : PageStatus) => {
 };
 
 const redirectPage = (values: {keepOpen: boolean, path?: string }) => {
-  if (values.keepOpen || actualState === PageState.Errored || typeof window === 'undefined') {
+  if (values.keepOpen || actualState === PageStatus.Errored || typeof window === 'undefined') {
     actualState = -1;
     return;
   }
@@ -150,40 +150,40 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
   const {
     submits,
   } = formState;
-  const [state, setState] = useState<PageStatus>({
-    status: PageState.Init,
+  const [state, setState] = useState<PageState>({
+    status: PageStatus.Init,
   });
   const context = useEditContext();
   const path = (typeof window !== 'undefined') ? window.location.pathname : '';
 
   useEffect(() => {
     if (path === '/') {
-      actualState = PageState.Errored;
-      setState({ status: PageState.Errored, errorMessage: 'The page cannot be deleted.' });
+      actualState = PageStatus.Errored;
+      setState({ status: PageStatus.Errored, errorMessage: 'The page cannot be deleted.' });
       formApi.setValue('keepOpen', false);
     } else {
       hasPageChild({ pagePath: path, client })
         .catch((err: Error) => {
-          actualState = PageState.Errored;
-          setState({ status: PageState.Errored, errorMessage: err.message });
+          actualState = PageStatus.Errored;
+          setState({ status: PageStatus.Errored, errorMessage: err.message });
           formApi.setValue('keepOpen', false);
         });
     }
 
     if (submits && path) {
       context.showPageOverlay({ hasSpinner: false });
-      actualState = PageState.Pending;
-      setState({ status: PageState.Pending });
+      actualState = PageStatus.Pending;
+      setState({ status: PageStatus.Pending });
 
       // Delete the page.
       deletePage({ path, client })
         .then(() => {
-          actualState = PageState.Complete;
-          setState({ status: PageState.Complete });
+          actualState = PageStatus.Complete;
+          setState({ status: PageStatus.Complete });
         })
         .catch((err: Error) => {
-          actualState = PageState.Errored;
-          setState({ status: PageState.Errored, errorMessage: err.message });
+          actualState = PageStatus.Errored;
+          setState({ status: PageStatus.Errored, errorMessage: err.message });
         })
         .finally(() => {
           context.hidePageOverlay();

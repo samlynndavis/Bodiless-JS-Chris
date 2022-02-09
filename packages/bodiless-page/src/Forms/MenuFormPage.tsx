@@ -5,12 +5,12 @@ import {
 import { ComponentFormSpinner } from '@bodiless/ui';
 import { usePageMenuOptionUI } from '../MenuOptionUI';
 import {
-  PageState,
   PageStatus,
+  PageState,
 } from '../types';
 import { PageURLField } from './MenuFormFields';
 
-const MenuFormPage = (props : PageStatus) => {
+const MenuFormPage = (props : PageState) => {
   const {
     status,
     errorMessage,
@@ -32,7 +32,7 @@ const MenuFormPage = (props : PageStatus) => {
   } = defaultUI;
 
   switch (status) {
-    case PageState.Init: {
+    case PageStatus.Init: {
       return (
         <>
           <ContextMenuProvider ui={defaultUI}>
@@ -47,14 +47,14 @@ const MenuFormPage = (props : PageStatus) => {
         </>
       );
     }
-    case PageState.Pending:
+    case PageStatus.Pending:
       return (
         <>
           <ComponentFormTitle>{titlePending}</ComponentFormTitle>
           <ComponentFormSpinner />
         </>
       );
-    case PageState.Complete:
+    case PageStatus.Complete:
       return (
         <>
           <ComponentFormTitle>Operation Complete</ComponentFormTitle>
@@ -63,7 +63,7 @@ const MenuFormPage = (props : PageStatus) => {
           </ComponentFormDescription>
         </>
       );
-    case PageState.Errored:
+    case PageStatus.Errored:
       return (
         <>
           <ComponentFormTitle>{formTitle}</ComponentFormTitle>

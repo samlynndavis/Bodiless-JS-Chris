@@ -26,8 +26,8 @@ import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { verifyPage } from '../Operations';
 import {
   PageClient,
-  PageState,
   PageStatus,
+  PageState,
 } from '../types';
 import { getPathValue } from '../utils';
 import { MenuFormPage } from './MenuFormPage';
@@ -62,8 +62,8 @@ const menuFormPageClone = (client: PageClient) => contextMenuForm({
   const {
     submits, invalid, values,
   } = formState;
-  const [state, setState] = useState<PageStatus>({
-    status: PageState.Init,
+  const [state, setState] = useState<PageState>({
+    status: PageStatus.Init,
   });
   const context = useEditContext();
   const origin = useNode().node.pagePath;
@@ -73,15 +73,15 @@ const menuFormPageClone = (client: PageClient) => contextMenuForm({
     // If the form is submitted and valid then lets try to clone a page.
     if (submits && destination && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
-      setState({ status: PageState.Pending });
+      setState({ status: PageStatus.Pending });
       clonePage({ origin, destination, client })
         .then((pagePath: string) => {
           if (pagePath) {
-            setState({ status: PageState.Complete, pagePath });
+            setState({ status: PageStatus.Complete, pagePath });
           }
         })
         .catch((err: Error) => {
-          setState({ status: PageState.Errored, errorMessage: err.message });
+          setState({ status: PageStatus.Errored, errorMessage: err.message });
         })
         .finally(() => {
           context.hidePageOverlay();
