@@ -23,7 +23,7 @@ import {
   handleBackendResponse,
   useEditContext,
 } from '@bodiless/core';
-import { useGatsbyPageContext } from '@bodiless/gatsby-theme-bodiless';
+// import { useGatsbyPageContext } from '@bodiless/gatsby-theme-bodiless';
 import { usePageMenuOptionUI } from '../MenuOptionUI';
 import { verifyPage } from '../Operations';
 import { DEFAULT_PAGE_TEMPLATE } from '../constants';
@@ -92,8 +92,11 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
     }
   }, [submits]);
   const { status, errorMessage, pagePath } = state;
-  const { subPageTemplate } = useGatsbyPageContext();
-  const currentTemplate = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
+  // @TODO: After (refactoring) Page Component is decoupled from gatsby theme bodiless,
+  // Add gatsby theme bodiless dep for page package and revert lines below.
+  // const { subPageTemplate } = useGatsbyPageContext();
+  // const currentTemplate = subPageTemplate || DEFAULT_PAGE_TEMPLATE;
+  const currentTemplate = DEFAULT_PAGE_TEMPLATE;
   return (
     <>
       <ComponentFormText type="hidden" field="keepOpen" initialValue />
