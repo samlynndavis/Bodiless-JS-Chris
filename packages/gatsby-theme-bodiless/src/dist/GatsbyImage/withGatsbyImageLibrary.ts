@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import { withNodeKey } from '@bodiless/core';
 import { withImageLibrary } from '@bodiless/components-ui';
 import type { AsBodilessImage } from '@bodiless/components';

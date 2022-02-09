@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withDesign, flowHoc} from '@bodiless/fclasses';
+import { withDesign, flowHoc } from '@bodiless/fclasses';
 import {
   withMandatoryCategories,
   ifNotComponentSelector,

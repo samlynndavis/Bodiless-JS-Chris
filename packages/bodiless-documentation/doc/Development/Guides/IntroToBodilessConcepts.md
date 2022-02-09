@@ -154,7 +154,7 @@ The simplest of these is`asEditable` - a simple, unformatted text field.
 Add the following import to the top of your index.tsx:
 ```ts
 import { asEditable } from '@bodiless/components';
-import { addClasses, H1, flowHoc} from '@bodiless/fclasses';
+import { addClasses, H1, flowHoc } from '@bodiless/fclasses';
 ```
 And then update your `PrimaryHeader` definition to make it editable:
 ```ts
@@ -219,7 +219,7 @@ image link to our page.
 Change the imports from `@bodiless/components` and `@bodiless/fclasses`;
 
 ```ts
-import { H1, Img, A, addClasses, flowHoc} from '@bodiless/fclasses';
+import { H1, Img, A, addClasses, flowHoc } from '@bodiless/fclasses';
 import { asEditable, asBodilessLink } from '@bodiless/components';
 import { asBodilessImage } from '@bodiless/components-ui';
 ```

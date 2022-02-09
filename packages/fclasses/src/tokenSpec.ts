@@ -5,7 +5,7 @@ import identity from 'lodash/identity';
 import { pick } from 'lodash';
 import { startWith } from './replaceable';
 import type {
-  TokenDef, // AsToken,
+  TokenDef, // FlowHoc,
   DesignableComponents, HocDesign, TokenSpec,
   ReservedDomains, Design, Token, HOCBase, HOD, TokenSpecBase,
 } from './types';

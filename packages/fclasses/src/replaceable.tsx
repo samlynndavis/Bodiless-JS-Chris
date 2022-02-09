@@ -6,7 +6,7 @@ import React, {
   useEffect,
 } from 'react';
 import { HOCBase, ComponentOrTag, HOC } from './types';
-import { flowHoc} from './flowHoc';
+import { flowHoc } from './flowHoc';
 
 const designContextDefault = undefined as undefined | ComponentType<any>;
 const DesignContext = React.createContext(designContextDefault);

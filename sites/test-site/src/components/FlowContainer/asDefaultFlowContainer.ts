@@ -15,7 +15,7 @@
 import {
   withMandatoryCategories,
 } from '@bodiless/layouts';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import withDefaultVariations from './withDefaultVariations';
 
 import { asFlowContainerWithMargins } from './token';

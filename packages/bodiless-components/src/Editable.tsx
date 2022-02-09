@@ -28,7 +28,7 @@ import {
   withNodeKey,
 } from '@bodiless/core';
 import './Editable.css';
-import { HOC, flowHoc} from '@bodiless/fclasses';
+import { HOC, flowHoc } from '@bodiless/fclasses';
 
 type EditableOverrides = {
   sanitizer?: (text: string) => string,

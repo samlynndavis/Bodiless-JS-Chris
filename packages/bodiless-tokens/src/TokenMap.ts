@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { HOC, flowHoc} from '@bodiless/fclasses';
+import { HOC, flowHoc } from '@bodiless/fclasses';
 
 export type Tokens = {
   [key: string]: HOC,

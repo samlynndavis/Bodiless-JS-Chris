@@ -19,7 +19,7 @@ import {
   useNode, useMenuOptionUI, EditButtonOptions, withEditButton,
   withNode, withSidecarNodes, withNodeKey, withNodeDataHandlers,
 } from '@bodiless/core';
-import { addClasses, flowHoc} from '@bodiless/fclasses';
+import { addClasses, flowHoc } from '@bodiless/fclasses';
 import { Option } from 'informed';
 import { observer } from 'mobx-react';
 import flow from 'lodash/flow';
