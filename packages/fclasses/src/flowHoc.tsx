@@ -150,7 +150,7 @@ type AsToken<B = {}> = AsTokenBase<B> & {
  * @return
  * A composed token.
  */
-const asToken: AsToken = (...args) => {
+const flowHoc: AsToken = (...args) => {
   // We allow "undefined" in args and simply ignore them.
   const args$ = args.filter(a => a !== undefined);
   const metaBits: TokenMeta[] = args$.filter(a => !isToken(a)) as TokenMeta[];
@@ -182,7 +182,7 @@ const withTokenFilter = <P extends object>(test: TokenFilterTest): HOC => (
 /**
  * Utilities for adding metadata to tokens.
  */
-asToken.meta = {
+flowHocmeta = {
   term: (c: string) => (t: string) => ({
     categories: {
       [c]: [t],
@@ -214,4 +214,4 @@ const extendMeta = (
   return undefined;
 });
 
-export { asToken, withTokenFilter, extendMeta };
+export { flowHoc, withTokenFilter, extendMeta };
