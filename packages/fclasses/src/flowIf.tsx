@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { AsToken, Condition } from './types';
-import { flowHoc} from './flowHoc';
+import { flowHoc } from './flowHoc';
 /**
  * Applies a set of HOC's if a condition is true.
  *

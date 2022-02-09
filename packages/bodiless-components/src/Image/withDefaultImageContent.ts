@@ -14,7 +14,7 @@
 
 import { withDefaultContent, withResetButton } from '@bodiless/core';
 import type { DefaultNodeContent } from '@bodiless/core';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import identity from 'lodash/identity';
 import type { AsBodilessImage, Data } from './Image';
 
@@ -31,7 +31,7 @@ const withDefaultImageContent = (
   const asImageHoc = asEditableImage(nodeKey, placeholder, useOverrides);
   return flowHoc(
     asImageHoc.meta,
-    flowHocmeta.term('Category')('Contentful'),
+    flowHoc.meta.term('Category')('Contentful'),
     asImageHoc,
     typeof nodeKey === 'string' ? withDefaultContent({
       [nodeKey]: nodeContent,

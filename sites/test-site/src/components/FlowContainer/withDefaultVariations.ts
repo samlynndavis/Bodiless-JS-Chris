@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import withCardVariations from './withCardVariations';
 import withContentfulCards from './withContentfulCards';
 import withRichTextVariations from './withRichTextVariations';

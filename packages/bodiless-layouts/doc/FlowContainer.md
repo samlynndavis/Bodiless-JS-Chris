@@ -150,11 +150,11 @@ component:
 ```js
 const asBlueCard = flowHoc({
   withDesign({ Wrapper: withBlueBorder }),
-  flowHocmeta.term('Color')('Blue'),
+  flowHoc.meta.term('Color')('Blue'),
 });
 const asRedCard = flowHoc({
   withDesign({ Wrapper: withRedBorder }),
-  flowHocmeta.term('Color')('Red'),
+  flowHoc.meta.term('Color')('Red'),
 });
 const ColoredCardsFC = withDesign({
   BlueCard: flowHoc(startWith(Card), asDefaultCard, asBlueCard),
@@ -193,8 +193,8 @@ to exclude certain categories from appearing.  This can be done via the
 ```js
 const asBlueCard = flowHoc({
   withDesign({ Wrapper: withBlueBorder }),
-  flowHocmeta.term('Color')('Blue'),
-  flowHocmeta.term('Design System')('JnJ'),
+  flowHoc.meta.term('Color')('Blue'),
+  flowHoc.meta.term('Design System')('JnJ'),
 });
 const FCWithBlacklistedCategory = flowHoc(
   withDesign({

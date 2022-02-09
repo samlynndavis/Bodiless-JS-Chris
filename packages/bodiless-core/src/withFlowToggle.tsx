@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { observer } from 'mobx-react';
-import { flowHoc} from '@bodiless/fclasses';
+import { flowHoc } from '@bodiless/fclasses';
 import type {
   Condition, AsToken, ComponentWithMeta, ComponentOrTag,
 } from '@bodiless/fclasses';

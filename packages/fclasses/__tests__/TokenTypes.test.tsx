@@ -97,7 +97,7 @@ describe('Enhancers', () => {
     const C1T3 = <C1 foo="foo" bar="bar" />;
   });
 
-  test('flowHocpropagates the type of an enhancer', () => {
+  test('flowHoc propagates the type of an enhancer', () => {
     const C4 = flowHoc(withToggle)(Base);
     const C4T1 = <C4 toggle foo="foo" bar="bar" />;
     // @ts-expect-error prop baz does not exist
@@ -165,7 +165,7 @@ describe('Composed token type inference', () => {
   const injector: Injector<Pick<BaseProps, 'foo'>> = () => () => null;
   const constrainer: HOC<BaseProps> = () => () => null;
 
-  test('flowHoccorrectly infers types when composing all token types', () => {
+  test('flowHoc correctly infers types when composing all token types', () => {
     const composed = flowHoc(
       constrainer,
       enhancer,

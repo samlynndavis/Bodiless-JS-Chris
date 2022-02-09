@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType, Fragment } from 'react';
+import React, { FC, ComponentType } from 'react';
 import {
   StaticPage,
   ContextWrapperProps,
@@ -22,7 +22,10 @@ import {
   OnNodeErrorNotification,
   useGitButtons,
 } from '@bodiless/core';
-import { withShowDesignKeys } from '@bodiless/fclasses';
+import {
+  Fragment,
+  withShowDesignKeys,
+} from '@bodiless/fclasses';
 import { observer } from 'mobx-react';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import { withPageDisableButton, withRedirectAliasButton } from '@bodiless/components';

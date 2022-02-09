@@ -44,8 +44,8 @@ import {
 import landscapeImage from './landscape_image.png';
 
 export const asBaseEditableImagePlain: AsBodilessImage = (nodeKey?, placeholder?, useOverrides?) => flowHoc(
-  flowHocmeta.term('Component')('Image'),
-  flowHocmeta.term('Category')('Editors'),
+  flowHoc.meta.term('Component')('Image'),
+  flowHoc.meta.term('Category')('Editors'),
   stylable,
   asBodilessImage(nodeKey, undefined, useOverrides),
   withImagePlaceholder(placeholder),

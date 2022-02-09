@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withDesign, addClasses, flowHoc} from '@bodiless/fclasses';
+import { withDesign, addClasses, flowHoc } from '@bodiless/fclasses';
 
 const asResponsiveEmbed = withDesign({
   Wrapper: addClasses('relative overflow-hidden w-full'),

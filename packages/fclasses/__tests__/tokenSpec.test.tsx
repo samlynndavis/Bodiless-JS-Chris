@@ -48,9 +48,9 @@ const asTestTokenSpec = asTokenSpec<TestComponents, typeof defaultDomains>(defau
 
 describe('extendMeta', () => {
   it('Merges categories properly', () => {
-    const foobar = flowHocmeta.term('Foo')('Bar');
-    const foobaz = flowHocmeta.term('Foo')('Baz');
-    const bingbang = flowHocmeta.term('Bing')('Bang');
+    const foobar = flowHoc.meta.term('Foo')('Bar');
+    const foobaz = flowHoc.meta.term('Foo')('Baz');
+    const bingbang = flowHoc.meta.term('Bing')('Bang');
     const test = extendMeta(foobar, foobaz, bingbang);
     expect(test).toEqual({
       categories: {
@@ -208,8 +208,8 @@ describe('extend', () => {
   });
 
   it('Combines metadata properly', () => {
-    const A = asTestTokenSpec({ Meta: flowHocmeta.term('Foo')('Bar') });
-    const B = asTestTokenSpec({ Meta: flowHocmeta.term('Foo')('Baz') });
+    const A = asTestTokenSpec({ Meta: flowHoc.meta.term('Foo')('Bar') });
+    const B = asTestTokenSpec({ Meta: flowHoc.meta.term('Foo')('Baz') });
     const C = asTestTokenSpec({ Meta: { title: 'Title' }});
     const Test = asTestTokenSpec(A, B, C);
     expect(Test).toEqual(asTestTokenSpec({

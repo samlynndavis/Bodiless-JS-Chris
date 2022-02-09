@@ -13,7 +13,7 @@
  */
 
 import { WithNodeKeyProps } from '@bodiless/core';
-import { addProps, flowHoc} from '@bodiless/fclasses';
+import { addProps, flowHoc } from '@bodiless/fclasses';
 import type { HOC } from '@bodiless/fclasses';
 import React, { FC } from 'react';
 import {

@@ -12,7 +12,7 @@ const colors = ['red', 'blue', 'teal', 'green', 'yellow', 'purple', 'orange'];
 const createColorDesign = (prefix: string) => colors.reduce(
   (acc, next) => ({
     ...acc,
-    [`${prefix}${next}4`]: flowHoc(addClasses(`${prefix}-${next}-400`), flowHocmeta.term(prefix)(`${prefix}-${next}`)),
+    [`${prefix}${next}4`]: flowHoc(addClasses(`${prefix}-${next}-400`), flowHoc.meta.term(prefix)(`${prefix}-${next}`)),
   }),
   {},
 );
@@ -25,7 +25,7 @@ const createTextDesign = (n: number) => {
   for (let i = 0; i < n; i += 1) {
     design[`Text${i}`] = flowHoc(
       addProps({ children: `Foo ${i}` }),
-      flowHocmeta.term('Copy')(`${i}`),
+      flowHoc.meta.term('Copy')(`${i}`),
     );
   }
   return design;

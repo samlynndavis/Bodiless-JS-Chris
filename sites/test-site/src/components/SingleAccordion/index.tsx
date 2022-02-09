@@ -18,7 +18,7 @@ import {
   withDisableExpandOnClick,
 } from '@bodiless/accordion';
 import { withNode } from '@bodiless/core';
-import { withDesign, flowHoc} from '@bodiless/fclasses';
+import { withDesign, flowHoc } from '@bodiless/fclasses';
 import {
   asSingleAccordionDefaultStyle,
   asAccordionTitleBordered,
