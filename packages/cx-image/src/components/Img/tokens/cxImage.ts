@@ -22,7 +22,7 @@ import { asBodilessLink } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/cx-elements';
 
 // @ts-ignore Cannot find module
-import landscapeImage from '../assets/landscape_image.png';
+import landscapeImage from '../../../../assets/landscape_image.png';
 
 /**
  * @private
