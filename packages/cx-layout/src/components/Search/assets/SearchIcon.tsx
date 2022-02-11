@@ -15,19 +15,18 @@
 import React from 'react';
 import { stylable } from '@bodiless/fclasses';
 
-// @todo update this placeholder with the real design icon
 const Search = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="14"
-    height="14"
-    fill="none"
+    width="26.83"
+    height="26.83"
     {...props}
   >
-    <path fill="#F0F" d="m7.7 6.29 5.78 5.78-1.41 1.42L6.28 7.7z" />
-    <circle cx="4.5" cy="4.5" r="3.5" stroke="#F0F" strokeWidth="2" />
+    <g data-name="Group 208" transform="translate(1.41 1.41)">
+      <circle data-name="Ellipse 21" cx="8.48" cy="8.48" r="8.48" transform="rotate(-45 14.49 6)" fill="none" stroke="#212121" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+    </g>
+    <path data-name="Line 271" fill="none" stroke="#212121" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19.94 20.08 5.47 5.22" />
   </svg>
-
 );
 
 const SearchIcon = stylable(Search);
