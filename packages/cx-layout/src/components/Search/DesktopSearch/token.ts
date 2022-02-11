@@ -12,17 +12,13 @@
  * limitations under the License.
  */
 
-import { addProps, replaceWith } from '@bodiless/fclasses';
-import SearchIcon from '../assets/SearchIcon';
+import { addProps } from '@bodiless/fclasses';
 import { asDesktopSearchToken } from './DesktopSearchClean';
 
 /**
  * Token that defines a basic header.
  */
 const Base = asDesktopSearchToken({
-  Components: {
-    Icon: replaceWith(SearchIcon)
-  },
   Layout: {
     Wrapper: 'flex items-center',
   },

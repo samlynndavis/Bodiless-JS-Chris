@@ -14,13 +14,14 @@
 
 import React, { FC } from 'react';
 
-import { Div, designable, Span } from '@bodiless/fclasses';
+import { Div, designable } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { SearchTogglerComponents, SearchTogglerProps } from './types';
+import SearchIcon from '../assets/SearchIcon';
 
 const searchTogglerComponents: SearchTogglerComponents = {
   Wrapper: Div,
-  Icon: Span,
+  Icon: SearchIcon,
 };
 
 const SearchTogglerBase: FC<SearchTogglerProps> = ({ components: C }) => (

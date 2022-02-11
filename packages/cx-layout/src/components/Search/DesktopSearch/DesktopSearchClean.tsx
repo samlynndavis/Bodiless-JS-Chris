@@ -17,10 +17,11 @@ import React, { FC } from 'react';
 import { Div, designable, Span } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { DesktopSearchComponents, DesktopSearchProps } from './types';
+import SearchIcon from '../assets/SearchIcon';
 
 const desktopSearchComponents: DesktopSearchComponents = {
   Wrapper: Div,
-  Icon: Span,
+  Icon: SearchIcon,
   Label: Span,
 };
 

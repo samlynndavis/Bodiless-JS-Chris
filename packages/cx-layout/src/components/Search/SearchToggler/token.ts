@@ -12,17 +12,12 @@
  * limitations under the License.
  */
 
-import { replaceWith } from '@bodiless/fclasses';
-import SearchIcon from '../assets/SearchIcon';
 import { asSearchTogglerToken } from './SearchTogglerClean';
 
 /**
  * Token that defines a basic header.
  */
 const Base = asSearchTogglerToken({
-  Components: {
-    Icon: replaceWith(SearchIcon)
-  },
   Layout: {
     Wrapper: 'lg:hidden'
   },
