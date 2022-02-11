@@ -87,7 +87,7 @@ const Base = asHeaderToken({
     UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu' }),
   },
   Layout: {
-    Container: 'container mx-auto flex justify-between items-center',
+    Container: 'container flex justify-between items-center',
     MenuContainer: 'hidden lg:flex justify-between items-center flex-grow',
     UtilityMenuContainer: 'flex items-center',
   },
@@ -96,33 +96,6 @@ const Base = asHeaderToken({
   }
 });
 
-/**
- * Token which adds a responsive utility menu
- */
-// const WithResponsiveUtilityMenu = asHeaderToken({
-//   Components: {
-//     UtilityMenu: t(
-//       withTwResponsiveVariants('lg'),
-//       withDesign({
-//         _default: withOnlyProps() as HOC,
-//         lg: t(startWith(ListClean), as(cxUtilityMenu.Default), 'hidden lg:block'),
-//       }),
-//     ),
-//   },
-// });
-
-/**
- * Token which adds a responsive utility menu
- */
-// const WithUtilityMenu = asHeaderToken({
-//   Components: {
-//     UtilityMenu: t(
-//       startWith(ListClean),
-//       as(cxUtilityMenu.Default),
-//     ),
-//   },
-// });
-
 const Default = asHeaderToken({
   ...Base,
 });
@@ -130,6 +103,4 @@ const Default = asHeaderToken({
 export const cxHeader = {
   Base,
   Default,
-  // WithUtilityMenu,
-  // WithResponsiveUtilityMenu,
 };
