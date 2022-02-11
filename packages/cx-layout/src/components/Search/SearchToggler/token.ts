@@ -24,8 +24,11 @@ const Base = asSearchTogglerToken({
     Icon: replaceWith(SearchIcon)
   },
   Layout: {
-    Wrapper: 'lg:hidden m-4'
-  }
+    Wrapper: 'lg:hidden'
+  },
+  Spacing: {
+    Wrapper: 'm-4'
+  },
 });
 
 const Default = asSearchTogglerToken({

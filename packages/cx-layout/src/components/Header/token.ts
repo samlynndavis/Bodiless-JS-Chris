@@ -87,10 +87,13 @@ const Base = asHeaderToken({
     UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu' }),
   },
   Layout: {
-    Container: 'container mx-auto flex justify-between items-center py-4',
+    Container: 'container mx-auto flex justify-between items-center',
     MenuContainer: 'hidden lg:flex justify-between items-center flex-grow',
     UtilityMenuContainer: 'flex items-center',
   },
+  Spacing: {
+    Container: 'mx-auto py-4',
+  }
 });
 
 /**

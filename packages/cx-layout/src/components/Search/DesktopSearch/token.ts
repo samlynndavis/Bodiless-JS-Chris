@@ -24,7 +24,10 @@ const Base = asDesktopSearchToken({
     Icon: replaceWith(SearchIcon)
   },
   Layout: {
-    Wrapper: 'flex items-center px-4',
+    Wrapper: 'flex items-center',
+  },
+  Spacing: {
+    Wrapper: 'px-4',
     Icon: 'm-3'
   },
   Content: {
