@@ -12,6 +12,27 @@
  * limitations under the License.
  */
 
-import cxLogo from './cxLogo';
+import { replaceWith } from '@bodiless/fclasses';
+import SearchIcon from '../assets/SearchIcon';
+import { asSearchTogglerToken } from './SearchTogglerClean';
 
-export default cxLogo;
+/**
+ * Token that defines a basic header.
+ */
+const Base = asSearchTogglerToken({
+  Components: {
+    Icon: replaceWith(SearchIcon)
+  },
+  Layout: {
+    Wrapper: 'lg:hidden m-4'
+  }
+});
+
+const Default = asSearchTogglerToken({
+  ...Base,
+});
+
+export const cxSearchToggler = {
+  Base,
+  Default,
+};

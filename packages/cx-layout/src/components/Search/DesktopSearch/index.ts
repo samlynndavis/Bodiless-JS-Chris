@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxLogo from './cxLogo';
-
-export default cxLogo;
+export { DesktopSearchClean, asDesktopSearchToken } from './DesktopSearchClean';
+export { cxDesktopSearch } from './token';
+export { DesktopSearchComponents, DesktopSearchProps } from './types';

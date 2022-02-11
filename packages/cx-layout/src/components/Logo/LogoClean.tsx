@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@ import React, { FC, HTMLProps } from 'react';
 import {
   A,
   DesignableComponentsProps,
-  Div,
+  Span,
   Img,
   designable,
   ComponentOrTag,
@@ -35,7 +35,7 @@ export type LogoComponents = {
 type LogoProps = DesignableComponentsProps<LogoComponents> & HTMLProps<HTMLElement>;
 
 const logoComponents: LogoComponents = {
-  Wrapper: Div,
+  Wrapper: Span,
   Image: Img,
   Link: A,
 };

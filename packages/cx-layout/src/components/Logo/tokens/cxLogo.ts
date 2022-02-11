@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,19 +27,14 @@ import {
   withSidecarNodes,
 } from '@bodiless/core';
 import { asBodilessLink } from '@bodiless/components-ui';
-// import { asSchemaSource } from '@canvasx/structuredata';
 import { asLogoToken } from '../LogoClean';
 
 const Default = asLogoToken({
   Layout: {
     Wrapper: as(
       cxElement.WithFlexCenterXY,
-      'order-1',
     ),
   },
-  // SEO: {
-  //   Image: asSchemaSource('organization-logo'),
-  // },
   Spacing: {
     Link: 'h-44px lg:h-88px max-w-240px lg:max-w-441px',
     Image: 'max-h-full',

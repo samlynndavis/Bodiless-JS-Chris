@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxLogo from './cxLogo';
-
-export default cxLogo;
+export { SearchTogglerClean, asSearchTogglerToken } from './SearchTogglerClean';
+export { cxSearchToggler } from './token';
+export { SearchTogglerComponents, SearchTogglerProps } from './types';

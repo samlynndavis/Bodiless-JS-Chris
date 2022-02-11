@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,21 +13,48 @@
  */
 
 import { withNodeKey } from '@bodiless/core';
-
 import { cxElement } from '@bodiless/cx-elements';
-import { as } from '@bodiless/fclasses';
+import {
+  flowHoc, replaceWith, Span, withProps
+} from '@bodiless/fclasses';
 import { asHeaderToken } from './HeaderClean';
 import { cxLogo } from '../Logo';
+import { cxMenuToggler } from '../MenuToggler';
+import { cxDesktopSearch, cxSearchToggler } from '../Search';
 
 /**
- * Token that defines a basic CanvasX header.
+ * Token that defines a basic header.
  */
 const Base = asHeaderToken({
-  // Analytics: {
-  //   Search: as(withSearchDataLayer),
-  // },
   Components: {
+    MenuToggler: cxMenuToggler.Default,
+    SearchToggler: cxSearchToggler.Default,
     Logo: cxLogo.Default,
+    DesktopSearch: cxDesktopSearch.Default,
+    // @todo replace Menu placeholder
+    Menu: flowHoc(
+      replaceWith(Span),
+      withProps({
+        children: 'Main menu',
+        className: 'ml-6'
+      })
+    ),
+    // @todo replace UserRegistration placeholder
+    UserRegistration: flowHoc(
+      replaceWith(Span),
+      withProps({
+        children: 'Email Sign Up & Rewards',
+        className: 'px-4 border-l-2 border-gray-400'
+      })
+    ),
+    // @todo replace LanguageButton placeholder
+    LanguageButton: flowHoc(
+      replaceWith(Span),
+      withProps({
+        children: 'Español',
+        className: 'px-4 border-l-2 border-gray-400'
+      })
+    ),
   },
   Theme: {
     Wrapper: cxElement.WithPrimaryBgColor,
@@ -40,16 +67,9 @@ const Base = asHeaderToken({
     }),
   },
   Layout: {
-    // @todo move to spacing
-    Wrapper: 'lg:pt-15px',
-    Container: as(
-      cxElement.withContainerLayout,
-      'flex items-center justify-between lg:items-start flex-wrap',
-      // @todo move this to spacing
-      'md:h-auto h-12',
-    ),
-    ButtonsWrapper: 'order-1',
-    MenuContainer: 'lg:mt-9px absolute lg:static lg:w-full lg:order-1',
+    Container: 'container mx-auto flex justify-between items-center py-4',
+    MenuContainer: 'hidden lg:flex justify-between items-center flex-grow',
+    UtilityMenu: 'flex items-center',
   },
 });
 

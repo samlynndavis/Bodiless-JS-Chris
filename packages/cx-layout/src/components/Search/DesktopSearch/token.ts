@@ -12,6 +12,31 @@
  * limitations under the License.
  */
 
-import cxLogo from './cxLogo';
+import { addProps, replaceWith } from '@bodiless/fclasses';
+import SearchIcon from '../assets/SearchIcon';
+import { asDesktopSearchToken } from './DesktopSearchClean';
 
-export default cxLogo;
+/**
+ * Token that defines a basic header.
+ */
+const Base = asDesktopSearchToken({
+  Components: {
+    Icon: replaceWith(SearchIcon)
+  },
+  Layout: {
+    Wrapper: 'flex items-center px-4',
+    Icon: 'm-3'
+  },
+  Content: {
+    Label: addProps({ children: 'Search' })
+  }
+});
+
+const Default = asDesktopSearchToken({
+  ...Base,
+});
+
+export const cxDesktopSearch = {
+  Base,
+  Default,
+};

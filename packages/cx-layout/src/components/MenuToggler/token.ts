@@ -12,6 +12,27 @@
  * limitations under the License.
  */
 
-import cxLogo from './cxLogo';
+import { replaceWith } from '@bodiless/fclasses';
+import BurgerIcon from './assets/BurgerIcon';
+import { asMenuTogglerToken } from './MenuTogglerClean';
 
-export default cxLogo;
+/**
+ * Token that defines a basic header.
+ */
+const Base = asMenuTogglerToken({
+  Components: {
+    Icon: replaceWith(BurgerIcon)
+  },
+  Layout: {
+    Wrapper: 'lg:hidden m-4'
+  }
+});
+
+const Default = asMenuTogglerToken({
+  ...Base,
+});
+
+export const cxMenuToggler = {
+  Base,
+  Default,
+};

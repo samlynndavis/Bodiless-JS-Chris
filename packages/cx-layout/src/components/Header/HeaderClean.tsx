@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,94 +12,45 @@
  * limitations under the License.
  */
 
-import React, {
-  FC, HTMLProps,
-} from 'react';
-import {
-  DesignableComponentsProps,
-  Div,
-  Fragment,
-  designable,
-  ComponentOrTag,
-} from '@bodiless/fclasses';
+import React, { FC } from 'react';
+import { Div, Fragment, designable } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { LogoClean } from '../Logo';
-
-export type HeaderComponents = {
-  Wrapper: ComponentOrTag<any>,
-  Container: ComponentOrTag<any>,
-  MenuContainer: ComponentOrTag<any>,
-  MenuToggler: ComponentOrTag<any>,
-  Menu: ComponentOrTag<any>,
-  Logo: ComponentOrTag<any>,
-  UtilityMenu: ComponentOrTag<any>,
-  SocialLinks: ComponentOrTag<any>,
-  ButtonsMenuWrapper: ComponentOrTag<any>,
-  ButtonsWrapper: ComponentOrTag<any>,
-  LanguageButton: ComponentOrTag<any>,
-  UserRegistration: ComponentOrTag<any>,
-  Search: ComponentOrTag<any>,
-  SearchToggler: ComponentOrTag<any>,
-};
-type HeaderProps = DesignableComponentsProps<HeaderComponents> & HTMLProps<HTMLElement>;
+import { MenuTogglerClean } from '../MenuToggler';
+import { SearchTogglerClean, DesktopSearchClean } from '../Search';
+import { HeaderComponents, HeaderProps } from './types';
 
 const headerComponents: HeaderComponents = {
   Wrapper: Div,
   Container: Div,
   MenuContainer: Div,
-  MenuToggler: Fragment,
+  MenuToggler: MenuTogglerClean,
   Menu: Fragment,
   Logo: LogoClean,
-  UtilityMenu: Fragment,
-  SocialLinks: Fragment,
-  ButtonsMenuWrapper: Fragment,
-  ButtonsWrapper: Div,
-  Search: Fragment,
-  SearchToggler: Fragment,
+  UtilityMenu: Div,
+  DesktopSearch: DesktopSearchClean,
+  SearchToggler: SearchTogglerClean,
   LanguageButton: Fragment,
   UserRegistration: Fragment,
 };
 
-const HeaderCleanBase: FC<HeaderProps> = ({ components }) => {
-  const {
-    Wrapper,
-    Container,
-    MenuContainer,
-    MenuToggler,
-    Menu,
-    Logo,
-    UtilityMenu,
-    SocialLinks,
-    ButtonsMenuWrapper,
-    ButtonsWrapper,
-    LanguageButton,
-    UserRegistration,
-    Search,
-    SearchToggler,
-  } = components;
-
-  return (
-    <Wrapper>
-      <Container>
-        <MenuToggler />
-        <SearchToggler />
-        <Logo />
-        <UtilityMenu />
-        <SocialLinks />
-        <ButtonsMenuWrapper>
-          <ButtonsWrapper>
-            <Search />
-            <LanguageButton />
-            <UserRegistration />
-          </ButtonsWrapper>
-          <MenuContainer>
-            <Menu />
-          </MenuContainer>
-        </ButtonsMenuWrapper>
-      </Container>
-    </Wrapper>
-  );
-};
+const HeaderCleanBase: FC<HeaderProps> = ({ components: C }) => (
+  <C.Wrapper>
+    <C.Container>
+      <C.MenuToggler />
+      <C.Logo />
+      <C.SearchToggler />
+      <C.MenuContainer>
+        <C.Menu />
+        <C.UtilityMenu>
+          <C.DesktopSearch />
+          <C.UserRegistration />
+          <C.LanguageButton />
+        </C.UtilityMenu>
+      </C.MenuContainer>
+    </C.Container>
+  </C.Wrapper>
+);
 
 export const HeaderClean = designable(headerComponents, 'Header')(HeaderCleanBase);
 

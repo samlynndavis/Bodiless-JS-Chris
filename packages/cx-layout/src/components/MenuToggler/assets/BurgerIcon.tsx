@@ -12,6 +12,22 @@
  * limitations under the License.
  */
 
-import cxLogo from './cxLogo';
+import React from 'react';
+import { stylable } from '@bodiless/fclasses';
 
-export default cxLogo;
+// @todo update this placeholder with the real design icon
+const Burger = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    fill="none"
+    {...props}
+  >
+    <path fill="#F0F" d="M0 0h14v2H0zM0 12h14v2H0zM0 6h14v2H0z" />
+  </svg>
+);
+
+const BurgerIcon = stylable(Burger);
+
+export default BurgerIcon;

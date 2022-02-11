@@ -12,6 +12,13 @@
  * limitations under the License.
  */
 
-import cxLogo from './cxLogo';
+import { HTMLProps } from 'react';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-export default cxLogo;
+export type SearchTogglerComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Icon: ComponentOrTag<any>,
+};
+
+export type SearchTogglerProps =
+  DesignableComponentsProps<SearchTogglerComponents> & HTMLProps<HTMLElement>;

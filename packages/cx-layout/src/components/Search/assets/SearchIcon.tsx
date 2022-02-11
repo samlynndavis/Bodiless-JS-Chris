@@ -12,6 +12,24 @@
  * limitations under the License.
  */
 
-import cxLogo from './cxLogo';
+import React from 'react';
+import { stylable } from '@bodiless/fclasses';
 
-export default cxLogo;
+// @todo update this placeholder with the real design icon
+const Search = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="14"
+    height="14"
+    fill="none"
+    {...props}
+  >
+    <path fill="#F0F" d="m7.7 6.29 5.78 5.78-1.41 1.42L6.28 7.7z" />
+    <circle cx="4.5" cy="4.5" r="3.5" stroke="#F0F" strokeWidth="2" />
+  </svg>
+
+);
+
+const SearchIcon = stylable(Search);
+
+export default SearchIcon;

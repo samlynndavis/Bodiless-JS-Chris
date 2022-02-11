@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxLogo from './cxLogo';
-
-export default cxLogo;
+export * from './MenuTogglerClean';
+export * from './token';
+export * from './types';
