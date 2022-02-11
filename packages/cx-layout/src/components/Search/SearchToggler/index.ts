@@ -13,5 +13,5 @@
  */
 
 export { SearchTogglerClean, asSearchTogglerToken } from './SearchTogglerClean';
-export { cxSearchToggler } from './token';
+export { cxSearchToggler } from './cxSearchToggler';
 export { SearchTogglerComponents, SearchTogglerProps } from './types';

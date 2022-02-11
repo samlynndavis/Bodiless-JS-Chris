@@ -13,5 +13,5 @@
  */
 
 export { HeaderClean, asHeaderToken } from './HeaderClean';
-export { cxHeader } from './token';
+export { cxHeader } from './cxHeader';
 export { HeaderComponents, HeaderProps } from './types';

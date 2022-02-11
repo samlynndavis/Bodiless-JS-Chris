@@ -13,5 +13,5 @@
  */
 
 export * from './MenuTogglerClean';
-export * from './token';
+export * from './cxMenuToggler';
 export * from './types';
