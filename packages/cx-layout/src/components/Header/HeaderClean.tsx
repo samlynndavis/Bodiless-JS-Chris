@@ -27,11 +27,11 @@ const headerComponents: HeaderComponents = {
   MenuToggler: MenuTogglerClean,
   Menu: Fragment,
   Logo: LogoClean,
-  UtilityMenu: Div,
+  UtilityMenuContainer: Div,
+  UtilityMenu: Fragment,
   DesktopSearch: DesktopSearchClean,
   SearchToggler: SearchTogglerClean,
   LanguageButton: Fragment,
-  UserRegistration: Fragment,
 };
 
 const HeaderCleanBase: FC<HeaderProps> = ({ components: C }) => (
@@ -42,11 +42,11 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C }) => (
       <C.SearchToggler />
       <C.MenuContainer>
         <C.Menu />
-        <C.UtilityMenu>
+        <C.UtilityMenuContainer>
           <C.DesktopSearch />
-          <C.UserRegistration />
+          <C.UtilityMenu />
           <C.LanguageButton />
-        </C.UtilityMenu>
+        </C.UtilityMenuContainer>
       </C.MenuContainer>
     </C.Container>
   </C.Wrapper>

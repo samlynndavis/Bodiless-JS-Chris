@@ -15,12 +15,32 @@
 import { withNodeKey } from '@bodiless/core';
 import { cxElement } from '@bodiless/cx-elements';
 import {
-  flowHoc, replaceWith, Span, withProps
+  A, addClasses, flowHoc, flowIf, replaceWith, Span,
+  Ul, withDesign, withProps
 } from '@bodiless/fclasses';
+import {
+  asBodilessLink, asBodilessList, asEditable, useListContext
+} from '@bodiless/components';
 import { asHeaderToken } from './HeaderClean';
 import { cxLogo } from '../Logo';
 import { cxMenuToggler } from '../MenuToggler';
 import { cxDesktopSearch, cxSearchToggler } from '../Search';
+
+// @todo replace UtilityMenu placeholder tokens
+const UtilityMenuContainerPlaceholder = addClasses('flex')(Ul);
+const UtilityMenuItemPlaceholder = flowHoc(
+  asBodilessLink(),
+  addClasses('px-4 border-l-2 border-gray-400'),
+  // I'm sure there's a better way to get the first
+  // list item, but this is just a placeholder, so...
+  // Also, whoever's gonna implement this later: it's
+  // probably better to use Tailwind's `first:`, but
+  // you'll need to activate it in the config first.
+  flowIf(() => {
+    const { currentItem, items } = useListContext();
+    return Boolean(items && currentItem === items[0]);
+  })(addClasses('px-0')),
+)(A);
 
 /**
  * Token that defines a basic header.
@@ -31,20 +51,22 @@ const Base = asHeaderToken({
     SearchToggler: cxSearchToggler.Default,
     Logo: cxLogo.Default,
     DesktopSearch: cxDesktopSearch.Default,
+    // @todo replace UtilityMenu placeholder
+    UtilityMenu: replaceWith(flowHoc(
+      asBodilessList(),
+      withDesign({
+        Title: flowHoc(
+          replaceWith(UtilityMenuItemPlaceholder),
+          asEditable('text', 'Menu Item')
+        )
+      })
+    )(UtilityMenuContainerPlaceholder)),
     // @todo replace Menu placeholder
     Menu: flowHoc(
       replaceWith(Span),
       withProps({
         children: 'Main menu',
         className: 'ml-6'
-      })
-    ),
-    // @todo replace UserRegistration placeholder
-    UserRegistration: flowHoc(
-      replaceWith(Span),
-      withProps({
-        children: 'Email Sign Up & Rewards',
-        className: 'px-4 border-l-2 border-gray-400'
       })
     ),
     // @todo replace LanguageButton placeholder
@@ -60,16 +82,14 @@ const Base = asHeaderToken({
     Wrapper: cxElement.WithPrimaryBgColor,
   },
   Schema: {
-    Menu: withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
-    UtilityMenu: withNodeKey({
-      nodeKey: 'UtilityMenu',
-      nodeCollection: 'site',
-    }),
+    Logo: withNodeKey({ nodeKey: 'Logo' }),
+    Menu: withNodeKey({ nodeKey: 'MainMenu' }),
+    UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu' }),
   },
   Layout: {
     Container: 'container mx-auto flex justify-between items-center py-4',
     MenuContainer: 'hidden lg:flex justify-between items-center flex-grow',
-    UtilityMenu: 'flex items-center',
+    UtilityMenuContainer: 'flex items-center',
   },
 });
 
