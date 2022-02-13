@@ -13,17 +13,24 @@
  */
 
 import React, { FC, useContext } from 'react';
+import type { GitContextProps } from '@bodiless/core';
 
 export type GatsbyPage = {
   slug: string,
   subPageTemplate: string,
   template: string,
+  gitInfo: GitContextProps,
 };
 
 const defaultGatsbyPage = {
   slug: '/',
   subPageTemplate: '_default',
   template: '_default',
+  gitInfo: {
+    origin: '',
+    sha: '',
+    branch: '',
+  },
 };
 
 export type PageProviderProps = {

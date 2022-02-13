@@ -13,7 +13,9 @@
  */
 
 import React from 'react';
+import Helmet from 'react-helmet';
 import { graphql } from 'gatsby';
+import { withMetaSiteInfo } from '@bodiless/components';
 import Layout from '../components/Layout';
 import { SectionContent, SectionMargin } from '../components/Product';
 import Page from '../components/Page';
@@ -24,8 +26,11 @@ import {
 } from '../components/ProductListing';
 import { FilterByGroupSingleSiteWide } from '../components/FilterByGroup';
 
+const SiteInfoHelmet = withMetaSiteInfo(Helmet);
+
 const main = props => (
   <Page {...props}>
+    <SiteInfoHelmet />
     <Layout>
       <SectionContent>
         <SectionMargin>
