@@ -30,13 +30,13 @@
     "@bodiless/components": "^0.3.6",
     "@bodiless/core": "^0.3.6",
     "common-tags": "^1.8.0",
-    "lodash": "^4.17.19",
-    "react-helmet": "^6.1.0"
+    "lodash": "^4.17.19"
   },
   "devDependencies": {
     "enzyme": "^3.9.0"
   },
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^17.0.2",
+    "react-helmet": "^6.1.0"
   }
 }
