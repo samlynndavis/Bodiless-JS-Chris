@@ -127,7 +127,7 @@ const MovePageComp = (props : PageState) => {
                 initialValue
                 keepState
               />
-              Redirect
+              Add redirect
             </ComponentFormLabel>
           </ContextMenuProvider>
         </>
