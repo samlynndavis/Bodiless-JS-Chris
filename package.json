@@ -50,14 +50,14 @@
     "sites:launch-test": "npm run sites:clone-local test-site && npm run sites:update test-site && cd sites/test-site && npm install --legacy-peer-deps && npm run start",
     "start": "npm run start --workspace=@bodiless/test-site",
     "sync:fix": "syncpack fix-mismatches",
-    "sync:list": "syncpack list-mismatches",
+    "sync:check": "syncpack list-mismatches",
     "test": "jest",
     "test:ci": "WAIT_ON_TIMEOUT=600000 start-server-and-test sites:launch-test http://localhost:8005 cy:run",
     "test:watch": "jest --watch"
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run sync:list && npm run lint && npm run check"
+      "pre-push": "npm run sync:check && npm run lint && npm run check"
     }
   },
   "dependencies": {
