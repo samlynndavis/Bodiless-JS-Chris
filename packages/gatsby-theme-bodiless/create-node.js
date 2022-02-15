@@ -188,11 +188,13 @@ const createGitInfo = async () => {
   try {
     const gitInfoFs = await getGitInfoFromFs();
     if (gitInfoFs) {
+      logger.log('Git info from fs. ', gitInfoFs);
       return gitInfoFs;
     }
 
-    const gitInfoAPI = getGitInfoFromGitHubAPI();
+    const gitInfoAPI = await getGitInfoFromGitHubAPI();
     if (gitInfoAPI) {
+      logger.log('Git info from API. ', gitInfoAPI);
       return gitInfoAPI;
     }
   } catch (err) {
