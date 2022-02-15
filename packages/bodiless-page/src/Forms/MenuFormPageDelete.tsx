@@ -83,6 +83,7 @@ const DeletePageForm = (props : PageState) => {
             <PageURLField
               fieldLabel="Add optional redirect"
               placeholder="/redirectpage"
+              simpleValidation
               validateOnChange
               validateOnBlur
             />

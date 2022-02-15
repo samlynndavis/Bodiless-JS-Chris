@@ -58,6 +58,7 @@ type CustomFieldProps = {
   fieldFull?: boolean,
   fieldLabel?: string,
   required?: boolean,
+  simpleValidation?: boolean,
 };
 type FieldProps = Omit<BaseFieldProps, 'field'> & CustomFieldProps;
 type FieldValidate = (value: FormValue, values: FormValues) => FormError;

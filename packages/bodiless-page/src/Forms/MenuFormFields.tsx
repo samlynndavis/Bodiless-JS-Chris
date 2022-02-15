@@ -54,14 +54,14 @@ const PageURLField = (props: FieldProps) => {
   const isFullUrl = isBasePathEmpty;
 
   const {
-    fieldLabel, fieldFull, required, validate, ...rest
+    fieldLabel, fieldFull, required, simpleValidation, validate, ...rest
   } = props;
 
   const {
     fieldState, fieldApi, render, ref, userProps,
   } = useField({
     field: PAGE_URL_FIELD_NAME,
-    validate: getPageUrlValidator(validate, required),
+    validate: getPageUrlValidator(validate, required, simpleValidation),
     placeholder: isFullUrl ? '/mypath/mypage' : 'my-page',
     ...rest,
   });
