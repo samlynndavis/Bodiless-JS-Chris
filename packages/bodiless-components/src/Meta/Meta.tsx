@@ -97,7 +97,6 @@ const withMetaHtml = (
 ) => (HelmetComponent: CT) => (props: any) => {
   const { children, ...rest } = props;
   const { node } = useNode(nodeCollection);
-
   const childNode = node.child(nodeKey);
   return (
     <HelmetComponent {...rest}>

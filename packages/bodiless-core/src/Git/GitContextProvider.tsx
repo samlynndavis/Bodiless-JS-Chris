@@ -28,14 +28,11 @@ const GitContext = React.createContext<GitContextProps>(defaultGitInfo);
  *
  * @param props
  */
-export const GitContextProvider: FC<GitContextProviderProps> = ({ children, ...rest }) => {
-  const { gitInfo } = rest;
-  return (
-    <GitContext.Provider value={gitInfo}>
-      {children}
-    </GitContext.Provider>
-  );
-};
+export const GitContextProvider: FC<GitContextProviderProps> = ({ children, gitInfo }) => (
+  <GitContext.Provider value={gitInfo}>
+    {children}
+  </GitContext.Provider>
+);
 
 export const useGitContext = () => useContext(GitContext);
 

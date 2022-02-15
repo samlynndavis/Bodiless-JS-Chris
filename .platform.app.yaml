@@ -45,6 +45,7 @@ hooks:
         export SSI_CONF_PATH=sites/test-site/ssi/ssi_conf.json
         export DOCUMENT_ROOT=$PLATFORM_DOCUMENT_ROOT
         export VOLUME_DIR=$APP_VOLUME
+        export BODILESS_GITHUB_API_BRANCH=$PLATFORM_BRANCH
         node $PLATFORM_APP_DIR/packages/bodiless-psh/lib/generate-ssi-files.js build    
     deploy: |
         #processing site url
