@@ -35,7 +35,7 @@
     "@bodiless/fclasses": "^0.3.6",
     "@bodiless/layouts": "^0.3.6",
     "@bodiless/ui": "^0.3.6",
-    "@types/react-helmet": "^5.0.14",
+    "@types/react-helmet": "^6.1.0",
     "axios": "^0.21.0",
     "common-tags": "^1.8.0",
     "copyfiles": "^2.1.1",
@@ -48,7 +48,7 @@
     "rc-tooltip": "^5.1.1",
     "react-contenteditable": "^3.2.6",
     "react-dropzone": "^10.1.5",
-    "react-helmet": "^5.2.0",
+    "react-helmet": "^6.1.0",
     "uuid": "^3.3.2"
   },
   "peerDependencies": {
