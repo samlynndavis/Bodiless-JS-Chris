@@ -91,15 +91,15 @@ const validatePagePath = (
     : undefined
 );
 
-const getPageUrlValidator = (validate?: FieldValidate) => (
+const getPageUrlValidator = (validate?: FieldValidate, required?: boolean) => (
   value: FormValue, values: FormValues,
-) => validateEmptyField(value)
+) => (required && validateEmptyField(value))
     || validatePageUrl(value)
     || (validate && validate(value, values));
 
-const getPagePathValidator = (validate?: FieldValidate) => (
+const getPagePathValidator = (validate?: FieldValidate, required?: boolean) => (
   value: FormValue, values: FormValues,
-) => validateEmptyField(value)
+) => (required && validateEmptyField(value))
     || validatePagePath(value)
     || (validate && validate(value, values));
 
