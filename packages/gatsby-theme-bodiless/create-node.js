@@ -24,8 +24,6 @@ const md5File = require('md5-file');
 const { fluid: sharpFluid, fixed: sharpFixed } = require('gatsby-plugin-sharp');
 const git = require('isomorphic-git');
 const findUp = require('find-up');
-const axios = require('axios');
-const https = require('https');
 const GatsbyImagePresets = require('./dist/GatsbyImage/GatsbyImagePresets').default;
 
 const Logger = require('./Logger');
@@ -101,81 +99,6 @@ const getGitInfoFromFs = async () => {
 };
 
 /**
- * Get git info through GitHub REST API with exported env variables.
- *
- * Env variables:
- *
- *  Required:
- *  - BODILESS_GITHUB_API_BRANCH
- *
- *  Optional
- *  - BODILESS_GITHUB_API_OWNER
- *  - BODILESS_GITHUB_API_REPO
- *
- * GitHub endpoints
- *  https://api.github.com/repos/johnsonandjohnson/Bodiless-JS/commits/main
- *  https://api.github.com/repos/johnsonandjohnson/Bodiless-JS/
- *
- * @returns {
- *  repo: string,
- *  sha: string,
- *  branch: string,
- * }
- */
-const getGitInfoFromGitHubAPI = async () => {
-  const host = 'https://api.github.com';
-  const owner = process.env.BODILESS_GITHUB_API_OWNER || 'johnsonandjohnson';
-  const repo = process.env.BODILESS_GITHUB_API_REPO || 'Bodiless-JS';
-  const branch = process.env.BODILESS_GITHUB_API_BRANCH;
-
-  // Branch name is required.
-  if (!branch) {
-    throw new Error('Branch name is missing for git info.');
-  }
-  // ignore SSL issues
-  const agent = new https.Agent({
-    rejectUnauthorized: false
-  });
-
-  const commitEndpoint = '/repos/%OWNER%/%REPO%/commits/%REF%'
-    .replace('%OWNER%', owner)
-    .replace('%REPO%', repo)
-    .replace('%REF%', branch);
-  const urlCommit = `${host}${commitEndpoint}`;
-  const commitResponse = await axios.get(urlCommit, {
-    httpsAgent: agent,
-    headers: {
-      Accept: 'application/vnd.github.v3+json',
-    }
-  });
-  if (commitResponse.status !== 200) {
-    throw new Error(`Failed to retrieve commit from ${urlCommit}`);
-  }
-  const { sha } = commitResponse.data;
-
-  const repoEndpoint = '/repos/%OWNER%/%REPO%'
-    .replace('%OWNER%', owner)
-    .replace('%REPO%', repo);
-  const urlRepo = `${host}${repoEndpoint}`;
-  const repoResponse = await axios.get(urlRepo, {
-    httpsAgent: agent,
-    headers: {
-      Accept: 'application/vnd.github.v3+json',
-    }
-  });
-  if (repoResponse.status !== 200) {
-    throw new Error(`Failed to retrieve repo info from ${urlRepo}`);
-  }
-  const { git_url } = repoResponse.data;
-
-  return {
-    repo: git_url,
-    sha,
-    branch,
-  };
-};
-
-/**
  * Get current git repo info.
  *
  * @returns Promise<{
@@ -190,12 +113,6 @@ const createGitInfo = async () => {
     if (gitInfoFs) {
       logger.log('Git info from fs. ', gitInfoFs);
       return gitInfoFs;
-    }
-
-    const gitInfoAPI = await getGitInfoFromGitHubAPI();
-    if (gitInfoAPI) {
-      logger.log('Git info from API. ', gitInfoAPI);
-      return gitInfoAPI;
     }
   } catch (err) {
     logger.log('Failed to create git info. ', err);
