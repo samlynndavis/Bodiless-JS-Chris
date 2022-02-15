@@ -25,6 +25,7 @@ type PageState = {
   titlePending?: string;
   formTitle?: string,
   linkId?: string,
+  isRedirectActive?: boolean,
   FormFields?: (Label: ComponentType<HTMLProps<HTMLLabelElement>>) => void,
 };
 

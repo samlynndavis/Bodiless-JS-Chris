@@ -55,12 +55,12 @@ const deletePage = async ({ path, client } : any) => {
 
 const DeletePageForm = (props : PageState) => {
   const {
-    status, errorMessage,
+    status, errorMessage, isRedirectActive,
   } = props;
-
   const defaultUI = usePageMenuOptionUI();
   const {
     ComponentFormDescription,
+    ComponentFormDescriptionEmphasis,
     ComponentFormFieldWrapper,
     ComponentFormLabelBase,
     ComponentFormTitle,
@@ -107,8 +107,14 @@ const DeletePageForm = (props : PageState) => {
             <ComponentFormDescription>
               Upon closing this dialog you will be redirected to the deleted page’s parent page.
             </ComponentFormDescription>
+            {
+              isRedirectActive ? (
+                <ComponentFormDescriptionEmphasis>
+                  Redirect Active
+                </ComponentFormDescriptionEmphasis>
+              ) : null
+            }
           </ContextMenuProvider>
-
         </>
       );
     }
@@ -162,6 +168,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
   const [state, setState] = useState<PageState>({
     status: PageStatus.Init,
   });
+  const [isRedirectActive, setRedirectActive] = useState<boolean>(false);
 
   const context = useEditContext();
   const { node } = useNode();
@@ -196,6 +203,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
               ? redirectPathInput
               : `/${redirectPathInput}`;
             createRedirect(node, path, redirectPath);
+            setRedirectActive(true);
           }
           actualState = PageStatus.Complete;
           setState({ status: PageStatus.Complete });
@@ -218,6 +226,7 @@ const menuFormPageDelete = (client: PageClient) => contextMenuForm({
       <DeletePageForm
         status={status}
         errorMessage={errorMessage}
+        isRedirectActive={isRedirectActive}
       />
     </>
   );
