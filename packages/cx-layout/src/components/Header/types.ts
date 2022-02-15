@@ -22,7 +22,7 @@ export type HeaderComponents = {
   MenuToggler: ComponentOrTag<any>,
   Menu: ComponentOrTag<any>,
   Logo: ComponentOrTag<any>,
-  UtilityMenuContainer: ComponentOrTag<any>,
+  ActionMenuContainer: ComponentOrTag<any>,
   UtilityMenu: ComponentOrTag<any>,
   LanguageButton: ComponentOrTag<any>,
   DesktopSearch: ComponentOrTag<any>,

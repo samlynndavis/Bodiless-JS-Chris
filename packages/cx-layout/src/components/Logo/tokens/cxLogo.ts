@@ -36,7 +36,7 @@ const Default = asLogoToken({
     ),
   },
   Spacing: {
-    Link: 'h-44px lg:h-88px max-w-240px lg:max-w-441px',
+    Wrapper: 'h-12 lg:h-14 w-60 lg:w-72',
     Image: 'max-h-full',
   },
   Components: {
