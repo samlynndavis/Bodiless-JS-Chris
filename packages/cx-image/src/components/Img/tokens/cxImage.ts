@@ -17,7 +17,8 @@ import {
   extendMeta,
   as,
 } from '@bodiless/fclasses';
-import { asBodilessImage, withImagePlaceholder } from '@bodiless/components';
+import { withImagePlaceholder } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/cx-elements';
 
