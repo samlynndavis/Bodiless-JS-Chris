@@ -25,6 +25,7 @@ type PageState = {
   titlePending?: string;
   formTitle?: string,
   linkId?: string,
+  isRedirectActive?: boolean,
   FormFields?: (Label: ComponentType<HTMLProps<HTMLLabelElement>>) => void,
 };
 
@@ -54,11 +55,13 @@ type PageData = {
  * if we decide to allow overriding it in the future
  * then also we need to allow overriding the second PageURLField input
  */
-type FieldLabel = {
+type CustomFieldProps = {
   fieldFull?: boolean,
   fieldLabel?: string,
+  required?: boolean,
+  simpleValidation?: boolean,
 };
-type FieldProps = Omit<BaseFieldProps, 'field'> & FieldLabel;
+type FieldProps = Omit<BaseFieldProps, 'field'> & CustomFieldProps;
 type FieldValidate = (value: FormValue, values: FormValues) => FormError;
 
 export {
