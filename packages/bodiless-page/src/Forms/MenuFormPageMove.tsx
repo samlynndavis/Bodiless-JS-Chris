@@ -118,6 +118,7 @@ const MovePageComp = (props : PageState) => {
             <ComponentFormLabelSmall>Current URL</ComponentFormLabelSmall>
             <ComponentFormDescription>{basePathValue}</ComponentFormDescription>
             <MovePageURLField
+              required
               validateOnChange
               validateOnBlur
             />
@@ -127,7 +128,7 @@ const MovePageComp = (props : PageState) => {
                 initialValue
                 keepState
               />
-              Redirect
+              Add redirect
             </ComponentFormLabel>
           </ContextMenuProvider>
         </>
