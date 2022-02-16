@@ -39,6 +39,11 @@ const Full = asCxTokenSpec()({
   Core: {
     paragraph: as(replaceWith(P), asBlock as HOC),
     // Link: replaceWith(LinkClean),
+    // H1: {},
+    // H2: {},
+    // H3: {},
+    // H4: {},
+    // H5: {},
   },
   Theme: {
     paragraph: cxElement.Body,
@@ -49,6 +54,7 @@ const Full = asCxTokenSpec()({
     H2: cxElement.H2,
     H3: cxElement.H3,
     H4: cxElement.H4,
+    H5: cxElement.H5,
     // Link: as(cxLink.Default),
   },
   Components: {

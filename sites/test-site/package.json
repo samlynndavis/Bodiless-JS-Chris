@@ -15,6 +15,7 @@
     "@bodiless/accordion": "^0.3.6",
     "@bodiless/backend": "^0.3.6",
     "@bodiless/cx-editors": "^0.3.6",    
+    "@bodiless/cx-elements": "^0.3.6",
     "@bodiless/cx-layout": "^0.3.6",
     "@bodiless/bv": "^0.3.6",
     "@bodiless/card": "^0.3.6",
