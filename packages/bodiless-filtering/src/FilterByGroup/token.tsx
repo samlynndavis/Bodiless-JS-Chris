@@ -20,6 +20,7 @@ import {
   replaceWith,
   addPropsIf,
   Span,
+  withoutProps,
 } from '@bodiless/fclasses';
 import { ifViewportIsNot, ifViewportIs } from '@bodiless/components';
 import {
@@ -36,13 +37,33 @@ const asResponsiveAccordionTitle = flowHoc(
   asAccordionTitle,
   withDesign({
     Icon: addClasses('lg:hidden'),
+    OpenIcon: addClasses('fill-current'),
+    CloseIcon: addClasses('fill-current'),
   }),
 );
 
-const asExpandedOnDesktopBody = flowHoc(
+/**
+ * asAccordionBodyFilter extends asAccordionBody to remove tabIndex prop
+ * for accessibility purposes.
+ */
+const asAccordionBodyFilter = flowHoc(
   asAccordionBody,
   withDesign({
+    Wrapper: withoutProps('tabIndex'),
+  }),
+);
+
+const asExpandedOnDesktopBody = asToken(
+  asAccordionBodyFilter,
+  withDesign({
     Wrapper: addClasses('lg:block'),
+  }),
+);
+
+const asExpandedOnDesktopResetButtonBody = asToken(
+  asExpandedOnDesktopBody,
+  withDesign({
+    Wrapper: withoutProps(['role', 'aria-labelledby']),
   }),
 );
 
@@ -54,13 +75,22 @@ const useRefineButtonProps = () => {
   };
 };
 
-const asResponsiveFilterByGroup = flowHoc(
+const asAccessibleFilterByGroup = flowHoc(
+  withDesign({
+    FilterWrapper: addProps({
+      role: 'region',
+      'aria-label': 'Product filters'
+    })
+  }),
+);
+
+const asResponsiveFilterByGroup = asToken(
   ifViewportIsNot(['lg', 'xl', '2xl'])(
     withDesign({
       FilterWrapper: asAccordionWrapper,
       FilterTitle: asResponsiveAccordionTitle,
       FilterBody: asExpandedOnDesktopBody,
-      ResetButton: asExpandedOnDesktopBody,
+      ResetButton: asExpandedOnDesktopResetButtonBody,
       RefineButton: addPropsIf(() => true)(useRefineButtonProps),
     }),
   ),
@@ -97,4 +127,5 @@ export const withSingleAllowedTag = flowHoc(
 export {
   asExpandedOnDesktopBody,
   asResponsiveFilterByGroup,
+  asAccessibleFilterByGroup,
 };
