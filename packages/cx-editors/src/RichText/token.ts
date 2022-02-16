@@ -40,9 +40,8 @@ const Full = asCxTokenSpec()({
     paragraph: as(replaceWith(P), asBlock as HOC),
     // Link: replaceWith(LinkClean),
   },
-  // @TODO remove these or use cxElement tokens.
   Theme: {
-    paragraph. cxElement.Body,
+    paragraph: cxElement.Body,
     Bold: cxElement.Bold,
     Underline: cxElement.Underline,
     SuperScript: cxElement.SuperScript,

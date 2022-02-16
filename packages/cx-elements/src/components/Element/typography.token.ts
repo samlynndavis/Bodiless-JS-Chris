@@ -11,4 +11,5 @@ export const cxElementTypography = asTokenCollection({
   H4: 'text-m-lg lg:text-lg font-normal',
   H5: 'text-m-base lg:text-base font-medium',
   Body: 'text-m-base lg:text-base font-normal',
+  DMSans: 'font-DMSans',
 });
