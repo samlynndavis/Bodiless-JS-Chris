@@ -93,7 +93,7 @@ const movePage = async ({ origin, destination, client } : any) => {
 
 const MovePageComp = (props : PageState) => {
   const {
-    status, errorMessage,
+    status, errorMessage, isRedirectActive,
   } = props;
   const basePathValue = usePagePath();
 
@@ -101,6 +101,7 @@ const MovePageComp = (props : PageState) => {
   const {
     ComponentFormCheckBox,
     ComponentFormDescription,
+    ComponentFormDescriptionEmphasis,
     ComponentFormLabel,
     ComponentFormLabelSmall,
     ComponentFormTitle,
@@ -149,6 +150,13 @@ const MovePageComp = (props : PageState) => {
             Move operation was successful. Upon closing this dialog you will be redirected to the
             new page’s url.
           </ComponentFormDescription>
+          {
+            isRedirectActive ? (
+              <ComponentFormDescriptionEmphasis>
+                Redirect Active
+              </ComponentFormDescriptionEmphasis>
+            ) : null
+          }
         </>
       );
     case PageStatus.Errored:
@@ -191,6 +199,7 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
   const [state, setState] = useState<PageState>({
     status: PageStatus.Init,
   });
+  const [isRedirectActive, setRedirectActive] = useState<boolean>(false);
 
   const context = useEditContext();
   const path = getPathValue(values);
@@ -240,6 +249,7 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
           .then(() => {
             if (redirectEnabled) {
               createRedirect(node, originClear, destination);
+              setRedirectActive(true);
             }
             actualState = PageStatus.Complete;
             setState({ status: PageStatus.Complete });
@@ -262,6 +272,7 @@ const menuFormPageMove = (client: PageClient) => contextMenuForm({
       <MovePageComp
         status={status}
         errorMessage={errorMessage}
+        isRedirectActive={isRedirectActive}
       />
     </>
   );
