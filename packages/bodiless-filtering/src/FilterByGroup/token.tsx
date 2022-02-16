@@ -53,14 +53,14 @@ const asAccordionBodyFilter = flowHoc(
   }),
 );
 
-const asExpandedOnDesktopBody = asToken(
+const asExpandedOnDesktopBody = flowHoc(
   asAccordionBodyFilter,
   withDesign({
     Wrapper: addClasses('lg:block'),
   }),
 );
 
-const asExpandedOnDesktopResetButtonBody = asToken(
+const asExpandedOnDesktopResetButtonBody = flowHoc(
   asExpandedOnDesktopBody,
   withDesign({
     Wrapper: withoutProps(['role', 'aria-labelledby']),
@@ -84,7 +84,7 @@ const asAccessibleFilterByGroup = flowHoc(
   }),
 );
 
-const asResponsiveFilterByGroup = asToken(
+const asResponsiveFilterByGroup = flowHoc(
   ifViewportIsNot(['lg', 'xl', '2xl'])(
     withDesign({
       FilterWrapper: asAccordionWrapper,

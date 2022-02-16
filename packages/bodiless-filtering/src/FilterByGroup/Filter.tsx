@@ -202,7 +202,7 @@ const asFilter = flowHoc(
       withUnselectOnDelete,
       withDesign({
         Title: startWith(TagTitle),
-        Wrapper: flow(
+        Wrapper: flowHoc(
           startWith(Fieldset),
           stylable,
           asFilterCategoryRegion

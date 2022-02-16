@@ -1,12 +1,12 @@
 import {
-  Token, H3, StylableProps, DesignableComponentsProps, designable
+  H3, StylableProps, DesignableComponentsProps, designable, HOC
 } from '@bodiless/fclasses';
 import React, {
   ComponentType, FC, HTMLProps,
 } from 'react';
 import { useCategoryListContext } from './CategoryListContext';
 
-const asFilterCategoryRegion: Token = Component => props => {
+const asFilterCategoryRegion: HOC = Component => props => {
   const { categoryId } = useCategoryListContext();
 
   return (
