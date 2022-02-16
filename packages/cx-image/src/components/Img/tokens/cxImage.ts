@@ -18,8 +18,7 @@ import {
   as,
 } from '@bodiless/fclasses';
 import { withImagePlaceholder } from '@bodiless/components';
-import { asBodilessImage } from '@bodiless/components-ui';
-import { asBodilessLink } from '@bodiless/components-ui';
+import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/cx-elements';
 
 // @ts-ignore Cannot find module
