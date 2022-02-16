@@ -31,7 +31,7 @@
     "@bodiless/fclasses": "^0.3.6",
     "@types/react-helmet": "^5.0.14",
     "lodash": "^4.17.19",
-    "mobx": "^5.8.0",
+    "mobx": "^6.0.0",
     "mobx-react": "^7.2.1",
     "react-contenteditable": "^3.2.6",
     "react-dropzone": "^10.1.5",
