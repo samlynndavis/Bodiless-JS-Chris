@@ -43,11 +43,14 @@ const deletePage = async ({ path, client } : any) => {
     if (result.message !== 'Success' && typeof (result.message) === 'string') {
       return Promise.reject(new Error(result.message));
     }
-    try {
-      await handleBackendResponse(client.deleteStaticAssets(path));
-    } catch (e: any) {
-      return Promise.reject(new Error(e.message));
-    }
+    // Deleting the static assets on delete leads to a gatsby image rendering issue.
+    // To be resolved with another approach:
+    // https://github.com/johnsonandjohnson/Bodiless-JS/issues/1348
+    // try {
+    //   await handleBackendResponse(client.deleteStaticAssets(path));
+    // } catch (e: any) {
+    //   return Promise.reject(new Error(e.message));
+    // }
     return Promise.resolve();
   }
   return Promise.reject(new Error('The page cannot be deleted.'));
