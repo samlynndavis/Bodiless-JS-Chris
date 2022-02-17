@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/cx-editors",
-  "version": "^0.3.7",
+  "version": "0.3.7",
   "description": "Editor components for the bodiless cx design system",
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
