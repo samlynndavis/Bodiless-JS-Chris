@@ -71,7 +71,7 @@ const menuFormPageNew = (client: PageClient) => contextMenuForm({
   const { template } = values;
   const path = getPathValue(values);
   useEffect(() => {
-    // If the form is submitted and valid then lets try to creat a page.
+    // If the form is submitted and valid then lets try to create a page.
     if (submits && path && invalid === false) {
       context.showPageOverlay({ hasSpinner: false });
       setState({ status: PageStatus.Pending });
