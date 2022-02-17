@@ -27,10 +27,15 @@ import {
 const usePageMenuOptionUI = () => {
   const defaultUI = useMenuOptionUI();
   const {
+    ComponentFormDescription,
     ComponentFormLabel,
-    ComponentFormWarning,
     ComponentFormLink,
+    ComponentFormWarning,
   } = defaultUI;
+
+  const Description = flowHoc(
+    addClasses('bl-italic'),
+  )(ComponentFormDescription as ComponentType<StylableProps>);
 
   const Label = flowHoc(
     removeClasses('bl-text-xs'),
@@ -53,6 +58,7 @@ const usePageMenuOptionUI = () => {
 
   const ui = {
     ...defaultUI,
+    ComponentFormDescriptionEmphasis: Description as ComponentType<HTMLProps<HTMLDivElement>>,
     ComponentFormLabelBase: Label as ComponentType<HTMLProps<HTMLLabelElement>>,
     ComponentFormLabelSmall: LabelSmall as ComponentType<HTMLProps<HTMLLabelElement>>,
     ComponentFormLinkEdit: Link as ComponentType<HTMLProps<HTMLAnchorElement>>,

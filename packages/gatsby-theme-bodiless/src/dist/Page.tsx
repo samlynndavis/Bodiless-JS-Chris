@@ -21,6 +21,7 @@ import {
   withSwitcherButton,
   OnNodeErrorNotification,
   useGitButtons,
+  GitContextProvider,
 } from '@bodiless/core';
 import {
   Fragment,
@@ -80,23 +81,25 @@ const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
       <GatsbyNodeProvider {...rest}>
         <ShowDesignKeys>
           <GatsbyPageProvider pageContext={rest.pageContext}>
-            <NotificationProvider>
-              <SwitcherButton />
-              <NotificationButton />
-              <Editor>
-                <OnNodeErrorNotification />
-                <NewPageButton />
-                <MovePageButton />
-                <DisablePageButton />
-                <ClonePageButton />
-                <GitButtons />
-                <Wrapper clickable>
-                  {children}
-                </Wrapper>
-                <DeletePageButton />
-                <RedirectAliasButton />
-              </Editor>
-            </NotificationProvider>
+            <GitContextProvider gitInfo={rest.pageContext.gitInfo}>
+              <NotificationProvider>
+                <SwitcherButton />
+                <NotificationButton />
+                <Editor>
+                  <OnNodeErrorNotification />
+                  <NewPageButton />
+                  <MovePageButton />
+                  <DisablePageButton />
+                  <ClonePageButton />
+                  <GitButtons />
+                  <Wrapper clickable>
+                    {children}
+                  </Wrapper>
+                  <DeletePageButton />
+                  <RedirectAliasButton />
+                </Editor>
+              </NotificationProvider>
+            </GitContextProvider>
           </GatsbyPageProvider>
         </ShowDesignKeys>
       </GatsbyNodeProvider>
@@ -105,7 +108,9 @@ const Page: FC<PageProps> = observer(({ children, ui, ...rest }) => {
   return (
     <GatsbyNodeProvider {...rest}>
       <ShowDesignKeys>
-        <StaticPage>{children}</StaticPage>
+        <GitContextProvider gitInfo={rest.pageContext.gitInfo}>
+          <StaticPage>{children}</StaticPage>
+        </GitContextProvider>
       </ShowDesignKeys>
     </GatsbyNodeProvider>
   );
