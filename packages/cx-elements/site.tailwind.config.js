@@ -21,6 +21,25 @@ module.exports = {
       'm-2xl': ['1.813rem', '2.125rem'],
       'm-3xl': ['2.25rem', '2.625rem'],
     },
+    colors: {
+      primary: {
+        brand: '#CA081B',
+        bg: '#ffffff',
+        interactive: '#031199',
+      },
+      gray: {
+        page: '#F4F4F4',
+        light: '#D8D8D8',
+        body: '#63666A',
+        footer: '#2B2B33',
+      },
+      black: {
+        header: '#212121',
+      },
+      secondary: {
+        eyebrow: '#CC1699',
+      },
+    },
     extend: {
       fontFamily: {
         DMSans: ['DM Sans', 'sans-serif'],

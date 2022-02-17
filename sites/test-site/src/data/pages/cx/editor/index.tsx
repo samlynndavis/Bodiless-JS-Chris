@@ -20,10 +20,17 @@ import {
   Div,
   H1,
   H2,
+  H3,
+  H4,
+  H5,
+  P,
   as,
 } from '@bodiless/fclasses';
 import { withEditorFull, withEditorPlain } from '@bodiless/cx-editors';
 import { cxElement } from '@bodiless/cx-elements';
+
+// For now, wrap whole page in Font -- this should be added to helmet.
+const PageFontWrapper = as(cxElement.DMSans)(Div);
 
 const FullFeaturedEditor = flowHoc(
   withEditorFull('RTEData', 'Type something here...'),
@@ -33,42 +40,60 @@ const PlainEditor = flowHoc(
   withEditorPlain('PlainData', 'Type something here...'),
 )(Div);
 
-const CXH1 = flowHoc(
+const CxH1 = flowHoc(
   withEditorPlain('H1', 'Header 1'),
   as(cxElement.H1),
 )(H1);
-const CXH2 = flowHoc(
+const CxH2 = flowHoc(
   withEditorPlain('H2', 'Header 2'),
   as(cxElement.H2),
 )(H2);
-const CXH3 = flowHoc(
+const CxH3 = flowHoc(
   withEditorPlain('H3', 'Header 3'),
   as(cxElement.H3),
-)(H2);
-const CXH4 = flowHoc(
+)(H3);
+const CxH4 = flowHoc(
   withEditorPlain('H4', 'Header 4'),
   as(cxElement.H4),
-)(H2);
-const CXH5 = flowHoc(
+)(H4);
+const CxH5 = flowHoc(
   withEditorPlain('H5', 'Header 5'),
   as(cxElement.H5),
-)(H2);
+)(H5);
+const CxBody = flowHoc(
+  withEditorPlain('Body', 'Body Copy'),
+  as(cxElement.Body),
+)(P);
+const CxEyebrow = flowHoc(
+  withEditorPlain('Eyebrow', 'Eyebrow'),
+  as(cxElement.Eyebrow),
+)(P);
+const CxRest = flowHoc(
+  withEditorPlain('Rest', 'Rest: i.e. Breadcrumbs / Review Numbers'),
+  as(cxElement.Rest),
+)(P);
 
 const main = (props: any) => (
   <Page {...props}>
-    <div className="p-10">
-      <h1 className="py-5">Typography and Editor Page </h1>
-      <h2 className="py-10">Full Featured Editor</h2>
-      <FullFeaturedEditor />
-      <h2 className="py-10">Basic Editor</h2>
-      <PlainEditor />
-      <h2 className="py-10">Typography</h2>
-      <CXH1 />
-      <CXH2 />
-      <CXH3 />
-      <CXH4 />
-      <CXH5 />
-    </div>
+    <PageFontWrapper>
+      <div className="p-10">
+        <h1 className="py-5 text-3xl">Typography and Editor Test Page* </h1>
+        <h2 className="py-10 text-2xl">Full Featured Editor*</h2>
+        <FullFeaturedEditor />
+        <h2 className="py-10 text-2xl">Basic Editor*</h2>
+        <PlainEditor />
+        <h2 className="py-10 text-2xl">Typography Samples*</h2>
+        <CxH1 />
+        <CxH2 />
+        <CxH3 />
+        <CxH4 />
+        <CxH5 />
+        <CxBody />
+        <CxEyebrow />
+        <CxRest />
+        <p className="py-10">* Test page headers/descriptions are not using cx typography.</p>
+      </div>
+    </PageFontWrapper>
   </Page>
 );
 export default main;

@@ -24,7 +24,8 @@
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "lint": "tslint ./src/**/*.ts?x"
   },
   "dependencies": {
     "@bodiless/components": "^0.3.7",
