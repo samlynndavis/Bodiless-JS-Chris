@@ -28,6 +28,7 @@ import {
 } from '@bodiless/fclasses';
 import { withEditorFull, withEditorPlain } from '@bodiless/cx-editors';
 import { cxElement } from '@bodiless/cx-elements';
+import { LinkClean, cxLink } from '@bodiless/cx-link';
 
 // For now, wrap whole page in Font -- this should be added to helmet.
 const PageFontWrapper = as(cxElement.DMSans)(Div);
@@ -72,6 +73,14 @@ const CxRest = flowHoc(
   withEditorPlain('Rest', 'Rest: i.e. Breadcrumbs / Review Numbers'),
   as(cxElement.Rest),
 )(P);
+const CxDemoLink = flowHoc(
+  withEditorPlain('Link1', 'Link'),
+  as(
+    cxElement.Link,
+    cxLink.Default,
+    cxLink.Sidecar,
+  ),
+)(LinkClean);
 
 const main = (props: any) => (
   <Page {...props}>
@@ -90,6 +99,7 @@ const main = (props: any) => (
         <CxH5 />
         <CxBody />
         <CxEyebrow />
+        <CxDemoLink />
         <CxRest />
         <p className="py-10">* Test page headers/descriptions are not using cx typography.</p>
       </div>

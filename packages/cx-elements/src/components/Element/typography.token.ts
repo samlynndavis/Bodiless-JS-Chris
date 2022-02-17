@@ -1,12 +1,16 @@
 import { as } from '@bodiless/fclasses';
 import { asTokenCollection } from '../../util';
-import { cxElementColor } from './color.token';
+
+// TODO/DISCUSS
+// I brought in color to typography but should typography + color = another token ????
+// I tried first cxelementcolor but that wasn't working so for now its actual class
+// import { cxElementColor } from './color.token';
 
 export const cxElementTypography = asTokenCollection({
   Underline: 'underline',
   Bold: 'font-bold',
   Superscript: '',
-  Link: 'underline',
+  Link: 'text-m-base lg:text-base font-bold text-primary-interactive underline',
   H1: as(
     'text-m-3xl lg:text-3xl font-bold text-black-header',
     //  cxElementColor.WithHeaderColor,

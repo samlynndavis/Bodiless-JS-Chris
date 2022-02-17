@@ -25,6 +25,7 @@
     "@bodiless/curator": "^0.3.7",
     "@bodiless/cx-editors": "^0.3.7",    
     "@bodiless/cx-elements": "^0.3.7",
+    "@bodiless/cx-link": "^0.3.7",
     "@bodiless/cx-layout": "^0.3.7",
     "@bodiless/documentation": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",

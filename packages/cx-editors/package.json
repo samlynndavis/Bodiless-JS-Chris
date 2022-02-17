@@ -22,7 +22,8 @@
     "build:api-doc": "typedoc --out doc/api src",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "lint": "tslint ./src/**/*.ts?x"
   },
   "peerDependencies": {
     "react": "^17.0.2"
@@ -31,6 +32,7 @@
     "@bodiless/components": "^0.3.7",
     "@bodiless/components-ui": "^0.3.7",
     "@bodiless/cx-elements": "^0.3.7",
+    "@bodiless/cx-link": "^0.3.7",
     "@bodiless/core": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/layouts": "^0.3.7",
