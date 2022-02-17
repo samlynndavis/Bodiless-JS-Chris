@@ -14,7 +14,7 @@ import {
 import {
   DefaultNormalHref,
 } from '@bodiless/components';
-//import { cxLink, LinkClean } from '@canvasx/link';
+// import { cxLink, LinkClean } from '@canvasx/link';
 import { ifComponentSelector } from '@bodiless/layouts';
 import { cxElement, asCxTokenSpec } from '@bodiless/cx-elements';
 
