@@ -1,5 +1,11 @@
-import { asTokenCollection } from '../../util';
+import { flowHoc } from '@bodiless/fclasses';
+import { asTokenGroup } from '../../util';
 
-export const cxElementLayout = asTokenCollection({
+const meta = [
+  flowHoc.meta.term('Type')('Element'),
+  flowHoc.meta.term('Group')('Layout'),
+];
+
+export const cxElementLayout = asTokenGroup(...meta)({
   WithFlexCenterXY: ''
 });

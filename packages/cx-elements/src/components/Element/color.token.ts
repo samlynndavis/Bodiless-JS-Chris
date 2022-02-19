@@ -1,6 +1,13 @@
-import { asTokenCollection } from '../../util';
+import { asTokenGroup } from '../../util';
 
-export const cxElementColor = asTokenCollection({
+const meta = {
+  categories: {
+    Type: ['Element'],
+    Group: ['Color'],
+  },
+};
+
+export const cxElementColor = asTokenGroup(meta)({
   WithPrimaryBgColor: 'bg-primary-bg',
   WithPrimaryBrandColorBg: 'bg-primary-brand',
   WithPrimaryBrandColorText: 'text-primary-brand',
