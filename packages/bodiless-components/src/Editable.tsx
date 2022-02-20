@@ -46,6 +46,19 @@ type EditableData = {
   text: string;
 };
 
+/**
+ * Type guard identifying an object as containing data which conforms
+ * to the EditableData interface.
+ *
+ * @param d
+ * True if the parameter is valid EditableData, false otherwise.
+ */
+export const isEditableData = (d: any): d is EditableData => {
+  if (typeof d !== 'object') return false;
+  if (d.text && typeof d.text !== 'string') return false;
+  return true;
+};
+
 const Text = observer((props: EditableProps) => {
   const { placeholder, useOverrides = () => ({}) }: EditableProps = props;
   const { sanitizer = identity }: EditableOverrides = useOverrides(props);
