@@ -272,7 +272,7 @@ export type TokenSpec<
 export type Token<
   C extends DesignableComponents,
   D extends object,
-> = TokenSpec<C, D> | HOCBase | string | undefined;
+> = TokenSpec<C, D> | HOCBase<any, any, any> | string | undefined;
 
 /**
    * Type of a collection of tokens which apply to a specific designable component.
