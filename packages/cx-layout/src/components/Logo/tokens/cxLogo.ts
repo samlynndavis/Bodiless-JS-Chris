@@ -50,7 +50,7 @@ const Default = asLogoToken({
     // @todo should this be a cx-link?
     // @todo can we separate sidecar nodekeys from editors?
     Link: withSidecarNodes(
-      asBodilessLink('link'),
+      asBodilessLink('link', { href: '/' }),
     ),
     _: withNode,
   },
