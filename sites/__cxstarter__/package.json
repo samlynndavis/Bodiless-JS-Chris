@@ -14,6 +14,7 @@
     "@babel/core": "^7.9.0",
     "@bodiless/__cxstarter__": "^0.3.7",
     "@bodiless/components": "^0.3.7",
+    "@bodiless/core": "^0.3.7",
     "@bodiless/cx-editors": "^0.3.7",
     "@bodiless/cx-elements": "^0.3.7",
     "@bodiless/cx-templates": "^0.3.7",
