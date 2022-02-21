@@ -9,7 +9,7 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
-    "/canvasx.docs.json",
+    "/bodiless.docs.json",
     "/doc"
   ],
   "repository": {
@@ -33,6 +33,7 @@
     "@bodiless/core": "^0.3.7",
     "@bodiless/cx-elements": "^0.3.7",
     "@bodiless/cx-editors": "^0.3.7",
+    "@bodiless/cx-layout": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/gatsby-theme-bodiless": "^0.3.7",
     "lodash": "^4.17.19"

@@ -12,5 +12,18 @@
  * limitations under the License.
  */
 
-export { cxLayout, LayoutClean, asLayoutToken } from './components/Layout';
-export { cxHeader, HeaderClean, asHeaderToken } from './components/Header';
+import { HTMLProps } from 'react';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+
+export type LayoutComponents = {
+  OuterContainer: ComponentOrTag<any>,
+  SkipToMainContent: ComponentOrTag<any>,
+  Helmet: ComponentOrTag<any>,
+  SiteHeader: ComponentOrTag<any>,
+  Container: ComponentOrTag<any>,
+  PageTopper: ComponentOrTag<any>,
+  PageCloser: ComponentOrTag<any>,
+  SiteFooter: ComponentOrTag<any>,
+};
+
+export type LayoutProps = DesignableComponentsProps<LayoutComponents> & HTMLProps<HTMLElement>;

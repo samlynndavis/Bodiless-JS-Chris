@@ -11,6 +11,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { as } from '@bodiless/fclasses';
+import { asLayoutToken } from './LayoutClean';
+import { cxHeader } from '../Header';
 
-export { cxLayout, LayoutClean, asLayoutToken } from './components/Layout';
-export { cxHeader, HeaderClean, asHeaderToken } from './components/Header';
+/**
+  * Token that defines a basic layout.
+  */
+const Base = asLayoutToken({
+  Components: {
+    SiteHeader: as(cxHeader.Default),
+  },
+  Theme: {
+    Container: 'container mx-auto',
+  },
+  Schema: {
+  },
+  Layout: {
+  },
+  Spacing: {
+  }
+});
+
+const Default = asLayoutToken({
+  ...Base,
+});
+
+export const cxLayout = {
+  Base,
+  Default,
+};
