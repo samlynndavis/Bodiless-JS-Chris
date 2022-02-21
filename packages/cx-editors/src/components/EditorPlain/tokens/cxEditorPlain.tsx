@@ -4,9 +4,11 @@ import {
 } from '@bodiless/core';
 import { HOC } from '@bodiless/fclasses';
 import { asElementToken } from '@bodiless/cx-elements';
-import { withAutoSuperscript } from './util';
+import { withPlaceholder } from '@bodiless/components';
+import type { EditableData } from '@bodiless/components';
+import { withAutoSuperscript } from '../util';
 
-const convertSlateToEditable = (componentData: any) => {
+const convertSlateToEditable = (componentData: any): EditableData => {
   if (!componentData) return { text: '' };
   if (componentData.text !== undefined) {
     return componentData;
@@ -53,4 +55,13 @@ const Default = asElementToken({
   },
 });
 
-export const cxEditorPlain = { Default, WithAutoSuperscript };
+const Title = asElementToken(
+  Default,
+  {
+    Content: {
+      _: withPlaceholder('title'),
+    },
+  }
+);
+
+export default { Default, Title, WithAutoSuperscript };

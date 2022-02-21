@@ -42,7 +42,7 @@ type EditableProps = {
   useOverrides?: UseEditableOverrides,
 } & Partial<WithNodeProps>;
 
-type EditableData = {
+export type EditableData = {
   text: string;
 };
 

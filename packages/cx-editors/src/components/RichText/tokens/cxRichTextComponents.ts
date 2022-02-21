@@ -1,4 +1,4 @@
-import { cxLink, LinkClean } from '@bodiless/cx-link';
+import { cxLink } from '@bodiless/cx-link';
 import { cxElement } from '@bodiless/cx-elements';
 
 export const cxRichTextComponents = {

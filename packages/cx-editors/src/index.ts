@@ -1,4 +1,3 @@
-/* eslint-disable import/export */
-export * from './Element';
-export * from './RichText';
-export * from './EditorPlain';
+export * from './withEditor';
+export * from './components/RichText';
+export * from './components/EditorPlain';

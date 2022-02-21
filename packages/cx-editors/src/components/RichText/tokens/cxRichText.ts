@@ -67,5 +67,4 @@ const Full = asCxTokenSpec()({
   },
 });
 
-// eslint-disable-next-line import/prefer-default-export
-export const cxRichText = { Full, AsFlowContainerItem };
+export default { Full, AsFlowContainerItem };
