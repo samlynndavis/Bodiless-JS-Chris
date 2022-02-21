@@ -11,35 +11,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { as } from '@bodiless/fclasses';
-import { asLayoutToken } from './LayoutClean';
-import { cxHeader } from '../Header';
-import { cxHelmet } from '../Helmet';
 
-/**
-  * Token that defines a basic layout.
-  */
-const Base = asLayoutToken({
-  Components: {
-    Helmet: as(cxHelmet.Default),
-    SiteHeader: as(cxHeader.Default),
-  },
-  Theme: {
-    Container: 'container mx-auto',
-  },
-  Schema: {
-  },
-  Layout: {
-  },
-  Spacing: {
-  }
-});
+import React from 'react';
+import { stylable } from '@bodiless/fclasses';
 
-const Default = asLayoutToken({
-  ...Base,
-});
+// Source: https://fonts.google.com/icons?selected=Material%20Icons%3Afile_download%3A
+const FileDownload = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="24px"
+    viewBox="0 0 24 24"
+    width="24px"
+    {...props}
+  >
+    <path d="M0 0h24v24H0z" fill="none" />
+    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+  </svg>
+);
 
-export const cxLayout = {
-  Base,
-  Default,
-};
+const FileDownloadIcon = stylable(FileDownload);
+
+export default FileDownloadIcon;

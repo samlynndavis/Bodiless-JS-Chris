@@ -23,14 +23,13 @@ import {
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 // import Footer from '../Footer/Footer';
 import { HeaderClean } from '../Header';
-// import { HelmetClean } from '../Helmet';
+import { HelmetClean } from '../Helmet';
 import { LayoutComponents, LayoutProps } from './types';
 
 const layoutComponents: LayoutComponents = {
   OuterContainer: Div,
   SkipToMainContent: A,
-  // Helmet: HelmetClean,
-  Helmet: Fragment,
+  Helmet: HelmetClean,
   SiteHeader: HeaderClean,
   // SiteFooter: Footer,
   SiteFooter: Fragment,

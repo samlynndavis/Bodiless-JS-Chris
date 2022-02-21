@@ -11,35 +11,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { as } from '@bodiless/fclasses';
-import { asLayoutToken } from './LayoutClean';
-import { cxHeader } from '../Header';
-import { cxHelmet } from '../Helmet';
+import { cxElement } from '@bodiless/cx-elements';
+import { asHelmetToken } from './HelmetClean';
 
-/**
-  * Token that defines a basic layout.
-  */
-const Base = asLayoutToken({
+const Default = asHelmetToken({
   Components: {
-    Helmet: as(cxHelmet.Default),
-    SiteHeader: as(cxHeader.Default),
+    /*
+    SeoHelmet: TBD,
+    SocialShareHelmet: TBD,
+    LanguageHelmet: TBD,
+    GtmHelmet: TBD,
+    */
   },
   Theme: {
-    Container: 'container mx-auto',
-  },
-  Schema: {
-  },
-  Layout: {
-  },
-  Spacing: {
+    HTMLHelmet: cxElement.DMSans,
   }
 });
 
-const Default = asLayoutToken({
-  ...Base,
-});
-
-export const cxLayout = {
-  Base,
-  Default,
-};
+export const cxHelmet = { Default };
