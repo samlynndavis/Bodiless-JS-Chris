@@ -1,12 +1,19 @@
 import { as } from '@bodiless/fclasses';
-import { asTokenCollection } from '../../util';
+import { asTokenGroup } from '../../util';
+
+const meta = {
+  categories: {
+    Type: ['Element'],
+    Group: ['Typography'],
+  },
+};
 
 // TODO/DISCUSS
 // I brought in color to typography but should typography + color = another token ????
 // I tried first cxelementcolor but that wasn't working so for now its actual class
 // import { cxElementColor } from './color.token';
 
-export const cxElementTypography = asTokenCollection({
+export const cxElementTypography = asTokenGroup(meta)({
   Underline: 'underline',
   Bold: 'font-bold',
   Superscript: '',

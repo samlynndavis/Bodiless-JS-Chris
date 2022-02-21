@@ -22,9 +22,10 @@ import {
 import {
   DefaultNormalHref,
 } from '@bodiless/components';
-import { cxLink, LinkClean } from '@bodiless/cx-link';
 import { ifComponentSelector } from '@bodiless/layouts';
-import { cxElement, asCxTokenSpec } from '@bodiless/cx-elements';
+import { asCxTokenSpec } from '@bodiless/cx-elements';
+import { LinkClean } from '@bodiless/cx-link';
+import Components from './cxRichText.cx-components';
 
 const withLinkDeserializer = withHtmlDeserializer(
   createLinkDeserializer({
@@ -57,21 +58,7 @@ const Full = asCxTokenSpec()({
     H4: withHeader4Meta,
     H5: withHeader5Meta,
   },
-  Theme: {
-    paragraph: cxElement.Body,
-    Bold: cxElement.Bold,
-    Underline: cxElement.Underline,
-    SuperScript: cxElement.SuperScript,
-    H1: cxElement.H1,
-    H2: cxElement.H2,
-    H3: cxElement.H3,
-    H4: cxElement.H4,
-    H5: cxElement.H5,
-    Link: as(cxLink.Default),
-  },
-  Components: {
-    Link: as(cxLink.Default),
-  },
+  Components,
   Behavior: {
     Link: withLinkDeserializer,
   },
@@ -80,5 +67,4 @@ const Full = asCxTokenSpec()({
   },
 });
 
-// eslint-disable-next-line import/prefer-default-export
-export const cxRichText = { Full, AsFlowContainerItem };
+export default { Full, AsFlowContainerItem };
