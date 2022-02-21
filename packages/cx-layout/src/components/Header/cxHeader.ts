@@ -66,7 +66,6 @@ const Base = asHeaderToken({
       replaceWith(Span),
       withProps({
         children: 'Main menu',
-        className: 'ml-6'
       })
     ),
     // @todo replace LanguageButton placeholder
@@ -91,6 +90,9 @@ const Base = asHeaderToken({
     ActionMenuContainer: 'flex items-center',
   },
   Spacing: {
+    Logo: withDesign({
+      Wrapper: 'mx-4',
+    }),
     Container: 'mx-auto py-4',
   }
 });
