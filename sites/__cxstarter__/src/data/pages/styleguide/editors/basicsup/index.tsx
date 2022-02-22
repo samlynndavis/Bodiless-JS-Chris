@@ -14,9 +14,9 @@ import { withNodeKey } from '@bodiless/core';
 const Editors = as(
   cxStyleGuideTemplate.Default,
   withDesign({
-    Title: replaceWith(() => <>Basic Editor without Auto Superscript</>),
+    Title: replaceWith(() => <>Basic Editor with Auto Superscript</>),
     Examples: on(EditorPlainClean)(
-      cxEditorPlain.Default,
+      cxEditorPlain.WithAutoSuperscript,
       addProps({
         placeholder: 'Placeholder',
       }),

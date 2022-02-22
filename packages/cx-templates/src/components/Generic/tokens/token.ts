@@ -14,7 +14,8 @@
 
 import {
   replaceWith,
-  Fragment, on,
+  Fragment,
+  on,
 } from '@bodiless/fclasses';
 import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
 import { asGenericTemplateToken } from '../GenericClean';
