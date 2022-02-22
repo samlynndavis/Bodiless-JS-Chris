@@ -12,23 +12,32 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { stylable } from '@bodiless/fclasses';
+import {
+  replaceWith,
+  Fragment, on,
+} from '@bodiless/fclasses';
+import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
+import { asGenericTemplateToken } from '../GenericClean';
 
-// Source: https://fonts.google.com/icons?selected=Material%20Icons%3Afile_download%3A
-const FileDownload = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    height="24px"
-    viewBox="0 0 24 24"
-    width="24px"
-    {...props}
-  >
-    <path d="M0 0h24v24H0z" fill="none" />
-    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
-  </svg>
-);
+const Default = asGenericTemplateToken({
+  Components: {
+    PageWrapper: on(LayoutClean)(cxLayout.Default),
+  },
+  Schema: {
+  },
+  SEO: {
+  },
+  Theme: {
+  },
+});
 
-const FileDownloadIcon = stylable(FileDownload);
+const WithoutBreadcrumbs = asGenericTemplateToken({
+  Components: {
+    Breadcrumb: replaceWith(Fragment),
+  },
+});
 
-export default FileDownloadIcon;
+export const cxGenericTemplate = {
+  Default,
+  WithoutBreadcrumbs,
+};

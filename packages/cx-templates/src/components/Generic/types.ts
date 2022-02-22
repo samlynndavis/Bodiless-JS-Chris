@@ -14,10 +14,15 @@
 
 import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-export type LinkComponents = {
-  Wrapper: ComponentOrTag<any>,
-  Body: ComponentOrTag<any>,
-  ExternalSRText: ComponentOrTag<any>,
+export type GenericTemplateComponents = {
+  PageWrapper: ComponentOrTag<any>,
+  Breadcrumb: ComponentOrTag<any>,
+  MainWrapper: ComponentOrTag<any>,
+  TitleRow: ComponentOrTag<any>,
+  ContentWrapper: ComponentOrTag<any>,
+  Content: ComponentOrTag<any>,
+  BottomWrapper: ComponentOrTag<any>,
+  BottomContent: ComponentOrTag<any>,
 };
 
-export type LinkBaseProps = DesignableComponentsProps<LinkComponents>;
+export type BaseGenericTemplateProps = DesignableComponentsProps<GenericTemplateComponents>;

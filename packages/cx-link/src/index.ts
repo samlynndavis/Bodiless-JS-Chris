@@ -17,4 +17,4 @@ export {
 } from './util';
 export { cxLink } from './token';
 export { LinkClean, asLinkToken } from './LinkClean';
-export { LinkComponents, LinkBaseProps } from './types';
+export type { LinkComponents, LinkBaseProps } from './types';
