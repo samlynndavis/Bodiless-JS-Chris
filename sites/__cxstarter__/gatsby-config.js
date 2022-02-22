@@ -61,6 +61,9 @@ const plugins = [
   //   ...getSampleDefaultContentConfig(),
   //   ...getSiteDefaultContentConfig(),
   // ),
+  {
+    resolve: '@bodiless/__cxstarter__',
+  }
 ];
 
 const robotsTxtPolicy = [
