@@ -20,7 +20,7 @@ import { as } from '@bodiless/fclasses';
 import { withNode, withNodeKey } from '@bodiless/core';
 
 const Header = as(
-  cxHeader.Default,
+  cxHeader.WithGatsbyLink,
   withNode,
   withNodeKey('header'),
 )(HeaderClean);

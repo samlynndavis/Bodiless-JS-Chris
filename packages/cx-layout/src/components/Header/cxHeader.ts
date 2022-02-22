@@ -101,7 +101,16 @@ const Default = asHeaderToken({
   ...Base,
 });
 
+const WithGatsbyLink = asHeaderToken({
+  ...Base,
+  Components: {
+    ...Base.Components,
+    Logo: cxLogo.WithGatsbyLink,
+  }
+});
+
 export const cxHeader = {
   Base,
   Default,
+  WithGatsbyLink,
 };

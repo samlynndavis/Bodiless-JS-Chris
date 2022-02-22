@@ -13,7 +13,7 @@
  */
 
 import {
-  as,
+  as, startWith,
 } from '@bodiless/fclasses';
 import {
   cxElement,
@@ -27,6 +27,7 @@ import {
   withSidecarNodes,
 } from '@bodiless/core';
 import { asBodilessLink } from '@bodiless/components-ui';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asLogoToken } from '../LogoClean';
 
 const Default = asLogoToken({
@@ -56,4 +57,15 @@ const Default = asLogoToken({
   },
 });
 
-export default { Default };
+const WithGatsbyLink = asLogoToken({
+  ...Default,
+  Components: {
+    ...Default.Components,
+    Link: startWith(GatsbyLink)
+  }
+});
+
+export default {
+  Default,
+  WithGatsbyLink,
+};
