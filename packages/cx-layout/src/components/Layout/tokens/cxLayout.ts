@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 import { as } from '@bodiless/fclasses';
-import { asLayoutToken } from './LayoutClean';
-import { cxHeader } from '../Header';
-import { cxHelmet } from '../Helmet';
+import { asLayoutToken } from '../LayoutClean';
+import { cxHeader } from '../../Header';
+import { cxHelmet } from '../../Helmet';
 
 /**
   * Token that defines a basic layout.
@@ -39,7 +39,7 @@ const Default = asLayoutToken({
   ...Base,
 });
 
-export const cxLayout = {
+export default {
   Base,
   Default,
 };

@@ -17,6 +17,8 @@ const Default = asStyleGuideTemplateToken({
   },
   Schema: {
     Title: withNodeKey('title'),
+    Description: withNodeKey('description'),
+    Examples: withNodeKey('exmples'),
   },
 });
 
