@@ -29,6 +29,7 @@ import {
 import { withEditorPlain } from '@bodiless/cx-editors';
 import { cxElement } from '@bodiless/cx-elements';
 import { LinkClean, cxLink } from '@bodiless/cx-link';
+import { withNodeKey } from '@bodiless/core';
 
 // For now, wrap whole page in Font -- this should be added to helmet.
 const PageFontWrapper = as(cxElement.DMSans)(Div);
@@ -75,6 +76,7 @@ const CxDemoLink = flowHoc(
     cxLink.Default,
     cxLink.Sidecar,
   ),
+  withNodeKey('demo-link'),
 )(LinkClean);
 
 const main = (props: any) => (
@@ -98,10 +100,22 @@ const main = (props: any) => (
 
 export default main;
 
+// The allSite query is extraneous and exists only to prevent
+// a webpack linting error produced by default gatsby config(the $slug variable
+// is used in the fragments, but the graphql doesn't pick that up and
+// raises an unused parameter error).
+// @todo Fix unnecessary query.
 export const query = graphql`
-   query($slug: String!) {
-     ...PageQuery
-     ...SiteQuery
-     ...DefaultContentQuery
-   }
- `;
+  query($slug: String!) {
+    ...PageQuery
+    ...SiteQuery
+    ...DefaultContentQuery
+    allSite(filter: {pathPrefix: {eq: $slug}}) {
+      edges {
+        node {
+          buildTime
+        }
+      }
+    }
+  }
+`;
