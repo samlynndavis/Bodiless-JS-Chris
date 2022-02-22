@@ -57,7 +57,7 @@ const WithExternalStyles = asLinkToken({
     }),
   },
   Theme: {
-    //PostIcon: on(Span)(withExternalLinkIcon),
+    // PostIcon: on(Span)(withExternalLinkIcon),
     Wrapper: 'cx-external-link',
   },
 });
