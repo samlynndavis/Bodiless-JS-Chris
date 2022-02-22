@@ -16,7 +16,7 @@ module.exports = {
       'm-xs': ['0.688rem', '0.938rem'],
       'm-sm': ['0.75rem', '1rem'],
       'm-base': ['0.875rem', '1.125rem'],
-      'm-lg': ['1.125rem', '1.5rem'],
+      'm-lg': ['1rem', '1.25rem'],
       'm-xl': ['1.438rem', '1.75rem'],
       'm-2xl': ['1.813rem', '2.125rem'],
       'm-3xl': ['2.25rem', '2.625rem'],

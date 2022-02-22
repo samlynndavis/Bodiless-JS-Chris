@@ -36,7 +36,7 @@ const Default = asLogoToken({
     ),
   },
   Spacing: {
-    Wrapper: 'h-12 lg:h-14 w-60 lg:w-72',
+    Wrapper: 'w-full max-w-48 lg:max-w-56',
     Image: 'max-h-full',
   },
   Components: {
@@ -50,7 +50,7 @@ const Default = asLogoToken({
     // @todo should this be a cx-link?
     // @todo can we separate sidecar nodekeys from editors?
     Link: withSidecarNodes(
-      asBodilessLink('link'),
+      asBodilessLink('link', { href: '/' }),
     ),
     _: withNode,
   },
