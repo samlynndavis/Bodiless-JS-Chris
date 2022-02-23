@@ -7,24 +7,29 @@ import {
   asStyleGuideTemplateToken, cxPage, cxStyleGuideTemplate, StyleGuideTemplateClean
 } from '@bodiless/cx-templates';
 import {
-  flowHoc, on, P, replaceWith
+  flowHoc, on, replaceWith
 } from '@bodiless/fclasses';
 import { __cxstarter__StyleGuideTemplate } from '../StyleGuideTemplate';
-import { EditorPlain } from '../StyleGuideTemplate/EditorPlain';
 
-const title = 'AAA';
-const RichText = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
-  Meta: flowHoc.meta.term('Tokens')('RichText'),
-  Content: {
-    Title: replaceWith(() => <>{title}</>),
-    // @TODO Enable editable description with default content.
-    // Description: ...
-    // @TODO: Add an iframe slot
-    // Comps: ...
-    // @TODO Auto generate examples from token collection.
-    Examples: on(RichTextClean)(cxRichText.Default),
-  },
-});
+const EditorPlain = on(StyleGuideTemplateClean)(
+  asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+    Meta: flowHoc.meta.term('Token')('EditorPlain'),
+    Content: {
+      Title: replaceWith(() => <>Plain Text Editor</>),
+      Examples: on(EditorPlainClean)(cxEditorPlain.Default),
+    },
+  })
+);
+
+const RichText = on(StyleGuideTemplateClean)(
+  asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+    Meta: flowHoc.meta.term('Token')('RichText'),
+    Content: {
+      Title: replaceWith(() => <>Rich Text Editor</>),
+      Examples: on(RichTextClean)(cxRichText.Default),
+    },
+  })
+);
 
 console.log('sgt', __cxstarter__StyleGuideTemplate);
 console.log('here now');
@@ -32,24 +37,9 @@ console.log('here now');
 const Default = asFluidToken({
   ...cxPage.Default,
   Components: {
-    // @ts-ignore
-    _default: replaceWith(() => 'Choose a styleguide page from the templates menu.'),
-    EditorPlain: on(StyleGuideTemplateClean)(
-      asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
-        Content: {
-          Title: replaceWith(() => <>Plain Text Editor</>),
-          Examples: on(EditorPlainClean)(cxEditorPlain.Default),
-        },
-      })
-    ),
-    RichText: on(StyleGuideTemplateClean)(
-      asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
-        Content: {
-          Title: replaceWith(() => <>Rich Text Editor</>),
-          Examples: on(RichTextClean)(cxRichText.Default),
-        },
-      })
-    ),
+    _default: replaceWith(() => <>Choose a styleguide page from the templates menu.</>),
+    EditorPlain,
+    RichText,
   },
 });
 
