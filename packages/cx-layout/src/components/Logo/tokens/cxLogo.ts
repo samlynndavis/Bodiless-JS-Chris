@@ -30,7 +30,7 @@ import { asBodilessLink } from '@bodiless/components-ui';
 import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asLogoToken } from '../LogoClean';
 
-const Default = asLogoToken({
+const Base = asLogoToken({
   Layout: {
     Wrapper: as(
       cxElement.WithFlexCenterXY,
@@ -58,14 +58,20 @@ const Default = asLogoToken({
 });
 
 const WithGatsbyLink = asLogoToken({
-  ...Default,
   Components: {
-    ...Default.Components,
     Link: startWith(GatsbyLink)
   }
 });
 
+const Default = asLogoToken({
+  ...Base,
+  Compose: {
+    WithGatsbyLink,
+  }
+});
+
 export default {
+  Base,
   Default,
   WithGatsbyLink,
 };
