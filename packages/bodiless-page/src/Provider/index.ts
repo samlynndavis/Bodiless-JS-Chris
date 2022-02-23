@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,16 +12,4 @@
  * limitations under the License.
  */
 
-import GatsbyMobxStore from './dist/GatsbyMobxStore';
-import GatsbyNodeProvider from './dist/GatsbyNodeProvider';
-import Page from './dist/Page';
-
-export {
-  GatsbyMobxStore,
-  GatsbyNodeProvider,
-  Page,
-};
-
-export type { PageProps } from './dist/Page';
-export * from './dist/GatsbyLink';
-export * from './dist/GatsbyImage';
+export * from './PageDataProvider';
