@@ -6,9 +6,9 @@ import {
 import {
   replaceWith
 } from '@bodiless/fclasses';
+import { __cxstarter__StyleGuideTemplate } from './StyleGuideTemplate';
 
-import { RichText } from './StyleGuideTemplate/RichText';
-import { EditorPlain } from './StyleGuideTemplate/EditorPlain';
+const { RichText, EditorPlain } = __cxstarter__StyleGuideTemplate;
 
 const Default = asFluidToken({
   ...cxPage.Default,
