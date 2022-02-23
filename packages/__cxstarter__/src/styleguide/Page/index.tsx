@@ -10,14 +10,14 @@ import {
 } from '@bodiless/fclasses';
 import { __cxstarter__StyleGuideTemplate } from './StyleGuideTemplate';
 
-const { RichText, EditorPlain } = __cxstarter__StyleGuideTemplate;
+const { RichTextDemo, EditorPlainDemo } = __cxstarter__StyleGuideTemplate;
 
 const Default = asFluidToken({
   ...cxPage.Default,
   Components: {
     _default: replaceWith(() => <>Choose a styleguide page from the templates menu.</>),
-    EditorPlain: on(StyleGuideTemplateClean)(EditorPlain),
-    RichText: on(StyleGuideTemplateClean)(RichText),
+    EditorPlainDemo: on(StyleGuideTemplateClean)(EditorPlainDemo),
+    RichTextDemo: on(StyleGuideTemplateClean)(RichTextDemo),
     Foo: replaceWith(() => <>FOO </>),
   },
 });

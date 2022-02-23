@@ -1,7 +1,7 @@
-import { RichText } from './RichText';
-import { EditorPlain } from './EditorPlain';
+import { RichTextDemo } from './RichText';
+import { EditorPlainDemo } from './EditorPlain';
 
 export const __cxstarter__StyleGuideTemplate = {
-  RichText,
-  EditorPlain,
+  RichTextDemo,
+  EditorPlainDemo,
 };
