@@ -9,11 +9,6 @@ const meta = {
   },
 };
 
-// TODO/DISCUSS
-// I brought in color to typography but should typography + color = another token ????
-// I tried first cxelementcolor but that wasn't working so for now its actual class
-// import { cxElementColor } from './color.token';
-
 export const cxElementTypography = asTokenGroup(meta)({
   Underline: 'underline',
   Bold: 'font-bold',
