@@ -1,9 +1,11 @@
 import React from 'react';
 import { asFluidToken } from '@bodiless/cx-elements';
 import {
-  cxPage
+  cxPage, StyleGuideTemplateClean
 } from '@bodiless/cx-templates';
 import {
+  as,
+  on,
   replaceWith
 } from '@bodiless/fclasses';
 import { __cxstarter__StyleGuideTemplate } from './StyleGuideTemplate';
@@ -14,8 +16,8 @@ const Default = asFluidToken({
   ...cxPage.Default,
   Components: {
     _default: replaceWith(() => <>Choose a styleguide page from the templates menu.</>),
-    EditorPlain,
-    RichText,
+    EditorPlain: on(StyleGuideTemplateClean)(EditorPlain),
+    RichText: on(StyleGuideTemplateClean)(RichText),
     Foo: replaceWith(() => <>FOO </>),
   },
 });
