@@ -47,11 +47,11 @@ const Base = asLogoToken({
     ),
   },
   Schema: {
-    Image: withNodeKey('image'),
+    Image: withNodeKey({ nodeKey: 'SiteLogo', nodeCollection: 'site' }),
     // @todo should this be a cx-link?
     // @todo can we separate sidecar nodekeys from editors?
     Link: withSidecarNodes(
-      asBodilessLink('link', { href: '/' }),
+      asBodilessLink({ nodeKey: 'SiteLink', nodeCollection: 'site' }, { href: '/' }),
     ),
     _: withNode,
   },
