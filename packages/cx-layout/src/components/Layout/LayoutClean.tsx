@@ -41,34 +41,25 @@ const layoutComponents: LayoutComponents = {
 /**
   * Base layout component composed with container and other site level
   * components to render page layout.
-  * @param layoutProps Layout component props.
+  * @param props Layout component props.
   *
   * @return Base layout functional component.
   */
-export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
-  const {
-    Container,
-    Helmet,
-    OuterContainer,
-    PageCloser,
-    PageTopper,
-    SiteFooter,
-    SiteHeader,
-    SkipToMainContent,
-  } = layoutProps.components;
+export const LayoutCleanBase: FC<LayoutProps> = (props: LayoutProps) => {
+  const { components: C, children, ...rest } = props;
 
   return (
-    <OuterContainer>
-      <SkipToMainContent />
-      <Helmet />
-      <SiteHeader />
-      <Container>
-        <PageTopper />
-        {layoutProps.children}
-        <PageCloser />
-      </Container>
-      <SiteFooter />
-    </OuterContainer>
+    <C.OuterContainer {...rest}>
+      <C.SkipToMainContent />
+      <C.Helmet />
+      <C.SiteHeader />
+      <C.Container>
+        <C.PageTopper />
+        {children}
+        <C.PageCloser />
+      </C.Container>
+      <C.SiteFooter />
+    </C.OuterContainer>
   );
 };
 

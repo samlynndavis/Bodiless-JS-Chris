@@ -4,6 +4,7 @@ import {
   HOC,
   flowHoc,
   as,
+  withTokenFromRegistry,
 } from '@bodiless/fclasses';
 import {
   asBlock,
@@ -23,7 +24,7 @@ import {
   DefaultNormalHref,
 } from '@bodiless/components';
 import { ifComponentSelector } from '@bodiless/layouts';
-import { asCxTokenSpec } from '@bodiless/cx-elements';
+import { asFluidToken } from '@bodiless/cx-elements';
 import { LinkClean } from '@bodiless/cx-link';
 import Components from './cxRichText.cx-components';
 
@@ -35,7 +36,7 @@ const withLinkDeserializer = withHtmlDeserializer(
   }),
 ) as HOC;
 
-const AsFlowContainerItem = asCxTokenSpec()({
+const AsFlowContainerItem = asFluidToken({
   Core: {
     _: as(
       ifComponentSelector(asPreview),
@@ -44,8 +45,14 @@ const AsFlowContainerItem = asCxTokenSpec()({
   Meta: flowHoc.meta.term('Type')('Text Editor'),
 });
 
+const WithRegisteredComponents = withTokenFromRegistry('cxRichText__WithComponents');
+
+const WithComponents = asFluidToken({
+  Components,
+});
+
 // QUESTION -- I had to bring in the definitions to get right order as () didn't work.
-const Full = asCxTokenSpec()({
+const Full = asFluidToken({
   Core: {
     paragraph: as(replaceWith(P), asBlock as HOC),
     Bold: withBoldMeta,
@@ -58,13 +65,13 @@ const Full = asCxTokenSpec()({
     H4: withHeader4Meta,
     H5: withHeader5Meta,
   },
-  Components,
   Behavior: {
     Link: withLinkDeserializer,
   },
   Compose: {
+    WithRegisteredComponents,
     AsFlowContainerItem,
   },
 });
 
-export default { Full, AsFlowContainerItem };
+export default { Full, AsFlowContainerItem, WithComponents, WithRegisteredComponents };

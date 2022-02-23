@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 import { as } from '@bodiless/fclasses';
+import { withRegisterRichTextTokens } from '@bodiless/cx-editors';
 import { asLayoutToken } from '../LayoutClean';
 import { cxHeader } from '../../Header';
 import { cxHelmet } from '../../Helmet';
@@ -37,6 +38,9 @@ const Base = asLayoutToken({
 
 const Default = asLayoutToken({
   ...Base,
+  Compose: {
+    withRegisterRichTextTokens,
+  }
 });
 
 export default {
