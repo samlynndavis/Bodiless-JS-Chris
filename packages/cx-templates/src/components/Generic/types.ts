@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,11 +12,17 @@
  * limitations under the License.
  */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-@tailwind base;
+export type GenericTemplateComponents = {
+  PageWrapper: ComponentOrTag<any>,
+  Breadcrumb: ComponentOrTag<any>,
+  MainWrapper: ComponentOrTag<any>,
+  TitleRow: ComponentOrTag<any>,
+  ContentWrapper: ComponentOrTag<any>,
+  Content: ComponentOrTag<any>,
+  BottomWrapper: ComponentOrTag<any>,
+  BottomContent: ComponentOrTag<any>,
+};
 
-@tailwind components;
- 
-@tailwind utilities;
-  
+export type BaseGenericTemplateProps = DesignableComponentsProps<GenericTemplateComponents>;

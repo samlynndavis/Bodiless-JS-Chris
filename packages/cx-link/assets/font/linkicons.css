@@ -1,0 +1,18 @@
+/* Created with https://fontello.com/ */
+
+@font-face {
+  font-family: 'linkicons';
+  src: url('./assets/font/linkicons.eot?74466082');
+  src: url('./assets/font/linkicons.eot?74466082#iefix') format('embedded-opentype'),
+       url('./assets/font/linkicons.woff2?74466082') format('woff2'),
+       url('./assets/font/linkicons.woff?74466082') format('woff'),
+       url('./assets/font/linkicons.ttf?74466082') format('truetype'),
+       url('./assets/font/linkicons.svg?74466082#linkicons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*
+.icon-download:before { content: '\e800'; } 
+.icon-link-ext:before { content: '\f08e'; } 
+ */

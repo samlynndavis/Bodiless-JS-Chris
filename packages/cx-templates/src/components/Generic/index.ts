@@ -12,12 +12,6 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
-
-export type LinkComponents = {
-  Wrapper: ComponentOrTag<any>,
-  Body: ComponentOrTag<any>,
-  ExternalSRText: ComponentOrTag<any>,
-};
-
-export type LinkBaseProps = DesignableComponentsProps<LinkComponents>;
+export { GenericTemplateClean, asGenericTemplateToken } from './GenericClean';
+export { cxGenericTemplate } from './tokens/token';
+export type { GenericTemplateComponents, BaseGenericTemplateProps } from './types';

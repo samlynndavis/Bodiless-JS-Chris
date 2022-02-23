@@ -20,23 +20,6 @@ import { cxElement } from '@bodiless/cx-elements';
 import { asLinkToken } from './LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from './util';
 
-/*
-import ExternalLinkIcon from './icons/ExternalLink';
-import FileDownloadIcon from './icons/FileDownload';
-
-const withExternalLinkIcon = as(
-  addClasses('fill-current'),
-  as(cxElement.WithInteractiveColorBg),
-  withChild(ExternalLinkIcon),
-);
-const withFileDownloadIcon = as(
-  addClasses('fill-current'),
-  as(cxElement.WithInteractiveColorBg),
-  withChild(FileDownloadIcon),
-);
-
-*/
-
 /**
  * Token which causes link to display as an external link.
  */
@@ -57,7 +40,6 @@ const WithExternalStyles = asLinkToken({
     }),
   },
   Theme: {
-    // PostIcon: on(Span)(withExternalLinkIcon),
     Wrapper: 'cx-external-link',
   },
 });
@@ -69,12 +51,6 @@ const WithDownloadStyles = asLinkToken({
       addPropsIf(useIsDownloadLink())({ target: '_blank', rel: 'noopener noreferrer' }),
     ),
   },
-  /*
-  Theme: {
-    // useIsDownloadLink
-    // PostIcon: on(Span)(withFileDownloadIcon),
-  },
-  */
 });
 
 /**

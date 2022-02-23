@@ -23,7 +23,6 @@ const linkComponents: LinkComponents = {
   Wrapper: A,
   Body: Span,
   ExternalSRText: Fragment,
-  PostIcon: Fragment,
 };
 
 const LinkBase: FC<LinkBaseProps> = ({ components: C, children, ...rest }) => (
@@ -32,7 +31,6 @@ const LinkBase: FC<LinkBaseProps> = ({ components: C, children, ...rest }) => (
     <C.Body>
       {children}
     </C.Body>
-    <C.PostIcon />
   </C.Wrapper>
 );
 
