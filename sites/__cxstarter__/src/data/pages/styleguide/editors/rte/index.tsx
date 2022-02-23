@@ -16,7 +16,7 @@ const Editors = as(
   withDesign({
     Title: replaceWith(() => <>Rich Text Editor</>),
     Examples: on(RichTextClean)(
-      cxRichText.Full,
+      cxRichText.Default,
       addProps({
         placeholder: 'Placeholder',
       }),

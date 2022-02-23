@@ -84,7 +84,7 @@ const withEditorRichClean = withEditor(RichTextClean);
  *
  * @see withEditor
  */
-const withEditorFull = withEditor(as(cxRichText.Full)(RichTextClean));
+const withEditorFull = withEditor(as(cxRichText.Default)(RichTextClean));
 
 export {
   withEditor,
