@@ -1,5 +1,7 @@
 import { cxElement } from '@bodiless/cx-elements';
-import { EditorPlainClean, cxEditorPlain } from '@bodiless/cx-editors';
+import {
+  EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
+} from '@bodiless/cx-editors';
 import { withNodeKey } from '@bodiless/core';
 import { on } from '@bodiless/fclasses';
 import { cxLayout, LayoutClean } from '@bodiless/cx-layout';
@@ -13,7 +15,8 @@ const Default = asStyleGuideTemplateToken({
     Wrapper: on(LayoutClean)(cxLayout.Default),
   },
   Editors: {
-    Title: on(EditorPlainClean)(cxEditorPlain.Title),
+    Title: on(EditorPlainClean)(cxEditorPlain.Default),
+    Description: on(RichTextClean)(cxRichText.Default),
   },
   Schema: {
     Title: withNodeKey('title'),

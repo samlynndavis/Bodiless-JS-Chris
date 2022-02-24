@@ -13,11 +13,8 @@
  */
 
 import React from 'react';
-import { graphql } from 'gatsby';
-import { Page } from '@bodiless/gatsby-theme-bodiless';
 import {
   flowHoc,
-  Div,
   H1,
   H2,
   H3,
@@ -25,14 +22,16 @@ import {
   H5,
   P,
   as,
+  replaceWith,
 } from '@bodiless/fclasses';
 import { withEditorPlain } from '@bodiless/cx-editors';
 import { cxElement } from '@bodiless/cx-elements';
 import { LinkClean, cxLink } from '@bodiless/cx-link';
 import { withNodeKey } from '@bodiless/core';
+import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
 
 // For now, wrap whole page in Font -- this should be added to helmet.
-const PageFontWrapper = as(cxElement.DMSans)(Div);
+// const PageFontWrapper = as(cxElement.DMSans)(Div);
 const H1Title = flowHoc(
   withEditorPlain('title', 'Page Title'),
   as(cxElement.H1, 'py-5'),
@@ -79,43 +78,25 @@ const CxDemoLink = flowHoc(
   withNodeKey('demo-link'),
 )(LinkClean);
 
-const main = (props: any) => (
-  <Page {...props}>
-    <PageFontWrapper>
-      <div className="p-10">
-        <H1Title />
-        <CxH1 />
-        <CxH2 />
-        <CxH3 />
-        <CxH4 />
-        <CxH5 />
-        <CxBody />
-        <CxEyebrow />
-        <CxDemoLink />
-        <CxRest />
-      </div>
-    </PageFontWrapper>
-  </Page>
+const Examples = (props: any) => (
+  <>
+    <H1Title />
+    <CxH1 />
+    <CxH2 />
+    <CxH3 />
+    <CxH4 />
+    <CxH5 />
+    <CxBody />
+    <CxEyebrow />
+    <CxDemoLink />
+    <CxRest />
+  </>
 );
 
-export default main;
-
-// The allSite query is extraneous and exists only to prevent
-// a webpack linting error produced by default gatsby config(the $slug variable
-// is used in the fragments, but the graphql doesn't pick that up and
-// raises an unused parameter error).
-// @todo Fix unnecessary query.
-export const query = graphql`
-  query($slug: String!) {
-    ...PageQuery
-    ...SiteQuery
-    ...DefaultContentQuery
-    allSite(filter: {pathPrefix: {eq: $slug}}) {
-      edges {
-        node {
-          buildTime
-        }
-      }
-    }
-  }
-`;
+export const Typography = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+  Meta: flowHoc.meta.term('Token')('Typography'),
+  Content: {
+    Title: replaceWith(() => <>Typography</>),
+    Examples: replaceWith(Examples),
+  },
+});

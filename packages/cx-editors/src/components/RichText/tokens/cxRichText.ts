@@ -4,6 +4,7 @@ import {
   HOC,
   flowHoc,
   as,
+  addProps,
 } from '@bodiless/fclasses';
 import {
   asBlock,
@@ -45,7 +46,7 @@ const AsFlowContainerItem = asCxTokenSpec()({
 });
 
 // QUESTION -- I had to bring in the definitions to get right order as () didn't work.
-const Full = asCxTokenSpec()({
+const Default = asCxTokenSpec()({
   Core: {
     paragraph: as(replaceWith(P), asBlock as HOC),
     Bold: withBoldMeta,
@@ -58,6 +59,9 @@ const Full = asCxTokenSpec()({
     H4: withHeader4Meta,
     H5: withHeader5Meta,
   },
+  Content: {
+    _: addProps({ placeholder: 'Placeholder' }),
+  },
   Components,
   Behavior: {
     Link: withLinkDeserializer,
@@ -67,4 +71,4 @@ const Full = asCxTokenSpec()({
   },
 });
 
-export default { Full, AsFlowContainerItem };
+export default { Default, AsFlowContainerItem };
