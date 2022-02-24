@@ -53,15 +53,9 @@ const Default = asElementToken({
   Core: {
     _: withSlateTranslator,
   },
+  Content: {
+    _: withPlaceholder('Plain text...'),
+  },
 });
 
-const Title = asElementToken(
-  Default,
-  {
-    Content: {
-      _: withPlaceholder('title'),
-    },
-  }
-);
-
-export default { Default, Title, WithAutoSuperscript };
+export default { Default, WithAutoSuperscript };

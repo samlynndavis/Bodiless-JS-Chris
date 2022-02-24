@@ -15,7 +15,7 @@ const Default = asStyleGuideTemplateToken({
     Wrapper: on(LayoutClean)(cxLayout.Default),
   },
   Editors: {
-    Title: on(EditorPlainClean)(cxEditorPlain.Title),
+    Title: on(EditorPlainClean)(cxEditorPlain.Default),
     Description: on(RichTextClean)(cxRichText.Default),
   },
   Schema: {
