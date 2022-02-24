@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 import { cxElement } from '@bodiless/cx-elements';
+import { as } from '@bodiless/fclasses';
 import { asHelmetToken } from './HelmetClean';
 
 const Default = asHelmetToken({
@@ -24,7 +25,10 @@ const Default = asHelmetToken({
     */
   },
   Theme: {
-    HTMLHelmet: cxElement.DMSans,
+    HTMLHelmet: as(
+      cxElement.DMSans,
+      cxElement.WithBodyText,
+    ),
   }
 });
 

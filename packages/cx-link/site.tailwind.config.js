@@ -41,7 +41,7 @@ module.exports = {
             'line-height': '1rem',
             'text-decoration': 'none',
             'text-transform': 'none',
-            'vertical-align': 'text-top',
+            'vertical-align': 'super',
             'margin-left': '.25rem',
             display: 'inline-block',
           },

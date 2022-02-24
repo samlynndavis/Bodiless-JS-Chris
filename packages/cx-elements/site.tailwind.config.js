@@ -26,6 +26,7 @@ module.exports = {
         brand: '#CA081B',
         bg: '#ffffff',
         interactive: '#031199',
+        'interactive-active': '#000341',
       },
       gray: {
         page: '#F4F4F4',
