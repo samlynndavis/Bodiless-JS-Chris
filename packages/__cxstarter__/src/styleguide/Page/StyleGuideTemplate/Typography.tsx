@@ -30,8 +30,6 @@ import { LinkClean, cxLink } from '@bodiless/cx-link';
 import { withNodeKey } from '@bodiless/core';
 import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
 
-// For now, wrap whole page in Font -- this should be added to helmet.
-// const PageFontWrapper = as(cxElement.DMSans)(Div);
 const H1Title = flowHoc(
   withEditorPlain('title', 'Page Title'),
   as(cxElement.H1, 'py-5'),
