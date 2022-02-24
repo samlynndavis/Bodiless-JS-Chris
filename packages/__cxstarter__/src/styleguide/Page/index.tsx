@@ -4,7 +4,6 @@ import {
   cxPage, StyleGuideTemplateClean
 } from '@bodiless/cx-templates';
 import {
-  as,
   on,
   replaceWith
 } from '@bodiless/fclasses';
@@ -16,9 +15,8 @@ const Default = asFluidToken({
   ...cxPage.Default,
   Components: {
     _default: replaceWith(() => <>Choose a styleguide page from the templates menu.</>),
-    EditorPlain: on(StyleGuideTemplateClean)(EditorPlain),
-    RichText: on(StyleGuideTemplateClean)(RichText),
-    Foo: replaceWith(() => <>FOO </>),
+    EditorPlain,
+    RichText,
   },
 });
 

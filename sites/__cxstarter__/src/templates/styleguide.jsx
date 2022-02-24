@@ -1,9 +1,9 @@
 import { graphql } from 'gatsby';
-import { Fragment } from 'react';
+import { StyleGuideTemplateClean } from '@bodiless/cx-templates';
 import { as } from '@bodiless/fclasses';
 import { __cxstarter__StyleGuidePage } from '@bodiless/__cxstarter__';
 
-const StyleGuidePage = as(__cxstarter__StyleGuidePage.Default)(Fragment);
+const StyleGuidePage = as(__cxstarter__StyleGuidePage.Default)(StyleGuideTemplateClean);
 
 export default StyleGuidePage;
 
