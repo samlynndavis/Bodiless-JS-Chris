@@ -17,7 +17,6 @@ const EditorPlainToken = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default,
     Examples: on(EditorPlainClean)(cxEditorPlain.Default),
   },
 });
-const EditorPlainDemo = on(StyleGuideTemplateClean)(EditorPlainToken);
 
 const RichTextToken = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('RichText'),
@@ -26,6 +25,7 @@ const RichTextToken = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
     Examples: on(RichTextClean)(cxRichText.Default),
   },
 });
+const EditorPlainDemo = on(StyleGuideTemplateClean)(EditorPlainToken);
 const RichTextDemo = on(StyleGuideTemplateClean)(RichTextToken);
 
 const Default = asFluidToken({
