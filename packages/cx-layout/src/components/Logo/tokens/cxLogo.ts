@@ -13,7 +13,7 @@
  */
 
 import {
-  as,
+  as, startWith,
 } from '@bodiless/fclasses';
 import {
   cxElement,
@@ -27,9 +27,10 @@ import {
   withSidecarNodes,
 } from '@bodiless/core';
 import { asBodilessLink } from '@bodiless/components-ui';
+import { GatsbyLink } from '@bodiless/gatsby-theme-bodiless';
 import { asLogoToken } from '../LogoClean';
 
-const Default = asLogoToken({
+const Base = asLogoToken({
   Layout: {
     Wrapper: as(
       cxElement.WithFlexCenterXY,
@@ -46,14 +47,31 @@ const Default = asLogoToken({
     ),
   },
   Schema: {
-    Image: withNodeKey('image'),
+    Image: withNodeKey({ nodeKey: 'SiteLogo', nodeCollection: 'site' }),
     // @todo should this be a cx-link?
     // @todo can we separate sidecar nodekeys from editors?
     Link: withSidecarNodes(
-      asBodilessLink('link', { href: '/' }),
+      asBodilessLink({ nodeKey: 'SiteLink', nodeCollection: 'site' }, { href: '/' }),
     ),
     _: withNode,
   },
 });
 
-export default { Default };
+const WithGatsbyLink = asLogoToken({
+  Components: {
+    Link: startWith(GatsbyLink)
+  }
+});
+
+const Default = asLogoToken({
+  ...Base,
+  Compose: {
+    WithGatsbyLink,
+  }
+});
+
+export default {
+  Base,
+  Default,
+  WithGatsbyLink,
+};
