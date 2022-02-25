@@ -36,7 +36,7 @@ const path = require('path');
 const cleanSymlink = path => {
   const link = fs.lstatSync(path, { throwIfNoEntry: false });
 
-  if (link.isSymbolicLink()) {
+  if (link && link.isSymbolicLink()) {
     fs.unlinkSync(path);
   }
 };
