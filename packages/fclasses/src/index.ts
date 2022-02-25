@@ -15,6 +15,7 @@
 export * from './withDesignAt';
 export * from './addClasses';
 export * from './Design';
+export * from './DesignContext';
 export * from './replaceable';
 export * from './withHocDesign';
 export * from './StyledHTML';

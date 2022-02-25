@@ -1,3 +1,5 @@
+import { withRegisterDesignContext } from '@bodiless/fclasses';
+import omit from 'lodash/omit';
 import { asFluidToken } from '@bodiless/cx-elements';
 import {
   cxPage,
@@ -12,6 +14,10 @@ const Default = asFluidToken({
     _default,
     Editors,
     Typography,
+  },
+  // @todo We shouldn't have to duplicate this
+  Compose: {
+    WithCustomRichText: withRegisterDesignContext('RichText', d => omit(d, 'H1')),
   },
 });
 

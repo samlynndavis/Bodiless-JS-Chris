@@ -29,6 +29,7 @@ import { replaceable } from './replaceable';
 import { withHocDesign } from './withHocDesign';
 import { withTransformer } from './Transformer';
 import { as, extendDesign } from './tokenSpec';
+import { withApplyDesignContext } from './DesignContext';
 
 /**
  * is an HOC that will attach a displayName to an object
@@ -169,6 +170,7 @@ export const extendDesignable = (transformDesign: TransformDesign = identity) =>
       const Designable: ComponentType<any> = flow(
         withTransformer({ transformFixed, transformPassthrough }),
         designKeys ? withHocDesign(designKeys) : identity,
+        withApplyDesignContext(namespace),
       )(Component);
 
       Designable.displayName = `extendDesignable(${namespace})`;
