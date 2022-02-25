@@ -3,9 +3,9 @@ import {
   NodeProvider, useNode,
 } from '@bodiless/core';
 import { HOC } from '@bodiless/fclasses';
-import { asElementToken } from '@bodiless/cx-elements';
 import { withPlaceholder } from '@bodiless/components';
 import type { EditableData } from '@bodiless/components';
+import { asEditorPlainToken } from '../EditorPlainClean';
 import { withAutoSuperscript } from '../util';
 
 const convertSlateToEditable = (componentData: any): EditableData => {
@@ -43,18 +43,18 @@ const withSlateTranslator: HOC = Component => props => {
   );
 };
 
-const WithAutoSuperscript = asElementToken({
+const WithAutoSuperscript = asEditorPlainToken({
   Behavior: {
-    _: withAutoSuperscript(),
+    Editable: withAutoSuperscript(),
   },
 });
 
-const Default = asElementToken({
+const Default = asEditorPlainToken({
   Core: {
-    _: withSlateTranslator,
+    Editable: withSlateTranslator,
   },
   Content: {
-    _: withPlaceholder('Plain text...'),
+    Editable: withPlaceholder('Plain text...'),
   },
 });
 

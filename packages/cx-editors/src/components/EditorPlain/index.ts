@@ -1,4 +1,2 @@
-import { Editable } from '@bodiless/components';
-
 export { cxEditorPlain, cxEditorPlainStatic } from './tokens';
-export { Editable as EditorPlainClean };
+export { EditorPlainClean, asEditorPlainToken } from './EditorPlainClean';
