@@ -1,10 +1,9 @@
-import { withRegisterDesignContext } from '@bodiless/fclasses';
-import omit from 'lodash/omit';
 import { asFluidToken } from '@bodiless/cx-elements';
 import {
   cxPage,
 } from '@bodiless/cx-templates';
 import { __cxstarter__StyleGuideTemplate } from './StyleGuideTemplate';
+import { __cxstarter__DesignContext } from '../../components/DesignContext';
 
 const { Editors, Typography, _default } = __cxstarter__StyleGuideTemplate;
 
@@ -17,7 +16,7 @@ const Default = asFluidToken({
   },
   // @todo We shouldn't have to duplicate this
   Compose: {
-    WithCustomRichText: withRegisterDesignContext('RichText', d => omit(d, 'H1')),
+    ...__cxstarter__DesignContext,
   },
 });
 
