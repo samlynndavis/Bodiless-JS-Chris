@@ -37,7 +37,7 @@ export const cxElementTypography = asTokenGroup(meta)({
   H4: as(
     'text-m-lg lg:text-lg font-normal',
     cxElementColor.WithHeaderColor,
-    'mb-5 lg:mb-9',
+    'mb-5.75 lg:mb-9',
   ),
   H5: as(
     'text-m-base lg:text-base font-medium',
