@@ -8,7 +8,7 @@ import { startWith } from './replaceable';
 import type {
   TokenDef, // FlowHoc,
   DesignableComponents, HocDesign, TokenSpec,
-  ReservedDomains, Design, Token, HOCBase, HOD, TokenSpecBase,
+  ReservedDomains, Design, Domain, Token, HOCBase, HOD, TokenSpecBase,
 } from './types';
 import { $TokenSpec } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
@@ -26,7 +26,7 @@ import { withHocDesign } from './withHocDesign';
      */
 function getHocForDomain<C extends DesignableComponents, D extends object = any>(
   domainName: keyof TokenSpec<C, D>,
-  domain?: Design<C> | ReservedDomains<C, D>[keyof ReservedDomains<C, D>]
+  domain?: Domain<C, D> | ReservedDomains<C, D>[keyof ReservedDomains<C, D>]
 ): TokenDef | undefined {
   if (!domain) return undefined;
   if (domainName === 'Flow') return undefined;
@@ -35,7 +35,12 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
     const compose = domain as ReservedDomains<C, D>['Compose'];
     return as(...Object.values(compose || {}));
   }
-  return withDesign(domain as Design<C, D>);
+  // This cast is safe bc we've exhausted all the other possibilities.
+  const normalDomain: Domain<C, D> = domain as Domain<C, D>;
+  return flowHoc(
+    as(normalDomain._),
+    withDesign(normalDomain),
+  );
 }
 
 /**
@@ -109,11 +114,11 @@ function withDesign<C extends DesignableComponents = any, D extends object = any
       }),
       {} as HocDesign<any>
     );
-  return flowHoc(
-    as(design._) as HOCBase,
-    withHocDesign(hocDesign)
-  );
-  // return withHocDesign(hocDesign);
+  // return flowHoc(
+  //   as(design._) as HOCBase,
+  //   withHocDesign(hocDesign)
+  // );
+  return withHocDesign(hocDesign);
 }
 
 /**

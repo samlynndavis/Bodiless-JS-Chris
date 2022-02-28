@@ -203,8 +203,12 @@ export type FluidDesign = Design<DesignableComponents>;
 export type Designable<C extends DesignableComponents = DesignableComponents>
   = HOCBase<{}, DesignableProps<C>, DesignableComponentsProps<C>>;
 
+export type Domain<C extends DesignableComponents, D extends object> = Design<C, D> & {
+  _?: Token<C, D>,
+};
+
 export type Domains<C extends DesignableComponents, D extends object> = {
-  [k in keyof D]?: Design<C>
+  [k in keyof D]?: Domain<C, D>
 };
 
 export type ReservedDomains<
@@ -292,7 +296,7 @@ type FinalDesign<
   C extends DesignableComponents = DesignableComponents,
   D extends object = any,
 > = {
-  [k in keyof Partial<C & { _?: Token<C, D> }>]: Token<any, D>
+  [k in keyof Partial<C>]: Token<any, D>
 };
 
 /**
