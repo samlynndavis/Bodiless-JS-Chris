@@ -7,6 +7,7 @@ import {
   addProps,
   H4,
   H5,
+  startWith,
 } from '@bodiless/fclasses';
 import {
   asBlock,
@@ -59,11 +60,11 @@ const Default = asCxTokenSpec()({
     H2: withHeader2Meta,
     H3: withHeader3Meta,
     H4: as(
-      replaceWith(H4),
+      startWith(H4),
       withHeader4Meta,
     ),
     H5: as(
-      replaceWith(H5),
+      startWith(H5),
       withHeader5Meta,
     ),
   },

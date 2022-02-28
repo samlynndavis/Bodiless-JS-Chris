@@ -9,7 +9,7 @@ const meta = {
   },
 };
 
-const asLink = asElementToken({
+const Link = asElementToken({
   Theme: {
     _: as(
       'text-m-base lg:text-base font-bold underline',
@@ -20,7 +20,7 @@ const asLink = asElementToken({
   },
 });
 
-const asH1 = asElementToken({
+const H1 = asElementToken({
   Theme: {
     _: as(
       'text-m-3xl lg:text-3xl font-bold',
@@ -32,7 +32,7 @@ const asH1 = asElementToken({
   },
 });
 
-const asH2 = asElementToken({
+const H2 = asElementToken({
   Theme: {
     _: as(
       'text-m-2xl lg:text-2xl font-bold',
@@ -44,7 +44,7 @@ const asH2 = asElementToken({
   },
 });
 
-const asH3 = asElementToken({
+const H3 = asElementToken({
   Theme: {
     _: as(
       'text-m-xl lg:text-xl font-medium',
@@ -56,7 +56,7 @@ const asH3 = asElementToken({
   },
 });
 
-const asH4 = asElementToken({
+const H4 = asElementToken({
   Theme: {
     _: as(
       'text-m-lg lg:text-lg font-normal',
@@ -68,7 +68,7 @@ const asH4 = asElementToken({
   },
 });
 
-const asH5 = asElementToken({
+const H5 = asElementToken({
   Theme: {
     _: as(
       'text-m-base lg:text-base font-medium',
@@ -129,12 +129,12 @@ export const cxElementTypography = asTokenGroup(meta)({
       _: 'align-super',
     }
   }),
-  Link: asLink,
-  H1: asH1,
-  H2: asH2,
-  H3: asH3,
-  H4: asH4,
-  H5: asH5,
+  Link,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
   Body: asBody,
   Eyebrow: asEyebrow,
   Rest: asRest,
