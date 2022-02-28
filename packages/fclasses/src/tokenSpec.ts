@@ -2,7 +2,8 @@ import mergeWith from 'lodash/mergeWith';
 import flow from 'lodash/flow';
 import { ComponentType } from 'react';
 import identity from 'lodash/identity';
-import { pick } from 'lodash';
+import pick from 'lodash/pick';
+import omit from 'lodash/omit';
 import { startWith } from './replaceable';
 import type {
   TokenDef, // FlowHoc,
@@ -13,7 +14,6 @@ import { $TokenSpec } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
 import { addClasses } from './addClasses';
 import { withHocDesign } from './withHocDesign';
-// import omit from 'lodash/omit';
 
 /**
      * @private
@@ -297,3 +297,34 @@ export {
 export const isTokenSpec = (a: Token<any, any>): a is TokenSpec<any, any> => (
   typeof a !== 'function' && typeof a !== 'string'
 );
+
+/**
+ * Consolidates a token specification into a single design, excluding
+ * any tokens which apply to the component as a whole. In general, given
+ * a token spec 'spec':
+ * ```
+ * withDesign(consolidateDesign(spec))
+ * ```
+ * will be equivalent to
+ * ```
+ * as(spec)
+ * ```
+ * Only if all of the following apply:
+ * - the spec has no 'Flow', 'Meta' or 'Compose' entries.
+ * - the domains in the spec have no tokens which apply to the component as
+ *   a whole (tokens with the `_` key).
+ *
+ * @param spec
+ * A token specification.
+ *
+ * @returns
+ * A single design which consoidates all domains of the token spec.
+ */
+export const consolidateDesign = <C extends DesignableComponents, D extends object>(
+  spec: TokenSpec<C, D>
+) => {
+  const designs: Design[] = Object.entries(spec)
+    .filter(([key]) => key !== 'Flow' && key !== 'Compose' && key !== 'Meta')
+    .map(([key, design]) => omit(design, '_'));
+  return extendDesign(...designs);
+};

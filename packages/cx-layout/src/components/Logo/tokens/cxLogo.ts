@@ -13,7 +13,7 @@
  */
 
 import {
-  as, startWith,
+  as, startWith, withDesign,
 } from '@bodiless/fclasses';
 import {
   cxElement,
@@ -41,10 +41,12 @@ const Base = asLogoToken({
     Image: 'max-h-full',
   },
   Components: {
-    Image: as(
-      cxImage.Default,
-      cxImage.WithEager,
-    ),
+    // @todo Should we provide this at the component level or provide
+    // a default canvasx design registry?
+    Image: withDesign({ Image: cxImage.Default }),
+  },
+  Behavior: {
+    Image: cxImage.WithEager,
   },
   Schema: {
     Image: withNodeKey({ nodeKey: 'SiteLogo', nodeCollection: 'site' }),

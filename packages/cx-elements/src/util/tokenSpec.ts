@@ -11,6 +11,7 @@ import {
 } from '@bodiless/fclasses';
 
 type CxTokenSpec<C extends DesignableComponents> = TokenSpecBase<C, DefaultDomains>;
+type CxToken<C extends DesignableComponents> = Token<C, DefaultDomains>;
 
 const defaultDomains = {
   Core: {},
@@ -101,4 +102,4 @@ export {
   asTokenGroup,
 };
 
-export type { CxTokenSpec };
+export type { CxTokenSpec, CxToken };

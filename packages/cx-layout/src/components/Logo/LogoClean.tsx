@@ -18,13 +18,15 @@ import {
   A,
   DesignableComponentsProps,
   Span,
-  Img,
   designable,
   ComponentOrTag,
 } from '@bodiless/fclasses';
 import {
   asCxTokenSpec,
 } from '@bodiless/cx-elements';
+import {
+  ImageClean,
+} from '@bodiless/cx-image';
 
 export type LogoComponents = {
   Wrapper: ComponentOrTag<any>,
@@ -36,7 +38,7 @@ type LogoProps = DesignableComponentsProps<LogoComponents> & HTMLProps<HTMLEleme
 
 const logoComponents: LogoComponents = {
   Wrapper: Span,
-  Image: Img,
+  Image: ImageClean,
   Link: A,
 };
 

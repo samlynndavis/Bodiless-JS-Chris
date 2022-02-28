@@ -22,6 +22,7 @@ import { HeaderComponents, HeaderProps } from './types';
 
 const headerComponents: HeaderComponents = {
   Wrapper: Div,
+  // @godo should there be a global container?
   Container: Div,
   MenuContainer: Div,
   MenuToggler: MenuTogglerClean,
