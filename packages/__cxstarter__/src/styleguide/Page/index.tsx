@@ -4,13 +4,19 @@ import {
 } from '@bodiless/cx-templates';
 import { __cxstarter__StyleGuideTemplate } from './StyleGuideTemplate';
 
-const { Editors, Typography, _default } = __cxstarter__StyleGuideTemplate;
+const {
+  Editors,
+  EditorsMonoFont,
+  Typography,
+  _default
+} = __cxstarter__StyleGuideTemplate;
 
 const Default = asFluidToken({
   ...cxPage.Default,
   Components: {
     _default,
     Editors,
+    EditorsMonoFont,
     Typography,
   },
 });

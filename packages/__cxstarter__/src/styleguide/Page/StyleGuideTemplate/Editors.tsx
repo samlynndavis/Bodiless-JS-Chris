@@ -73,3 +73,23 @@ export const Editors = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
     Examples: replaceWith(Examples),
   },
 });
+
+const MonoFont = {
+  Wrapper: as('font-mono')(Div),
+};
+
+const ExamplesMonoFont = () => (
+  <>
+    <MonoFont.Wrapper>
+      <Examples />
+    </MonoFont.Wrapper>
+  </>
+);
+
+export const EditorsMonoFont = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+  Meta: flowHoc.meta.term('Token')('Editors'),
+  Content: {
+    Title: replaceWith(() => <>Text Editors</>),
+    Examples: replaceWith(ExamplesMonoFont),
+  },
+});

@@ -9,7 +9,9 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
-    "site.tailwind.config.js"
+    "/bodiless.docs.json",
+    "/site.tailwind.config.js",
+    "/doc"
   ],
   "repository": {
     "type": "git",

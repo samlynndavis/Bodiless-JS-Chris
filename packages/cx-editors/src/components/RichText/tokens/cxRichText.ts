@@ -5,6 +5,8 @@ import {
   flowHoc,
   as,
   addProps,
+  H4,
+  H5,
 } from '@bodiless/fclasses';
 import {
   asBlock,
@@ -56,8 +58,14 @@ const Default = asCxTokenSpec()({
     H1: withHeader1Meta,
     H2: withHeader2Meta,
     H3: withHeader3Meta,
-    H4: withHeader4Meta,
-    H5: withHeader5Meta,
+    H4: as(
+      replaceWith(H4),
+      withHeader4Meta,
+    ),
+    H5: as(
+      replaceWith(H5),
+      withHeader5Meta,
+    ),
   },
   Content: {
     _: addProps({ placeholder: 'Placeholder' }),
