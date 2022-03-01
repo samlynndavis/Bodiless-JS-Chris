@@ -22,23 +22,19 @@ module.exports = {
       'm-3xl': ['2.25rem', '2.5rem'],
     },
     colors: {
-      primary: {
+      'cx-primary': {
         brand: '#CA081B',
-        bg: '#ffffff',
+        'card-bg': '#ffffff',
+        'page-bg': '#F4F4F4',
         interactive: '#000099',
         'interactive-active': '#000341',
+        divider: '#D8D8D8',
+        'body-copy': '#63666A',
+        'header-copy': '#212121',
       },
-      gray: {
-        page: '#F4F4F4',
-        light: '#D8D8D8',
-        body: '#63666A',
-        footer: '#2B2B33',
-      },
-      black: {
-        header: '#212121',
-      },
-      secondary: {
+      'cx-secondary': {
         eyebrow: '#CC0099',
+        'footer-bg': '#2B2B33',
       },
     },
     extend: {

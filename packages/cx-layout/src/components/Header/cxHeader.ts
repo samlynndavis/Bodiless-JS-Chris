@@ -78,7 +78,7 @@ const Base = asHeaderToken({
     ),
   },
   Theme: {
-    Wrapper: cxElement.WithPrimaryBgColor,
+    Wrapper: cxElement.WithBgPrimaryCardBgColor,
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),

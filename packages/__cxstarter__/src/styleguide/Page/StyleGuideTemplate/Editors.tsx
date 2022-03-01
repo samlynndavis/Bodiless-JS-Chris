@@ -14,7 +14,11 @@ const C = {
   H3: as(cxElement.H3)(H3),
   Example: as('pt-12')(Section),
   Demo: as('p-2 border border-1')(Div),
-  Code: as('bg-black text-white p-2 mt-2 text-primary-bg bg-black-header')(Pre),
+  Code: as(
+    'bg-black text-white p-2 mt-2',
+    cxElement.WithBgPrimaryCardBgColor,
+    cxElement.WithTextPrimaryHeaderCopyColor,
+  )(Pre),
 };
 
 // @todo auto-generate examples from token collection entries
