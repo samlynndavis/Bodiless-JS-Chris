@@ -29,7 +29,7 @@ const Link = asElementToken({
 
 const H1 = asElementToken({
   Core: {
-    _: cxElementFontSize.ThreeXL,
+    _: cxElementFontSize.ThreeXl,
   },
   Theme: {
     _: as(
@@ -45,7 +45,7 @@ const H1 = asElementToken({
 
 const H2 = asElementToken({
   Core: {
-    _: cxElementFontSize.TwoXL,
+    _: cxElementFontSize.TwoXl,
   },
   Theme: {
     _: as(
@@ -61,7 +61,7 @@ const H2 = asElementToken({
 
 const H3 = asElementToken({
   Core: {
-    _: cxElementFontSize.XL,
+    _: cxElementFontSize.Xl,
   },
   Theme: {
     _: as(
@@ -77,7 +77,7 @@ const H3 = asElementToken({
 
 const H4 = asElementToken({
   Core: {
-    _: cxElementFontSize.LG,
+    _: cxElementFontSize.Lg,
   },
   Theme: {
     _: as(
@@ -124,7 +124,7 @@ const Body = asElementToken({
 
 const Eyebrow = asElementToken({
   Core: {
-    _: cxElementFontSize.XS,
+    _: cxElementFontSize.Xs,
   },
   Theme: {
     _: as(
@@ -142,7 +142,7 @@ const Eyebrow = asElementToken({
 // They have called it crumbs & reviews now.
 const Rest = asElementToken({
   Core: {
-    _: cxElementFontSize.XS,
+    _: cxElementFontSize.Xs,
   },
   Theme: {
     _: as(

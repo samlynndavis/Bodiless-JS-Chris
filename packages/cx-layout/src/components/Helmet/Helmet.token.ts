@@ -28,6 +28,7 @@ const Default = asHelmetToken({
     HTMLHelmet: as(
       cxElement.DMSans,
       cxElement.WithTextPrimaryBodyCopyColor,
+      cxElement.WithNormal,
     ),
   }
 });

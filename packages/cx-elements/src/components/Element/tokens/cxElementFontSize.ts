@@ -9,9 +9,9 @@ const meta = {
 
 export const cxElementFontSize = asTokenGroup(meta)({
   Base: 'text-m-base lg:text-base',
-  ThreeXL: 'text-m-3xl lg:text-3xl',
-  TwoXL: 'text-m-2xl lg:text-2xl',
-  XL: 'text-m-xl lg:text-xl',
-  LG: 'text-m-lg lg:text-lg',
-  XS: 'text-m-xs lg:text-xs',
+  ThreeXl: 'text-m-3xl lg:text-3xl',
+  TwoXl: 'text-m-2xl lg:text-2xl',
+  Xl: 'text-m-xl lg:text-xl',
+  Lg: 'text-m-lg lg:text-lg',
+  Xs: 'text-m-xs lg:text-xs',
 });
