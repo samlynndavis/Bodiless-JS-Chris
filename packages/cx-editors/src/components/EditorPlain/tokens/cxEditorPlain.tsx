@@ -45,7 +45,7 @@ const withSlateTranslator: HOC = Component => props => {
 
 const WithAutoSuperscript = asElementToken({
   Behavior: {
-    _: withAutoSuperscript(),
+    _: withAutoSuperscript(undefined, 'align-baseline'),
   },
 });
 

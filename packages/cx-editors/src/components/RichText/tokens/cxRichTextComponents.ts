@@ -2,7 +2,7 @@ import { cxLink } from '@bodiless/cx-link';
 import { cxElement } from '@bodiless/cx-elements';
 
 export const cxRichTextComponents = {
-  paragraph: cxElement.Body,
+  paragraph: cxElement.asBody,
   Bold: cxElement.Bold,
   Underline: cxElement.Underline,
   SuperScript: cxElement.Superscript,

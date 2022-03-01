@@ -17,7 +17,7 @@ export const cxElementColor = asTokenGroup(meta)({
   WithPrimaryInteractiveHoverOpacity: 'hover:opacity-70',
   WithTextPrimaryInteractiveActiveColor: 'active:text-cx-primary-interactive-active',
   WithTextPrimaryInteractiveDisabledOpacity: 'text-opacity-60',
-  WithBgPrimaryDividerColor: 'text-cx-primary-divider',
+  WithBgPrimaryDividerColor: 'bg-cx-primary-divider',
   WithTextPrimaryDividerColor: 'text-cx-primary-divider',
   WithTextPrimaryBodyCopyColor: 'text-cx-primary-body-copy',
   WithTextPrimaryHeaderCopyColor: 'text-cx-primary-header-copy',

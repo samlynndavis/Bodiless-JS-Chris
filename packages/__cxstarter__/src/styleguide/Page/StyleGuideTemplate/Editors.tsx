@@ -15,8 +15,8 @@ const C = {
   Example: as('pt-12')(Section),
   Demo: as('p-2 border border-1')(Div),
   Code: as(
-    'bg-black text-white p-2 mt-2',
-    cxElement.WithBgPrimaryCardBgColor,
+    'p-2 mt-2',
+    cxElement.WithBgPrimaryDividerColor,
     cxElement.WithTextPrimaryHeaderCopyColor,
   )(Pre),
 };

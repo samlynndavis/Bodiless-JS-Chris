@@ -24,7 +24,7 @@ const Bold = asElementToken({
 
 const Superscript = asElementToken({
   Theme: {
-    _: 'align-super',
+    _: 'align-baseline',
   },
   Meta: meta,
 });

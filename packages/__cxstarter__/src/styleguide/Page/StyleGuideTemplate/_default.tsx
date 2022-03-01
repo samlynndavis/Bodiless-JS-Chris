@@ -20,6 +20,7 @@ const Examples = () => (
     <Para>
       <ul>
         <li><a href="./editors">Editors</a></li>
+        <li><a href="./editors-monofont">Editors with MonoFont</a></li>
         <li><a href="./typography">Typography</a></li>
       </ul>
     </Para>
