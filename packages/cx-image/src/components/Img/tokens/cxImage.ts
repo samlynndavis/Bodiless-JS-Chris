@@ -126,14 +126,18 @@ const WithEditorNoEffect = asElementToken({
 });
 
 /**
- * Token which apply a Landscape Placeholder.
+ * Token which applies a Landscape Placeholder.
  */
 const WithLandscapePlaceholder = asElementToken({
+  Meta: flowHoc.meta.term('Placeholder')('Landscape'),
   Content: {
     _: withImagePlaceholder({ src: landscapeImage }),
   },
 });
 
+/**
+ * @private
+ */
 const LinkBase = asBodilessLink('link')(A);
 
 /**
@@ -166,7 +170,11 @@ const EditableTraced = asElementToken(Base, WithEditorTraced);
 */
 const EditableNoEffect = asElementToken(Base, WithEditorNoEffect);
 
+/**
+ * Adds loading="eager"
+ */
 const WithEager = asElementToken({
+  Meta: flowHoc.meta.term('Loading')('Eager'),
   Core: {
     _: addProps({ loading: 'eager'}),
   },
