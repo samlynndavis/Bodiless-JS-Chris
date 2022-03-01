@@ -60,6 +60,8 @@
       "@bodiless/cx-templates/*": ["cx-templates/src/*"],      
       "@bodiless/filtering": ["bodiless-filtering/src"],
       "@bodiless/filtering/*": ["bodiless-filtering/src/*"],
+      "@bodiless/hydration": ["bodiless-hydration/src"],
+      "@bodiless/hydration/*": ["bodiless-hydration/src/*"],
       "@bodiless/layouts": ["bodiless-layouts/src"],
       "@bodiless/layouts/*": ["bodiless-layouts/src/*"],
       "@bodiless/layouts-ui": ["bodiless-layouts-ui/src"],

@@ -30,6 +30,7 @@
     "@bodiless/documentation": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/filtering": "^0.3.7",
+    "@bodiless/hydration": "^0.3.7",
     "@bodiless/gatsby-plugin-ssi": "^0.3.7",
     "@bodiless/gatsby-theme-bodiless": "^0.3.7",
     "@bodiless/gtm": "^0.3.7",

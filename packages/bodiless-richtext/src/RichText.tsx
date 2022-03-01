@@ -36,6 +36,7 @@ import {
   ifToggledOn,
   useUUID,
 } from '@bodiless/core';
+import { withHydrationWrapper } from '@bodiless/hydration';
 import {
   designable,
   H1,
@@ -345,6 +346,7 @@ const RichText = flow(
   withNode,
   withPreview,
   designable(apply, 'RichText'),
+  withHydrationWrapper(),
 )(BasicRichText) as ComponentType<RichTextProps>;
 
 export default RichText;
