@@ -1,5 +1,5 @@
 import { flowHoc } from '@bodiless/fclasses';
-import { asTokenGroup } from '../../util';
+import { asTokenGroup } from '../../../util';
 
 const meta = [
   flowHoc.meta.term('Type')('Element'),

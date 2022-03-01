@@ -56,15 +56,15 @@ const CxH5 = flowHoc(
 )(H5);
 const CxBody = flowHoc(
   withEditorPlain('Body', 'Body Copy'),
-  as(cxElement.asBody),
+  as(cxElement.Body),
 )(P);
 const CxEyebrow = flowHoc(
   withEditorPlain('Eyebrow', 'Eyebrow'),
-  as(cxElement.asEyebrow),
+  as(cxElement.Eyebrow),
 )(P);
 const CxRest = flowHoc(
   withEditorPlain('Rest', 'Rest: i.e. Breadcrumbs / Review Numbers'),
-  as(cxElement.asRest),
+  as(cxElement.Rest),
 )(P);
 const CxDemoLink = flowHoc(
   withEditorPlain('Link1', 'Link'),

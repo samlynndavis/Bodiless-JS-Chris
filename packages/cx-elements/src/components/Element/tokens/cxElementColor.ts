@@ -1,4 +1,4 @@
-import { asTokenGroup } from '../../util';
+import { asTokenGroup } from '../../../util';
 
 const meta = {
   categories: {
