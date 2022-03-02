@@ -3,27 +3,43 @@ import { mount } from 'enzyme';
 import React, { FC, Fragment } from 'react';
 import {
   as, flowHoc, HOC,
-  Span, ComponentOrTag, Div, designable, DesignableComponentsProps,
+  Span, Div, designable, DesignableComponentsProps, DesignableComponents, on, asTokenSpec,
 } from '../src';
 import {
-  asTestTokenSpec, asShadowedTokenCollection, withRegisterShadowTokens,
+  asShadowedTokenCollection, withRegisterShadowTokens, DefaultDomains,
 } from '../src/TokenShadow';
 
-// ++++++++++++++++++++++++++ Base Token Collection
+// Test designable component
 
-const Foo = asTestTokenSpec({
+type TestDesignableProps = DesignableComponentsProps & {
+  component: string,
+};
+
+const TestDesignableBase: FC<TestDesignableProps> = (
+  { components, component, ...rest }
+) => {
+  const Component = components[component] || Fragment;
+  return <Component {...components} />;
+};
+const TestDesignable = designable<DesignableComponents>({}, 'TestDesignable')(TestDesignableBase);
+export const asTestDesignableToken = asTokenSpec<any, DefaultDomains>();
+
+// ++++++++++++++++++++++++++ Base Token Collection
+export const asTestElementToken = asTokenSpec<{}, DefaultDomains>();
+
+const Foo = asTestElementToken({
   Core: {
     _: 'foo',
   },
 });
 
-const Bar = asTestTokenSpec({
+const Bar = asTestElementToken({
   Core: {
     _: 'bar',
   },
 });
 
-const Baz = asTestTokenSpec({
+const Baz = asTestElementToken({
   Core: {
     _: 'baz',
   },
@@ -35,13 +51,13 @@ const cxElement = asShadowedTokenCollection({
   Baz,
 }, 'Element');
 
-const FooBar = asTestTokenSpec({
+const FooBar = asTestElementToken({
   Core: {
     _: as(cxElement.Foo, cxElement.Bar),
   },
 });
 
-const FooBaz = asTestTokenSpec({
+const FooBaz = asTestElementToken({
   Core: {
     _: as(cxElement.Foo, cxElement.Baz),
   },
@@ -52,18 +68,27 @@ const cxComposedElement = asShadowedTokenCollection({
   FooBaz,
 }, 'ComposedElement');
 
+const cxTestDesignable = asShadowedTokenCollection({
+  Default: asTestDesignableToken({
+    Components: {
+      Foo: on(Span)(cxElement.Foo),
+      Bar: on(Span)(cxElement.Bar),
+      Baz: on(Span)(cxElement.Baz),
+    },
+  }),
+}, 'TestDesignable');
+
 // +++++++++++++++++++++++++ Brand Token Collections
 
 const brandElement = {
-  ...cxElement,
-  Bar: asTestTokenSpec({
+  Bar: asTestElementToken({
     Core: {
       // Standard way of extending the cx token with another class.
       // Need to be careful that this odesn't produce an infinite loop.
       _: as(cxElement.Bar, 'brand-bar'),
     }
   }),
-  Baz: asTestTokenSpec({
+  Baz: asTestElementToken({
     Core: {
       _: 'brand-baz',
     }
@@ -72,7 +97,7 @@ const brandElement = {
 
 const brandComposedElement = {
   ...cxComposedElement,
-  FooBaz: asTestTokenSpec({
+  FooBaz: asTestElementToken({
     Core: {
       _: 'brand-foo-baz',
     },
@@ -84,12 +109,34 @@ const BrandTokenProvider = flowHoc(
   withRegisterShadowTokens(brandComposedElement, 'ComposedColection'),
 )(Fragment);
 
-describe('shadowed collection', () => {
-  it('Applies the shadowed token', () => {
+// +++++++++++++++++++++++++ Site Token Collections
+
+const siteElement = {
+  Bar: asTestElementToken({
+    Core: {
+      // Standard way of extending the cx token with another class.
+      // Need to be careful that this odesn't produce an infinite loop.
+      _: as(cxElement.Bar, 'site-bar'),
+    },
+  }),
+};
+
+describe('basic dynamic shadowing', () => {
+  it('Applies the base token when no shadows are registered', () => {
     const Test = as(cxElement.Bar)(Span);
-    const cxline = mount(<Test />);
-    expect(cxline.find('span').prop('class')).toBe('bar');
+    const test = mount(<Test />);
+    expect(test.find('span').prop('class')).toBe('bar');
+  });
+
+  it('Applies the base token when it is not shadowed', () => {
+    const Test = as(cxElement.Foo)(Span);
     const test = mount(<BrandTokenProvider><Test /></BrandTokenProvider>);
-    expect(cxline.find('span').prop('class')).toBe('bar brand-bar');
+    expect(test.find('span').prop('class')).toBe('foo');
+  });
+
+  it('Applies a shadowed token when registered', () => {
+    const Test = as(cxElement.Bar)(Span);
+    const test = mount(<BrandTokenProvider><Test /></BrandTokenProvider>);
+    expect(test.find('span').prop('class')).toBe('bar brand-bar');
   });
 });

@@ -1,13 +1,12 @@
 import { TokenSpec, HOC } from './types';
-import { asTokenSpec } from './tokenSpec';
 
 export type DefaultDomains = {
   Core: any,
+  Components: any,
 };
 
 // @todo make these more generic
 export type TokenCollection<K extends string> = Record<K, TokenSpec<{}, DefaultDomains>>;
-export const asTestTokenSpec = asTokenSpec<{}, DefaultDomains>();
 
 export const asShadowedTokenCollection = <K extends string>(
   collection: TokenCollection<K>,
