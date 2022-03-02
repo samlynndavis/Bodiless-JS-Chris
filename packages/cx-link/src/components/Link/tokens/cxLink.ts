@@ -17,12 +17,12 @@ import {
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/core';
 import { cxElement } from '@bodiless/cx-elements';
-import { asLinkToken } from './LinkClean';
-import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from './util';
+import { asLinkToken } from '../LinkClean';
+import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
 
 /**
- * Token which causes link to display as an external link.
- */
+   * Token which causes link to display as an external link.
+   */
 const WithExternalStyles = asLinkToken({
   Flow: flowIf(useExternalLinkToggle),
   Core: {
@@ -54,21 +54,21 @@ const WithDownloadStyles = asLinkToken({
 });
 
 /**
- * Token which produces a default canvasx editable link.
- */
+   * Token which produces a default canvasx editable link.
+   */
 const Default = asLinkToken({
   /**
-   * Canvasx typography and colors.
-   */
+     * Canvasx typography and colors.
+     */
   Theme: {
     _: as(WithDownloadStyles, WithExternalStyles),
     Wrapper: as(cxElement.Link),
   },
   /**
-   * Makes the link editable. Nodekey must be provided separately.
-   * Editor token should be applied after all composed tokens to ensure
-   * they have access to props...
-   */
+     * Makes the link editable. Nodekey must be provided separately.
+     * Editor token should be applied after all composed tokens to ensure
+     * they have access to props...
+     */
   Schema: {
     _: asEditableLink(),
   },
@@ -84,9 +84,6 @@ const Sidecar = asLinkToken({
   },
 });
 
-const cxLink = {
+export default {
   Default, WithExternalStyles, WithDownloadStyles, Sidecar,
 };
-
-// eslint-disable-next-line import/prefer-default-export
-export { cxLink };
