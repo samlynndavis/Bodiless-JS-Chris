@@ -59,20 +59,3 @@ export const asShadowedToken = <C extends DesignableComponents, D extends object
 ): TokenSpec<C, D> => {
   throw new Error('Function not implemented.');
 };
-
-/**
- * Inserts a token into the registry.
- * @param name
- * @param token
- */
-export const withRegisterShadowToken = (name: string, token: Token<any, any>): HOC => {
-  throw new Error('Function not implemented.');
-};
-
-/**
- * Applies a token from the registry.
- * @param name
- */
-export const withRegisteredToken = (name: string): HOC => {
-  throw new Error('Function not implemented.');
-};

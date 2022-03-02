@@ -7,8 +7,11 @@ import {
 } from '../src';
 import {
   asShadowedTokenCollection, withRegisterShadowTokens, DefaultDomains,
-  asShadowedTokenSpec, withRegisterShadowToken,
+  asShadowedTokenSpec,
 } from '../src/TokenShadow';
+import {
+  withRegisterTokens,
+} from '../src/TokenRegistry';
 
 // Test designable component
 
@@ -157,7 +160,7 @@ describe('single token shadowing', () => {
     });
     const Test = flowHoc(
       as(Base),
-      withRegisterShadowToken('Base', Brand),
+      withRegisterTokens({ Base: Brand }),
     )(Span);
     const test = mount(<Test />);
     expect(test.find('span').prop('className')).toBe('brand');
@@ -172,7 +175,7 @@ describe('single token shadowing', () => {
     });
     const Test = flowHoc(
       as(Base),
-      withRegisterShadowToken('Base', BrandExtend),
+      withRegisterTokens({ Base: BrandExtend }),
     )(Span);
     const test = mount(<Test />);
     expect(test.find('span').prop('className')).toBe('base brand');
@@ -190,7 +193,7 @@ describe('single token shadowing', () => {
     });
     const Test = flowHoc(
       as(Base),
-      withRegisterShadowToken('Base', BrandExtend),
+      withRegisterTokens({ Base: BrandExtend }),
     )(Span);
     const test = mount(<Test />);
     expect(test.find('span').prop('className')).toBe('brand base');
