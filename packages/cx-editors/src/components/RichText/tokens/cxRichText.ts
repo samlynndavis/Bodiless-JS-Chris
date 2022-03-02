@@ -27,9 +27,8 @@ import {
   DefaultNormalHref,
 } from '@bodiless/components';
 import { ifComponentSelector } from '@bodiless/layouts';
-import { asCxTokenSpec } from '@bodiless/cx-elements';
-import { LinkClean } from '@bodiless/cx-link';
-import Components from './cxRichText.cx-components';
+import { asCxTokenSpec, cxElement } from '@bodiless/cx-elements';
+import { LinkClean, cxLink } from '@bodiless/cx-link';
 
 const withLinkDeserializer = withHtmlDeserializer(
   createLinkDeserializer({
@@ -71,7 +70,18 @@ const Default = asCxTokenSpec()({
   Content: {
     _: addProps({ placeholder: 'Placeholder' }),
   },
-  Components,
+  Components: {
+    paragraph: cxElement.Body,
+    Bold: cxElement.Bold,
+    Underline: cxElement.Underline,
+    SuperScript: cxElement.Superscript,
+    H1: cxElement.H1,
+    H2: cxElement.H2,
+    H3: cxElement.H3,
+    H4: cxElement.H4,
+    H5: cxElement.H5,
+    Link: cxLink.Default,
+  },
   Behavior: {
     Link: withLinkDeserializer,
   },
