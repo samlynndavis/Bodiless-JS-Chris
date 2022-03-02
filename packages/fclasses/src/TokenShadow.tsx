@@ -1,6 +1,4 @@
-import {
-  TokenSpec, HOC, DesignableComponents, Token
-} from './types';
+import {TokenSpec, HOC, DesignableComponents} from './types';
 
 export type DefaultDomains = {
   Core: any,
@@ -44,18 +42,6 @@ export const asShadowedTokenSpec = <C extends DesignableComponents, D extends ob
   name: string,
   // can this be a token?
   token: TokenSpec<C, D>
-): TokenSpec<C, D> => {
-  throw new Error('Function not implemented.');
-};
-
-/**
- * Makes a token shadowable.
- *
- * @param token
- */
-export const asShadowedToken = <C extends DesignableComponents, D extends object>(
-  // can this be a token?
-  token: Token<C, D>
 ): TokenSpec<C, D> => {
   throw new Error('Function not implemented.');
 };

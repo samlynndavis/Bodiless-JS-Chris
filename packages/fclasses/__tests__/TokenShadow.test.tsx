@@ -1,9 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import React, { FC, Fragment } from 'react';
+import React, {
+  FC, Fragment, useCallback, useContext, useState
+} from 'react';
 import {
   as, flowHoc, HOC,
-  Span, Div, designable, DesignableComponentsProps, DesignableComponents, on, asTokenSpec,
+  Span, Div, designable, DesignableComponentsProps, DesignableComponents, on, asTokenSpec, Token,
 } from '../src';
 import {
   asShadowedTokenCollection, withRegisterShadowTokens, DefaultDomains,
@@ -199,3 +201,5 @@ describe('single token shadowing', () => {
     expect(test.find('span').prop('className')).toBe('brand base');
   });
 });
+
+type ElementToken = Token<{}, DefaultDomains>;

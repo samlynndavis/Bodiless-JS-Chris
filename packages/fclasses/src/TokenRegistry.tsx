@@ -14,11 +14,11 @@ export const TokenRegistryContext = createContext<TokenRegistryValue>({});
  * @param key
  * The key identifying th globally defined design you wish to apply.
  * The design must previously have been added to the registry via
- * `withRegisterGlobalDesign`.
+ * `withRegisterGlobalDesign`.k
  */
-export const withTokenFromRegistry = (key: string): HOC => Component => {
+export const withTokenFromRegistry = (key: string, fallbac?: Token<any, any>): HOC => Component => {
   const WithTokenFromRegistry: FC<any> = props => {
-    const token = useContext(TokenRegistryContext)[key];
+    const token = useContext(TokenRegistryContext)[key] || fallbac;
     const WrappedComponent = useMemo(
       () => (token ? as(token)(Component) : Component),
       [token],
