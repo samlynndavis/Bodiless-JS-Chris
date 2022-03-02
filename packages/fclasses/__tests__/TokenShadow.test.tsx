@@ -7,6 +7,7 @@ import {
 } from '../src';
 import {
   asShadowedTokenCollection, withRegisterShadowTokens, DefaultDomains,
+  asShadowedTokenSpec, withRegisterShadowToken,
 } from '../src/TokenShadow';
 
 // Test designable component
@@ -45,11 +46,11 @@ const Baz = asTestElementToken({
   },
 });
 
-const cxElement = asShadowedTokenCollection({
+const cxElement = asShadowedTokenCollection('Element', {
   Foo,
   Bar,
   Baz,
-}, 'Element');
+});
 
 const FooBar = asTestElementToken({
   Core: {
@@ -63,12 +64,12 @@ const FooBaz = asTestElementToken({
   },
 });
 
-const cxComposedElement = asShadowedTokenCollection({
+const cxComposedElement = asShadowedTokenCollection('ComposedElement', {
   FooBar,
   FooBaz,
-}, 'ComposedElement');
+});
 
-const cxTestDesignable = asShadowedTokenCollection({
+const cxTestDesignable = asShadowedTokenCollection('TestDesignable', {
   Default: asTestDesignableToken({
     Components: {
       Foo: on(Span)(cxElement.Foo),
@@ -76,7 +77,7 @@ const cxTestDesignable = asShadowedTokenCollection({
       Baz: on(Span)(cxElement.Baz),
     },
   }),
-}, 'TestDesignable');
+});
 
 // +++++++++++++++++++++++++ Brand Token Collections
 
@@ -105,8 +106,8 @@ const brandComposedElement = {
 };
 
 const BrandTokenProvider = flowHoc(
-  withRegisterShadowTokens(brandElement, 'Element'),
-  withRegisterShadowTokens(brandComposedElement, 'ComposedColection'),
+  withRegisterShadowTokens('Element', brandElement),
+  withRegisterShadowTokens('ComposedCollection', brandComposedElement),
 )(Fragment);
 
 // +++++++++++++++++++++++++ Site Token Collections
@@ -138,5 +139,60 @@ describe('basic dynamic shadowing', () => {
     const Test = as(cxElement.Bar)(Span);
     const test = mount(<BrandTokenProvider><Test /></BrandTokenProvider>);
     expect(test.find('span').prop('class')).toBe('bar brand-bar');
+  });
+});
+
+describe('single token shadowing', () => {
+  const Base = asShadowedTokenSpec('Base', asTestElementToken({
+    Core: {
+      _: 'base',
+    },
+  }));
+
+  test('registered token is used', () => {
+    const Brand = asTestElementToken({
+      Core: {
+        _: as('brand'),
+      },
+    });
+    const Test = flowHoc(
+      as(Base),
+      withRegisterShadowToken('Base', Brand),
+    )(Span);
+    const test = mount(<Test />);
+    expect(test.find('span').prop('className')).toBe('brand');
+  });
+
+  test('registered token is used which extends the base token', () => {
+    const BrandExtend = asTestElementToken({
+      ...Base,
+      Core: {
+        _: as(Base.Core._, 'brand'),
+      },
+    });
+    const Test = flowHoc(
+      as(Base),
+      withRegisterShadowToken('Base', BrandExtend),
+    )(Span);
+    const test = mount(<Test />);
+    expect(test.find('span').prop('className')).toBe('base brand');
+  });
+
+  test('registered token is used which composes base token', () => {
+    const BrandExtend = asTestElementToken({
+      Core: {
+        _: 'brand',
+      },
+      Compose: {
+        // Need to avoid infinite loop!
+        Base,
+      },
+    });
+    const Test = flowHoc(
+      as(Base),
+      withRegisterShadowToken('Base', BrandExtend),
+    )(Span);
+    const test = mount(<Test />);
+    expect(test.find('span').prop('className')).toBe('brand base');
   });
 });
