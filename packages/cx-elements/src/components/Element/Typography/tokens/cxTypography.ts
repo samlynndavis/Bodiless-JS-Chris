@@ -75,7 +75,7 @@ const H3 = asElementToken({
 
 const H4 = asElementToken({
   Core: {
-    _: cxFontSize.L,
+    _: cxFontSize.XL,
   },
   Theme: {
     _: as(

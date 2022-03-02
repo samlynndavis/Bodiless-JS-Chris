@@ -21,7 +21,7 @@ import { HOC } from '@bodiless/fclasses';
 export const withAutoSuperscript = (chars: string = '®™', classname: string = ''): HOC => Component => {
   const superscriptSanitizer = (html: string) => html
     .split('')
-    .map(c => (chars.includes(c) ? `<sup className='${classname}'>${c}</sup>` : c))
+    .map(c => (chars.includes(c) ? `<sup class='${classname}'>${c}</sup>` : c))
     .join('');
   const WithAutoSuperscript: FC<any> = props => {
     const { useOverrides = () => ({}), ...rest } = props;
