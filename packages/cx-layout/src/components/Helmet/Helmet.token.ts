@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { cxElement } from '@bodiless/cx-elements';
+import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
 import { as } from '@bodiless/fclasses';
 import { asHelmetToken } from './HelmetClean';
 
@@ -26,9 +26,9 @@ const Default = asHelmetToken({
   },
   Theme: {
     HTMLHelmet: as(
-      cxElement.DMSans,
-      cxElement.WithTextPrimaryBodyCopyColor,
-      cxElement.WithNormal,
+      'font-DMSans',
+      cxColor.TextPrimaryBodyCopy,
+      cxTextDecoration.Normal,
     ),
   }
 });

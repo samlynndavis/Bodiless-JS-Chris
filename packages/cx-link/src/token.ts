@@ -62,8 +62,7 @@ const Default = asLinkToken({
    */
   Theme: {
     _: as(WithDownloadStyles, WithExternalStyles),
-    // @todo these should apply tokens from the cxElement collection.
-    Wrapper: as(cxElement.Link, cxElement.WithTextPrimaryInteractiveColor),
+    Wrapper: as(cxElement.Link),
   },
   /**
    * Makes the link editable. Nodekey must be provided separately.

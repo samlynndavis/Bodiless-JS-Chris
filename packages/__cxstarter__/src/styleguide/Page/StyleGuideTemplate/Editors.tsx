@@ -8,7 +8,7 @@ import {
   as, flowHoc, replaceWith,
   H3, Section, Pre, Div,
 } from '@bodiless/fclasses';
-import { cxElement } from '@bodiless/cx-elements';
+import { cxColor, cxElement } from '@bodiless/cx-elements';
 
 const C = {
   H3: as(cxElement.H3)(H3),
@@ -16,8 +16,8 @@ const C = {
   Demo: as('p-2 border border-1')(Div),
   Code: as(
     'p-2 mt-2',
-    cxElement.WithBgPrimaryDividerColor,
-    cxElement.WithTextPrimaryHeaderCopyColor,
+    cxColor.BgPrimaryDivider,
+    cxColor.TextPrimaryHeaderCopy,
   )(Pre),
 };
 
