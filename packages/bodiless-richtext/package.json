@@ -15,7 +15,7 @@
     "/bodiless.docs.json"
   ],
   "exports": {
-    "production": "./lib/index.static.js",
+    "bodiless:static": "./lib/index.static.js",
     "default": "./lib/index.js"
   },
   "repository": {

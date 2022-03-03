@@ -266,6 +266,12 @@ exports.onCreateWebpackConfig = (
           },
         ],
       },
+      resolve: {
+        // Adds "bodiless:static" as a resolve condition, which can be used by
+        // Bodiless packages to use different entry points for static builds.
+        // "import" and "module" are added for compatibility with webpack defaults.
+        conditionNames: ['import', 'module', 'bodiless:static'],
+      },
     });
   }
   if (stage === 'build-javascript' || stage === 'develop') {
