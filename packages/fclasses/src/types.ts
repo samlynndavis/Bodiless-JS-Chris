@@ -6,6 +6,11 @@ import { ComponentType, HTMLProps } from 'react';
 export const $TokenSpec = Symbol('TokenSpec');
 
 /**
+ * Symbol used as the key of a token which defines it as shadowable.
+ */
+export const $MakeShadowable = Symbol('TokenSpec:MakeShadowable');
+
+/**
  * Metadata which can be attached to a token.
  *
  * When the token is applied, these metadata will also be attached to the
@@ -260,6 +265,7 @@ export type TokenSpec<
   D extends object,
 > = TokenSpecBase<C, D> & {
   [$TokenSpec]: true,
+  [$MakeShadowable]?: (h: HOC) => HOC,
 };
 
 /**

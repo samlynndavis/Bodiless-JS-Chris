@@ -1,4 +1,7 @@
-import {TokenSpec, HOC, DesignableComponents} from './types';
+import { withTokenFromRegistry } from './TokenRegistry';
+import {
+  TokenSpec, HOC, DesignableComponents, $MakeShadowable,
+} from './types';
 
 export type DefaultDomains = {
   Core: any,
@@ -41,7 +44,12 @@ export const withRegisterShadowTokens = <K extends string>(
 export const asShadowedTokenSpec = <C extends DesignableComponents, D extends object>(
   name: string,
   // can this be a token?
-  token: TokenSpec<C, D>
+  tokenSpec: TokenSpec<C, D>
 ): TokenSpec<C, D> => {
-  throw new Error('Function not implemented.');
+  // This function is invoked in `as` to register the hoc produced by this token.
+  const makeShadowable = (hoc: HOC) => withTokenFromRegistry(name, hoc);
+  const shadowableTokenSpec = { ...tokenSpec, [$MakeShadowable]: makeShadowable };
+  // Ensure that when this token is extended, the extended token is not implicitly shadowable.
+  Object.defineProperty(shadowableTokenSpec, $MakeShadowable, { enumerable: false });
+  return shadowableTokenSpec;
 };

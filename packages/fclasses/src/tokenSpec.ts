@@ -4,12 +4,11 @@ import { ComponentType } from 'react';
 import identity from 'lodash/identity';
 import { pick } from 'lodash';
 import { startWith } from './replaceable';
-import type {
+import {
   TokenDef, // FlowHoc,
-  DesignableComponents, HocDesign, TokenSpec,
-  ReservedDomains, Design, Token, HOCBase, HOD, TokenSpecBase,
+  DesignableComponents, HocDesign, TokenSpec, $TokenSpec,
+  ReservedDomains, Design, Token, HOCBase, HOD, TokenSpecBase, $MakeShadowable,
 } from './types';
-import { $TokenSpec } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
 import { addClasses } from './addClasses';
 import { withHocDesign } from './withHocDesign';
@@ -80,10 +79,8 @@ function as<D extends object = any>(
         arg[domainName as keyof TokenSpec<any, D>]
       )));
 
-    if (arg.Flow) {
-      return arg.Flow(...specTokens);
-    }
-    return flowHoc(...specTokens);
+    const hoc = (arg.Flow || flowHoc)(...specTokens);
+    return arg[$MakeShadowable] !== undefined ? arg[$MakeShadowable]!(hoc) : hoc;
   });
   return flowHoc(...tokens);
 }
