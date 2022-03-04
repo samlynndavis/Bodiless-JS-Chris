@@ -1,4 +1,4 @@
 import { Editable } from '@bodiless/components';
 
-export { cxEditorPlain, cxEditorPlainStatic } from './tokens';
-export { Editable as EditorPlainClean };
+export const EditorPlainClean = withoutHydration(Editable);
+export { cxEditorPlain } from './tokens';

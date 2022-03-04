@@ -40,4 +40,4 @@ const RichTextCleanBase = (props: any) => {
 /**
  * A clean rich text editor with no styling applied to
  */
-export const RichTextClean = stylable(RichTextCleanBase);
+export const RichTextClean = withoutHydration(stylable(RichTextCleanBase));
