@@ -5,6 +5,12 @@
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js",
+      "bodiless:static": "./lib/index.static.js",
+    }
+  },
   "sideEffects": false,
   "typings": "lib/index.d.ts",
   "files": [

@@ -1,2 +1,2 @@
 export const cxRichText = {};
-export const RichTextClean = () => null;
+export const RichTextClean = withoutHydration(() => null);
