@@ -8,7 +8,7 @@
   "exports": {
     ".": {
       "default": "./lib/index.js",
-      "bodiless:static": "./lib/index.static.js",
+      "bodiless:static": "./lib/index.static.js"
     }
   },
   "sideEffects": false,

@@ -1,0 +1,37 @@
+{
+  "name": "@bodiless/webpack",
+  "version": "0.3.7",
+  "description": "Portable webpack configuration for bodiless sites",
+  "author": "Chris Oden <coden@its.jnj.com>",
+  "homepage": "",
+  "license": "Apache-2.0",
+  "main": "./lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "/lib",
+    "/bodiless.docs.json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc --version && tsc -p ./tsconfig.json ",
+    "build:watch": "npm run build -- --watch",
+    "prepack": "rimraf lib && npm run build",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.19",
+    "webpack": "^5.69.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16"
+  }
+}

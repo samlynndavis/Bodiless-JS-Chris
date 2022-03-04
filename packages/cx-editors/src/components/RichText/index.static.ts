@@ -1,2 +1,4 @@
-export const cxRichText = {};
-export const RichTextClean = withoutHydration(() => null);
+export {
+  staticTokenCollection as cxRichtext,
+  StaticComponent as RichTextClean,
+} from '@bodiless/cx-elements';

@@ -2,6 +2,7 @@ import React from 'react';
 import { RichText } from '@bodiless/richtext-ui';
 import { stylable } from '@bodiless/fclasses';
 import { useNode, NodeProvider } from '@bodiless/core';
+import { withoutHydration } from '@bodiless/cx-elements';
 
 /**
  * @private
