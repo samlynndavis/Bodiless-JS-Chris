@@ -8,16 +8,40 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
-// const { cxShadowWebpackPlugin } = require('@bodiless/cx-elements');
+const webpack = require('webpack');
+
+const TOKENS_PATH = 'tokens';
+
+const cxShadowWebpackPlugin = (
+  ...packages
+) => new webpack.NormalModuleReplacementPlugin(
+  new RegExp(`\\.\\${path.sep}${TOKENS_PATH}`),
+  resource => {
+    const componentName = path.basename(resource.context);
+    console.log('request', resource.request, componentName);
+    for (let i = 0; i < packages.length; i += 1) {
+      try {
+        const exportName = `${packages[i]}/lib/shadow/${componentName}`;
+        console.log('exportName', exportName);
+        // eslint-disable-next-line no-param-reassign
+        resource.request = require.resolve(exportName);
+        console.log('found', resource.request);
+        break;
+      // eslint-disable-next-line no-empty
+      } catch (e) {}
+    }
+  }
+);
 
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
-  // actions.setWebpackConfig({
-  //   plugins: [
-  //     cxShadowWebpackPlugin('@canvasx/foo'),
-  //   ]
-  // });
+  console.log('wp', require.resolve('webpack'));
+  actions.setWebpackConfig({
+    plugins: [
+      cxShadowWebpackPlugin('@bodiless/__cxstarter__'),
+    ]
+  });
   if (stage === 'develop') {
     // When running test-site with local packages (via npm pack) we seem to get
     // multiple react instances, which causes this invalid hook call warning
