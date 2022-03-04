@@ -1,5 +1,5 @@
 /**
- * Copyright © 2020 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,6 +12,18 @@
  * limitations under the License.
  */
 
-export const createLinkDeserializer = () => ({});
-export const createDefaultDeserializers = () => ({});
-export const deserializeHtml = () => [];
+import createBlockButton from './createBlockButton.static';
+import {
+  hasBlock,
+  insertBlock,
+  toggleBlock,
+  createToggleBlock,
+} from './blockUtils.static';
+
+export {
+  createBlockButton,
+  createToggleBlock,
+  hasBlock,
+  toggleBlock,
+  insertBlock,
+};

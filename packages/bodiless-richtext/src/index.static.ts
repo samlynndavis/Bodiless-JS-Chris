@@ -17,7 +17,11 @@ export {
 } from './RichText.static';
 export { asPreview } from './RichTextPreview.static';
 export { default as asFloat } from './Float.static';
-export { asBlock, withButton, withHtmlDeserializer } from './RichTextItemSetters.static';
-export { HoverMenu } from './core/HoverMenu.static';
-export { withStrikeThroughMeta } from './meta/static';
-export { createLinkDeserializer, createDefaultDeserializers, deserializeHtml } from './serializers/static';
+export * from './RichTextItemGetters.static';
+export * from './RichTextItemSetters.static';
+export * from './plugin-factory/index.static';
+export * from './components/index.static';
+export * from './core/index.static';
+export * from './meta/index.static';
+export * from './RichTextPlain.static';
+export * from './serializers/index.static';

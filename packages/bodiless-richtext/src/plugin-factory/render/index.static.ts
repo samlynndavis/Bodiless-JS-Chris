@@ -12,8 +12,7 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
+import { staticFunction } from '@bodiless/hydration';
 
-const RichText = StaticComponent;
-
-export default RichText;
+export const createElementRenderPlugin = staticFunction(() => {});
+export const createLeafRenderPlugin = staticFunction(() => {});

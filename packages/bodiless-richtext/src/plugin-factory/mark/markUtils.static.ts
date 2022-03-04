@@ -12,8 +12,9 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
+import { staticFunction } from '@bodiless/hydration';
 
-const RichText = StaticComponent;
-
-export default RichText;
+export const createIsActive = staticFunction(() => () => null);
+export const createToggleMark = staticFunction(() => () => null);
+export const toggleMark = staticFunction(() => null);
+export const hasMark = staticFunction(() => null);

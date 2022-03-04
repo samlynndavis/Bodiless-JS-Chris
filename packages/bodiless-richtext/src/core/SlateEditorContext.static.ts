@@ -12,8 +12,10 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
+import React from 'react';
 
-const RichText = StaticComponent;
+const SlateEditorContext = React.createContext({});
 
-export default RichText;
+export const useSlateContext = () => {};
+
+export default SlateEditorContext;

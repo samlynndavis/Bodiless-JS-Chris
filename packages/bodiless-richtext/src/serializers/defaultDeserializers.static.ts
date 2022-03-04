@@ -12,10 +12,22 @@
  * limitations under the License.
  */
 
-import { staticHOC } from '@bodiless/hydration';
-
-const asPreview = staticHOC;
+const createBoldDeserializer = () => {};
+const createItalicDeserializer = () => {};
+const createLinkDeserializer = () => {};
+const createStrikeDeserializer = () => {};
+const createHeader1Deserializer = () => {};
+const createHeader2Deserializer = () => {};
+const createHeader3Deserializer = () => {};
+const createDefaultDeserializers = () => {};
 
 export {
-  asPreview,
+  createBoldDeserializer,
+  createItalicDeserializer,
+  createLinkDeserializer,
+  createStrikeDeserializer,
+  createHeader1Deserializer,
+  createHeader2Deserializer,
+  createHeader3Deserializer,
+  createDefaultDeserializers,
 };

@@ -12,8 +12,20 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
+import { staticFunction } from '@bodiless/hydration';
 
-const RichText = StaticComponent;
+const getPlugins = staticFunction(() => []);
+const getHoverButtons = staticFunction(() => []);
+const getInlineButtons = staticFunction(() => []);
+const getSelectorButtons = staticFunction(() => []);
+const getGlobalButtons = staticFunction(() => () => []);
+const getDeserializers = staticFunction(() => []);
 
-export default RichText;
+export {
+  getPlugins,
+  getSelectorButtons,
+  getHoverButtons,
+  getGlobalButtons,
+  getInlineButtons,
+  getDeserializers,
+};

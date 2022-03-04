@@ -12,8 +12,10 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
-
-const RichText = StaticComponent;
-
-export default RichText;
+export { default as Content } from './Content.static';
+export { default as SlateEditor, withSlateEditor } from './SlateEditor.static';
+export { default as HoverMenu } from './HoverMenu.static';
+export {
+  default as SlateEditorContext,
+  useSlateContext,
+} from './SlateEditorContext.static';

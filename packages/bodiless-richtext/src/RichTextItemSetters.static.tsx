@@ -12,14 +12,32 @@
  * limitations under the License.
  */
 
-import { withNoop } from '@bodiless/hydration';
+import { staticHOC } from '@bodiless/hydration';
 
-const asBlock = withNoop;
-const withButton = () => withNoop;
-const withHtmlDeserializer = () => withNoop;
+const withComponent = (C: any) => staticHOC(C);
+const asBlock = staticHOC;
+const asInline = staticHOC;
+const asMark = staticHOC;
+const asVoid = staticHOC;
+const asAtomicBlock = staticHOC;
+const withKey = () => staticHOC;
+const withId = () => staticHOC;
+const withGlobalButton = () => staticHOC;
+const withHoverButton = () => staticHOC;
+const withButton = () => () => staticHOC;
+const withHtmlDeserializer = () => staticHOC;
 
 export {
+  withComponent,
   asBlock,
+  asInline,
+  asMark,
+  asVoid,
+  asAtomicBlock,
+  withKey,
+  withId,
   withButton,
+  withGlobalButton,
+  withHoverButton,
   withHtmlDeserializer,
 };

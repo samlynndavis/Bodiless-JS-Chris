@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
-import { withoutHydration } from '@bodiless/hydration';
+import { StaticComponent } from '@bodiless/hydration';
 
-export const HoverMenu = withoutHydration();
+const HoverMenu = StaticComponent;
+
+export default HoverMenu;

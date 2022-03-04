@@ -14,6 +14,6 @@
 
 import { StaticComponent } from '@bodiless/hydration';
 
-const RichText = StaticComponent;
+const Content = StaticComponent;
 
-export default RichText;
+export default Content;

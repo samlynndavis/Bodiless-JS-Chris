@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { withoutHydration } from '@bodiless/hydration';
+import { staticToken } from '@bodiless/hydration';
 
-const asFloat = withoutHydration();
+const asFloat = staticToken;
 
 export default asFloat;

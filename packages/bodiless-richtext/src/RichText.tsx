@@ -36,7 +36,6 @@ import {
   ifToggledOn,
   useUUID,
 } from '@bodiless/core';
-import { withHydrationWrapper } from '@bodiless/hydration';
 import {
   designable,
   H1,
@@ -57,6 +56,7 @@ import {
   HOC,
 } from '@bodiless/fclasses';
 import { withHistory } from 'slate-history';
+import { withoutHydration } from '@bodiless/hydration';
 import {
   withSlateEditor,
   Content,
@@ -346,7 +346,7 @@ const RichText = flow(
   withNode,
   withPreview,
   designable(apply, 'RichText'),
-  withHydrationWrapper(),
+  withoutHydration(),
 )(BasicRichText) as ComponentType<RichTextProps>;
 
 export default RichText;

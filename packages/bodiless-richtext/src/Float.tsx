@@ -22,7 +22,6 @@ import {
   withMenuOptions,
 } from '@bodiless/core';
 import { observer } from 'mobx-react';
-import { withHydrationWrapper } from '@bodiless/hydration';
 
 type Data = {
   float: string,
@@ -73,6 +72,5 @@ const asFloat = flowRight(
     withLocalContextMenu,
     withContextActivator('onClick'),
   ),
-  withHydrationWrapper(),
 );
 export default asFloat;

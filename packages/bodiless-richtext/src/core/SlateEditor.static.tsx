@@ -12,8 +12,10 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
+import { StaticComponent, staticHOC } from '@bodiless/hydration';
 
-const RichText = StaticComponent;
+const withSlateEditor = staticHOC;
+const SlateEditor = StaticComponent;
 
-export default RichText;
+export default SlateEditor;
+export { withSlateEditor };

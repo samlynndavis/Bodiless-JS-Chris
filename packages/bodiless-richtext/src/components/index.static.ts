@@ -12,8 +12,6 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
+import TextSelectorButton from './TextSelectorButton.static';
 
-const RichText = StaticComponent;
-
-export default RichText;
+export { TextSelectorButton, TextSelectorButton as default };

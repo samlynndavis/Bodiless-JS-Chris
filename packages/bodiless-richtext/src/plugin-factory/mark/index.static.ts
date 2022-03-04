@@ -12,8 +12,13 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
+import { hasMark, createToggleMark, toggleMark } from './markUtils.static';
 
-const RichText = StaticComponent;
+import createMarkButton from './createMarkButton.static';
 
-export default RichText;
+export {
+  createMarkButton,
+  hasMark,
+  createToggleMark,
+  toggleMark,
+};

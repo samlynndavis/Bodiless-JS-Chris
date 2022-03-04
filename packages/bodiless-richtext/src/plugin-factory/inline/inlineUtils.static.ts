@@ -12,6 +12,14 @@
  * limitations under the License.
  */
 
-import { withNoop } from '@bodiless/hydration';
+import { staticFunction } from '@bodiless/hydration';
 
-export const withStrikeThroughMeta = withNoop;
+export const createIsActive = staticFunction(() => () => undefined);
+export const hasInline = staticFunction(() => undefined);
+export const createInline = staticFunction(() => {});
+export const removeInline = staticFunction(() => null);
+export const wrapInline = staticFunction(() => null);
+export const updateInline = staticFunction(() => null);
+export const insertInline = staticFunction(() => null);
+export const toggleInline = staticFunction(() => null);
+export const createToggleInline = staticFunction(() => () => null);

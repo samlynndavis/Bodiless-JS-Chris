@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
-
-const RichText = StaticComponent;
-
-export default RichText;
+export * from './inline/index.static';
+export * from './mark/index.static';
+export * from './block/index.static';
+export * from './render/index.static';
+export { default as createPluginButton, withToggle } from './createPluginButton.static';

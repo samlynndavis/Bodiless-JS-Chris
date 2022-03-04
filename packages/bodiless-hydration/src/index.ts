@@ -1,3 +1,12 @@
-export { withoutHydration } from './withoutHydration';
-export { withHydrationWrapper } from './withHydrationWrapper';
-export { withNoop } from './withNoop';
+export {
+  withoutHydration,
+  isStaticClientSide,
+  WithoutHydrationProps,
+} from './withoutHydration';
+export {
+  StaticComponent,
+  staticHOC,
+  staticToken,
+  staticTokenCollection,
+  staticFunction,
+} from './staticHelpers';

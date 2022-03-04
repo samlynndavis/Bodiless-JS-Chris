@@ -12,8 +12,22 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
+import createInlineButton from './createInlineButton.static';
+import {
+  removeInline,
+  insertInline,
+  hasInline,
+  toggleInline,
+  createToggleInline,
+  updateInline,
+} from './inlineUtils.static';
 
-const RichText = StaticComponent;
-
-export default RichText;
+export {
+  createInlineButton,
+  hasInline,
+  removeInline,
+  insertInline,
+  toggleInline,
+  createToggleInline,
+  updateInline,
+};

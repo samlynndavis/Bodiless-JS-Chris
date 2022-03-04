@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2020 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,8 +12,12 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
+import { staticHOC } from '@bodiless/hydration';
 
-const RichText = StaticComponent;
+const useRichtextPlainSerializer = () => '';
+const withRichtextPlainSerializer = staticHOC;
 
-export default RichText;
+export {
+  useRichtextPlainSerializer,
+  withRichtextPlainSerializer,
+};
