@@ -11,14 +11,12 @@ const glob = require('glob');
 const webpack = require('webpack');
 const { createTokenShadowPlugin } = require('@bodiless/webpack');
 
-const TOKENS_PATH = 'tokens';
-
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig({
     plugins: [
-      createTokenShadowPlugin('@bodiless/__starter__'),
+      createTokenShadowPlugin('@bodiless/__cxstarter__'),
     ],
   });
   if (stage === 'develop') {
