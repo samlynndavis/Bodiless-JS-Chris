@@ -9,7 +9,7 @@ const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
 const webpack = require('webpack');
-const { createTokenShadowPlugin } = require('@bodiless/webpack');
+const { createTokenShadowPlugin, addStaticExportsCondition } = require('@bodiless/webpack');
 
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
@@ -19,6 +19,11 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
       createTokenShadowPlugin('@bodiless/__cxstarter__'),
     ],
   });
+  if (stage === 'build-javascript') {
+    actions.setWebpackConfig(
+      addStaticExportsCondition(),
+    );
+  }
   if (stage === 'develop') {
     // When running test-site with local packages (via npm pack) we seem to get
     // multiple react instances, which causes this invalid hook call warning
