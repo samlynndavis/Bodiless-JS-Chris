@@ -8,9 +8,11 @@
   "main": "lib/index.js",
   "exports": {
     ".": {
-      "default": "./lib/index.js",
-      "bodiless:static": "./lib/index.static.js"
-    }
+      "bodiless:static": "./lib/index.static.js",
+      "default": "./lib/index.js"
+    },
+    "./site.tailwind.config": "./site.tailwind.config.js",
+    "./assets/font/linkicons.woff2": "./assets/font/linkicons.woff2"
   },
   "typings": "lib/index.d.ts",
   "files": [

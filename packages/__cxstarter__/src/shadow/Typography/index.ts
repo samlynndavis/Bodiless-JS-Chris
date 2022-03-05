@@ -13,15 +13,14 @@ import { asElementToken } from '@bodiless/cx-elements';
 // but this is not yet officially supported in a typescript stable release.
 // See https://github.com/microsoft/TypeScript/issues/33079
 // Note this is a default export.
-import cxElementBase from '@bodiless/cx-elements/lib/components/Element/tokens/cxElement';
+import cxTypoBase from '@bodiless/cx-elements/lib/components/Element/Typography/tokens/cxTypography';
 
-
-export const cxElement = {
-  ...cxElementBase,
+export const cxTypography = {
+  ...cxTypoBase,
   // Here we extend the base H1 token to add a class.
   // A more realistic example would be to alter the existing
   // token more substantailly.
-  H1: asElementToken(cxElementBase.H1, {
+  H1: asElementToken(cxTypoBase.H1, {
     Core: {
       _: 'shadowed',
     },

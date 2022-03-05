@@ -7,9 +7,10 @@
   "main": "lib/index.js",
   "exports": {
     ".": {
-      "default": "./lib/index.js",
-      "bodiless:static": "./lib/index.static.js"
-    }
+      "bodiless:static": "./lib/index.static.js",
+      "default": "./lib/index.js"
+    },
+    "./site.tailwind.config": "./site.tailwind.config.js"
   },
   "sideEffects": false,
   "typings": "lib/index.d.ts",
