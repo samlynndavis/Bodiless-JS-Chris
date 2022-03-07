@@ -14,5 +14,5 @@
 
 // In "static" mode (in the browser in production) we do not need any of the static
 // token code bc it won't be hydrated.
-export const cxLinkStatic = {};
+export { staticTokenCollection as cxLinkStatic } from '@bodiless/cx-elements';
 export * from './index.common';

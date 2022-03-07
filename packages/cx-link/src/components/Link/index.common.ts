@@ -13,7 +13,7 @@
  */
 
 // The following exports are the same for both static and edit apps
-export { cxLink } from './tokens';
+export { default as cxLink } from './tokens';
 export {
   useExternalLinkToggle, useIsDownloadLink, asEditableLink, anchorTo,
 } from './util';

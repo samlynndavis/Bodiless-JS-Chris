@@ -1,3 +1,3 @@
-import cxLink from './cxLink';
+import tokens from './cxLink';
 
-export { cxLink };
+export default tokens;
