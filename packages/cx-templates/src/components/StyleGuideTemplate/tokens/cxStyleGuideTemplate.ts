@@ -1,4 +1,4 @@
-import { cxElement } from '@bodiless/cx-elements';
+import { cxTypography } from '@bodiless/cx-elements';
 import {
   EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
 } from '@bodiless/cx-editors';
@@ -9,7 +9,7 @@ import { asStyleGuideTemplateToken } from '../StyleGuideTemplateClean';
 
 const Default = asStyleGuideTemplateToken({
   Theme: {
-    TitleWrapper: cxElement.H1,
+    TitleWrapper: cxTypography.H1,
   },
   Components: {
     Wrapper: on(LayoutClean)(cxLayout.Default),

@@ -13,40 +13,16 @@ import { asElementToken } from '@bodiless/cx-elements';
 // but this is not yet officially supported in a typescript stable release.
 // See https://github.com/microsoft/TypeScript/issues/33079
 // Note this is a default export.
-import cxTypoBase from '@bodiless/cx-elements/lib/components/Element/Typography/tokens/cxTypography';
+import cxTypography from '@bodiless/cx-elements/lib/components/Typography/tokens/cxTypography';
 
-export const cxTypography = {
-  ...cxTypoBase,
+export default {
+  ...cxTypography,
   // Here we extend the base H1 token to add a class.
   // A more realistic example would be to alter the existing
   // token more substantailly.
-  H1: asElementToken(cxTypoBase.H1, {
+  H1: asElementToken(cxTypography.H1, {
     Core: {
       _: 'shadowed',
     },
   }),
 };
-
-// @todo How to handle static tokens?
-// We can't simply re-export cElementStatic (if it exists)
-// because it imports direclty from `cxElement` which is not shadowed.
-// Maybe need to re-think directory structure.  Something like
-//
-// /Element/tokens/index.ts
-// ```
-// import cxElement from './cxElement'
-// export default cxElement;
-// ```
-//
-// /Element/cxElementStatic.cx-static.ts
-// ```
-// import { cxElement } from './tokens';
-// export default cxElementStatic;
-// ```
-//
-// /Element/index.ts
-// ```
-// import cxElement from './tokens';
-// import cxElementStatic from './cxElementStatic.cx-static';
-// export { cxElement, cxElementStatic };
-// ```

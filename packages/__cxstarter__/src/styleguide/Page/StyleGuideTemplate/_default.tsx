@@ -1,11 +1,11 @@
-import { cxElement } from '@bodiless/cx-elements';
+import { cxTypography } from '@bodiless/cx-elements';
 import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
 import {
   flowHoc, H2, replaceWith, as, P
 } from '@bodiless/fclasses';
 import React from 'react';
 
-const Subtitle = as(cxElement.H2, 'pt-8')(H2);
+const Subtitle = as(cxTypography.H2, 'pt-8')(H2);
 const Para = as('pt-4')(P);
 
 const Examples = () => (

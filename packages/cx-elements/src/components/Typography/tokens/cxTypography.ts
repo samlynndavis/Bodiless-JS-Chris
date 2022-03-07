@@ -1,5 +1,5 @@
 import { as } from '@bodiless/fclasses';
-import { asElementToken } from '../../../../util';
+import { asElementToken } from '../../../util';
 import { cxColor } from '../../Color';
 import { cxFontSize } from '../../FontSize';
 import { cxTextDecoration } from '../../TextDecoration';
