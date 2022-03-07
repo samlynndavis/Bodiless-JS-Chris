@@ -50,7 +50,7 @@ Both supported use-cases are implemented by following the following steps:
   **Note: you can skip this step when using `gatsby-theme-bodiless`***
 
 - Define a conditional export in your `package.json` which tells webpack to use
-  a different module when building the prodction bundle:
+  a different module when building the production bundle:
   ```
 
   "exports": {
@@ -124,14 +124,37 @@ This should include, at a minimum, the following keys:
   ```
   If your package exports any other files or assets, be sure to add them as sell.
 - **scripts**. Usually the following should suffice:
-  ```
+  ```json
     "build": "run-p build:lib build:api-doc",
     "build:api-doc": "typedoc --out doc/api src",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
   ```
-  Do not incluce lint or test scripts as these are generally defined at monorepo root.
+  Do not include lint or test scripts as these are generally defined at monorepo root.
 - **dependencies**, **peerDependencies**.  List only packages which are specifically
   required.
-  
+
+### `index.ts` (top level)
+
+Expose exports from all components, 
+```ts
+export * from './components/{CompnentA}';
+export * from './components/{CompnentB}';
+...
+```
+in addition to any special exports from your package.
+
+### `index.static.ts` (top level)
+
+Expose static exports from all components:
+```
+export * from './components/{ComponentA}/index.static';
+export * from './components/{ComponentB}/index.static';
+...
+```
+
+### `index.ts` (component level)
+```
+export { default as brandComponent } from './tokens';
+export { default as brandComponentStatic } from './tokens';
