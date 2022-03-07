@@ -7,6 +7,13 @@
   "license": "UNLICENSED",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "bodiless:static": "./lib/index.static.js",
+      "default": "./lib/index.js"
+    },
+    "./lib/components/": "./lib/components/"
+  },
   "files": [
     "/lib",
     "/bodiless.docs.json",

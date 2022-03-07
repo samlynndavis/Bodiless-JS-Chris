@@ -19,7 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { withImagePlaceholder } from '@bodiless/components';
 import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
-import { asElementToken } from '@bodiless/cx-elements';
+import { asElementToken, withoutHydration } from '@bodiless/cx-elements';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';
@@ -47,6 +47,7 @@ const Base = asElementToken({
       asGatsbyImage,
       stylable,
       withGatsbyImageLogger(),
+      withoutHydration,
     ),
   },
   Meta: flowHoc.meta.term('Type')('Image'),
@@ -172,7 +173,7 @@ const WithEager = asElementToken({
   },
 });
 
-export const cxImage = {
+export default {
   Base,
   Plain: EditablePlain,
   Default,
