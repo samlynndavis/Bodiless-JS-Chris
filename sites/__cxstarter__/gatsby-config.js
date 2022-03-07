@@ -25,6 +25,7 @@ const disabledPages = Object.keys(disablePageList).filter(
 
 // Gatsby plugins list.
 const plugins = [
+  'gatsby-plugin-webpack-bundle-analyser-v2',
   {
     resolve: 'gatsby-plugin-compile-es6-packages',
     options: {
