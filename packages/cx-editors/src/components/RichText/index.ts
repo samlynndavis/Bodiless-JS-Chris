@@ -1,2 +1,1 @@
-export { cxRichText } from './tokens';
-export { RichTextClean } from './RichTextClean';
+export * from './index.bl-edit';

@@ -8,8 +8,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
-const webpack = require('webpack');
-const { createTokenShadowPlugin, addStaticExportsCondition } = require('@bodiless/webpack');
+const { createTokenShadowPlugin, addStaticReplacementPlugin } = require('@bodiless/webpack');
 
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
@@ -21,7 +20,8 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
   });
   if (stage === 'build-javascript') {
     actions.setWebpackConfig(
-      addStaticExportsCondition(),
+      // addStaticExportsCondition(),
+      addStaticReplacementPlugin(),
     );
   }
   if (stage === 'develop') {

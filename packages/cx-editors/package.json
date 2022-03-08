@@ -5,13 +5,6 @@
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
-  "exports": {
-    ".": {
-      "bodiless:static": "./lib/index.static.js",
-      "default": "./lib/index.js"
-    },
-    "./site.tailwind.config": "./site.tailwind.config.js"
-  },
   "sideEffects": false,
   "typings": "lib/index.d.ts",
   "files": [
