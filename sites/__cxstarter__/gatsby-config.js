@@ -50,7 +50,7 @@ const plugins = [
         // against the **absolute** path of the .bl-edit file being imported. Strings will be
         // concatenated into a RegExp instance like this: new RegExp(excludeArray.join('|')).
         // Defaults to an empty array.
-        exclude: ['bodiless-richtext'],
+        exclude: [],
         // Pass false to disable logging all resolving operations.
         // Defaults to true.
         logging: true,
