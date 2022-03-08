@@ -12,18 +12,20 @@
  * limitations under the License.
  */
 
-import createBlockButton from './createBlockButton.static';
-import {
-  hasBlock,
-  insertBlock,
-  toggleBlock,
-  createToggleBlock,
-} from './blockUtils.static';
+import { ComponentType } from 'react';
+import { createIsActive, createToggleMark } from './markUtils.bl-edit';
+import createPluginButton from '../createPluginButton.bl-edit';
+import { EditorButtonProps } from '../../Type';
 
-export {
-  createBlockButton,
-  createToggleBlock,
-  hasBlock,
-  toggleBlock,
-  insertBlock,
-};
+type CreateMarkButton = (
+  markType: string,
+  icon: string,
+) => ComponentType<EditorButtonProps>;
+
+const createMarkButton: CreateMarkButton = (markType, icon) => createPluginButton({
+  icon,
+  toggle: createToggleMark(markType),
+  isActive: createIsActive(markType),
+});
+
+export default createMarkButton;

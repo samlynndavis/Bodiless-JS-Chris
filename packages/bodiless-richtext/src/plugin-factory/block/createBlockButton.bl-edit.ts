@@ -13,8 +13,8 @@
  */
 
 import { ComponentType } from 'react';
-import { createToggleBlock, createIsActive } from './blockUtils';
-import createPluginButton from '../createPluginButton';
+import { createToggleBlock, createIsActive } from './blockUtils.bl-edit';
+import createPluginButton from '../createPluginButton.bl-edit';
 import { EditorButtonProps } from '../../Type';
 
 type CreateBlockButton = (

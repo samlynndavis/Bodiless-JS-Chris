@@ -12,6 +12,20 @@
  * limitations under the License.
  */
 
-import TextSelectorButton from './TextSelectorButton.static';
+import { ComponentType } from 'react';
+import { createToggleInline, createIsActive } from './inlineUtils.bl-edit';
+import createPluginButton from '../createPluginButton.bl-edit';
+import { EditorButtonProps } from '../../Type';
 
-export { TextSelectorButton, TextSelectorButton as default };
+type CreateInlineButton = (
+  inlineType: string,
+  icon: string,
+) => ComponentType<EditorButtonProps>;
+
+const createInlineButton: CreateInlineButton = (inlineType, icon) => createPluginButton({
+  icon,
+  toggle: createToggleInline(inlineType),
+  isActive: createIsActive(inlineType),
+});
+
+export default createInlineButton;

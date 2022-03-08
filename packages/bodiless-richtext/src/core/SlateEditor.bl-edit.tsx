@@ -16,7 +16,7 @@ import React, {
   Fragment,
   ComponentType,
 } from 'react';
-import SlateEditorContext from './SlateEditorContext';
+import SlateEditorContext from './SlateEditorContext.bl-edit';
 import {
   EditorOnChange,
   EditableProps,

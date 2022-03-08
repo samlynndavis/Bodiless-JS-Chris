@@ -15,9 +15,9 @@
 import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { mount } from 'enzyme';
-import createMarkButton from '../createMarkButton';
+import createMarkButton from '../createMarkButton.bl-edit';
 import { inactiveValueWithMark, activeValue } from './fixtures/markState';
-import SlateEditorContext from '../../../core/SlateEditorContext';
+import SlateEditorContext from '../../../core/SlateEditorContext.bl-edit';
 
 const toggleStub = jest.fn();
 const isActiveStub = jest.fn(() => true);

@@ -62,6 +62,7 @@
     "@bodiless/organisms": "^0.3.7",
     "@bodiless/page": "^0.3.7",
     "@bodiless/ui": "^0.3.7",
+    "@bodiless/webpack": "^0.3.7",
     "@types/walk": "^2.3.0",
     "autoprefixer": "^10.0.0",
     "axios": "^0.21.0",

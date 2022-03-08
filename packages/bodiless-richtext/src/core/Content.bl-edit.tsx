@@ -31,7 +31,7 @@ import {
   RenderPlaceholderProps,
 } from 'slate-react';
 import flow from 'lodash/flow';
-import { useSlateContext } from './SlateEditorContext';
+import { useSlateContext } from './SlateEditorContext.bl-edit';
 import {
   RenderLeafProps,
   RenderElementProps,

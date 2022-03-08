@@ -23,7 +23,7 @@ import {
   withId,
   asVoid,
   withHtmlDeserializer,
-} from '../RichTextItemSetters';
+} from '../RichTextItemSetters.bl-edit';
 import {
   createBoldDeserializer,
   createItalicDeserializer,
