@@ -26,7 +26,7 @@ import {
   asBlock,
   asInline,
   withButton,
-} from '../src/RichTextItemSetters';
+} from '../src/RichTextItemSetters.bl-edit';
 
 const setupPageEditContext = (isEdit: boolean): PageEditContext => {
   const pageEditContext = new PageEditContext();
@@ -39,7 +39,7 @@ const createRichtext = () => {
   // @ts-ignore no types defined for jest.isolateModules
   jest.isolateModules(() => {
     // eslint-disable-next-line global-require
-    RichText = require('../src/RichText').default;
+    RichText = require('../src/RichText.bl-edit').default;
   });
   return RichText as any;
 };
