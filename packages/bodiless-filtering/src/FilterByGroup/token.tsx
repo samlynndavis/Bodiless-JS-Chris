@@ -15,7 +15,7 @@
 import {
   withDesign,
   addClasses,
-  asToken,
+  flowHoc,
   addProps,
   replaceWith,
   addPropsIf,
@@ -33,7 +33,7 @@ import {
   withAnyTag, withoutAnyTag,
 } from './Filter.token';
 
-const asResponsiveAccordionTitle = asToken(
+const asResponsiveAccordionTitle = flowHoc(
   asAccordionTitle,
   withDesign({
     Icon: addClasses('lg:hidden'),
@@ -46,21 +46,21 @@ const asResponsiveAccordionTitle = asToken(
  * asAccordionBodyFilter extends asAccordionBody to remove tabIndex prop
  * for accessibility purposes.
  */
-const asAccordionBodyFilter = asToken(
+const asAccordionBodyFilter = flowHoc(
   asAccordionBody,
   withDesign({
     Wrapper: withoutProps('tabIndex'),
   }),
 );
 
-const asExpandedOnDesktopBody = asToken(
+const asExpandedOnDesktopBody = flowHoc(
   asAccordionBodyFilter,
   withDesign({
     Wrapper: addClasses('lg:block'),
   }),
 );
 
-const asExpandedOnDesktopResetButtonBody = asToken(
+const asExpandedOnDesktopResetButtonBody = flowHoc(
   asExpandedOnDesktopBody,
   withDesign({
     Wrapper: withoutProps(['role', 'aria-labelledby']),
@@ -75,7 +75,7 @@ const useRefineButtonProps = () => {
   };
 };
 
-const asAccessibleFilterByGroup = asToken(
+const asAccessibleFilterByGroup = flowHoc(
   withDesign({
     FilterWrapper: addProps({
       role: 'region',
@@ -84,7 +84,7 @@ const asAccessibleFilterByGroup = asToken(
   }),
 );
 
-const asResponsiveFilterByGroup = asToken(
+const asResponsiveFilterByGroup = flowHoc(
   ifViewportIsNot(['lg', 'xl', '2xl'])(
     withDesign({
       FilterWrapper: asAccordionWrapper,
@@ -102,23 +102,23 @@ const asResponsiveFilterByGroup = asToken(
   ),
 );
 
-export const withMultipleAllowedTags = asToken(
+export const withMultipleAllowedTags = flowHoc(
   addProps({
     multipleAllowedTags: true,
   }),
   withDesign({
-    Filter: asToken(
+    Filter: flowHoc(
       withoutAnyTag,
     ),
   }),
 );
 
-export const withSingleAllowedTag = asToken(
+export const withSingleAllowedTag = flowHoc(
   addProps({
     multipleAllowedTags: false,
   }),
   withDesign({
-    Filter: asToken(
+    Filter: flowHoc(
       withAnyTag,
     ),
   }),

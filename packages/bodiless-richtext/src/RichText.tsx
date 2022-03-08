@@ -27,7 +27,7 @@ import { createEditor, Editor } from 'slate';
 import {
   Slate, withReact, useSlate
 } from 'slate-react';
-import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react';
 import {
   useEditContext,
   useContextActivator,
@@ -53,7 +53,7 @@ import {
   DesignableComponents,
   withDisplayName,
   Fragment,
-  Token,
+  HOC,
 } from '@bodiless/fclasses';
 import { withHistory } from 'slate-history';
 import {
@@ -124,7 +124,7 @@ const withSlateSchema = <P extends object>(Component: ComponentType<P>) => (
   }
 );
 // create item to activate the context not sure whats up with all the old vs new
-const withSlateActivator: Token = Component => props => {
+const withSlateActivator: HOC = Component => props => {
   const previousSlateContext = useSlateContext();
   const previousEditorProps = previousSlateContext!.editorProps;
 
@@ -336,7 +336,7 @@ const apply = (design: Design<DesignableComponents>) => {
       {},
     );
   const finalDesign = pick(lastDesign, Object.getOwnPropertyNames(design));
-  return applyDesign(start)(extendDesign(finalDesign)(design));
+  return applyDesign(start)(extendDesign(design, finalDesign));
 };
 
 const RichText = flow(

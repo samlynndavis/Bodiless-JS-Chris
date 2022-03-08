@@ -32,7 +32,7 @@ import {
   Label,
   withDesign,
   stylable,
-  asToken,
+  flowHoc,
   HOC,
   withoutProps,
   startWith,
@@ -170,7 +170,7 @@ const TagTitle = flow(
 
 const asResponsiveFilter = ifViewportIsNot(['lg', 'xl', '2xl'])(
   withDesign({
-    Item: asToken(
+    Item: flowHoc(
       asAccordionWrapper,
       withDesign({
         SubList: withDesign({
@@ -182,27 +182,27 @@ const asResponsiveFilter = ifViewportIsNot(['lg', 'xl', '2xl'])(
   }),
 );
 
-const asFilter = asToken(
+const asFilter = flowHoc(
   asBodilessList(undefined, undefined, () => ({ groupLabel: 'Category' })),
   withDesign({
-    Title: asToken(
+    Title: flowHoc(
       startWith(CategoryTitleClean),
       asEditable('category_name', 'Category Name'),
     ),
-    Item: asToken(
+    Item: flowHoc(
       stylable,
       withCategoryListContextProvider,
     ),
     Wrapper: stylable,
   }),
   withSubLists(1)(
-    asToken(
+    flowHoc(
       asSubList(() => ({ groupLabel: 'Group' })),
       withDeleteNodeOnUnwrap('sublist'),
       withUnselectOnDelete,
       withDesign({
         Title: startWith(TagTitle),
-        Wrapper: flow(
+        Wrapper: flowHoc(
           startWith(Fieldset),
           stylable,
           asFilterCategoryRegion
@@ -239,10 +239,10 @@ const withFilterDesignTransformer = <P extends object>(Component: ComponentOrTag
         design: restDesignProps,
       };
       // @ts-ignore
-      this.Filter = asToken(
+      this.Filter = flowHoc(
         withCategoryListDesign,
         withDesign({
-          Item: asToken(
+          Item: flowHoc(
             withDesign({
               SubList: withTagListDesign,
             }),
@@ -259,7 +259,7 @@ const withFilterDesignTransformer = <P extends object>(Component: ComponentOrTag
   return WithFilterDesignTransformer;
 };
 
-const FilterClean = asToken(
+const FilterClean = flowHoc(
   asFilter,
   withFilterDesignTransformer as HOC,
   // This probably should not be in Clean...

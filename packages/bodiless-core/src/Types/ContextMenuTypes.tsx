@@ -193,6 +193,7 @@ export type ContextMenuUI = {
   ComponentFormListItem?: ComponentType<HTMLProps<HTMLLIElement>> | string;
   ContextSubMenu?: ComponentType<HTMLProps<HTMLDivElement>> | string;
   ContextMenuGroup?: ComponentType<IContextMenuItemProps>;
+  Spinner?: ComponentType<any>;
 };
 
 export type IContextMenuProps = {

@@ -18,7 +18,7 @@ import React, {
 } from 'react';
 import { WithNodeKeyProps, withSidecarNodes, withBodilessData } from '@bodiless/core';
 import {
-  ComponentOrTag, Token, Fragment, DesignableComponents, Design, HOC, asToken, replaceWith,
+  ComponentOrTag, Fragment, DesignableComponents, Design, HOC, flowHoc, replaceWith, as,
   replaceable,
 } from '@bodiless/fclasses';
 import { SelectorComponents, SelectorComponentsProps } from '@bodiless/layouts';
@@ -68,7 +68,7 @@ class ChameleonContextValue extends SelectorComponents implements ChameleonState
     };
     const activeComponent = component || DEFAULT_KEY;
     const apply = design[activeComponent]
-      ? asToken(replaceable, design[activeComponent])
+      ? as(replaceable, design[activeComponent])
       : identity;
     return {
       DefaultComponent,
@@ -82,7 +82,7 @@ class ChameleonContextValue extends SelectorComponents implements ChameleonState
       isOn: activeComponent !== DEFAULT_KEY,
       setActiveComponent: (component: string|null) => setComponentData({ component }),
       apply: startComponents?.[activeComponent]
-        ? asToken(replaceWith(startComponents[activeComponent]), apply) : apply,
+        ? flowHoc(replaceWith(startComponents[activeComponent]), apply) : apply,
     };
   }
 
@@ -112,7 +112,7 @@ class ChameleonContextValue extends SelectorComponents implements ChameleonState
     if (keys.length > 2) return false;
     if (!keys.includes(DEFAULT_KEY)) return false;
     if (!design[DEFAULT_KEY]) return true;
-    const def = design[DEFAULT_KEY]!(Fragment);
+    const def = as(design[DEFAULT_KEY]!)(Fragment);
     return def.title === undefined;
   }
 }
@@ -129,7 +129,7 @@ const withChameleonContext = (
   defaultData?: ChameleonData,
   /** */
   RootComponent: ComponentOrTag<any> = Fragment,
-): Token => Component => {
+): HOC => Component => {
   const WithChameleonContext: FC<any> = props => (
     <ChameleonContext.Provider value={useChameleonContextValue(props, RootComponent)}>
       <Component
