@@ -13,6 +13,7 @@
  */
 import { as } from '@bodiless/fclasses';
 import { asLayoutToken } from '../LayoutClean';
+import { cxGlobalFooter } from '../../GlobalFooter';
 import { cxHeader } from '../../Header';
 import { cxHelmet } from '../../Helmet';
 
@@ -23,6 +24,7 @@ const Base = asLayoutToken({
   Components: {
     Helmet: as(cxHelmet.Default),
     SiteHeader: as(cxHeader.Default),
+    SiteFooter: as(cxGlobalFooter.Default),
   },
   Theme: {
     Container: 'container mx-auto',

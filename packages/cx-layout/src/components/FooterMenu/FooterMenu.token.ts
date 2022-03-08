@@ -12,23 +12,33 @@
  * limitations under the License.
  */
 
-import { cxLayout, asLayoutToken } from '@bodiless/cx-layout';
-import { __cxstarter__GlobalFooter } from '../../GlobalFooter';
-import { __cxstarter__Header } from '../../Header';
+import {
+  Nav,
+  addProps,
+  as,
+  flowHoc,
+  startWith,
+} from '@bodiless/fclasses';
+import { asFooterMenuToken } from './FooterMenuClean';
+import { cxMenu } from './Menus';
 
-const Default = asLayoutToken({
-  ...cxLayout.Default,
-  Components: {
-    ...cxLayout.Default.Components,
-    SiteHeader: __cxstarter__Header.Default,
-    SiteFooter: __cxstarter__GlobalFooter.Default,
+const Base = asFooterMenuToken({
+  Core: {
+    Wrapper: addProps({ 'aria-label': 'Footer Menu' }),
   },
-  Compose: {
-    ...cxLayout.Default.Compose,
+  Components: {
+    Wrapper: startWith(Nav),
+    Menu: flowHoc(
+      as(cxMenu.Default),
+    ),
   },
 });
 
-export default {
-  ...cxLayout,
+const Default = asFooterMenuToken({
+  ...Base,
+});
+
+export const cxFooterMenu = {
+  Base,
   Default,
 };

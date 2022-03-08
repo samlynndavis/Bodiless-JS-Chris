@@ -12,23 +12,22 @@
  * limitations under the License.
  */
 
-import { cxLayout, asLayoutToken } from '@bodiless/cx-layout';
-import { __cxstarter__GlobalFooter } from '../../GlobalFooter';
-import { __cxstarter__Header } from '../../Header';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-const Default = asLayoutToken({
-  ...cxLayout.Default,
-  Components: {
-    ...cxLayout.Default.Components,
-    SiteHeader: __cxstarter__Header.Default,
-    SiteFooter: __cxstarter__GlobalFooter.Default,
-  },
-  Compose: {
-    ...cxLayout.Default.Compose,
-  },
-});
+type GlobalFooterComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Container: ComponentOrTag<any>,
+  SectionTop: ComponentOrTag<any>,
+  Rewards: ComponentOrTag<any>,
+  FooterMenus: ComponentOrTag<any>,
+  SectionBottom: ComponentOrTag<any>,
+  Copyright: ComponentOrTag<any>,
+  SocialLinks: ComponentOrTag<any>,
+};
 
-export default {
-  ...cxLayout,
-  Default,
+type GlobalFooterProps = DesignableComponentsProps<GlobalFooterComponents>;
+
+export type {
+  GlobalFooterComponents,
+  GlobalFooterProps,
 };

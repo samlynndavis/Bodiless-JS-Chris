@@ -12,23 +12,28 @@
  * limitations under the License.
  */
 
-import { cxLayout, asLayoutToken } from '@bodiless/cx-layout';
-import { __cxstarter__GlobalFooter } from '../../GlobalFooter';
-import { __cxstarter__Header } from '../../Header';
+import {
+  Div,
+  startWith,
+} from '@bodiless/fclasses';
+import { asSocialLinksToken } from './SocialLinksClean';
 
-const Default = asLayoutToken({
-  ...cxLayout.Default,
+const Base = asSocialLinksToken({
   Components: {
-    ...cxLayout.Default.Components,
-    SiteHeader: __cxstarter__Header.Default,
-    SiteFooter: __cxstarter__GlobalFooter.Default,
+    Wrapper: startWith(Div),
   },
-  Compose: {
-    ...cxLayout.Default.Compose,
-  },
+  // @TODO: After Social Links implementations, readjust layout.
+  Layout: {
+    Wrapper: 'flex',
+    InnerWrapper: 'w-full inline-flex justify-between mx-4 md:mx-0 lg:w-20 lg:mx-10 lg:mr-16',
+  }
 });
 
-export default {
-  ...cxLayout,
+const Default = asSocialLinksToken({
+  ...Base,
+});
+
+export const cxSocialLinks = {
+  Base,
   Default,
 };

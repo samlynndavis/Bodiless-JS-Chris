@@ -7,5 +7,10 @@ module.exports = {
       48: '12rem',
       56: '14rem',
     }
-  }
+  },
+  variants: {
+    borderWidth: ['first', 'last', 'responsive'],
+    margin: ['first', 'last', 'responsive'],
+    padding: ['first', 'last', 'responsive'],
+  },
 };

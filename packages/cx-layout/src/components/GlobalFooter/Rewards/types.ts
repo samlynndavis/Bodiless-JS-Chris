@@ -12,23 +12,23 @@
  * limitations under the License.
  */
 
-import { cxLayout, asLayoutToken } from '@bodiless/cx-layout';
-import { __cxstarter__GlobalFooter } from '../../GlobalFooter';
-import { __cxstarter__Header } from '../../Header';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-const Default = asLayoutToken({
-  ...cxLayout.Default,
-  Components: {
-    ...cxLayout.Default.Components,
-    SiteHeader: __cxstarter__Header.Default,
-    SiteFooter: __cxstarter__GlobalFooter.Default,
-  },
-  Compose: {
-    ...cxLayout.Default.Compose,
-  },
-});
+type RewardsComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Brand: ComponentOrTag<any>,
+  Title: ComponentOrTag<any>,
+  Body: ComponentOrTag<any>,
+  FormWrapper: ComponentOrTag<any>,
+  FormTextFirstName: ComponentOrTag<any>,
+  FormTextEmail: ComponentOrTag<any>,
+  FormButton: ComponentOrTag<any>,
+  Footnote: ComponentOrTag<any>,
+};
 
-export default {
-  ...cxLayout,
-  Default,
+type RewardsProps = DesignableComponentsProps<RewardsComponents>;
+
+export type {
+  RewardsComponents,
+  RewardsProps,
 };

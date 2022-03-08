@@ -21,7 +21,7 @@ import {
   A,
 } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
-// import Footer from '../Footer/Footer';
+import { GlobalFooterClean } from '../GlobalFooter';
 import { HeaderClean } from '../Header';
 import { HelmetClean } from '../Helmet';
 import { LayoutComponents, LayoutProps } from './types';
@@ -31,8 +31,7 @@ const layoutComponents: LayoutComponents = {
   SkipToMainContent: A,
   Helmet: HelmetClean,
   SiteHeader: HeaderClean,
-  // SiteFooter: Footer,
-  SiteFooter: Fragment,
+  SiteFooter: GlobalFooterClean,
   Container: Div,
   PageTopper: Fragment,
   PageCloser: Fragment,

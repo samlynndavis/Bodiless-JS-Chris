@@ -35,6 +35,7 @@ module.exports = {
       'cx-secondary': {
         eyebrow: '#CC0099',
         'footer-bg': '#2B2B33',
+        'footer-text': '#FFFFFF',
       },
     },
     extend: {

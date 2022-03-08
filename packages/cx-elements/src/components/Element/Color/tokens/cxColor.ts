@@ -34,5 +34,6 @@ export default asTokenGroup(meta)({
   TextPrimaryBodyCopy: 'text-cx-primary-body-copy',
   TextPrimaryHeaderCopy: 'text-cx-primary-header-copy',
   BgSecondaryFooter: 'bg-cx-secondary-footer-bg',
+  TextSecondaryFooter: 'text-cx-secondary-footer-text',
   TextSecondaryEyebrow: 'text-cx-secondary-eyebrow',
 });

@@ -12,23 +12,6 @@
  * limitations under the License.
  */
 
-import { cxLayout, asLayoutToken } from '@bodiless/cx-layout';
-import { __cxstarter__GlobalFooter } from '../../GlobalFooter';
-import { __cxstarter__Header } from '../../Header';
-
-const Default = asLayoutToken({
-  ...cxLayout.Default,
-  Components: {
-    ...cxLayout.Default.Components,
-    SiteHeader: __cxstarter__Header.Default,
-    SiteFooter: __cxstarter__GlobalFooter.Default,
-  },
-  Compose: {
-    ...cxLayout.Default.Compose,
-  },
-});
-
-export default {
-  ...cxLayout,
-  Default,
-};
+export { cxSocialLinks } from './SocialLinks.token';
+export { SocialLinksClean, asSocialLinksToken } from './SocialLinksClean';
+export type { SocialLinksComponents, SocialLinksProps } from './types';
