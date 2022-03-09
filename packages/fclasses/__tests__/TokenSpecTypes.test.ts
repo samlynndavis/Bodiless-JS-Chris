@@ -74,7 +74,7 @@ describe('Fixed type tokens', () => {
   });
 
   // Creates a token which can be passed to as
-  as<TestD>(t);
+  as(t);
 
   // Creates a token with known properties
   t.Meta;
@@ -226,7 +226,7 @@ describe('fluid tokens', () => {
   });
 
   // Creates a token which can be passed to as
-  as<TestD>(t);
+  as(t);
 
   // Creates a token with known properties
   t.Meta;

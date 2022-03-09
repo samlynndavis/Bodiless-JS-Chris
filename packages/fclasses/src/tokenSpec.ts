@@ -21,7 +21,7 @@ import { startWith } from './replaceable';
 import type {
   TokenDef, // FlowHoc,
   DesignableComponents, HocDesign, TokenSpec,
-  ReservedDomains, Design, Token, HOCBase, HOD, AsTokenSpec,
+  ReservedDomains, Design, Token, HOCBase, HOD, AsTokenSpec, FinalDesign,
 } from './types';
 import { $TokenSpec } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
@@ -39,8 +39,8 @@ import { withHocDesign } from './withHocDesign';
      * @param domain
      */
 function getHocForDomain<C extends DesignableComponents, D extends object = any>(
-  domainName: keyof TokenSpec<C, D>,
-  domain?: Design<C> | ReservedDomains<C, D>[keyof ReservedDomains<C, D>]
+  domainName: string,
+  domain?: FinalDesign<C> | ReservedDomains<C, any>['Meta'] | ReservedDomains<C, any>['Flow'] | ReservedDomains<C, any>['Compose']
 ): TokenDef | undefined {
   if (!domain) return undefined;
   if (domainName === 'Flow') return undefined;
@@ -63,8 +63,8 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
      * @returns
      * An HOC which can be applied to a component.
      */
-function as<D extends object = any>(
-  ...args$: Token<any, D>[]
+function as(
+  ...args$: Token<any, {}>[]
 
 ): HOCBase<any, any, any> {
   const args = args$.filter(Boolean);
@@ -90,8 +90,8 @@ function as<D extends object = any>(
     const keys = Object.getOwnPropertyNames(arg);
     specTokens.push(...keys
       .map(domainName => getHocForDomain(
-        domainName as keyof TokenSpec<any, D>,
-        arg[domainName as keyof TokenSpec<any, D>]
+        domainName,
+        arg[domainName as keyof Omit<typeof arg, typeof $TokenSpec>],
       )));
 
     if (arg.Flow) {

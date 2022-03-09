@@ -14,7 +14,6 @@
 
 import type {
   DesignableComponents,
-  TokenSpec as TokenSpecBase,
   TokenMeta,
   Token,
   TokenSpec,
@@ -24,7 +23,7 @@ import {
   asTokenSpec,
 } from '@bodiless/fclasses';
 
-type CxTokenSpec<C extends DesignableComponents> = TokenSpecBase<C, DefaultDomains>;
+type CxTokenSpec<C extends DesignableComponents> = TokenSpec<C, DefaultDomains>;
 
 const defaultDomains = {
   Core: {},

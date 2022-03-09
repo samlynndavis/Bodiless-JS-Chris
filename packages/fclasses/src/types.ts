@@ -217,10 +217,6 @@ export type FluidDesign = Design<DesignableComponents>;
 export type Designable<C extends DesignableComponents = DesignableComponents>
   = HOCBase<{}, DesignableProps<C>, DesignableComponentsProps<C>>;
 
-export type Domains<C extends DesignableComponents, D extends object> = {
-  [k in keyof D]?: Design<C>
-};
-
 export type ReservedDomains<
   C extends DesignableComponents,
   D extends object,
@@ -243,37 +239,6 @@ export type ReservedDomains<
      * to which the token is applied).
      */
   Meta?: TokenMeta,
-};
-
-/**
-   * Type of a token specification, a token expressed in the
-   * HOC Object Notation.
-   *
-   * This is a nested object with two levels of keys:
-   * - The inner keys are to the design keys of the target component, and their
-   *   values extended CanvasX token definitions which should be applied to
-   *   each key. In addition to the design keys of the component, the special `_`
-   *   key is supported to denote a token which should be applied to the component
-   *   as a whole.
-   * - The top-level keys are "domains" -- areas of styling or behavior which can
-   *   be individually reused, extended or overridden by downstream consumers.
-   *
-   * @param C
-   * The type of the design elements for the target componetn.
-   *
-   * @param D
-   * An object type describing the domain keys available in this token.
-   */
-export type TokenSpecBase<
-  C extends DesignableComponents,
-  D extends object,
-> = Domains<C, D> & ReservedDomains<C, D>;
-
-export type TokenSpec<
-  C extends DesignableComponents,
-  D extends object,
-> = TokenSpecBase<C, D> & {
-  [$TokenSpec]: true,
 };
 
 /**
@@ -328,17 +293,19 @@ export type Design<
  */
 export type Condition<P = any> = (props: P) => boolean;
 
-type BareDomains<
+type Domains<
   C extends DesignableComponents,
   D extends object
-> = Record<keyof D, FinalDesign<C>>;
+> = {
+  [k in keyof D]?: FinalDesign<C>
+};
 
-export type FinalDomains<
+type FinalDomains<
   C extends DesignableComponents,
   D extends object
-> = BareDomains<C, D> & ReservedDomains<C, D>;
+> = Domains<C, D> & ReservedDomains<C, D>;
 
-export type TokenSpecIn<
+type TokenSpecIn<
   C extends DesignableComponents,
   D extends object,
   K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
@@ -351,6 +318,33 @@ export type TokenSpecOut<
 > = TokenSpecIn<C, D, K> & {
   [$TokenSpec]: true,
 };
+
+/**
+   * Type of a token specification, a token expressed in the
+   * HOC Object Notation.
+   *
+   * This is a nested object with two levels of keys:
+   * - The inner keys are to the design keys of the target component, and their
+   *   values extended CanvasX token definitions which should be applied to
+   *   each key. In addition to the design keys of the component, the special `_`
+   *   key is supported to denote a token which should be applied to the component
+   *   as a whole.
+   * - The top-level keys are "domains" -- areas of styling or behavior which can
+   *   be individually reused, extended or overridden by downstream consumers.
+   *
+   * @param C
+   * The type of the design elements for the target componetn.
+   *
+   * @param D
+   * An object type describing the domain keys available in this token.
+   */
+export type TokenSpec<
+  C extends DesignableComponents,
+  D extends object,
+> = Domains<C, D> & ReservedDomains<C, D> & {
+  [$TokenSpec]: true,
+};
+// > = TokenSpecOut<C, D, keyof FinalDomains<C, D>>;
 
 export type AsTokenSpec<C extends DesignableComponents, D extends object> = <
   K0 extends keyof FinalDomains<C, D>,
