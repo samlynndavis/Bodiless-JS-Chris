@@ -2,7 +2,8 @@
 import {
   $TokenSpec,
   as,
-  ComponentOrTag, DesignableComponents, FinalDesign, flowHoc, ReservedDomains,
+  ComponentOrTag, DesignableComponents, flowHoc,
+  AsTokenSpec,
 } from '../src';
 
 // This version procies autocomplete, but does not
@@ -20,7 +21,7 @@ import {
 //   C extends DesignableComponents,
 //   D extends Domains<C>,
 // >() => <S extends Partial<D & ReservedDomains<C, D>>>(
-//     // s: Pick<TokenSpecBase<C, D>, K>
+//     // s: Pick<TokenSpecIn<C, D>, K>
 //     // s: { [k in K]: Design<C> }
 //     s: S,
 //   ): S & { [$TokenSpec]: true } => s as any;
@@ -35,54 +36,6 @@ import {
 //     s: Partial<{ [k in K]: FinalDesign<C> }> & ReservedDomains<C, D>
 //     // s: Partial<Record<K, Design<C>> & ReservedDomains<C, D>>
 //   ): typeof s & { [$TokenSpec]: true } => s as any;
-type BareDomains<
-  C extends DesignableComponents,
-  D extends object
-> = Record<keyof D, FinalDesign<C>>;
-
-type Domains<
-  C extends DesignableComponents,
-  D extends object
-> = BareDomains<C, D> & ReservedDomains<C, D>;
-
-type TokenSpecBase<
-  C extends DesignableComponents,
-  D extends object,
-  K extends keyof (Domains<C, D>) = keyof (Domains<C, D>)
-> = Pick<Domains<C, D>, K>;
-
-type TokenSpec<
-  C extends DesignableComponents,
-  D extends object,
-  K extends keyof (Domains<C, D>) = keyof (Domains<C, D>)
-> = TokenSpecBase<C, D, K> & {
-  [$TokenSpec]: true,
-};
-
-type AsTokenSpec<C extends DesignableComponents, D extends object> = <
-  K0 extends keyof Domains<C, D>,
-  K1 extends keyof Domains<C, D> = never,
-  K2 extends keyof Domains<C, D> = never,
-  K3 extends keyof Domains<C, D> = never,
-  K4 extends keyof Domains<C, D> = never,
-  K5 extends keyof Domains<C, D> = never,
-  K6 extends keyof Domains<C, D> = never,
-  K7 extends keyof Domains<C, D> = never,
-  K8 extends keyof Domains<C, D> = never,
-  K9 extends keyof Domains<C, D> = never
->(
-  s0: TokenSpecBase<C, D, K0>,
-  s1?: TokenSpecBase<C, D, K1>,
-  s2?: TokenSpecBase<C, D, K2>,
-  s3?: TokenSpecBase<C, D, K3>,
-  s4?: TokenSpecBase<C, D, K4>,
-  s5?: TokenSpecBase<C, D, K5>,
-  s6?: TokenSpecBase<C, D, K6>,
-  s7?: TokenSpecBase<C, D, K7>,
-  s8?: TokenSpecBase<C, D, K8>,
-  s9?: TokenSpecBase<C, D, K9>,
-) => TokenSpec<C, D, K0 | K1 | K2 | K3 | K4 | K5 | K6 | K7 | K8 | K9>;
-
 const asTokenSpec = <
   C extends DesignableComponents,
   D extends object,

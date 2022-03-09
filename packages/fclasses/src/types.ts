@@ -327,3 +327,51 @@ export type Design<
  * Type of a condition suitable for use with `flowIf`, `addPropsIf`, `addClassesIf`
  */
 export type Condition<P = any> = (props: P) => boolean;
+
+type BareDomains<
+  C extends DesignableComponents,
+  D extends object
+> = Record<keyof D, FinalDesign<C>>;
+
+export type FinalDomains<
+  C extends DesignableComponents,
+  D extends object
+> = BareDomains<C, D> & ReservedDomains<C, D>;
+
+export type TokenSpecIn<
+  C extends DesignableComponents,
+  D extends object,
+  K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
+> = Pick<FinalDomains<C, D>, K>;
+
+export type TokenSpecOut<
+  C extends DesignableComponents,
+  D extends object,
+  K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
+> = TokenSpecIn<C, D, K> & {
+  [$TokenSpec]: true,
+};
+
+export type AsTokenSpec<C extends DesignableComponents, D extends object> = <
+  K0 extends keyof FinalDomains<C, D>,
+  K1 extends keyof FinalDomains<C, D> = never,
+  K2 extends keyof FinalDomains<C, D> = never,
+  K3 extends keyof FinalDomains<C, D> = never,
+  K4 extends keyof FinalDomains<C, D> = never,
+  K5 extends keyof FinalDomains<C, D> = never,
+  K6 extends keyof FinalDomains<C, D> = never,
+  K7 extends keyof FinalDomains<C, D> = never,
+  K8 extends keyof FinalDomains<C, D> = never,
+  K9 extends keyof FinalDomains<C, D> = never
+>(
+  s0: TokenSpecIn<C, D, K0>,
+  s1?: TokenSpecIn<C, D, K1>,
+  s2?: TokenSpecIn<C, D, K2>,
+  s3?: TokenSpecIn<C, D, K3>,
+  s4?: TokenSpecIn<C, D, K4>,
+  s5?: TokenSpecIn<C, D, K5>,
+  s6?: TokenSpecIn<C, D, K6>,
+  s7?: TokenSpecIn<C, D, K7>,
+  s8?: TokenSpecIn<C, D, K8>,
+  s9?: TokenSpecIn<C, D, K9>,
+) => TokenSpecOut<C, D, K0 | K1 | K2 | K3 | K4 | K5 | K6 | K7 | K8 | K9>;

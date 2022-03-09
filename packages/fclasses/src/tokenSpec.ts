@@ -21,7 +21,7 @@ import { startWith } from './replaceable';
 import type {
   TokenDef, // FlowHoc,
   DesignableComponents, HocDesign, TokenSpec,
-  ReservedDomains, Design, Token, HOCBase, HOD, TokenSpecBase,
+  ReservedDomains, Design, Token, HOCBase, HOD, AsTokenSpec,
 } from './types';
 import { $TokenSpec } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
@@ -275,9 +275,10 @@ const on = (
  *
  * @see https://stackoverflow.com/questions/54598322/how-to-make-typescript-infer-the-keys-of-an-object-but-define-type-of-its-value
  */
-const asTokenSpec = <C extends DesignableComponents, D extends object>(
-  d?: D,
-) => (...specs: TokenSpecBase<C, D>[]): TokenSpec<C, D> => {
+const asTokenSpec = <
+  C extends DesignableComponents,
+  D extends object,
+>(d?: D): AsTokenSpec<C, D> => (...specs) => {
     const [spec0, ...restSpecs] = specs;
     const mergedSpec = { ...spec0 };
     mergeWith(
@@ -290,7 +291,7 @@ const asTokenSpec = <C extends DesignableComponents, D extends object>(
     // Add an identifying key to ensure that tokens passed through `as`
     // have been defined with `asTokenSpec`, thus guaranteeing proper order
     // of domain keys.
-    return { ...orderedSpec, [$TokenSpec]: true };
+    return { ...orderedSpec, [$TokenSpec]: true } as any;
   };
 
 export {
