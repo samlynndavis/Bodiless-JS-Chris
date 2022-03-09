@@ -302,7 +302,7 @@ export type TokenCollection<
   [name: string]: TokenSpec<C, D>,
 };
 
-type FinalDesign<
+export type FinalDesign<
   C extends DesignableComponents = DesignableComponents,
   D extends object = any,
 > = {
