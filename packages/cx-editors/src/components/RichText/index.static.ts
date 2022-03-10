@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxRichText from './cxRichText';
+import { staticTokenCollection as cxRichText, StaticComponent as RichTextClean } from '@bodiless/hydration';
 
-export default cxRichText;
+export { cxRichText, RichTextClean };

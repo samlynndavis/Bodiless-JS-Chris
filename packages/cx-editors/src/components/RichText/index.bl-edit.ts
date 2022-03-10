@@ -12,6 +12,5 @@
  * limitations under the License.
  */
 
-import cxRichText from './cxRichText';
-
-export default cxRichText;
+export { default as cxRichText } from './tokens';
+export { RichTextClean } from './RichTextClean';

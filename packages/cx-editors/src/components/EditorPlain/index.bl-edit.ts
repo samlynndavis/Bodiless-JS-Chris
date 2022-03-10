@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
-import cxRichText from './cxRichText';
+import { Editable } from '@bodiless/components';
+import { withoutHydration } from '@bodiless/hydration';
 
-export default cxRichText;
+export const EditorPlainClean = withoutHydration()(Editable);
+export { cxEditorPlain } from './tokens';

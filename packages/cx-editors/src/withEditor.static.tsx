@@ -12,6 +12,11 @@
  * limitations under the License.
  */
 
-import cxRichText from './cxRichText';
+import { withChild } from '@bodiless/core';
+import { StaticComponent, } from '@bodiless/hydration';
 
-export default cxRichText;
+export const withEditor = () => () => withChild(StaticComponent);
+export const withEditorPlain = withEditor();
+export const withEditorPlainClean = withEditor();
+export const withEditorRichClean = withEditor();
+export const withEditorFull = withEditor();

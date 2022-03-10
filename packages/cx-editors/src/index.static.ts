@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxRichText from './cxRichText';
-
-export default cxRichText;
+export * from './withEditor.static';
+export * from './components/RichText/index.static';
+export * from './components/EditorPlain/index.static';
