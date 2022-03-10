@@ -69,7 +69,7 @@ the name of your brand or design system.)*
   // wrap in withoutHydration
   export const MyComponentClean = withoutHydration(MyComponentClean$);
   ```
-- Export normal versions of the component and its token colleciton in uyour
+- Export normal versions of the component and its token collection in your
   `index.bl-edit.ts`:
   ```
   export { default as MyComponentClean } from './MyComponentClean';
@@ -151,8 +151,8 @@ This should include, at a minimum, the following keys:
 
 Expose exports from all components, 
 ```ts
-export * from './components/{CompnentA}';
-export * from './components/{CompnentB}';
+export * from './components/{ComponentA}';
+export * from './components/{ComponentB}';
 ...
 ```
 in addition to any special exports from your package.
