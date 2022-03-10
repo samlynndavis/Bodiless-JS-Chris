@@ -12,9 +12,5 @@
  * limitations under the License.
  */
 
-export * from './components/Typography';
-export * from './components/Color';
-export * from './components/TextDecoration';
-export * from './components/FontSize';
-export * from './components/Element';
-export * from './util';
+export { default as cxTextDecoration } from './tokens';
+export { default as cxTextDecorationStatic } from './tokens';
