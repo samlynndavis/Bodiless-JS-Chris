@@ -266,7 +266,7 @@ export type TokenCollection<
   C extends DesignableComponents,
   D extends object = object,
 > = {
-  [name: string]: TokenSpec<C, D>,
+  [name: string]: TokenSpecOut<C, D, keyof D>,
 };
 
 export type FinalDesign<
@@ -340,12 +340,12 @@ export type TokenSpecOut<
    * @param D
    * An object type describing the domain keys available in this token.
    */
-export type TokenSpec<
-  C extends DesignableComponents,
-  D extends object,
-> = Domains<C, D> & ReservedDomains<C, D> & {
-  [$TokenSpec]: true,
-};
+// export type TokenSpec<
+//   C extends DesignableComponents,
+//   D extends object,
+// > = Domains<C, D> & ReservedDomains<C, D> & {
+//   [$TokenSpec]: true,
+// };
 // > = TokenSpecOut<C, D, keyof FinalDomains<C, D>>;
 
 export type AsTokenSpec<C extends DesignableComponents, D extends object> = <

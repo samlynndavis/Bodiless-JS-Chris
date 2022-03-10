@@ -20,8 +20,8 @@ import { pick } from 'lodash';
 import { startWith } from './replaceable';
 import type {
   TokenDef, // FlowHoc,
-  DesignableComponents, HocDesign, TokenSpec,
-  ReservedDomains, Design, Token, HOCBase, HOD, AsTokenSpec, FinalDesign,
+  DesignableComponents, HocDesign,
+  ReservedDomains, Design, Token, HOCBase, HOD, AsTokenSpec, FinalDesign, TokenSpecOut,
 } from './types';
 import { $TokenSpec } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
@@ -309,6 +309,6 @@ export {
  * @param a
  * The Token to test.
  */
-export const isTokenSpec = (a: Token): a is TokenSpec<any, any> => (
+export const isTokenSpec = (a: Token): a is TokenSpecOut<any, any, any> => (
   typeof a !== 'function' && typeof a !== 'string'
 );

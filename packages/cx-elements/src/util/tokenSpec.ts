@@ -16,14 +16,12 @@ import type {
   DesignableComponents,
   TokenMeta,
   Token,
-  TokenSpec,
+  TokenSpecOut,
 } from '@bodiless/fclasses';
 import {
   extendMeta,
   asTokenSpec,
 } from '@bodiless/fclasses';
-
-type CxTokenSpec<C extends DesignableComponents> = TokenSpec<C, DefaultDomains>;
 
 const defaultDomains = {
   Core: {},
@@ -80,7 +78,7 @@ const asMetaToken = (...m: TokenMeta[]) => asElementToken({
 });
 
 // @todo should these be public types exported from fclasses?
-type TC<K extends string> = Record<K, TokenSpec<{}, Pick<DefaultDomains, 'Core'>>>;
+type TC<K extends string> = Record<K, TokenSpecOut<{}, Pick<DefaultDomains, 'Core'>>>;
 type TD<K extends string> = Record<K, Token>;
 
 /**
@@ -113,5 +111,3 @@ export {
   asCxTokenSpec, asMetaToken, asElementToken, asFluidToken,
   asTokenGroup,
 };
-
-export type { CxTokenSpec };
