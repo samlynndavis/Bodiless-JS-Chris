@@ -225,7 +225,7 @@ export type ReservedDomains<
      * A list of other tokens which should be applied.
      */
   Compose?: {
-    [key: string]: Token<C, D>,
+    [key: string]: ComposedToken<C, D>,
   },
   /**
      * If specified, the entire token will be wrapped in a flow toggle using
@@ -251,7 +251,12 @@ export type ReservedDomains<
 export type Token<
   C extends DesignableComponents,
   D extends object,
-> = TokenSpec<C, D> | HOCBase | string | undefined;
+> = TokenSpecOut<any, {}, any> | HOCBase | string | undefined;
+
+export type ComposedToken<
+  C extends DesignableComponents,
+  D extends object,
+> = TokenSpecOut<C, D, keyof D> | HOCBase | string | undefined;
 
 /**
    * Type of a collection of tokens which apply to a specific designable component.

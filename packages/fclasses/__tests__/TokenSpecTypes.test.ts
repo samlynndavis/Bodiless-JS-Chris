@@ -1,9 +1,10 @@
+/* eslint-disable jest/expect-expect */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import {
   $TokenSpec,
   as,
   ComponentOrTag, DesignableComponents, flowHoc,
-  AsTokenSpec,
+  asTokenSpec,
 } from '../src';
 
 // This version procies autocomplete, but does not
@@ -36,10 +37,10 @@ import {
 //     s: Partial<{ [k in K]: FinalDesign<C> }> & ReservedDomains<C, D>
 //     // s: Partial<Record<K, Design<C>> & ReservedDomains<C, D>>
 //   ): typeof s & { [$TokenSpec]: true } => s as any;
-const asTokenSpec = <
-  C extends DesignableComponents,
-  D extends object,
->(domains?: D): AsTokenSpec<C, D> => (...args) => args[0] as any;
+// const asTokenSpec = <
+//   C extends DesignableComponents,
+//   D extends object,
+// >(domains?: D): AsTokenSpec<C, D> => (...args) => args[0] as any;
 
 // ***********************************************************************
 // *************** TESTS
@@ -226,7 +227,9 @@ describe('fluid tokens', () => {
   });
 
   // Creates a token which can be passed to as
-  as(t);
+  it('creates a token which can be passed to as', () => {
+    as(t);
+  });
 
   // Creates a token with known properties
   t.Meta;
