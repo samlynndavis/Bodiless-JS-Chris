@@ -64,7 +64,7 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
      * An HOC which can be applied to a component.
      */
 function as(
-  ...args$: Token<any, {}>[]
+  ...args$: Token[]
 
 ): HOCBase<any, any, any> {
   const args = args$.filter(Boolean);
@@ -256,7 +256,7 @@ const extendDesignWith = (
 const on = (
   CleanComponent: ComponentType<any>
 ) => <C extends DesignableComponents, D extends object = any>(
-  ...specs: Token<C, D>[]
+  ...specs: Token[]
 ) => as(
     startWith(CleanComponent),
     ...specs
@@ -309,6 +309,6 @@ export {
  * @param a
  * The Token to test.
  */
-export const isTokenSpec = (a: Token<any, any>): a is TokenSpec<any, any> => (
+export const isTokenSpec = (a: Token): a is TokenSpec<any, any> => (
   typeof a !== 'function' && typeof a !== 'string'
 );

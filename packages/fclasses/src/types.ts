@@ -248,10 +248,7 @@ export type ReservedDomains<
  * - A token specified as an HOC
  * - A token specified as a string of classes.
  */
-export type Token<
-  C extends DesignableComponents,
-  D extends object,
-> = TokenSpecOut<any, {}, any> | HOCBase | string | undefined;
+export type Token = TokenSpecOut<any, {}, any> | HOCBase | string | undefined;
 
 export type ComposedToken<
   C extends DesignableComponents,
@@ -276,7 +273,7 @@ export type FinalDesign<
   C extends DesignableComponents = DesignableComponents,
   D extends object = any,
 > = {
-  [k in keyof Partial<C & { _?: Token<C, D> }>]: Token<any, D>
+  [k in keyof Partial<C & { _?: Token }>]: Token
 };
 
 /**

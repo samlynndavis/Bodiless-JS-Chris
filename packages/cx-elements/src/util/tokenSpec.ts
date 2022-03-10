@@ -81,7 +81,7 @@ const asMetaToken = (...m: TokenMeta[]) => asElementToken({
 
 // @todo should these be public types exported from fclasses?
 type TC<K extends string> = Record<K, TokenSpec<{}, Pick<DefaultDomains, 'Core'>>>;
-type TD<K extends string> = Record<K, Token<{}, DefaultDomains>>;
+type TD<K extends string> = Record<K, Token>;
 
 /**
  * Creates a group of element tokens with shared meta.
@@ -102,7 +102,7 @@ const asTokenGroup = (...m: TokenMeta[]) => <K extends string>(
       [name]: asElementToken({
         Meta: extendMeta(...m),
         Core: {
-          _: value as Token<{}, DefaultDomains>,
+          _: value as Token,
         }
       }),
     }),
