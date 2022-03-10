@@ -12,6 +12,4 @@
  * limitations under the License.
  */
 
-import tokens from './cxLink';
-
-export default tokens;
+export * from './components/Link/index.static';

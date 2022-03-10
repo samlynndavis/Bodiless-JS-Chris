@@ -6,6 +6,14 @@
   "author": "Konstantin Mishur <kmishur@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "bodiless:static": "./lib/index.static.js",
+      "default": "./lib/index.js"
+    },
+    "./site.tailwind.config": "./site.tailwind.config.js",
+    "./assets/font/linkicons.woff2": "./assets/font/linkicons.woff2"
+  },
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
@@ -33,8 +41,7 @@
     "@bodiless/components-ui": "^0.3.7",
     "@bodiless/core": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
-    "@bodiless/richtext": "^0.3.7",
-    "@bodiless/richtext-ui": "^0.3.7",
+    "@bodiless/hydration": "^0.3.7",
     "@bodiless/cx-elements": "^0.3.7",
     "lodash": "^4.17.19",
     "tailwindcss": "^2.0.2"
