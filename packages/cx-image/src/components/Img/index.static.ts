@@ -12,6 +12,4 @@
  * limitations under the License.
  */
 
-import tokens from './cxImage';
-
-export default tokens;
+export { staticTokenCollection as cxImage } from '@bodiless/hydration';

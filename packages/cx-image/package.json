@@ -33,6 +33,7 @@
     "@bodiless/core": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
     "@bodiless/gatsby-theme-bodiless": "^0.3.7",
+    "@bodiless/hydration": "^0.3.7",
     "@bodiless/layouts": "^0.3.7",
     "@bodiless/layouts-ui": "^0.3.7",
     "@bodiless/cx-elements": "^0.3.7",

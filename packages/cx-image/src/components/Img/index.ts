@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export * from './tokens';
+export { default as cxImage } from './tokens';
