@@ -248,12 +248,12 @@ export type ReservedDomains<
  * - A token specified as an HOC
  * - A token specified as a string of classes.
  */
-export type Token = TokenSpecOut<any, {}, any> | HOCBase | string | undefined;
+export type Token = TokenSpec<any, {}, any> | HOCBase | string | undefined;
 
 export type ComposedToken<
   C extends DesignableComponents,
   D extends object,
-> = TokenSpecOut<C, D, keyof D> | HOCBase | string | undefined;
+> = TokenSpec<C, D, keyof D> | HOCBase | string | undefined;
 
 /**
    * Type of a collection of tokens which apply to a specific designable component.
@@ -266,7 +266,7 @@ export type TokenCollection<
   C extends DesignableComponents,
   D extends object = object,
 > = {
-  [name: string]: TokenSpecOut<C, D, keyof D>,
+  [name: string]: TokenSpec<C, D, keyof D>,
 };
 
 export type FinalDesign<
@@ -313,7 +313,7 @@ type TokenSpecIn<
   K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
 > = Pick<FinalDomains<C, D>, K>;
 
-export type TokenSpecOut<
+export type TokenSpec<
   C extends DesignableComponents,
   D extends object,
   K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
@@ -346,7 +346,7 @@ export type TokenSpecOut<
 // > = Domains<C, D> & ReservedDomains<C, D> & {
 //   [$TokenSpec]: true,
 // };
-// > = TokenSpecOut<C, D, keyof FinalDomains<C, D>>;
+// > = TokenSpec<C, D, keyof FinalDomains<C, D>>;
 
 export type AsTokenSpec<C extends DesignableComponents, D extends object> = <
   K0 extends keyof FinalDomains<C, D>,
@@ -370,4 +370,4 @@ export type AsTokenSpec<C extends DesignableComponents, D extends object> = <
   s7?: TokenSpecIn<C, D, K7>,
   s8?: TokenSpecIn<C, D, K8>,
   s9?: TokenSpecIn<C, D, K9>,
-) => TokenSpecOut<C, D, K0 | K1 | K2 | K3 | K4 | K5 | K6 | K7 | K8 | K9>;
+) => TokenSpec<C, D, K0 | K1 | K2 | K3 | K4 | K5 | K6 | K7 | K8 | K9>;

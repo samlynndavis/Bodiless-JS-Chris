@@ -16,7 +16,7 @@ import type {
   DesignableComponents,
   TokenMeta,
   Token,
-  TokenSpecOut,
+  TokenSpec,
 } from '@bodiless/fclasses';
 import {
   extendMeta,
@@ -78,7 +78,7 @@ const asMetaToken = (...m: TokenMeta[]) => asElementToken({
 });
 
 // @todo should these be public types exported from fclasses?
-type TC<K extends string> = Record<K, TokenSpecOut<{}, Pick<DefaultDomains, 'Core'>>>;
+type TC<K extends string> = Record<K, TokenSpec<{}, Pick<DefaultDomains, 'Core'>>>;
 type TD<K extends string> = Record<K, Token>;
 
 /**
