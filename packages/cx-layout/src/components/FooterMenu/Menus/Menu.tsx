@@ -18,6 +18,7 @@ import { asCxTokenSpec, cxColor } from '@bodiless/cx-elements';
 import {
   A,
   Ul,
+  addProps,
   as,
   flowHoc,
   replaceWith,
@@ -32,6 +33,13 @@ const asMenuToken = asCxTokenSpec<ListComponents>();
 const WithMenuItem = asBodilessLink()(A);
 
 const Base = asMenuToken({
+  Core: {
+    Wrapper: addProps({
+      'aria-label': 'Navigation Menu',
+      role: 'menubar',
+    }),
+    Item: addProps({ role: 'menuitem' }),
+  },
   Components: {
     Title: replaceWith(WithMenuItem),
     _: flowHoc(
@@ -40,11 +48,15 @@ const Base = asMenuToken({
     ),
   },
   Layout: {
-    Wrapper: 'w-full md:flex md:justify-between md:flex-grow',
+    Wrapper: 'w-full md:flex md:justify-between md:flex-grow lg:h-full',
     Item: 'md:w-1/4',
   },
   Spacing: {
-    Item: 'mb-9 pb-9 last:mb-0 last:pb-0 md:mb-0 md:pb-0 lg:px-12',
+    Item: as(
+      'mb-9 pb-9 last:mb-0 last:pb-0',
+      'md:mb-0 md:pb-0 md:px-10 md:first:pl-0 md:last:pr-0',
+      'lg:px-12 lg:first:pl-12',
+    ),
   },
   Theme: {
     Item: as(
@@ -54,7 +66,7 @@ const Base = asMenuToken({
     ),
     Title: flowHoc(
       as(
-        cxColor.TextSecondaryFooter,
+        cxColor.TextPrimaryFooterCopy,
         'font-bold text-m-xl md:text-m-lg lg:text-base',
       ),
     ),

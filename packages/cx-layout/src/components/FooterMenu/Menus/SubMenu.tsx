@@ -18,6 +18,7 @@ import { asCxTokenSpec, cxColor } from '@bodiless/cx-elements';
 import {
   A,
   Ul,
+  addProps,
   as,
   flowHoc,
   replaceWith,
@@ -29,6 +30,10 @@ const asSubMenuToken = asCxTokenSpec<ListComponents>();
 const WithSubMenuItem = asBodilessLink()(A);
 
 const FooterSubMenu = asSubMenuToken({
+  Core: {
+    Wrapper: addProps({ role: 'menu' }),
+    Item: addProps({ role: 'menuitem' }),
+  },
   Components: {
     Wrapper: startWith(Ul),
     Title: replaceWith(WithSubMenuItem),
@@ -36,13 +41,13 @@ const FooterSubMenu = asSubMenuToken({
   Theme: {
     Title: flowHoc(
       as(
-        cxColor.TextSecondaryFooter,
+        cxColor.TextPrimaryFooterCopy,
         'text-base font-medium md:text-sm lg:text-xs',
       ),
     ),
   },
   Spacing: {
-    Item: 'mt-5',
+    Item: 'mt-5 lg:mt-2',
   },
   Editors: {
     Title: asEditable('text', 'Submenu Item'),

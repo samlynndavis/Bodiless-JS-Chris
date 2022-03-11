@@ -43,33 +43,33 @@ const Base = asRewardsToken({
     Wrapper: 'bg-cx-primary-card-bg md:bg-cx-secondary-footer-bg',
     Brand: as(
       'text-cx-primary-header-copy text-xl font-medium',
-      'md:text-cx-secondary-footer-text md:text-m-2xl',
+      'md:text-cx-primary-footer-copy md:text-m-2xl',
     ),
     Title: as(
       'text-cx-primary-header-copy text-m-xl font-bold',
-      'md:text-cx-secondary-footer-text md:text-base',
+      'md:text-cx-primary-footer-copy md:text-base',
       'lg:text-sm',
     ),
     Body: as(
       'text-cx-primary-header-copy text-sm',
-      'md:text-cx-secondary-footer-text md:text-base',
+      'md:text-cx-primary-footer-copy md:text-base',
       'lg:text-xs',
     ),
     FormTextFirstName: as(
       'bg-cx-primary-page-bg text-cx-primary-header-copy text-sm font-bold rounded',
-      'md:border md:border-cx-secondary-footer-text md:bg-cx-secondary-footer-bg md:text-cx-secondary-footer-text md:rounded-none',
+      'md:border md:border-cx-secondary-footer-text md:bg-cx-secondary-footer-bg md:text-cx-primary-footer-copy md:rounded-none',
       'lg:text-sm',
     ),
     FormTextEmail: as(
       'bg-cx-primary-page-bg text-cx-primary-header-copy text-sm font-bold rounded',
-      'md:border md:border-cx-secondary-footer-text md:bg-cx-secondary-footer-bg md:text-cx-secondary-footer-text md:rounded-none',
+      'md:border md:border-cx-secondary-footer-text md:bg-cx-secondary-footer-bg md:text-cx-primary-footer-copy md:rounded-none',
       'lg:text-sm',
     ),
     FormButton: as(
-      'bg-cx-primary-header-copy text-cx-secondary-footer-text text-sm font-bold rounded',
+      'bg-cx-primary-header-copy text-cx-primary-footer-copy text-sm font-bold rounded',
       'md:bg-cx-primary-card-bg md:text-cx-secondary-footer-bg md:rounded-none',
     ),
-    Footnote: 'text-xs md:text-cx-secondary-footer-text',
+    Footnote: 'text-xs md:text-cx-primary-footer-copy',
   },
   // @TODO: Placeholders must be replaced with editable fields.
   Content: {

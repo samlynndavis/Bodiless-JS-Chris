@@ -31,11 +31,11 @@ module.exports = {
         divider: '#D8D8D8',
         'body-copy': '#63666A',
         'header-copy': '#212121',
+        'footer-copy': '#FFFFFF',
       },
       'cx-secondary': {
         eyebrow: '#CC0099',
         'footer-bg': '#2B2B33',
-        'footer-text': '#FFFFFF',
       },
     },
     extend: {

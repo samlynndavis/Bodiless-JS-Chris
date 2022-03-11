@@ -24,7 +24,10 @@ import { cxMenu } from './Menus';
 
 const Base = asFooterMenuToken({
   Core: {
-    Wrapper: addProps({ 'aria-label': 'Footer Menu' }),
+    Wrapper: addProps({
+      'aria-label': 'Footer Navigation Menu',
+      role: 'navigation',
+    }),
   },
   Components: {
     Wrapper: startWith(Nav),

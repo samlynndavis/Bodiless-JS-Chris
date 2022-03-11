@@ -64,7 +64,7 @@ const Base = asGlobalFooterToken({
   Theme: {
     Wrapper: cxColor.BgSecondaryFooter,
     Copyright: as(
-      cxColor.TextSecondaryFooter,
+      cxColor.TextPrimaryFooterCopy,
       cxFontSize.XS,
       'border-white-400 border-t border-b md:border-0 lg:text-m-xs',
     ),
