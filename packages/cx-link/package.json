@@ -6,14 +6,6 @@
   "author": "Konstantin Mishur <kmishur@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
-  "exports": {
-    ".": {
-      "bodiless:static": "./lib/index.static.js",
-      "default": "./lib/index.js"
-    },
-    "./site.tailwind.config": "./site.tailwind.config.js",
-    "./assets/font/linkicons.woff2": "./assets/font/linkicons.woff2"
-  },
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
@@ -27,10 +19,10 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.json && npm run build:api-doc",
-    "build:watch": "npm run build -- --watch",
+    "build": "npm run build:lib && npm run build:api-doc",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
     "build:api-doc": "typedoc --out doc/api ./src",
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
   },
   "peerDependencies": {

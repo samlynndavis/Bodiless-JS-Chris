@@ -21,8 +21,8 @@ import {
   addPropsIf,
   HOC,
 } from '@bodiless/fclasses';
-import { cxEditorPlain, EditorPlainClean } from './components/EditorPlain';
-import { RichTextClean, cxRichText } from './components/RichText';
+import { cxEditorPlain, EditorPlainClean } from '../components/EditorPlain';
+import { RichTextClean, cxRichText } from '../components/RichText';
 
 export type WithEditor = (
   nodeKey?: WithNodeKeyProps,

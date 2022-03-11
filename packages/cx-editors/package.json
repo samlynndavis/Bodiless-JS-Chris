@@ -22,8 +22,7 @@
     "build:api-doc": "typedoc --out doc/api src",
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
-    "lint": "tslint ./src/**/*.ts?x"
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "peerDependencies": {
     "react": "^17.0.2"

@@ -14,10 +14,6 @@
     "/doc",
     "/bodiless.docs.json"
   ],
-  "exports": {
-    "bodiless:static": "./lib/index.static.js",
-    "default": "./lib/index.js"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"

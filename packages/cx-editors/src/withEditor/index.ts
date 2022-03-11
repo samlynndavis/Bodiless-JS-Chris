@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export * from './components/Img/index.static';
+export * from './withEditor.bl-edit';

@@ -14,4 +14,4 @@
 
 import cxEditorPlain from './cxEditorPlain';
 
-export { cxEditorPlain };
+export default cxEditorPlain;

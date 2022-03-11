@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/cx-elements",
   "version": "0.3.7",
-  "description": "Layout components for the bodiless cx design system",
+  "description": "Basic elements for the bodiless cx design system",
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -26,8 +26,7 @@
     "build:lib": "tsc -p ./tsconfig.json",
     "build:watch": "npm run build:lib -- --watch",
     "copy": "copyfiles -u 1 \"./src/*.css\" \"./lib/\"",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
-    "lint": "tslint ./src/**/*.ts?x"
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
     "@bodiless/components": "^0.3.7",
@@ -41,8 +40,7 @@
     "react-contenteditable": "^3.2.6",
     "react-dropzone": "^10.1.5",
     "react-id-generator": "^3.0.1",
-    "uuid": "^3.3.2",
-    "webpack": "^5.69.1"
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "tailwindcss": "^2.0.2",

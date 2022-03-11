@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/hydration",
   "version": "0.3.7",
-  "description": "Tools to manage how React hydrate your components",
+  "description": "Tools to manage how React hydrates your components",
   "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
