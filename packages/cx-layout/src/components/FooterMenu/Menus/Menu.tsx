@@ -24,6 +24,7 @@ import {
   replaceWith,
 } from '@bodiless/fclasses';
 import { asBodilessMenu, withListSubMenu, withMenuDesign } from '@bodiless/navigation';
+import { cxSeparator } from '../tokens';
 import { FooterSubMenu } from './SubMenu';
 
 const MenuClean = asBodilessMenu()(Ul);
@@ -51,19 +52,8 @@ const Base = asMenuToken({
     Wrapper: 'w-full md:flex md:justify-between md:flex-grow lg:h-full',
     Item: 'md:w-1/4',
   },
-  Spacing: {
-    Item: as(
-      'mb-9 pb-9 last:mb-0 last:pb-0',
-      'md:mb-0 md:pb-0 md:px-10 md:first:pl-0 md:last:pr-0',
-      'lg:px-12 lg:first:pl-12',
-    ),
-  },
   Theme: {
-    Item: as(
-      'border-white-400 border-b last:border-0',
-      'md:border-b-0 md:border-l md:last:border-l md:first:border-0',
-      'lg:first:border-l',
-    ),
+    Item: cxSeparator.Default,
     Title: flowHoc(
       as(
         cxColor.TextPrimaryFooterCopy,
