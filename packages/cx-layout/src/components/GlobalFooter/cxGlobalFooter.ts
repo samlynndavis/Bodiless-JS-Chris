@@ -14,7 +14,7 @@
 
 import { withNode, withNodeKey } from '@bodiless/core';
 import { cxColor, cxFontSize } from '@bodiless/cx-elements';
-import { withEditorPlain } from '@bodiless/cx-editors';
+import { withEditorFull } from '@bodiless/cx-editors';
 import {
   Div,
   as,
@@ -26,6 +26,17 @@ import { cxRewards } from './Rewards';
 import { cxSocialLinks } from './SocialLinks';
 import { asGlobalFooterToken } from './GlobalFooterClean';
 import { cxFooterMenu } from '../FooterMenu';
+
+const withCopyrightDesign = withDesign({
+  Editor: withDesign({
+    paragraph: as(
+      cxColor.TextPrimaryFooterCopy,
+      cxFontSize.XS,
+      'border-white-400 border-t border-b md:border-0 lg:text-m-xs',
+      'mx-9 py-9 md:mx-0 md:mb-4 md:p-0 lg:mt-2 lg:mb-0 lg:py-0',
+    ),
+  }),
+});
 
 const Base = asGlobalFooterToken({
   Components: {
@@ -59,19 +70,15 @@ const Base = asGlobalFooterToken({
     Wrapper: 'mt-10',
     Container: 'md:px-10 md:py-6 lg:py-8',
     SectionTop: 'lg:mb-12',
-    Copyright: 'mx-9 py-9 md:mx-0 md:mb-4 md:p-0 lg:mt-2 lg:mb-0 lg:py-0',
   },
   Theme: {
     Wrapper: cxColor.BgSecondaryFooter,
-    Copyright: as(
-      cxColor.TextPrimaryFooterCopy,
-      cxFontSize.XS,
-      'border-white-400 border-t border-b md:border-0 lg:text-m-xs',
-    ),
   },
   Editors: {
-    // Copyright: withEditorFull(undefined, 'Insert Copyright'),
-    Copyright: withEditorPlain(undefined, 'Insert Copyright'),
+    Copyright: flowHoc(
+      withEditorFull(undefined, 'Insert Copyright'),
+      withCopyrightDesign,
+    ),
   },
   Schema: {
     FooterMenus: flowHoc(

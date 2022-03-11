@@ -15,8 +15,6 @@
 import {
   Nav,
   addProps,
-  as,
-  flowHoc,
   startWith,
 } from '@bodiless/fclasses';
 import { asFooterMenuToken } from './FooterMenuClean';
@@ -31,9 +29,7 @@ const Base = asFooterMenuToken({
   },
   Components: {
     Wrapper: startWith(Nav),
-    Menu: flowHoc(
-      as(cxMenu.Default),
-    ),
+    Menu: cxMenu.Default,
   },
 });
 

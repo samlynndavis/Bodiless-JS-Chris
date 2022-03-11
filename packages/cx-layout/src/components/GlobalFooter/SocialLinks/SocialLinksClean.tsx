@@ -28,6 +28,7 @@ const socialLinksComponents: SocialLinksComponents = {
   IconYouTube: YouTubeIcon,
 };
 
+// @TODO: When implementing social links, convert them to a list of linkable icons.
 const SocialLinksCleanBase: FC<SocialLinksProps> = ({ components: C }) => (
   <C.Wrapper>
     <C.InnerWrapper>
