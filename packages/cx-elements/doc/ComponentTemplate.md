@@ -126,15 +126,6 @@ This should include, at a minimum, the following keys:
 - **sideEffects**. Usually set to `false` unless your package has them.
 - **main**. Usually `./lib/index.js`
 - **typings**. Usually `./lib/index.d.ts`
-- **exports**. Should include at least the following:
-  ```
-  "exports": {
-    ".": {
-      "bodiless:static": "./lib/index.static.js",
-      "default": "./lib/index.js"
-    }
-  ```
-  If your package exports any other files or assets, be sure to add them as sell.
 - **scripts**. Usually the following should suffice:
   ```json
     "build": "run-p build:lib build:api-doc",
