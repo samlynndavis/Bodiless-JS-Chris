@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export * from './index.temp';
+export * from './index.bl-edit';

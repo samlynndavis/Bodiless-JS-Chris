@@ -12,4 +12,10 @@
  * limitations under the License.
  */
 
-export { staticTokenCollection as cxImage } from '@bodiless/hydration';
+import { withoutHydration } from '@bodiless/hydration';
+
+const staticTokenCollection = new Proxy({}, {
+  get: () => withoutHydration(),
+});
+
+export { staticTokenCollection as cxImage };
