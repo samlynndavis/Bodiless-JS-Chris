@@ -80,6 +80,37 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
   return WithoutHydration;
 };
 
+/**
+ * Makes React skip hydration of the given component on the browser in production. The given
+ * component will still hydrate and behave normally on the Edit site (because it runs in a
+ * development environment) and on Server Side Rendering.
+ *
+ * This allows developers to create optimized "static" versions of their components, which are
+ * interactive on Edit sites, but static on browsers in production. For instance, a rich-text
+ * editor may have a static version with all interactive functions stripped out, since these are
+ * not used by end users on production sites.
+ *
+ * Components can still have interactivity if needed. For instance, an accordion component still
+ * needs to be expandable by end users. To do this, you can pass an `onUpdate` function in the
+ * options object to receive all props passed to the component, and its HTMLElement after it
+ * renders. Using the component HTMLElement, you can update it however you want, but be aware that
+ * this element will be out of React's scope, so hooks will not work.
+ *
+ * You can also pass `disableFallback` as `true` in the options object to make this component
+ * not render on the server side. While it will also not hydrate on the client side, you can use
+ * `onUpdate` to access its props and modify its element afterwards.
+ *
+ * The given component will also be able to receive a new prop: `forceHydration`. If you set it
+ * to `true`, your component will hydrate on both the server and client side, regardless of the
+ * current environment.
+ *
+ * @param options
+ * An optional configuration object for the hydration wrapper.
+ *
+ * @returns
+ * A HOC which places the given component inside a <section> wrapper. The components inside
+ * this wrapper won't hydrate on the client side in production environments.
+ */
 export const withoutHydration: WithoutHydrationFunction = (options) => {
   if (isStaticClientSide) return withoutHydrationClientSide(options);
 
