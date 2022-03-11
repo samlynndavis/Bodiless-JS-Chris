@@ -50,7 +50,7 @@ const Base = asMenuToken({
   },
   Layout: {
     Wrapper: 'w-full md:flex md:justify-between md:flex-grow lg:h-full',
-    Item: 'md:w-1/4',
+    Item: 'md:min-w-1/4 md:w-full',
   },
   Theme: {
     Item: cxSeparator.Default,

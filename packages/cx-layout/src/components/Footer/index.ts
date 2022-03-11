@@ -12,16 +12,6 @@
  * limitations under the License.
  */
 
-import { cxGlobalFooter, asGlobalFooterToken } from '@bodiless/cx-layout';
-
-const Default = asGlobalFooterToken({
-  ...cxGlobalFooter.Default,
-  Components: {
-    ...cxGlobalFooter.Default.Components,
-  },
-});
-
-export default {
-  ...cxGlobalFooter,
-  Default,
-};
+export { cxFooter } from './cxFooter';
+export { FooterClean, asFooterToken } from './FooterClean';
+export type { FooterComponents, FooterProps } from './types';

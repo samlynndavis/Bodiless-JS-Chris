@@ -12,22 +12,4 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
-
-type GlobalFooterComponents = {
-  Wrapper: ComponentOrTag<any>,
-  Container: ComponentOrTag<any>,
-  SectionTop: ComponentOrTag<any>,
-  Rewards: ComponentOrTag<any>,
-  FooterMenus: ComponentOrTag<any>,
-  SectionBottom: ComponentOrTag<any>,
-  Copyright: ComponentOrTag<any>,
-  SocialLinks: ComponentOrTag<any>,
-};
-
-type GlobalFooterProps = DesignableComponentsProps<GlobalFooterComponents>;
-
-export type {
-  GlobalFooterComponents,
-  GlobalFooterProps,
-};
+export { __cxstarter__Footer } from './tokens';

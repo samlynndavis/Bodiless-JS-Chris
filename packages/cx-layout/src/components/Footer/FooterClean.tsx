@@ -18,9 +18,9 @@ import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { FooterMenuClean } from '../FooterMenu';
 import { RewardsClean } from './Rewards';
 import { SocialLinksClean } from './SocialLinks';
-import type { GlobalFooterComponents, GlobalFooterProps } from './types';
+import type { FooterComponents, FooterProps } from './types';
 
-const globalFooterComponents: GlobalFooterComponents = {
+const footerComponents: FooterComponents = {
   Wrapper: Div,
   Container: Div,
   SectionTop: Div,
@@ -31,7 +31,7 @@ const globalFooterComponents: GlobalFooterComponents = {
   SocialLinks: SocialLinksClean,
 };
 
-const GlobalFooterCleanBase: FC<GlobalFooterProps> = ({ components: C }) => (
+const FooterCleanBase: FC<FooterProps> = ({ components: C }) => (
   <C.Wrapper>
     <C.Container>
       <C.SectionTop>
@@ -46,11 +46,11 @@ const GlobalFooterCleanBase: FC<GlobalFooterProps> = ({ components: C }) => (
   </C.Wrapper>
 );
 
-const GlobalFooterClean = designable(globalFooterComponents, 'GlobalFooter')(GlobalFooterCleanBase);
+const FooterClean = designable(footerComponents, 'Footer')(FooterCleanBase);
 
-const asGlobalFooterToken = asCxTokenSpec<GlobalFooterComponents>();
+const asFooterToken = asCxTokenSpec<FooterComponents>();
 
 export {
-  GlobalFooterClean,
-  asGlobalFooterToken,
+  FooterClean,
+  asFooterToken,
 };

@@ -12,4 +12,6 @@
  * limitations under the License.
  */
 
-export { __cxstarter__GlobalFooter } from './tokens';
+import __cxstarter__Footer from './__cxstarter__Footer';
+
+export { __cxstarter__Footer };

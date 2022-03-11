@@ -12,6 +12,22 @@
  * limitations under the License.
  */
 
-export { cxGlobalFooter } from './cxGlobalFooter';
-export { GlobalFooterClean, asGlobalFooterToken } from './GlobalFooterClean';
-export type { GlobalFooterComponents, GlobalFooterProps } from './types';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+
+type FooterComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Container: ComponentOrTag<any>,
+  SectionTop: ComponentOrTag<any>,
+  Rewards: ComponentOrTag<any>,
+  FooterMenus: ComponentOrTag<any>,
+  SectionBottom: ComponentOrTag<any>,
+  Copyright: ComponentOrTag<any>,
+  SocialLinks: ComponentOrTag<any>,
+};
+
+type FooterProps = DesignableComponentsProps<FooterComponents>;
+
+export type {
+  FooterComponents,
+  FooterProps,
+};

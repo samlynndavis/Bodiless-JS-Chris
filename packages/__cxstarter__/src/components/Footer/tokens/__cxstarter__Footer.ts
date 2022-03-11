@@ -12,6 +12,16 @@
  * limitations under the License.
  */
 
-import __cxstarter__GlobalFooter from './__cxstarter__GlobalFooter';
+import { cxFooter, asFooterToken } from '@bodiless/cx-layout';
 
-export { __cxstarter__GlobalFooter };
+const Default = asFooterToken({
+  ...cxFooter.Default,
+  Components: {
+    ...cxFooter.Default.Components,
+  },
+});
+
+export default {
+  ...cxFooter,
+  Default,
+};

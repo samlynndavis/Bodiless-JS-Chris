@@ -24,7 +24,7 @@ import {
 } from '@bodiless/fclasses';
 import { cxRewards } from './Rewards';
 import { cxSocialLinks } from './SocialLinks';
-import { asGlobalFooterToken } from './GlobalFooterClean';
+import { asFooterToken } from './FooterClean';
 import { cxFooterMenu } from '../FooterMenu';
 
 const withCopyrightDesign = withDesign({
@@ -38,7 +38,7 @@ const withCopyrightDesign = withDesign({
   }),
 });
 
-const Base = asGlobalFooterToken({
+const Base = asFooterToken({
   Components: {
     Wrapper: startWith(Div),
     Rewards: flowHoc(
@@ -92,11 +92,11 @@ const Base = asGlobalFooterToken({
   },
 });
 
-const Default = asGlobalFooterToken({
+const Default = asFooterToken({
   ...Base,
 });
 
-export const cxGlobalFooter = {
+export const cxFooter = {
   Base,
   Default,
 };

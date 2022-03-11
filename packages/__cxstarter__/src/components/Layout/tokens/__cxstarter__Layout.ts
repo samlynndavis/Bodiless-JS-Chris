@@ -13,7 +13,7 @@
  */
 
 import { cxLayout, asLayoutToken } from '@bodiless/cx-layout';
-import { __cxstarter__GlobalFooter } from '../../GlobalFooter';
+import { __cxstarter__Footer } from '../../Footer';
 import { __cxstarter__Header } from '../../Header';
 
 const Default = asLayoutToken({
@@ -21,7 +21,7 @@ const Default = asLayoutToken({
   Components: {
     ...cxLayout.Default.Components,
     SiteHeader: __cxstarter__Header.Default,
-    SiteFooter: __cxstarter__GlobalFooter.Default,
+    SiteFooter: __cxstarter__Footer.Default,
   },
   Compose: {
     ...cxLayout.Default.Compose,
