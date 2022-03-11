@@ -12,6 +12,5 @@
  * limitations under the License.
  */
 
-import cxEditorPlain from './cxEditorPlain';
-
-export default cxEditorPlain;
+// @todo Rename to index.bl-edit.ts when the static image is fixed.
+export { default as cxImage } from './tokens';

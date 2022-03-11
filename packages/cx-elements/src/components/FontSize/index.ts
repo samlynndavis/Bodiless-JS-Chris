@@ -12,6 +12,5 @@
  * limitations under the License.
  */
 
-import cxRichText from './cxRichText';
-
-export default cxRichText;
+export { default as cxFontSize } from './tokens';
+export { default as cxFontSizeStatic } from './tokens';

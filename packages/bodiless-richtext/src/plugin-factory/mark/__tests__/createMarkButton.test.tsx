@@ -30,7 +30,7 @@ jest.mock('slate-react', () => ({
   }),
 }));
 
-jest.mock('../markUtils', () => ({
+jest.mock('../markUtils.bl-edit', () => ({
   createIsActive: () => isActiveStub,
   createToggleMark: () => toggleStub,
 }));

@@ -22,10 +22,12 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc --version && tsc -p ./tsconfig.json ",
-    "build:watch": "npm run build -- --watch",
-    "prepack": "rimraf lib && npm run build",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "build": "run-p build:lib build:api-doc",
+    "build:api-doc": "typedoc --out doc/api src",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+    "prepack": "npm run clean && npm run build"
   },
   "dependencies": {
     "lodash": "^4.17.19",
