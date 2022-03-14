@@ -16,28 +16,13 @@
 import webpack from 'webpack';
 import path from 'path';
 
+import type { PluginOptions } from './util';
+import { createLogger, requestIsExcluded } from './util';
+
 const REGEXP = /\.bl-edit/;
 const REPLACEMENT = '.static';
 
-type ExcludeSetting = string[] | RegExp;
-
-type PluginOptions = {
-  enabled?: boolean
-  logging?: boolean
-  exclude?: ExcludeSetting;
-};
-
-const createLogger = (log = true) => (message: string) => {
-  if (log) console.log(message);
-};
-
-const requestIsExcluded = (requestedFile: string, exclude?: ExcludeSetting) => {
-  if (!exclude || (Array.isArray(exclude) && !exclude.length)) return false;
-
-  return requestedFile.match(exclude instanceof RegExp ? exclude : new RegExp(exclude.join('|')));
-};
-
-const createStaticReplacementPlugin = ({ exclude, logging }: PluginOptions) => {
+export const createStaticReplacementPlugin = ({ exclude, logging }: PluginOptions) => {
   const log = createLogger(logging);
 
   return new webpack.NormalModuleReplacementPlugin(

@@ -25,6 +25,164 @@ bodiless.docs.json
               {brand}{Component}.ts
                  
 ```
+These are described in more detail below:
+
+### Component Level files
+
+#### `{Component}Clean.tsx`
+
+Provides the clean component (if any) as a default export. It should also export
+the type of the component's design keys ("slots"), and an `as...Token` function
+used to create token specifications. For example:
+
+File `FooClean.tsx`:
+
+```ts
+import React from 'react';
+import type { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+import { Div, Fragment, designable } from '@bodiless/fclasses';
+import type { FC } from 'react';
+import { asCxTokenSpec } from '@bodiless/cx-elements';
+
+export type FooComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Body: ComponentOrTag<any>,
+};
+
+const FooBase: FC<DesignableComponentsProps<FooComponents>> = ({ components: C, ...rest }) => (
+  <C.Wrapper {...rest}>
+    <C.Body />
+  <C.Wrapper>
+);
+
+const fooComponents: FooComponents = {
+  Wrapper: Div,
+  Body: Fragment,
+};
+
+export default designable(fooComponents, 'Foo')(FooBase);
+export const asFooToken = asCxTokenSpec<FooComponents>();
+```
+
+> In some cases, there will be no clean component; for example, if a package is
+> merely providing tokens for a component defined elsewhere.
+
+#### `tokens/{brand}{Component}`
+
+Provides the actual token collection as a default export. For example:
+
+File `tokens/mybrandFoo`
+
+```js
+const Default = asFooToken({ ... });
+export default { Default };
+```
+
+May extend a token collection from another package, for example:
+
+```js
+import { baseFoo } from 'some-package';
+const Default = asFooToken(baseFoo.Default, { ...})
+export default { ...baseFoo, Default };
+```
+
+#### `tokens/index.ts`
+
+Simply re-export the default export from the token collection:
+```
+import tokens from './mybrandFoo';
+export default tokens;
+```
+
+#### `index.bl-edit.ts`
+
+Export the clean component and any tokens.
+
+```js
+export { default as FooClean } from './FooClean';
+export { default as mybrandFoo } from './tokens';
+```
+
+Note, in many cases you will also want to export a static version of your token
+collection:
+
+```js
+export { default as mybrandFoo, default as mybrandFooStatic } from './tokens';
+export { default as mybrandFoo } from './tokens';
+```
+
+#### 'index.static.ts`
+
+If your token is always static, export empty versions of the token and clean component:
+
+```js
+import {
+  staticTokenCollection as mybrandFoo,
+  StaticComponent as FooClean,
+} from '@bodiless/hydration';
+
+export { FooClean, mybrandFoo };
+```
+
+If you have both static and a dynamic versions of your token:
+
+```js
+import { staticTokenCollection  as mybrandFooStatic } from '@bodiless/hydration';
+
+export { mybrandFooStatic };
+export { default mybrandFoo } from './tokens';
+export { default as FooClean } from './FooClean';
+```
+
+> If your token does not have a static version, omit this file.
+
+#### `index.ts`
+
+Re-export everything from `index.bl-edit.ts`, along with any other utilities or types:
+
+```js
+export * from './index.bl-edit';
+export { asFooToken, FooComponents } from './FooClean';
+// ... any other exports or utilities.
+```
+
+### Top level
+
+#### `package.json`
+This should include, at a minimum, the following keys:
+- **name**. Should be namespaced to `@bodiless` for CanvasX packages.
+- **version**. This field is managed by lerna.  Currently all bodiless packages
+- **license**. Set to `Apache 2.0` for all Bodiless packages.
+  maintain a common version line.
+- **description**
+- **author**
+- **repository**.
+- **files**. Be sure to include all resources exported by the package.
+- **sideEffects**. Usually set to `false` unless your package has them.
+- **main**. Usually `./lib/index.js`
+- **typings**. Usually `./lib/index.d.ts`
+- **scripts**. Usually the following should suffice:
+  ```json
+    "build": "run-p build:lib build:api-doc",
+    "build:api-doc": "typedoc --out doc/api src",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
+  ```
+  Do not include lint or test scripts as these are generally defined at monorepo root.
+- **dependencies**, **peerDependencies**.  List only packages which are specifically
+  required.
+
+### `index.ts` (top level)
+
+Expose exports from all components, 
+```ts
+export * from './components/{ComponentA}';
+export * from './components/{ComponentB}';
+// ... additional utilities or types defined in your package.
+...
+```
+
 ## Static Replacements
 
 Bodiless supports a performance optimization which helps remove unused code from
@@ -110,54 +268,3 @@ to enable this feature.
 
 ### Creating a shadowable token collection
 
-
-## Notes on files/directories
-
-### `package.json`
-This should include, at a minimum, the following keys:
-- **name**. Should be namespaced to `@bodiless` for CanvasX packages.
-- **version**. This field is managed by lerna.  Currently all bodiless packages
-- **license**. Set to `Apache 2.0` for all Bodiless packages.
-  maintain a common version line.
-- **description**
-- **author**
-- **repository**.
-- **files**. Be sure to include all resources required by the package.
-- **sideEffects**. Usually set to `false` unless your package has them.
-- **main**. Usually `./lib/index.js`
-- **typings**. Usually `./lib/index.d.ts`
-- **scripts**. Usually the following should suffice:
-  ```json
-    "build": "run-p build:lib build:api-doc",
-    "build:api-doc": "typedoc --out doc/api src",
-    "build:lib": "tsc -p ./tsconfig.json",
-    "build:watch": "npm run build:lib -- --watch",
-    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\"",
-  ```
-  Do not include lint or test scripts as these are generally defined at monorepo root.
-- **dependencies**, **peerDependencies**.  List only packages which are specifically
-  required.
-
-### `index.ts` (top level)
-
-Expose exports from all components, 
-```ts
-export * from './components/{ComponentA}';
-export * from './components/{ComponentB}';
-...
-```
-in addition to any special exports from your package.
-
-### `index.static.ts` (top level)
-
-Expose static exports from all components:
-```
-export * from './components/{ComponentA}/index.static';
-export * from './components/{ComponentB}/index.static';
-...
-```
-
-### `index.ts` (component level)
-```
-export { default as brandComponent } from './tokens';
-export { default as brandComponentStatic } from './tokens';
