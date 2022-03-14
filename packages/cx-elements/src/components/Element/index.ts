@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
-import { cxColor, cxColorStatic } from './Color';
-import { cxFontSize, cxFontSizeStatic } from './FontSize';
-import { cxTextDecoration, cxTextDecorationStatic } from './TextDecoration';
-import { cxTypography, cxTypographyStatic } from './Typography';
+import { cxColor, cxColorStatic } from '../Color';
+import { cxFontSize, cxFontSizeStatic } from '../FontSize';
+import { cxTextDecoration, cxTextDecorationStatic } from '../TextDecoration';
+import { cxTypography, cxTypographyStatic } from '../Typography';
 
 export const cxElement = {
   ...cxColor,
