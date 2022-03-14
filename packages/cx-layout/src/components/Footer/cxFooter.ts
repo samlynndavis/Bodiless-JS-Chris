@@ -16,10 +16,8 @@ import { withNode, withNodeKey } from '@bodiless/core';
 import { cxColor, cxFontSize } from '@bodiless/cx-elements';
 import { withEditorFull } from '@bodiless/cx-editors';
 import {
-  Div,
   as,
   flowHoc,
-  startWith,
   withDesign,
 } from '@bodiless/fclasses';
 import { cxMenu } from '@bodiless/cx-navigation';
@@ -40,20 +38,9 @@ const withCopyrightDesign = withDesign({
 
 const Base = asFooterToken({
   Components: {
-    Wrapper: startWith(Div),
-    Rewards: flowHoc(
-      as(cxRewards.Default),
-      withDesign({
-        Wrapper: 'w-full p-9 md:mb-8 md:p-0 lg:w-1/3 lg:mb-0 lg:pr-12',
-      }),
-    ),
+    Rewards: cxRewards.Default,
     FooterMenu: cxMenu.Footer,
-    SocialLinks: flowHoc(
-      as(cxSocialLinks.Default),
-      withDesign({
-        Wrapper: 'w-full px-10 py-5 md:p-0 lg:w-1/5',
-      }),
-    ),
+    SocialLinks: cxSocialLinks.Default,
   },
   Layout: {
     FooterMenu: withDesign({
@@ -63,6 +50,15 @@ const Base = asFooterToken({
     Container: 'lg:mx-auto lg:container',
     SectionTop: 'w-full lg:flex lg:space-between',
     SectionBottom: 'w-full lg:flex lg:space-between',
+    Rewards: withDesign({
+      Wrapper: 'w-full lg:w-1/3',
+    }),
+    FooterMenus: withDesign({
+      Wrapper: 'w-full',
+    }),
+    SocialLinks: withDesign({
+      Wrapper: 'w-full lg:w-1/5',
+    }),
   },
   Spacing: {
     FooterMenu: withDesign({
@@ -71,6 +67,15 @@ const Base = asFooterToken({
     Wrapper: 'mt-10',
     Container: 'md:px-10 md:py-6 lg:py-8',
     SectionTop: 'lg:mb-12',
+    Rewards: withDesign({
+      Wrapper: 'p-9 md:mb-8 md:p-0 lg:mb-0 lg:pr-12',
+    }),
+    FooterMenus: withDesign({
+      Wrapper: 'p-9 md:mb-8 md:p-0',
+    }),
+    SocialLinks: withDesign({
+      Wrapper: 'px-10 py-5 md:p-0',
+    }),
   },
   Theme: {
     Wrapper: cxColor.BgSecondaryFooter,

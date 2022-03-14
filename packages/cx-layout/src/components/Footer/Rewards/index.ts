@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
+// @TODO: As Rewards is implemented, move it outside Footer component into
+// a more appropriate place.
 export { cxRewards } from './Rewards.token';
 export { RewardsClean, asRewardsToken } from './RewardsClean';
 export type { RewardsComponents, RewardsProps } from './types';
