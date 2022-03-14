@@ -20,12 +20,15 @@ bodiless.docs.json
             index.bl-edit.ts 
             index.static.ts
             {Component}Clean.tsx
-            /tokens
-              index.ts
-              {brand}{Component}.ts
-                 
+            tokens.ts
 ```
-These are described in more detail below:
+THis structure is intended to facilitate two build-time webpack optimizations:
+- [Static Token Replacement](#static-token-replacement): Removes unnecessary code
+  from the production bundle.
+- [Token shadowing](#token-shadowing): Allows a downstream package to define an
+  override of any CanvasX token collection.
+
+The files and directories are described in more detail below:
 
 ### Component Level files
 
@@ -67,15 +70,19 @@ export const asFooToken = asCxTokenSpec<FooComponents>();
 > In some cases, there will be no clean component; for example, if a package is
 > merely providing tokens for a component defined elsewhere.
 
-#### `tokens/{brand}{Component}`
+#### `tokens.ts`
 
-Provides the actual token collection as a default export. For example:
+Provides the component's token collection as a default export. For example:
 
-File `tokens/mybrandFoo`
+File `tokens.ts`
 
 ```js
 const Default = asFooToken({ ... });
-export default { Default };
+const Special - asFooToken({ ... });
+// A token which is intended to be composed with other tokens should be prefixed with 'With...'
+const WithSomething = asFooToken({ ... });
+
+export default { Default, Special, WithSomething };
 ```
 
 May extend a token collection from another package, for example:
@@ -84,14 +91,6 @@ May extend a token collection from another package, for example:
 import { baseFoo } from 'some-package';
 const Default = asFooToken(baseFoo.Default, { ...})
 export default { ...baseFoo, Default };
-```
-
-#### `tokens/index.ts`
-
-Simply re-export the default export from the token collection:
-```
-import tokens from './mybrandFoo';
-export default tokens;
 ```
 
 #### `index.bl-edit.ts`
@@ -268,3 +267,106 @@ to enable this feature.
 
 ### Creating a shadowable token collection
 
+In order to be shadowable, a token collection must be the *default export* of
+a module which is located at `.../{ComponentName}/tokens`, and this module
+must itself be re-exported from the package by an index file which imports
+it at the *exact path* `./tokens`.  For example:
+
+**File `./lib/components/Foo/tokens.ts`**
+```js
+const Default = asFooToken({ ... });
+
+export default { Default }; // Must be a default export.
+```
+
+**File `./lib/Foo/index.ts`**
+```js
+import cxFoo from './tokens';  // Must import from exactly this path.
+
+export { cxFoo }; // Must be a named export.
+```
+
+**File './lib/components/index.ts**
+```
+export * from './components/Foo';
+```
+
+### Shadowing a token collection
+
+To export a shadowed version of a token collection:
+
+1. Add a module to your package which defines the shadowed token collection.  You may
+   import the original token collection from its location in the source package.
+   For example:
+
+   **File `./lib/shadow/MyComponent.js`**
+   ```js
+   // Import the base collection from its original location. Note that it is
+   // the default export.
+   import cxFoo from 'base-package/lib/components/Foo/tokens';
+   // *** NOT: import { cxFoo } from 'base-package';
+  
+   // Override one or more of the tokens in the base collection
+   const SomeToken = asFooToken(tokens.SomeToken, { ... });
+  
+   // Default export is the overridden token collection.
+   export default {
+     ...baseTokens,
+     SomeToken,
+   };
+   ```
+
+2. place a file at your package root called 'shadow.js'.  This should export a
+   single function which receives a component name and returns the *resolved* module
+   shadowed version of the specified token collection. 
+
+   **File `shadow.js`***
+   ```js
+   module.exports = component => {
+     try {
+       return require.resolve(`./lib/shadow/${component}`);
+     } catch (e) {
+       return false;
+     }
+   };
+   ```
+
+3. Add the bodiless `tokenShadowPlugin` to the webpack config used to build your site.
+   Pass it a list of one or more resolvers which are exported from shadowing packages.
+   For example, in the site's `gatsby-node.js`:
+
+   ```js
+   const { addTokenShadowPlugin } = require('@bodiless/webpack');
+   const shadow = require('shadowing-package/shadow');
+   const shadow2 = require('lower-priority-shadowing-package/shadow');
+
+   module.exports.onCreateWebpackConfig = ({ actions }) => {
+     actions.setWebpackConfig(
+       // The shadowed tokens will be loaded by the first shadow package
+       //which returns a match.
+       addTokenShadowPlugin({}, { resolvers: [shadow, shadow2] })
+     );
+   };
+   ```
+
+Some important notes:
+- If you are extending a base token collection, be sure to import it from its
+  original location as a default export, and not by name from the base package.
+- Ensure that your token shadow resolver (`shadow.js`) uses CJS module syntax.
+- Ensure that all resources directly required (including `shadow.js` and your original
+  token file) are included in and exported by your package. In your `package.json`
+  ```json
+  ...
+  "files": [
+    ...,
+    "./shadow.js"
+  ],
+  ```
+  And, if you use the `exports` key:
+  ```json
+  ...
+  "exports": {
+    ...,
+    "./shadow.js": "./shadow.js"
+  }
+  ```

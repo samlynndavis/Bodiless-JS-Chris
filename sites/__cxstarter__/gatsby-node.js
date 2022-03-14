@@ -9,12 +9,13 @@ const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
 const { addTokenShadowPlugin } = require('@bodiless/webpack');
+const shadow = require('@bodiless/__cxstarter__/shadow');
 
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig(
-    addTokenShadowPlugin({}, { packages: [require.resolve('@bodiless/__cxstarter__')] })
+    addTokenShadowPlugin({}, { resolvers: [shadow] })
   );
   if (stage === 'develop') {
     // When running test-site with local packages (via npm pack) we seem to get

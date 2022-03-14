@@ -20,11 +20,11 @@ import { createLogger, PluginOptions } from './util';
 const TOKENS_PATH = 'tokens';
 
 type TokenShadowPluginOptions = Omit<PluginOptions, 'exclude'> & {
-  packages: string[],
+  resolvers: ((component: string) => string)[];
 };
 
 export const createTokenShadowPlugin = (
-  { logging = true, packages }: TokenShadowPluginOptions
+  { logging = true, resolvers = [] }: TokenShadowPluginOptions
 ) => {
   // console.log('creating token shadow plugin');
   // @ts-ignore
@@ -35,19 +35,16 @@ export const createTokenShadowPlugin = (
       const componentName = path.basename(resource.context);
       // console.log('componentName', componentName, packages, resource.request);
       // Loop through all packges until we fid one that exports a shadow...
-      for (let i = 0; i < packages.length; i += 1) {
-        const exportName = `${path.dirname(packages[i])}/shadow/${componentName}`;
-        // console.log('exportName', exportName);
-        try {
-          const newRequest = require.resolve(exportName);
+      for (let i = 0; i < resolvers.length; i += 1) {
+        const newRequest = resolvers[i](componentName);
+        console.log(componentName, newRequest);
+        if (newRequest) {
           console.log(`[Shadow replacement] Replacing import in ${resource.contextInfo.issuer}`);
           console.log(` ↳ ${resource.request} → ${newRequest}\n`);
           // eslint-disable-next-line no-param-reassign
           resource.request = newRequest;
           break;
           // eslint-disable-next-line no-empty
-        } catch (e) {
-          // console.log('error resoving', exportName);
         }
       }
     }

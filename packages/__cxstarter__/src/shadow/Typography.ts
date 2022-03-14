@@ -1,6 +1,6 @@
 import { asElementToken } from '@bodiless/cx-elements';
 // Must import directy from the token collection.
-import cxTypography from '@bodiless/cx-elements/lib/components/Typography/tokens/cxTypography';
+import cxTypography from '@bodiless/cx-elements/lib/components/Typography/tokens';
 
 export default {
   ...cxTypography,

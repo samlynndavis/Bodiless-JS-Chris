@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { default as cxTypography } from './tokens';
 export { staticTokenCollection as cxTypographyStatic } from '@bodiless/hydration';
+export { default as cxTypography } from './tokens';
