@@ -12,32 +12,6 @@
  * limitations under the License.
  */
 
-import {
-  Nav,
-  addProps,
-  startWith,
-} from '@bodiless/fclasses';
-import { asFooterMenuToken } from './FooterMenuClean';
-import { cxMenu } from './Menus';
-
-const Base = asFooterMenuToken({
-  Core: {
-    Wrapper: addProps({
-      'aria-label': 'Footer Navigation Menu',
-      role: 'navigation',
-    }),
-  },
-  Components: {
-    Wrapper: startWith(Nav),
-    Menu: cxMenu.Default,
-  },
-});
-
-const Default = asFooterMenuToken({
-  ...Base,
-});
-
-export const cxFooterMenu = {
-  Base,
-  Default,
-};
+export { MenuClean, cxMenu, asMenuToken } from './components/Menu';
+export { cxSubMenu, asSubMenuToken } from './components/SubMenu';
+export { MenuTitleClean, cxMenuTitle, asMenuTitleToken } from './components/MenuTitle';

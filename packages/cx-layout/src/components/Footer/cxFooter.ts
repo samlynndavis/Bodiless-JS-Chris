@@ -22,10 +22,10 @@ import {
   startWith,
   withDesign,
 } from '@bodiless/fclasses';
+import { cxMenu } from '@bodiless/cx-navigation';
 import { cxRewards } from './Rewards';
 import { cxSocialLinks } from './SocialLinks';
 import { asFooterToken } from './FooterClean';
-import { cxFooterMenu } from '../FooterMenu';
 
 const withCopyrightDesign = withDesign({
   Editor: withDesign({
@@ -47,12 +47,7 @@ const Base = asFooterToken({
         Wrapper: 'w-full p-9 md:mb-8 md:p-0 lg:w-1/3 lg:mb-0 lg:pr-12',
       }),
     ),
-    FooterMenus: flowHoc(
-      as(cxFooterMenu.Default),
-      withDesign({
-        Wrapper: 'w-full p-9 md:mb-8 md:p-0',
-      }),
-    ),
+    FooterMenu: cxMenu.Footer,
     SocialLinks: flowHoc(
       as(cxSocialLinks.Default),
       withDesign({
@@ -61,12 +56,18 @@ const Base = asFooterToken({
     ),
   },
   Layout: {
+    FooterMenu: withDesign({
+      Nav: 'w-full',
+    }),
     Wrapper: 'w-full',
     Container: 'lg:mx-auto lg:container',
     SectionTop: 'w-full lg:flex lg:space-between',
     SectionBottom: 'w-full lg:flex lg:space-between',
   },
   Spacing: {
+    FooterMenu: withDesign({
+      Nav: 'p-9 md:mb-8 md:p-0',
+    }),
     Wrapper: 'mt-10',
     Container: 'md:px-10 md:py-6 lg:py-8',
     SectionTop: 'lg:mb-12',
@@ -81,7 +82,7 @@ const Base = asFooterToken({
     ),
   },
   Schema: {
-    FooterMenus: flowHoc(
+    FooterMenu: flowHoc(
       withNode,
       withNodeKey({ nodeKey: 'FooterMenus', nodeCollection: 'site' }),
     ),
