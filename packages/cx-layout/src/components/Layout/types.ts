@@ -22,6 +22,7 @@ export type LayoutComponents = {
   Header: ComponentOrTag<any>,
   Footer: ComponentOrTag<any>,
   Container: ComponentOrTag<any>,
+  ContainerWrapper: ComponentOrTag<any>,
   PageTopper: ComponentOrTag<any>,
   PageCloser: ComponentOrTag<any>,
 };

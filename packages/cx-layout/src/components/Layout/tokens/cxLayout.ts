@@ -11,11 +11,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { as } from '@bodiless/fclasses';
+import {
+  addProps,
+  as,
+} from '@bodiless/fclasses';
 import { asLayoutToken } from '../LayoutClean';
 import { cxFooter } from '../../Footer';
 import { cxHeader } from '../../Header';
 import { cxHelmet } from '../../Helmet';
+import { MAIN_CONTENT_ID } from './constants';
+import { WithBordersLabels } from './cxLayoutTest';
 
 /**
   * Token that defines a basic layout.
@@ -27,9 +32,23 @@ const Base = asLayoutToken({
     Footer: as(cxFooter.Default),
   },
   Theme: {
-    Container: 'container mx-auto',
+    // Tailwind's container is specifially not used due to its feature it set's max-width
+    // to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
+    // to contain content.
+    ContainerWrapper: 'mx-site-percent md:mx-md-site-percent lg:mx-lg-site-percent mx-auto',
+    Container: 'mx-auto',
   },
   Schema: {
+  },
+  Behavior: {
+    Container: addProps({ id: MAIN_CONTENT_ID }),
+    SkipToMainContent: as(
+      addProps({
+        href: `#${MAIN_CONTENT_ID}`,
+        children: 'Skip To Main Content',
+      }),
+      'sr-only focus:not-sr-only',
+    ),
   },
   Layout: {
   },
@@ -37,11 +56,31 @@ const Base = asLayoutToken({
   }
 });
 
+const Header = asLayoutToken({
+  Components: {
+    SiteHeader: as(cxHeader.Default),
+  },
+});
+
+const Footer = asLayoutToken({
+  Components: {
+    // SiteFooter: as(cxFooter.Default),
+  },
+});
+
 const Default = asLayoutToken({
   ...Base,
+  Components: {
+    ...Base.Components,
+    ...Header.Components,
+    ...Footer.Components,
+  },
 });
 
 export default {
   Base,
   Default,
+  Header,
+  Footer,
+  WithBordersLabels,
 };
