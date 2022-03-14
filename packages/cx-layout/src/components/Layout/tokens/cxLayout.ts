@@ -58,13 +58,13 @@ const Base = asLayoutToken({
 
 const Header = asLayoutToken({
   Components: {
-    SiteHeader: as(cxHeader.Default),
+    Header: as(cxHeader.Default),
   },
 });
 
 const Footer = asLayoutToken({
   Components: {
-    // SiteFooter: as(cxFooter.Default),
+    Footer: as(cxFooter.Default),
   },
 });
 

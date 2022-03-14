@@ -453,16 +453,16 @@ For example, the
 includes the `HeaderClean` and `FooterClean` components as design keys:
 ```ts
   const layoutComponents: LayoutComponents = {
-    SiteHeader: Header,
-    SiteFooter: Footer,
+    Header: Header,
+    Footer: Footer,
     ...
   };
   ...
   <OuterContainer>
     ...
-    <SiteHeader />
+    <Header />
     ...
-    <SiteFooter />
+    <Footer />
   </OuterContainer>
 ```
 
