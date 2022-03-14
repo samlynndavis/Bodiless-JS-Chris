@@ -14,7 +14,7 @@ const { addTokenShadowPlugin } = require('@bodiless/webpack');
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig(
-    addTokenShadowPlugin({}, { packages: ['@bodiless/__cxstarter__'] })
+    addTokenShadowPlugin({}, { packages: [require.resolve('@bodiless/__cxstarter__')] })
   );
   if (stage === 'develop') {
     // When running test-site with local packages (via npm pack) we seem to get

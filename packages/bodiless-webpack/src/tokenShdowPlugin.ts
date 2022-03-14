@@ -26,17 +26,18 @@ type TokenShadowPluginOptions = Omit<PluginOptions, 'exclude'> & {
 export const createTokenShadowPlugin = (
   { logging = true, packages }: TokenShadowPluginOptions
 ) => {
-  console.log('creating token shadow plugin');
+  // console.log('creating token shadow plugin');
+  // @ts-ignore
   const log = createLogger(logging);
   return new webpack.NormalModuleReplacementPlugin(
     new RegExp(`\\.\\${path.sep}${TOKENS_PATH}`),
     resource => {
       const componentName = path.basename(resource.context);
-      console.log('componentName', componentName, packages, resource.request);
+      // console.log('componentName', componentName, packages, resource.request);
       // Loop through all packges until we fid one that exports a shadow...
       for (let i = 0; i < packages.length; i += 1) {
-        const exportName = `${packages[i]}/lib/shadow/${componentName}`;
-        console.log('exportName', exportName);
+        const exportName = `${path.dirname(packages[i])}/shadow/${componentName}`;
+        // console.log('exportName', exportName);
         try {
           const newRequest = require.resolve(exportName);
           console.log(`[Shadow replacement] Replacing import in ${resource.contextInfo.issuer}`);
@@ -46,7 +47,7 @@ export const createTokenShadowPlugin = (
           break;
           // eslint-disable-next-line no-empty
         } catch (e) {
-          console.log('error resoving', exportName);
+          // console.log('error resoving', exportName);
         }
       }
     }
