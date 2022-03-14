@@ -20,10 +20,10 @@ import {
   flowHoc,
   withDesign,
 } from '@bodiless/fclasses';
+import { cxMenu } from '@bodiless/cx-navigation';
 import { cxRewards } from './Rewards';
 import { cxSocialLinks } from './SocialLinks';
 import { asFooterToken } from './FooterClean';
-import { cxFooterMenu } from '../FooterMenu';
 
 const withCopyrightDesign = withDesign({
   Editor: withDesign({
@@ -39,10 +39,13 @@ const withCopyrightDesign = withDesign({
 const Base = asFooterToken({
   Components: {
     Rewards: cxRewards.Default,
-    FooterMenus: cxFooterMenu.Default,
+    FooterMenu: cxMenu.Footer,
     SocialLinks: cxSocialLinks.Default,
   },
   Layout: {
+    FooterMenu: withDesign({
+      Nav: 'w-full',
+    }),
     Wrapper: 'w-full',
     Container: 'lg:mx-auto lg:container',
     SectionTop: 'w-full lg:flex lg:space-between',
@@ -50,22 +53,19 @@ const Base = asFooterToken({
     Rewards: withDesign({
       Wrapper: 'w-full lg:w-1/3',
     }),
-    FooterMenus: withDesign({
-      Wrapper: 'w-full',
-    }),
     SocialLinks: withDesign({
       Wrapper: 'w-full lg:w-1/5',
     }),
   },
   Spacing: {
+    FooterMenu: withDesign({
+      Nav: 'p-9 md:mb-8 md:p-0',
+    }),
     Wrapper: 'mt-10',
     Container: 'md:px-10 md:py-6 lg:py-8',
     SectionTop: 'lg:mb-12',
     Rewards: withDesign({
       Wrapper: 'p-9 md:mb-8 md:p-0 lg:mb-0 lg:pr-12',
-    }),
-    FooterMenus: withDesign({
-      Wrapper: 'p-9 md:mb-8 md:p-0',
     }),
     SocialLinks: withDesign({
       Wrapper: 'px-10 py-5 md:p-0',
@@ -81,7 +81,7 @@ const Base = asFooterToken({
     ),
   },
   Schema: {
-    FooterMenus: flowHoc(
+    FooterMenu: flowHoc(
       withNode,
       withNodeKey({ nodeKey: 'FooterMenus', nodeCollection: 'site' }),
     ),

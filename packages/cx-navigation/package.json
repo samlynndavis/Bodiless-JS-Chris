@@ -1,7 +1,7 @@
 {
-  "name": "@bodiless/cx-layout",
+  "name": "@bodiless/cx-navigation",
   "version": "0.3.7",
-  "description": "Layout components for the bodiless cx design system",
+  "description": "Navigation components for the bodiless cx design system",
   "author": "Chris Odem <coden@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
@@ -33,25 +33,11 @@
     "@bodiless/core": "^0.3.7",
     "@bodiless/cx-elements": "^0.3.7",
     "@bodiless/cx-editors": "^0.3.7",
-    "@bodiless/cx-image": "^0.3.7",
     "@bodiless/fclasses": "^0.3.7",
-    "@bodiless/gatsby-theme-bodiless": "^0.3.7",
-    "@bodiless/cx-navigation": "^0.3.7",
-    "lodash": "^4.17.19",
-    "mobx": "^6.0.0",
-    "mobx-react": "^7.2.1",
-    "react-contenteditable": "^3.2.6",
-    "react-dropzone": "^10.1.5",
-    "react-id-generator": "^3.0.1",
-    "uuid": "^3.3.2"
-  },
-  "devDependencies": {
-    "@types/uuid": "^3.4.4"
+    "@bodiless/navigation": "^0.3.7",
+    "lodash": "^4.17.19"
   },
   "peerDependencies": {
-    "@types/react-helmet": "^6.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-helmet": "^6.1.0"
+    "react": "^17.0.2"
   }
 }

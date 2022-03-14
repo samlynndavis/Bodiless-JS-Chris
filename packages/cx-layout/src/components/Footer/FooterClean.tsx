@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 import { Div, designable } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
-import { FooterMenuClean } from '../FooterMenu';
+import { MenuClean } from '@bodiless/cx-navigation';
 import { RewardsClean } from './Rewards';
 import { SocialLinksClean } from './SocialLinks';
 import type { FooterComponents, FooterProps } from './types';
@@ -25,7 +25,7 @@ const footerComponents: FooterComponents = {
   Container: Div,
   SectionTop: Div,
   Rewards: RewardsClean,
-  FooterMenus: FooterMenuClean,
+  FooterMenu: MenuClean,
   SectionBottom: Div,
   Copyright: Div,
   SocialLinks: SocialLinksClean,
@@ -36,7 +36,7 @@ const FooterCleanBase: FC<FooterProps> = ({ components: C }) => (
     <C.Container>
       <C.SectionTop>
         <C.Rewards />
-        <C.FooterMenus />
+        <C.FooterMenu />
       </C.SectionTop>
       <C.SectionBottom>
         <C.Copyright />

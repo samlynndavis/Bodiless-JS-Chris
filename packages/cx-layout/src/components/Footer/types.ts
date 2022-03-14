@@ -19,7 +19,7 @@ type FooterComponents = {
   Container: ComponentOrTag<any>,
   SectionTop: ComponentOrTag<any>,
   Rewards: ComponentOrTag<any>,
-  FooterMenus: ComponentOrTag<any>,
+  FooterMenu: ComponentOrTag<any>,
   SectionBottom: ComponentOrTag<any>,
   Copyright: ComponentOrTag<any>,
   SocialLinks: ComponentOrTag<any>,
