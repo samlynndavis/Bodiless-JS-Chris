@@ -23,8 +23,8 @@ import { cxHelmet } from '../../Helmet';
 const Base = asLayoutToken({
   Components: {
     Helmet: as(cxHelmet.Default),
-    SiteHeader: as(cxHeader.Default),
-    SiteFooter: as(cxFooter.Default),
+    Header: as(cxHeader.Default),
+    Footer: as(cxFooter.Default),
   },
   Theme: {
     Container: 'container mx-auto',

@@ -20,8 +20,8 @@ const Default = asLayoutToken({
   ...cxLayout.Default,
   Components: {
     ...cxLayout.Default.Components,
-    SiteHeader: __cxstarter__Header.Default,
-    SiteFooter: __cxstarter__Footer.Default,
+    Header: __cxstarter__Header.Default,
+    Footer: __cxstarter__Footer.Default,
   },
   Compose: {
     ...cxLayout.Default.Compose,

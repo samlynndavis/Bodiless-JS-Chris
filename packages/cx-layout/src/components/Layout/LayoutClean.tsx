@@ -30,8 +30,8 @@ const layoutComponents: LayoutComponents = {
   OuterContainer: Div,
   SkipToMainContent: A,
   Helmet: HelmetClean,
-  SiteHeader: HeaderClean,
-  SiteFooter: FooterClean,
+  Header: HeaderClean,
+  Footer: FooterClean,
   Container: Div,
   PageTopper: Fragment,
   PageCloser: Fragment,
@@ -51,8 +51,8 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
     OuterContainer,
     PageCloser,
     PageTopper,
-    SiteFooter,
-    SiteHeader,
+    Header,
+    Footer,
     SkipToMainContent,
   } = layoutProps.components;
 
@@ -60,13 +60,13 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
     <OuterContainer>
       <SkipToMainContent />
       <Helmet />
-      <SiteHeader />
+      <Header />
       <Container>
         <PageTopper />
         {layoutProps.children}
         <PageCloser />
       </Container>
-      <SiteFooter />
+      <Footer />
     </OuterContainer>
   );
 };
