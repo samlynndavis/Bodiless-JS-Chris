@@ -21,9 +21,9 @@ import {
   withDesign,
 } from '@bodiless/fclasses';
 import { cxMenu } from '@bodiless/cx-navigation';
-import { cxRewards } from './Rewards';
-import { cxSocialLinks } from './SocialLinks';
-import { asFooterToken } from './FooterClean';
+import { cxRewards } from '../Rewards';
+import { cxSocialLinks } from '../SocialLinks';
+import { asFooterToken } from '../FooterClean';
 
 const withCopyrightDesign = withDesign({
   Editor: withDesign({
@@ -43,9 +43,6 @@ const Base = asFooterToken({
     SocialLinks: cxSocialLinks.Default,
   },
   Layout: {
-    FooterMenu: withDesign({
-      Nav: 'w-full',
-    }),
     Wrapper: 'w-full',
     Container: 'lg:mx-auto lg:container',
     SectionTop: 'w-full lg:flex lg:space-between',
@@ -53,19 +50,22 @@ const Base = asFooterToken({
     Rewards: withDesign({
       Wrapper: 'w-full lg:w-1/3',
     }),
+    FooterMenu: withDesign({
+      Nav: 'w-full',
+    }),
     SocialLinks: withDesign({
       Wrapper: 'w-full lg:w-1/5',
     }),
   },
   Spacing: {
-    FooterMenu: withDesign({
-      Nav: 'p-9 md:mb-8 md:p-0',
-    }),
     Wrapper: 'mt-10',
     Container: 'md:px-10 md:py-6 lg:py-8',
     SectionTop: 'lg:mb-12',
     Rewards: withDesign({
       Wrapper: 'p-9 md:mb-8 md:p-0 lg:mb-0 lg:pr-12',
+    }),
+    FooterMenu: withDesign({
+      Nav: 'p-9 md:mb-8 md:p-0',
     }),
     SocialLinks: withDesign({
       Wrapper: 'px-10 py-5 md:p-0',
@@ -96,7 +96,7 @@ const Default = asFooterToken({
   ...Base,
 });
 
-export const cxFooter = {
+export default {
   Base,
   Default,
 };

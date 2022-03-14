@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-export { default as FooterClean, asFooterToken } from './FooterClean';
-export { default as cxFooter } from './tokens';
-export type { FooterComponents, FooterProps } from './types';
+import tokens from './cxFooter';
+
+export default tokens;

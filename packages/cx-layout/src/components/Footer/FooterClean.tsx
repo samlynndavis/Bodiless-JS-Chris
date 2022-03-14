@@ -46,11 +46,11 @@ const FooterCleanBase: FC<FooterProps> = ({ components: C }) => (
   </C.Wrapper>
 );
 
+/**
+ * A clean footer to be used in pages layouts.
+ */
 const FooterClean = designable(footerComponents, 'Footer')(FooterCleanBase);
 
-const asFooterToken = asCxTokenSpec<FooterComponents>();
+export const asFooterToken = asCxTokenSpec<FooterComponents>();
 
-export {
-  FooterClean,
-  asFooterToken,
-};
+export default FooterClean;
