@@ -75,7 +75,7 @@ objects:
   });
   ```
 
-## Order ot domains
+## Order of domains
 
 HOC's defined for each domain are applied in a fixed order (as listed above),
 regardless of the order in which they are specified in an individual token.
