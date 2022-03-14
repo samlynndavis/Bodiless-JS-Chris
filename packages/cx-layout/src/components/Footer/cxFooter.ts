@@ -53,9 +53,6 @@ const Base = asFooterToken({
     Rewards: withDesign({
       Wrapper: 'w-full lg:w-1/3',
     }),
-    FooterMenus: withDesign({
-      Wrapper: 'w-full',
-    }),
     SocialLinks: withDesign({
       Wrapper: 'w-full lg:w-1/5',
     }),
@@ -69,9 +66,6 @@ const Base = asFooterToken({
     SectionTop: 'lg:mb-12',
     Rewards: withDesign({
       Wrapper: 'p-9 md:mb-8 md:p-0 lg:mb-0 lg:pr-12',
-    }),
-    FooterMenus: withDesign({
-      Wrapper: 'p-9 md:mb-8 md:p-0',
     }),
     SocialLinks: withDesign({
       Wrapper: 'px-10 py-5 md:p-0',
