@@ -144,7 +144,7 @@ const Example = asLinkToken({
 ## Additional Considerations and Gotchas
 
 ### Access to component data
-Note the position of hte `Editors` and `Schema` domains which usually provide
+Note the position of the `Editors` and `Schema` domains which usually provide
 the data that a component renders. They are applied "outside" (after) the
 styling domains (`Theme`, `Layout`, `Spacing`), so that these domains will have
 access to the data (to allow conditional styling based on state). However they
