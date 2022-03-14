@@ -1,7 +1,7 @@
-import { addProps, as } from '@bodiless/fclasses';
+import { addProps, as, on } from '@bodiless/fclasses';
 import { cxColor } from '@bodiless/cx-elements';
 import { asSubMenuToken } from '../SubMenuClean';
-import { cxMenuTitle } from '../../MenuTitle';
+import { cxMenuTitle, MenuTitleClean } from '../../MenuTitle';
 import { withAnalyticsAttr } from '../../../util';
 
 const Base = asSubMenuToken({
@@ -13,7 +13,7 @@ const Base = asSubMenuToken({
     Title: withAnalyticsAttr,
   },
   Components: {
-    Title: cxMenuTitle.Default,
+    Title: on(MenuTitleClean)(cxMenuTitle.Default),
   },
 });
 
