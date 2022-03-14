@@ -25,9 +25,10 @@ const Footer = asSubMenuToken(Base, {
       // @todo why is this not an available token in cxFontSize?
       'font-medium md:text-sm lg:text-xs',
     ),
+    Item: 'leading-none',
   },
   Spacing: {
-    Item: 'mt-5 lg:mt-2',
+    Item: 'mt-5 lg:mt-3',
   },
 });
 

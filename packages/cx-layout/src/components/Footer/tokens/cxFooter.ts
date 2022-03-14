@@ -59,7 +59,7 @@ const Base = asFooterToken({
   },
   Spacing: {
     Wrapper: 'mt-10',
-    Container: 'md:px-10 md:py-6 lg:py-8',
+    Container: 'md:px-10 md:py-6 lg:px-6 lg:py-8',
     SectionTop: 'lg:mb-12',
     Rewards: withDesign({
       Wrapper: 'p-9 md:mb-8 md:p-0 lg:mb-0 lg:pr-12',
