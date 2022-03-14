@@ -40,7 +40,6 @@ const FooterMenu = asElementToken({
     ),
   },
 });
-console.log('FM', FooterMenu);
 
 export default {
   FooterMenu,
