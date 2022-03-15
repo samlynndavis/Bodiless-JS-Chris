@@ -15,6 +15,7 @@ import {
   addProps,
   as,
 } from '@bodiless/fclasses';
+import { cxElement } from '@bodiless/cx-elements';
 import { asLayoutToken } from '../LayoutClean';
 import { cxFooter } from '../../Footer';
 import { cxHeader } from '../../Header';
@@ -32,11 +33,6 @@ const Base = asLayoutToken({
     Footer: as(cxFooter.Default),
   },
   Theme: {
-    // Tailwind's container is specifially not used due to its feature it set's max-width
-    // to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
-    // to contain content.
-    ContainerWrapper: 'mx-site-percent md:mx-md-site-percent lg:mx-lg-site-percent mx-auto',
-    Container: 'mx-auto',
   },
   Schema: {
   },
@@ -54,6 +50,24 @@ const Base = asLayoutToken({
   },
   Spacing: {
   }
+});
+
+/*
+ * Tailwind's container is specifially not used due to its feature it set's max-width
+ * to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
+ * to contain content until we get to xl and then constrain by max-width.
+ */
+const ConstrainSite = asLayoutToken({
+  Theme: {
+    // TODO The tokens on this ContainerWrapper will move to be controlled by
+    // content within Templates.
+    ContainerWrapper: as(
+      cxElement.WithSiteMargin,
+      cxElement.WithSiteXLConstraint
+    ),
+    HeaderWrapper: cxElement.WithSiteXLConstraint,
+    FooterWrapper: cxElement.WithSiteXLConstraint,
+  },
 });
 
 const Header = asLayoutToken({
@@ -74,6 +88,7 @@ const Default = asLayoutToken({
     ...Base.Components,
     ...Header.Components,
     ...Footer.Components,
+    ...ConstrainSite.Theme,
   },
 });
 

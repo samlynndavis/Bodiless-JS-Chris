@@ -44,7 +44,6 @@ const Base = asFooterToken({
   },
   Layout: {
     Wrapper: 'w-full',
-    Container: 'lg:mx-auto lg:container',
     SectionTop: 'w-full lg:flex lg:space-between',
     SectionBottom: 'w-full lg:flex lg:space-between',
     Rewards: withDesign({

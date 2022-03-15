@@ -16,10 +16,12 @@ import { cxColor, cxColorStatic } from './Color';
 import { cxFontSize, cxFontSizeStatic } from './FontSize';
 import { cxTextDecoration, cxTextDecorationStatic } from './TextDecoration';
 import { cxTypography, cxTypographyStatic } from './Typography';
+import { cxSpacing, cxSpacingStatic } from './Spacing';
 
 const cxElement = {
   ...cxColor,
   ...cxFontSize,
+  ...cxSpacing,
   ...cxTextDecoration,
   ...cxTypography,
 };
@@ -27,13 +29,15 @@ const cxElement = {
 const cxElementStatic = {
   ...cxColorStatic,
   ...cxFontSizeStatic,
+  ...cxSpacingStatic,
   ...cxTextDecorationStatic,
   ...cxTypographyStatic,
 };
 
 export {
+  cxColor, cxColorStatic,
   cxElement, cxElementStatic,
   cxFontSize, cxFontSizeStatic,
-  cxColor, cxColorStatic,
+  cxSpacing, cxSpacingStatic,
   cxTextDecoration, cxTextDecorationStatic,
 };
