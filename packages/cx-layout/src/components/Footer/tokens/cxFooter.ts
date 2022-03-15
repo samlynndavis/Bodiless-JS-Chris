@@ -53,11 +53,11 @@ const Base = asFooterToken({
   Schema: {
     FooterMenu: flowHoc(
       withNode,
-      withNodeKey({ nodeKey: 'FooterMenus', nodeCollection: 'site' }),
+      withNodeKey({ nodeKey: 'footer', nodeCollection: 'site' }),
     ),
     Copyright: flowHoc(
       withNode,
-      withNodeKey({ nodeKey: 'Copyright', nodeCollection: 'site' }),
+      withNodeKey({ nodeKey: 'copyright', nodeCollection: 'site' }),
     ),
   },
 });
