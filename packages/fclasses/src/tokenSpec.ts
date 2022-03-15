@@ -16,7 +16,7 @@ import mergeWith from 'lodash/mergeWith';
 import flow from 'lodash/flow';
 import { ComponentType } from 'react';
 import identity from 'lodash/identity';
-import { pick } from 'lodash';
+import pick from 'lodash/pick';
 import { startWith } from './replaceable';
 import type {
   TokenDef, // FlowHoc,

@@ -313,14 +313,6 @@ type TokenSpecIn<
   K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
 > = Pick<FinalDomains<C, D>, K>;
 
-export type TokenSpec<
-  C extends DesignableComponents,
-  D extends object,
-  K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
-> = TokenSpecIn<C, D, K> & {
-  [$TokenSpec]: true,
-};
-
 /**
    * Type of a token specification, a token expressed in the
    * HOC Object Notation.
@@ -340,13 +332,13 @@ export type TokenSpec<
    * @param D
    * An object type describing the domain keys available in this token.
    */
-// export type TokenSpec<
-//   C extends DesignableComponents,
-//   D extends object,
-// > = Domains<C, D> & ReservedDomains<C, D> & {
-//   [$TokenSpec]: true,
-// };
-// > = TokenSpec<C, D, keyof FinalDomains<C, D>>;
+export type TokenSpec<
+  C extends DesignableComponents,
+  D extends object,
+  K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
+> = TokenSpecIn<C, D, K> & {
+  [$TokenSpec]: true,
+};
 
 export type AsTokenSpec<C extends DesignableComponents, D extends object> = <
   K0 extends keyof FinalDomains<C, D>,
