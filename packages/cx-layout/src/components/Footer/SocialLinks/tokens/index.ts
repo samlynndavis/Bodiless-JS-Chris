@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import cxSpacing from './cxSpacing';
+import tokens from './cxSocialLinks';
 
-export default cxSpacing;
+export default tokens;

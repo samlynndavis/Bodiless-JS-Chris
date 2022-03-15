@@ -13,7 +13,7 @@
  */
 
 import { withNode, withNodeKey } from '@bodiless/core';
-import { withCopyright } from '@bodiless/cx-editors';
+import { cxRichText } from '@bodiless/cx-editors';
 import { cxColor } from '@bodiless/cx-elements';
 import { cxMenu } from '@bodiless/cx-navigation';
 import { flowHoc } from '@bodiless/fclasses';
@@ -48,7 +48,7 @@ const Base = asFooterToken({
     RewardsWrapper: 'bg-cx-primary-card-bg md:bg-cx-secondary-footer-bg',
   },
   Editors: {
-    Copyright: withCopyright(),
+    Copyright: cxRichText.Copyright,
   },
   Schema: {
     FooterMenu: flowHoc(

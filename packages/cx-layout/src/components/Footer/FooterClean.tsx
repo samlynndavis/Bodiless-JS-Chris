@@ -13,7 +13,8 @@
  */
 
 import React, { FC } from 'react';
-import { Div, Span, designable } from '@bodiless/fclasses';
+import { Div, designable } from '@bodiless/fclasses';
+import { RichTextClean } from '@bodiless/cx-editors';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { MenuClean } from '@bodiless/cx-navigation';
 import { RewardsClean } from './Rewards';
@@ -30,13 +31,13 @@ const footerComponents: FooterComponents = {
   FooterMenuWrapper: Div,
   FooterMenu: MenuClean,
   CopyrightWrapper: Div,
-  Copyright: Span,
+  Copyright: RichTextClean,
   SocialLinksWrapper: Div,
   SocialLinks: SocialLinksClean,
 };
 
-const FooterCleanBase: FC<FooterProps> = ({ components: C }) => (
-  <C.Wrapper>
+const FooterCleanBase: FC<FooterProps> = ({ components: C, ...rest }) => (
+  <C.Wrapper {...rest}>
     <C.Container>
       <C.SectionTop>
         <C.RewardsWrapper>

@@ -16,7 +16,7 @@ import { cxColor, cxColorStatic } from './Color';
 import { cxFontSize, cxFontSizeStatic } from './FontSize';
 import { cxTextDecoration, cxTextDecorationStatic } from './TextDecoration';
 import { cxTypography, cxTypographyStatic } from './Typography';
-import { cxSpacing, cxSpacingStatic } from './Spacing';
+import { cxSpacing } from './Spacing';
 
 const cxElement = {
   ...cxColor,
@@ -29,7 +29,6 @@ const cxElement = {
 const cxElementStatic = {
   ...cxColorStatic,
   ...cxFontSizeStatic,
-  ...cxSpacingStatic,
   ...cxTextDecorationStatic,
   ...cxTypographyStatic,
 };
@@ -38,6 +37,6 @@ export {
   cxColor, cxColorStatic,
   cxElement, cxElementStatic,
   cxFontSize, cxFontSizeStatic,
-  cxSpacing, cxSpacingStatic,
+  cxSpacing,
   cxTextDecoration, cxTextDecorationStatic,
 };

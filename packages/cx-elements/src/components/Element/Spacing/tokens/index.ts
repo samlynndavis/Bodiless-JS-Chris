@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import cxSpacing from './cxSpacing';
-import cxSpacingStatic from './cxSpacing.bl-static';
+import tokens from './cxSpacing';
 
-export { cxSpacing, cxSpacingStatic };
+export default tokens;

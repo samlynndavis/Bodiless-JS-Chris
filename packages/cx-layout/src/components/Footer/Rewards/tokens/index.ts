@@ -12,4 +12,6 @@
  * limitations under the License.
  */
 
-export { default as cxSpacing } from './tokens';
+import tokens from './cxRewards';
+
+export default tokens;

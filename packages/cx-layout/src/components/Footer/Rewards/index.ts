@@ -15,6 +15,6 @@
 // @TODO: As Rewards is implemented, move it outside Footer component into
 // a more appropriate place.
 // Also requires component structure reorganization for new static pattern.
-export { cxRewards } from './Rewards.token';
 export { RewardsClean, asRewardsToken } from './RewardsClean';
+export { default as cxRewards } from './tokens';
 export type { RewardsComponents, RewardsProps } from './types';

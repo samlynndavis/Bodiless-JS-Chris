@@ -35,8 +35,8 @@ const rewardsComponents: RewardsComponents = {
 };
 
 // @TODO: Rewards needs implementation for fields events and form submission.
-const RewardsCleanBase: FC<RewardsProps> = ({ components: C }) => (
-  <C.Wrapper>
+const RewardsCleanBase: FC<RewardsProps> = ({ components: C, ...rest }) => (
+  <C.Wrapper {...rest}>
     <C.Brand />
     <C.Title />
     <C.Body />

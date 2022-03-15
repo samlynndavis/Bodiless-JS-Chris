@@ -28,9 +28,9 @@ import { WithBordersLabels } from './cxLayoutTest';
   */
 const Base = asLayoutToken({
   Components: {
-    Helmet: as(cxHelmet.Default),
-    Header: as(cxHeader.Default),
-    Footer: as(cxFooter.Default),
+    Helmet: cxHelmet.Default,
+    Header: cxHeader.Default,
+    Footer: cxFooter.Default,
   },
   Theme: {
   },

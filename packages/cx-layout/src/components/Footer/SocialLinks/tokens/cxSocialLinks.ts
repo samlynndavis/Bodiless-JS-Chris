@@ -16,7 +16,7 @@ import {
   Div,
   startWith,
 } from '@bodiless/fclasses';
-import { asSocialLinksToken } from './SocialLinksClean';
+import { asSocialLinksToken } from '../SocialLinksClean';
 
 const Base = asSocialLinksToken({
   Components: {
@@ -33,7 +33,7 @@ const Default = asSocialLinksToken({
   ...Base,
 });
 
-export const cxSocialLinks = {
+export default {
   Base,
   Default,
 };

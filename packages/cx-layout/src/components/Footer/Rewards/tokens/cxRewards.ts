@@ -18,7 +18,7 @@ import {
   startWith,
   withProps,
 } from '@bodiless/fclasses';
-import { asRewardsToken } from './RewardsClean';
+import { asRewardsToken } from '../RewardsClean';
 
 const Base = asRewardsToken({
   Components: {
@@ -101,7 +101,7 @@ const Default = asRewardsToken({
   ...Base,
 });
 
-export const cxRewards = {
+export default {
   Base,
   Default,
 };
