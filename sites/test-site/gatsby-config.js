@@ -39,6 +39,11 @@ const plugins = [
           quality: 90,
         },
       },
+      static: {
+        // Disables static rich text editors because of a bug where some editors were
+        // being forced rendered on the client side.
+        exclude: ['bodiless-richtext'],
+      }
     },
   },
   {
