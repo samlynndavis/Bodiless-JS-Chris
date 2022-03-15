@@ -17,7 +17,7 @@ import webpack, { Configuration } from 'webpack';
 import path from 'path';
 import { createLogger, PluginOptions } from './util';
 
-const TOKENS_PATH = 'tokens';
+const TOKENS_REGEX = /\.\/tokens$/;
 
 type TokenShadowPluginOptions = Omit<PluginOptions, 'exclude'> & {
   resolvers: ((component: string) => string)[];
@@ -28,7 +28,7 @@ export const createTokenShadowPlugin = (
 ) => {
   const log = createLogger(logging);
   return new webpack.NormalModuleReplacementPlugin(
-    new RegExp(`\\.\\${path.sep}${TOKENS_PATH}`),
+    TOKENS_REGEX,
     resource => {
       const componentName = path.basename(resource.context);
       // console.log('componentName', componentName, packages, resource.request);

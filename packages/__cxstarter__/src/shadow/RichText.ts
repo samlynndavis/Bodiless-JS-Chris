@@ -1,19 +1,19 @@
 import { asFluidToken } from '@bodiless/cx-elements';
 // Must import directy from the token collection.
-import cxRichText from '@bodiless/cx-editors/lib/components/RichText/tokens';
+import { cxRichTextBase } from '@bodiless/cx-editors'; 
 import omit from 'lodash/omit';
 
 const Default = asFluidToken({
-  ...cxRichText.Default,
+  ...cxRichTextBase.Default,
   Core: {
-    ...omit(cxRichText.Default.Components, 'H1'),
+    ...omit(cxRichTextBase.Default.Core, 'H1'),
   },
   Components: {
-    ...omit(cxRichText.Default.Components, 'H1'),
+    ...omit(cxRichTextBase.Default.Components, 'H1'),
   },
 });
 
 export default {
-  ...cxRichText,
+  ...cxRichTextBase,
   Default,
 };
