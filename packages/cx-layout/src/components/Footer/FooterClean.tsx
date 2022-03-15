@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { Div, Fragment, designable } from '@bodiless/fclasses';
+import { Div, Span, designable } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { MenuClean } from '@bodiless/cx-navigation';
 import { RewardsClean } from './Rewards';
@@ -30,7 +30,7 @@ const footerComponents: FooterComponents = {
   FooterMenuWrapper: Div,
   FooterMenu: MenuClean,
   CopyrightWrapper: Div,
-  Copyright: Div,
+  Copyright: Span,
   SocialLinksWrapper: Div,
   SocialLinks: SocialLinksClean,
 };

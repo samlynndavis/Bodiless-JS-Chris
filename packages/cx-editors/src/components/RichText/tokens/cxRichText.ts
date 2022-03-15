@@ -41,7 +41,12 @@ import {
   DefaultNormalHref,
 } from '@bodiless/components';
 import { ifComponentSelector } from '@bodiless/layouts';
-import { asCxTokenSpec, cxElement } from '@bodiless/cx-elements';
+import {
+  asCxTokenSpec,
+  cxColor,
+  cxElement,
+  cxFontSize,
+} from '@bodiless/cx-elements';
 import { LinkClean, cxLink } from '@bodiless/cx-link';
 
 const withLinkDeserializer = withHtmlDeserializer(
@@ -104,4 +109,26 @@ const Default = asCxTokenSpec()({
   },
 });
 
-export default { Default, AsFlowContainerItem };
+const Copyright = asCxTokenSpec()({
+  ...Default,
+  Spacing: {
+    paragraph: 'mx-9 py-9 md:mx-0 md:mb-4 md:p-0 lg:mt-2 lg:mb-0 lg:py-0',
+  },
+  Theme: {
+    paragraph: as(
+      cxColor.TextPrimaryFooterCopy,
+      cxFontSize.XS,
+      'border-white-400 border-t border-b md:border-0 lg:text-m-xs',
+    ),
+  },
+  Content: {
+    _: addProps({ placeholder: 'Insert Copyright' }),
+  },
+  Compose: {},
+});
+
+export default {
+  Default,
+  AsFlowContainerItem,
+  Copyright,
+};

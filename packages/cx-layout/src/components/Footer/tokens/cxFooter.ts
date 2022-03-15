@@ -13,28 +13,13 @@
  */
 
 import { withNode, withNodeKey } from '@bodiless/core';
-import { cxColor, cxFontSize } from '@bodiless/cx-elements';
-import { withEditorFull } from '@bodiless/cx-editors';
-import {
-  as,
-  flowHoc,
-  withDesign,
-} from '@bodiless/fclasses';
+import { withCopyright } from '@bodiless/cx-editors';
+import { cxColor } from '@bodiless/cx-elements';
 import { cxMenu } from '@bodiless/cx-navigation';
+import { flowHoc } from '@bodiless/fclasses';
 import { cxRewards } from '../Rewards';
 import { cxSocialLinks } from '../SocialLinks';
 import { asFooterToken } from '../FooterClean';
-
-const withCopyrightDesign = withDesign({
-  Editor: withDesign({
-    paragraph: as(
-      cxColor.TextPrimaryFooterCopy,
-      cxFontSize.XS,
-      'border-white-400 border-t border-b md:border-0 lg:text-m-xs',
-      'mx-9 py-9 md:mx-0 md:mb-4 md:p-0 lg:mt-2 lg:mb-0 lg:py-0',
-    ),
-  }),
-});
 
 const Base = asFooterToken({
   Components: {
@@ -63,10 +48,7 @@ const Base = asFooterToken({
     RewardsWrapper: 'bg-cx-primary-card-bg md:bg-cx-secondary-footer-bg',
   },
   Editors: {
-    Copyright: flowHoc(
-      withEditorFull(undefined, 'Insert Copyright'),
-      withCopyrightDesign,
-    ),
+    Copyright: withCopyright(),
   },
   Schema: {
     FooterMenu: flowHoc(

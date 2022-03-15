@@ -100,10 +100,19 @@ const withEditorRichClean = withEditor(RichTextClean);
  */
 const withEditorFull = withEditor(as(cxRichText.Default)(RichTextClean));
 
+/**
+ * Bodiless HOC factory creates an HOC which adds a CanvasX Copyright with Full Rich Text
+ * editor as a designable child of the target component.
+ *
+ * @see withEditor
+ */
+const withCopyright = withEditor(as(cxRichText.Copyright)(RichTextClean));
+
 export {
   withEditor,
   withEditorPlain,
   withEditorPlainClean,
   withEditorRichClean,
   withEditorFull,
+  withCopyright,
 };
