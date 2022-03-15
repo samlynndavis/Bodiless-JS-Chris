@@ -45,6 +45,7 @@ const Footer = asMenuToken(Base, {
     _: withMenuDesign('List')(as(cxSubMenu.Footer)),
   },
   Layout: {
+    Nav: 'w-full lg:h-full',
     Wrapper: 'w-full md:flex md:justify-between md:flex-grow lg:h-full',
     Item: 'md:min-w-1/4 md:w-full',
   },

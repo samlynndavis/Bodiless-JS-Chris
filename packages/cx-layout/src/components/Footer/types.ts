@@ -18,10 +18,14 @@ type FooterComponents = {
   Wrapper: ComponentOrTag<any>,
   Container: ComponentOrTag<any>,
   SectionTop: ComponentOrTag<any>,
-  Rewards: ComponentOrTag<any>,
-  FooterMenu: ComponentOrTag<any>,
   SectionBottom: ComponentOrTag<any>,
+  RewardsWrapper: ComponentOrTag<any>,
+  Rewards: ComponentOrTag<any>,
+  FooterMenuWrapper: ComponentOrTag<any>,
+  FooterMenu: ComponentOrTag<any>,
+  CopyrightWrapper: ComponentOrTag<any>,
   Copyright: ComponentOrTag<any>,
+  SocialLinksWrapper: ComponentOrTag<any>,
   SocialLinks: ComponentOrTag<any>,
 };
 

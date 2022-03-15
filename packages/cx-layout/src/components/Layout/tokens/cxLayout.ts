@@ -63,7 +63,7 @@ const ConstrainSite = asLayoutToken({
     // content within Templates.
     ContainerWrapper: as(
       cxElement.WithSiteMargin,
-      cxElement.WithSiteXLConstraint
+      cxElement.WithSiteXLConstraint,
     ),
     HeaderWrapper: cxElement.WithSiteXLConstraint,
     FooterWrapper: cxElement.WithSiteXLConstraint,

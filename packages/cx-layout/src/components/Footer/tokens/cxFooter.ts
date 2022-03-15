@@ -46,32 +46,21 @@ const Base = asFooterToken({
     Wrapper: 'w-full',
     SectionTop: 'w-full lg:flex lg:space-between',
     SectionBottom: 'w-full lg:flex lg:space-between',
-    Rewards: withDesign({
-      Wrapper: 'w-full lg:w-1/3',
-    }),
-    FooterMenu: withDesign({
-      Nav: 'w-full',
-    }),
-    SocialLinks: withDesign({
-      Wrapper: 'w-full lg:w-1/5',
-    }),
+    RewardsWrapper: 'w-full lg:w-1/3',
+    FooterMenuWrapper: 'w-full',
+    SocialLinksWrapper: 'w-full lg:w-1/5',
   },
   Spacing: {
     Wrapper: 'mt-10',
     Container: 'md:px-10 md:py-6 lg:px-6 lg:py-8',
     SectionTop: 'lg:mb-12',
-    Rewards: withDesign({
-      Wrapper: 'p-9 md:mb-8 md:p-0 lg:mb-0 lg:pr-12',
-    }),
-    FooterMenu: withDesign({
-      Nav: 'p-9 md:mb-8 md:p-0',
-    }),
-    SocialLinks: withDesign({
-      Wrapper: 'px-10 py-5 md:p-0',
-    }),
+    RewardsWrapper: 'p-9 md:mb-8 md:p-0 lg:mb-0 lg:pr-12',
+    FooterMenuWrapper: 'p-9 md:mb-8 md:p-0',
+    SocialLinksWrapper: 'px-10 py-5 md:p-0',
   },
   Theme: {
     Wrapper: cxColor.BgSecondaryFooter,
+    RewardsWrapper: 'bg-cx-primary-card-bg md:bg-cx-secondary-footer-bg',
   },
   Editors: {
     Copyright: flowHoc(

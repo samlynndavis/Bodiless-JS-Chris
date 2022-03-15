@@ -25,6 +25,7 @@ const Base = asRewardsToken({
     Wrapper: startWith(Div),
   },
   Layout: {
+    Wrapper: 'w-full',
     FormWrapper: 'md:flex md:justify-between lg:block',
     FormTextFirstName: 'w-full lg:w-44 lg:block',
     FormTextEmail: 'w-full lg:w-44 lg:block',
@@ -40,7 +41,6 @@ const Base = asRewardsToken({
   },
   // @TODO: Rewards colors needs to be organized/setup and updated.
   Theme: {
-    Wrapper: 'bg-cx-primary-card-bg md:bg-cx-secondary-footer-bg',
     Brand: as(
       'text-cx-primary-header-copy text-xl font-medium',
       'md:text-cx-primary-footer-copy md:text-m-2xl',

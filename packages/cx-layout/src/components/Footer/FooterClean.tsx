@@ -13,7 +13,7 @@
  */
 
 import React, { FC } from 'react';
-import { Div, designable } from '@bodiless/fclasses';
+import { Div, Fragment, designable } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { MenuClean } from '@bodiless/cx-navigation';
 import { RewardsClean } from './Rewards';
@@ -24,10 +24,14 @@ const footerComponents: FooterComponents = {
   Wrapper: Div,
   Container: Div,
   SectionTop: Div,
-  Rewards: RewardsClean,
-  FooterMenu: MenuClean,
   SectionBottom: Div,
+  RewardsWrapper: Div,
+  Rewards: RewardsClean,
+  FooterMenuWrapper: Div,
+  FooterMenu: MenuClean,
+  CopyrightWrapper: Div,
   Copyright: Div,
+  SocialLinksWrapper: Div,
   SocialLinks: SocialLinksClean,
 };
 
@@ -35,12 +39,20 @@ const FooterCleanBase: FC<FooterProps> = ({ components: C }) => (
   <C.Wrapper>
     <C.Container>
       <C.SectionTop>
-        <C.Rewards />
-        <C.FooterMenu />
+        <C.RewardsWrapper>
+          <C.Rewards />
+        </C.RewardsWrapper>
+        <C.FooterMenuWrapper>
+          <C.FooterMenu />
+        </C.FooterMenuWrapper>
       </C.SectionTop>
       <C.SectionBottom>
-        <C.Copyright />
-        <C.SocialLinks />
+        <C.CopyrightWrapper>
+          <C.Copyright />
+        </C.CopyrightWrapper>
+        <C.SocialLinksWrapper>
+          <C.SocialLinks />
+        </C.SocialLinksWrapper>
       </C.SectionBottom>
     </C.Container>
   </C.Wrapper>
