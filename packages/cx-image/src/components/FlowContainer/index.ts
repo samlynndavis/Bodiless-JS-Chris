@@ -1,13 +1,13 @@
 import { asFluidToken, asMetaToken } from '@bodiless/cx-elements';
 import {
-  flowHoc, on, varyDesigns, withDesign
+  flowHoc, Img, on, varyDesigns, withDesign
 } from '@bodiless/fclasses';
-import { cxImage, ImageClean } from '../Img';
+import { cxImage } from '../Img';
 
 // For the base variation, we apply the default token to the design key of
 // the designable element. This can be overridden from the design context.
 const baseVariation = {
-  Image: on(ImageClean)(withDesign({
+  Image: on(Img)(withDesign({
     Image: cxImage.Default,
   })),
 };

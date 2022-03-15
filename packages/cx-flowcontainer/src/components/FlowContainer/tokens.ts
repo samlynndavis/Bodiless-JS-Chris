@@ -9,7 +9,7 @@ import { asFluidToken } from '@bodiless/cx-elements';
 import { cxImageFlowContainer } from '@bodiless/cx-image';
 import { cxEditorsFlowContainer } from '@bodiless/cx-editors';
 
-import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
+import FlowContainerClean, { FlowContainerPreview } from './FlowContainerClean';
 
 const blacklistCategories = ['Group'];
 const mandatoryCateogries = ['Type'];
@@ -96,7 +96,6 @@ const WithBaseVariations = asFluidToken(
  */
 const ContentRegion = asFluidToken(
   omit(Base, 'Spacing'),
-  withDesignRegistryName('ContentRegion'),
   WithBaseVariations,
   {
     Compose: {
@@ -116,7 +115,6 @@ const WithContentRegionVariations = asFluidToken({
 
 const Default = asFluidToken(
   Base,
-  withDesignRegistryName('FlowContainerDefault'),
   WithBaseVariations,
   WithContentRegionVariations,
 );

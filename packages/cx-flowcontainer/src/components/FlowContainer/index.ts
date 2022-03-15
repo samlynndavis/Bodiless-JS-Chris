@@ -1,2 +1,2 @@
-export { FlowContainerClean, withDesignRegistryName } from './FlowContainerClean';
-export { cxFlowContainer, cxFlowContainerStatic } from './tokens';
+export { default as FlowContainerClean } from './FlowContainerClean';
+export { default as cxFlowContainer, default as cxFlowContainerStatic } from './tokens';
