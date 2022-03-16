@@ -41,18 +41,24 @@ const plugins = [
       },
       // Static replacement options, see docs for more info.
       static: {
-        // Pass false to disable static replacement.
-        // Defaults to true.
+        // Pass false to disable static replacement. Defaults to true.
         enabled: true,
-        // By default, all files ending in ".bl-edit" will be replaced with a file with the same
-        // name, but ending in ".static" instead. You can exclude files providing an array of
-        // strings or a RegExp instance to the setting below. The strings or regex will be matched
-        // against the **absolute** path of the .bl-edit file being imported. Strings will be
-        // concatenated into a RegExp instance like this: new RegExp(excludeArray.join('|')).
+        // Static replacement works by searching for files ending in ".bl-edit" and replacing them
+        // with a file with the same name, but ending in ".static" instead. However, all files are
+        // skipped by default for compatibility reasons.
+        //
+        // You can include files providing an array of strings or a RegExp instance to the setting
+        // below. The strings or regex will be matched against the **absolute** path of the .bl-edit
+        // file being imported. Strings will be concatenated into a RegExp instance like this:
+        // new RegExp(includeArray.join('|')).
+        //
+        // You can also pass a boolean. True means include all ".bl-edit" files, enabling static
+        // replacement on all packages. False disables static replacement, which is the same as
+        // passing `enabled: false` in the options object.
+        //
         // Defaults to an empty array.
-        exclude: [],
-        // Pass false to disable logging all resolving operations.
-        // Defaults to true.
+        include: true,
+        // Pass false to disable logging all resolving operations. Defaults to true.
         logging: true,
       }
     },

@@ -19,25 +19,27 @@ import path from 'path';
 const REGEXP = /\.bl-edit/;
 const REPLACEMENT = '.static';
 
-type ExcludeSetting = string[] | RegExp;
+type IncludeSetting = string[] | RegExp | boolean;
 
 type PluginOptions = {
   enabled?: boolean
   logging?: boolean
-  exclude?: ExcludeSetting;
+  include?: IncludeSetting;
 };
 
 const createLogger = (log = true) => (message: string) => {
   if (log) console.log(message);
 };
 
-const requestIsExcluded = (requestedFile: string, exclude?: ExcludeSetting) => {
-  if (!exclude || (Array.isArray(exclude) && !exclude.length)) return false;
+const requestIsIncluded = (requestedFile: string, include?: IncludeSetting) => {
+  if (typeof include === 'boolean') return include;
 
-  return requestedFile.match(exclude instanceof RegExp ? exclude : new RegExp(exclude.join('|')));
+  if (!include || (Array.isArray(include) && !include.length)) return false;
+
+  return requestedFile.match(include instanceof RegExp ? include : new RegExp(include.join('|')));
 };
 
-const createStaticReplacementPlugin = ({ exclude, logging }: PluginOptions) => {
+const createStaticReplacementPlugin = ({ include, logging }: PluginOptions) => {
   const log = createLogger(logging);
 
   return new webpack.NormalModuleReplacementPlugin(
@@ -45,7 +47,7 @@ const createStaticReplacementPlugin = ({ exclude, logging }: PluginOptions) => {
     resource => {
       const requestedFile = path.join(resource.context, resource.request);
 
-      if (requestIsExcluded(requestedFile, exclude)) {
+      if (!requestIsIncluded(requestedFile, include)) {
         log(`[Static replacement] Skipped excluded import for file ${requestedFile}\n`);
         return;
       }
@@ -73,7 +75,7 @@ const createStaticReplacementPlugin = ({ exclude, logging }: PluginOptions) => {
 export const addStaticReplacementPlugin = (
   webpackConfig: any = {}, pluginOptions: PluginOptions = {}
 ) => {
-  if (pluginOptions.enabled === false) {
+  if (pluginOptions.enabled === false || pluginOptions.include === false) {
     console.log('Bodiless static replacement plugin disabled, no static files will be resolved.');
 
     return webpackConfig;
