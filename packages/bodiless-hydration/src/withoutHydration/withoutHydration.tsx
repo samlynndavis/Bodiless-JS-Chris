@@ -32,9 +32,9 @@ export const isStaticClientSide = !!(
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
 
 const withoutHydrationServerSide: HydrationHOC = WrappedComponent => props => (
-  <section data-no-hydrate>
+  <span data-no-hydrate>
     <WrappedComponent {...props} />
-  </section>
+  </span>
 );
 
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
@@ -63,7 +63,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
 
     if (!shouldHydrate) {
       return (
-        <section
+        <span
           ref={rootRef}
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: '' }}
@@ -108,7 +108,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
  * An optional configuration object for the hydration wrapper.
  *
  * @returns
- * A HOC which places the given component inside a <section> wrapper. The components inside
+ * A HOC which places the given component inside a no-hydration wrapper. The components inside
  * this wrapper won't hydrate on the client side in production environments.
  */
 export const withoutHydration: WithoutHydrationFunction = (options) => {
