@@ -13,11 +13,11 @@
  */
 
 /* eslint-disable no-console */
-import webpack from 'webpack';
+import webpack, { Configuration } from 'webpack';
 import path from 'path';
 import { createLogger, PluginOptions } from './util';
 
-const TOKENS_PATH = 'tokens';
+const TOKENS_REGEX = /\.\/tokens$/;
 
 type TokenShadowPluginOptions = Omit<PluginOptions, 'exclude'> & {
   resolvers: ((component: string) => string)[];
@@ -26,32 +26,32 @@ type TokenShadowPluginOptions = Omit<PluginOptions, 'exclude'> & {
 export const createTokenShadowPlugin = (
   { logging = true, resolvers = [] }: TokenShadowPluginOptions
 ) => {
-  // console.log('creating token shadow plugin');
-  // @ts-ignore
   const log = createLogger(logging);
   return new webpack.NormalModuleReplacementPlugin(
-    new RegExp(`\\.\\${path.sep}${TOKENS_PATH}`),
+    TOKENS_REGEX,
     resource => {
       const componentName = path.basename(resource.context);
       // console.log('componentName', componentName, packages, resource.request);
       // Loop through all packges until we fid one that exports a shadow...
       for (let i = 0; i < resolvers.length; i += 1) {
         const newRequest = resolvers[i](componentName);
-        console.log(componentName, newRequest);
+        // console.log(componentName, newRequest);
         if (newRequest) {
-          console.log(`[Shadow replacement] Replacing import in ${resource.contextInfo.issuer}`);
-          console.log(` ↳ ${resource.request} → ${newRequest}\n`);
+          log(`[Shadow replacement] Replacing import in ${resource.contextInfo.issuer}`);
+          log(` ↳ ${resource.request} → ${newRequest}\n`);
           // eslint-disable-next-line no-param-reassign
           resource.request = newRequest;
           break;
-          // eslint-disable-next-line no-empty
         }
       }
     }
   );
 };
 
-export const addTokenShadowPlugin = (config: any, options: TokenShadowPluginOptions) => ({
+export const addTokenShadowPlugin = (
+  config: Configuration,
+  options: TokenShadowPluginOptions,
+): Configuration => ({
   ...config,
   plugins: [
     ...(config.plugins || []),

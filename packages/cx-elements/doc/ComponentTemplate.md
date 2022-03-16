@@ -20,7 +20,9 @@ bodiless.docs.json
             index.bl-edit.ts 
             index.static.ts
             {Component}Clean.tsx
-            tokens.ts
+            tokens/
+              index.ts
+              {brand}{Component}.ts
 ```
 THis structure is intended to facilitate two build-time webpack optimizations:
 - [Static Token Replacement](#static-token-replacement): Removes unnecessary code
@@ -38,7 +40,7 @@ Provides the clean component (if any) as a default export. It should also export
 the type of the component's design keys ("slots"), and an `as...Token` function
 used to create token specifications. For example:
 
-File `FooClean.tsx`:
+**File `FooClean.tsx`:**
 
 ```ts
 import React from 'react';
@@ -70,11 +72,11 @@ export const asFooToken = asCxTokenSpec<FooComponents>();
 > In some cases, there will be no clean component; for example, if a package is
 > merely providing tokens for a component defined elsewhere.
 
-#### `tokens.ts`
+#### `tokens/{brand}{Component}.ts`
 
 Provides the component's token collection as a default export. For example:
 
-File `tokens.ts`
+**File `cxFoo.ts`**
 
 ```js
 const Default = asFooToken({ ... });
@@ -88,17 +90,32 @@ export default { Default, Special, WithSomething };
 May extend a token collection from another package, for example:
 
 ```js
-import { baseFoo } from 'some-package';
-const Default = asFooToken(baseFoo.Default, { ...})
-export default { ...baseFoo, Default };
+import { otherFooBase } from 'some-package';
+const Default = asFooToken(otherFooBase.Default, { ...})
+export default { ...otherFooBase, Default };
 ```
+> Note here we extend `otherFooBase` and **not** `otherFoo`.  This is to allow shadowing
+> of `otherFoo` (see below).
+
+#### `tokens/index.ts`
+
+Simply re-exports the token collection defined in `{brandComponent}.ts`:
+
+```js
+import tokens from './cxFoo';
+
+export default tokens;
+```
+
 
 #### `index.bl-edit.ts`
 
-Export the clean component and any tokens.
+Export the clean component and token collection, including a "Base" version of the token
+collection.
 
 ```js
 export { default as FooClean } from './FooClean';
+// Note this export will be shadowable.
 export { default as mybrandFoo } from './tokens';
 ```
 
@@ -106,9 +123,17 @@ Note, in many cases you will also want to export a static version of your token
 collection:
 
 ```js
-export { default as mybrandFoo, default as mybrandFooStatic } from './tokens';
-export { default as mybrandFoo } from './tokens';
+export { default as FooClean } from './FooClean';
+export {
+  default as mybrandFoo,
+  default as mybrandFooStatic
+} from './tokens';
 ```
+
+This is useful when your component adds significant weight to the bundle (ususally
+through its dependencies), and you are not sure whether the children of your component
+will need to be hydrated in the browser.  See [Static Replacement](static-replacement)
+below for more information.
 
 #### 'index.static.ts`
 
@@ -137,12 +162,17 @@ export { default as FooClean } from './FooClean';
 
 #### `index.ts`
 
-Re-export everything from `index.bl-edit.ts`, along with any other utilities or types:
+Re-export everything from `index.bl-edit.ts`, along with any other utilities or types.
+Also export the "Base" version of the token collection directly from its location.
 
 ```js
-export * from './index.bl-edit';
 export { asFooToken, FooComponents } from './FooClean';
+// This export will not be shadowable.
+export { default as mybrandFooBase } from './tokens/cxFoo';
 // ... any other exports or utilities.
+
+// These exports will be excluded from the static bundle
+export * from './index.bl-edit';
 ```
 
 ### Top level
