@@ -1,6 +1,6 @@
 {
-  "Components": {
-    "FlowContainer": {
+  "CX_DesignSystem": {
+    "CX_FlowContainer": {
       "README.md": "./doc/FlowContainer.md"
     }
   }

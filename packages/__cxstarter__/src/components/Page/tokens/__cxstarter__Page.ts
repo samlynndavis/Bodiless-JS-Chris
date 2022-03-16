@@ -12,11 +12,17 @@
  * limitations under the License.
  */
 
+import { on } from '@bodiless/fclasses';
 import { asElementToken } from '@bodiless/cx-elements';
-import { cxPage } from '@bodiless/cx-templates';
+import { GenericTemplateClean, cxPage } from '@bodiless/cx-templates';
+import { __cxstarter__GenericTemplate } from '../../GenericTemplate';
 
 const Default = asElementToken({
   ...cxPage.Default,
+  Components: {
+    // @todo fix Type error
+    _default: on(GenericTemplateClean)(__cxstarter__GenericTemplate.cxGenericTest),
+  },
 });
 
 export default {

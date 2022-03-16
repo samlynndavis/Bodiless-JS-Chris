@@ -24,9 +24,10 @@ import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
 
 const genericTemplateComponents: GenericTemplateComponents = {
   PageWrapper: LayoutClean,
+  BreadcrumbWrapper: Fragment,
   Breadcrumb: Fragment,
-  TitleRow: Fragment,
-  MainWrapper: Div,
+  TopWrapper: Div,
+  TopContent: Fragment,
   ContentWrapper: Div,
   Content: Fragment,
   BottomWrapper: Div,
@@ -37,16 +38,19 @@ const GenericTemplateBase = (props: BaseGenericTemplateProps) => {
   const { components: C } = props;
   return (
     <C.PageWrapper>
-      <C.Breadcrumb />
-      <C.MainWrapper>
-        <C.TitleRow />
-        <C.ContentWrapper>
-          <C.Content />
-        </C.ContentWrapper>
-        <C.BottomWrapper>
-          <C.BottomContent />
-        </C.BottomWrapper>
-      </C.MainWrapper>
+
+      <C.TopWrapper>
+        <C.TopContent />
+      </C.TopWrapper>
+      <C.BreadcrumbWrapper>
+        <C.Breadcrumb />
+      </C.BreadcrumbWrapper>
+      <C.ContentWrapper>
+        <C.Content />
+      </C.ContentWrapper>
+      <C.BottomWrapper>
+        <C.BottomContent />
+      </C.BottomWrapper>
     </C.PageWrapper>
   );
 };

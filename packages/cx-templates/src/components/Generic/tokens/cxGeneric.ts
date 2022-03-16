@@ -19,6 +19,7 @@ import {
 } from '@bodiless/fclasses';
 import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
 import { asGenericTemplateToken } from '../GenericClean';
+import { cxGenericTest } from './cxGenericTest';
 
 const Default = asGenericTemplateToken({
   Components: {
@@ -38,7 +39,8 @@ const WithoutBreadcrumbs = asGenericTemplateToken({
   },
 });
 
-export const cxGenericTemplate = {
+export default {
   Default,
   WithoutBreadcrumbs,
+  cxGenericTest,
 };

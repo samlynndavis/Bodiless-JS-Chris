@@ -1,5 +1,5 @@
 // @todo replace after static replacement merges
-export { default as cxFlowContainerStatic } from './tokens/cxFowContainer';
+export { default as cxFlowContainerStatic } from './tokens/cxFlowContainer';
 // import {
 //   StaticComponent as FlowContainerStatic,
 //   staticTokenCollection as cxFlowContainerStatic,

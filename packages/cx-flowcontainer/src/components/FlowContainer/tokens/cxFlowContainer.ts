@@ -27,12 +27,19 @@ const Base = asFluidToken({
     // @todo restore tools and component id badge
     // ComponentWrapper: flowIf(() => useInfoContext().enabled)(withComponentId),
   },
+});
+
+// TODO move to cxSpacing in canvasx-elements;
+const Gutter = 'p-2 md:p-4.5 lg:p-6';
+const GutterOffset = '-mx-2 md:-mx-4.5 lg:-mx-6';
+
+/**
+ * Token which constrains a flow container to full width.
+ */
+const WithCxGutters = asFluidToken({
   Spacing: {
-    // @todo what is this class?
-    // Wrapper: 'flow-container-wrapper',
-    Wrapper: '-px-5',
-    // @todo Should there be an element token for these gutters?
-    ComponentWrapper: 'p-5',
+    Wrapper: Gutter,
+    ComponentWrapper: GutterOffset,
   },
 });
 
@@ -127,4 +134,5 @@ export default {
   AsFlowContainerItem,
   WithFullWidthConstraint,
   WithTabletOneThirdConstraint,
+  WithCxGutters,
 };
