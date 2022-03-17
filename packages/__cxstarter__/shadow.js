@@ -1,6 +1,6 @@
-module.exports = component => {
+module.exports = ({ componentName }) => {
   try {
-    return require.resolve(`./lib/shadow/${component}`);
+    return require.resolve(`./lib/shadow/${componentName}`);
   } catch (e) {
     return false;
   }
