@@ -2,11 +2,9 @@ const path = require('path');
 
 module.exports = ({ componentName, packageName }) => {
   const parts = packageName ? packageName.split('/') : [];
-  console.log('parts', parts);
   try {
-    const relPath = ['.', 'lib', 'shadow', ...parts, componentName].join('/');
-    console.log(relPath);
-    return require.resolve(relPath);
+    const requirePath = ['.', 'lib', 'shadow', ...parts, componentName].join('/');
+    return require.resolve(requirePath);
   } catch (e) {
     return false;
   }
