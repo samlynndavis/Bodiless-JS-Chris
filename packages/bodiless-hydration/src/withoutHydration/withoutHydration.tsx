@@ -17,10 +17,11 @@ import React, {
   useState, useRef, useLayoutEffect, FC
 } from 'react';
 import {
-  HydrationHOC,
   WithoutHydrationFunction,
   WithoutHydrationProps
 } from './types';
+
+const DEFAULT_WRAPPER = 'div';
 
 export const isStaticClientSide = !!(
   typeof window !== 'undefined'
@@ -31,19 +32,22 @@ export const isStaticClientSide = !!(
 
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
 
-const withoutHydrationServerSide: HydrationHOC = WrappedComponent => props => (
-  <span data-no-hydrate>
+const withoutHydrationServerSide: WithoutHydrationFunction = (
+  { WrapperElement = DEFAULT_WRAPPER } = {}
+) => WrappedComponent => props => (
+  <WrapperElement data-no-hydrate>
     <WrappedComponent {...props} />
-  </span>
+  </WrapperElement>
 );
 
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
   onUpdate = null,
-  disableFallback = false
+  disableFallback = false,
+  WrapperElement = DEFAULT_WRAPPER,
 } = {}) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
   const WithoutHydration: FC<P & WithoutHydrationProps> = (props) => {
     const { forceHydration = false } = props;
-    const rootRef = useRef<HTMLElement>(null);
+    const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
     const [shouldHydrate, setShouldHydrate] = useState<boolean | undefined>(undefined);
 
     useLayoutEffect(() => {
@@ -63,7 +67,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
 
     if (!shouldHydrate) {
       return (
-        <span
+        <WrapperElement
           ref={rootRef}
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: '' }}
@@ -114,5 +118,10 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
 export const withoutHydration: WithoutHydrationFunction = (options) => {
   if (isStaticClientSide) return withoutHydrationClientSide(options);
 
-  return withoutHydrationServerSide;
+  return withoutHydrationServerSide(options);
 };
+
+export const withoutHydrationInline: WithoutHydrationFunction = options => withoutHydration({
+  ...options,
+  WrapperElement: 'span',
+});

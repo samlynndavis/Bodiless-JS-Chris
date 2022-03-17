@@ -13,7 +13,7 @@
  */
 
 import { Editable } from '@bodiless/components';
-import { withoutHydration } from '@bodiless/hydration';
+import { withoutHydrationInline } from '@bodiless/hydration';
 
-export const EditorPlainClean = withoutHydration()(Editable);
+export const EditorPlainClean = withoutHydrationInline()(Editable);
 export { default as cxEditorPlain } from './tokens';
