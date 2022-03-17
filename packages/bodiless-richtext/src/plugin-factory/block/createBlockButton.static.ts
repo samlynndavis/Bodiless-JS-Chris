@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { StaticComponent, staticFunction } from '@bodiless/hydration';
+import { StaticBlock, staticFunction } from '@bodiless/hydration';
 
-const createBlockButton = staticFunction(() => StaticComponent);
+const createBlockButton = staticFunction(() => StaticBlock);
 
 export default createBlockButton;

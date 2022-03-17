@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
-import { StaticComponent, staticHOC } from '@bodiless/hydration';
+import { StaticBlock, staticHOC } from '@bodiless/hydration';
 
 export const withToggle = staticHOC;
 
-const createPluginButton = () => StaticComponent;
+const createPluginButton = () => StaticBlock;
 
 export default createPluginButton;
