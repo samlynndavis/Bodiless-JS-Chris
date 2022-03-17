@@ -12,20 +12,22 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/fclasses';
-import { asElementToken } from '@bodiless/cx-elements';
-import { GenericTemplateClean, cxPage } from '@bodiless/cx-templates';
-import { __cxstarter__GenericTemplate } from '../../GenericTemplate';
+import { asTokenGroup } from '../../../util';
 
-const Default = asElementToken({
-  ...cxPage.Default,
-  Components: {
-    // @todo fix Type error
-    _default: on(GenericTemplateClean)(__cxstarter__GenericTemplate.cxGenericTestStyleGuide),
+const meta = {
+  categories: {
+    Type: ['Element'],
+    Group: ['Spacing'],
   },
-});
-
-export default {
-  ...cxPage,
-  Default,
 };
+
+/*
+ * Tailwind's container is specifically not used due to its feature it set's max-width
+ * to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
+ * to contain content (WithSiteMargin) until we get to xl and then constrain by
+ * max-width (WithSiteXLConstraint).
+ */
+export default asTokenGroup(meta)({
+  WithSiteMargin: 'mx-site-percent md:mx-md-site-percent xl:px-40',
+  WithSiteXLConstraint: 'xl:container xl:mx-auto',
+});

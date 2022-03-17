@@ -15,11 +15,12 @@ import {
   addProps,
   as,
 } from '@bodiless/fclasses';
+import { cxSpacing, cxColor } from '@bodiless/cx-elements';
 import { asLayoutToken } from '../LayoutClean';
 import { cxHeader } from '../../Header';
 import { cxHelmet } from '../../Helmet';
 import { MAIN_CONTENT_ID } from './constants';
-import { WithBordersLabels } from './cxLayoutTest';
+import { cxLayoutStyleGuide } from './cxLayoutStyleGuide';
 
 /**
   * Token that defines a basic layout.
@@ -27,13 +28,6 @@ import { WithBordersLabels } from './cxLayoutTest';
 const Base = asLayoutToken({
   Components: {
     Helmet: as(cxHelmet.Default),
-  },
-  Theme: {
-    // Tailwind's container is specifially not used due to its feature it set's max-width
-    // to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
-    // to contain content.
-    ContainerWrapper: 'mx-site-percent md:mx-md-site-percent lg:mx-lg-site-percent mx-auto',
-    Container: 'mx-auto',
   },
   Schema: {
   },
@@ -53,15 +47,27 @@ const Base = asLayoutToken({
   }
 });
 
+/*
+ * Tailwind's container is specifially not used due to its feature it set's max-width
+ * to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
+ * to contain content until we get to xl and then constrain by max-width.
+ */
+const ConstrainSite = asLayoutToken({
+  Theme: {
+    HeaderWrapper: cxSpacing.WithSiteXLConstraint,
+    FooterWrapper: cxSpacing.WithSiteXLConstraint,
+  },
+});
+
 const Header = asLayoutToken({
   Components: {
-    SiteHeader: as(cxHeader.Default),
+    Header: as(cxHeader.Default),
   },
 });
 
 const Footer = asLayoutToken({
   Components: {
-    // SiteFooter: as(cxFooter.Default),
+    Footer: as(cxColor.BgSecondaryFooter, 'h-10'), // Temporary
   },
 });
 
@@ -71,6 +77,7 @@ const Default = asLayoutToken({
     ...Base.Components,
     ...Header.Components,
     ...Footer.Components,
+    ...ConstrainSite.Theme,
   },
 });
 
@@ -79,5 +86,5 @@ export default {
   Default,
   Header,
   Footer,
-  WithBordersLabels,
+  cxLayoutStyleGuide,
 };

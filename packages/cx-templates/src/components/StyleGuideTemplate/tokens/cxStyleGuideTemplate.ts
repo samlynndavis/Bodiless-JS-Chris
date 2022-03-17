@@ -42,7 +42,7 @@ const Default = asStyleGuideTemplateToken({
 const BordersLabels = asStyleGuideTemplateToken({
   ...Default,
   Theme: {
-    Wrapper: cxLayout.WithBordersLabels,
+    Wrapper: cxLayout.cxLayoutStyleGuide,
   },
 });
 

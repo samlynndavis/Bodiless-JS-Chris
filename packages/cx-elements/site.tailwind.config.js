@@ -44,6 +44,8 @@ module.exports = {
       margin: {
         4.5: '1.125rem',
         5.75: '1.438rem',
+        'site-percent': '5%',
+        'md-site-percent': '8%',
       }
     },
   },

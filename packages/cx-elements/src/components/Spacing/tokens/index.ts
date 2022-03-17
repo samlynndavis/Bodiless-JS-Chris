@@ -12,20 +12,6 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/fclasses';
-import { asElementToken } from '@bodiless/cx-elements';
-import { GenericTemplateClean, cxPage } from '@bodiless/cx-templates';
-import { __cxstarter__GenericTemplate } from '../../GenericTemplate';
+import tokens from './cxSpacing';
 
-const Default = asElementToken({
-  ...cxPage.Default,
-  Components: {
-    // @todo fix Type error
-    _default: on(GenericTemplateClean)(__cxstarter__GenericTemplate.cxGenericTestStyleGuide),
-  },
-});
-
-export default {
-  ...cxPage,
-  Default,
-};
+export default tokens;

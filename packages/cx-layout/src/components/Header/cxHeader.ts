@@ -85,7 +85,7 @@ const Base = asHeaderToken({
     UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu' }),
   },
   Layout: {
-    Container: 'container flex justify-between items-center',
+    Container: 'flex justify-between items-center',
     MenuContainer: 'hidden lg:flex justify-between items-center flex-grow',
     ActionMenuContainer: 'flex items-center',
   },

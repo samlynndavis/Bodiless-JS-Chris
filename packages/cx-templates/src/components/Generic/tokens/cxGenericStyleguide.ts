@@ -19,13 +19,13 @@ import {
   on,
 } from '@bodiless/fclasses';
 import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
-// import { cxElement } from '@bodiless/cx-elements';
+import { cxSpacing } from '@bodiless/cx-elements';
 import { asGenericTemplateToken } from '../GenericClean';
 
 const asBorderResponsiveIndicator = 'border text-red md:text-green lg:text-blue xl:text-orange';
 
 /* Used in StyleGuide for Testing Purposes */
-const cxGenericTest = asGenericTemplateToken({
+const cxGenericTestStyleGuide = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(cxLayout.Default),
     BreadcrumbWrapper: replaceWith(Div),
@@ -39,17 +39,16 @@ const cxGenericTest = asGenericTemplateToken({
   },
   Theme: {
     Breadcrumb: asBorderResponsiveIndicator,
-    /* @todo add to Wrappers -- tokens in footer PR.
     ContentWrapper: as(
-      cxElement.WithSiteMargin,
-      cxElement.WithSiteXLConstraint
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint
     ),
     BottomWrapper: as(
-      cxElement.WithSiteMargin,
-      cxElement.WithSiteXLConstraint
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint
     ),
-    TopWrapper: cxElement.WithSiteXLConstraint,
-    */
+    TopWrapper: cxSpacing.WithSiteXLConstraint,
+    BreadcrumbWrapper: cxSpacing.WithSiteXLConstraint,
     TopContent: asBorderResponsiveIndicator,
     Content: asBorderResponsiveIndicator,
     BottomContent: asBorderResponsiveIndicator,
@@ -62,4 +61,4 @@ const cxGenericTest = asGenericTemplateToken({
   },
 });
 
-export { cxGenericTest };
+export { cxGenericTestStyleGuide };
