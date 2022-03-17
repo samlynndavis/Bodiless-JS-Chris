@@ -98,15 +98,20 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
  * needs to be expandable by end users. To do this, you can pass an `onUpdate` function in the
  * options object to receive all props passed to the component, and its HTMLElement after it
  * renders. Using the component HTMLElement, you can update it however you want, but be aware that
- * this element will be out of React's scope, so hooks will not work.
+ * this element will be out of React's scope, so hooks won't work inside the `onUpdate` function.
  *
  * You can also pass `disableFallback` as `true` in the options object to make this component
  * not render on the server side. While it will also not hydrate on the client side, you can use
  * `onUpdate` to access its props and modify its element afterwards.
  *
- * The given component will also be able to receive a new prop: `forceHydration`. If you set it
- * to `true`, your component will hydrate on both the server and client side, regardless of the
- * current environment.
+ * The given component will be wrapped in an HTML element that tells React whether to hydrate it
+ * or not. By default, the given component will be wrapped in a `div`. You can change the wrapper
+ * element by passing the `WrapperElement` option. Possible values are 'div' and 'span'. You can
+ * also use `withoutHydrationInline` instead of this function, which defaults to a `span`.
+ *
+ * Finally, the given component will also be able to receive a new prop: `forceHydration`. If you
+ * set it to `true`, your component will hydrate on both the server and client side, regardless of
+ * the current environment.
  *
  * @param options
  * An optional configuration object for the hydration wrapper.
