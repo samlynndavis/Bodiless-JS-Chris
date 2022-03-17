@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { useNode } from '@bodiless/core';
 import { ComponentOrTag } from '@bodiless/fclasses';
 import React, {
   useState, useRef, useLayoutEffect, FC
@@ -34,11 +35,17 @@ const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof Wrappe
 
 const withoutHydrationServerSide: WithoutHydrationFunction = (
   { WrapperElement = DEFAULT_WRAPPER } = {}
-) => WrappedComponent => props => (
-  <WrapperElement data-no-hydrate>
-    <WrappedComponent {...props} />
-  </WrapperElement>
-);
+) => WrappedComponent => props => {
+  const { path } = useNode().node;
+  const { nodeKey = '' } = {...props};
+  const id = `${path.join('-')}-${nodeKey}`;
+
+  return (
+    <WrapperElement data-no-hydrate id={id}>
+      <WrappedComponent {...props} />
+    </WrapperElement>
+  );
+};
 
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
   onUpdate = null,
@@ -50,11 +57,18 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
     const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
     const [shouldHydrate, setShouldHydrate] = useState<boolean | undefined>(undefined);
 
+    const { path } = useNode().node;
+    const { nodeKey = ''} = {...props};
+    const id = `${path.join('-')}-${nodeKey}`;
+    const tempId = `temp-${id}`;
+    const markup = document.getElementById(tempId)?.innerHTML || '';
+
     useLayoutEffect(() => {
       if (shouldHydrate) return;
       const wasRenderedServerSide = !!rootRef.current?.getAttribute(
         'data-no-hydrate'
       );
+
       setShouldHydrate(
         (!wasRenderedServerSide && !disableFallback) || forceHydration
       );
@@ -65,18 +79,30 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
       onUpdate(props, rootRef.current);
     });
 
+    useLayoutEffect(() => {
+      const tempDiv = document.getElementById(tempId) || document.createElement('div');
+      tempDiv.id = tempId;
+      tempDiv.style.display = 'none';
+      tempDiv.innerHTML = document.getElementById(id)?.innerHTML || '';
+      document.body.append(tempDiv);
+    }, []);
+
     if (!shouldHydrate) {
       return (
         <WrapperElement
+          data-no-hydrate
+          id={id}
           ref={rootRef}
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: '' }}
+          dangerouslySetInnerHTML={{ __html: markup }}
           suppressHydrationWarning
         />
       );
     }
 
-    return <WrappedComponent {...props} />;
+    return (
+      <WrappedComponent {...props} />
+    );
   };
 
   WithoutHydration.displayName = `WithoutHydration(${getDisplayName(WrappedComponent)})`;
