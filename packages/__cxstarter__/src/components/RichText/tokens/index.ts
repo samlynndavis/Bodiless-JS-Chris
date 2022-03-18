@@ -13,7 +13,7 @@
  */
 
 import __cxstarter__RichText from './__cxstarter__RichText';
-//import __cxstarter__RichText from './__cxstarter__RichText.bl-static';
+// import __cxstarter__RichText from './__cxstarter__RichText.bl-static';
 
-//export { __cxstarter__RichText, __cxstarter__RichTextStatic };
+// export { __cxstarter__RichText, __cxstarter__RichTextStatic };
 export { __cxstarter__RichText };

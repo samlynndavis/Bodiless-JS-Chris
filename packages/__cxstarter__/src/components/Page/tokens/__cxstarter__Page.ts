@@ -15,7 +15,7 @@
 import { on } from '@bodiless/fclasses';
 import { asElementToken } from '@bodiless/cx-elements';
 import { cxPage, GenericTemplateClean } from '@bodiless/cx-templates';
-//import { cxPage } from '@bodiless/cx-templates';
+// import { cxPage } from '@bodiless/cx-templates';
 import { __cxstarter__GenericTemplate } from '../../GenericTemplate';
 
 const Default = asElementToken({

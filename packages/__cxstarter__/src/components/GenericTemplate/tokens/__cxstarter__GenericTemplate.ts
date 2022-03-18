@@ -17,6 +17,7 @@ import {
   asGenericTemplateToken,
 } from '@bodiless/cx-templates';
 import { as } from '@bodiless/fclasses';
+import { cxSpacing } from '@bodiless/cx-elements';
 import { __cxstarter__Layout } from '../../Layout';
 import { __cxstarter__FlowContainer } from '../../FlowContainer';
 import { StyleGuide } from './Styleguide';
@@ -29,6 +30,16 @@ const Default = asGenericTemplateToken({
     // TopContent: as(__cxstarter__FlowContainer.Default),
     // Content: as(__cxstarter__FlowContainer.Default),
     // BottomContent: as(__cxstarter__FlowContainer.Default),
+  },
+  Theme: {
+    ContentWrapper: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint
+    ),
+    BottomWrapper: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint
+    ),
   },
   Meta: { title: 'Default' },
 });

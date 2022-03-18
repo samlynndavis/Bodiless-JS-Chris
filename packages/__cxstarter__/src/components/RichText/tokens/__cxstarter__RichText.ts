@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-//import { on } from '@bodiless/fclasses';
-//import { cxRichText, RichTextClean } from '@bodiless/cx-editors';
+// import { on } from '@bodiless/fclasses';
+// import { cxRichText, RichTextClean } from '@bodiless/cx-editors';
 import { cxRichText } from '@bodiless/cx-editors';
 import { asFluidToken } from '@bodiless/cx-elements';
 

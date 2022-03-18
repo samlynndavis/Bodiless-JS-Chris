@@ -20,7 +20,7 @@ import { asLayoutToken } from '../LayoutClean';
 import { cxHeader } from '../../Header';
 import { cxHelmet } from '../../Helmet';
 import { MAIN_CONTENT_ID } from './constants';
-import { cxLayoutStyleGuide } from './cxLayoutStyleGuide';
+import { StyleGuide } from './StyleGuide';
 
 /**
   * Token that defines a basic layout.
@@ -86,5 +86,5 @@ export default {
   Default,
   Header,
   Footer,
-  cxLayoutStyleGuide,
+  StyleGuide,
 };
