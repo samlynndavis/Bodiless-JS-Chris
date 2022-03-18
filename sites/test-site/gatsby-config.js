@@ -39,9 +39,6 @@ const plugins = [
           quality: 90,
         },
       },
-      static: {
-        include: true,
-      }
     },
   },
   {

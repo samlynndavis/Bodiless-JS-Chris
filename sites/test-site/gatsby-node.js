@@ -43,15 +43,4 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
       }
     });
   }
-
-  // if (stage === 'build-javascript') {
-  //   actions.setWebpackConfig({
-  //     resolve: {
-  //       alias: {
-  //         slate$: false,
-  //         'slate-hypertext$': false,
-  //       },
-  //     },
-  //   });
-  // }
 };
