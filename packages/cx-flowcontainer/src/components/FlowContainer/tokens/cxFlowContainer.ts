@@ -5,7 +5,7 @@ import {
 import {
   withMandatoryCategories, withAllTitlesFromTerms, ifComponentSelector,
 } from '@bodiless/layouts';
-import { asFluidToken } from '@bodiless/cx-elements';
+import { asFluidToken, cxSpacing } from '@bodiless/cx-elements';
 import { cxImageFlowContainer } from '@bodiless/cx-image';
 import { cxEditorsFlowContainer } from '@bodiless/cx-editors';
 
@@ -29,17 +29,13 @@ const Base = asFluidToken({
   },
 });
 
-// TODO move to cxSpacing in canvasx-elements;
-const Gutter = 'p-2 md:p-4.5 lg:p-6';
-const GutterOffset = '-mx-2 md:-mx-4.5 lg:-mx-6';
-
 /**
  * Token which constrains a flow container to full width.
  */
 const WithCxGutters = asFluidToken({
   Spacing: {
-    Wrapper: Gutter,
-    ComponentWrapper: GutterOffset,
+    Wrapper: cxSpacing.Gutter,
+    ComponentWrapper: cxSpacing.GutterOffset,
   },
 });
 

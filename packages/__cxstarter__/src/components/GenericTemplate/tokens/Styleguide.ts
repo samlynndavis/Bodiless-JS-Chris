@@ -16,18 +16,17 @@ import {
   as,
   Div,
   replaceWith,
-  on,
 } from '@bodiless/fclasses';
-import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
 import { cxSpacing } from '@bodiless/cx-elements';
-import { asGenericTemplateToken } from '../GenericClean';
+import { asGenericTemplateToken } from '@bodiless/cx-templates';
+import { __cxstarter__Layout } from '../../Layout';
 
 const asBorderResponsiveIndicator = 'border text-red md:text-green lg:text-blue xl:text-orange';
 
 /* Used in StyleGuide for Testing Purposes */
-const cxGenericTestStyleGuide = asGenericTemplateToken({
+const StyleGuide = asGenericTemplateToken({
   Components: {
-    PageWrapper: on(LayoutClean)(cxLayout.Default),
+    PageWrapper: as(__cxstarter__Layout.Default),
     BreadcrumbWrapper: replaceWith(Div),
     Breadcrumb: replaceWith(Div),
     TopWrapper: replaceWith(Div),
@@ -61,4 +60,4 @@ const cxGenericTestStyleGuide = asGenericTemplateToken({
   },
 });
 
-export { cxGenericTestStyleGuide };
+export { StyleGuide };

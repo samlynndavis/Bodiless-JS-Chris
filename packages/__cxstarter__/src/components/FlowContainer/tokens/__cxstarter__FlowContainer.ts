@@ -12,21 +12,25 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/fclasses';
-import { asElementToken } from '@bodiless/cx-elements';
-import { cxPage, GenericTemplateClean } from '@bodiless/cx-templates';
-//import { cxPage } from '@bodiless/cx-templates';
-import { __cxstarter__GenericTemplate } from '../../GenericTemplate';
+import { asFluidToken } from '@bodiless/cx-elements';
+import { cxFlowContainer } from '@bodiless/cx-flowcontainer';
+// import { withRichTextVariations } from '../RichText';
 
-const Default = asElementToken({
-  ...cxPage.Default,
+const Default = asFluidToken({
+  ...cxFlowContainer.Default,
   Components: {
-    // @todo fix Type error
-    _default: on(GenericTemplateClean)(__cxstarter__GenericTemplate.StyleGuide),
+    ...cxFlowContainer.Default.Components,
+    // ...withRichTextVariations.Components,
   },
+  /* @todo
+  Spacing: {
+    ...cxFlowContainer.Default.Spacing,
+    ...cxFlowContainer.WithCxGutters,
+  },
+  */
 });
 
 export default {
-  ...cxPage,
+  ...cxFlowContainer,
   Default,
 };

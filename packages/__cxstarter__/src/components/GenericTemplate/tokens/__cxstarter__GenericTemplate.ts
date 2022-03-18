@@ -13,32 +13,28 @@
  */
 
 import {
-  replaceWith,
-  Fragment,
-  on,
-} from '@bodiless/fclasses';
-import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
-import { asGenericTemplateToken } from '../GenericClean';
+  cxGenericTemplate,
+  asGenericTemplateToken,
+} from '@bodiless/cx-templates';
+import { as } from '@bodiless/fclasses';
+import { __cxstarter__Layout } from '../../Layout';
+import { __cxstarter__FlowContainer } from '../../FlowContainer';
+import { StyleGuide } from './Styleguide';
 
 const Default = asGenericTemplateToken({
+  ...cxGenericTemplate.Default,
   Components: {
-    PageWrapper: on(LayoutClean)(cxLayout.Default),
+    ...cxGenericTemplate.Default.Components,
+    PageWrapper: as(__cxstarter__Layout.Default),
+    // TopContent: as(__cxstarter__FlowContainer.Default),
+    // Content: as(__cxstarter__FlowContainer.Default),
+    // BottomContent: as(__cxstarter__FlowContainer.Default),
   },
-  Schema: {
-  },
-  SEO: {
-  },
-  Theme: {
-  },
-});
-
-const WithoutBreadcrumbs = asGenericTemplateToken({
-  Components: {
-    Breadcrumb: replaceWith(Fragment),
-  },
+  Meta: { title: 'Default' },
 });
 
 export default {
+  ...cxGenericTemplate,
   Default,
-  WithoutBreadcrumbs,
+  StyleGuide,
 };

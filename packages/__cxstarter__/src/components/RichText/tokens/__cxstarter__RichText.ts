@@ -12,21 +12,22 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/fclasses';
-import { asElementToken } from '@bodiless/cx-elements';
-import { cxPage, GenericTemplateClean } from '@bodiless/cx-templates';
-//import { cxPage } from '@bodiless/cx-templates';
-import { __cxstarter__GenericTemplate } from '../../GenericTemplate';
+//import { on } from '@bodiless/fclasses';
+//import { cxRichText, RichTextClean } from '@bodiless/cx-editors';
+import { cxRichText } from '@bodiless/cx-editors';
+import { asFluidToken } from '@bodiless/cx-elements';
 
-const Default = asElementToken({
-  ...cxPage.Default,
+export default {
+  ...cxRichText,
+};
+
+export const withRichTextVariations = asFluidToken({
   Components: {
     // @todo fix Type error
-    _default: on(GenericTemplateClean)(__cxstarter__GenericTemplate.StyleGuide),
+    // EditorFull: on(RichTextClean)(cxRichText.AsFlowContainerItem, __starter__RichText.Default),
   },
 });
 
-export default {
-  ...cxPage,
-  Default,
-};
+// const EditorFull = as(__starter__RichText.Full)(RichTextClean);
+
+// export const withEditorFull: WithEditor = withEditor(EditorFull);

@@ -12,21 +12,8 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/fclasses';
-import { asElementToken } from '@bodiless/cx-elements';
-import { cxPage, GenericTemplateClean } from '@bodiless/cx-templates';
-//import { cxPage } from '@bodiless/cx-templates';
-import { __cxstarter__GenericTemplate } from '../../GenericTemplate';
+import __cxstarter__RichText from './__cxstarter__RichText';
+//import __cxstarter__RichText from './__cxstarter__RichText.bl-static';
 
-const Default = asElementToken({
-  ...cxPage.Default,
-  Components: {
-    // @todo fix Type error
-    _default: on(GenericTemplateClean)(__cxstarter__GenericTemplate.StyleGuide),
-  },
-});
-
-export default {
-  ...cxPage,
-  Default,
-};
+//export { __cxstarter__RichText, __cxstarter__RichTextStatic };
+export { __cxstarter__RichText };
