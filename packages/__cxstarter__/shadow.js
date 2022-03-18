@@ -1,9 +1,6 @@
-const path = require('path');
-
-module.exports = ({ componentName, packageName }) => {
-  const parts = packageName ? packageName.split('/') : [];
+module.exports = ({ componentName, packageName = 'unknown' }) => {
+  const requirePath = `./lib/shadow/${packageName}/${componentName}`;
   try {
-    const requirePath = ['.', 'lib', 'shadow', ...parts, componentName].join('/');
     return require.resolve(requirePath);
   } catch (e) {
     return false;

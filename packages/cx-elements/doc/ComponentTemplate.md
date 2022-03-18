@@ -17,7 +17,7 @@ bodiless.docs.json
     /components
         /{Component}
             index.ts
-            index.bl-edit.ts 
+            index.bl-edit.ts
             index.static.ts
             {Component}Clean.tsx
             tokens/
@@ -94,6 +94,7 @@ import { otherFooBase } from 'some-package';
 const Default = asFooToken(otherFooBase.Default, { ...})
 export default { ...otherFooBase, Default };
 ```
+
 > Note here we extend `otherFooBase` and **not** `otherFoo`.  This is to allow shadowing
 > of `otherFoo` (see below).
 
@@ -110,30 +111,26 @@ export default tokens;
 
 #### `index.bl-edit.ts`
 
-Export the clean component and token collection, including a "Base" version of the token
-collection.
+This file is used in static token replacement (see below). It holds the version
+of a static token and/or clean component which should be rendered in edit mode.
+This will be replaced by empty code in the static, production bundle.
+
+If your token collection is *always* static, export it and the associated clean
+component (if any) from this file.
 
 ```js
 export { default as FooClean } from './FooClean';
 // Note this export will be shadowable.
 export { default as mybrandFoo } from './tokens';
 ```
-
-Note, in many cases you will also want to export a static version of your token
-collection:
+If your token collection is *sometimes* static, export it from this file as an
+alternate version with the `Static` suffix:
 
 ```js
-export { default as FooClean } from './FooClean';
-export {
-  default as mybrandFoo,
-  default as mybrandFooStatic
-} from './tokens';
+export { default as FooStatic } from './FooClean';
+// Note this export will be shadowable.
+export { default as mybrandFooStatic } from './tokens';
 ```
-
-This is useful when your component adds significant weight to the bundle (ususally
-through its dependencies), and you are not sure whether the children of your component
-will need to be hydrated in the browser.  See [Static Replacement](static-replacement)
-below for more information.
 
 #### 'index.static.ts`
 
@@ -141,24 +138,26 @@ If your token is always static, export empty versions of the token and clean com
 
 ```js
 import {
+  StaticBlock as FooClean,  // use``StaticInline` if your component renders inline elements.
   staticTokenCollection as mybrandFoo,
-  StaticComponent as FooClean,
 } from '@bodiless/hydration';
 
 export { FooClean, mybrandFoo };
 ```
 
-If you have both static and a dynamic versions of your token:
+If you have both static and dynamic versions of your token collection:
 
 ```js
-import { staticTokenCollection  as mybrandFooStatic } from '@bodiless/hydration';
+import {
+  StaticBlock as FooStatic,  // use``StaticInline` if your component renders inline elements.
+  staticTokenCollection  as mybrandFooStatic,
+  } from '@bodiless/hydration';
 
-export { mybrandFooStatic };
-export { default mybrandFoo } from './tokens';
-export { default as FooClean } from './FooClean';
+export { FooStatic, mybrandFooStatic };
 ```
 
-> If your token does not have a static version, omit this file.
+> If your token does not have a static version, omit both `index.bl-edit.ts` nd
+> `index.static.ts`.
 
 #### `index.ts`
 
@@ -167,12 +166,21 @@ Also export the "Base" version of the token collection directly from its locatio
 
 ```js
 export { asFooToken, FooComponents } from './FooClean';
-// This export will not be shadowable.
+// This export will not be shadowable because it is exported
+// directy from `cxFoo`.
 export { default as mybrandFooBase } from './tokens/cxFoo';
 // ... any other exports or utilities.
 
 // These exports will be excluded from the static bundle
 export * from './index.bl-edit';
+```
+
+If your token collection is not *always* static, also export the non-static
+version here:
+
+```
+export { default as cxFooClean } from './FooClean';
+export { default as cxFoo } from './tokens';
 ```
 
 ### Top level
@@ -285,6 +293,19 @@ Now, when the production bundle is built, your `index.bl-edit.ts` will be
 replaced by `index.static.ts`, which will cause all your component and token
 code (along with its dependencies) to be excluded from the bundle.
 
+#### When to use static replacement
+
+In general you should enable static replacement for your component or tokens if
+
+- they (or, more likely, their dependencies) add significant weight to the
+production JS bundle, and
+- they do not require React to function in the browser, but only for rendering.
+
+If you know that your component's children will never require hydration, tnen you need
+only export a single, static version.  If its children *may* require hydration, then
+you should export a separate static version, and let the site builder determine
+which is appropriate for her needs.
+
 ## Token Shadowing
 
 Bodiless provides a mechanism to override the tokens provided by a CanvasX
@@ -300,20 +321,34 @@ to enable this feature.
 In order to be shadowable, a token collection must be the *default export* of
 a module which is located at `.../{ComponentName}/tokens`, and this module
 must itself be re-exported from the package by an index file which imports
-it at the *exact path* `./tokens`.  For example:
+it at the *exact path* `./tokens`.
 
-**File `./lib/components/Foo/tokens.ts`**
+You should also export a "base" or unshadowed version of your token collection
+to allow downstream consumers to extend it. You may do this by exporting
+the tokens from their original location.
+
+Example:
+
+**File `./lib/components/Foo/tokens/cxFoo.ts`**
 ```js
 const Default = asFooToken({ ... });
 
 export default { Default }; // Must be a default export.
 ```
 
+**File `./lib/components/Foo/tokens/index.ts`**
+
+```js
+import tokens from './cxFoo';
+export default tokens;
+```
+
 **File `./lib/Foo/index.ts`**
 ```js
-import cxFoo from './tokens';  // Must import from exactly this path.
-
-export { cxFoo }; // Must be a named export.
+// This version will be shadowable bc it is exported from './tokens'.
+export { default as cxFoo } from './tokens';
+// This version will not be shadowable bc it is exported froma a different path.
+export { default as cxFooBase } from './tokens/cxFoo';
 ```
 
 **File './lib/components/index.ts**
@@ -325,36 +360,36 @@ export * from './components/Foo';
 
 To export a shadowed version of a token collection:
 
-1. Add a module to your package which defines the shadowed token collection.  You may
-   import the original token collection from its location in the source package.
-   For example:
+1. Add a module to your package which defines the shadowed token collection. You
+   may import the original base token collection to extend it. For example:
 
-   **File `./lib/shadow/MyComponent.js`**
+   **File `./lib/shadow/base-package/MyComponent.js`**
    ```js
-   // Import the base collection from its original location. Note that it is
-   // the default export.
-   import cxFoo from 'base-package/lib/components/Foo/tokens';
+   // Import the base collection.
+   import { cxFooBase} from 'base-package';
    // *** NOT: import { cxFoo } from 'base-package';
   
    // Override one or more of the tokens in the base collection
-   const SomeToken = asFooToken(tokens.SomeToken, { ... });
+   const SomeToken = asFooToken(cxFooBase.SomeToken, { ... });
   
    // Default export is the overridden token collection.
    export default {
-     ...baseTokens,
+     ...cxFooBase,
      SomeToken,
    };
    ```
 
-2. place a file at your package root called 'shadow.js'.  This should export a
-   single function which receives a component name and returns the *resolved* module
-   shadowed version of the specified token collection. 
+2. place a file at your package root called 'shadow.js'. This should export a
+   single function which receives a component name and package name, and returns
+   the *resolved* module containing the shadowed version of the specified token
+   collection.
 
    **File `shadow.js`***
    ```js
-   module.exports = component => {
+   module.exports = ({ componentName, packageName = 'unknown' }) => {
+     const requirePath = `./lib/shadow/${packageName}/${componentName}`;
      try {
-       return require.resolve(`./lib/shadow/${component}`);
+       return require.resolve(requirePath);
      } catch (e) {
        return false;
      }
@@ -380,8 +415,11 @@ To export a shadowed version of a token collection:
    ```
 
 Some important notes:
-- If you are extending a base token collection, be sure to import it from its
-  original location as a default export, and not by name from the base package.
+- Above we show the contents of the compiled js files containing the shadowed
+  token collections, but you should write them in typescript and compile them
+  to those locations.
+- If you are extending a base token collection, be sure to import it using the
+  `...Base` version name.
 - Ensure that your token shadow resolver (`shadow.js`) uses CJS module syntax.
 - Ensure that all resources directly required (including `shadow.js` and your original
   token file) are included in and exported by your package. In your `package.json`
@@ -400,3 +438,6 @@ Some important notes:
     "./shadow.js": "./shadow.js"
   }
   ```
+- The above pattern for organizing your shadowed token collections is not mandatory.
+  You can use whatever logic you like in `shadow.js` to resove the shadowed token
+  collection.
