@@ -16,13 +16,30 @@
 import webpack from 'webpack';
 import path from 'path';
 
-import type { PluginOptions } from './util';
-import { createLogger, requestIsExcluded } from './util';
-
 const REGEXP = /\.bl-edit/;
 const REPLACEMENT = '.static';
 
-export const createStaticReplacementPlugin = ({ exclude, logging }: PluginOptions) => {
+type IncludeSetting = string[] | RegExp | boolean;
+
+type PluginOptions = {
+  enabled?: boolean
+  logging?: boolean
+  include?: IncludeSetting;
+};
+
+const createLogger = (log = true) => (message: string) => {
+  if (log) console.log(message);
+};
+
+const requestIsIncluded = (requestedFile: string, include?: IncludeSetting) => {
+  if (typeof include === 'boolean') return include;
+
+  if (!include || (Array.isArray(include) && !include.length)) return false;
+
+  return requestedFile.match(include instanceof RegExp ? include : new RegExp(include.join('|')));
+};
+
+const createStaticReplacementPlugin = ({ include, logging }: PluginOptions) => {
   const log = createLogger(logging);
 
   return new webpack.NormalModuleReplacementPlugin(
@@ -30,7 +47,7 @@ export const createStaticReplacementPlugin = ({ exclude, logging }: PluginOption
     resource => {
       const requestedFile = path.join(resource.context, resource.request);
 
-      if (requestIsExcluded(requestedFile, exclude)) {
+      if (!requestIsIncluded(requestedFile, include)) {
         log(`[Static replacement] Skipped excluded import for file ${requestedFile}\n`);
         return;
       }
@@ -58,7 +75,7 @@ export const createStaticReplacementPlugin = ({ exclude, logging }: PluginOption
 export const addStaticReplacementPlugin = (
   webpackConfig: any = {}, pluginOptions: PluginOptions = {}
 ) => {
-  if (pluginOptions.enabled === false) {
+  if (pluginOptions.enabled === false || pluginOptions.include === false) {
     console.log('Bodiless static replacement plugin disabled, no static files will be resolved.');
 
     return webpackConfig;

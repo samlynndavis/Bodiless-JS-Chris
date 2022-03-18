@@ -12,15 +12,17 @@
  * limitations under the License.
  */
 
+import { useNode } from '@bodiless/core';
 import { ComponentOrTag } from '@bodiless/fclasses';
 import React, {
   useState, useRef, useLayoutEffect, FC
 } from 'react';
 import {
-  HydrationHOC,
   WithoutHydrationFunction,
   WithoutHydrationProps
 } from './types';
+
+const DEFAULT_WRAPPER = 'div';
 
 export const isStaticClientSide = !!(
   typeof window !== 'undefined'
@@ -31,26 +33,42 @@ export const isStaticClientSide = !!(
 
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
 
-const withoutHydrationServerSide: HydrationHOC = WrappedComponent => props => (
-  <section data-no-hydrate>
-    <WrappedComponent {...props} />
-  </section>
-);
+const withoutHydrationServerSide: WithoutHydrationFunction = (
+  { WrapperElement = DEFAULT_WRAPPER } = {}
+) => WrappedComponent => props => {
+  const { path } = useNode().node;
+  const { nodeKey = '' } = {...props};
+  const id = `${path.join('-')}-${nodeKey}`;
+
+  return (
+    <WrapperElement data-no-hydrate id={id}>
+      <WrappedComponent {...props} />
+    </WrapperElement>
+  );
+};
 
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
   onUpdate = null,
-  disableFallback = false
+  disableFallback = false,
+  WrapperElement = DEFAULT_WRAPPER,
 } = {}) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
   const WithoutHydration: FC<P & WithoutHydrationProps> = (props) => {
     const { forceHydration = false } = props;
-    const rootRef = useRef<HTMLElement>(null);
+    const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
     const [shouldHydrate, setShouldHydrate] = useState<boolean | undefined>(undefined);
+
+    const { path } = useNode().node;
+    const { nodeKey = ''} = {...props};
+    const id = `${path.join('-')}-${nodeKey}`;
+    const tempId = `temp-${id}`;
+    const markup = document.getElementById(tempId)?.innerHTML || '';
 
     useLayoutEffect(() => {
       if (shouldHydrate) return;
       const wasRenderedServerSide = !!rootRef.current?.getAttribute(
         'data-no-hydrate'
       );
+
       setShouldHydrate(
         (!wasRenderedServerSide && !disableFallback) || forceHydration
       );
@@ -61,18 +79,30 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
       onUpdate(props, rootRef.current);
     });
 
+    useLayoutEffect(() => {
+      const tempDiv = document.getElementById(tempId) || document.createElement('div');
+      tempDiv.id = tempId;
+      tempDiv.style.display = 'none';
+      tempDiv.innerHTML = document.getElementById(id)?.innerHTML || '';
+      document.body.append(tempDiv);
+    }, []);
+
     if (!shouldHydrate) {
       return (
-        <section
+        <WrapperElement
+          data-no-hydrate
+          id={id}
           ref={rootRef}
           // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: '' }}
+          dangerouslySetInnerHTML={{ __html: markup }}
           suppressHydrationWarning
         />
       );
     }
 
-    return <WrappedComponent {...props} />;
+    return (
+      <WrappedComponent {...props} />
+    );
   };
 
   WithoutHydration.displayName = `WithoutHydration(${getDisplayName(WrappedComponent)})`;
@@ -94,25 +124,35 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
  * needs to be expandable by end users. To do this, you can pass an `onUpdate` function in the
  * options object to receive all props passed to the component, and its HTMLElement after it
  * renders. Using the component HTMLElement, you can update it however you want, but be aware that
- * this element will be out of React's scope, so hooks will not work.
+ * this element will be out of React's scope, so hooks won't work inside the `onUpdate` function.
  *
  * You can also pass `disableFallback` as `true` in the options object to make this component
  * not render on the server side. While it will also not hydrate on the client side, you can use
  * `onUpdate` to access its props and modify its element afterwards.
  *
- * The given component will also be able to receive a new prop: `forceHydration`. If you set it
- * to `true`, your component will hydrate on both the server and client side, regardless of the
- * current environment.
+ * The given component will be wrapped in an HTML element that tells React whether to hydrate it
+ * or not. By default, the given component will be wrapped in a `div`. You can change the wrapper
+ * element by passing the `WrapperElement` option. Possible values are 'div' and 'span'. You can
+ * also use `withoutHydrationInline` instead of this function, which defaults to a `span`.
+ *
+ * Finally, the given component will also be able to receive a new prop: `forceHydration`. If you
+ * set it to `true`, your component will hydrate on both the server and client side, regardless of
+ * the current environment.
  *
  * @param options
  * An optional configuration object for the hydration wrapper.
  *
  * @returns
- * A HOC which places the given component inside a <section> wrapper. The components inside
+ * A HOC which places the given component inside a no-hydration wrapper. The components inside
  * this wrapper won't hydrate on the client side in production environments.
  */
 export const withoutHydration: WithoutHydrationFunction = (options) => {
   if (isStaticClientSide) return withoutHydrationClientSide(options);
 
-  return withoutHydrationServerSide;
+  return withoutHydrationServerSide(options);
 };
+
+export const withoutHydrationInline: WithoutHydrationFunction = options => withoutHydration({
+  ...options,
+  WrapperElement: 'span',
+});

@@ -12,5 +12,5 @@
  * limitations under the License.
  */
 
-export { isStaticClientSide, withoutHydration } from './withoutHydration';
+export { isStaticClientSide, withoutHydration, withoutHydrationInline } from './withoutHydration';
 export { WithoutHydrationProps } from './types';

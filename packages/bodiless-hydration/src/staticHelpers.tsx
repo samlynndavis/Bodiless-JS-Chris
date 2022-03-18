@@ -34,7 +34,8 @@ export const staticTokenCollection = new Proxy({}, {
   get: () => staticToken,
 });
 
-export const StaticComponent = withoutHydration()(() => null);
+export const StaticBlock = withoutHydration()(() => null);
+export const StaticInline = withoutHydration({ WrapperElement: 'span' })(() => null);
 
 export const staticFunction = (func: Function) => (...args: any) => {
   staticWarning();

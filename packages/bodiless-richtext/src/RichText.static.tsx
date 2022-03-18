@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { StaticComponent } from '@bodiless/hydration';
+import { StaticBlock } from '@bodiless/hydration';
 
-const RichText = StaticComponent;
+const RichText = StaticBlock;
 
 export default RichText;

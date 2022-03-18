@@ -275,7 +275,7 @@ the name of your brand or design system.)*
 - Export static versions of the component and its token collection. In your
   `index.static.ts`:
   ```
-  export { StaticComponent as MyComponentClean } from '@bodiless/hydration';
+  export { StaticBlock as MyComponentClean } from '@bodiless/hydration';
   export { staticTokenCollection as mybrandMyComponent } from './tokens';
   // Be sure to include any other exports which should not be removed in static mode.
   export { asComponentToken, ... } from './ComponentClean';
