@@ -39,7 +39,7 @@ const requestIsIncluded = (requestedFile: string, include?: IncludeSetting) => {
   return requestedFile.match(include instanceof RegExp ? include : new RegExp(include.join('|')));
 };
 
-const createStaticReplacementPlugin = ({ include, logging }: PluginOptions) => {
+export const createStaticReplacementPlugin = ({ include, logging }: PluginOptions) => {
   const log = createLogger(logging);
 
   return new webpack.NormalModuleReplacementPlugin(
