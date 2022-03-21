@@ -60,5 +60,4 @@ const asHeaderToken = asCxTokenSpec<HeaderComponents>();
 
 export default HeaderClean;
 
-
 export { asHeaderToken, HeaderStatic };
