@@ -19,7 +19,7 @@ import path from 'path';
 const REGEXP = /\.bl-edit/;
 const REPLACEMENT = '.static';
 
-type IncludeSetting = string[] | RegExp | boolean;
+type IncludeSetting = RegExp | boolean;
 
 type PluginOptions = {
   enabled?: boolean
@@ -34,9 +34,9 @@ const createLogger = (log = true) => (message: string) => {
 const requestIsIncluded = (requestedFile: string, include?: IncludeSetting) => {
   if (typeof include === 'boolean') return include;
 
-  if (!include || (Array.isArray(include) && !include.length)) return false;
+  if (!include) return false;
 
-  return requestedFile.match(include instanceof RegExp ? include : new RegExp(include.join('|')));
+  return requestedFile.match(include);
 };
 
 const createStaticReplacementPlugin = ({ include, logging }: PluginOptions) => {
