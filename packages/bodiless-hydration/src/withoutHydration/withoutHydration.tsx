@@ -33,13 +33,16 @@ export const isStaticClientSide = !!(
 
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
 
+const useWrapperId = (props: any) => {
+  const { path } = useNode().node;
+  const { nodeKey = '' } = props;
+  return `${path.join('-')}-${nodeKey}`;
+};
+
 const withoutHydrationServerSide: WithoutHydrationFunction = (
   { WrapperElement = DEFAULT_WRAPPER } = {}
 ) => WrappedComponent => props => {
-  const { path } = useNode().node;
-  const { nodeKey = '' } = {...props};
-  const id = `${path.join('-')}-${nodeKey}`;
-
+  const id = useWrapperId(props);
   return (
     <WrapperElement data-no-hydrate id={id}>
       <WrappedComponent {...props} />
@@ -57,9 +60,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
     const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
     const [shouldHydrate, setShouldHydrate] = useState<boolean | undefined>(undefined);
 
-    const { path } = useNode().node;
-    const { nodeKey = ''} = {...props};
-    const id = `${path.join('-')}-${nodeKey}`;
+    const id = useWrapperId(props);
     const tempId = `temp-${id}`;
     const markup = document.getElementById(tempId)?.innerHTML || '';
 
@@ -79,6 +80,10 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
       onUpdate(props, rootRef.current);
     });
 
+    // When a non-hydrated component is re-mounted in the browser (eg due to a parent
+    // component's dom manipulation), it renders the empty inner html.  Here, we grab
+    // the server-rendered html and stash it in a hidden div so we can restore it if/when the
+    // component re-mounts.
     useLayoutEffect(() => {
       const tempDiv = document.getElementById(tempId) || document.createElement('div');
       tempDiv.id = tempId;
