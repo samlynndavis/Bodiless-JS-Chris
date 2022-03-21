@@ -56,7 +56,6 @@ import {
   HOC,
 } from '@bodiless/fclasses';
 import { withHistory } from 'slate-history';
-import { withoutHydration } from '@bodiless/hydration';
 import {
   withSlateEditor,
   Content,
@@ -346,7 +345,6 @@ const RichText = flow(
   withNode,
   withPreview,
   designable(apply, 'RichText'),
-  withoutHydration(),
 )(BasicRichText) as ComponentType<RichTextProps>;
 
 export default RichText;
