@@ -1,3 +1,12 @@
 {
-  "_dir": "/doc"
+  "Components": {
+    "CX_Elements": {
+      "README.md": "./doc/CX_Elements.md",
+      "CX_SiteTypography.md": "./doc/CX_SiteTypography.md",
+      "CX_Shadow.md": "./doc/CX_Shadow.md"
+    },
+    "assets": {
+      "PXtoREMTemplate.xlsx": "./doc/assets/PXtoREMTemplate.xlsx"
+    }
+  }
 }
