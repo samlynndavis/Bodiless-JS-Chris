@@ -14,11 +14,13 @@
 
 export {
   withoutHydration,
+  withoutHydrationInline,
   isStaticClientSide,
   WithoutHydrationProps,
 } from './withoutHydration';
 export {
-  StaticComponent,
+  StaticBlock,
+  StaticInline,
   staticHOC,
   staticToken,
   staticTokenCollection,

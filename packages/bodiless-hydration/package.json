@@ -25,7 +25,8 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/fclasses": "^1.0.0-beta.1"
+    "@bodiless/fclasses": "^1.0.0-beta.1",
+    "@bodiless/core": "^1.0.0-beta.1"
   },
   "peerDependencies": {
     "react": "^17.0.2"

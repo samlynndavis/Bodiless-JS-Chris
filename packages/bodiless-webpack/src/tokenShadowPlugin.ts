@@ -12,15 +12,33 @@
  * limitations under the License.
  */
 
-/* eslint-disable no-console */
 import webpack, { Configuration } from 'webpack';
 import path from 'path';
+import fs from 'fs';
 import { createLogger, PluginOptions } from './util';
 
 const TOKENS_REGEX = /\.\/tokens$/;
 
+type Resolver = (args: { componentName: string, packageName?: string }) => string;
+
 type TokenShadowPluginOptions = Omit<PluginOptions, 'exclude'> & {
-  resolvers: ((component: string) => string)[];
+  resolvers: Resolver[];
+};
+
+const findPackageName = (resourcePath: string): string|undefined => {
+  if (resourcePath.length === 1) return undefined;
+  const dir = path.dirname(resourcePath);
+  try {
+    const pjPath = path.join(dir, 'package.json');
+    if (fs.existsSync(pjPath)) {
+      const json = fs.readFileSync(pjPath);
+      const pj = JSON.parse(json.toString());
+      if (pj.name) return pj.name;
+    }
+  } catch (e) {
+    return undefined;
+  }
+  return findPackageName(dir);
 };
 
 export const createTokenShadowPlugin = (
@@ -31,10 +49,11 @@ export const createTokenShadowPlugin = (
     TOKENS_REGEX,
     resource => {
       const componentName = path.basename(resource.context);
+      const packageName = findPackageName(resource.context);
       // console.log('componentName', componentName, packages, resource.request);
       // Loop through all packges until we fid one that exports a shadow...
       for (let i = 0; i < resolvers.length; i += 1) {
-        const newRequest = resolvers[i](componentName);
+        const newRequest = resolvers[i]({ componentName, packageName });
         // console.log(componentName, newRequest);
         if (newRequest) {
           log(`[Shadow replacement] Replacing import in ${resource.contextInfo.issuer}`);

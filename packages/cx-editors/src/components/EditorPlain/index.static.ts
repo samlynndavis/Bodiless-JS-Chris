@@ -13,7 +13,7 @@
  */
 
 import {
-  StaticComponent as EditorPlainClean,
+  StaticInline as EditorPlainClean,
   staticTokenCollection as cxEditorPlain,
 } from '@bodiless/hydration';
 
