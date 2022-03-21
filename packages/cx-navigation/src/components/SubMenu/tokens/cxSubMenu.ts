@@ -1,5 +1,5 @@
 import { addProps, as, on } from '@bodiless/fclasses';
-import { cxColor } from '@bodiless/cx-elements';
+import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
 import { asSubMenuToken } from '../SubMenuClean';
 import { cxMenuTitle, MenuTitleClean } from '../../MenuTitle';
 import { withAnalyticsAttr } from '../../../util';
@@ -20,6 +20,7 @@ const Base = asSubMenuToken({
 const Footer = asSubMenuToken(Base, {
   Theme: {
     Title: as(
+      cxTextDecoration.Uppercase,
       cxColor.TextPrimaryFooterCopy,
       'text-base',
       // @todo why is this not an available token in cxFontSize?

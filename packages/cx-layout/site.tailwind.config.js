@@ -20,4 +20,10 @@ module.exports = {
       56: '14rem',
     },
   },
+  variants: {
+    backgroundColor: ['first', 'last', 'responsive'],
+    margin: ['first', 'last', 'responsive'],
+    padding: ['first', 'last', 'responsive'],
+    width: ['first', 'last', 'responsive'],
+  },
 };

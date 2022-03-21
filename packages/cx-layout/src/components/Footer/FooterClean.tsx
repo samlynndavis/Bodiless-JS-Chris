@@ -24,8 +24,8 @@ import type { FooterComponents, FooterProps } from './types';
 const footerComponents: FooterComponents = {
   Wrapper: Div,
   Container: Div,
-  SectionTop: Div,
-  SectionBottom: Div,
+  Column: Div,
+  Row: Div,
   RewardsWrapper: Div,
   Rewards: RewardsClean,
   FooterMenuWrapper: Div,
@@ -39,22 +39,26 @@ const footerComponents: FooterComponents = {
 const FooterCleanBase: FC<FooterProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.Container>
-      <C.SectionTop>
+      <C.Column>
         <C.RewardsWrapper>
           <C.Rewards />
         </C.RewardsWrapper>
-        <C.FooterMenuWrapper>
-          <C.FooterMenu />
-        </C.FooterMenuWrapper>
-      </C.SectionTop>
-      <C.SectionBottom>
-        <C.CopyrightWrapper>
-          <C.Copyright />
-        </C.CopyrightWrapper>
-        <C.SocialLinksWrapper>
-          <C.SocialLinks />
-        </C.SocialLinksWrapper>
-      </C.SectionBottom>
+      </C.Column>
+      <C.Column>
+        <C.Row>
+          <C.FooterMenuWrapper>
+            <C.FooterMenu />
+          </C.FooterMenuWrapper>
+        </C.Row>
+        <C.Row>
+          <C.CopyrightWrapper>
+            <C.Copyright />
+          </C.CopyrightWrapper>
+          <C.SocialLinksWrapper>
+            <C.SocialLinks />
+          </C.SocialLinksWrapper>
+        </C.Row>
+      </C.Column>
     </C.Container>
   </C.Wrapper>
 );

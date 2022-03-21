@@ -17,8 +17,8 @@ import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 type FooterComponents = {
   Wrapper: ComponentOrTag<any>,
   Container: ComponentOrTag<any>,
-  SectionTop: ComponentOrTag<any>,
-  SectionBottom: ComponentOrTag<any>,
+  Column: ComponentOrTag<any>,
+  Row: ComponentOrTag<any>,
   RewardsWrapper: ComponentOrTag<any>,
   Rewards: ComponentOrTag<any>,
   FooterMenuWrapper: ComponentOrTag<any>,

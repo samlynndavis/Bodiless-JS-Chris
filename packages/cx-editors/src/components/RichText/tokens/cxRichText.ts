@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import pick from 'lodash/pick';
 import {
   replaceWith,
   P,
@@ -22,6 +23,7 @@ import {
   H4,
   H5,
   startWith,
+  removeClasses,
 } from '@bodiless/fclasses';
 import {
   asBlock,
@@ -46,6 +48,7 @@ import {
   cxColor,
   cxElement,
   cxFontSize,
+  cxTextDecoration,
 } from '@bodiless/cx-elements';
 import { LinkClean, cxLink } from '@bodiless/cx-link';
 
@@ -89,7 +92,7 @@ const Default = asCxTokenSpec()({
   Content: {
     _: addProps({ placeholder: 'Placeholder' }),
   },
-  Components: {
+  Theme: {
     paragraph: cxElement.Body,
     Bold: cxElement.Bold,
     Underline: cxElement.Underline,
@@ -109,26 +112,39 @@ const Default = asCxTokenSpec()({
   },
 });
 
-const Copyright = asCxTokenSpec()({
+const Basic = asCxTokenSpec()({
   ...Default,
-  Spacing: {
-    paragraph: 'mx-9 py-9 md:mx-0 md:mb-4 md:p-0 lg:mt-2 lg:mb-0 lg:py-0',
-  },
+  Core: pick(Default.Core, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
+  Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
+});
+
+const Copyright = asCxTokenSpec()({
+  ...Basic,
   Theme: {
+    ...Basic.Theme,
     paragraph: as(
       cxColor.TextPrimaryFooterCopy,
       cxFontSize.XS,
-      'border-white-400 border-t border-b md:border-0 lg:text-m-xs',
+      cxTextDecoration.Normal,
+    ),
+    Link: as(
+      cxLink.Default,
+      cxColor.TextPrimaryFooterCopy,
+      cxColor.TextPrimaryInteractive,
+      cxFontSize.XS,
+      cxTextDecoration.Bold,
+      cxTextDecoration.Underline,
+      removeClasses('text-m-base lg:text-base'),
     ),
   },
   Content: {
     _: addProps({ placeholder: 'Insert Copyright' }),
   },
-  Compose: {},
 });
 
 export default {
   Default,
+  Basic,
   AsFlowContainerItem,
   Copyright,
 };

@@ -28,15 +28,14 @@ const FooterMenu = asElementToken({
   Theme: {
     _: as(
       'border-white-400 border-b last:border-0',
-      'md:border-b-0 md:border-l md:last:border-l md:first:border-0',
-      'lg:first:border-l',
+      'md:border-b-0 md:border-r md:last:border-0',
     ),
   },
   Spacing: {
     _: as(
       'mb-9 pb-9 last:mb-0 last:pb-0',
       'md:mb-0 md:pb-0 md:px-10 md:first:pl-0 md:last:pr-0',
-      'lg:px-12 lg:first:pl-12',
+      'lg:px-12',
     ),
   },
 });

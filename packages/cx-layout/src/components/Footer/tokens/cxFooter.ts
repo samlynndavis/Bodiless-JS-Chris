@@ -16,7 +16,7 @@ import { withNode, withNodeKey } from '@bodiless/core';
 import { cxRichText } from '@bodiless/cx-editors';
 import { cxColor } from '@bodiless/cx-elements';
 import { cxMenu } from '@bodiless/cx-navigation';
-import { flowHoc } from '@bodiless/fclasses';
+import { as } from '@bodiless/fclasses';
 import { cxRewards } from '../Rewards';
 import { cxSocialLinks } from '../SocialLinks';
 import { asFooterToken } from '../FooterClean';
@@ -29,36 +29,36 @@ const Base = asFooterToken({
   },
   Layout: {
     Wrapper: 'w-full',
-    SectionTop: 'w-full lg:flex lg:space-between',
-    SectionBottom: 'w-full lg:flex lg:space-between',
-    RewardsWrapper: 'w-full lg:w-1/3',
+    Container: 'lg:flex',
+    Column: 'w-full lg:first:w-1/4 lg:w-3/4',
+    Row: 'w-full lg:flex lg:space-between',
     FooterMenuWrapper: 'w-full',
-    SocialLinksWrapper: 'w-full lg:w-1/5',
+    CopyrightWrapper: 'w-full lg:w-3/4',
+    SocialLinksWrapper: 'w-full lg:w-1/4',
   },
   Spacing: {
     Wrapper: 'mt-10',
-    Container: 'md:px-10 md:py-6 lg:px-6 lg:py-8',
-    SectionTop: 'lg:mb-12',
-    RewardsWrapper: 'p-9 md:mb-8 md:p-0 lg:mb-0 lg:pr-12',
-    FooterMenuWrapper: 'p-9 md:mb-8 md:p-0',
+    Column: 'md:px-10 md:py-6 lg:p-8',
+    Row: 'md:mb-8 md:last:mb-0 lg:mb-12',
+    RewardsWrapper: 'p-9 md:mb-0 md:p-0',
+    FooterMenuWrapper: 'p-9 md:p-0',
+    Copyright: 'mx-9 py-9 md:mx-0 md:mb-4 md:p-0 lg:mt-2 lg:mb-0 lg:py-0',
     SocialLinksWrapper: 'px-10 py-5 md:p-0',
   },
   Theme: {
-    Wrapper: cxColor.BgSecondaryFooter,
-    RewardsWrapper: 'bg-cx-primary-card-bg md:bg-cx-secondary-footer-bg',
+    Column: as(
+      cxColor.BgSecondaryFooter,
+      'first:bg-cx-primary-card-bg md:first:bg-cx-secondary-footer-bg',
+    ),
+    Copyright: 'border-white-400 border-t border-b md:border-0',
   },
   Editors: {
     Copyright: cxRichText.Copyright,
   },
   Schema: {
-    FooterMenu: flowHoc(
-      withNode,
-      withNodeKey({ nodeKey: 'footer', nodeCollection: 'site' }),
-    ),
-    Copyright: flowHoc(
-      withNode,
-      withNodeKey({ nodeKey: 'copyright', nodeCollection: 'site' }),
-    ),
+    FooterMenu: withNodeKey({ nodeKey: 'footer', nodeCollection: 'site' }),
+    Copyright: withNodeKey({ nodeKey: 'copyright', nodeCollection: 'site' }),
+    _: withNode,
   },
 });
 

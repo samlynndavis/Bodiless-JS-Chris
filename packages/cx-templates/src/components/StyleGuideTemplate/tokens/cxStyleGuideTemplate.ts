@@ -48,15 +48,15 @@ const BordersLabels = asStyleGuideTemplateToken({
 
 const HeaderOnly = asStyleGuideTemplateToken({
   ...Default,
-  Theme: {
-    Wrapper: cxLayout.Header,
+  Components: {
+    Wrapper: on(LayoutClean)(cxLayout.HeaderOnly),
   },
 });
 
 const FooterOnly = asStyleGuideTemplateToken({
   ...Default,
-  Theme: {
-    Wrapper: cxLayout.Footer,
+  Components: {
+    Wrapper: on(LayoutClean)(cxLayout.FooterOnly),
   },
 });
 
@@ -64,5 +64,5 @@ export default {
   Default,
   BordersLabels,
   HeaderOnly,
-  FooterOnly
+  FooterOnly,
 };

@@ -49,6 +49,9 @@ const Footer = asMenuToken(Base, {
     Wrapper: 'w-full md:flex md:justify-between md:flex-grow lg:h-full',
     Item: 'md:min-w-1/4 md:w-full',
   },
+  Spacing: {
+    Wrapper: 'lg:mb-12',
+  },
   Theme: {
     // @todo this 'as' is needed only because of a bug and should be removed when it is fixed.
     // See https://github.com/johnsonandjohnson/Bodiless-JS/issues/1455
