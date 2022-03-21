@@ -24,7 +24,7 @@ bodiless.docs.json
               index.ts
               {brand}{Component}.ts
 ```
-THis structure is intended to facilitate two build-time webpack optimizations:
+This structure is intended to facilitate two build-time webpack optimizations:
 - [Static Token Replacement](#static-token-replacement): Removes unnecessary code
   from the production bundle.
 - [Token shadowing](#token-shadowing): Allows a downstream package to define an
