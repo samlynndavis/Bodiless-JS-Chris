@@ -46,7 +46,6 @@ import { ifComponentSelector } from '@bodiless/layouts';
 import {
   asCxTokenSpec,
   cxColor,
-  cxElement,
   cxFontSize,
   cxTextDecorationStatic,
   cxTypographyStatic,
@@ -125,15 +124,15 @@ const Copyright = asCxTokenSpec()({
     paragraph: as(
       cxColor.TextPrimaryFooterCopy,
       cxFontSize.XS,
-      cxTextDecoration.Normal,
+      cxTextDecorationStatic.Normal,
     ),
     Link: as(
       cxLink.Default,
       cxColor.TextPrimaryFooterCopy,
       cxColor.TextPrimaryInteractive,
       cxFontSize.XS,
-      cxTextDecoration.Bold,
-      cxTextDecoration.Underline,
+      cxTextDecorationStatic.Bold,
+      cxTextDecorationStatic.Underline,
       removeClasses('text-m-base lg:text-base'),
     ),
   },

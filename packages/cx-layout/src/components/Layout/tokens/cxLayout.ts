@@ -11,14 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import { cxSpacing } from '@bodiless/cx-elements';
 import {
   addProps,
   as,
-  Div,
   on,
-  replaceWith,
 } from '@bodiless/fclasses';
-import { cxElement } from '@bodiless/cx-elements';
 import { asLayoutToken } from '../LayoutClean';
 import { cxFooter, FooterClean } from '../../Footer';
 import { cxHeader, HeaderClean } from '../../Header';
@@ -63,11 +62,11 @@ const ConstrainSite = asLayoutToken({
     // TODO The tokens on this ContainerWrapper will move to be controlled by
     // content within Templates.
     ContainerWrapper: as(
-      cxElement.WithSiteMargin,
-      cxElement.WithSiteXLConstraint,
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint,
     ),
-    HeaderWrapper: cxElement.WithSiteXLConstraint,
-    FooterWrapper: cxElement.WithSiteXLConstraint,
+    HeaderWrapper: cxSpacing.WithSiteXLConstraint,
+    FooterWrapper: cxSpacing.WithSiteXLConstraint,
   },
 });
 
