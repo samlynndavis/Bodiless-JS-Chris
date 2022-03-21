@@ -13,7 +13,7 @@
  */
 
 import identity from 'lodash/identity';
-import { createDeserializer, TagName } from './htmlSerializer';
+import { createDeserializer, TagName } from './htmlSerializer.bl-edit';
 
 const createBoldDeserializer = () => ({
   ...createDeserializer({

@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export * from './withEditor.bl-edit';
+export * from './withEditor';
