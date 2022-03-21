@@ -13,16 +13,14 @@
  */
 
 import { on } from '@bodiless/fclasses';
-import { asElementToken } from '@bodiless/cx-elements';
-import { cxPage, GenericTemplateClean } from '@bodiless/cx-templates';
-// import { cxPage } from '@bodiless/cx-templates';
-import { __cxstarter__GenericTemplate } from '../../GenericTemplate';
+import { asFluidToken } from '@bodiless/cx-elements';
+import { cxPage, GenericTemplateClean, cxGenericTemplate } from '@bodiless/cx-templates';
 
-const Default = asElementToken({
+const Default = asFluidToken({
   ...cxPage.Default,
   Components: {
-    // @todo fix Type error
-    _default: on(GenericTemplateClean)(__cxstarter__GenericTemplate.StyleGuide),
+    // @todo change to Default when done testing
+    _default: on(GenericTemplateClean)(cxGenericTemplate.StyleGuide),
   },
 });
 

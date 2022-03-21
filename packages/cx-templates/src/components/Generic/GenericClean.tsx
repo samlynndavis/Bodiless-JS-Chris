@@ -20,6 +20,7 @@ import {
 } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { LayoutClean } from '@bodiless/cx-layout';
+import { FlowContainerClean } from '@bodiless/cx-flowcontainer';
 import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
 
 const genericTemplateComponents: GenericTemplateComponents = {
@@ -27,18 +28,17 @@ const genericTemplateComponents: GenericTemplateComponents = {
   BreadcrumbWrapper: Fragment,
   Breadcrumb: Fragment,
   TopWrapper: Div,
-  TopContent: Fragment,
+  TopContent: FlowContainerClean,
   ContentWrapper: Div,
-  Content: Fragment,
+  Content: FlowContainerClean,
   BottomWrapper: Div,
-  BottomContent: Fragment,
+  BottomContent: FlowContainerClean,
 };
 
 const GenericTemplateBase = (props: BaseGenericTemplateProps) => {
   const { components: C } = props;
   return (
     <C.PageWrapper>
-
       <C.TopWrapper>
         <C.TopContent />
       </C.TopWrapper>

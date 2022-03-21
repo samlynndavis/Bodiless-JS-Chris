@@ -13,4 +13,4 @@
  */
 
 export { default as cxSpacing } from './tokens';
-export { default as cxSpacingStatic } from './tokens';
+export { default as cxSpacingBase } from './tokens/cxSpacing';

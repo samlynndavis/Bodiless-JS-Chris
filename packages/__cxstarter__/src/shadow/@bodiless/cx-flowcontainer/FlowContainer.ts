@@ -12,4 +12,24 @@
  * limitations under the License.
  */
 
-export { __cxstarter__FlowContainer } from './tokens';
+import { asFluidToken } from '@bodiless/cx-elements';
+import { cxFlowContainer } from '@bodiless/cx-flowcontainer';
+import { cxEditorsFlowContainer } from '@bodiless/cx-editors';
+
+const Default = asFluidToken({
+  ...cxFlowContainer.Default,
+  Components: {
+    ...cxEditorsFlowContainer,
+  },
+  /*
+  Spacing: {
+    ...cxFlowContainer.Default.Spacing,
+    ...cxFlowContainer.WithCxGutters,
+  },
+  */
+});
+
+export default {
+  ...cxFlowContainer,
+  Default,
+};

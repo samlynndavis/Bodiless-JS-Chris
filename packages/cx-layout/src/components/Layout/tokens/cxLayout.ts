@@ -53,7 +53,7 @@ const Base = asLayoutToken({
  * to contain content until we get to xl and then constrain by max-width.
  */
 const ConstrainSite = asLayoutToken({
-  Theme: {
+  Spacing: {
     HeaderWrapper: cxSpacing.WithSiteXLConstraint,
     FooterWrapper: cxSpacing.WithSiteXLConstraint,
   },
@@ -77,8 +77,11 @@ const Default = asLayoutToken({
     ...Base.Components,
     ...Header.Components,
     ...Footer.Components,
-    ...ConstrainSite.Theme,
   },
+  Spacing: {
+    ...Base.Spacing,
+    ...ConstrainSite.Spacing,
+  }
 });
 
 export default {

@@ -15,26 +15,19 @@ import {
   addProps,
   as,
   Div,
-  replaceWith,
+  startWith,
 } from '@bodiless/fclasses';
 import { cxSpacing } from '@bodiless/cx-elements';
-import { asGenericTemplateToken } from '@bodiless/cx-templates';
-import { __cxstarter__Layout } from '../../Layout';
+import { cxLayout } from '@bodiless/cx-layout';
+import { asGenericTemplateToken } from '../GenericClean';
 
 const asBorderResponsiveIndicator = 'border text-red md:text-green lg:text-blue xl:text-orange';
 
 /* Used in StyleGuide for Testing Purposes */
 const StyleGuide = asGenericTemplateToken({
   Components: {
-    PageWrapper: as(__cxstarter__Layout.Default),
-    BreadcrumbWrapper: replaceWith(Div),
-    Breadcrumb: replaceWith(Div),
-    TopWrapper: replaceWith(Div),
-    TopContent: replaceWith(Div),
-    ContentWrapper: replaceWith(Div),
-    Content: replaceWith(Div),
-    BottomWrapper: replaceWith(Div),
-    BottomContent: replaceWith(Div),
+    PageWrapper: as(cxLayout.Default),
+    Breadcrumb: startWith(Div),
   },
   Theme: {
     Breadcrumb: asBorderResponsiveIndicator,
@@ -54,9 +47,6 @@ const StyleGuide = asGenericTemplateToken({
   },
   Behavior: {
     Breadcrumb: as(addProps({ children: 'Breadcrumb', }),),
-    TopContent: as(addProps({ children: 'Top Content', }),),
-    Content: as(addProps({ children: 'Content', }),),
-    BottomContent: as(addProps({ children: 'Bottom Content', }),),
   },
 });
 
