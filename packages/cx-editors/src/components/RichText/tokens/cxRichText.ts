@@ -61,7 +61,6 @@ const AsFlowContainerItem = asCxTokenSpec()({
   Meta: flowHoc.meta.term('Type')('Text Editor'),
 });
 
-// QUESTION -- I had to bring in the definitions to get right order as () didn't work.
 const Default = asCxTokenSpec()({
   Core: {
     paragraph: as(replaceWith(P), asBlock as HOC),
