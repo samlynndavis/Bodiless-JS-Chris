@@ -14,7 +14,7 @@
 
 export {
   default as RichText,
-} from './RichText.bl-edit';
+} from './RichText';
 export { asPreview } from './RichTextPreview.bl-edit';
 export { default as asFloat } from './Float.bl-edit';
 export * from './RichTextItemGetters.bl-edit';
