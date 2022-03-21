@@ -3,16 +3,10 @@ export const createLogger = (log = true) => (message: string) => {
   if (log) console.log(message);
 };
 
-type ExcludeSetting = string[] | RegExp;
+type IncludeSetting = RegExp | boolean;
 
 export type PluginOptions = {
-  enabled?: boolean
-  logging?: boolean
-  exclude?: ExcludeSetting;
-};
-
-export const requestIsExcluded = (requestedFile: string, exclude?: ExcludeSetting) => {
-  if (!exclude || (Array.isArray(exclude) && !exclude.length)) return false;
-
-  return requestedFile.match(exclude instanceof RegExp ? exclude : new RegExp(exclude.join('|')));
+  enabled?: boolean,
+  logging?: boolean,
+  include?: IncludeSetting,
 };

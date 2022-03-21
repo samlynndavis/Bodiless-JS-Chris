@@ -15,23 +15,13 @@
 /* eslint-disable no-console */
 import webpack from 'webpack';
 import path from 'path';
+import { createLogger } from './util';
+import type { PluginOptions } from './util';
 
 const REGEXP = /\.bl-edit/;
 const REPLACEMENT = '.static';
 
-type IncludeSetting = RegExp | boolean;
-
-type PluginOptions = {
-  enabled?: boolean
-  logging?: boolean
-  include?: IncludeSetting;
-};
-
-const createLogger = (log = true) => (message: string) => {
-  if (log) console.log(message);
-};
-
-const requestIsIncluded = (requestedFile: string, include?: IncludeSetting) => {
+const requestIsIncluded = (requestedFile: string, include?: PluginOptions['include']) => {
   if (typeof include === 'boolean') return include;
 
   if (!include) return false;
