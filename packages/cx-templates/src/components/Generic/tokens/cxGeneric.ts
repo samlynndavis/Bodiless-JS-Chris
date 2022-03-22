@@ -20,22 +20,34 @@ import {
 } from '@bodiless/fclasses';
 import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
 import { cxFlowContainer } from '@bodiless/cx-flowcontainer';
+import { withNodeKey } from '@bodiless/core';
+import { cxSpacing } from '@bodiless/cx-elements';
 import { asGenericTemplateToken } from '../GenericClean';
+import { GenericPageNodeKeys } from '../constants';
 
 const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(cxLayout.Default),
-    // @todo switch TopContent to Flowcontainer with specific components.
-    TopContent: as(cxFlowContainer.Default),
+    TopContent: as(cxFlowContainer.Top),
     Content: as(cxFlowContainer.Default),
     BottomContent: as(cxFlowContainer.Default),
   },
   Schema: {
+    TopContent: withNodeKey(GenericPageNodeKeys.TopContent),
+    Content: withNodeKey(GenericPageNodeKeys.Content),
+    BottomContent: withNodeKey(GenericPageNodeKeys.BottomContent),
   },
-  SEO: {
-  },
-  Theme: {
-  },
+  Spacing: {
+    TopContent: cxSpacing.WithSiteXLConstraint,
+    ContentWrapper: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint
+    ),
+    BottomWrapper: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint
+    ),
+  }
 });
 
 const WithoutBreadcrumbs = asGenericTemplateToken({

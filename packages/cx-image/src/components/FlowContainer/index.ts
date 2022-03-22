@@ -1,6 +1,6 @@
 import { asFluidToken, asMetaToken } from '@bodiless/cx-elements';
 import {
-  flowHoc, Img, on, varyDesigns, withDesign
+  Img, on, varyDesigns, withDesign, as, flowHoc
 } from '@bodiless/fclasses';
 import { cxImage } from '../Img';
 
@@ -16,8 +16,14 @@ const baseVariation = {
 // not be overridden from the design context. This allows a site to override
 // the base image globally, while still preserving variations in the flow container.
 const placeholderVariations = {
-  Square: asMetaToken(flowHoc.meta.term('Placeholder')('Square')),
-  Landscape: cxImage.WithLandscapePlaceholder,
+  Square: as(
+    cxImage.Default,
+    asMetaToken(flowHoc.meta.term('Placeholder')('Square')),
+  ),
+  Landscape: as(
+    cxImage.Default,
+    cxImage.WithLandscapePlaceholder,
+  ),
 };
 
 /**
