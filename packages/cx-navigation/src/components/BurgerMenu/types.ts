@@ -15,10 +15,24 @@
 import { HTMLProps } from 'react';
 import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-export type MenuTogglerComponents = {
+type BurgerMenuComponents = {
   Wrapper: ComponentOrTag<any>,
-  Icon: ComponentOrTag<any>,
+  Container: ComponentOrTag<any>,
+  MenuContainer: ComponentOrTag<any>,
+  MenuTogglerWrapper: ComponentOrTag<any>,
+  MenuToggler: ComponentOrTag<any>,
+  MenuWrapper: ComponentOrTag<any>,
+  Menu: ComponentOrTag<any>,
+  ActionMenuContainer: ComponentOrTag<any>,
+  UtilityMenuWrapper: ComponentOrTag<any>,
+  UtilityMenu: ComponentOrTag<any>,
+  LanguageButton: ComponentOrTag<any>,
+  Overlay: ComponentOrTag<any>,
 };
 
-export type MenuTogglerProps =
-  DesignableComponentsProps<MenuTogglerComponents> & HTMLProps<HTMLElement>;
+type BurgerMenuProps = DesignableComponentsProps<BurgerMenuComponents> & HTMLProps<HTMLElement>;
+
+export type {
+  BurgerMenuComponents,
+  BurgerMenuProps,
+};

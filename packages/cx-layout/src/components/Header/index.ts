@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-export { HeaderClean, asHeaderToken } from './HeaderClean';
-export { cxHeader } from './cxHeader';
-export { HeaderComponents, HeaderProps } from './types';
+export { default as HeaderClean, asHeaderToken } from './HeaderClean';
+export { default as cxHeader } from './tokens';
+export type { HeaderComponents, HeaderProps } from './types';
