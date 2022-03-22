@@ -19,8 +19,7 @@ import { cxPage, GenericTemplateClean, cxGenericTemplate } from '@bodiless/cx-te
 const Default = asFluidToken({
   ...cxPage.Default,
   Components: {
-    // @todo change to Default when done testing
-    _default: on(GenericTemplateClean)(cxGenericTemplate.StyleGuide),
+    _default: on(GenericTemplateClean)(cxGenericTemplate.Default),
   },
 });
 

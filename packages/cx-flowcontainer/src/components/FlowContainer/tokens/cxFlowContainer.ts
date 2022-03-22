@@ -119,6 +119,7 @@ const WithContentRegionVariations = asFluidToken({
 const Default = asFluidToken(
   Base,
   WithBaseVariations,
+  WithCxGutters,
   WithContentRegionVariations,
 );
 

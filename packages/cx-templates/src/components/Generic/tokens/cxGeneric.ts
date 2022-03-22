@@ -16,14 +16,19 @@ import {
   replaceWith,
   Fragment,
   on,
+  as,
 } from '@bodiless/fclasses';
 import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
+import { cxFlowContainer } from '@bodiless/cx-flowcontainer';
 import { asGenericTemplateToken } from '../GenericClean';
-import { StyleGuide } from './Styleguide';
 
 const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(cxLayout.Default),
+    // @todo switch TopContent to Flowcontainer with specific components.
+    TopContent: as(cxFlowContainer.Default),
+    Content: as(cxFlowContainer.Default),
+    BottomContent: as(cxFlowContainer.Default),
   },
   Schema: {
   },
@@ -42,5 +47,4 @@ const WithoutBreadcrumbs = asGenericTemplateToken({
 export default {
   Default,
   WithoutBreadcrumbs,
-  StyleGuide,
 };
