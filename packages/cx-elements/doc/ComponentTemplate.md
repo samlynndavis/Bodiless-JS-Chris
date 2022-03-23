@@ -6,7 +6,7 @@ should follow these conventions.
 ## File structure
 
 Packages defining CanvasX components and/or tokens should use the following
-file structure.
+file structure.  Some files are optional; see below for full details.
 ```
 package.json
 tsconfig.json
@@ -70,7 +70,8 @@ export const asFooToken = asCxTokenSpec<FooComponents>();
 ```
 
 > In some cases, there will be no clean component; for example, if a package is
-> merely providing tokens for a component defined elsewhere.
+> merely providing tokens for a component defined elsewhere.  In such cases,
+> this file may be omitted.
 
 #### `tokens/{brand}{Component}.ts`
 
