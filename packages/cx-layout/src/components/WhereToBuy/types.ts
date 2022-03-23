@@ -12,29 +12,18 @@
  * limitations under the License.
  */
 
-import { HTMLProps } from 'react';
 import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-type BurgerMenuComponents = {
+type WhereToBuyComponents = {
   Wrapper: ComponentOrTag<any>,
-  Container: ComponentOrTag<any>,
-  MenuTogglerWrapper: ComponentOrTag<any>,
-  MenuToggler: ComponentOrTag<any>,
-  MenuWrapper: ComponentOrTag<any>,
-  Menu: ComponentOrTag<any>,
-  FooterWrapper: ComponentOrTag<any>,
-  WhereToBuyWrapper: ComponentOrTag<any>,
-  WhereToBuy: ComponentOrTag<any>,
-  ActionFooterContainer: ComponentOrTag<any>,
-  UtilityMenuWrapper: ComponentOrTag<any>,
-  UtilityMenu: ComponentOrTag<any>,
-  LanguageButton: ComponentOrTag<any>,
-  Overlay: ComponentOrTag<any>,
+  Button: ComponentOrTag<any>,
+  Icon: ComponentOrTag<any>,
+  Label: ComponentOrTag<any>,
 };
 
-type BurgerMenuProps = DesignableComponentsProps<BurgerMenuComponents> & HTMLProps<HTMLElement>;
+type WhereToBuyProps = DesignableComponentsProps<WhereToBuyComponents>;
 
 export type {
-  BurgerMenuComponents,
-  BurgerMenuProps,
+  WhereToBuyComponents,
+  WhereToBuyProps,
 };

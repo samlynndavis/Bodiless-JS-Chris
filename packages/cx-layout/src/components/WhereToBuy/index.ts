@@ -12,30 +12,6 @@
  * limitations under the License.
  */
 
-import { addProps } from '@bodiless/fclasses';
-import { asDesktopSearchToken } from './DesktopSearchClean';
-
-/**
- * Token that defines a basic header.
- */
-const Base = asDesktopSearchToken({
-  Layout: {
-    Wrapper: 'flex items-center',
-  },
-  Spacing: {
-    Wrapper: 'px-4 lg:pl-0',
-    Icon: 'm-3'
-  },
-  Content: {
-    Label: addProps({ children: 'Search' })
-  }
-});
-
-const Default = asDesktopSearchToken({
-  ...Base,
-});
-
-export const cxDesktopSearch = {
-  Base,
-  Default,
-};
+export { default as WhereToBuyClean, asWhereToBuyToken } from './WhereToBuyClean';
+export { default as cxWhereToBuy } from './tokens';
+export type { WhereToBuyComponents, WhereToBuyProps } from './types';

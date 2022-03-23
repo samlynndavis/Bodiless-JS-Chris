@@ -51,30 +51,24 @@ const Base = asBurgerMenuToken({
     MenuToggler: cxMenuToggler.Close,
     Menu: cxMenu.Burger,
     UtilityMenu: cxMenu.Utility,
-    // @TODO: Replace LanguageButton placeholder.
-    LanguageButton: flowHoc(
-      replaceWith(Span),
-      withProps({
-        children: 'Español',
-        className: 'px-4 border-l-2 border-gray-400',
-      }),
-    ),
   },
   Layout: {
     Wrapper: 'w-full h-full fixed left-0 top-0 lg:hidden',
     Container: 'flex flex-col',
-    ActionMenuContainer: 'w-full flex justify-center fixed left-0 bottom-0',
+    FooterWrapper: 'w-full fixed left-0 bottom-0',
+    ActionFooterContainer: 'w-full flex justify-center',
   },
   Spacing: {
-    MenuContainer: 'm-6',
-    ActionMenuContainer: 'py-4',
+    MenuWrapper: 'p-6',
+    FooterWrapper: 'p-6',
+    ActionFooterContainer: 'mt-4',
   },
   Theme: {
     Wrapper: as(
       cxColor.BgPrimaryCard,
       'z-10',
     ),
-    ActionMenuContainer: 'border-t',
+    FooterWrapper: 'border-t',
   },
 });
 

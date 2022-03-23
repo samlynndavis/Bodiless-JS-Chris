@@ -48,7 +48,7 @@ const UtilityMenu = asElementToken({
     },
   },
   Theme: {
-    _: 'px-4 border-l-2 border-gray-400',
+    _: 'px-4 lg:border-l-2 lg:border-gray-400',
   },
 });
 

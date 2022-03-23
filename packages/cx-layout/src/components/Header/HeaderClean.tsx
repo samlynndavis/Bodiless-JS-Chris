@@ -22,6 +22,7 @@ import {
 } from '@bodiless/cx-navigation';
 import { LogoClean } from '../Logo';
 import { SearchTogglerClean, DesktopSearchClean } from '../Search';
+import { WhereToBuyClean } from '../WhereToBuy';
 import type { HeaderComponents, HeaderProps } from './types';
 
 const headerComponents: HeaderComponents = {
@@ -41,6 +42,8 @@ const headerComponents: HeaderComponents = {
   DesktopSearch: DesktopSearchClean,
   SearchToggler: SearchTogglerClean,
   LanguageButton: Fragment,
+  WhereToBuyWrapper: Fragment,
+  WhereToBuy: WhereToBuyClean,
 };
 
 const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
@@ -61,6 +64,9 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
             <C.UtilityMenu />
           </C.UtilityMenuWrapper>
           <C.LanguageButton />
+          <C.WhereToBuyWrapper>
+            <C.WhereToBuy />
+          </C.WhereToBuyWrapper>
         </C.ActionMenuContainer>
       </C.MenuContainer>
       <C.BurgerMenuWrapper>

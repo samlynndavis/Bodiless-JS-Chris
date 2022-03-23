@@ -30,6 +30,8 @@ export type HeaderComponents = {
   UtilityMenuWrapper: ComponentOrTag<any>,
   UtilityMenu: ComponentOrTag<any>,
   LanguageButton: ComponentOrTag<any>,
+  WhereToBuyWrapper: ComponentOrTag<any>,
+  WhereToBuy: ComponentOrTag<any>,
   DesktopSearch: ComponentOrTag<any>,
   SearchToggler: ComponentOrTag<any>,
 };

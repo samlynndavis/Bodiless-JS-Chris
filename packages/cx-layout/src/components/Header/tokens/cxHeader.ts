@@ -24,6 +24,7 @@ import {
 } from '@bodiless/cx-navigation';
 import {
   Span,
+  as,
   flowHoc,
   replaceWith,
   withDesign,
@@ -31,7 +32,18 @@ import {
 } from '@bodiless/fclasses';
 import { cxLogo } from '../../Logo';
 import { cxDesktopSearch, cxSearchToggler } from '../../Search';
+import { cxWhereToBuy, WhereToBuyClean } from '../../WhereToBuy';
 import { asHeaderToken } from '../HeaderClean';
+
+// @TODO: Get rid of this after language button is implemented.
+const WithLanguageButton = flowHoc(
+  replaceWith(Span),
+  withProps({
+    children: 'Español',
+    // @TODO: Create separator tokens.
+    className: 'px-4 border-l-2 border-gray-400 lg:mr-4 lg:border-r-2',
+  }),
+);
 
 /**
  * Token that defines a basic header.
@@ -42,17 +54,21 @@ const Base = asHeaderToken({
     SearchToggler: cxSearchToggler.Default,
     Logo: cxLogo.Default,
     Menu: cxMenu.TopNav,
-    BurgerMenu: cxBurgerMenu.Default,
+    BurgerMenu: flowHoc(
+      as(cxBurgerMenu.Default),
+      // @TODO: Is there a better way to inject WhereToBuy and (future) LanguageButton
+      // components into the menu? Maybe, move the components to another package...
+      withDesign({
+        WhereToBuy: replaceWith(as(cxWhereToBuy.Default)(WhereToBuyClean)),
+        // @TODO: Replace LanguageButton placeholder.
+        LanguageButton: WithLanguageButton,
+      }),
+    ),
     DesktopSearch: cxDesktopSearch.Default,
     UtilityMenu: cxMenu.Utility,
     // @TODO: Replace LanguageButton placeholder.
-    LanguageButton: flowHoc(
-      replaceWith(Span),
-      withProps({
-        children: 'Español',
-        className: 'px-4 border-l-2 border-gray-400',
-      }),
-    ),
+    LanguageButton: WithLanguageButton,
+    WhereToBuy: cxWhereToBuy.Default,
   },
   Theme: {
     Wrapper: cxColor.BgPrimaryCard,
@@ -71,7 +87,8 @@ const Base = asHeaderToken({
       Wrapper: 'mx-4',
     }),
     Container: 'mx-auto py-4',
-  }
+    ActionMenuContainer: 'px-4',
+  },
 });
 
 const Default = asHeaderToken({

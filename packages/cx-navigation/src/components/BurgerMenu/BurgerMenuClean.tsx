@@ -22,12 +22,14 @@ import type { BurgerMenuComponents, BurgerMenuProps } from './types';
 const burgerMenuComponents: BurgerMenuComponents = {
   Wrapper: Div,
   Container: Div,
-  MenuContainer: Div,
   MenuTogglerWrapper: Fragment,
   MenuToggler: MenuTogglerClean,
-  MenuWrapper: Fragment,
+  MenuWrapper: Div,
   Menu: MenuClean,
-  ActionMenuContainer: Div,
+  FooterWrapper: Div,
+  WhereToBuyWrapper: Fragment,
+  WhereToBuy: Fragment,
+  ActionFooterContainer: Div,
   UtilityMenuWrapper: Fragment,
   UtilityMenu: MenuClean,
   LanguageButton: Fragment,
@@ -41,17 +43,20 @@ const BurgerMenuCleanBase: FC<BurgerMenuProps> = ({ components: C, ...rest }) =>
         <C.MenuTogglerWrapper>
           <C.MenuToggler />
         </C.MenuTogglerWrapper>
-        <C.MenuContainer>
-          <C.MenuWrapper>
-            <C.Menu />
-          </C.MenuWrapper>
-          <C.ActionMenuContainer>
+        <C.MenuWrapper>
+          <C.Menu />
+        </C.MenuWrapper>
+        <C.FooterWrapper>
+          <C.WhereToBuyWrapper>
+            <C.WhereToBuy />
+          </C.WhereToBuyWrapper>
+          <C.ActionFooterContainer>
             <C.UtilityMenuWrapper>
               <C.UtilityMenu />
             </C.UtilityMenuWrapper>
             <C.LanguageButton />
-          </C.ActionMenuContainer>
-        </C.MenuContainer>
+          </C.ActionFooterContainer>
+        </C.FooterWrapper>
       </C.Container>
     </C.Wrapper>
     <C.Overlay />
