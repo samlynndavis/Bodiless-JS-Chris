@@ -12,10 +12,6 @@
  * limitations under the License.
  */
 
-import React from 'react';
+import cxGeneric from './cxGeneric';
 
-export default () => (
-  <>
-    Placeholder home page
-  </>
-);
+export default cxGeneric;

@@ -11,6 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { cxSpacing } from '@bodiless/cx-elements';
 import {
   addProps,
   as,
@@ -22,27 +23,31 @@ import { asLayoutToken } from '../LayoutClean';
 const asBorderResponsiveIndicator = 'border text-red md:text-green lg:text-blue xl:text-orange';
 
 /* Used in StyleGuide for Testing Purposes */
-const WithBordersLabels = asLayoutToken({
+const StyleGuide = asLayoutToken({
   Components: {
-    SiteHeader: replaceWith(Div),
-    SiteFooter: replaceWith(Div),
+    Header: replaceWith(Div),
+    Footer: replaceWith(Div),
     PageTopper: replaceWith(Div),
     PageCloser: replaceWith(Div),
   },
   Theme: {
     OuterContainer: 'border',
-    SiteHeader: asBorderResponsiveIndicator,
-    SiteFooter: asBorderResponsiveIndicator,
-    Container: asBorderResponsiveIndicator,
+    Header: asBorderResponsiveIndicator,
+    Footer: asBorderResponsiveIndicator,
+    Container: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint,
+      asBorderResponsiveIndicator,
+    ),
     PageTopper: asBorderResponsiveIndicator,
     PageCloser: asBorderResponsiveIndicator,
   },
   Behavior: {
-    SiteHeader: as(addProps({ children: 'Site Header', }),),
-    SiteFooter: as(addProps({ children: 'Site Footer', }),),
+    Header: as(addProps({ children: 'Site Header', }),),
+    Footer: as(addProps({ children: 'Site Footer', }),),
     PageTopper: as(addProps({ children: 'Page Topper', }),),
     PageCloser: as(addProps({ children: 'Page Closer', }),),
   },
 });
 
-export { WithBordersLabels };
+export { StyleGuide };

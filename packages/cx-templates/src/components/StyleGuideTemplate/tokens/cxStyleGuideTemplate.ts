@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { cxTypography } from '@bodiless/cx-elements';
+import { cxSpacing, cxTypography } from '@bodiless/cx-elements';
 import {
   EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
 } from '@bodiless/cx-editors';
@@ -22,11 +22,15 @@ import { cxLayout, LayoutClean } from '@bodiless/cx-layout';
 import { asStyleGuideTemplateToken } from '../StyleGuideTemplateClean';
 
 const Default = asStyleGuideTemplateToken({
-  Theme: {
-    TitleWrapper: cxTypography.H1,
-  },
   Components: {
     Wrapper: on(LayoutClean)(cxLayout.Default),
+  },
+  Theme: {
+    TitleWrapper: cxTypography.H1,
+    Container: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint
+    ),
   },
   Editors: {
     Title: on(EditorPlainClean)(cxEditorPlain.Default),
