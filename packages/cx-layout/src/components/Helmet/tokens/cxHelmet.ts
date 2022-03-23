@@ -13,7 +13,7 @@
  */
 import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
 import { as } from '@bodiless/fclasses';
-import { asHelmetToken } from './HelmetClean';
+import { asHelmetToken } from '../HelmetClean';
 
 const Default = asHelmetToken({
   Components: {
@@ -33,4 +33,4 @@ const Default = asHelmetToken({
   }
 });
 
-export const cxHelmet = { Default };
+export default { Default };

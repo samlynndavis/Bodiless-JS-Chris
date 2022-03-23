@@ -6,7 +6,7 @@ should follow these conventions.
 ## File structure
 
 Packages defining CanvasX components and/or tokens should use the following
-file structure.
+file structure.  Some files are optional; see below for full details.
 ```
 package.json
 tsconfig.json
@@ -24,7 +24,7 @@ bodiless.docs.json
               index.ts
               {brand}{Component}.ts
 ```
-THis structure is intended to facilitate two build-time webpack optimizations:
+This structure is intended to facilitate two build-time webpack optimizations:
 - [Static Token Replacement](#static-token-replacement): Removes unnecessary code
   from the production bundle.
 - [Token shadowing](#token-shadowing): Allows a downstream package to define an
@@ -70,7 +70,8 @@ export const asFooToken = asCxTokenSpec<FooComponents>();
 ```
 
 > In some cases, there will be no clean component; for example, if a package is
-> merely providing tokens for a component defined elsewhere.
+> merely providing tokens for a component defined elsewhere.  In such cases,
+> this file may be omitted.
 
 #### `tokens/{brand}{Component}.ts`
 
@@ -167,7 +168,7 @@ Also export the "Base" version of the token collection directly from its locatio
 ```js
 export { asFooToken, FooComponents } from './FooClean';
 // This export will not be shadowable because it is exported
-// directy from `cxFoo`.
+// directly from `cxFoo`.
 export { default as mybrandFooBase } from './tokens/cxFoo';
 // ... any other exports or utilities.
 
@@ -301,7 +302,7 @@ In general you should enable static replacement for your component or tokens if
 production JS bundle, and
 - they do not require React to function in the browser, but only for rendering.
 
-If you know that your component's children will never require hydration, tnen you need
+If you know that your component's children will never require hydration, then you need
 only export a single, static version.  If its children *may* require hydration, then
 you should export a separate static version, and let the site builder determine
 which is appropriate for her needs.
@@ -323,7 +324,7 @@ a module which is located at `.../{ComponentName}/tokens`, and this module
 must itself be re-exported from the package by an index file which imports
 it at the *exact path* `./tokens`.
 
-You should also export a "base" or unshadowed version of your token collection
+You should also export a "base" or un-shadowed version of your token collection
 to allow downstream consumers to extend it. You may do this by exporting
 the tokens from their original location.
 
@@ -347,7 +348,7 @@ export default tokens;
 ```js
 // This version will be shadowable bc it is exported from './tokens'.
 export { default as cxFoo } from './tokens';
-// This version will not be shadowable bc it is exported froma a different path.
+// This version will not be shadowable bc it is exported from a different path.
 export { default as cxFooBase } from './tokens/cxFoo';
 ```
 
@@ -439,5 +440,5 @@ Some important notes:
   }
   ```
 - The above pattern for organizing your shadowed token collections is not mandatory.
-  You can use whatever logic you like in `shadow.js` to resove the shadowed token
+  You can use whatever logic you like in `shadow.js` to resolve the shadowed token
   collection.
