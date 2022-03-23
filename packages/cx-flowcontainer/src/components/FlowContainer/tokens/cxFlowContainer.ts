@@ -130,30 +130,21 @@ const WithContentRegionVariations = asFluidToken({
   },
 });
 
-/**
- * Top container restricted to Hero components with no gutters.
- */
-const Top = asFluidToken(
-  Base,
-  // @todo WithFullWidthConstraint,
-  cxImageFlowContainer.WithImageVariations,
-  // @todo add hero video
-  // @todo add hero card
-  // @todo why is the Editor showing up as default?
-);
-
 const Default = asFluidToken(
   Base,
-  Top,
   WithBaseVariations,
-  WithCxGutters,
   WithContentRegionVariations,
+);
+
+const DefaultWithGutters = asFluidToken(
+  Default,
+  WithCxGutters,
 );
 
 export default {
   Base,
   Default,
-  Top,
+  DefaultWithGutters,
   ContentRegion,
   WithContentRegionVariations,
   AsFlowContainerItem,

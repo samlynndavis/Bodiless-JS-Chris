@@ -28,9 +28,10 @@ import { GenericPageNodeKeys } from '../constants';
 const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(cxLayout.Default),
-    TopContent: as(cxFlowContainer.Top),
-    Content: as(cxFlowContainer.Default),
-    BottomContent: as(cxFlowContainer.Default),
+    // @todo in Hero ticket is change to this Flowcontainer with Hero only components.
+    TopContent: as(cxFlowContainer.Default),
+    Content: as(cxFlowContainer.DefaultWithGutters),
+    BottomContent: as(cxFlowContainer.DefaultWithGutters),
   },
   Schema: {
     TopContent: withNodeKey(GenericPageNodeKeys.TopContent),
@@ -38,7 +39,7 @@ const Default = asGenericTemplateToken({
     BottomContent: withNodeKey(GenericPageNodeKeys.BottomContent),
   },
   Spacing: {
-    TopContent: cxSpacing.WithSiteXLConstraint,
+    TopWrapper: cxSpacing.WithSiteXLConstraint,
     ContentWrapper: as(
       cxSpacing.WithSiteMargin,
       cxSpacing.WithSiteXLConstraint
@@ -47,7 +48,7 @@ const Default = asGenericTemplateToken({
       cxSpacing.WithSiteMargin,
       cxSpacing.WithSiteXLConstraint
     ),
-  }
+  },
 });
 
 const WithoutBreadcrumbs = asGenericTemplateToken({

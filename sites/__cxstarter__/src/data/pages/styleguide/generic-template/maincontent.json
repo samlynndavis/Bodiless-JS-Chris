@@ -8,6 +8,13 @@
       "type": "RichText"
     },
     {
+      "uuid": "792a1b30-aac3-11ec-8ca2-77d49caabad1",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "ImageLandscape"
+    },
+    {
       "uuid": "72f21440-aa17-11ec-a8e8-63f9aaeac145",
       "wrapperProps": {
         "className": "w-full lg:w-1/3"
