@@ -204,7 +204,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
         `${cwd}/README.md`,
         `${cwd}/${packagesDir}/${name}/README.md`,
         `${cwd}/${sitesDir}/${name}/site-docs/About/AboutThisSite.md`,
-      ],
+      ].filter(f => fs.existsSync(f)),
       from: new RegExp(templateName, 'g'),
       to: newName,
     };
@@ -381,6 +381,13 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const name = await this.getArg('name');
     const source = path.join(dest, sitesDir, name, 'README.md');
     const target = path.join(dest, 'README.md');
+    try {
+      fs.removeSync(target);
+    // eslint-disable-next-line no-empty
+    } catch (e) {}
+    if (!fs.existsSync(source)) {
+      return fs.writeFile(target, `# ${name}`);
+    }
     return fs.move(source, target, { overwrite: true });
   }
 

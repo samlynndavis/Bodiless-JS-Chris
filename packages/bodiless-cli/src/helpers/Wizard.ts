@@ -99,7 +99,7 @@ abstract class Wizard<O extends WizardOptions> extends Command implements Wizard
       type: 'input',
       default: validator(arg) === true ? arg : undefined,
       validate: validator,
-      filter: flagDef.parse || identity,
+      filter: flagDef.parse ? (a: never) => flagDef.parse(a, {}) : identity,
       ...(typeof promptFlag === 'function' ? promptFlag(this) : promptFlag),
       ...(typeof promptArg === 'function' ? promptArg(this) : promptArg),
     };

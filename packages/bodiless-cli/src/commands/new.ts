@@ -12,9 +12,6 @@
  * limitations under the License.
  */
 
-import * as path from 'path';
-import * as fs from 'fs-extra';
-import * as yaml from 'js-yaml';
 import AbstractNew, { AbstractNewOptions } from '../helpers/AbstractNew';
 import { Flags } from '../helpers/Wizard';
 
