@@ -3,7 +3,7 @@
     "type": "H3",
     "children": [
       {
-        "text": "Default Flow Container "
+        "text": "Default Flow Container with Gutters"
       }
     ]
   },
@@ -11,7 +11,7 @@
     "type": "paragraph",
     "children": [
       {
-        "text": "Default behavior with no tokens."
+        "text": "Default behavior with Gutter tokens"
       }
     ]
   }

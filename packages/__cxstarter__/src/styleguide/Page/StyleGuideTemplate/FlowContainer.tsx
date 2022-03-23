@@ -16,34 +16,31 @@ import React from 'react';
 import { withNodeKey } from '@bodiless/core';
 import {
   flowHoc,
-  H2,
   as,
   replaceWith,
 } from '@bodiless/fclasses';
-import { withEditorPlain } from '@bodiless/cx-editors';
-import { cxTypography } from '@bodiless/cx-elements';
 import { cxFlowContainer, FlowContainerClean } from '@bodiless/cx-flowcontainer';
 
 import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
-
-const H2Title = flowHoc(
-  withEditorPlain('title', 'Section Title'),
-  as(cxTypography.H2, 'py-5'),
-)(H2);
 
 const DefaultFlowContainer = as(
   cxFlowContainer.Default,
   withNodeKey('defaultcontainer'),
 )(FlowContainerClean);
 
+const DefaultFlowContainerWithGutters = as(
+  cxFlowContainer.DefaultWithGutters,
+  withNodeKey('defaultgutterscontainer'),
+)(FlowContainerClean);
+
 const FullFlowContainer = as(
-  cxFlowContainer.Default,
+  cxFlowContainer.DefaultWithGutters,
   cxFlowContainer.WithFullWidthConstraint,
   withNodeKey('fullwidthcontainer'),
 )(FlowContainerClean);
 
 const OneThirdContainer = as(
-  cxFlowContainer.Default,
+  cxFlowContainer.DefaultWithGutters,
   cxFlowContainer.WithTabletOneThirdConstraint,
   withNodeKey('onethirdcontainer'),
 )(FlowContainerClean);
@@ -55,9 +52,9 @@ const ContentRegionContainer = as(
 
 const Examples = (props: any) => (
   <>
-    <H2Title />
-    <hr />
     <DefaultFlowContainer />
+    <hr />
+    <DefaultFlowContainerWithGutters />
     <hr />
     <FullFlowContainer />
     <hr />

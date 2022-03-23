@@ -28,4 +28,5 @@ export const __cxstarter__StyleGuideTemplate = {
   Layout,
   Header,
   Images,
+  FlowContainer,
 };
