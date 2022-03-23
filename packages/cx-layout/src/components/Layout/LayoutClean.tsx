@@ -30,9 +30,10 @@ const layoutComponents: LayoutComponents = {
   OuterContainer: Div,
   SkipToMainContent: A,
   Helmet: HelmetClean,
-  SiteHeader: HeaderClean,
-  // SiteFooter: FooterClean,
-  SiteFooter: Fragment,
+  HeaderWrapper: Div,
+  Header: HeaderClean,
+  FooterWrapper: Div,
+  Footer: Div,
   Container: Div,
   ContainerWrapper: Div,
   PageTopper: Fragment,
@@ -54,8 +55,10 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
     OuterContainer,
     PageCloser,
     PageTopper,
-    SiteFooter,
-    SiteHeader,
+    Header,
+    HeaderWrapper,
+    Footer,
+    FooterWrapper,
     SkipToMainContent,
   } = layoutProps.components;
 
@@ -63,7 +66,9 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
     <OuterContainer>
       <SkipToMainContent />
       <Helmet />
-      <SiteHeader />
+      <HeaderWrapper>
+        <Header />
+      </HeaderWrapper>
       <ContainerWrapper>
         <Container>
           <PageTopper />
@@ -71,7 +76,9 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
           <PageCloser />
         </Container>
       </ContainerWrapper>
-      <SiteFooter />
+      <FooterWrapper>
+        <Footer />
+      </FooterWrapper>
     </OuterContainer>
   );
 };

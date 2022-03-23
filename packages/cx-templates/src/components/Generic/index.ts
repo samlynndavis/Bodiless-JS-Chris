@@ -13,5 +13,7 @@
  */
 
 export { GenericTemplateClean, asGenericTemplateToken } from './GenericClean';
-export { cxGenericTemplate } from './tokens/token';
+export { default as cxGenericTemplate } from './tokens/cxGeneric';
+export { cxGenericStatic } from './tokens';
 export type { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
+export { GenericPageNodeKeys } from './constants';

@@ -20,33 +20,37 @@ import {
 } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { LayoutClean } from '@bodiless/cx-layout';
+import { FlowContainerClean } from '@bodiless/cx-flowcontainer';
 import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
 
 const genericTemplateComponents: GenericTemplateComponents = {
   PageWrapper: LayoutClean,
+  BreadcrumbWrapper: Fragment,
   Breadcrumb: Fragment,
-  TitleRow: Fragment,
-  MainWrapper: Div,
+  TopWrapper: Div,
+  TopContent: FlowContainerClean,
   ContentWrapper: Div,
-  Content: Fragment,
+  Content: FlowContainerClean,
   BottomWrapper: Div,
-  BottomContent: Fragment,
+  BottomContent: FlowContainerClean,
 };
 
 const GenericTemplateBase = (props: BaseGenericTemplateProps) => {
   const { components: C } = props;
   return (
     <C.PageWrapper>
-      <C.Breadcrumb />
-      <C.MainWrapper>
-        <C.TitleRow />
-        <C.ContentWrapper>
-          <C.Content />
-        </C.ContentWrapper>
-        <C.BottomWrapper>
-          <C.BottomContent />
-        </C.BottomWrapper>
-      </C.MainWrapper>
+      <C.TopWrapper>
+        <C.TopContent />
+      </C.TopWrapper>
+      <C.BreadcrumbWrapper>
+        <C.Breadcrumb />
+      </C.BreadcrumbWrapper>
+      <C.ContentWrapper>
+        <C.Content />
+      </C.ContentWrapper>
+      <C.BottomWrapper>
+        <C.BottomContent />
+      </C.BottomWrapper>
     </C.PageWrapper>
   );
 };

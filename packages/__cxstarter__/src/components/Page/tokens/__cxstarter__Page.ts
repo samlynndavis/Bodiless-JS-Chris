@@ -12,11 +12,15 @@
  * limitations under the License.
  */
 
-import { asElementToken } from '@bodiless/cx-elements';
-import { cxPage } from '@bodiless/cx-templates';
+import { on } from '@bodiless/fclasses';
+import { asFluidToken } from '@bodiless/cx-elements';
+import { cxPage, GenericTemplateClean, cxGenericTemplate } from '@bodiless/cx-templates';
 
-const Default = asElementToken({
+const Default = asFluidToken({
   ...cxPage.Default,
+  Components: {
+    _default: on(GenericTemplateClean)(cxGenericTemplate.Default),
+  },
 });
 
 export default {

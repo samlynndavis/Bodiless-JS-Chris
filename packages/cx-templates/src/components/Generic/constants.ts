@@ -12,10 +12,8 @@
  * limitations under the License.
  */
 
-import React from 'react';
-
-export default () => (
-  <>
-    Placeholder home page
-  </>
-);
+export enum GenericPageNodeKeys {
+  TopContent = 'topcontent',
+  Content = 'maincontent',
+  BottomContent = 'bottomcontent',
+}
