@@ -108,6 +108,10 @@ const ContentRegion = asFluidToken(
     Compose: {
       AsFlowContainerItem,
     },
+    Spacing: {
+      Wrapper: cxSpacing.GutterOffset,
+      ComponentWrapper: cxSpacing.Gutter,
+    },
   },
 );
 
