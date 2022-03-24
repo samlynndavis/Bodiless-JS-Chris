@@ -24,20 +24,20 @@ const Base = asWhereToBuyToken({
   // @TODO: After Where to Buy, readjust layout.
   Layout: {
     Wrapper: 'w-full lg:w-auto',
-    Button: 'flex justify-center items-center max-w-64 h-12 lg:max-w-48',
+    Button: 'flex justify-center items-center max-w-64 h-12 lg:w-48',
   },
   Spacing: {
-    Button: 'mx-auto p-3 lg:px-7',
+    Button: 'mx-auto p-3',
     Icon: 'mr-3',
   },
   Theme: {
     Button: as(
-      cxFontSize.Base,
       cxColor.BgPrimaryInteractive,
       cxColor.TextPrimaryFooterCopy,
       cxTextDecoration.Bold,
       cxTextDecoration.Uppercase,
-      // 'text-m-base',
+      // @TODO: Create token? It should be same size for both mobile and desktop...
+      'text-m-base',
       'rounded',
     ),
     Icon: 'w-6 h-6',

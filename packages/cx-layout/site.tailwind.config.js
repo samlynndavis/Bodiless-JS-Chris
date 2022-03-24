@@ -16,6 +16,8 @@ module.exports = {
       orange: '#FFA500',
     },
     maxWidth: {
+      20: '5rem',
+      28: '7rem',
       48: '12rem',
       56: '14rem',
       64: '16rem',

@@ -25,7 +25,7 @@ const Default = asMenuTogglerToken({
     Button: withChild(BurgerIcon),
   },
   Layout: {
-    Wrapper: 'flex m-4 lg:hidden',
+    Wrapper: 'flex my-4 lg:hidden',
     Button: 'w-6 h-6 flex justify-center items-center',
   },
 });

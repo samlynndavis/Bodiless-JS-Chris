@@ -16,7 +16,7 @@ import {
   withNode,
   withNodeKey,
 } from '@bodiless/core';
-import { cxColor } from '@bodiless/cx-elements';
+import { cxColor, cxSpacing } from '@bodiless/cx-elements';
 import {
   cxBurgerMenu,
   cxMenu,
@@ -42,7 +42,7 @@ const WithLanguageButton = flowHoc(
     children: 'Español',
     // @TODO: Create divider tokens.
     // @TODO: Use existing tokens.
-    className: 'text-m-base border-l-2 border-cx-primary-divider pl-5 lg:mr-4 lg:px-4 lg:border-r-2',
+    className: 'text-m-base border-l-2 border-cx-primary-divider pl-5 lg:mr-5 lg:px-5 lg:py-2 lg:border-r-2',
   }),
 );
 
@@ -71,24 +71,24 @@ const Base = asHeaderToken({
     LanguageButton: WithLanguageButton,
     WhereToBuy: cxWhereToBuy.Default,
   },
-  Theme: {
-    Wrapper: cxColor.BgPrimaryCard,
-  },
-  Schema: {
-    Logo: withNodeKey({ nodeKey: 'Logo' }),
-    _: withNode,
-  },
   Layout: {
     Container: 'flex justify-between items-center',
     MenuContainer: 'hidden lg:flex justify-between items-center flex-grow',
     ActionMenuContainer: 'flex items-center',
   },
   Spacing: {
-    Logo: withDesign({
-      Wrapper: 'mx-4',
-    }),
-    Container: 'mx-auto py-4',
-    ActionMenuContainer: 'px-4',
+    Container: 'mx-auto mb-10 py-3 lg:py-0',
+    ActionMenuContainer: 'pl-5',
+  },
+  Theme: {
+    Wrapper: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint,
+    ),
+  },
+  Schema: {
+    Logo: withNodeKey({ nodeKey: 'Logo' }),
+    _: withNode,
   },
 });
 

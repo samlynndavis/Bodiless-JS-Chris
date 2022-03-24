@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { cxSpacing } from '@bodiless/cx-elements';
+import { cxColor, cxSpacing } from '@bodiless/cx-elements';
 import { withBurgerMenuProvider } from '@bodiless/cx-navigation';
 import {
   addProps,
@@ -62,14 +62,13 @@ const Base = asLayoutToken({
  * to contain content until we get to xl and then constrain by max-width.
  */
 const ConstrainSite = asLayoutToken({
-  Theme: {
+  Spacing: {
     // TODO The tokens on this ContainerWrapper will move to be controlled by
     // content within Templates.
     ContainerWrapper: as(
       cxSpacing.WithSiteMargin,
       cxSpacing.WithSiteXLConstraint,
     ),
-    HeaderWrapper: cxSpacing.WithSiteXLConstraint,
     FooterWrapper: cxSpacing.WithSiteXLConstraint,
   },
 });
@@ -77,6 +76,9 @@ const ConstrainSite = asLayoutToken({
 const Header = asLayoutToken({
   Components: {
     Header: on(HeaderClean)(cxHeader.Default),
+  },
+  Theme: {
+    HeaderWrapper: cxColor.BgPrimaryPage,
   },
 });
 
@@ -93,8 +95,11 @@ const Default = asLayoutToken({
     ...Header.Components,
     ...Footer.Components,
   },
+  Spacing: {
+    ...ConstrainSite.Spacing,
+  },
   Theme: {
-    ...ConstrainSite.Theme,
+    ...Header.Theme,
   },
 });
 

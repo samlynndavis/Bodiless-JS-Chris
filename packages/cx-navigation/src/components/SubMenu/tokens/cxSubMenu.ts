@@ -70,10 +70,10 @@ const TopNav = asSubMenuToken({
   // @TODO: Improve theme, layout, and spacing.
   Layout: {
     Wrapper: flowHoc(
-      as('absolute w-40 left-0 top-full hidden group-hover:flex flex-col'),
+      as('absolute w-max min-w-full -left-7 top-full hidden group-hover:flex flex-col'),
       removeClassesIf(useIsSubmenuExpanded)('hidden'),
     ),
-    Item: 'relative flex',
+    Title: 'flex',
     _: flowHoc(
       as('relative group'),
       // addClassesIf(not(useIsMenuOpen))('hover:static'),
@@ -81,17 +81,23 @@ const TopNav = asSubMenuToken({
     ),
   },
   Spacing: {
-    Item: 'px-6 py-2',
+    Title: 'px-10 py-3',
   },
   Theme: {
     Wrapper: as(cxColor.BgPrimaryCard),
+    Title: as(
+      cxColor.TextPrimaryHeaderCopy,
+      cxTextDecoration.Normal,
+      cxTextDecoration.Uppercase,
+      // @TODO: Add to tokens?
+      'text-m-base',
+    ),
   },
 });
 
 // @TODO: Toggle burger submenu on click.
 const Burger = asSubMenuToken({
   ...Base,
-  // @TODO: Improve theme, layout, and spacing.
   Layout: {
     Wrapper: flowHoc(
       // as('hidden'),
@@ -102,9 +108,10 @@ const Burger = asSubMenuToken({
     Item: 'mt-10',
   },
   Theme: {
-    Item: as(
+    Title: as(
+      cxColor.TextPrimaryHeaderCopy,
       cxFontSize.Base,
-      cxTextDecoration.Normal,
+      cxTextDecoration.Uppercase,
     ),
   },
 });

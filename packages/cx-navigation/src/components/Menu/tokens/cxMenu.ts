@@ -51,7 +51,7 @@ const Base = asMenuToken({
 });
 
 /**
- * Token which produces a Default CanvasX Menu, with list submenus.
+ * Token which produces a Default CanvasX Menu, with submenus list.
  */
 const Default = asMenuToken({
   ...Base,
@@ -75,7 +75,8 @@ const Utility = asMenuToken({
     Wrapper: 'flex',
     Title: as(
       cxSeparator.UtilityMenu,
-      cxFontSize.Base,
+      // @TODO: Create token? It should be same size for both mobile and desktop...
+      'text-m-base',
     ),
   },
   Schema: {
@@ -126,10 +127,24 @@ const TopNav = asMenuToken({
     ...Default.Components,
     _: withMenuDesign('List')(as(cxSubMenu.TopNav)),
   },
-  // @TODO: Improve theme, layout, and spacing.
-  Theme: {
+  Layout: {
     Wrapper: 'flex',
-    Title: 'px-6',
+    // Item: 'h-12 flex items-center',
+    Title: 'flex items-center',
+  },
+  Spacing: {
+    Wrapper: 'pt-6',
+    Item: 'pb-6',
+    Title: 'px-3',
+  },
+  Theme: {
+    Title: as(
+      cxColor.TextPrimaryHeaderCopy,
+      cxTextDecoration.Bold,
+      cxTextDecoration.Uppercase,
+      // @TODO: Add to tokens?
+      'text-base',
+    ),
   },
   Schema: {
     _: withNodeKey({ nodeKey: 'MainMenu', nodeCollection: 'site' }),
@@ -147,13 +162,14 @@ const Burger = asMenuToken({
     ...Default.Components,
     _: withMenuDesign('List')(as(cxSubMenu.Burger)),
   },
-  // @TODO: Improve theme, layout, and spacing.
+  Layout: {
+    Wrapper: 'flex flex-col',
+  },
   Spacing: {
     Item: 'mb-12',
   },
   Theme: {
-    Wrapper: 'flex flex-col',
-    Item: as(
+    Title: as(
       cxColor.TextPrimaryHeaderCopy,
       cxFontSize.L,
       cxTextDecoration.Bold,
