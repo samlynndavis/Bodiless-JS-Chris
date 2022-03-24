@@ -23,7 +23,7 @@ import {
 import { CartIcon } from './assets/CartIcon';
 import { WhereToBuyComponents, WhereToBuyProps } from './types';
 
-const socialLinksComponents: WhereToBuyComponents = {
+const whereToBuyComponents: WhereToBuyComponents = {
   Wrapper: Div,
   Button: A,
   Icon: CartIcon,
@@ -40,7 +40,7 @@ const WhereToBuyCleanBase: FC<WhereToBuyProps> = ({ components: C, ...rest }) =>
   </C.Wrapper>
 );
 
-const WhereToBuyClean = designable(socialLinksComponents, 'WhereToBuy')(WhereToBuyCleanBase);
+const WhereToBuyClean = designable(whereToBuyComponents, 'WhereToBuy')(WhereToBuyCleanBase);
 
 export const asWhereToBuyToken = asCxTokenSpec<WhereToBuyComponents>();
 
