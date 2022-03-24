@@ -114,25 +114,25 @@ const Default = asCxTokenSpec()({
 const Basic = asCxTokenSpec()({
   ...Default,
   Core: pick(Default.Core, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
-  Theme: pick(Default.Theme, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
+  Components: pick(Default.Components, 'paragraph', 'Bold', 'Underline', 'Link', 'SuperScript'),
 });
 
 const Copyright = asCxTokenSpec()({
   ...Basic,
-  Theme: {
-    ...Basic.Theme,
+  Components: {
+    ...Basic.Components,
     paragraph: as(
       cxColor.TextPrimaryFooterCopy,
       cxFontSize.XS,
-      cxTextDecorationStatic.Normal,
+      cxTextDecoration.Normal,
     ),
     Link: as(
       cxLink.Default,
       cxColor.TextPrimaryFooterCopy,
       cxColor.TextPrimaryInteractive,
       cxFontSize.XS,
-      cxTextDecorationStatic.Bold,
-      cxTextDecorationStatic.Underline,
+      cxTextDecoration.Bold,
+      cxTextDecoration.Underline,
       removeClasses('text-m-base lg:text-base'),
     ),
   },
