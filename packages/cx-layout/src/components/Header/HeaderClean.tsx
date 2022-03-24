@@ -14,6 +14,7 @@
 
 import React, { FC } from 'react';
 import { Div, Fragment, designable } from '@bodiless/fclasses';
+import { withoutHydration } from '@bodiless/hydration';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import {
   BurgerMenuClean,
@@ -80,7 +81,10 @@ const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (
  * A clean header to be used in pages layouts.
  */
 const HeaderClean = designable(headerComponents, 'Header')(HeaderCleanBase);
+const HeaderStatic = withoutHydration()(HeaderClean);
 
-export const asHeaderToken = asCxTokenSpec<HeaderComponents>();
+const asHeaderToken = asCxTokenSpec<HeaderComponents>();
 
 export default HeaderClean;
+
+export { asHeaderToken, HeaderStatic };

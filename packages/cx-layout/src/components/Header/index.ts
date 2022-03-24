@@ -13,5 +13,6 @@
  */
 
 export { default as HeaderClean, asHeaderToken } from './HeaderClean';
+export { default as cxHeaderBase } from './tokens/cxHeader';
 export { default as cxHeader } from './tokens';
 export type { HeaderComponents, HeaderProps } from './types';
