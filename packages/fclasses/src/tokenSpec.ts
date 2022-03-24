@@ -70,11 +70,11 @@ function as(
   const args = args$.filter(Boolean);
 
   // Ensure that all token specs have been passed through `asTokenSpec`
-  // args.forEach(a => {
-  //   if (typeof a !== 'function' && typeof a !== 'string' && !a![$TokenSpec]) {
-  //     throw new Error('All token specifications passed to "as" must be created by a version of "asTokenSpec"');
-  //   }
-  // });
+  args.forEach(a => {
+    if (typeof a !== 'function' && typeof a !== 'string' && !a![$TokenSpec]) {
+      throw new Error('All token specifications passed to "as" must be created by a version of "asTokenSpec"');
+    }
+  });
 
   const tokens: TokenDef[] = args.map(arg => {
     if (typeof arg === 'function' || typeof arg === 'undefined') return arg;
@@ -147,7 +147,8 @@ const tokenMergeCustomizer = (...args: any) => {
     }
     return undefined;
   }
-  if (!a || !b) return undefined;
+  if (!a) return b;
+  if (!b) return a;
   return as(a, b);
 };
 
