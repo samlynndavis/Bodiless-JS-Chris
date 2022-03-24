@@ -12,7 +12,11 @@
  * limitations under the License.
  */
 
-import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
+import {
+  cxColor,
+  cxFontSize,
+  cxTextDecoration,
+} from '@bodiless/cx-elements';
 import {
   // addClassesIf,
   addProps,
@@ -92,6 +96,15 @@ const Burger = asSubMenuToken({
     Wrapper: flowHoc(
       // as('hidden'),
       // removeClassesIf(useIsSubmenuExpanded)('hidden'),
+    ),
+  },
+  Spacing: {
+    Item: 'mt-10',
+  },
+  Theme: {
+    Item: as(
+      cxFontSize.Base,
+      cxTextDecoration.Normal,
     ),
   },
 });

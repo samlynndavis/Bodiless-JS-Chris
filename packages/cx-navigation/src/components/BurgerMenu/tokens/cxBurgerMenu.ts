@@ -18,9 +18,6 @@ import {
   addClassesIf,
   as,
   flowHoc,
-  replaceWith,
-  Span,
-  withProps,
 } from '@bodiless/fclasses';
 import { useIsBurgerMenuHidden } from '@bodiless/navigation';
 import { cxMenu } from '../../Menu';
@@ -53,22 +50,36 @@ const Base = asBurgerMenuToken({
     UtilityMenu: cxMenu.Utility,
   },
   Layout: {
-    Wrapper: 'w-full h-full fixed left-0 top-0 lg:hidden',
+    Wrapper: 'w-full h-full fixed left-0 top-0 md:w-7/12 lg:hidden',
     Container: 'flex flex-col',
-    FooterWrapper: 'w-full fixed left-0 bottom-0',
-    ActionFooterContainer: 'w-full flex justify-center',
+    FooterWrapper: 'w-full fixed left-0 bottom-0 flex flex-col items-center md:w-7/12',
+    ActionFooterContainer: 'w-full flex justify-center items-center',
+    Overlay: 'w-full h-full fixed left-0 top-0',
   },
   Spacing: {
-    MenuWrapper: 'p-6',
-    FooterWrapper: 'p-6',
-    ActionFooterContainer: 'mt-4',
+    MenuWrapper: 'px-9',
+    FooterWrapper: 'px-9 py-6',
+    ActionFooterContainer: 'mt-5',
   },
   Theme: {
     Wrapper: as(
       cxColor.BgPrimaryCard,
       'z-10',
     ),
-    FooterWrapper: 'border-t',
+    FooterWrapper: as(
+      // @TODO: Is this bg color name correct for this wrapper?
+      cxColor.BgPrimaryCard,
+      // @TODO: Create tokens for borders?
+      'border-t-2 border-cx-primary-page-bg',
+    ),
+    // @TODO: Should these effects be combined as a new tailwind custom class?
+    Overlay: 'z-5 bg-gray-112-10 backdrop-blur-m-md backdrop-brightness-80',
+  },
+  Behavior: {
+    // Needs to hide it when menu is closed, otherwise it will not allow page interaction.
+    Overlay: flowHoc(
+      addClassesIf(useIsBurgerMenuHidden)('hidden'),
+    ),
   },
 });
 

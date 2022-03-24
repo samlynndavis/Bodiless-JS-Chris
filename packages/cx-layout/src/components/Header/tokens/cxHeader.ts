@@ -16,7 +16,7 @@ import {
   withNode,
   withNodeKey,
 } from '@bodiless/core';
-import { cxColor } from '@bodiless/cx-elements';
+import { cxColor, cxFontSize } from '@bodiless/cx-elements';
 import {
   cxBurgerMenu,
   cxMenu,
@@ -40,8 +40,9 @@ const WithLanguageButton = flowHoc(
   replaceWith(Span),
   withProps({
     children: 'Español',
-    // @TODO: Create separator tokens.
-    className: 'px-4 border-l-2 border-gray-400 lg:mr-4 lg:border-r-2',
+    // @TODO: Create divider tokens.
+    // @TODO: Use existing tokens.
+    className: 'text-m-base border-l-2 border-cx-primary-divider pl-5 lg:mr-4 lg:px-4 lg:border-r-2',
   }),
 );
 
@@ -59,7 +60,7 @@ const Base = asHeaderToken({
       // @TODO: Is there a better way to inject WhereToBuy and (future) LanguageButton
       // components into the menu? Maybe, move the components to another package...
       withDesign({
-        WhereToBuy: replaceWith(as(cxWhereToBuy.Default)(WhereToBuyClean)),
+        WhereToBuy: replaceWith(as(cxWhereToBuy.WithoutIcon)(WhereToBuyClean)),
         // @TODO: Replace LanguageButton placeholder.
         LanguageButton: WithLanguageButton,
       }),

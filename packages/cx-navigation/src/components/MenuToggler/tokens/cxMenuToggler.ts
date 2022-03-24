@@ -40,7 +40,7 @@ const Close = asMenuTogglerToken({
   },
   Layout: {
     ...Default.Layout,
-    Wrapper: 'flex justify-end m-4',
+    Wrapper: 'flex justify-end mx-4 my-6',
   },
 });
 

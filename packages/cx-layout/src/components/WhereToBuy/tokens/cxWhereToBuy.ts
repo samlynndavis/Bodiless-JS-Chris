@@ -12,33 +12,32 @@
  * limitations under the License.
  */
 
-import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
+import { cxColor, cxFontSize, cxTextDecoration } from '@bodiless/cx-elements';
 import {
-  Div,
   as,
-  startWith,
   withProps,
+  replaceWith,
 } from '@bodiless/fclasses';
 import { asWhereToBuyToken } from '../WhereToBuyClean';
 
 const Base = asWhereToBuyToken({
-  Components: {
-    Wrapper: startWith(Div),
-  },
   // @TODO: After Where to Buy, readjust layout.
   Layout: {
-    Button: 'flex justify-center items-center',
+    Wrapper: 'w-full lg:w-auto',
+    Button: 'flex justify-center items-center max-w-64 h-12 lg:max-w-48',
   },
   Spacing: {
-    Button: 'px-7 py-3',
+    Button: 'mx-auto p-3 lg:px-7',
     Icon: 'mr-3',
   },
   Theme: {
     Button: as(
-      cxColor.BgSecondaryFooter,
+      cxFontSize.Base,
+      cxColor.BgPrimaryInteractive,
       cxColor.TextPrimaryFooterCopy,
+      cxTextDecoration.Bold,
       cxTextDecoration.Uppercase,
-      'text-m-base',
+      // 'text-m-base',
       'rounded',
     ),
     Icon: 'w-6 h-6',
@@ -56,7 +55,18 @@ const Default = asWhereToBuyToken({
   ...Base,
 });
 
+/**
+ * Token that provides the Where To Buy button without an icon.
+ */
+const WithoutIcon = asWhereToBuyToken({
+  ...Base,
+  Components: {
+    Icon: replaceWith(() => null),
+  },
+});
+
 export default {
   Base,
   Default,
+  WithoutIcon,
 };

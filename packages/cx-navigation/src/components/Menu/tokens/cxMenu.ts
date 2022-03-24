@@ -22,7 +22,7 @@ import {
   withListSubMenu,
 } from '@bodiless/navigation';
 import { withNodeKey } from '@bodiless/core';
-import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
+import { cxColor, cxFontSize, cxTextDecoration } from '@bodiless/cx-elements';
 import { asMenuToken } from '../MenuClean';
 import { cxMenuTitle, MenuTitleClean } from '../../MenuTitle';
 import { cxSubMenu } from '../../SubMenu';
@@ -73,7 +73,10 @@ const Utility = asMenuToken({
   },
   Theme: {
     Wrapper: 'flex',
-    Title: as(cxSeparator.UtilityMenu),
+    Title: as(
+      cxSeparator.UtilityMenu,
+      cxFontSize.Base,
+    ),
   },
   Schema: {
     _: withNodeKey({ nodeKey: 'UtilityMenu', nodeCollection: 'site' }),
@@ -145,9 +148,17 @@ const Burger = asMenuToken({
     _: withMenuDesign('List')(as(cxSubMenu.Burger)),
   },
   // @TODO: Improve theme, layout, and spacing.
+  Spacing: {
+    Item: 'mb-12',
+  },
   Theme: {
     Wrapper: 'flex flex-col',
-    Item: 'pb-4',
+    Item: as(
+      cxColor.TextPrimaryHeaderCopy,
+      cxFontSize.L,
+      cxTextDecoration.Bold,
+      cxTextDecoration.Uppercase,
+    ),
   },
   Schema: {
     ...TopNav.Schema,
