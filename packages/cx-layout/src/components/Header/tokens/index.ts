@@ -12,4 +12,6 @@
  * limitations under the License.
  */
 
+import cxHeader from './cxHeader';
+
 export default cxHeader;
