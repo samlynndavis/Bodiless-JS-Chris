@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxHeader';
+import cxHeader from './cxHeader';
 
-export default tokens;
+export default cxHeader;
