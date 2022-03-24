@@ -12,6 +12,5 @@
  * limitations under the License.
  */
 
-// @todo add after static replacement merges.
-// export { FlowContainerStatic } from './FlowContainerClean';
-export { default as cxFlowContainerStatic } from './tokens/cxFlowContainer';
+export { default as FlowContainerStatic } from './FlowContainerClean';
+export { default as cxFlowContainerStatic } from './tokens';

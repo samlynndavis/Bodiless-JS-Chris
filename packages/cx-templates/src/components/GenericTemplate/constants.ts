@@ -12,6 +12,8 @@
  * limitations under the License.
  */
 
-import cxGeneric from './cxGeneric';
-
-export default cxGeneric;
+export enum GenericTemplateNodeKeys {
+  TopContent = 'top-content',
+  Content = 'main-content',
+  BottomContent = 'bottom-content',
+}

@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-export enum GenericPageNodeKeys {
-  TopContent = 'topcontent',
-  Content = 'maincontent',
-  BottomContent = 'bottomcontent',
-}
+export { default as GenericTemplateClean, asGenericTemplateToken } from './GenericTemplateClean';
+export { default as cxGenericTemplateBase } from './tokens/cxGenericTemplate';
+export { default as cxGenericTemplate } from './tokens';
+export type { GenericTemplateComponents } from './types';
+export { GenericTemplateNodeKeys } from './constants';

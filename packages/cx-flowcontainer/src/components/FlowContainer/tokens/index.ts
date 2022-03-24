@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import tokens from './cxFlowContainer';
+import cxFlowContainer from './cxFlowContainer';
 
-export default tokens;
+export default cxFlowContainer;

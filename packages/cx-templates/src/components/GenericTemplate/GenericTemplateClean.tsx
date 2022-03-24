@@ -36,9 +36,9 @@ const genericTemplateComponents: GenericTemplateComponents = {
 };
 
 const GenericTemplateBase = (props: BaseGenericTemplateProps) => {
-  const { components: C } = props;
+  const { components: C, ...rest } = props;
   return (
-    <C.PageWrapper>
+    <C.PageWrapper {...rest}>
       <C.TopWrapper>
         <C.TopContent />
       </C.TopWrapper>
@@ -59,7 +59,6 @@ const GenericTemplateClean = designable(genericTemplateComponents, 'Generic Temp
 
 const asGenericTemplateToken = asCxTokenSpec<GenericTemplateComponents>();
 
-export {
-  GenericTemplateClean,
-  asGenericTemplateToken,
-};
+export { asGenericTemplateToken };
+
+export default GenericTemplateClean;

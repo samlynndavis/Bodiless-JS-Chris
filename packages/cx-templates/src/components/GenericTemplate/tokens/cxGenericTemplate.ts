@@ -22,8 +22,8 @@ import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
 import { cxFlowContainer } from '@bodiless/cx-flowcontainer';
 import { withNodeKey } from '@bodiless/core';
 import { cxSpacing } from '@bodiless/cx-elements';
-import { asGenericTemplateToken } from '../GenericClean';
-import { GenericPageNodeKeys } from '../constants';
+import { asGenericTemplateToken } from '../GenericTemplateClean';
+import { GenericTemplateNodeKeys } from '../constants';
 
 const Default = asGenericTemplateToken({
   Components: {
@@ -34,9 +34,9 @@ const Default = asGenericTemplateToken({
     BottomContent: as(cxFlowContainer.DefaultWithGutters),
   },
   Schema: {
-    TopContent: withNodeKey(GenericPageNodeKeys.TopContent),
-    Content: withNodeKey(GenericPageNodeKeys.Content),
-    BottomContent: withNodeKey(GenericPageNodeKeys.BottomContent),
+    TopContent: withNodeKey(GenericTemplateNodeKeys.TopContent),
+    Content: withNodeKey(GenericTemplateNodeKeys.Content),
+    BottomContent: withNodeKey(GenericTemplateNodeKeys.BottomContent),
   },
   Spacing: {
     TopWrapper: cxSpacing.WithSiteXLConstraint,
