@@ -16,15 +16,15 @@ import { asFluidToken } from '@bodiless/cx-elements';
 import { cxFlowContainerBase } from '@bodiless/cx-flowcontainer';
 import { addProps } from '@bodiless/fclasses';
 
-const WithCxGutters = asFluidToken(
-  cxFlowContainerBase.WithCxGutters, {
-    Spacing: {
-      _: addProps({ 'data-shadowed-by': '__cxstarter__:NewGutters' }),
-    },
-  },
-);
+const Default = asFluidToken({
+  ...cxFlowContainerBase.Default,
+  Spacing: {
+    ...cxFlowContainerBase.Default.Spacing,
+    _: addProps({ 'data-shadowed-by': '__cxstarter__FlowContainer' }),
+  }
+});
 
 export default {
   ...cxFlowContainerBase,
-  WithCxGutters,
+  Default,
 };

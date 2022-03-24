@@ -17,7 +17,9 @@ import {
   Fragment,
   on,
   as,
+  Img,
 } from '@bodiless/fclasses';
+import { cxImage } from '@bodiless/cx-image';
 import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
 import { cxFlowContainer } from '@bodiless/cx-flowcontainer';
 import { withNodeKey } from '@bodiless/core';
@@ -28,10 +30,10 @@ import { GenericTemplateNodeKeys } from '../constants';
 const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(cxLayout.Default),
-    // @todo in Hero ticket is change to this Flowcontainer with Hero only components.
-    TopContent: as(cxFlowContainer.Default),
-    Content: as(cxFlowContainer.DefaultWithGutters),
-    BottomContent: as(cxFlowContainer.DefaultWithGutters),
+    // @todo in Hero ticket is change this to chameleon.
+    TopContent: on(Img)(cxImage.Default, cxImage.WithLandscapePlaceholder),
+    Content: as(cxFlowContainer.Default),
+    BottomContent: as(cxFlowContainer.Default),
   },
   Schema: {
     TopContent: withNodeKey(GenericTemplateNodeKeys.TopContent),

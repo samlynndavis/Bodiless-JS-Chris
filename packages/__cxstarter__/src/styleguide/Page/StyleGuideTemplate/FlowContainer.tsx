@@ -28,19 +28,14 @@ const DefaultFlowContainer = as(
   withNodeKey('defaultcontainer'),
 )(FlowContainerClean);
 
-const DefaultFlowContainerWithGutters = as(
-  cxFlowContainer.DefaultWithGutters,
-  withNodeKey('defaultgutterscontainer'),
-)(FlowContainerClean);
-
 const FullFlowContainer = as(
-  cxFlowContainer.DefaultWithGutters,
+  cxFlowContainer.Default,
   cxFlowContainer.WithFullWidthConstraint,
   withNodeKey('fullwidthcontainer'),
 )(FlowContainerClean);
 
 const OneThirdContainer = as(
-  cxFlowContainer.DefaultWithGutters,
+  cxFlowContainer.Default,
   cxFlowContainer.WithTabletOneThirdConstraint,
   withNodeKey('onethirdcontainer'),
 )(FlowContainerClean);
@@ -53,8 +48,6 @@ const ContentRegionContainer = as(
 const Examples = (props: any) => (
   <>
     <DefaultFlowContainer />
-    <hr />
-    <DefaultFlowContainerWithGutters />
     <hr />
     <FullFlowContainer />
     <hr />

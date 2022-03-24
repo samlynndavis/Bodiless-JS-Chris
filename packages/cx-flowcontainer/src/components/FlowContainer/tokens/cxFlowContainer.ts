@@ -44,16 +44,6 @@ const Base = asFluidToken({
 });
 
 /**
- * Token which constrains a flow container to full width.
- */
-const WithCxGutters = asFluidToken({
-  Spacing: {
-    Wrapper: cxSpacing.GutterOffset,
-    ComponentWrapper: cxSpacing.Gutter,
-  },
-});
-
-/**
  * @private
  * SnapData function to use for a full width constrained flow container.
  */
@@ -131,24 +121,34 @@ const WithContentRegionVariations = asFluidToken({
 });
 
 const Default = asFluidToken(
-  Base,
+  {
+    ...Base,
+    Spacing: {
+      Wrapper: cxSpacing.GutterOffset,
+      ComponentWrapper: cxSpacing.Gutter,
+    },
+  },
   WithBaseVariations,
   WithContentRegionVariations,
 );
 
-const DefaultWithGutters = asFluidToken(
-  Default,
-  WithCxGutters,
+const Hero = asFluidToken(
+  {
+    ...Base,
+    Compose: {
+      WithFullWidthConstraint,
+    },
+  },
+  WithBaseVariations,
 );
 
 export default {
   Base,
   Default,
-  DefaultWithGutters,
+  Hero,
   ContentRegion,
   WithContentRegionVariations,
   AsFlowContainerItem,
   WithFullWidthConstraint,
   WithTabletOneThirdConstraint,
-  WithCxGutters,
 };
