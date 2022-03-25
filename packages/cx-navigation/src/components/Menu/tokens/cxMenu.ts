@@ -76,7 +76,7 @@ const Utility = asMenuToken({
     Title: as(
       cxSeparator.UtilityMenu,
       // @TODO: Create token? It should be same size for both mobile and desktop...
-      'text-m-base',
+      'text-m-base whitespace-nowrap',
     ),
   },
   Schema: {
@@ -129,8 +129,7 @@ const TopNav = asMenuToken({
   },
   Layout: {
     Wrapper: 'flex',
-    // Item: 'h-12 flex items-center',
-    Title: 'flex items-center',
+    Item: 'flex items-center',
   },
   Spacing: {
     Wrapper: 'pt-6',
@@ -143,7 +142,7 @@ const TopNav = asMenuToken({
       cxTextDecoration.Bold,
       cxTextDecoration.Uppercase,
       // @TODO: Add to tokens?
-      'text-base',
+      'text-base whitespace-nowrap',
     ),
   },
   Schema: {
