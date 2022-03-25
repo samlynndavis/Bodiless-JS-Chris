@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import omit from 'lodash/omit';
 import { cxSpacing, cxTypography } from '@bodiless/cx-elements';
 import {
   EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
@@ -52,14 +53,12 @@ const Default = asStyleGuideTemplateToken({
   },
 });
 
-const NoLayout = asStyleGuideTemplateToken({
-  ...Base,
+const NoLayout = asStyleGuideTemplateToken(omit(Base, 'Components'), {
   Components: {
     ...Base.Components,
     Wrapper: replaceWith(Fragment),
   },
-  Theme: {
-    ...Base.Components,
+  Layout: {
     TitleWrapper: 'container mx-auto',
     DescriptionWrapper: 'container mx-auto',
   },
