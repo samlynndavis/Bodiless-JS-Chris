@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { cxSpacing } from '@bodiless/cx-elements';
+import { cxColor, cxSpacing } from '@bodiless/cx-elements';
 import {
   addProps,
   as,
@@ -58,7 +58,7 @@ const Base = asLayoutToken({
  * to contain content until we get to xl and then constrain by max-width.
  */
 const ConstrainSite = asLayoutToken({
-  Theme: {
+  Spacing: {
     // TODO The tokens on this ContainerWrapper will move to be controlled by
     // content within Templates.
     ContainerWrapper: as(
@@ -66,7 +66,6 @@ const ConstrainSite = asLayoutToken({
       cxSpacing.WithSiteXLConstraint,
     ),
     HeaderWrapper: cxSpacing.WithSiteXLConstraint,
-    FooterWrapper: cxSpacing.WithSiteXLConstraint,
   },
 });
 
@@ -80,6 +79,9 @@ const Footer = asLayoutToken({
   Components: {
     Footer: on(FooterClean)(cxFooter.Default),
   },
+  Theme: {
+    FooterWrapper: cxColor.BgSecondaryFooter,
+  },
 });
 
 const Default = asLayoutToken({
@@ -89,8 +91,11 @@ const Default = asLayoutToken({
     ...Header.Components,
     ...Footer.Components,
   },
+  Spacing: {
+    ...ConstrainSite.Spacing,
+  },
   Theme: {
-    ...ConstrainSite.Theme,
+    ...Footer.Theme,
   },
 });
 

@@ -18,6 +18,12 @@ module.exports = {
     maxWidth: {
       48: '12rem',
       56: '14rem',
+      screen: '100vw',
+    },
+    extend: {
+      margin: {
+        'negative-half-screen': '-50vw',
+      },
     },
   },
   variants: {
