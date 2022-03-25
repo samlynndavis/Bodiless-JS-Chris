@@ -80,6 +80,7 @@ const TopNav = asSubMenuToken({
     ),
   },
   Spacing: {
+    Wrapper: 'py-3',
     Title: 'px-10 py-3',
   },
   Theme: {

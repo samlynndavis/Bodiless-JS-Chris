@@ -72,7 +72,6 @@ const Base = asBurgerMenuToken({
       // @TODO: Create tokens for borders?
       'border-t-2 border-cx-primary-page-bg',
     ),
-    // @TODO: Should these effects be combined as a new tailwind custom class?
     Overlay: 'z-5 bg-gray-112-10 backdrop-blur-m-md backdrop-brightness-80',
   },
   Behavior: {

@@ -15,9 +15,11 @@
 import {
   addProps,
   as,
+  flowIf,
   on,
 } from '@bodiless/fclasses';
 import {
+  useIsActiveTrail,
   withMenuDesign,
   withListSubMenu,
 } from '@bodiless/navigation';
@@ -43,10 +45,16 @@ const Base = asMenuToken({
   A11y: {
     Nav: addProps({ role: 'navigation' }),
     Wrapper: addProps({ role: 'menubar' }),
-    Item: addProps({ role: 'menuitem' }),
+    Item: addProps({ role: 'none' }),
+    Title: addProps({ role: 'menuitem' }),
   },
   Components: {
     Title: on(MenuTitleClean)(cxMenuTitle.Default),
+  },
+  Behavior: {
+    Title: flowIf(useIsActiveTrail)(
+      // @TODO: Add active trail styles.
+    ),
   },
 });
 
@@ -132,8 +140,7 @@ const TopNav = asMenuToken({
     Item: 'flex items-center',
   },
   Spacing: {
-    Wrapper: 'pt-6',
-    Item: 'pb-6',
+    Item: 'py-6',
     Title: 'px-3',
   },
   Theme: {
