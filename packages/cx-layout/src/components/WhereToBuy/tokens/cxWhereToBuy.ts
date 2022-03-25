@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { cxColor, cxFontSize, cxTextDecoration } from '@bodiless/cx-elements';
+import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
 import {
   as,
   withProps,

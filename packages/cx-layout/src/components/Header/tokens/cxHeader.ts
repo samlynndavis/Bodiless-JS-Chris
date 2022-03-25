@@ -16,7 +16,7 @@ import {
   withNode,
   withNodeKey,
 } from '@bodiless/core';
-import { cxColor, cxSpacing } from '@bodiless/cx-elements';
+import { cxSpacing } from '@bodiless/cx-elements';
 import {
   cxBurgerMenu,
   cxMenu,
