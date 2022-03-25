@@ -69,7 +69,6 @@ const ConstrainSite = asLayoutToken({
       cxSpacing.WithSiteMargin,
       cxSpacing.WithSiteXLConstraint,
     ),
-    FooterWrapper: cxSpacing.WithSiteXLConstraint,
   },
 });
 
@@ -86,6 +85,9 @@ const Footer = asLayoutToken({
   Components: {
     Footer: on(FooterClean)(cxFooter.Default),
   },
+  Theme: {
+    FooterWrapper: cxColor.BgSecondaryFooter,
+  },
 });
 
 const Default = asLayoutToken({
@@ -100,6 +102,7 @@ const Default = asLayoutToken({
   },
   Theme: {
     ...Header.Theme,
+    ...Footer.Theme,
   },
 });
 

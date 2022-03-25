@@ -53,14 +53,13 @@ const Footer = asSubMenuToken(Base, {
     Title: as(
       cxTextDecoration.Uppercase,
       cxColor.TextPrimaryFooterCopy,
-      'text-base',
-      // @todo why is this not an available token in cxFontSize?
-      'font-medium md:text-sm lg:text-xs',
+      cxFontSize.Base,
     ),
     Item: 'leading-none',
   },
   Spacing: {
     Item: 'mt-5 lg:mt-3',
+    Title: 'my-3 lg:my-1.5',
   },
 });
 

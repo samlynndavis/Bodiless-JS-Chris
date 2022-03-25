@@ -48,6 +48,10 @@ module.exports = {
         'site-percent': '5%',
         'md-site-percent': '8%',
       },
+      padding: {
+        'site-percent': '5%',
+        'md-site-percent': '8%',
+      },
     },
   },
   variants: {

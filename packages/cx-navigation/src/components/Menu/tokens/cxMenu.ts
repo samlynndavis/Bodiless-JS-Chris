@@ -103,7 +103,8 @@ const Footer = asMenuToken({
     Item: 'md:min-w-1/4 md:w-full',
   },
   Spacing: {
-    Wrapper: 'lg:mb-12',
+    Wrapper: 'lg:mb-9',
+    Title: 'lg:mb-4',
   },
   Theme: {
     // @TODO: This 'as' is needed only because of a bug and should be removed when it is fixed.
@@ -112,8 +113,7 @@ const Footer = asMenuToken({
     Title: as(
       cxColor.TextPrimaryFooterCopy,
       cxTextDecoration.Bold,
-      // @todo should we use tokens here?
-      'text-m-xl md:text-m-lg lg:text-base',
+      cxFontSize.XL,
     ),
   },
 });

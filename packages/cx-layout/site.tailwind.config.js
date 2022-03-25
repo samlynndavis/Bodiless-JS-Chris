@@ -21,6 +21,12 @@ module.exports = {
       48: '12rem',
       56: '14rem',
       64: '16rem',
+      screen: '100vw',
+    },
+    extend: {
+      margin: {
+        'negative-half-screen': '-50vw',
+      },
     },
   },
   variants: {
