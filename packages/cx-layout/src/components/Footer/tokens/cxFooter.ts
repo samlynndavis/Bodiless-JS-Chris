@@ -14,7 +14,7 @@
 
 import { withNode, withNodeKey } from '@bodiless/core';
 import { cxRichText } from '@bodiless/cx-editors';
-import { cxColor } from '@bodiless/cx-elements';
+import { cxSpacing } from '@bodiless/cx-elements';
 import { cxMenu } from '@bodiless/cx-navigation';
 import { as } from '@bodiless/fclasses';
 import { cxRewards } from '../Rewards';
@@ -31,6 +31,14 @@ const Base = asFooterToken({
     Wrapper: 'w-full',
     Container: 'lg:flex',
     Column: 'w-full lg:first:w-1/4 lg:w-3/4',
+    RewardsWrapper: as(
+      // This makes RewardsWrapper full screen on mobile. This is necessary
+      // because we have to flow specific white background inside a container
+      // with margin.
+      'max-w-screen w-screen relative inset-x-1/2 mx-negative-half-screen px-site-percent py-9',
+      // Reset RewardsWrapper to follow container from tablet on.
+      'md:w-full md:static md:inset-x-0 md:mx-0 md:p-0',
+    ),
     Row: 'w-full lg:flex lg:space-between',
     FooterMenuWrapper: 'w-full',
     CopyrightWrapper: 'w-full lg:w-3/4',
@@ -38,18 +46,20 @@ const Base = asFooterToken({
   },
   Spacing: {
     Wrapper: 'mt-10',
-    Column: 'md:px-10 md:py-6 lg:p-8',
-    Row: 'md:mb-8 md:last:mb-0 lg:mb-12',
-    RewardsWrapper: 'p-9 md:mb-0 md:p-0',
-    FooterMenuWrapper: 'p-9 md:p-0',
-    Copyright: 'mx-9 py-9 md:mx-0 md:mb-4 md:p-0 lg:mb-0 lg:py-0',
-    SocialLinksWrapper: 'px-10 py-5 md:p-0',
+    Container: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint,
+      'lg:pt-16 lg:pb-10',
+    ),
+    Column: 'md:py-9 lg:p-0',
+    Row: 'md:mb-8 md:last:mb-0 lg:mb-9',
+    RewardsWrapper: 'md:mb-0 lg:pr-20',
+    FooterMenuWrapper: 'py-9 md:p-0 lg:pl-28',
+    Copyright: 'py-6 md:mb-4 md:py-6 lg:py-0 lg:pl-28 lg:mb-0',
+    SocialLinksWrapper: 'py-5 md:p-0',
   },
   Theme: {
-    Column: as(
-      cxColor.BgSecondaryFooter,
-      'first:bg-cx-primary-card-bg md:first:bg-cx-secondary-footer-bg',
-    ),
+    RewardsWrapper: 'bg-cx-primary-card-bg md:bg-cx-secondary-footer-bg',
     Copyright: 'border-white-400 border-t border-b md:border-0',
   },
   Editors: {
