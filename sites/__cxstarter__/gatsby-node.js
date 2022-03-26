@@ -9,7 +9,7 @@ const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
 const { addTokenShadowPlugin } = require('@bodiless/webpack');
-const shadow = require('@bodiless/__cxstarter__/shadow');
+const shadow = require('--cxstarter--/shadow');
 
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404

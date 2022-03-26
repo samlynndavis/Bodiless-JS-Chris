@@ -23,6 +23,7 @@ import { SpawnOptions } from 'child_process';
 import Wizard, { Flags, WizardOptions } from './Wizard';
 import Spawner from './Spawner';
 import { listVersionsSync, listBranchesSync } from './git';
+import { recursiveRename } from './recursiveRename';
 
 const replaceInFile = require('replace-in-file');
 const findGitRoot = require('find-git-root');
@@ -428,6 +429,8 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   async run() {
     try {
       // await this.loadProfile();
+      await recursiveRename({ path: __dirname, search: '__cxstarter__', replace: 'foo' });
+      return;
       await this.validate();
       await this.clone();
       await this.clean();
