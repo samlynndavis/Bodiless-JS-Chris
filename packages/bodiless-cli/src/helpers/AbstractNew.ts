@@ -317,10 +317,9 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       data.scripts.docs = `lerna run build:doc --stream --scope ${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
     } else if (type === 'site') {
       data.name = siteName;
-      // @TODO support different namespaces for source and target packages.
-      const ns = await this.getNamespace();
-      const key = `${ns}${template}`;
-      delete data.dependencies[key];
+      // Find the old dependency on the template package (if any) and delete it.
+      const key = Object.keys(data.dependencies).find(k => new RegExp(template).test(k));
+      if (key) delete data.dependencies[key];
       data.dependencies[packageName] = '^0.0.0';
     } else {
       data.name = packageName;
@@ -428,6 +427,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
 
   async run() {
     try {
+      // await this.loadProfile();
       await this.validate();
       await this.clone();
       await this.clean();
