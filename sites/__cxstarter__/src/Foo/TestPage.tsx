@@ -14,7 +14,7 @@
 
 import { Fragment } from 'react';
 import { as } from '@bodiless/fclasses';
-import { __cxstarter__StyleGuidePage } from '@bodiless/__cxstarter__';
+import { __cxstarter__StyleGuidePage } from '--cxstarter--';
 
 const StyleGuidePage = as(__cxstarter__StyleGuidePage.Default)(Fragment);
 
