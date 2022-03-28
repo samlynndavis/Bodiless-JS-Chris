@@ -82,7 +82,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
   'site-template': commandFlags.string({
     char: 's',
     parse: d => d.trim(),
-    default: '--cxstarter--',
+    default: '__cxstarter__',
     description: 'Name of the starter site to copy',
   }),
 
@@ -97,7 +97,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
 
   'package-template': commandFlags.string({
     description: 'Name of the starter package to copy',
-    default: '--cxstarter--',
+    default: '__cxstarter__',
     char: 'p',
     parse: d => d.trim(),
   }),
@@ -164,9 +164,9 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   getFlagDefs() { return abstractNewFlags as Flags<O>; }
 
   async replaceTemplatePackageName() {
-    const templateName = await this.getArg('package-template');
-    const jsTemplateName = templateName.replace('-', '_');
-    if (templateName === NO_TEMPLATE) return Promise.resolve();
+    const jsTemplateName = await this.getArg('package-template');
+    if (jsTemplateName === NO_TEMPLATE) return Promise.resolve();
+    const pkgTemplateName = jsTemplateName.replace('_', '-');
     const packagesDir = await this.getArg('packages-dir');
     const sitesDir = await this.getArg('sites-dir');
     const name = await this.getArg('name');
@@ -192,7 +192,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     // all matches are replaced before replacing the token names.
     const conf1 = {
       ...commonOptions,
-      from: new RegExp(templateName, 'g'),
+      from: new RegExp(pkgTemplateName, 'g'),
       to: `${ns}${newName}`,
     };
     await replaceInFile(conf1);
@@ -210,7 +210,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
         `${cwd}/${packagesDir}/${name}/README.md`,
         `${cwd}/${sitesDir}/${name}/site-docs/About/AboutThisSite.md`,
       ].filter(f => fs.existsSync(f)),
-      from: new RegExp(templateName, 'g'),
+      from: new RegExp(jsTemplateName, 'g'),
       to: newName,
     };
     return Promise.all([replaceInFile(conf2), replaceInFile(conf3)]);
@@ -317,8 +317,9 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       : path.join(rootDir, dir, name, 'package.json');
     const packageName = await this.getPackageName();
     const siteName = `@sites/${name}`;
-    const template = await this.getArg(type === 'site' ? 'site-template' : 'package-template');
-    if (template === NO_TEMPLATE) return Promise.resolve();
+    const template$ = await this.getArg(type === 'site' ? 'site-template' : 'package-template');
+    if (template$ === NO_TEMPLATE) return Promise.resolve();
+    const template = template$.replace(/_/g, '-');
     const json = await fs.readFile(file);
     const data = JSON.parse(json.toString());
     if (type === 'root') {
@@ -330,6 +331,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       data.name = siteName;
       // Find the old dependency on the template package (if any) and delete it.
       const key = Object.keys(data.dependencies).find(k => new RegExp(template).test(k));
+      console.log(key, template);
       if (key) delete data.dependencies[key];
       data.dependencies[packageName] = '^0.0.0';
     } else {
