@@ -1,5 +1,5 @@
 {
-  "name": "@sites/__cxstarter__",
+  "name": "@sites/--cxstarter--",
   "version": "1.0.0-beta.1",
   "description": "Starter site for a canvasx-based Bodiless site",
   "author": "Chris Oden <coden@its.jnj.com>",
@@ -11,8 +11,8 @@
     "test": "__tests__"
   },
   "dependencies": {
-    "@babel/core": "^7.9.0",
     "--cxstarter--": "^1.0.0-beta.1",
+    "@babel/core": "^7.9.0",
     "@bodiless/backend": "^1.0.0-beta.1",
     "@bodiless/components": "^1.0.0-beta.1",
     "@bodiless/core": "^1.0.0-beta.1",
