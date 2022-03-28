@@ -81,17 +81,17 @@ abstract class Wizard<O extends WizardOptions> extends Command implements Wizard
     const arg = flagValues[flag];
     const { prompt: promptFlag = {} } = flagDefs[flag];
     const { validator = Boolean } = flagDefs[flag];
+    const validated = await validator(arg);
+    if (validated === true) {
+      this.options[flag] = arg;
+      return arg;
+    }
     if (flagValues.automation
       || promptArg === false || (promptArg === undefined && promptFlag === false)
     ) {
-      const validated = await validator(arg);
-      if (validated !== true) {
-        throw new Error(
-          typeof validated === 'string' ? validated : `Invalid value "${arg}" for option "--${flag}"`,
-        );
-      }
-      this.options[flag] = arg;
-      return arg;
+      throw new Error(
+        typeof validated === 'string' ? validated : `Invalid value "${arg}" for option "--${flag}"`,
+      );
     }
     const finalPrompt: inquirer.DistinctQuestion = {
       name: flag as string,

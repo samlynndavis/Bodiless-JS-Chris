@@ -34,11 +34,15 @@ const NO_TEMPLATE = '*** NONE';
 const abstractNewFlags: Flags<AbstractNewOptions> = {
   ...Wizard.flags,
 
-  name: commandFlags.string({
-    description: 'Name of the new site',
-    char: 'n',
-    parse: d => d.trim(),
-  }),
+  name: {
+    ...commandFlags.string({
+      description: 'Name of the new site',
+      char: 'n',
+      parse: d => d.trim(),
+    }),
+    validator: s => s.trim().length > 0,
+    prompt: false,
+  },
 
   dest: {
     ...commandFlags.string({
@@ -56,6 +60,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
       if (fs.existsSync(arg)) return 'Destination already exists';
       return true;
     },
+    prompt: false,
   },
 
   url: {
@@ -78,7 +83,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
   'site-template': commandFlags.string({
     char: 's',
     parse: d => d.trim(),
-    default: '__starter__',
+    default: '--cxstarter--',
     description: 'Name of the starter site to copy',
   }),
 
@@ -93,7 +98,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
 
   'package-template': commandFlags.string({
     description: 'Name of the starter package to copy',
-    default: '__starter__',
+    default: '--cxstarter--',
     char: 'p',
     parse: d => d.trim(),
   }),
@@ -161,13 +166,13 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
 
   async replaceTemplatePackageName() {
     const templateName = await this.getArg('package-template');
+    const jsTemplateName = templateName.replace('-', '_');
     if (templateName === NO_TEMPLATE) return Promise.resolve();
     const packagesDir = await this.getArg('packages-dir');
     const sitesDir = await this.getArg('sites-dir');
     const name = await this.getArg('name');
     const newName = await this.getArg('name');
     const newTokenName = newName.replace(/-([a-z])/g, g => g[1].toUpperCase());
-    // @TODO support different namespaces for source package and target package.
     const ns = await this.getNamespace();
     const cwd = path.resolve(await this.getArg('dest'));
     const commonOptions = {
@@ -188,14 +193,14 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     // all matches are replaced before replacing the token names.
     const conf1 = {
       ...commonOptions,
-      from: new RegExp(`${ns}${templateName}`, 'g'),
+      from: new RegExp(templateName, 'g'),
       to: `${ns}${newName}`,
     };
     await replaceInFile(conf1);
     // Now replace token names.
     const conf2 = {
       ...commonOptions,
-      from: new RegExp(templateName, 'g'),
+      from: new RegExp(jsTemplateName, 'g'),
       to: newTokenName,
     };
     // And site name in READMEs
@@ -288,12 +293,18 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const template = await this.getArg(templateFlag, prompt);
     const promises = sites.filter(s => s !== template)
       .map(s => path.join(sitesDir, s))
-      .map(s => fs.remove(s));
+      .map(s => fs.remove(s)) as Promise<any>[];
     if (template !== NO_TEMPLATE) {
       const name = await this.getArg('name');
-      promises.push(fs.rename(path.join(sitesDir, template), path.join(sitesDir, name)));
+      await fs.rename(path.join(sitesDir, template), path.join(sitesDir, name));
+      promises.push(recursiveRename({
+        rootPath: path.join(sitesDir, name),
+        search: template,
+        replace: name,
+        exclude: pathName => /node_modules/.test(pathName) || /lib/.test(pathName),
+      }));
     }
-    return Promise.all(promises);
+    return promises;
   }
 
   async updatePackageJson(type: 'root'|'site'|'package') {
@@ -429,8 +440,6 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   async run() {
     try {
       // await this.loadProfile();
-      await recursiveRename({ path: __dirname, search: '__cxstarter__', replace: 'foo' });
-      return;
       await this.validate();
       await this.clone();
       await this.clean();
