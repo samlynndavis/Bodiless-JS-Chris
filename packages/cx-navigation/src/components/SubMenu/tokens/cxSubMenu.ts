@@ -27,7 +27,8 @@ const Footer = asSubMenuToken(Base, {
     Item: 'leading-none',
   },
   Spacing: {
-    Item: 'mt-5 lg:mt-3',
+    Wrapper: 'lg:mb-16',
+    Item: 'mt-5 lg:mt-3 lg:first:mt-6',
     Title: 'my-3 lg:my-1.5',
   },
 });
