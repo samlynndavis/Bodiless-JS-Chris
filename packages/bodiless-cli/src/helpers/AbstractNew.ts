@@ -40,8 +40,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
       char: 'n',
       parse: d => d.trim(),
     }),
-    validator: s => s.trim().length > 0,
-    prompt: false,
+    validator: s => s && s.trim().length > 0,
   },
 
   dest: {
