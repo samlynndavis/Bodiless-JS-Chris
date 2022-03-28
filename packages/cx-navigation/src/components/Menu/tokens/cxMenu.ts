@@ -111,7 +111,6 @@ const Footer = asMenuToken({
     Item: 'md:min-w-1/4 md:w-full',
   },
   Spacing: {
-    Wrapper: 'lg:mb-9',
     Title: 'lg:mb-4',
   },
   Theme: {
