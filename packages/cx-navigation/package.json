@@ -33,6 +33,7 @@
     "@bodiless/core": "^1.0.0-beta.1",
     "@bodiless/cx-elements": "^1.0.0-beta.1",
     "@bodiless/cx-editors": "^1.0.0-beta.1",
+    "@bodiless/cx-link": "^1.0.0-beta.1",
     "@bodiless/fclasses": "^1.0.0-beta.1",
     "@bodiless/navigation": "^1.0.0-beta.1",
     "lodash": "^4.17.19"

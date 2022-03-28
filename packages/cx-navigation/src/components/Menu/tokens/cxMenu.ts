@@ -23,7 +23,8 @@ const Base = asMenuToken({
   A11y: {
     Nav: addProps({ role: 'navigation' }),
     Wrapper: addProps({ role: 'menubar' }),
-    Item: addProps({ role: 'menuitem' }),
+    Item: addProps({ role: 'none' }),
+    Title: addProps({ role: 'menuitem' }),
   },
   Components: {
     Title: on(MenuTitleClean)(cxMenuTitle.Default),
