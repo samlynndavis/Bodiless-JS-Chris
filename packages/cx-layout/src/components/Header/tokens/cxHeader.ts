@@ -30,9 +30,9 @@ import {
   withDesign,
   withProps,
 } from '@bodiless/fclasses';
+import { cxLink } from '@bodiless/cx-link';
 import { cxLogo } from '../../Logo';
 import { cxDesktopSearch, cxSearchToggler } from '../../Search';
-import { cxWhereToBuy, WhereToBuyClean } from '../../WhereToBuy';
 import { asHeaderToken } from '../HeaderClean';
 
 // @TODO: Get rid of this after language button is implemented.
@@ -60,7 +60,6 @@ const Base = asHeaderToken({
       // @TODO: Is there a better way to inject WhereToBuy and (future) LanguageButton
       // components into the menu? Maybe, move the components to another package...
       withDesign({
-        WhereToBuy: replaceWith(as(cxWhereToBuy.WithoutIcon)(WhereToBuyClean)),
         // @TODO: Replace LanguageButton placeholder.
         LanguageButton: WithLanguageButton,
       }),
@@ -69,7 +68,7 @@ const Base = asHeaderToken({
     UtilityMenu: cxMenu.Utility,
     // @TODO: Replace LanguageButton placeholder.
     LanguageButton: WithLanguageButton,
-    WhereToBuy: cxWhereToBuy.Default,
+    WhereToBuy: cxLink.WhereToBuy,
   },
   Layout: {
     Container: 'flex justify-between items-center',

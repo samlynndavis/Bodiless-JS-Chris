@@ -16,6 +16,7 @@ import React, { FC } from 'react';
 import { Div, Fragment, designable } from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
+import { LinkClean } from '@bodiless/cx-link';
 import {
   BurgerMenuClean,
   MenuClean,
@@ -23,7 +24,6 @@ import {
 } from '@bodiless/cx-navigation';
 import { LogoClean } from '../Logo';
 import { SearchTogglerClean, DesktopSearchClean } from '../Search';
-import { WhereToBuyClean } from '../WhereToBuy';
 import type { HeaderComponents, HeaderProps } from './types';
 
 const headerComponents: HeaderComponents = {
@@ -44,7 +44,7 @@ const headerComponents: HeaderComponents = {
   SearchToggler: SearchTogglerClean,
   LanguageButton: Fragment,
   WhereToBuyWrapper: Fragment,
-  WhereToBuy: WhereToBuyClean,
+  WhereToBuy: LinkClean,
 };
 
 const HeaderCleanBase: FC<HeaderProps> = ({ components: C, ...rest }) => (

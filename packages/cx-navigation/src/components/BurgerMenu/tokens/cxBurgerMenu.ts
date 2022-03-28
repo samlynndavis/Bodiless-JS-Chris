@@ -14,6 +14,7 @@
 
 import { asStatic } from '@bodiless/core';
 import { cxColor } from '@bodiless/cx-elements';
+import { cxLink } from '@bodiless/cx-link';
 import {
   addClassesIf,
   as,
@@ -48,6 +49,7 @@ const Base = asBurgerMenuToken({
     MenuToggler: cxMenuToggler.Close,
     Menu: cxMenu.Burger,
     UtilityMenu: cxMenu.Utility,
+    WhereToBuy: cxLink.WhereToBuy,
   },
   Layout: {
     Wrapper: 'w-full h-full fixed left-0 top-0 md:w-7/12 lg:hidden',
