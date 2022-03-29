@@ -43,7 +43,6 @@ const Base = asLayoutToken({
   },
 });
 
-
 const Default = asLayoutToken({
   ...Base,
   Components: {
