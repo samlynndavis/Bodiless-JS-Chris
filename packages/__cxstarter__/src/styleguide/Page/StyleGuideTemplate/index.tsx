@@ -18,6 +18,7 @@ import { Layout } from './Layout';
 import { Header } from './Header';
 import { FlowContainer } from './FlowContainer';
 import { Images } from './Images';
+import { Footer } from './Footer';
 import { _default } from './_default';
 
 export const __cxstarter__StyleGuideTemplate = {
@@ -29,4 +30,5 @@ export const __cxstarter__StyleGuideTemplate = {
   Header,
   Images,
   FlowContainer,
+  Footer,
 };

@@ -64,7 +64,23 @@ const NoLayout = asStyleGuideTemplateToken(omit(Base, 'Components'), {
   },
 });
 
+const HeaderOnly = asStyleGuideTemplateToken({
+  ...Default,
+  Components: {
+    Wrapper: on(LayoutClean)(cxLayout.HeaderOnly),
+  },
+});
+
+const FooterOnly = asStyleGuideTemplateToken({
+  ...Default,
+  Components: {
+    Wrapper: on(LayoutClean)(cxLayout.FooterOnly),
+  },
+});
+
 export default {
   Default,
   NoLayout,
+  HeaderOnly,
+  FooterOnly,
 };

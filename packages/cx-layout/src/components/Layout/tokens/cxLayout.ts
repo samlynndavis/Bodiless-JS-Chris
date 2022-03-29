@@ -11,12 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+import { cxColor, cxSpacing } from '@bodiless/cx-elements';
 import {
   addProps,
   as,
+  on,
 } from '@bodiless/fclasses';
-import { cxSpacing, cxColor } from '@bodiless/cx-elements';
 import { asLayoutToken } from '../LayoutClean';
+import { cxFooter, FooterClean } from '../../Footer';
 import { cxHeader } from '../../Header';
 import { cxHelmet } from '../../Helmet';
 import { MAIN_CONTENT_ID } from './constants';
@@ -27,9 +30,7 @@ import { StyleGuide } from './StyleGuide';
   */
 const Base = asLayoutToken({
   Components: {
-    Helmet: as(cxHelmet.Default),
-  },
-  Schema: {
+    Helmet: cxHelmet.Default,
   },
   Behavior: {
     Container: addProps({ id: MAIN_CONTENT_ID }),
@@ -41,53 +42,27 @@ const Base = asLayoutToken({
       'sr-only focus:not-sr-only',
     ),
   },
-  Layout: {
-  },
-  Spacing: {
-  }
 });
 
-/*
- * Tailwind's container is specifially not used due to its feature it set's max-width
- * to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
- * to contain content until we get to xl and then constrain by max-width.
- */
-const ConstrainSite = asLayoutToken({
+
+const Default = asLayoutToken({
+  ...Base,
+  Components: {
+    ...Base.Components,
+    Header: cxHeader.Default,
+    Footer: cxFooter.Default,
+  },
+  // Tailwind's container is specifially not used due to its feature it set's max-width
+  // to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
+  // to contain content until we get to xl and then constrain by max-width.
   Spacing: {
     HeaderWrapper: cxSpacing.WithSiteXLConstraint,
     FooterWrapper: cxSpacing.WithSiteXLConstraint,
   },
 });
 
-const Header = asLayoutToken({
-  Components: {
-    Header: as(cxHeader.Default),
-  },
-});
-
-const Footer = asLayoutToken({
-  Components: {
-    Footer: as(cxColor.BgSecondaryFooter, 'h-10'), // Temporary
-  },
-});
-
-const Default = asLayoutToken({
-  ...Base,
-  Components: {
-    ...Base.Components,
-    ...Header.Components,
-    ...Footer.Components,
-  },
-  Spacing: {
-    ...Base.Spacing,
-    ...ConstrainSite.Spacing,
-  }
-});
-
 export default {
   Base,
   Default,
-  Header,
-  Footer,
   StyleGuide,
 };

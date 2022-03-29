@@ -18,7 +18,7 @@ import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 export type LayoutComponents = {
   OuterContainer: ComponentOrTag<any>,
   SkipToMainContent: ComponentOrTag<any>,
-  Helmet: ComponentOrTag<any>
+  Helmet: ComponentOrTag<any>,
   Header: ComponentOrTag<any>,
   HeaderWrapper: ComponentOrTag<any>,
   Footer: ComponentOrTag<any>,

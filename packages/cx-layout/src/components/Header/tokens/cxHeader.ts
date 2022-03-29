@@ -82,7 +82,7 @@ const Base = asHeaderToken({
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
-    UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu' }),
+    UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu', nodeCollection: 'site' }),
   },
   Layout: {
     Container: 'flex justify-between items-center',
