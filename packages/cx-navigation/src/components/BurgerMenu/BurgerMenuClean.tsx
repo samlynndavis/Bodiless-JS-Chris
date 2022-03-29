@@ -15,6 +15,7 @@
 import React, { FC } from 'react';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { Div, Fragment, designable } from '@bodiless/fclasses';
+import { LinkClean } from '@bodiless/cx-link';
 import { MenuClean } from '../Menu';
 import { MenuTogglerClean } from '../MenuToggler';
 import type { BurgerMenuComponents, BurgerMenuProps } from './types';
@@ -28,7 +29,7 @@ const burgerMenuComponents: BurgerMenuComponents = {
   Menu: MenuClean,
   FooterWrapper: Div,
   WhereToBuyWrapper: Fragment,
-  WhereToBuy: Fragment,
+  WhereToBuy: LinkClean,
   ActionFooterContainer: Div,
   UtilityMenuWrapper: Fragment,
   UtilityMenu: MenuClean,

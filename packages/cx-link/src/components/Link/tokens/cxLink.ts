@@ -13,12 +13,13 @@
  */
 
 import {
-  addProps, Span, addPropsIf, flowIf, as, on, addClassesIf
+  addProps, Span, addPropsIf, flowIf, as, on, addClassesIf, withProps, startWith
 } from '@bodiless/fclasses';
 import { withSidecarNodes, withNodeKey } from '@bodiless/core';
-import { cxTypography } from '@bodiless/cx-elements';
+import { cxColor, cxTextDecoration, cxTypography } from '@bodiless/cx-elements';
 import { asLinkToken } from '../LinkClean';
 import { useExternalLinkToggle, asEditableLink, useIsDownloadLink } from '../util';
+import { CartIcon } from '../assets/CartIcon';
 
 /**
    * Token which causes link to display as an external link.
@@ -84,6 +85,44 @@ const Sidecar = asLinkToken({
   },
 });
 
+const WhereToBuy = asLinkToken({
+  Components: {
+    Icon: startWith(CartIcon),
+  },
+  Layout: {
+    Wrapper: 'w-full lg:w-auto flex justify-center items-center max-w-64 h-12 lg:w-48',
+  },
+  Spacing: {
+    Wrapper: 'mx-auto p-3',
+    Icon: 'mr-3',
+  },
+  Theme: {
+    Wrapper: as(
+      cxColor.BgPrimaryInteractive,
+      cxColor.TextPrimaryFooterCopy,
+      cxTextDecoration.Bold,
+      cxTextDecoration.Uppercase,
+      // @TODO: Create token? It should be same size for both mobile and desktop...
+      'text-m-base',
+      'rounded',
+    ),
+    Icon: 'w-6 h-6',
+    Body: 'leading',
+  },
+  Content: {
+    Wrapper: withProps({
+      href: '/where-to-buy',
+    }),
+    Body: withProps({
+      children: 'Where to Buy',
+    }),
+  },
+});
+
 export default {
-  Default, WithExternalStyles, WithDownloadStyles, Sidecar,
+  Default,
+  WithExternalStyles,
+  WithDownloadStyles,
+  Sidecar,
+  WhereToBuy,
 };
