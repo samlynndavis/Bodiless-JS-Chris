@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { cxColor, cxSpacing } from '@bodiless/cx-elements';
+import { cxSpacing } from '@bodiless/cx-elements';
 import {
   addProps,
   as,
@@ -49,9 +49,6 @@ const Default = asLayoutToken({
     ...Base.Components,
     Header: cxHeader.Default,
     Footer: cxFooter.Default,
-  },
-  Theme: {
-    FooterWrapper: cxColor.BgSecondaryFooter,
   },
   // Tailwind's container is specifially not used due to its feature it set's max-width
   // to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
