@@ -166,7 +166,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   async replaceTemplatePackageName() {
     const jsTemplateName = await this.getArg('package-template');
     if (jsTemplateName === NO_TEMPLATE) return Promise.resolve();
-    const pkgTemplateName = jsTemplateName.replace('_', '-');
+    const pkgTemplateName = jsTemplateName.replace(/_/g, '-');
     const packagesDir = await this.getArg('packages-dir');
     const sitesDir = await this.getArg('sites-dir');
     const name = await this.getArg('name');
@@ -174,8 +174,9 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const newTokenName = newName.replace(/-([a-z])/g, g => g[1].toUpperCase());
     const ns = await this.getNamespace();
     const cwd = path.resolve(await this.getArg('dest'));
+    console.log('ptn', pkgTemplateName, cwd);
     const commonOptions = {
-      cwd: path.resolve(await this.getArg('dest')),
+      cwd,
       files: [
         `${cwd}/**/*.ts`,
         `${cwd}/**/*.tsx`,
@@ -331,7 +332,6 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       data.name = siteName;
       // Find the old dependency on the template package (if any) and delete it.
       const key = Object.keys(data.dependencies).find(k => new RegExp(template).test(k));
-      console.log(key, template);
       if (key) delete data.dependencies[key];
       data.dependencies[packageName] = '^0.0.0';
     } else {
@@ -379,6 +379,8 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const name = await this.getArg('name');
     const files = [
       path.join(dest, 'jenkins'),
+      path.join(dest, 'cypress'),
+      path.join(dest, 'github'),
       // remove the starter eslintrcs.  They exist only to disable
       // rules which flag the underscores in the __starter__ template.
       path.join(dest, packagesDir, name, 'eslintrc.js'),
