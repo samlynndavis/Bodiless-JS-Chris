@@ -19,17 +19,23 @@ type Options = AbstractNewOptions;
 
 const flags: Required<Flags<Options>> = {
   ...AbstractNew.flags,
+  'package-template': {
+    ...AbstractNew.flags['package-template'],
+    default: '__cxstarter__',
+  },
+  'site-template': {
+    ...AbstractNew.flags['site-template'],
+    default: '__cxstarter__',
+  },
 };
 
-class New extends AbstractNew<Options> {
-  static description = 'Create a new Bodiless site';
+class NewVds extends AbstractNew<Options> {
+  static description = 'Create a new Bodiless/VitalDS site';
 
   static flags: any = flags;
 
-  async clean() {
-    await super.clean();
-    // await this.updatePsh();
-  }
+  // eslint-disable-next-line class-methods-use-this
+  getFlagDefs() { return flags as Flags<AbstractNewOptions>; }
 
   // async updatePsh() {
   //   const dest = await this.getArg('dest');
@@ -49,4 +55,4 @@ class New extends AbstractNew<Options> {
   // }
 }
 
-export default New;
+export default NewVds;

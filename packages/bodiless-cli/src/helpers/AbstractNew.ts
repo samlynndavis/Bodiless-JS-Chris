@@ -59,7 +59,6 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
       if (fs.existsSync(arg)) return 'Destination already exists';
       return true;
     },
-    prompt: false,
   },
 
   url: {
@@ -82,7 +81,6 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
   'site-template': commandFlags.string({
     char: 's',
     parse: d => d.trim(),
-    default: '__cxstarter__',
     description: 'Name of the starter site to copy',
   }),
 
@@ -97,7 +95,6 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
 
   'package-template': commandFlags.string({
     description: 'Name of the starter package to copy',
-    default: '__cxstarter__',
     char: 'p',
     parse: d => d.trim(),
   }),
