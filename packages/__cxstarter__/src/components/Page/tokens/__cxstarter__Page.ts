@@ -15,7 +15,6 @@
 import React from 'react';
 import negate from 'lodash/negate';
 import {
-  addProps,
   as,
   flowIf,
   on,
