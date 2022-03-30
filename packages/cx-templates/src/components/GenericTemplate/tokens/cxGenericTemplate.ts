@@ -16,6 +16,7 @@ import {
   on,
   as,
   Img,
+  addProps,
 } from '@bodiless/fclasses';
 import { cxImage } from '@bodiless/cx-image';
 import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
@@ -28,6 +29,8 @@ import { GenericTemplateNodeKeys } from '../constants';
 const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(cxLayout.Default),
+    // @todo breadcrumb placeholder
+    Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
     // @todo in Hero ticket is change this to chameleon.
     TopContent: on(Img)(cxImage.Default, cxImage.WithLandscapePlaceholder),
     Content: as(cxFlowContainer.Default),
