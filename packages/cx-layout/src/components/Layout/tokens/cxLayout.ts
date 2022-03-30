@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { cxSpacing } from '@bodiless/cx-elements';
+import { cxColor, cxSpacing } from '@bodiless/cx-elements';
 import {
   addProps,
   as,
@@ -49,13 +49,6 @@ const Default = asLayoutToken({
     ...Base.Components,
     Header: cxHeader.Default,
     Footer: cxFooter.Default,
-  },
-  // Tailwind's container is specifially not used due to its feature it set's max-width
-  // to min-width of breakpoint.  So instead rely on ContainerWrapper to margin percent
-  // to contain content until we get to xl and then constrain by max-width.
-  Spacing: {
-    HeaderWrapper: cxSpacing.WithSiteXLConstraint,
-    FooterWrapper: cxSpacing.WithSiteXLConstraint,
   },
 });
 
