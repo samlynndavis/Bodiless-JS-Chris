@@ -53,7 +53,9 @@ const Examples = (props: any) => (
     <hr />
     <OneThirdContainer />
     <hr />
-    <ContentRegionContainer />
+    <div className="border-2">
+      <ContentRegionContainer />
+    </div>
   </>
 );
 
