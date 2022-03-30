@@ -21,6 +21,7 @@ import {
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 
 type StyleGuideTemplateComponents = {
+  Hero: ComponentOrTag<any>,
   Wrapper: ComponentOrTag<any>,
   TitleWrapper: ComponentOrTag<any>,
   Title: ComponentOrTag<any>,
@@ -31,6 +32,7 @@ type StyleGuideTemplateComponents = {
 };
 
 const styleGuideTemplateComponents: StyleGuideTemplateComponents = {
+  Hero: Fragment,
   Wrapper: Div,
   TitleWrapper: H1,
   Title: Fragment,
@@ -44,6 +46,7 @@ const StyleGuideTemplateBase: FC<DesignableComponentsProps<StyleGuideTemplateCom
   { components: C }
 ) => (
   <C.Wrapper>
+    <C.Hero />
     <C.TitleWrapper>
       <C.Title />
     </C.TitleWrapper>

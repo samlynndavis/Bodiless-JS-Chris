@@ -12,7 +12,4 @@
  * limitations under the License.
  */
 
-export * from './components/Img';
-export {
-  HeroClean, HeroStatic, asHeroToken, cxHero
-} from './components/Hero';
+export { default as cxHero } from './cxHero';

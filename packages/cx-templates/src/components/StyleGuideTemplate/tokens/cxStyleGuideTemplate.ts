@@ -16,6 +16,7 @@ import { cxTypography } from '@bodiless/cx-elements';
 import {
   EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
 } from '@bodiless/cx-editors';
+import { HeroClean, cxHero } from '@bodiless/cx-image';
 import { withNodeKey } from '@bodiless/core';
 import { on, replaceWith, Fragment } from '@bodiless/fclasses';
 import { cxLayout, LayoutClean } from '@bodiless/cx-layout';
@@ -26,6 +27,7 @@ const Default = asStyleGuideTemplateToken({
     TitleWrapper: cxTypography.H1,
   },
   Components: {
+    Hero: on(HeroClean)(cxHero.Image),
     Wrapper: on(LayoutClean)(cxLayout.Default),
   },
   Editors: {

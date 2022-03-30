@@ -12,7 +12,13 @@
  * limitations under the License.
  */
 
-export * from './components/Img';
-export {
-  HeroClean, HeroStatic, asHeroToken, cxHero
-} from './components/Hero';
+import { HTMLProps } from 'react';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+
+export type HeroComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Container: ComponentOrTag<any>,
+  Content: ComponentOrTag<any>,
+};
+
+export type HeroProps = DesignableComponentsProps<HeroComponents> & HTMLProps<HTMLElement>;
