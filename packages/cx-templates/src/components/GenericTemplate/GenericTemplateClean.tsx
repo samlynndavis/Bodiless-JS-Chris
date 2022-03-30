@@ -16,7 +16,6 @@ import React from 'react';
 import {
   designable,
   Div,
-  Fragment,
 } from '@bodiless/fclasses';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
 import { LayoutClean } from '@bodiless/cx-layout';

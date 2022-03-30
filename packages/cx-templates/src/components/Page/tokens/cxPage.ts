@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 
-import { as, Token } from '@bodiless/fclasses';
+import { as, Token, withShowDesignKeys } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { asElementToken } from '@bodiless/cx-elements';
-import { withShowDesignKeys } from '@bodiless/fclasses';
 import { asBodilessPage } from '../asBodilessPage';
 // import { cxGenericTemplate, GenericTemplateClean } from '../../Generic';
 // import { cxStyleGuideTemplate, StyleGuideTemplateClean } from '../../StyleGuideTemplate';
