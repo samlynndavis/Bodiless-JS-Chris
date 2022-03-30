@@ -12,8 +12,5 @@
  * limitations under the License.
  */
 
-export * from './components/Img';
-export * from './components/FlowContainer';
-export {
-  HeroClean, HeroStatic, asHeroToken, cxHero
-} from './components/Hero';
+export { cxHero } from './tokens';
+export { default as HeroClean, HeroStatic, asHeroToken } from './HeroClean';
