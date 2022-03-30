@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import negate from 'lodash/negate';
 import {
   addProps,
   as,
@@ -29,11 +30,9 @@ import {
 } from '@bodiless/cx-templates';
 import { useNode } from '@bodiless/core';
 
-// @todo remove WithNoBreadcrumbs & WithBreadcrumbsPlaceholder when
-// breadcrumbs is implemented and content editor can choose to use breadcrumb
-const isHomePage = () => useNode().node.pagePath === '/';
-
-const WithNoBreadcrumbs = asGenericTemplateToken({
+// @todo remove NoBreadcrumbsGeneric when breadcrumbs is implemented and
+// content editor can choose to use breadcrumb
+const NoBreadcrumbsGeneric = asGenericTemplateToken({
   ...cxGenericTemplate.Default,
   Components: {
     ...cxGenericTemplate.Default.Components,
@@ -42,20 +41,14 @@ const WithNoBreadcrumbs = asGenericTemplateToken({
   },
 });
 
-const WithBreadcrumbsPlaceholder = asGenericTemplateToken({
-  ...cxGenericTemplate.Default,
-  Behavior: {
-    Breadcrumb: as(addProps({ children: 'Breadcrumb Placeholder', }),),
-  },
-});
+const isHomePage = () => useNode().node.pagePath === '/';
 
 const Default = asFluidToken({
   ...cxPage.Default,
   Components: {
     _default: on(GenericTemplateClean)(
-      cxGenericTemplate.Default,
-      WithBreadcrumbsPlaceholder,
-      flowIf(isHomePage)(as(WithNoBreadcrumbs)),
+      flowIf(isHomePage)(as(NoBreadcrumbsGeneric)),
+      flowIf(negate(isHomePage))(as(cxGenericTemplate.Default)),
     ),
   },
 });
