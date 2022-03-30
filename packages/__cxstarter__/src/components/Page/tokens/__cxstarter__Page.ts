@@ -12,14 +12,51 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/fclasses';
+import React from 'react';
+import {
+  addProps,
+  as,
+  flowIf,
+  on,
+  replaceWith
+} from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/cx-elements';
-import { cxPage, GenericTemplateClean, cxGenericTemplate } from '@bodiless/cx-templates';
+import {
+  cxPage,
+  GenericTemplateClean,
+  cxGenericTemplate,
+  asGenericTemplateToken
+} from '@bodiless/cx-templates';
+import { useNode } from '@bodiless/core';
+
+// @todo remove WithNoBreadcrumbs & WithBreadcrumbsPlaceholder when
+// breadcrumbs is implemented and content editor can choose to use breadcrumb
+const isHomePage = () => useNode().node.pagePath === '/';
+
+const WithNoBreadcrumbs = asGenericTemplateToken({
+  ...cxGenericTemplate.Default,
+  Components: {
+    ...cxGenericTemplate.Default.Components,
+    BreadcrumbWrapper: replaceWith(React.Fragment),
+    Breadcrumb: replaceWith(React.Fragment),
+  },
+});
+
+const WithBreadcrumbsPlaceholder = asGenericTemplateToken({
+  ...cxGenericTemplate.Default,
+  Behavior: {
+    Breadcrumb: as(addProps({ children: 'Breadcrumb Placeholder', }),),
+  },
+});
 
 const Default = asFluidToken({
   ...cxPage.Default,
   Components: {
-    _default: on(GenericTemplateClean)(cxGenericTemplate.Default),
+    _default: on(GenericTemplateClean)(
+      cxGenericTemplate.Default,
+      WithBreadcrumbsPlaceholder,
+      flowIf(isHomePage)(as(WithNoBreadcrumbs)),
+    ),
   },
 });
 

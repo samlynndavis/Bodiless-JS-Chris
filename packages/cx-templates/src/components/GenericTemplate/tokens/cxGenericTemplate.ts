@@ -13,8 +13,6 @@
  */
 
 import {
-  replaceWith,
-  Fragment,
   on,
   as,
   Img,
@@ -23,7 +21,7 @@ import { cxImage } from '@bodiless/cx-image';
 import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
 import { cxFlowContainer } from '@bodiless/cx-flowcontainer';
 import { withNodeKey } from '@bodiless/core';
-import { cxSpacing } from '@bodiless/cx-elements';
+import { cxSpacing, cxTypography } from '@bodiless/cx-elements';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
 
@@ -42,6 +40,13 @@ const Default = asGenericTemplateToken({
   },
   Spacing: {
     TopWrapper: cxSpacing.WithSiteXLConstraint,
+    BreadcrumbWrapper: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint,
+      'my-2.5',
+    ),
+    // @todo move styling of breadcrumb to breadcrumb component when it exists.
+    Breadcrumb: cxTypography.Rest,
     ContentWrapper: as(
       cxSpacing.WithSiteMargin,
       cxSpacing.WithSiteXLConstraint
@@ -53,13 +58,6 @@ const Default = asGenericTemplateToken({
   },
 });
 
-const WithoutBreadcrumbs = asGenericTemplateToken({
-  Components: {
-    Breadcrumb: replaceWith(Fragment),
-  },
-});
-
 export default {
   Default,
-  WithoutBreadcrumbs,
 };

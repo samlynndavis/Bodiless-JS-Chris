@@ -25,8 +25,8 @@ import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
 
 const genericTemplateComponents: GenericTemplateComponents = {
   PageWrapper: LayoutClean,
-  BreadcrumbWrapper: Fragment,
-  Breadcrumb: Fragment,
+  BreadcrumbWrapper: Div,
+  Breadcrumb: Div,
   TopWrapper: Div,
   TopContent: FlowContainerClean,
   ContentWrapper: Div,
