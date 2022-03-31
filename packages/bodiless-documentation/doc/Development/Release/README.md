@@ -2,46 +2,45 @@
 
 ?> We adhere to the principles of [Semantic Versioning](https://semver.org/ ':target=_blank').
 
-<!-- tabs:start -->
-
-## **`1.x` Versions**
-
-- All Bodiless packages will maintain a common version line at `1.y.z`.
-- New "patch" versions (`1.y.Z`) will be published every two weeks, coinciding with our internal
+- All Bodiless packages will maintain a common version line at `X.y.z`.
+- New "patch" versions (`x.y.Z`) will be published every two weeks, coinciding with our internal
   sprint cadence.
 - In exceptional circumstances (critical bugfixes), we may publish a new version mid-sprint.
-- New "minor" versions (`1.Y.0`) will be released periodically as we hit major milestones on our
+- New "minor" versions (`x.Y.0`) will be released periodically as we hit major milestones on our
   roadmap.
 
-## `1.x` Release Process
+<!-- tabs:start -->
 
-At the end of the Sprint, a new `1.x` package version should be published as follows:
+## **Release Process**
+
+## Release Process
+
+At the end of the Sprint, a new package version should be published as follows:
 
 01. Create a fresh clone of the repository.
-01. Checkout the release branch, e.g.:
-   ```shell-session
-   git checkout -b release origin/release
-   ```
+01. Checkout the `release` branch, e.g.:
+    ```shell-session
+    git checkout -b release origin/release
+    ```
 01. Merge in the latest commits from `main`.
-   ```shell-session
-   git merge main
-   ```
+    ```shell-session
+    git merge main
+    ```
 01. Initialize all dependencies, and build the project.
-   ```shell-session
-   npm run setup
-   npm run build
-   ```
-01. Publish packages with the patch version update.
-   ```shell-session
-   npm run publish:patch
-   ```
+    ```shell-session
+    npm run setup
+    npm run build
+    ```
+01. Publish packages with the version update.
+    ```shell-session
+    npm run publish:<UPDATE_TYPE>
+    ```
+    - For `<UPDATE_TYPE>`, substitute the type of version update (i.e., `patch`, `minor`, or
+      `major`).
 01. Update the dependencies in `package-lock.json` for each example site by following [these
     steps](../Release/UpdatePackages#updating-example-sites39-package-lockjson).
-01. Create a PR to `main` from the release branch.
-    - The PR title should emulate the following form:
-      ```
-      chore: Release v1.0.45
-      ```
+01. Create a PR to `main` from the `release` branch.
+    - The PR title should emulate the following form: `chore: Release v1.0.45`
     - Commits in the PR should _not_ be squashed, since the tag is already attached to the
       appropriate commit hash.
 
@@ -51,61 +50,49 @@ At the end of the Sprint, a new `1.x` package version should be published as fol
 ### Notes
 
 - We use the `--conventional-commits` option to generate the changelog.
-- We push the commit to a release branch, which must be merged to `main` using the standard PR
+- We push the commit to a `release` branch, which must be merged to `main` using the standard PR
   process.
 
-## **`0.x` Versions**
+## **Pre-Release Process**
 
-?> While we adhere to the principles of [Semantic Versioning](https://semver.org/ ':target=_blank'),
-please note that `0.x` versions of BodilessJS were developed under ["Major Version
-Zero"](https://semver.org/#spec-item-4 ':target=_blank') status, meaning that _stability and
-backwards compatibility is not guaranteed_ for those versions.
+## Pre-Release Process
 
-- All Bodiless packages will maintain a common version line at `0.y.z`.
-- New "patch" versions (`0.y.Z`) will be published every two weeks, coinciding with our internal
-  sprint cadence.
-- In exceptional circumstances (critical bugfixes), we may publish a new version mid-sprint.
-- New "minor" versions (`0.Y.0`) will be released periodically as we hit major milestones on our
-  roadmap.
+If you need to create a _pre-release_ package version to precede a _major_ release, it should be
+published as follows:
 
-## `0.x` Release Process
-
-At the end of the Sprint, a new `0.x` package version should be published as follows:
-
-01. Create a fresh clone of the repository.
-01. Checkout the release branch, e.g.:
-   ```shell-session
-   git checkout -b release origin/release
-   ```
-01. Merge in the latest commits from `main`.
-   ```shell-session
-   git merge main
-   ```
+01. On GitHub, create a `release` branch off the `main` branch.
+    - [`johnsonandjohnson/Bodiless-JS` | GitHub](https://github.com/johnsonandjohnson/Bodiless-JS/ ':target=_blank')
+01. Checkout the `release` branch in your local environment.
+    ```shell-session
+    git checkout -b release origin/release
+    ```
 01. Initialize all dependencies, and build the project.
-   ```shell-session
-   npm run setup
-   npm run build
-   ```
-01. Publish packages with the patch version update.
-   ```shell-session
-   npm run publish:patch
-   ```
-01. Update the dependencies in `package-lock.json` for each example site by following [these
-    steps](../Release/UpdatePackages#updating-example-sites39-package-lockjson).
-01. Create a PR to `main` from the release branch.
-    - The PR title should emulate the following form:
-      ```
-      chore: Release v0.0.45
-      ```
-    - Commits in the PR should _not_ be squashed, since the tag is already attached to the
-      appropriate commit hash.
+    ```shell-session
+    npm run setup && npm run build
+    ```
+01. Publish packages with selected version.  
+    For example:
+    ```shell-session
+    npx lerna version 1.0.0-beta.1 --conventional-commits --force-publish
+    ```
+    - The release version has to be manually specified.
+    - GitHub's _publish_ action will take care of the actual publishing.
+01. Update the site's `package-lock.json`.
+    ```shell-session
+    cd sites/test-site/ && \
+    rm -rf node_modules/ && \
+    rm package-lock.json && \
+    npm install --legacy-peer-deps
+    ```
+01. Update the root `package.json`/`-lock` file version, and push to release PR.
+01. Merge back to the `main` branch.
 
 !> **IMPORTANT:** Ensure that you **do not squash/merge the release branch**. You _must_ use the
    "fast-forward" merge strategy.
 
 ### Notes
 
-- We specify an explicit version number because we are in pre-`1.0`, so the normal semver bumps
+- We specify an explicit version number because we are in pre-`X.0`, so the normal semver bumps
   which would be created by conventional-commits are not appropriate. We use the
   `--conventional-commits` option to generate the changelog.
 - We push the commit to a release branch, which must be merged to `main` using the standard PR
