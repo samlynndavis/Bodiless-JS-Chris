@@ -30,7 +30,7 @@ export const withOrganizationSchema = () => (
 
     const withNodeData = (field: string) => {
       const pageTypeNode = node.peer<PageTypeNodeData>(['Page', 'meta', field]);
-      let { content } = pageTypeNode.data;
+      const { content } = pageTypeNode.data;
       return content;
     };
 
@@ -43,17 +43,19 @@ export const withOrganizationSchema = () => (
     const contactOption = withNodeData('organization-contact-option');
     const areaServed = withNodeData('organization-area-served');
 
-    const hasContactPoint = (contactType || telephone || contactOption  || areaServed ) ? true : false;
+    const hasContactPoint = !!((
+      contactType || telephone || contactOption || areaServed
+    ));
+
     const isHomePage = useIsHomePage();
 
     useEffect(() => {
       // Generate schema only on home page.
       if (!isHomePage || !url) return;
-      
-      let logo = document.querySelector('[data-schema-source=organization-logo]');
-  
-      if (logo){
 
+      let logo = document.querySelector('[data-schema-source=organization-logo]');
+
+      if (logo) {
         const organizationSchema = {
           '@context': 'https://schema.org',
           '@type': 'Organization',
@@ -68,17 +70,17 @@ export const withOrganizationSchema = () => (
               contactOption,
               areaServed,
             },
-          }),          
+          }),
         };
 
         setStructuredData('Organization', organizationSchema);
       }
-      
+
       // To get the value image of element hydrated
-      const observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function (mutation) {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
           if (mutation.attributeName === 'src') {
-            logo =  document.querySelector('[data-schema-source=organization-logo]');
+            logo = document.querySelector('[data-schema-source=organization-logo]');
           }
           // Logo and URL is mandatory to generate organization schema.
           if (!logo) return;
@@ -99,13 +101,13 @@ export const withOrganizationSchema = () => (
                 contactOption,
                 areaServed,
               },
-            }),          
+            }),
           };
 
           setStructuredData('Organization', organizationSchema);
         });
       });
-      
+
       const logoWrapper = document.querySelector('[data-layer-region="Logo:Link"]');
 
       const config = {
@@ -117,7 +119,6 @@ export const withOrganizationSchema = () => (
       if (logoWrapper) {
         observer.observe(logoWrapper, config);
       }
-
     }, []);
 
     return (

@@ -116,7 +116,7 @@ export const withProductSchema = (
         ...({
           offers: {
             '@type': 'Offer',
-            price: offerPrice ? offerPrice : '0',
+            price: offerPrice || '0',
             ...(offerAvailability && { availability: offerAvailability }),
             ...(offerItemOffered && { itemCondition: offerItemOffered }),
             ...(offerPriceCurrency && { priceCurrency: offerPriceCurrency }),

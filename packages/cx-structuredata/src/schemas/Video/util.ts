@@ -64,11 +64,13 @@ export const getYouTubeSchema = async (schemaSourceKeys: Array<DataStructureSche
       const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?key=${googleYTApiKey}&part=${part}&id=${ids}`);
       data = await res.json();
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(`Unable to retrieve Youtube API data: ${data}.`);
       data = null;
     }
 
     if (data == null || data.error != null) {
+      // eslint-disable-next-line no-console
       console.error(`Unable to retrieve Youtube API data: ${data}.`);
     }
     const youTubeVideosData = data.items;
@@ -99,5 +101,6 @@ export const getYouTubeSchema = async (schemaSourceKeys: Array<DataStructureSche
     }));
     return schemaYouTube;
   }
+  // eslint-disable-next-line no-console
   console.error(`Unable to retrieve Youtube API googleYTApiKey: ${googleYTApiKey}.`);
 };

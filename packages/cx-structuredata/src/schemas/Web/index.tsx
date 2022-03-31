@@ -37,18 +37,18 @@ export const withWebSchema = () => (
 
     const withNodeData = (field: string) => {
       const pageTypeNode = node.peer<PageTypeNodeData>(['Page', 'meta', field]);
-      let { content } = pageTypeNode.data;
+      const { content } = pageTypeNode.data;
       return content;
     };
 
     const name = withNodeData('page-title');
 
     const isHomePage = useIsHomePage();
-    
+
     useEffect(() => {
       // Generate schema only on home page.
       if (!isHomePage) return;
-      
+
       const webSchema = {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
