@@ -246,7 +246,6 @@ const fixed = async ({
 const generateGatsbyImage = async ({
   file, preset, reporter, pathPrefix
 }, options) => {
-  console.log('pp', pathPrefix);
   // skip image generation when unknown preset is passed
   if (!Object.values(GatsbyImagePresets).includes(preset)) {
     return undefined;

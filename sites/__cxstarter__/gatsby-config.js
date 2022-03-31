@@ -116,6 +116,6 @@ module.exports = {
   flags: {
     DEV_SSR: false,
   },
-  pathPrefix: process.env.GATSBY_PATH_PREFIX,
+  pathPrefix: process.env.GATSBY_PATH_PREFIX || '',
   plugins,
 };
