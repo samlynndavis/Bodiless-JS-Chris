@@ -30,12 +30,14 @@ import {
   A,
   extendMeta,
   as,
+  Img,
+  on,
 } from '@bodiless/fclasses';
 import { withImagePlaceholder } from '@bodiless/components';
 import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/cx-elements';
 import { withoutHydration } from '@bodiless/hydration';
-
+import { cxHero, asHeroToken } from '@bodiless/cx-hero';
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';
 
@@ -189,6 +191,19 @@ const WithEager = asElementToken({
   },
 });
 
+const Hero = asHeroToken({
+  ...cxHero.Default,
+  Components: {
+    Content: on(Img)(asBodilessImage()),
+  },
+  Content: {
+    Content: withImagePlaceholder({ src: landscapeImage }),
+  },
+  Layout: {
+    Content: 'w-full'
+  },
+});
+
 export default {
   Base,
   Plain: EditablePlain,
@@ -202,4 +217,5 @@ export default {
   WithLandscapePlaceholder,
   WithLink,
   WithEager,
+  Hero,
 };

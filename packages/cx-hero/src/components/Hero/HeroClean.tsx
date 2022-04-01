@@ -14,7 +14,7 @@
 
 import React, { FC } from 'react';
 import {
-  Div, Fragment, designable, Section
+  Fragment, designable, Section
 } from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
@@ -22,15 +22,12 @@ import { HeroComponents, HeroProps } from './types';
 
 const heroComponents: HeroComponents = {
   Wrapper: Section,
-  Container: Div,
   Content: Fragment,
 };
 
 const HeroCleanBase: FC<HeroProps> = ({ components: C }) => (
   <C.Wrapper>
-    <C.Container>
-      <C.Content />
-    </C.Container>
+    <C.Content />
   </C.Wrapper>
 );
 

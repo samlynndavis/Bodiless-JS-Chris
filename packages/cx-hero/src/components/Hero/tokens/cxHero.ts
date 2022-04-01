@@ -12,5 +12,21 @@
  * limitations under the License.
  */
 
-export * from './components/Img';
-export * from './components/FlowContainer';
+import { asHeroToken } from '../HeroClean';
+
+const Base = asHeroToken({
+  Spacing: {
+    Wrapper: 'pb-9'
+  }
+});
+
+const Default = asHeroToken({
+  ...Base,
+});
+
+const cxHero = {
+  Base,
+  Default,
+};
+
+export default cxHero;

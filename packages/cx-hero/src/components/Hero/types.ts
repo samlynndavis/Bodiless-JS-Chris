@@ -17,7 +17,6 @@ import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
 export type HeroComponents = {
   Wrapper: ComponentOrTag<any>,
-  Container: ComponentOrTag<any>,
   Content: ComponentOrTag<any>,
 };
 

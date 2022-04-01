@@ -21,6 +21,7 @@ export type LayoutComponents = {
   Helmet: ComponentOrTag<any>,
   Header: ComponentOrTag<any>,
   HeaderWrapper: ComponentOrTag<any>,
+  Hero: ComponentOrTag<any>,
   Footer: ComponentOrTag<any>,
   FooterWrapper: ComponentOrTag<any>,
   Container: ComponentOrTag<any>,

@@ -1,9 +1,9 @@
 {
-  "name": "@bodiless/cx-image",
+  "name": "@bodiless/cx-hero",
   "sideEffects": false,
-  "version": "1.0.0-beta.2",
-  "description": "Clean, designable Image components for CanvasX based projects",
-  "author": "Marco Pagliarulo <mpaglia1@its.jnj.com>",
+  "version": "1.0.0-beta.1",
+  "description": "Clean, designable Hero component for CanvasX based projects",
+  "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "license": "UNLICENSED",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -31,16 +31,8 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/components": "^1.0.0-beta.2",
-    "@bodiless/components-ui": "^1.0.0-beta.2",
-    "@bodiless/core": "^1.0.0-beta.2",
-    "@bodiless/cx-elements": "^1.0.0-beta.2",
-    "@bodiless/cx-hero": "^1.0.0-beta.2",
-    "@bodiless/fclasses": "^1.0.0-beta.2",
-    "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.2",
-    "@bodiless/hydration": "^1.0.0-beta.2",
-    "@bodiless/layouts": "^1.0.0-beta.2",
-    "@bodiless/layouts-ui": "^1.0.0-beta.2",
-    "lodash": "^4.17.19"
+    "@bodiless/cx-elements": "^1.0.0-beta.1",
+    "@bodiless/fclasses": "^1.0.0-beta.1",
+    "@bodiless/hydration": "^1.0.0-beta.1"
   }
 }

@@ -12,24 +12,6 @@
  * limitations under the License.
  */
 
-import { asBodilessImage } from '@bodiless/components';
-import { Img, on } from '@bodiless/fclasses';
-import { asHeroToken } from '../HeroClean';
-
-const Base = asHeroToken({
-  Layout: {}
-});
-
-const Image = asHeroToken({
-  ...Base,
-  Components: {
-    Content: on(Img)(asBodilessImage()),
-  }
-});
-
-const cxHero = {
-  Base,
-  Image,
-};
-
-export default cxHero;
+export {
+  cxHero, HeroClean, HeroStatic, asHeroToken,
+} from './components/Hero';
