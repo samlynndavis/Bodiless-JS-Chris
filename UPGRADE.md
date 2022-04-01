@@ -14,3 +14,37 @@ instead of the original one. This affected error messages sent from `bodiless-ba
 - Reason: 2.0.0-rc.3 version introduced a few type errors into Bodiless. While these are fixable,
 it's better to lock into a working version while there's no stable release available.
 - Issue: https://github.com/johnsonandjohnson/Bodiless-JS/issues/1243
+
+
+NOTES:
+https://tailwindcss.com/docs/upgrade-guide
+
+TAILWIND Upgrade:
+* Upgrade packages  CHECK : tailwindcss & postcss
+* Migrating to the JIT engine -- no mode.
+* Configure content sources -- replace purge with content -- CHECK had to do in scripts as well.
+* Remove dark mode configuration -- no usage of darkMode
+* Remove variant configuration -- CHECK had to remove in scripts as well
+* Replace @variants with @layer -- no usage of @variants
+* Automatic transforms and filters -- left usage as they said it was harmless..
+* Color palette changes -- 
+** replaced -green- with -emerald-
+** replaced -yellow- with -amber-
+** repleaced -violet- with -violet-
+** left -gray- as -gray....
+* Class name changes -- 
+** overflow-clip with text-clip
+** overflow-ellipsis -- no usage
+** flex-grow-* -- no usage
+** flex-shrink-* -- no usage
+** outline-black -- one usage replaced with "focus:outline-black focus:outline-2 focus:outline-dotted focus:outline-offset-2"
+** outline-white -- no usage
+** decoration-clone -- no usage
+** decoration-slice -- no usage
+* Separator cannot be a dash - no usage
+* Prefix cannot be a function -- no usage
+* File modifier order reversed -- no usage
+* Fill and stroke use color palette -- no usage
+* Negative values removed -- ??
+* Base layer must be present -- check at site level
+* Screens layer has been renamed -- no usage

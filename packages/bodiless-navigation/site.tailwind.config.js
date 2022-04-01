@@ -18,7 +18,7 @@
  * site is responsible for merging these settings into site level settings
  */
 module.exports = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
@@ -42,13 +42,6 @@ module.exports = {
         'slide-in': 'slide-in .5s forwards',
         'slide-out': 'slide-out .5s forwards',
       },
-    },
-  },
-  variants: {
-    extend: {
-      overflow: ['responsive', 'hover', 'focus', 'group-hover'],
-      position: ['responsive', 'hover', 'focus', 'group-hover'],
-      display: ['responsive', 'hover', 'focus', 'group-hover'],
     },
   },
 };

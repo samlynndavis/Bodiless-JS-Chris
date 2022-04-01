@@ -83,10 +83,6 @@ const remGrid = {
 const tailwindcssDir = require('tailwindcss-dir');
 
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: false,
-  },
   prefix: 'bl-',
   theme: {
     extend: {
@@ -637,31 +633,6 @@ module.exports = {
 
       // stroke: { },
     },
-  },
-
-  /*
-  |-----------------------------------------------------------------------------
-  | Variants                 https://tailwindcss.com/docs/configuration#modules
-  |-----------------------------------------------------------------------------
-  |
-  | Here is where you control which modules are generated and what
-  | variants are generated for each of those modules.
-  |
-  | Currently supported variants:
-  |   - responsive
-  |   - hover
-  |   - focus
-  |   - active
-  |   - group-hover
-  |
-  | As a V1 update 'modules' has a name change to 'variants'
-  |
-  */
-
-  variants: {
-    borderWidth: ['first', 'responsive'],
-    margin: ['responsive', 'first', 'last'],
-    divideWidth: ['responsive', 'direction'],
   },
 
   // corePlugins: {},

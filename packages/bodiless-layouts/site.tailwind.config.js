@@ -18,12 +18,11 @@
  * site is responsible for merging these settings into site level settings
  */
 module.exports = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
     extend: {},
   },
-  variants: {},
   plugins: [],
 };
