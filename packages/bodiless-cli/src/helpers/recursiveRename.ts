@@ -3,7 +3,6 @@ import * as fs from 'fs';
 import type { Dirent } from 'fs';
 // @ts-ignore Could not find a declaration file
 import * as walk from '@root/walk';
-// const walk = require('@root/walk');
 
 const path = require('path');
 

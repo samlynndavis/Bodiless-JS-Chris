@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Copyright © 2020 Johnson & Johnson
  *
@@ -18,8 +19,11 @@ import * as os from 'os';
 import * as fs from 'fs-extra';
 import * as tar from 'tar';
 import * as inquirer from 'inquirer';
+// @ts-ignore Could not find a declaration file
+import * as walk from '@root/walk';
 import { v1 } from 'uuid';
 import { SpawnOptions } from 'child_process';
+import { Dirent } from 'fs-extra';
 import Wizard, { Flags, WizardOptions } from './Wizard';
 import Spawner from './Spawner';
 import { listVersionsSync, listBranchesSync } from './git';
@@ -63,9 +67,10 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
 
   url: {
     ...commandFlags.string({
-      description: 'Url of remote git repository to clone (omit to use current local directory)',
+      description: 'Url of remote git repository to clone',
       char: 'u',
       parse: r => (r || '').trim(),
+      default: 'https://github.com/johnsonandjohnson/bodiless-js',
     }),
     validator: r => r !== undefined,
   },
@@ -125,6 +130,23 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
     prompt: false,
   },
 
+  'clone-local': {
+    ...commandFlags.boolean({
+      description: 'Use local repository as source (url flag is ignored)',
+    }),
+    validator: () => true,
+    prompt: false,
+    default: false,
+  },
+
+  'keep-content': {
+    ...commandFlags.boolean({
+      description: 'Keep all content in the template site',
+    }),
+    validator: () => true,
+    prompt: false,
+  },
+
   namespace: {
     ...commandFlags.string({
       description: 'NPM Namespace for starter package',
@@ -152,6 +174,7 @@ export type AbstractNewOptions = WizardOptions & {
   'namespace': string,
   setup: string,
   'no-setup': boolean,
+  'keep-content': boolean,
 };
 
 abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
@@ -171,7 +194,6 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const newTokenName = newName.replace(/-([a-z])/g, g => g[1].toUpperCase());
     const ns = await this.getNamespace();
     const cwd = path.resolve(await this.getArg('dest'));
-    console.log('ptn', pkgTemplateName, cwd);
     const commonOptions = {
       cwd,
       files: [
@@ -215,12 +237,12 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   }
 
   async cloneSourceRepo(): Promise<string> {
-    const url = await this.getArg('url');
-    if (url?.length === 0) {
+    if (await this.getArg('clone-local')) {
       const repo = findGitRoot(process.cwd());
       return repo;
     }
 
+    const url = await this.getArg('url');
     const tmpDir = path.resolve(os.tmpdir(), v1());
     const spawner = new Spawner();
     if (!await this.getArg('verbose', false)) {
@@ -230,6 +252,35 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     await spawner.spawn('git', 'clone', url as string, tmpDir);
     spinner.stop();
     return tmpDir;
+  }
+
+  async getTargetDir(type: 'sites'|'packages') {
+    const rootDir = await this.getArg('dest');
+    const name = await this.getArg('name');
+    const subDir = await this.getArg(`${type}-dir`);
+    return path.join(rootDir, subDir, name);
+  }
+
+  async cleanContent() {
+    if (await this.getArg('keep-content')) return Promise.resolve();
+    const dataDir = path.join(
+      await this.getTargetDir('sites'),
+      'src',
+      'data',
+    );
+    return walk.walk(dataDir, async (err: Error, pathname: string, dirent: Dirent) => {
+      // console.log(pathname);
+      if (err) {
+        console.warn('Warning could not stat', pathname, err.message);
+      } else if (
+        !dirent.isDirectory()
+        && path.extname(pathname) === 'json'
+        && !/^index/.test(path.basename(pathname))
+      ) {
+        return fs.remove(pathname);
+      }
+      return Promise.resolve();
+    });
   }
 
   async getRevision(repo: string): Promise<string> {
@@ -414,6 +465,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     await this.cleanSites('site');
     await this.cleanSites('package');
     await this.cleanMisc();
+    await this.cleanContent();
     await this.updatePackageJson('root');
     await this.updatePackageJson('site');
     await this.updatePackageJson('package');
