@@ -23,6 +23,23 @@ TAILWIND Upgrade:
 * Upgrade packages  CHECK : tailwindcss & postcss
 * Migrating to the JIT engine -- no mode.
 * Configure content sources -- replace purge with content -- CHECK had to do in scripts as well.
+* Also because of this "If you weren’t already using the purge option in your project, it’s crucial that you configure your template paths now or your compiled CSS will be empty." 
+
+** every package that uses bl-classes other than bodiless-ui is being purged in edit.  NEED TO SOLVE
+
+All these packages use bl-classes:
+Bodiless-page
+Bodiless-components
+Bodiless-components-ui
+Bodiless-core
+Bodiless-core-ui
+bodiless-layouts
+Bodiless-layouts-ui
+Bodiless-richtext
+Bodiless-richtext-ui
+Bodiless-ui. ** primary bodiless tailwind and only one not being purged
+Gatsby-theme-bodiless
+
 * Remove dark mode configuration -- no usage of darkMode
 * Remove variant configuration -- CHECK had to remove in scripts as well
 * Replace @variants with @layer -- no usage of @variants

@@ -83,6 +83,12 @@ const remGrid = {
 const tailwindcssDir = require('tailwindcss-dir');
 
 module.exports = {
+  future: {
+    purgeLayersByDefault: false,
+  },
+  content: [
+    './lib/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
   prefix: 'bl-',
   theme: {
     extend: {
