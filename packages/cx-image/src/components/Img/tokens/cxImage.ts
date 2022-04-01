@@ -37,7 +37,7 @@ import { withImagePlaceholder } from '@bodiless/components';
 import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/cx-elements';
 import { withoutHydration } from '@bodiless/hydration';
-import { cxHero, asHeroToken } from '@bodiless/cx-hero';
+import { vitalHero, asHeroToken } from '@bodiless/vital-hero';
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';
 
@@ -192,7 +192,7 @@ const WithEager = asElementToken({
 });
 
 const Hero = asHeroToken({
-  ...cxHero.Default,
+  ...vitalHero.Default,
   Components: {
     Content: on(Img)(asBodilessImage()),
   },

@@ -12,6 +12,4 @@
  * limitations under the License.
  */
 
-export {
-  cxHero, HeroClean, HeroStatic, asHeroToken,
-} from './components/Hero';
+export { default as vitalHero } from './vitalHero';

@@ -12,4 +12,21 @@
  * limitations under the License.
  */
 
-export { default as cxHero } from './cxHero';
+import { asHeroToken } from '../HeroClean';
+
+const Base = asHeroToken({
+  Spacing: {
+    Wrapper: 'pb-9'
+  }
+});
+
+const Default = asHeroToken({
+  ...Base,
+});
+
+const vitalHero = {
+  Base,
+  Default,
+};
+
+export default vitalHero;
