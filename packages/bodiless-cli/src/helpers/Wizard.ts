@@ -27,8 +27,16 @@ export type Flags<O extends WizardOptions> = Required<{
   [p in keyof O]: FlagDef<O>;
 }>;
 
+type GetArOptions<O extends WizardOptions> = {
+  prompt?: FlagDef<O>['prompt'],
+  validator?: (v: any) => boolean,
+};
+
 export type WizardInterface<O extends WizardOptions> = {
-  getArg: <V extends keyof O>(flag: V, promptArg?: FlagDef<O>['prompt']) => Promise<O[V]>;
+  getArg: <V extends keyof O>(
+    flag: V,
+    options?: GetArOptions<O>,
+  ) => Promise<O[V]>,
   getFlagDefs: () => Flags<O>;
 };
 
@@ -91,29 +99,36 @@ abstract class Wizard<O extends WizardOptions> extends Command implements Wizard
    *
    * If omitted, the default prompt will be used for this flag.
    */
-  async getArg<V extends keyof O>(flag: V, promptArg?: FlagDef<O>['prompt']): Promise<O[V]> {
+  async getArg<V extends keyof O>(
+    flag: V,
+    { prompt: promptArg, validator: validatorArg }: GetArOptions<O> = {}
+  ) {
     if (this.options[flag]) return this.options[flag]!;
     const flagDefs = this.getFlagDefs();
     const flagDef = flagDefs[flag];
     const { flags: flagValues } = this.parse<O, any>({ flags: flagDefs });
     const arg = flagValues[flag];
     const { prompt: promptFlag } = flagDefs[flag];
-    const { validator = Boolean } = flagDefs[flag];
+    const prompt = (promptArg !== undefined) ? promptArg : promptFlag;
+    const { validator: validatorFlag = Boolean } = flagDefs[flag];
+    const validator = validatorArg || validatorFlag || (() => true);
+
     const validated = await validator(arg);
-    // Never prompt for valid flags except in interactive mode.
-    if (validated === true && !flagValues.interactive) {
-      this.options[flag] = arg;
-      return arg;
-    }
-    // Throw error for invalid flags in automation mode or if prompting is disabled.
-    if (flagValues.automation
-      || promptArg === false
-      || (promptArg === undefined && promptFlag === false)
-    ) {
+
+    // Determine if we should prompt.
+    if (validated === true) {
+      // Accept valid flag if notinteractive or if prompting is disabled.
+      if (!flagValues.interactive || prompt === false) {
+        this.options[flag] = arg;
+        return arg;
+      }
+    // Throw error for invalid flags in automation mode or if prompt is disabled.
+    } else if (flagValues.automation || prompt === false) {
       throw new Error(
         typeof validated === 'string' ? validated : `Invalid value "${arg}" for option "--${flag}"`,
       );
     }
+
     // Prompt for this value.
     const finalPrompt: inquirer.DistinctQuestion = {
       name: flag as string,
@@ -122,8 +137,7 @@ abstract class Wizard<O extends WizardOptions> extends Command implements Wizard
       default: validator(arg) === true ? arg : undefined,
       validate: validator,
       filter: flagDef.parse ? (a: never) => flagDef.parse(a, {}) : identity,
-      ...(typeof promptFlag === 'function' ? promptFlag(this) : (promptFlag || {})),
-      ...(typeof promptArg === 'function' ? promptArg(this) : (promptArg || {})),
+      ...(typeof prompt === 'function' ? prompt(this) : (prompt || {})),
     };
     const responses: any = await inquirer.prompt([finalPrompt]);
     this.options[flag] = responses[flag];

@@ -1,0 +1,14 @@
+# Project dependencies
+node_modules
+
+# Build directories
+public
+doc
+
+# Temporary files
+.DS_Store
+.swp
+.cache
+
+src/components/index.css
+tailwind.config.js

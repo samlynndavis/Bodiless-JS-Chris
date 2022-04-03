@@ -4,22 +4,21 @@
 
 Ensure you have the following installed locally:
 - NodeJS: https://nodejs.org/en/download/
-  - We are currently using the LTS version 16.9.
-  - We use `npm` (v7) as a package manager. If you prefer `yarn` feel free to try it. YMMV.
+  - We are currently using the LTS version 16.9+
+  - We use `npm` (v7+) as a package manager. If you prefer `yarn` feel free to
+    try it. YMMV.
 
 ## Creating a New Site
 
-BodilessJS provides a Gatsby starter you can use as the basis of a new site. Currently, you must
-install it from this repository as follows:
+BodilessJS provides a CLI tool for creating a new site from a template.
 
 ```bash
-git clone https://github.com/johnsonandjohnson/bodiless-js.git
-cd bodiless-js
-npm ci
-npm run new /path/to/new/site
+npx @bodiless/cli new
 ```
 
-This will create a new git repository at the specified location (which defaults
+This will walk you through the process of creating a new bodiless site locally.
+It will ask you for the following:
+-
 to `~/gatsby-starter-bodiless`), copy the starter, and install all dependencies.
 
 > Note: You should avoid creating a new site in the monorepo, except in the /sites
@@ -45,7 +44,6 @@ npm run serve
 
 Visit http://localhost:9000/ in your browser to view the site.
 
-> Note: Official Gatsby Stater (installable via `gatsby new`) is coming soon!
 
 ## Exploring and Developing *BodilessJS*
 

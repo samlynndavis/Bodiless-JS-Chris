@@ -19,6 +19,8 @@ import * as os from 'os';
 import * as fs from 'fs-extra';
 import * as tar from 'tar';
 import * as inquirer from 'inquirer';
+// @ts-ignore
+import * as semver from 'semver';
 // @ts-ignore Could not find a declaration file
 import * as walk from '@root/walk';
 import { v1 } from 'uuid';
@@ -80,6 +82,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
       description: 'Revision of source monorepo on which new site will be based',
       char: 'r',
       parse: d => d.trim(),
+      default: 'latest',
     }),
   },
 
@@ -97,12 +100,6 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
     }),
     prompt: false,
   },
-
-  'package-template': commandFlags.string({
-    description: 'Name of the starter package to copy',
-    char: 'p',
-    parse: d => d.trim(),
-  }),
 
   'packages-dir': {
     ...commandFlags.string({
@@ -170,7 +167,6 @@ export type AbstractNewOptions = WizardOptions & {
   'sites-dir': string,
   'site-template': string,
   'packages-dir': string,
-  'package-template': string,
   'namespace': string,
   setup: string,
   'no-setup': boolean,
@@ -184,7 +180,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   getFlagDefs() { return abstractNewFlags as Flags<O>; }
 
   async replaceTemplatePackageName() {
-    const jsTemplateName = await this.getArg('package-template');
+    const jsTemplateName = await this.getArg('site-template');
     if (jsTemplateName === NO_TEMPLATE) return Promise.resolve();
     const pkgTemplateName = jsTemplateName.replace(/_/g, '-');
     const packagesDir = await this.getArg('packages-dir');
@@ -245,7 +241,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const url = await this.getArg('url');
     const tmpDir = path.resolve(os.tmpdir(), v1());
     const spawner = new Spawner();
-    if (!await this.getArg('verbose', false)) {
+    if (!await this.getArg('verbose', { prompt: false })) {
       (spawner.options as SpawnOptions).stdio = ['ignore', 'ignore', 'ignore'];
     }
     const spinner = ora(`Cloning ${url}...`).start();
@@ -285,23 +281,51 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
 
   async getRevision(repo: string): Promise<string> {
     const versions = listVersionsSync(repo);
-    const choices = [];
-    if (versions.length) choices.push(`${versions[0]} (latest)`);
+    const latestIndex = versions.findIndex(v => semver.prerelease(v) === null);
+    const choices: string[] = [];
+    let latestChoice = '';
+    let nextChoice = '';
+    if (latestIndex >= 0) {
+      latestChoice = `${versions[latestIndex]} (latest)`;
+      choices.push(latestChoice);
+      versions.splice(latestIndex, 1);
+    }
+    const nextIndex = latestIndex > 0 ? 0 : -1;
+    if (nextIndex >= 0) {
+      nextChoice = `${versions[nextIndex]} (next)`;
+      choices.push(nextChoice);
+      versions.splice(nextIndex, 1);
+    }
     choices.push('HEAD (unstable)');
-    if (versions.length > 1) choices.push(...versions.slice(1));
+    if (versions.length > 0) choices.push(...versions);
     choices.push(...listBranchesSync(repo));
-    const rev = await this.getArg('revision', {
+
+    const xlateRev = (r: string) => {
+      let r$ = r;
+      if (r === 'latest') r$ = latestChoice;
+      else if (r === 'next') r$ = nextChoice;
+      return r$.split(' ')[0];
+    };
+
+    const validator = (r: string) => {
+      const r$ = xlateRev(r);
+      return Boolean(choices.find(choice => xlateRev(choice) === r$));
+    };
+
+    const prompt = {
       type: 'list',
       choices,
       loop: false,
-    } as inquirer.ListQuestion<any>);
-    // Remove any extra text added to the rev in the choices list.
-    return Promise.resolve(rev.split(' ')[0]);
+    } as inquirer.ListQuestion<any>;
+
+    const rev = await this.getArg('revision', { prompt, validator });
+    return Promise.resolve(xlateRev(rev));
   }
 
   async clone() {
     const repo = await this.cloneSourceRepo();
     const rev = await this.getRevision(repo);
+    console.log('Using revision', rev);
     const dest = await this.getArg('dest');
     const tmpFile = path.resolve(os.tmpdir(), v1());
     const spawner = new Spawner();
@@ -324,21 +348,19 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       .map(n => path.join(sitesDir, n))
       .filter(p => fs.lstatSync(p).isDirectory())
       .map(n => path.basename(n));
+    console.log('sites', sites);
 
-    const templateFlag = type === 'site' ? 'site-template' : 'package-template';
+    const templateFlag = 'site-template';
     const {
-      default: defaultTemplateName,
       prompt: defaultPrompt,
     } = this.getFlagDefs()[templateFlag];
-    const choices = !sites.includes(defaultTemplateName)
-      ? [NO_TEMPLATE, ...sites]
-      : [defaultTemplateName, ...sites.filter(s => s !== defaultTemplateName), NO_TEMPLATE];
+    const choices = sites.filter(s => /^__/.test(s));
     const prompt = defaultPrompt !== false && {
       type: 'list',
       choices,
       loop: false,
     } as inquirer.ListQuestion;
-    const template = await this.getArg(templateFlag, prompt);
+    const template = await this.getArg(templateFlag, { prompt });
     const promises = sites.filter(s => s !== template)
       .map(s => path.join(sitesDir, s))
       .map(s => fs.remove(s)) as Promise<any>[];
@@ -366,7 +388,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       : path.join(rootDir, dir, name, 'package.json');
     const packageName = await this.getPackageName();
     const siteName = `@sites/${name}`;
-    const template$ = await this.getArg(type === 'site' ? 'site-template' : 'package-template');
+    const template$ = await this.getArg('site-template');
     if (template$ === NO_TEMPLATE) return Promise.resolve();
     const template = template$.replace(/_/g, '-');
     const json = await fs.readFile(file);
@@ -403,7 +425,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   }
 
   async updateTsConfig() {
-    const template = await this.getArg('package-template');
+    const template = await this.getArg('site-template');
     if (template === NO_TEMPLATE) return Promise.resolve();
     const dest = await this.getArg('dest');
     const packagesDir = await this.getArg('packages-dir');

@@ -2,7 +2,7 @@
   "name": "--cxstarter--",
   "sideEffects": false,
   "version": "1.0.0-beta.1",
-  "description": "",
+  "description": "Starter template for a Design System package based on Vital DS",
   "author": "Chris Oden <coden@its.jnj.com>",
   "license": "Apache-2.0",
   "private": true,
