@@ -341,6 +341,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
   }
 
   async cleanSites(type: 'site'|'package' = 'site') {
+    // Find all sites or packages.
     const directory = await this.getArg('dest');
     const sitesDirName = await this.getArg(type === 'site' ? 'sites-dir' : 'packages-dir');
     const sitesDir = path.resolve(directory, sitesDirName);
@@ -348,8 +349,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       .map(n => path.join(sitesDir, n))
       .filter(p => fs.lstatSync(p).isDirectory())
       .map(n => path.basename(n));
-    console.log('sites', sites);
-
+    // Generate a prompt to allow user to select a template.
     const templateFlag = 'site-template';
     const {
       prompt: defaultPrompt,
@@ -361,18 +361,23 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       loop: false,
     } as inquirer.ListQuestion;
     const template = await this.getArg(templateFlag, { prompt });
+    // Remove all directories except the template
     const promises = sites.filter(s => s !== template)
       .map(s => path.join(sitesDir, s))
       .map(s => fs.remove(s)) as Promise<any>[];
+    // Rename the template and any files within it.
     if (template !== NO_TEMPLATE) {
       const name = await this.getArg('name');
-      await fs.rename(path.join(sitesDir, template), path.join(sitesDir, name));
-      promises.push(recursiveRename({
-        rootPath: path.join(sitesDir, name),
-        search: template,
-        replace: name,
-        exclude: pathName => /node_modules/.test(pathName) || /lib/.test(pathName),
-      }));
+      const templateDir = path.join(sitesDir, template);
+      if (fs.existsSync(templateDir)) { // Package template may not exist.
+        await fs.rename(templateDir, path.join(sitesDir, name));
+        promises.push(recursiveRename({
+          rootPath: path.join(sitesDir, name),
+          search: template,
+          replace: name,
+          exclude: pathName => /node_modules/.test(pathName) || /lib/.test(pathName),
+        }));
+      }
     }
     return promises;
   }
@@ -386,6 +391,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const file = type === 'root'
       ? path.join(rootDir, 'package.json')
       : path.join(rootDir, dir, name, 'package.json');
+    if (!fs.existsSync(file)) return Promise.resolve(); // DS package may not exist.
     const packageName = await this.getPackageName();
     const siteName = `@sites/${name}`;
     const template$ = await this.getArg('site-template');
