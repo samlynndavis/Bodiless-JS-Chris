@@ -1,14 +1,16 @@
 # Project dependencies
 node_modules
-
-# Build directories
-public
 doc
+yarn-error.log
+
+# Build directory
+/public
 
 # Temporary files
 .DS_Store
 .swp
-.cache
 
+.cache
+public
 src/components/index.css
 tailwind.config.js

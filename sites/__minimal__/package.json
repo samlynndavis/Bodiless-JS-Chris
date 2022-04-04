@@ -1,7 +1,7 @@
 {
   "name": "@sites/--minimal--",
   "version": "1.0.0-beta.1",
-  "description": "Starter template for a basic Bodiless site",
+  "description": "Starter site for a basic Bodiless site",
   "author": "Chris Oden <coden@its.jnj.com>",
   "homepage": "",
   "license": "Apache-2.0",
@@ -11,7 +11,6 @@
     "test": "__tests__"
   },
   "dependencies": {
-    "@babel/core": "^7.9.0",
     "@bodiless/backend": "^1.0.0-beta.1",
     "@bodiless/components": "^1.0.0-beta.1",
     "@bodiless/core": "^1.0.0-beta.1",
@@ -24,12 +23,12 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "gatsby": "~3.13.0",
-    "lodash": "^4.17.19",
-    "mobx-react": "^7.2.1",
     "postcss": "^8.2.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-helmet": "^6.1.0"
+    "react-helmet": "^6.1.0",
+    "tailwindcss": "^2.0.2",
+    "tailwindcss-dir": "^4.0.0"
   },
   "files": [
     "lib"
@@ -57,12 +56,8 @@
     "start": "run-p -r dev-frontend dev-backend"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.4.0",
-    "copyfiles": "^2.1.1",
     "cross-env": "^5.2.0",
     "npm-run-all": "^4.1.5",
-    "tailwindcss": "^2.0.2",
-    "tailwindcss-dir": "^4.0.0",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "typescript": "^4.0.0"
   }

@@ -12,9 +12,12 @@
  * limitations under the License.
  */
 
+import React from 'react';
 import { graphql } from 'gatsby';
 
-export default () => 'Default Template';
+const DefaultPage = () => <>Basic</>;
+
+export default DefaultPage;
 
 // The allSite query is extraneous and exists only to prevent
 // a webpack linting error produced by default gatsby config(the $slug variable
