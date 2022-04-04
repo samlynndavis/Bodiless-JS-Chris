@@ -1,4 +1,3 @@
-# `@bodiless/cx-image`
+# `@bodiless/vital-hero`
 
-See [Image Docs](./doc/Image.md).
-See [Image Configuration Docs](./doc/ImageConfigurations.md).
+See [Hero Docs](./doc/Hero.md).

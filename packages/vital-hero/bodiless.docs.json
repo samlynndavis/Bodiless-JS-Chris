@@ -1,9 +1,8 @@
 {
   "CX_DesignSystem": {
     "Components": {
-      "CX_Image": {
-        "README.md": "./doc/Image.md",
-        "ImageConfigurations.md": "./doc/ImageConfigurations.md"
+      "CX_Hero": {
+        "README.md": "./doc/Hero.md"
       }
     }
   }
