@@ -38,11 +38,10 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:tailwind-configs build:lib build:doc build:search",
+    "build": "npm-run-all build:env-vars build:tailwind-configs build:lib build:doc",
     "build:doc": "bl-docs-build",
     "build:env-vars": "generate-env-vars",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
-    "build:search": "create-search-incex",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "build:tailwind-configs": "cross-env BODILESS_NPM_ROOT='.' generate-tailwind-configs",
     "check": "tsc -p ./tsconfig.check.json",
