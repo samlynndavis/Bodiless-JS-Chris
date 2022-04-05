@@ -75,7 +75,11 @@ published as follows:
     ```shell-session
     npx lerna version 1.0.0-beta.1 --conventional-commits --force-publish
     ```
-    - The release version has to be manually specified.
+    - The release version has to be manually specified, as (currently) we have no npm script for
+      publishing pre-release versions.
+    - For information on these Lerna command flags, please see Lerna's documentation:
+      - [`--conventional-commits`](https://github.com/lerna/lerna/blob/main/commands/version/README.md#--conventional-commits ':target=_blank')
+      - [`--force-publish`](https://github.com/lerna/lerna/blob/main/commands/version/README.md#--force-publish ':target=_blank')
     - GitHub's _publish_ action will take care of the actual publishing.
 01. Update the site's `package-lock.json`.
     ```shell-session
@@ -84,17 +88,18 @@ published as follows:
     rm package-lock.json && \
     npm install --legacy-peer-deps
     ```
-01. Update the root `package.json`/`-lock` file version, and push to release PR.
-01. Merge back to the `main` branch.
+01. Update the dependencies in `package-lock.json` for each example site by following [these
+    steps](../Release/UpdatePackages#updating-example-sites39-package-lockjson).
+01. Create a PR to `main` from the `release` branch.
+    - The PR title should emulate the following form: `chore: Release v1.0.0-beta.1`
+    - Commits in the PR should _not_ be squashed, since the tag is already attached to the
+      appropriate commit hash.
 
 !> **IMPORTANT:** Ensure that you **do not squash/merge the release branch**. You _must_ use the
    "fast-forward" merge strategy.
 
 ### Notes
 
-- We specify an explicit version number because we are in pre-`X.0`, so the normal semver bumps
-  which would be created by conventional-commits are not appropriate. We use the
-  `--conventional-commits` option to generate the changelog.
 - We push the commit to a release branch, which must be merged to `main` using the standard PR
   process.
 
