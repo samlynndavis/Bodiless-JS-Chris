@@ -63,12 +63,12 @@ const plugins = [
   //     ssiEntities: getSSIEntities('ssi/ssi_conf.json'),
   //   }
   // },
-  {
-    resolve: 'gatsby-plugin-canonical-urls',
-    options: {
-      siteUrl: SITEURL,
-    },
-  },
+  // {
+  //   resolve: 'gatsby-plugin-canonical-urls',
+  //   options: {
+  //     siteUrl: SITEURL,
+  //   },
+  // },
   // {
   //   resolve: 'gatsby-plugin-sitemap',
   //   options: { excludes: disabledPages },
