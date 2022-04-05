@@ -67,7 +67,6 @@ module.exports = {
     '../bodiless-components/lib/**/!(*.d).{ts,js,jsx,tsx}',
     '../bodiless-components-ui/lib/**/!(*.d).{ts,js,jsx,tsx}',
     '../bodiless-carousel/lib/**/!(*.d).{ts,js,jsx,tsx}',
-    '../bodiless-richtext-ui/lib/**/!(*.d).{ts,js,jsx,tsx}',
     '../bodiless-core/lib/**/!(*.d).{ts,js,jsx,tsx}',
     '../bodiless-core-ui/lib/**/!(*.d).{ts,js,jsx,tsx}',
     '../bodiless-layouts/lib/**/!(*.d).{ts,js,jsx,tsx}',
