@@ -408,8 +408,10 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       data.name = siteName;
       // Find the old dependency on the template package (if any) and delete it.
       const key = Object.keys(data.dependencies).find(k => new RegExp(template).test(k));
-      if (key) delete data.dependencies[key];
-      data.dependencies[packageName] = '^0.0.0';
+      if (key) {
+        delete data.dependencies[key];
+        data.dependencies[packageName] = '^0.0.0';
+      }
     } else {
       data.name = packageName;
     }

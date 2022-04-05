@@ -15,7 +15,7 @@ export function listBranchesSync(repoDir: string) {
   const spawner = new Spawner();
   spawner.options.stdio = 'pipe';
   spawner.options.cwd = repoDir;
-  return spawner.execSync('git', 'branch', '-r')
+  return spawner.execSync('git', 'branch', '-a')
     .toString()
     .split('\n')
     .filter(Boolean)
