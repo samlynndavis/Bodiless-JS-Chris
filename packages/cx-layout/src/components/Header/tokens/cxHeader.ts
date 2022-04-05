@@ -13,9 +13,9 @@
  */
 
 import { withNodeKey } from '@bodiless/core';
-import { cxColor } from '@bodiless/cx-elements';
+import { cxColor, cxSpacing } from '@bodiless/cx-elements';
 import {
-  A, addClasses, flowHoc, flowIf, replaceWith, Span,
+  A, addClasses, as, flowHoc, flowIf, replaceWith, Span,
   Ul, withDesign, withProps
 } from '@bodiless/fclasses';
 import {
@@ -82,10 +82,10 @@ const Base = asHeaderToken({
   },
   Schema: {
     Logo: withNodeKey({ nodeKey: 'Logo' }),
-    UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu' }),
+    UtilityMenu: withNodeKey({ nodeKey: 'UtilityMenu', nodeCollection: 'site' }),
   },
   Layout: {
-    Container: 'container flex justify-between items-center',
+    Container: 'flex justify-between items-center',
     MenuContainer: 'hidden lg:flex justify-between items-center flex-grow',
     ActionMenuContainer: 'flex items-center',
   },
@@ -93,7 +93,11 @@ const Base = asHeaderToken({
     Logo: withDesign({
       Wrapper: 'mx-4',
     }),
-    Container: 'mx-auto py-4',
+    Container: as(
+      cxSpacing.WithSiteMargin,
+      cxSpacing.WithSiteXLConstraint,
+      'mx-auto py-4',
+    ),
   }
 });
 

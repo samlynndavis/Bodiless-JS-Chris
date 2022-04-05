@@ -30,14 +30,28 @@ const Examples = () => (
       to demo from the &quot;Templates&quot; button on the &quot;Page&quot; toolbar
       menu on the new page.
     </Para>
-    <Subtitle>Existing Pages</Subtitle>
+    <Subtitle>Global Elements</Subtitle>
     <Para>
       <ul>
         <li><a href="./layout">Layout</a></li>
         <li><a href="./header">Header</a></li>
+        <li><a href="./footer">Footer</a></li>
         <li><a href="./editors">Editors</a></li>
         <li><a href="./editors-monofont">Editors with MonoFont</a></li>
         <li><a href="./typography">Typography</a></li>
+      </ul>
+    </Para>
+    <Subtitle>Components</Subtitle>
+    <Para>
+      <ul>
+        <li><a href="./flowcontainer">Flow Container</a></li>
+        <li><a href="./images">Images</a></li>
+      </ul>
+    </Para>
+    <Subtitle>Templates</Subtitle>
+    <Para>
+      <ul>
+        <li><a href="./generic-template">Generic Template</a></li>
       </ul>
     </Para>
   </>
