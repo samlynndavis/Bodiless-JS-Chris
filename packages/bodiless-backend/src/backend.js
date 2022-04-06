@@ -525,7 +525,7 @@ class Backend {
   }
 
   static setAsset(route) {
-    route.post((req, res) => { 
+    route.post((req, res) => {
       Backend.ensureSaveEnabled(res);
       const baseResourcePath = Backend.getPath(req);
       const tmpDir = tmp.dirSync({ mode: '0755', unsafeCleanup: true, prefix: 'backendTmpDir_' });

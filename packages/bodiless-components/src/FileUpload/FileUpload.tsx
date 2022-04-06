@@ -91,7 +91,7 @@ const defaultFileUploadUI = {
   Input: 'input',
   UploadArea: () => <div>{`${FileUploadStrings.DragOrClickToUpload}`}</div>,
   Uploading: () => <div>{`${FileUploadStrings.Uploading}`}</div>,
-  UploadDisabled: () => <div>{`${FileUploadStrings.Disabled}`}</div>,
+  UploadDisabled: () => <div>{`${FileUploadStrings.UploadDisabled}`}</div>,
   DragRejected: () => <div>{`${FileUploadStrings.FileRejected}`}</div>,
   UploadTimeout: () => <div>{`${FileUploadStrings.UploadTimeout}`}</div>,
   UploadFinished: () => <div>{`${FileUploadStrings.UploadFinished}`}</div>,
