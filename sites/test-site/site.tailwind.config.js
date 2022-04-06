@@ -119,7 +119,8 @@ module.exports = {
         400: '#63b3ed',
         500: '#4299e1',
         600: '#3182ce',
-        700: '#2b6cb0',
+        /* Use of important To address tailwind bug https://github.com/tailwindlabs/tailwindcss/issues/7298 */
+        700: '#2b6cb0 !important',
         800: '#2c5282',
         900: '#2a4365',
       },
