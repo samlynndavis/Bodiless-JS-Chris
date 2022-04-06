@@ -57,7 +57,6 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
     PageTopper,
     Header,
     HeaderWrapper,
-    Hero,
     Footer,
     FooterWrapper,
     SkipToMainContent,
@@ -70,7 +69,6 @@ export const LayoutCleanBase: FC<LayoutProps> = (layoutProps: LayoutProps) => {
       <HeaderWrapper>
         <Header />
       </HeaderWrapper>
-      <Hero />
       <ContainerWrapper>
         <Container>
           <PageTopper />

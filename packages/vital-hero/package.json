@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-hero",
   "sideEffects": false,
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Clean, designable Hero component for CanvasX based projects",
   "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "license": "UNLICENSED",
@@ -31,8 +31,8 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/cx-elements": "^1.0.0-beta.1",
-    "@bodiless/fclasses": "^1.0.0-beta.1",
-    "@bodiless/hydration": "^1.0.0-beta.1"
+    "@bodiless/cx-elements": "^1.0.0-beta.2",
+    "@bodiless/fclasses": "^1.0.0-beta.2",
+    "@bodiless/hydration": "^1.0.0-beta.2"
   }
 }
