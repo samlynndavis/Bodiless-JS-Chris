@@ -18,7 +18,7 @@
  * site is responsible for merging these settings into site level settings
  */
 module.exports = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
@@ -30,7 +30,6 @@ module.exports = {
       '21/9': [21, 9],
     },
   },
-  variants: {},
   plugins: [
     // eslint-disable-next-line
     require('tailwindcss-aspect-ratio'),

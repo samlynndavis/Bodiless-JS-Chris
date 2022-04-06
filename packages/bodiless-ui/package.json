@@ -35,13 +35,13 @@
   "dependencies": {
     "@bodiless/core": "^1.0.0-beta.2",
     "@bodiless/fclasses": "^1.0.0-beta.2",
-    "autoprefixer": "^10.0.0",
+    "autoprefixer": "^10.4.2",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
-    "postcss": "^8.2.4"
+    "postcss": "^8.4.12"
   },
   "devDependencies": {
-    "tailwindcss": "^2.0.2",
+    "tailwindcss": "^3.0.23",
     "tailwindcss-dir": "^4.0.0"
   },
   "peerDependencies": {

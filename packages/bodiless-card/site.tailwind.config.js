@@ -18,7 +18,7 @@
  * site is responsible for merging these settings into site level settings
  */
 module.exports = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
@@ -34,10 +34,6 @@ module.exports = {
         full: '100%',
       },
     },
-  },
-  variants: {
-    overflow: ['responsive', 'hover', 'focus'],
-    position: ['responsive', 'hover', 'focus'],
   },
   plugins: [
     // eslint-disable-next-line

@@ -1,5 +1,5 @@
 module.exports = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
@@ -25,11 +25,5 @@ module.exports = {
         'negative-half-screen': '-50vw',
       },
     },
-  },
-  variants: {
-    backgroundColor: ['first', 'last', 'responsive'],
-    margin: ['first', 'last', 'responsive'],
-    padding: ['first', 'last', 'responsive'],
-    width: ['first', 'last', 'responsive'],
   },
 };

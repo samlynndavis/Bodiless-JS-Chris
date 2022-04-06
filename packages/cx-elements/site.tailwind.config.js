@@ -1,7 +1,7 @@
 const tailwindcssDir = require('tailwindcss-dir')();
 
 module.exports = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
@@ -53,11 +53,6 @@ module.exports = {
         'md-site-percent': '8%',
       },
     },
-  },
-  variants: {
-    extend: {
-      textColor: ['active'],
-    }
   },
   plugins: [
     tailwindcssDir,
