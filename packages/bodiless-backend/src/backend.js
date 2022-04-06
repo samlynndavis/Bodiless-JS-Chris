@@ -36,6 +36,7 @@ const backendStaticPath = process.env.BODILESS_BACKEND_STATIC_PATH || '';
 const backendPublicPath = process.env.BODILESS_BACKEND_PUBLIC_PAGE_PATH || 'public/page-data';
 const isExtendedLogging = (process.env.BODILESS_BACKEND_EXTENDED_LOGGING_ENABLED || '0') === '1';
 const canCommit = (process.env.BODILESS_BACKEND_COMMIT_ENABLED || '0') === '1';
+const canSave = (process.env.BODILESS_BACKEND_SAVE_ENABLED || '1') === '1';
 
 const logger = new Logger('BACKEND');
 
@@ -311,9 +312,20 @@ class Backend {
     res.send(Backend.sanitizeOutput(error.message)).end();
   }
 
-  static gitCommitsEnabled(res) {
+  static ensureCommitEnabled(res) {
     // Exit with HTTP 405 "Method Not Allowed" if git commits are disabled.
     if (!canCommit) {
+      const error = new Error(
+        'Your current environment does not allow saving content.',
+      );
+      error.code = 405;
+      Backend.exitWithErrorResponse(error, res);
+    }
+  }
+
+  static ensureSaveEnabled(res) {
+    // Exit with HTTP 405 "Method Not Allowed" if git commits are disabled.
+    if (!canSave) {
       const error = new Error(
         'Your current environment does not allow saving content.',
       );
@@ -374,6 +386,7 @@ class Backend {
 
   static setChangeReset(route) {
     route.post(async (req, res) => {
+      Backend.ensureSaveEnabled(res);
       logger.log('Start reset');
       try {
         // Clean up untracked files.
@@ -422,6 +435,7 @@ class Backend {
 
   static setChangePull(route) {
     route.post((req, res) => {
+      Backend.ensureSaveEnabled(res);
       logger.log('Start pull');
       new GitCommit()
         .pull()
@@ -433,6 +447,7 @@ class Backend {
 
   static mergeMain(route) {
     route.post(async (req, res) => {
+      Backend.ensureSaveEnabled(res);
       try {
         const status = await mergeMain();
         res.send(status);
@@ -458,7 +473,7 @@ class Backend {
 
   static setChangeCommit(route) {
     route.post((req, res) => {
-      Backend.gitCommitsEnabled(res);
+      Backend.ensureCommitEnabled(res);
       logger.log(`Start committing: ${req.body.message}`);
       const { author } = req.body;
       const files = req.body.files || [];
@@ -479,7 +494,7 @@ class Backend {
 
   static setChangePush(route) {
     route.post((req, res) => {
-      Backend.gitCommitsEnabled(res);
+      Backend.ensureCommitEnabled(res);
       logger.log('Start push');
       new GitCmd()
         .add('symbolic-ref', '--short', 'HEAD')
@@ -510,7 +525,8 @@ class Backend {
   }
 
   static setAsset(route) {
-    route.post((req, res) => {
+    route.post((req, res) => { 
+      Backend.ensureSaveEnabled(res);
       const baseResourcePath = Backend.getPath(req);
       const tmpDir = tmp.dirSync({ mode: '0755', unsafeCleanup: true, prefix: 'backendTmpDir_' });
       const form = formidable({ multiples: true, uploadDir: tmpDir.name });
@@ -568,6 +584,7 @@ class Backend {
           .catch(() => res.send({}));
       })
       .post((req, res) => {
+        Backend.ensureSaveEnabled(res);
         // @todo: refactor 2nd argument.
         const page = Backend.getPage(Backend.getPath(req));
         logger.log(`Start post content for:${page.file}`);
@@ -583,6 +600,7 @@ class Backend {
           });
       })
       .delete((req, res) => {
+        Backend.ensureSaveEnabled(res);
         const page = Backend.getPage(Backend.getPath(req));
         logger.log(`Start deletion for:${page.file}`);
         page
@@ -616,6 +634,7 @@ class Backend {
   static removePage(route) {
     route
       .delete((req, res) => {
+        Backend.ensureSaveEnabled(res);
         const pagePath = req.params[0];
         const page = Backend.getPage(pagePath);
         page.setBasePath(backendPagePath);
@@ -638,6 +657,7 @@ class Backend {
   static removeFile(route) {
     route
       .delete((req, res) => {
+        Backend.ensureSaveEnabled(res);
         const pagePath = req.params[0];
         const page = Backend.getPage(pagePath);
         page.setBasePath(backendPagePath);
@@ -660,6 +680,7 @@ class Backend {
   static directoryChild(route) {
     route
       .delete((req, res) => {
+        Backend.ensureSaveEnabled(res);
         const pagePath = req.params[0];
         const page = Backend.getPage(pagePath);
 
@@ -705,6 +726,7 @@ class Backend {
 
   static setPages(route) {
     route.post((req, res) => {
+      Backend.ensureSaveEnabled(res);
       const { body } = req;
       const pagePath = body.path || '';
       const template = body.template || '_default';
@@ -736,6 +758,7 @@ class Backend {
 
   static clonePage(route) {
     route.post(async (req, res) => {
+      Backend.ensureSaveEnabled(res);
       const { body: { origin, destination } } = req;
       const page = Backend.getPage(destination);
       page.setBasePath(backendPagePath);
@@ -761,6 +784,7 @@ class Backend {
 
   static removeAssets(route) {
     route.delete(async (req, res) => {
+      Backend.ensureSaveEnabled(res);
       const origin = req.params[0];
       const page = Backend.getPage(origin);
 
@@ -784,6 +808,7 @@ class Backend {
 
   static copyAssets(route) {
     route.post((req, res) => {
+      Backend.ensureSaveEnabled(res);
       const {
         body: {
           path_from: pathFrom, path_to: pathTo,
@@ -806,6 +831,7 @@ class Backend {
 
   static moveAssets(route) {
     route.post((req, res) => {
+      Backend.ensureSaveEnabled(res);
       const {
         body: {
           path_from: pathFrom, path_to: pathTo,
