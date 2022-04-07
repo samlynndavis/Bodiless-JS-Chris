@@ -16,17 +16,17 @@ BodilessJS provides a CLI tool for creating a new site from a template.
 npx @bodiless/cli new
 ```
 
-This will walk you through the process of creating a new bodiless site locally.
-It will ask you for the following:
--
-to `~/gatsby-starter-bodiless`), copy the starter, and install all dependencies.
+This will walk you through the process of creating a new bodiless site locally.  It will prompt you for the name of the new site, the path
+to the directory in which you want to create it, and the starter
+template you wish to use.  The following templates are available:
 
-> Note: You should avoid creating a new site in the monorepo, except in the /sites
-directory if you intend to check it against local packages.
+- `__minimal__`; The bare bones needed to start creating a Bodiless site.
+- `__vital__`: A more full-featured starter based on the vital design system.
+  This is a highly extensible and custokmizable set of components enabling very rapid creation of marketing websites. 
 
 You can then launch the editor:
 
-```
+```sh
 cd /path/to/new/site
 npm start
 ```
@@ -64,7 +64,7 @@ npm run setup
 ### Launch the Test Site
 
 ```
-cd examples/test-site
+cd sites/test-site
 npm run start
 ```
 This will build all packages in watch mode and then start `gatsby develop` on the test site.  You
