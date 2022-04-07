@@ -509,7 +509,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const dest = await this.getArg('dest');
     const spawner = new Spawner();
     spawner.options.cwd = dest;
-    await spawner.spawn('git', 'init');
+    await spawner.spawn('git', 'init', '-b', 'main');
     await spawner.spawn('git', 'add', '.');
     await spawner.spawn('git', 'commit', '-m', '"Initial Commit"');
     if (await this.getArg('no-setup')) return Promise.resolve();
