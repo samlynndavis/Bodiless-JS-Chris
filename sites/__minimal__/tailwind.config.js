@@ -29,10 +29,8 @@ const { buildTailwindConfig } = requireEsm(
 
 console.log(buildTailwindConfig({
   resolver: pkg => requireEsm.resolve(pkg),
-  prefer: ['--cxstarter--'],
 }));
 
 module.exports = buildTailwindConfig({
   resolver: pkg => requireEsm.resolve(pkg),
-  prefer: ['--cxstarter--'],
 });
