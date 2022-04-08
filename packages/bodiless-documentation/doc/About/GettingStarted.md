@@ -102,3 +102,39 @@ Visit http://localhost:9000/ in your browser to view the site.
 - [Understand our Platform Architecture](../Development/Architecture/Data).
 
 
+## Troubleshooting Setup
+
+### Error occurred: fatal: 'origin' does not appear to be a git repository
+
+You may see this error in the console after starting the new site. This is because you
+have not configured an 'origin' git remote.  To fix it, add one:
+```
+git remote add origin {url-of-your-remote}
+```
+Note that you don't have to do this -- the application will still function locally
+even though these errors are printed to the console.
+
+### Failures trying to use globally installed `libvips`
+
+Depending on your system configuration, the installer may try to build libvips from
+source, which will usually fail.  Example error:
+```
+erna ERR! npm install --legacy-peer-deps exited 1 in 'canvasx-monorepo'
+lerna ERR! npm install --legacy-peer-deps stderr:
+npm ERR! code 1
+npm ERR! path .../node_modules/sharp
+npm ERR! command failed
+npm ERR! command sh -c (node install/libvips && node install/dll-copy && prebuild-install) || (node install/can-compile && node-gyp rebuild && node install/dll-copy)
+npm ERR! sharp: Detected globally-installed libvips v8.12.1
+npm ERR! sharp: Building from source via node-gyp
+npm ERR!   CC(target) Release/obj.target/nothing/../node-addon-api/nothing.o
+npm ERR!   LIBTOOL-STATIC Release/nothing.a
+npm ERR! gyp info it worked if it ends with ok
+...
+npm ERR! gyp ERR! build error 
+npm ERR! gyp ERR! stack Error: `make` failed with exit code: 2
+```
+Try removing the globally installed libvips and running again, or try 
+```
+.SHARP_IGNORE_GLOBAL_LIBVIPS=1 npm run setup
+```

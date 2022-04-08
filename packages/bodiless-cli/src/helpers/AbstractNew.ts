@@ -387,6 +387,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const name = await this.getArg('name');
     const sitesDir = await this.getArg('sites-dir');
     const packagesDir = await this.getArg('packages-dir');
+    const templatePackageDir = path.resolve(rootDir, packagesDir, name);
     const dir = type === 'site' ? sitesDir : packagesDir;
     const file = type === 'root'
       ? path.join(rootDir, 'package.json')
@@ -401,6 +402,10 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const data = JSON.parse(json.toString());
     if (type === 'root') {
       data.name = `${name}-monorepo`;
+      if (!fs.existsSync(templatePackageDir)) {
+        delete data.scripts['build:packages'];
+        data.scripts.setup = 'npm run bootstrap';
+      }
       data.scripts.start = `lerna run start --stream --scope ${siteName}`;
       data.scripts.serve = `lerna run serve --stream --scope ${siteName}`;
       data.scripts.docs = `lerna run build:doc --stream --scope ${siteName} && docsify serve ./${sitesDir}/${name}/doc`;
@@ -509,7 +514,8 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const dest = await this.getArg('dest');
     const spawner = new Spawner();
     spawner.options.cwd = dest;
-    await spawner.spawn('git', 'init', '-b', 'main');
+    await spawner.spawn('git', 'init');
+    await spawner.spawn('git', 'checkout', '-b', 'main');
     await spawner.spawn('git', 'add', '.');
     await spawner.spawn('git', 'commit', '-m', '"Initial Commit"');
     if (await this.getArg('no-setup')) return Promise.resolve();
