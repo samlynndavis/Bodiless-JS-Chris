@@ -29,7 +29,10 @@ const usePageMenuOptions = (
 
   const saveEnabled = (process.env.BODILESS_BACKEND_SAVE_ENABLED || '1') === '1';
 
-  const isDisabled = isDisabled$ ? (!context.isEdit || !saveEnabled) : false;
+  const isDisabled = useCallback(
+    () => (isDisabled$ ? (!context.isEdit || !saveEnabled) : false),
+    []
+  );
 
   const menuOptions = [
     {
@@ -43,9 +46,8 @@ const usePageMenuOptions = (
       icon,
       label,
       group: 'page-group',
-      handler: isDisabled ? () => null : handler,
+      handler: () => (isDisabled() ? null : handler()),
       isDisabled,
-      isHidden: isHidden ? useCallback(() => !context.isEdit, []) : false,
     },
   ];
 
