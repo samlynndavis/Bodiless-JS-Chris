@@ -86,8 +86,11 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
   } = props;
   try {
     const pkgPath = join(resolver('./package.json'), '..');
+    console.log(pkgPath);
     const pkgJson = require(join(pkgPath, 'package.json'));
+    console.log(pkgJson.dependencies);
     const deps = Object.keys(pkgJson.dependencies);
+    console.log('deps', deps);
     const startingConfig: Config[] = twConfig === undefined ? [] : [{
       name: pkgJson.name,
       root: pkgPath,
@@ -97,6 +100,7 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
       (config, next) => {
         try {
           const nextExport = require(resolver(join(next, 'tailwind.config')));
+          console.log('next', next, nextExport);
           const nextConfig = Array.isArray(nextExport) ? nextExport : [{
             name: next,
             root: join(resolver(join(next, 'package.json')), '..'),
@@ -107,6 +111,7 @@ export const getPackageTailwindConfig: GetPackageTailwindConfig = props => {
             .filter((item: Config) => addedPaths.includes(item.root) === false);
           return config.concat(dedupedConfigs);
         } catch (e) {
+          console.log('could not open', next);
           return config;
         }
       },

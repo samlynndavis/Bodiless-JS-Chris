@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 /**
  * Copyright © 2022 Johnson & Johnson
  *
@@ -18,6 +17,12 @@ const { buildTailwindConfig } = requireEsm(
   '@bodiless/fclasses'
 );
 
+const twConfig = {
+  purge: [
+    './src/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
+};
+
 // Get configs sorted by precedence and/or exclude some packages:
 // const getTwConfig = () => getPackageTailwindConfig({
 //   pkgJson,
@@ -28,9 +33,13 @@ const { buildTailwindConfig } = requireEsm(
 // });
 
 console.log(buildTailwindConfig({
-  resolver: pkg => requireEsm.resolve(pkg),
+  twConfig,
+  resolver: (pkgName) => require.resolve(pkgName),
+  // prefer: ['@sites/--minimal--'],
 }));
 
 module.exports = buildTailwindConfig({
-  resolver: pkg => requireEsm.resolve(pkg),
+  twConfig,
+  resolver: (pkgName) => require.resolve(pkgName),
+  // prefer: ['@sites/--minimal--'],
 });
