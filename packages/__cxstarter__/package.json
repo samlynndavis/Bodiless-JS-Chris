@@ -11,7 +11,7 @@
   "files": [
     "/lib",
     "/bodiless.docs.json",
-    "/site.tailwind.config.js",
+    "/tailwind.config.js",
     "/doc",
     "./shadow.js"
   ],
