@@ -11,25 +11,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { cxColor, cxTextDecoration } from '@bodiless/cx-elements';
-import { vitalMetaHelmet } from '@bodiless/vital-meta';
-import { as } from '@bodiless/fclasses';
-import { asHelmetToken } from '../HelmetClean';
 
-const Default = asHelmetToken({
-  Components: {
-    SeoHelmet: vitalMetaHelmet.SEO,
-    SocialShareHelmet: vitalMetaHelmet.Share,
-    // LanguageHelmet: TBD,
-    // GtmHelmet: TBD,
-  },
-  Theme: {
-    HTMLHelmet: as(
-      'font-DMSans',
-      cxColor.TextPrimaryBodyCopy,
-      cxTextDecoration.Normal,
-    ),
-  }
-});
-
-export default { Default };
+export * from './components/MetaHelmet';
