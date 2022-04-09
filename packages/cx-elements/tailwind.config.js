@@ -77,7 +77,7 @@ const twConfig = {
   ],
 };
 
-export default getPackageTailwindConfig({
+module.exports = getPackageTailwindConfig({
   twConfig,
   resolver,
 });

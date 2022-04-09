@@ -31,7 +31,7 @@ const twConfig = {
   plugins: [],
 };
 
-export default getPackageTailwindConfig({
+module.exports = getPackageTailwindConfig({
   twConfig,
   resolver,
 });
