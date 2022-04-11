@@ -17,7 +17,6 @@ import { cxSpacing, cxTypography } from '@bodiless/cx-elements';
 import {
   EditorPlainClean, cxEditorPlain, RichTextClean, cxRichText
 } from '@bodiless/cx-editors';
-import { HeroClean, cxHero } from '@bodiless/cx-image';
 import { withNodeKey } from '@bodiless/core';
 import {
   on, replaceWith, Fragment, as
@@ -27,7 +26,6 @@ import { asStyleGuideTemplateToken } from '../StyleGuideTemplateClean';
 
 const Base = asStyleGuideTemplateToken({
   Components: {
-    Hero: on(HeroClean)(cxHero.Image),
     Wrapper: on(LayoutClean)(cxLayout.Default),
   },
   Theme: {
