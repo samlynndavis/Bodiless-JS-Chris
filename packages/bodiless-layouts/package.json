@@ -16,6 +16,7 @@
     "/lib",
     "/doc",
     "/bodiless.docs.json",
+    "/getDocs.js",
     "tailwind.config.js"
   ],
   "repository": {
