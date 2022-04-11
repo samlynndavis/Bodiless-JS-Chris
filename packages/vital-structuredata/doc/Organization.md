@@ -55,12 +55,12 @@ Organization metadata can be entered using the Editor Interface on your site's h
 
 ## Site Builder Details
 
-### CanvasX
+### VitalDS
 
 01. Get data:
 
     ```tsx
-    import { asSchemaSource } from '@canvasx/structure';
+    import { asSchemaSource } from '@bodiless/vital-structuredata';
 
     SEO: {
       Image: asSchemaSource('organization-logo'),
@@ -70,7 +70,7 @@ Organization metadata can be entered using the Editor Interface on your site's h
 01. Return data:
 
     ```tsx
-    import { WithOrganizationSchema } from '@canvasx/structure';
+    import { WithOrganizationSchema } from '@bodiless/vital-structuredata';
 
     SEO: {
       SiteHeader: WithOrganizationSchema,
@@ -80,7 +80,7 @@ Organization metadata can be entered using the Editor Interface on your site's h
 01. Set provider:
 
     ```tsx
-    import { withStructuredDataProvider } from '@canvasx/structuredata';
+    import { withStructuredDataProvider } from '@bodiless/vital-structuredata';
 
     SEO: {
       _: withStructuredDataProvider as Token,
@@ -92,7 +92,7 @@ Organization metadata can be entered using the Editor Interface on your site's h
 01. Get data image logo (the other fields are automatically added or provided):
 
     ```tsx
-    import { asSchemaSource } from '@canvasx/structure';
+    import { asSchemaSource } from '@bodiless/vital-structuredata';
 
     const asLogoSchema = asImageToken({
       SEO: {

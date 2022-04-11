@@ -18,12 +18,12 @@ For more information regarding the definition of the WebSite data type, see the
 
 ## Site Builder Details
 
-### CanvasX
+### VitalDS
 
 01. Return data:
 
     ```tsx
-    import { WithWebSchema } from '@canvasx/structure';
+    import { WithWebSchema } from '@bodiless/vital-structuredata';
 
     SEO: {
       SiteHeader: WithWebSchema,
@@ -33,7 +33,7 @@ For more information regarding the definition of the WebSite data type, see the
 01. Set provider:
 
     ```tsx
-    import { withStructuredDataProvider } from '@canvasx/structuredata';
+    import { withStructuredDataProvider } from '@bodiless/vital-structuredata';
 
     SEO: {
       _: withStructuredDataProvider as Token,
