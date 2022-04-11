@@ -48,6 +48,7 @@ const WithIndent = asListToken({
 });
 
 const WithBullets = asListToken({
+  Meta: flowHoc.meta.term('Decoration')('Bullets'),
   Layout: {
     Wrapper: 'list-disc',
   },
@@ -57,6 +58,7 @@ const WithBullets = asListToken({
 });
 
 const WithNumbers = asListToken({
+  Meta: flowHoc.meta.term('Decoration')('Numbers'),
   Layout: {
     Wrapper: 'list-decimal',
   },

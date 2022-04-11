@@ -21,8 +21,10 @@ const twConfig = {
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
-    maxWidth: {
-      24: '6rem',
+    extend: {
+      maxWidth: {
+        24: '6rem',
+      },
     },
   },
 };

@@ -13,15 +13,39 @@
  */
 
 import { asFluidToken } from '@bodiless/cx-elements';
-import { on } from '@bodiless/fclasses';
-import { ListStatic, vitalListStatic } from '../List';
+import { on, varyDesigns, flowHoc, } from '@bodiless/fclasses';
+import {
+  asListToken, ListClean, ListStatic, vitalList, vitalListStatic
+} from '../List';
+
+const BaseVariation = {
+  List: on(ListClean)(vitalList.Base),
+};
+
+const TitleVariations = {
+  Linked: vitalList.WithLinkedTitle,
+  RichText: vitalList.WithRichTitle,
+};
+
+const DecorationVariations = {
+  Bulleted: vitalList.WithBullets,
+  Numbered: vitalList.WithNumbers,
+  Plain: asListToken({
+    Meta: flowHoc.meta.term('Decoration')('None'),
+  }),
+};
 
 /**
  * Token which adds image variations to a flow container.
  */
 const WithListVariations = asFluidToken({
   Components: {
-    InfographicList: on(ListStatic)(vitalListStatic.Base, vitalListStatic.WithInfographicTitle),
+    ListInfographic: on(ListStatic)(vitalListStatic.Base, vitalListStatic.WithInfographicTitle),
+    ...varyDesigns(
+      BaseVariation,
+      DecorationVariations,
+      TitleVariations,
+    ),
   }
 });
 
