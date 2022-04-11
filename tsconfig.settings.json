@@ -23,8 +23,6 @@
     "useDefineForClassFields": true,
     "baseUrl": "packages",
     "paths": {
-      "@bodiless/accessibility": ["bodiless-accessibility/src"],
-      "@bodiless/accessibility/*": ["bodiless-accessibility/src/*"],
       "@bodiless/accordion": ["bodiless-accordion/src"],
       "@bodiless/accordion/*": ["bodiless-accordion/src/*"],
       "@bodiless/bv": ["bodiless-bv/src"],
@@ -50,6 +48,8 @@
       "@bodiless/cx-elements/*": ["cx-elements/src/*"],
       "@bodiless/cx-flowcontainer": ["cx-flowcontainer/src/"],
       "@bodiless/cx-flowcontainer/*": ["cx-flowcontainer/src/*"],
+      "@bodiless/vital-hero": ["vital-hero/src/"],
+      "@bodiless/vital-hero/*": ["vital-hero/src/*"],
       "@bodiless/cx-image": ["cx-image/src/"],
       "@bodiless/cx-image/*": ["cx-image/src/*"],
       "@bodiless/cx-layout": ["cx-layout/src/"],
