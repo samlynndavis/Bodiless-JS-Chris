@@ -18,7 +18,7 @@ const Default = asTitleInfographicToken({
   },
   Layout: {
     Wrapper: 'flex flex-row',
-    Image: 'max-w-xs ltr:pr-4 rtl:pl-4 box-content',
+    Image: 'max-w-24 pr-4 rtl:pl-4 rtl:pr-0 box-content',
   },
 });
 
