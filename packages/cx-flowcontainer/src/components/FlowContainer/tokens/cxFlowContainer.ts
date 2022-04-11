@@ -22,6 +22,7 @@ import {
 import { asFluidToken, cxSpacing } from '@bodiless/cx-elements';
 import { cxImageFlowContainer } from '@bodiless/cx-image';
 import { cxEditorsFlowContainer } from '@bodiless/cx-editors';
+import { vitalListFlowContainer } from '@bodiless/vital-list';
 
 import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
 
@@ -104,6 +105,7 @@ const AsFlowContainerItem = asFluidToken({
 const WithBaseVariations = asFluidToken(
   cxImageFlowContainer.WithImageVariations,
   cxEditorsFlowContainer.WithEditorVariations,
+  vitalListFlowContainer.WithListVariations,
 );
 
 /**

@@ -98,12 +98,12 @@ const withEditorRichClean = withEditor(RichTextClean);
  *
  * @see withEditor
  */
-const withEditorFull = withEditor(as(cxRichText.Default)(RichTextClean));
+const withEditorRich = withEditor(as(cxRichText.Default)(RichTextClean));
 
 export {
   withEditor,
   withEditorPlain,
   withEditorPlainClean,
   withEditorRichClean,
-  withEditorFull,
+  withEditorRich,
 };
