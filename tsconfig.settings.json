@@ -88,6 +88,8 @@
       "@bodiless/ui/*": ["bodiless-ui/src/*"],
       "@bodiless/vital-structuredata": ["vital-structuredata/src"],
       "@bodiless/vital-structuredata/*": ["vital-structuredata/src/*"],
+      "@bodiless/vital-youtube": ["vital-youtube/src"],
+      "@bodiless/vital-youtube/*": ["vital-youtube/src/*"],
       "@bodiless/table": ["bodiless-table/src"],
       "@bodiless/table/*": ["bodiless-table/src/*"],
       "@bodiless/youtube": ["bodiless-youtube/src"],

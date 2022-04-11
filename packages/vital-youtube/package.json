@@ -1,0 +1,41 @@
+{
+  "name": "@bodiless/vital-youtube",
+  "sideEffects": false,
+  "version": "1.0.0-beta.2",
+  "description": "Clean, designable YouTube components for VitalDS based projects.",
+  "author": "Guilherme Zeni <gzeni@its.jnj.com>",
+  "license": "Apache-2.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/bodiless.docs.json",
+    "/doc"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
+  },
+  "scripts": {
+    "build": "npm run build:lib && npm run build:api-doc",
+    "build:lib": "tsc -p ./tsconfig.json",
+    "build:watch": "npm run build:lib -- --watch",
+    "build:api-doc": "typedoc --out doc/api ./src",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
+    "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo"
+  },
+  "dependencies": {
+    "@bodiless/components": "^1.0.0-beta.2",
+    "@bodiless/core": "^1.0.0-beta.2",
+    "@bodiless/cx-editors": "^1.0.0-beta.2",
+    "@bodiless/cx-elements": "^1.0.0-beta.2",
+    "@bodiless/fclasses": "^1.0.0-beta.2",
+    "@bodiless/organisms": "^1.0.0-beta.2",
+    "@bodiless/vital-structuredata": "^1.0.0-beta.2",
+    "@bodiless/youtube": "^1.0.0-beta.2",
+    "lodash": "^4.17.19"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2"
+  }
+}
