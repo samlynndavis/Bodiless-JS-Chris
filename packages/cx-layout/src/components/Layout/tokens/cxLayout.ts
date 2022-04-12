@@ -15,7 +15,9 @@
 import {
   addProps,
   as,
+  HOC,
 } from '@bodiless/fclasses';
+import { WithStructuredDataProvider } from '@bodiless/vital-structuredata';
 import { asLayoutToken } from '../LayoutClean';
 import { cxFooter } from '../../Footer';
 import { cxHeader } from '../../Header';
@@ -24,11 +26,14 @@ import { MAIN_CONTENT_ID } from './constants';
 import { StyleGuide } from './StyleGuide';
 
 /**
-  * Token that defines a basic layout.
-  */
+ * Token that defines a basic layout.
+ */
 const Base = asLayoutToken({
   Components: {
     Helmet: cxHelmet.Default,
+  },
+  SEO: {
+    _: WithStructuredDataProvider,
   },
   Behavior: {
     Container: addProps({ id: MAIN_CONTENT_ID }),

@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { HOC } from '@bodiless/fclasses';
 import React, {
   ComponentType, createContext, useContext, useState, FC,
 } from 'react';
@@ -62,7 +63,7 @@ export const StructuredDataProvider: FC = ({ children }) => {
   );
 };
 
-export const withStructuredDataProvider = (Component: ComponentType) => {
+const withStructuredDataProvider = (Component: ComponentType) => {
   const provider = (props: SchemaSetter) => (
     <StructuredDataProvider>
       <Component {...props} />
@@ -71,3 +72,5 @@ export const withStructuredDataProvider = (Component: ComponentType) => {
 
   return provider;
 };
+
+export const WithStructuredDataProvider = withStructuredDataProvider as HOC;
