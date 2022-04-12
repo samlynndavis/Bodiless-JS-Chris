@@ -22,7 +22,7 @@ import {
 } from '@bodiless/fclasses';
 
 import {
-  withSeoMetaForm, withShareMetaForm, SocialShareFormImage, withMetaHtmlAttributes, useIsHomePage,
+  withSeoMetaForm, withShareMetaForm, withMetaHtmlAttributes, useIsHomePage,
 } from '../helpers';
 
 const asSimpleToken = (...tokens: Token[]) => asElementToken({
@@ -32,10 +32,6 @@ const asSimpleToken = (...tokens: Token[]) => asElementToken({
 });
 
 // SEO tokens
-
-const WithPageType = asSimpleToken(withMeta({
-  name: 'pagetype', label: 'Page Type',
-})('page-type'));
 
 const WithPageTitle = asSimpleToken(withTitle({
   name: 'title', label: 'Title', placeholder: 'Rec 30-65 charecterr',
@@ -74,10 +70,6 @@ const WithHomePageSchemas = asElementToken({
   Flow: flowIf(useIsHomePage),
 });
 
-const WithCountry = asSimpleToken(withMetaStatic({ name: 'bl-country' })({ nodeKey: 'country', nodeCollection: 'site' }));
-
-const WithBrand = asSimpleToken(withMetaStatic({ name: 'bl-brand' })({ nodeKey: 'brand', nodeCollection: 'site' }));
-
 const WithHtml = asSimpleToken(
   withMetaHtmlAttributes('Set at /src/data/site/meta$html.json', 'Set at /src/data/site/meta$html.json', 'html', 'site'),
 );
@@ -92,11 +84,8 @@ const WithSeoForm = asElementToken({
 const SEO = asElementToken({
   Compose: {
     WithHtml,
-    WithCountry,
-    WithBrand,
     WithHomePageSchemas,
     WithPageDescription,
-    WithPageType,
     WithPageTitle,
     WithSeoForm,
   },
@@ -140,8 +129,7 @@ export const WithShareUrl = asSimpleToken(withMeta({
 
 export const WithShareImage = asSimpleToken(withMeta({
   name: 'og:image',
-  label: 'Image',
-  useFormElement: () => SocialShareFormImage,
+  label: 'Image (provide absolute URL)',
   attribute: 'property',
 })('og-image'));
 
@@ -186,10 +174,7 @@ export default {
   WithShareImage,
   WithShareTitle,
   WithHtml,
-  WithCountry,
-  WithBrand,
   WithPageDescription,
-  WithPageType,
   WithPageTitle,
   WithOrganizationTelephone,
   WithOrganizationContactType,
