@@ -87,7 +87,7 @@ describe('extendMeta', () => {
 });
 
 describe('asTokenSpec', () => {
-  it.only('Does not alter tokens when extending them', () => {
+  it('Does not alter tokens when extending them', () => {
     const Inner1 = asTestTokenSpec({
       Core: {
         _: 'foo'
