@@ -233,9 +233,9 @@ export type ReservedDomains<
      * so it will not have access to any contexts or content nodes provided by
      * the token itself.
      */
-  Flow?: FlowHoc|undefined,
+  Flow?: FlowHoc | undefined,
   /**
-     * Metadata which should be attached to this token (and to any component to
+     * Metadata which should be attached to this token (and to any components
      * to which the token is applied).
      */
   Meta?: TokenMeta,
