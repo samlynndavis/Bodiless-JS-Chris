@@ -1,7 +1,6 @@
 import React from 'react';
-import { useFieldApi } from 'informed';
-import { addClasses, Div, HOC } from '@bodiless/fclasses';
-import { TImagePickerUI, ImageDropZone, withMetaForm } from '@bodiless/components';
+import { HOC } from '@bodiless/fclasses';
+import { withMetaForm } from '@bodiless/components';
 import { useMenuOptionUI, useNode } from '@bodiless/core';
 
 /**
@@ -46,30 +45,15 @@ const useShareMenuOptions = () => [
 
 const metaSocialShareImageName = 'og-image';
 
-const DropZoneWrapper = addClasses('my-2')(Div);
-
-const DropZoneDesign = {
-  UploadArea: addClasses('w-full bg-gray-600 text-center p-2')(Div),
-};
-
-const DropZoneUploadArea = DropZoneDesign.UploadArea;
-
-const dropZoneUI: Partial<TImagePickerUI> = {
-  UploadArea: () => <DropZoneUploadArea>Drag a file or click here to upload.</DropZoneUploadArea>,
-};
-
 export const SocialShareFormImage = () => {
-  const { ComponentFormText } = useMenuOptionUI();
-  const fieldApi = useFieldApi(metaSocialShareImageName);
+  const { ComponentFormText, ComponentFormDescription } = useMenuOptionUI();
   return (
-    <DropZoneWrapper>
+    <>
       <ComponentFormText field={metaSocialShareImageName} id="social-share-img-src" />
-      <ImageDropZone
-        fieldApi={fieldApi}
-        targetFieldName={metaSocialShareImageName}
-        ui={dropZoneUI}
-      />
-    </DropZoneWrapper>
+      <ComponentFormDescription>
+        Provide an absolute image url.
+      </ComponentFormDescription>
+    </>
   );
 };
 
