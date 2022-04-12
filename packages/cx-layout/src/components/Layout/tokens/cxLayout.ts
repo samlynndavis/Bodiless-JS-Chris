@@ -15,7 +15,6 @@
 import {
   addProps,
   as,
-  HOC,
 } from '@bodiless/fclasses';
 import { WithStructuredDataProvider } from '@bodiless/vital-structuredata';
 import { asLayoutToken } from '../LayoutClean';
