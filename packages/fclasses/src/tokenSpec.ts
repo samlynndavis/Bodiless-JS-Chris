@@ -15,13 +15,11 @@
 import mergeWith from 'lodash/mergeWith';
 import flow from 'lodash/flow';
 import { ComponentType } from 'react';
-import identity from 'lodash/identity';
-import pick from 'lodash/pick';
 import { startWith } from './replaceable';
 import type {
   TokenDef, // FlowHoc,
   DesignableComponents, HocDesign,
-  ReservedDomains, Design, Token, HOCBase, HOD, AsTokenSpec, FinalDesign, TokenSpec,
+  ReservedDomains, Design, Token, HOCBase, HOD, AsTokenSpec, FinalDesign, TokenSpec, FinalDomains,
 } from './types';
 import { $TokenSpec } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
@@ -46,8 +44,9 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
   if (domainName === 'Flow') return undefined;
   if (domainName === 'Meta') return Array.isArray(domain) ? extendMeta(...domain) : domain;
   if (domainName === 'Compose') {
-    const compose = domain as ReservedDomains<C, D>['Compose'];
-    return as(...Object.values(compose || {}));
+    const compose = domain as Required<ReservedDomains<any, any>>['Compose'];
+    const toks = Object.values(compose);
+    return as(...toks);
   }
   return withDesign(domain as Design<C, D>);
 }
@@ -144,7 +143,6 @@ const tokenMergeCustomizer = (...args: any) => {
       if (a && b) return flow(a, b);
       if (a) return a;
       if (b) return b;
-      return identity;
     }
     return undefined;
   }
@@ -281,19 +279,17 @@ const asTokenSpec = <
   C extends DesignableComponents,
   D extends object,
 >(d?: D): AsTokenSpec<C, D> => (...specs) => {
-    const [spec0, ...restSpecs] = specs;
-    const mergedSpec = { ...spec0 };
-    mergeWith(
-      mergedSpec, ...restSpecs, tokenMergeCustomizer
+    const spec: FinalDomains<C, D> = Object.keys(d || {}).reduce(
+      (acc, next) => ({
+        ...acc,
+        [next]: {},
+      }), {},
     );
-    const orderedSpec = d
-      // Ensure order of keys in resulting token matches order of domains.
-      ? pick(mergedSpec, ...Object.getOwnPropertyNames(d), 'Meta', 'Compose', 'Flow')
-      : mergedSpec;
-    // Add an identifying key to ensure that tokens passed through `as`
-    // have been defined with `asTokenSpec`, thus guaranteeing proper order
-    // of domain keys.
-    return { ...orderedSpec, [$TokenSpec]: true } as any;
+    spec.Compose = {};
+    spec.Flow = undefined;
+    spec.Meta = {};
+    mergeWith(spec, ...specs, tokenMergeCustomizer);
+    return { ...spec, [$TokenSpec]: true } as TokenSpec<C, D>;
   };
 
 export {
@@ -311,6 +307,6 @@ export {
  * @param a
  * The Token to test.
  */
-export const isTokenSpec = (a: Token): a is TokenSpec<any, any, any> => (
+export const isTokenSpec = (a: Token): a is TokenSpec<any, any> => (
   typeof a !== 'function' && typeof a !== 'string'
 );
