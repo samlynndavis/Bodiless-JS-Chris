@@ -34,16 +34,25 @@ const twConfig = {
       orange: '#FFA500',
     },
     maxWidth: {
-      48: '12rem',
-      56: '14rem',
+      20: '5rem',
+      28: '7rem',
+      64: '16rem',
+      screen: '100vw',
+    },
+    minWidth: {
+      28: '7rem',
     },
     extend: {
       margin: {
-        'site-percent': '5%',
-        'md-site-percent': '8%',
-        'lg-site-percent': '8%',
+        'negative-half-screen': '-50vw',
       },
     },
+  },
+  variants: {
+    backgroundColor: ['first', 'last', 'responsive'],
+    margin: ['first', 'last', 'responsive'],
+    padding: ['first', 'last', 'responsive'],
+    width: ['first', 'last', 'responsive'],
   },
 };
 
