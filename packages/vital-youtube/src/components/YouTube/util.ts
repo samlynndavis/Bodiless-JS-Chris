@@ -21,7 +21,7 @@ const getOrigin = () => process.env.SITE_URL || '';
 
 // @TODO: Remove origin attribute in case it is blocking YouTube analytics tracking.
 const defaultPlayerSettings: YouTubePlayerSettings = {
-  cc_load_policy: 0,
+  cc_load_policy: 1,
   controls: 1,
   loop: 0,
   enablejsapi: 1,
