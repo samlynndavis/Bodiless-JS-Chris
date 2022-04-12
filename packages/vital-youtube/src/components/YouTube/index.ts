@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,5 +12,6 @@
  * limitations under the License.
  */
 
-export * from './components/FlowContainer';
-export * from './components/YouTube';
+export { default as YouTubeClean, asYouTubeToken } from './YouTubeClean';
+export { default as vitalYouTube } from './tokens';
+export type { YouTubeComponents } from './types';
