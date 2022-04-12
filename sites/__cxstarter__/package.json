@@ -65,7 +65,7 @@
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "gatsby clean",
     "dev-backend": "bodiless-backend",
-    "dev-frontend": "gatsby develop -p 8000",
+    "dev-frontend": "gatsby develop",
     "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "prestart": "run-s build:env-vars build:doc",
     "serve": "gatsby serve",
