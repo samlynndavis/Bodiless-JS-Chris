@@ -22,7 +22,7 @@ import {
 import { asFluidToken, cxSpacing } from '@bodiless/cx-elements';
 import { cxImageFlowContainer } from '@bodiless/cx-image';
 import { cxEditorsFlowContainer } from '@bodiless/cx-editors';
-
+import { vitalYouTubeFlowContainer } from '@bodiless/vital-youtube';
 import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
 
 const blacklistCategories = ['Group'];
@@ -104,6 +104,7 @@ const AsFlowContainerItem = asFluidToken({
 const WithBaseVariations = asFluidToken(
   cxImageFlowContainer.WithImageVariations,
   cxEditorsFlowContainer.WithEditorVariations,
+  vitalYouTubeFlowContainer.WithYouTubeVariations,
 );
 
 /**
