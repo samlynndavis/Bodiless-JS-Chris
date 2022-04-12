@@ -187,10 +187,11 @@ export const FileUpload: CT<FileUploadProps> = ({ fieldApi, ui = {}, accept }: F
     ...ui,
   };
   const saveEnabled = (process.env.BODILESS_BACKEND_SAVE_ENABLED || '1') === '1';
+  const rootProps = saveEnabled ? getRootProps() : {};
 
   return (
     <MasterWrapper>
-      <Wrapper {...getRootProps()}>
+      <Wrapper {...rootProps}>
         {saveEnabled && (
           <>
             <Input {...getInputProps()} />

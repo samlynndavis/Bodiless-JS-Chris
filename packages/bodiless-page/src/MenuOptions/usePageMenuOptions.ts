@@ -23,7 +23,7 @@ const usePageMenuOptions = (
   options: PageMenuOptions,
 ) => {
   const {
-    name, icon, label, handler, isDisabled: isDisabled$, isHidden,
+    name, icon, label, handler, isDisabled: isDisabled$,
   } = options;
   const context = useEditContext();
 
