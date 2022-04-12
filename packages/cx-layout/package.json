@@ -36,6 +36,7 @@
     "@bodiless/cx-editors": "^1.0.0-beta.3",
     "@bodiless/cx-elements": "^1.0.0-beta.3",
     "@bodiless/cx-image": "^1.0.0-beta.3",
+    "@bodiless/cx-link": "^1.0.0-beta.3",
     "@bodiless/cx-navigation": "^1.0.0-beta.3",
     "@bodiless/fclasses": "^1.0.0-beta.3",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.3",
