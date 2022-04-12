@@ -14,12 +14,10 @@
 
 import {
   addProps,
-  as,
   flowHoc,
 } from '@bodiless/fclasses';
 import {
   asResponsive16By9Embed as asBodilessResponsive16By9Embed,
-  Embed,
 } from '@bodiless/organisms';
 import { asSchemaSource, WithVideoSchema } from '@bodiless/vital-structuredata';
 import {
@@ -27,108 +25,78 @@ import {
   withFullScreenEnabled as withBodilessFullScreenEnabled,
   withYouTubePlayerSettings,
 } from '@bodiless/youtube';
-import { defaultPlayerSettings } from '../util';
 import { asYouTubeToken } from '../YouTubeClean';
+import { defaultPlayerSettings } from '../util';
+
+/**
+ * WithDefaultPlayerSettings provides standard default YouTube player settings.
+ */
+const WithDefaultPlayerSettings = asYouTubeToken({
+  Components: {
+    Item: withYouTubePlayerSettings(defaultPlayerSettings),
+  },
+  Meta: flowHoc.meta.term('Settings')('Standard Player'),
+});
+
+/**
+ * WithFullScreenEnabled allows YouTube video to be full screen.
+ */
+const WithFullScreenEnabled = asYouTubeToken({
+  Behavior: {
+    Item: withBodilessFullScreenEnabled,
+  },
+  Meta: flowHoc.meta.term('Settings')('Full Screen'),
+});
+
+/**
+ * WithSchema allows YouTube video to generate structure data schema.
+ */
+const WithSchema = asYouTubeToken({
+  SEO: {
+    Item: asSchemaSource('youtube-iframe'),
+    Wrapper: WithVideoSchema,
+  },
+  Meta: flowHoc.meta.term('SEO')('With Schema'),
+});
 
 /**
  * Token that provides VitalDS YouTube base component.
  */
 const Base = asYouTubeToken({
-  Layout: {
+  Components: {
     _: asBodilessResponsiveYouTube,
   },
-  Meta: flowHoc.meta.term('Type')('YouTube'),
-  SEO: {
-    Item: asSchemaSource('youtube-iframe'),
-    Wrapper: WithVideoSchema,
-  },
-});
-
-/**
- * asResponsive16By9Embed provides responsive YouTube component in widescreen format (16:9).
- */
-const asResponsive16By9Embed = asYouTubeToken({
-  Layout: {
-    _: asBodilessResponsive16By9Embed,
-  },
-  Meta: flowHoc.meta.term('Layout')('Responsive Widescreen (16:9)'),
-});
-
-/**
- * withDefaultPlayerSettings provides standard Canvas YouTube player settings.
- */
-const withDefaultPlayerSettings = asYouTubeToken({
-  Meta: flowHoc.meta.term('Settings')('With Canvas presets'),
-  Behavior: {
-    Item: withYouTubePlayerSettings(defaultPlayerSettings),
-  },
-});
-
-/**
- * withFullScreenEnabled allows YouTube video to be full screen.
- */
-const withFullScreenEnabled = asYouTubeToken({
-  Meta: flowHoc.meta.term('Settings')('With full screen'),
-  Behavior: {
-    Item: withBodilessFullScreenEnabled,
-  },
-});
-
-/**
- * withPlaceholder provides default placeholder for YouTube component.
- */
-const withPlaceholder = asYouTubeToken({
-  Layout: {
+  Content: {
+    // Video placeholder.
     Item: addProps({ src: 'https://www.youtube.com/embed/ukz74aLMvhc' }),
   },
-  Meta: flowHoc.meta.term('Content')('With Placeholder'),
+  Meta: flowHoc.meta.term('Type')('YouTube'),
 });
 
 /**
- * asResponsiveYouTube re-composes responsive YouTube base component with default placeholder.
+ * Token that provides VitalDS YouTube default component.
  */
-const asResponsiveYouTube = asYouTubeToken({
-  Compose: {
-    Base,
-    withPlaceholder,
-  },
+const Default = asYouTubeToken({
+  ...Base,
+  Meta: flowHoc.meta.term('Screen')('Default'),
 });
 
 /**
- * asYouTube re-composes responsive YouTube base component with default placeholder
- * in widescreen format (16:9).
+ * Responsive16By9Embed provides responsive YouTube component in widescreen format (16:9).
  */
-const asYouTube = asYouTubeToken({
-  Compose: {
-    asResponsiveYouTube,
-    asResponsive16By9Embed,
+const Responsive16By9Embed = asYouTubeToken({
+  ...Base,
+  Components: {
+    _: asBodilessResponsive16By9Embed,
   },
+  Meta: flowHoc.meta.term('Screen')('Widescreen (16:9)'),
 });
-
-/**
- * withYouTubeDefaults provides standard Canvas presets with full screen allowed.
- */
-const withYouTubeDefaults = asYouTubeToken({
-  Compose: {
-    withFullScreenEnabled,
-    withDefaultPlayerSettings,
-  },
-});
-
-const Responsive16By9Embed = as(asYouTube)(Embed);
-
-const Default = as(withYouTubeDefaults)(Responsive16By9Embed);
 
 export default {
-  asYouTube,
-  asResponsive16By9Embed,
-  asResponsiveYouTube,
-  withDefaultPlayerSettings,
-  withFullScreenEnabled,
-  withPlaceholder,
-  withYouTubeDefaults,
+  WithDefaultPlayerSettings,
+  WithFullScreenEnabled,
+  WithSchema,
   Base,
-  // @TODO: We should not export components as part of a token collection.
   Default,
   Responsive16By9Embed,
 };

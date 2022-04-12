@@ -12,17 +12,14 @@
  * limitations under the License.
  */
 
+import identity from 'lodash/identity';
 import {
   as,
-  flowHoc,
   on,
   varyDesigns,
 } from '@bodiless/fclasses';
-import {
-  asFluidToken,
-} from '@bodiless/cx-elements';
-import YouTubeClean from '../YouTube/YouTubeClean';
-import vitalYouTube from '../YouTube/tokens';
+import { asFluidToken } from '@bodiless/cx-elements';
+import { YouTubeClean, vitalYouTube } from '../YouTube';
 
 /**
  * YouTube base variation object definition.
@@ -31,20 +28,43 @@ const baseVariation = {
   YouTube: on(YouTubeClean)(vitalYouTube.Base),
 };
 
-const layoutVariations = {
-  Responsive16By9Embed: as({
-    ...vitalYouTube.asResponsive16By9Embed,
-    Meta: flowHoc.meta.term('Layout')('Responsive Widescreen'),
-  }),
-  Responsive16By9EmbedWithPlaceholder: as({
-    ...vitalYouTube.asYouTube,
-    Meta: flowHoc.meta.term('Layout')('Responsive Widescreen With Placeholder'),
-  }),
-  Default: as({
-    ...vitalYouTube.asYouTube,
-    ...vitalYouTube.withYouTubeDefaults,
-    Meta: flowHoc.meta.term('Layout')('Default Responsive Widescreen With Placeholder'),
-  }),
+/**
+ * YouTube settings variations object definition.
+ */
+const settingsVariations = {
+  NoSettings: identity,
+  DefaultPlayer: as(
+    vitalYouTube.Base,
+    vitalYouTube.WithDefaultPlayerSettings,
+  ),
+  FullScreenEnabled: as(
+    vitalYouTube.Base,
+    vitalYouTube.WithFullScreenEnabled,
+  ),
+  DefaultSettings: as(
+    vitalYouTube.Base,
+    vitalYouTube.WithDefaultPlayerSettings,
+    vitalYouTube.WithFullScreenEnabled,
+  ),
+};
+
+/**
+ * YouTube SEO variations object definition.
+ */
+const seoVariations = {
+  NoSchema: identity,
+  Schema: as(
+    vitalYouTube.Base,
+    vitalYouTube.WithSchema,
+  ),
+};
+
+/**
+ * YouTube screen variations object definition.
+ */
+const screenVariations = {
+  Default: vitalYouTube.Default,
+  Responsive16By9Embed: vitalYouTube.Responsive16By9Embed,
 };
 
 /**
@@ -53,7 +73,9 @@ const layoutVariations = {
 const WithYouTubeVariations = asFluidToken({
   Components: varyDesigns(
     baseVariation,
-    layoutVariations,
+    settingsVariations,
+    seoVariations,
+    screenVariations,
   ),
 });
 

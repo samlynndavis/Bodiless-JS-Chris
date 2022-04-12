@@ -12,12 +12,17 @@
  * limitations under the License.
  */
 
+import { withNode } from '@bodiless/core';
 import { asCxTokenSpec } from '@bodiless/cx-elements';
-import { Iframe } from '@bodiless/fclasses';
+import { flowHoc, Iframe } from '@bodiless/fclasses';
+import { Embed } from '@bodiless/organisms';
 import { asBodilessYouTube } from '@bodiless/youtube';
 import type { YouTubeComponents } from './types';
 
-const YouTubeClean: any = asBodilessYouTube()(Iframe);
+const YouTubeClean: any = flowHoc(
+  asBodilessYouTube()(Iframe),
+  withNode,
+)(Embed);
 
 export const asYouTubeToken = asCxTokenSpec<YouTubeComponents>();
 
