@@ -17,7 +17,7 @@ import {
   Fragment, designable, Section
 } from '@bodiless/fclasses';
 import { withoutHydration } from '@bodiless/hydration';
-import { asCxTokenSpec } from '@bodiless/cx-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { HeroComponents, HeroProps } from './types';
 
 const heroComponents: HeroComponents = {
@@ -34,7 +34,7 @@ const HeroCleanBase: FC<HeroProps> = ({ components: C }) => (
 const HeroClean = designable(heroComponents, 'Hero')(HeroCleanBase);
 const HeroStatic = withoutHydration()(HeroClean);
 
-const asHeroToken = asCxTokenSpec<HeroComponents>();
+const asHeroToken = asVitalTokenSpec<HeroComponents>();
 
 export default HeroClean;
 

@@ -13,7 +13,7 @@
  */
 
 import { withNode } from '@bodiless/core';
-import { asCxTokenSpec } from '@bodiless/cx-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { flowHoc, Iframe } from '@bodiless/fclasses';
 import { Embed } from '@bodiless/organisms';
 import { asBodilessYouTube } from '@bodiless/youtube';
@@ -24,6 +24,6 @@ const YouTubeClean: any = flowHoc(
   withNode,
 )(Embed);
 
-export const asYouTubeToken = asCxTokenSpec<YouTubeComponents>();
+export const asYouTubeToken = asVitalTokenSpec<YouTubeComponents>();
 
 export default YouTubeClean;

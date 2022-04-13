@@ -18,7 +18,7 @@ import {
   on,
   varyDesigns,
 } from '@bodiless/fclasses';
-import { asFluidToken } from '@bodiless/cx-elements';
+import { asFluidToken } from '@bodiless/vital-elements';
 import { YouTubeClean, vitalYouTube } from '../YouTube';
 
 /**

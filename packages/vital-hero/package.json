@@ -33,7 +33,7 @@
   "dependencies": {
     "@bodiless/components": "^1.0.0-beta.5",
     "@bodiless/components-ui": "^1.0.0-beta.5",
-    "@bodiless/cx-elements": "^1.0.0-beta.5",
+    "@bodiless/vital-elements": "^1.0.0-beta.5",
     "@bodiless/fclasses": "^1.0.0-beta.5",
     "@bodiless/hydration": "^1.0.0-beta.5",
     "@bodiless/vital-youtube": "^1.0.0-beta.5"

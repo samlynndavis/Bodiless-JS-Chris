@@ -18,7 +18,7 @@ import {
   as,
   replaceWith,
 } from '@bodiless/fclasses';
-import { asStyleGuideTemplateToken, cxStyleGuideTemplate } from '@bodiless/cx-templates';
+import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { HeroClean, vitalHero } from '@bodiless/vital-hero';
 
 const ImageHero = as(vitalHero.Image)(HeroClean);
@@ -32,7 +32,7 @@ const HeroVariations = (props: any) => (
   </>
 );
 
-export const Hero = asStyleGuideTemplateToken(cxStyleGuideTemplate.Default, {
+export const Hero = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Hero'),
   Content: {
     Title: replaceWith(() => <>Hero</>),
