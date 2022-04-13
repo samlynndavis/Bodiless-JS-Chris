@@ -19,7 +19,7 @@ const tailwindcssDir = require('tailwindcss-dir')();
 const resolver = (pkgName) => require.resolve(pkgName);
 
 const twConfig = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
@@ -71,11 +71,6 @@ const twConfig = {
         'md-site-percent': '8%',
       },
     },
-  },
-  variants: {
-    extend: {
-      textColor: ['active'],
-    }
   },
   plugins: [
     tailwindcssDir,

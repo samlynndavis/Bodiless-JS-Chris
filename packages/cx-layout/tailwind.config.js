@@ -17,7 +17,7 @@ import { getPackageTailwindConfig } from '@bodiless/fclasses';
 const resolver = (pkgName) => require.resolve(pkgName);
 
 const twConfig = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
@@ -47,12 +47,6 @@ const twConfig = {
         'negative-half-screen': '-50vw',
       },
     },
-  },
-  variants: {
-    backgroundColor: ['first', 'last', 'responsive'],
-    margin: ['first', 'last', 'responsive'],
-    padding: ['first', 'last', 'responsive'],
-    width: ['first', 'last', 'responsive'],
   },
 };
 

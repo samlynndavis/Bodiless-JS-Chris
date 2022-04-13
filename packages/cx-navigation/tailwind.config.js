@@ -15,7 +15,7 @@
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
 const twConfig = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
@@ -41,14 +41,6 @@ const twConfig = {
         max: 'max-content',
       },
     },
-  },
-  variants: {
-    borderWidth: ['first', 'last', 'responsive'],
-    boxShadow: ['group-hover', 'hover', 'responsive'],
-    margin: ['first', 'last', 'responsive'],
-    overflow: ['focus', 'hover', 'responsive'],
-    position: ['focus', 'hover', 'responsive'],
-    padding: ['first', 'last', 'responsive'],
   },
 };
 

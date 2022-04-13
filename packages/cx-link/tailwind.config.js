@@ -19,7 +19,7 @@ const plugin = require('tailwindcss/plugin');
 const resolver = (pkgName) => require.resolve(pkgName);
 
 const twConfig = {
-  purge: [
+  content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
   theme: {
