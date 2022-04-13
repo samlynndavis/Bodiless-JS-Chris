@@ -21,11 +21,11 @@ const flags: Required<Flags<Options>> = {
   ...AbstractNew.flags,
   'package-template': {
     ...AbstractNew.flags['package-template'],
-    default: '__cxstarter__',
+    default: '__vital__',
   },
   'site-template': {
     ...AbstractNew.flags['site-template'],
-    default: '__cxstarter__',
+    default: '__vital__',
   },
 };
 
