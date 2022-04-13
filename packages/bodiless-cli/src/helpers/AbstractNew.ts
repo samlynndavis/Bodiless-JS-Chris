@@ -25,7 +25,6 @@ import * as semver from 'semver';
 import * as walk from '@root/walk';
 import { v1 } from 'uuid';
 import { SpawnOptions } from 'child_process';
-import { Dirent } from 'fs-extra';
 import Wizard, { Flags, WizardOptions } from './Wizard';
 import Spawner from './Spawner';
 import { listVersionsSync, listBranchesSync } from './git';
@@ -134,14 +133,6 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
     validator: () => true,
     prompt: false,
     default: false,
-  },
-
-  'keep-content': {
-    ...commandFlags.boolean({
-      description: 'Keep all content in the template site',
-    }),
-    validator: () => true,
-    prompt: false,
   },
 
   namespace: {
@@ -255,28 +246,6 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const name = await this.getArg('name');
     const subDir = await this.getArg(`${type}-dir`);
     return path.join(rootDir, subDir, name);
-  }
-
-  async cleanContent() {
-    if (await this.getArg('keep-content')) return Promise.resolve();
-    const dataDir = path.join(
-      await this.getTargetDir('sites'),
-      'src',
-      'data',
-    );
-    return walk.walk(dataDir, async (err: Error, pathname: string, dirent: Dirent) => {
-      // console.log(pathname);
-      if (err) {
-        console.warn('Warning could not stat', pathname, err.message);
-      } else if (
-        !dirent.isDirectory()
-        && path.extname(pathname) === 'json'
-        && !/^index/.test(path.basename(pathname))
-      ) {
-        return fs.remove(pathname);
-      }
-      return Promise.resolve();
-    });
   }
 
   async getRevision(repo: string): Promise<string> {
@@ -500,7 +469,6 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     await this.cleanSites('site');
     await this.cleanSites('package');
     await this.cleanMisc();
-    await this.cleanContent();
     await this.updatePackageJson('root');
     await this.updatePackageJson('site');
     await this.updatePackageJson('package');
