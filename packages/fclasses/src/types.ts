@@ -233,9 +233,9 @@ export type ReservedDomains<
      * so it will not have access to any contexts or content nodes provided by
      * the token itself.
      */
-  Flow?: FlowHoc,
+  Flow?: FlowHoc | undefined,
   /**
-     * Metadata which should be attached to this token (and to any component to
+     * Metadata which should be attached to this token (and to any components
      * to which the token is applied).
      */
   Meta?: TokenMeta,
@@ -248,12 +248,12 @@ export type ReservedDomains<
  * - A token specified as an HOC
  * - A token specified as a string of classes.
  */
-export type Token = TokenSpec<any, {}, any> | HOCBase | string | undefined;
+export type Token = TokenSpec<any, {}> | HOCBase | string | undefined;
 
 export type ComposedToken<
   C extends DesignableComponents,
   D extends object,
-> = TokenSpec<C, D, keyof D> | HOCBase | string | undefined;
+> = TokenSpec<C, D> | HOCBase | string | undefined;
 
 /**
    * Type of a collection of tokens which apply to a specific designable component.
@@ -266,7 +266,7 @@ export type TokenCollection<
   C extends DesignableComponents,
   D extends object = object,
 > = {
-  [name: string]: TokenSpec<C, D, keyof D>,
+  [name: string]: TokenSpec<C, D>,
 };
 
 export type FinalDesign<
@@ -302,16 +302,10 @@ type Domains<
   [k in keyof D]?: FinalDesign<C>
 };
 
-type FinalDomains<
+export type FinalDomains<
   C extends DesignableComponents,
   D extends object
 > = Domains<C, D> & ReservedDomains<C, D>;
-
-type TokenSpecIn<
-  C extends DesignableComponents,
-  D extends object,
-  K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
-> = Pick<FinalDomains<C, D>, K>;
 
 /**
    * Type of a token specification, a token expressed in the
@@ -335,31 +329,10 @@ type TokenSpecIn<
 export type TokenSpec<
   C extends DesignableComponents,
   D extends object,
-  K extends keyof (FinalDomains<C, D>) = keyof (FinalDomains<C, D>)
-> = TokenSpecIn<C, D, K> & {
+> = Required<FinalDomains<C, D>> & {
   [$TokenSpec]: true,
 };
 
-export type AsTokenSpec<C extends DesignableComponents, D extends object> = <
-  K0 extends keyof FinalDomains<C, D>,
-  K1 extends keyof FinalDomains<C, D> = never,
-  K2 extends keyof FinalDomains<C, D> = never,
-  K3 extends keyof FinalDomains<C, D> = never,
-  K4 extends keyof FinalDomains<C, D> = never,
-  K5 extends keyof FinalDomains<C, D> = never,
-  K6 extends keyof FinalDomains<C, D> = never,
-  K7 extends keyof FinalDomains<C, D> = never,
-  K8 extends keyof FinalDomains<C, D> = never,
-  K9 extends keyof FinalDomains<C, D> = never
->(
-  s0: TokenSpecIn<C, D, K0>,
-  s1?: TokenSpecIn<C, D, K1>,
-  s2?: TokenSpecIn<C, D, K2>,
-  s3?: TokenSpecIn<C, D, K3>,
-  s4?: TokenSpecIn<C, D, K4>,
-  s5?: TokenSpecIn<C, D, K5>,
-  s6?: TokenSpecIn<C, D, K6>,
-  s7?: TokenSpecIn<C, D, K7>,
-  s8?: TokenSpecIn<C, D, K8>,
-  s9?: TokenSpecIn<C, D, K9>,
-) => TokenSpec<C, D, K0 | K1 | K2 | K3 | K4 | K5 | K6 | K7 | K8 | K9>;
+export type AsTokenSpec<C extends DesignableComponents, D extends object> = (
+  ...specs: FinalDomains<C, D>[]
+) => TokenSpec<C, D>;
