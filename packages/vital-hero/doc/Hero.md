@@ -43,13 +43,12 @@ Setting up is as simple as applying the desired Token variation on top of the `H
 For instance, the example below places a Hero Image inside an example template token:
 
 ```ts
-import { HeroClean } from '@bodiless/vital-hero';
-import { cxImage } from '@bodiless/cx-image';
-import { asCxTokenSpec } from '@bodiless/cx-elements';
+import { HeroClean, vitalHero } from '@bodiless/vital-hero';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
-const Default = asCxTokenSpec({
+const Default = asVitalTokenSpec({
   Components: {
-    Hero: on(HeroClean)(cxImage.Hero),
+    Hero: on(HeroClean)(vitalHero.Image),
   },
   // Other tokens...
 });
@@ -61,20 +60,17 @@ Hero variations are provided by other Bodiless packages, as described below.
 
 #### Hero Image
 
-Provided by the `@bodiless/cx-image` package. Example:
-
 <!-- TODO: maybe we should add an example of how to configure the inner bodiless image -->
 
 ```js
-import { HeroClean } from '@bodiless/vital-hero';
-import { cxImage } from '@bodiless/cx-image';
+import { HeroClean, vitalHero } from '@bodiless/vital-hero';
 import { as } from '@bodiless/fclasses';
 
-const Hero = as(cxImage.Hero)(HeroClean);
+const ImageHero = as(vitalHero.Image)(HeroClean);
 
 const ExamplePage = () => (
   <ExampleWrapper>
-    <Hero />
+    <ImageHero />
     ...
   </ExampleWrapper>
 );
@@ -82,6 +78,18 @@ const ExamplePage = () => (
 
 #### Hero Video
 
-<!-- TODO: add video example -->
+<!-- TODO: maybe we should add an example of how to configure the inner youtube component -->
 
-TBD
+```js
+import { HeroClean, vitalHero } from '@bodiless/vital-hero';
+import { as } from '@bodiless/fclasses';
+
+const VideoHero = as(vitalHero.Video)(HeroClean);
+
+const ExamplePage = () => (
+  <ExampleWrapper>
+    <VideoHero />
+    ...
+  </ExampleWrapper>
+);
+``` 

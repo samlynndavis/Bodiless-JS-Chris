@@ -2,7 +2,7 @@
   "name": "@bodiless/vital-hero",
   "sideEffects": false,
   "version": "1.0.0-beta.5",
-  "description": "Clean, designable Hero component for CanvasX based projects",
+  "description": "Clean, designable Hero component for Vital based projects",
   "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "license": "UNLICENSED",
   "main": "lib/index.js",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://sourcecode.jnj.com/scm/asx-nbfp/canvasx.git"
+    "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "publishConfig": {
     "access": "public"
