@@ -27,6 +27,7 @@ const {
   FlowContainer,
   Images,
   Footer,
+  Hero,
   _default
 } = __cxstarter__StyleGuideTemplate;
 
@@ -42,6 +43,7 @@ const Default = asFluidToken({
     FlowContainer,
     Images,
     Footer,
+    Hero,
   },
 });
 

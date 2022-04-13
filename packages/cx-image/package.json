@@ -42,7 +42,6 @@
     "@bodiless/hydration": "^1.0.0-beta.5",
     "@bodiless/layouts": "^1.0.0-beta.5",
     "@bodiless/layouts-ui": "^1.0.0-beta.5",
-    "@bodiless/vital-hero": "^1.0.0-beta.5",
     "lodash": "^4.17.19"
   }
 }

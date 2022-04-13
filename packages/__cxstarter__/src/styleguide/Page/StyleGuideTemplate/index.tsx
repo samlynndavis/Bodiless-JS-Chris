@@ -20,6 +20,7 @@ import { FlowContainer } from './FlowContainer';
 import { Images } from './Images';
 import { Footer } from './Footer';
 import { _default } from './_default';
+import { Hero } from './Hero';
 
 export const __cxstarter__StyleGuideTemplate = {
   _default,
@@ -31,4 +32,5 @@ export const __cxstarter__StyleGuideTemplate = {
   Images,
   FlowContainer,
   Footer,
+  Hero,
 };

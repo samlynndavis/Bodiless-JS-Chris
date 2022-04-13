@@ -40,10 +40,10 @@
     "@bodiless/cx-editors": "^1.0.0-beta.5",
     "@bodiless/cx-elements": "^1.0.0-beta.5",
     "@bodiless/cx-flowcontainer": "^1.0.0-beta.5",
-    "@bodiless/cx-image": "^1.0.0-beta.5",
     "@bodiless/cx-layout": "^1.0.0-beta.5",
     "@bodiless/fclasses": "^1.0.0-beta.5",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.5",
+    "@bodiless/vital-hero": "^1.0.0-beta.5",
     "lodash": "^4.17.19"
   }
 }

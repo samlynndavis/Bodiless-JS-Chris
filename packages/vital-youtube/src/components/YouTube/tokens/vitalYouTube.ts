@@ -14,6 +14,7 @@
 
 import {
   addProps,
+  as,
   flowHoc,
 } from '@bodiless/fclasses';
 import {
@@ -87,7 +88,10 @@ const Default = asYouTubeToken({
 const Responsive16By9Embed = asYouTubeToken({
   ...Base,
   Components: {
-    _: asBodilessResponsive16By9Embed,
+    _: as(
+      Base.Components?._,
+      asBodilessResponsive16By9Embed,
+    ),
   },
   Meta: flowHoc.meta.term('Screen')('Widescreen (16:9)'),
 });

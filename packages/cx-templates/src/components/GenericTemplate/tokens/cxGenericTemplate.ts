@@ -15,14 +15,16 @@
 import {
   on,
   as,
-  Img,
   addProps,
+  startWith,
+  withDesign,
 } from '@bodiless/fclasses';
-import { cxImage } from '@bodiless/cx-image';
 import { LayoutClean, cxLayout } from '@bodiless/cx-layout';
 import { cxFlowContainer } from '@bodiless/cx-flowcontainer';
 import { withNodeKey } from '@bodiless/core';
+import { asBodilessChameleon } from '@bodiless/components';
 import { cxSpacing, cxTypography } from '@bodiless/cx-elements';
+import { HeroClean, vitalHero } from '@bodiless/vital-hero';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
 
@@ -31,8 +33,14 @@ const Default = asGenericTemplateToken({
     PageWrapper: on(LayoutClean)(cxLayout.Default),
     // @todo breadcrumb placeholder
     Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
-    // @todo in Hero ticket is change this to chameleon.
-    TopContent: on(Img)(cxImage.Default, cxImage.WithLandscapePlaceholder),
+    TopContent: as(
+      startWith(HeroClean),
+      asBodilessChameleon('hero', { component: 'Image' }),
+      withDesign({
+        Image: vitalHero.Image,
+        Video: vitalHero.Video,
+      }),
+    ),
     Content: as(cxFlowContainer.Default),
     BottomContent: as(cxFlowContainer.Default),
   },

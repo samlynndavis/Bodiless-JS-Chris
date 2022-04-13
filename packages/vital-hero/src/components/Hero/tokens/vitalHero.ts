@@ -12,7 +12,13 @@
  * limitations under the License.
  */
 
+import { withImagePlaceholder } from '@bodiless/components';
+import { asBodilessImage } from '@bodiless/components-ui';
+import { Img, on } from '@bodiless/fclasses';
+import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube/';
 import { asHeroToken } from '../HeroClean';
+// @ts-ignore Cannot find module
+import landscapeHero from '../../../../assets/landscape_hero.png';
 
 const Base = asHeroToken({
   Spacing: {
@@ -24,9 +30,34 @@ const Default = asHeroToken({
   ...Base,
 });
 
+const Image = asHeroToken({
+  ...Default,
+  Components: {
+    Content: on(Img)(asBodilessImage()),
+  },
+  Content: {
+    Content: withImagePlaceholder({ src: landscapeHero }),
+  },
+  Layout: {
+    Content: 'w-full'
+  },
+});
+
+const Video = asHeroToken({
+  ...Default,
+  Components: {
+    Content: on(YouTubeClean)(
+      vitalYouTube.Responsive16By9Embed,
+      vitalYouTube.WithSchema,
+    ),
+  },
+});
+
 const vitalHero = {
   Base,
   Default,
+  Image,
+  Video,
 };
 
 export default vitalHero;
