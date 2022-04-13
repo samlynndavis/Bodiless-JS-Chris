@@ -1,1 +1,1 @@
-export { __cxstarter__Hero } from './tokens';
+export { __vital__Hero } from './tokens';

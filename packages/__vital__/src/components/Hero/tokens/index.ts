@@ -1,3 +1,3 @@
-import __cxstarter__Hero from './__cxstarter__Hero';
+import __vital__Hero from './__vital__Hero';
 
-export { __cxstarter__Hero };
+export { __vital__Hero };
