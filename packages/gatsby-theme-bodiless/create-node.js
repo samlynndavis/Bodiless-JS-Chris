@@ -17,7 +17,7 @@
 
 const pathUtil = require('path');
 const slash = require('slash');
-const MD5 = require('crypto-js/md5');
+const crypto = require('crypto-js');
 const fs = require('fs');
 const fse = require('fs-extra');
 const md5File = require('md5-file');
@@ -157,7 +157,7 @@ const addSlugField = ({ node, getNode, actions }) => {
   });
 };
 
-const generateStringDigest = content => MD5(content)
+const generateStringDigest = content => crypto.MD5(content)
   .toString();
 
 const generateFileDigest = absolutePath => md5File.sync(absolutePath);
