@@ -17,7 +17,7 @@
 
 const pathUtil = require('path');
 const slash = require('slash');
-const crypto = require('crypto');
+const crypto = require('crypto-js');
 const fs = require('fs');
 const fse = require('fs-extra');
 const md5File = require('md5-file');
@@ -157,10 +157,8 @@ const addSlugField = ({ node, getNode, actions }) => {
   });
 };
 
-const generateStringDigest = content => crypto
-  .createHash('md5')
-  .update(content)
-  .digest('hex');
+const generateStringDigest = content => crypto.MD5(content)
+  .toString();
 
 const generateFileDigest = absolutePath => md5File.sync(absolutePath);
 
@@ -243,12 +241,16 @@ const fixed = async ({
   };
 };
 
-const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
+const generateGatsbyImage = async ({
+  file, preset, reporter, pathPrefix
+}, options) => {
   // skip image generation when unknown preset is passed
   if (!Object.values(GatsbyImagePresets).includes(preset)) {
     return undefined;
   }
   const { sharpArgs } = options || {};
+  sharpArgs.pathPrefix = pathPrefix;
+
   switch (preset) {
     case GatsbyImagePresets.Fixed:
       return fixed({
@@ -394,7 +396,7 @@ const generateGatsbyImage = async ({ file, preset, reporter }, options) => {
  * leveraging logic from gatsby-source-filesystem
  * https://github.com/gatsbyjs/gatsby/blob/39baf4eb504dcbb4d231f4baf8b109d0dcabb1da/packages/gatsby-source-filesystem/src/extend-file-node.js
  */
-const copyFileToStatic = (node, reporter) => {
+const copyFileToStatic = (node, reporter, pathPrefix = '') => {
   const fileAbsolutePath = node.absolutePath;
   const fileName = `${node.internal.contentDigest}/${pathUtil.basename(fileAbsolutePath)}`;
 
@@ -425,7 +427,7 @@ const copyFileToStatic = (node, reporter) => {
     );
   }
 
-  return `/static/${fileName}`;
+  return `${pathPrefix}/static/${fileName}`;
 };
 
 const createImageNode = ({ node, content }) => {
@@ -461,12 +463,15 @@ const createImageNode = ({ node, content }) => {
   return imageNode;
 };
 
-const generateImages = async ({ imageNode, content, reporter }, options) => {
+const generateImages = async ({
+  imageNode, content, reporter, pathPrefix
+}, options) => {
   const parsedContent = JSON.parse(content);
   return generateGatsbyImage({
     file: imageNode,
     preset: parsedContent.preset,
     reporter,
+    pathPrefix,
   }, options);
 };
 
@@ -475,6 +480,7 @@ const createBodilessNode = async ({
   actions,
   loadNodeContent,
   reporter,
+  pathPrefix,
 }, pluginOptions) => {
   const nodeContent = await loadNodeContent(node);
   const { createNode, createParentChildLink } = actions;
@@ -485,7 +491,7 @@ const createBodilessNode = async ({
   if (imageNode !== undefined) {
     const publicUrl = pathUtil.isAbsolute(imageNode.path)
       ? imageNode.path
-      : copyFileToStatic(imageNode, reporter);
+      : copyFileToStatic(imageNode, reporter, pathPrefix);
     let gatsbyImgData;
     // skip gatsby img data generation when an image from json does not exist in filesystem
     if (fse.existsSync(imageNode.absolutePath)) {
@@ -493,6 +499,7 @@ const createBodilessNode = async ({
         imageNode,
         content: nodeContent,
         reporter,
+        pathPrefix,
       }, gatsbyImageOptions);
     }
 
@@ -535,6 +542,7 @@ exports.onCreateNode = ({
   actions,
   loadNodeContent,
   reporter,
+  pathPrefix,
 }, pluginOptions) => {
   // Add slug field to Bodiless node
   if (node.internal.type === BODILESS_NODE_TYPE) {
@@ -553,6 +561,7 @@ exports.onCreateNode = ({
       actions,
       loadNodeContent,
       reporter,
+      pathPrefix,
     }, pluginOptions);
   }
 };

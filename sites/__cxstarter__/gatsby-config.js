@@ -88,16 +88,6 @@ const plugins = [
   }
 ];
 
-if (process.env.BODILESS_BUILD_STATS === '1') {
-  plugins.push({
-    resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
-    options: {
-      analyzerMode: 'static',
-      generateStatsFile: true,
-    }
-  });
-}
-
 const robotsTxtPolicy = [
   {
     userAgent: '*',
@@ -116,5 +106,6 @@ module.exports = {
   flags: {
     DEV_SSR: false,
   },
+  pathPrefix: process.env.GATSBY_PATH_PREFIX || '',
   plugins,
 };
