@@ -16,7 +16,7 @@ import {
   withMeta, withTitle, withMetaStatic, asBodilessHelmet,
 } from '@bodiless/components';
 import { useMenuOptionUI } from '@bodiless/core';
-import { asElementToken } from '@bodiless/cx-elements';
+import { asElementToken } from '@bodiless/vital-elements';
 import {
   flowIf, HOC, Token, as
 } from '@bodiless/fclasses';
