@@ -2,7 +2,7 @@
   "name": "@bodiless/vital-list",
   "version": "1.0.0-beta.4",
   "description": "Editable Lists for Bodiless/VitalDS",
-  "author": "Chris Odem <coden@its.jnj.com>",
+  "author": "Chris Oden <coden@its.jnj.com>",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "sideEffects": false,
