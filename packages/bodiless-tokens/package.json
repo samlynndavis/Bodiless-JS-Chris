@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@bodiless/core": "^1.0.0-beta.4",
+    "@bodiless/core-ui": "^1.0.0-beta.4",
     "@bodiless/fclasses": "^1.0.0-beta.4",
     "@bodiless/layouts": "^1.0.0-beta.4",
     "@bodiless/layouts-ui": "^1.0.0-beta.4",

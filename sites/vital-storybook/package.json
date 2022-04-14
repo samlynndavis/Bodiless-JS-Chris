@@ -27,6 +27,13 @@
     "@bodiless/search": "^1.0.0-beta.4",
     "@bodiless/ui": "^1.0.0-beta.4",
     "@bodiless/webpack": "^1.0.0-beta.4",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/addon-postcss": "2.0.0",
+    "@storybook/builder-webpack5": "^6.3.12",
+    "@storybook/manager-webpack5": "^6.3.12",
+    "@storybook/react": "^6.3.12",
     "autoprefixer": "^10.4.2",
     "docsify-cli": "^4.3.0",
     "dotenv": "^8.2.0",
@@ -64,6 +71,7 @@
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
     "build:search": "npm run search-index",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
+    "build:storybook": "build-storybook",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "rimraf ./public/* ./.cache",
     "dev-backend": "bodiless-backend",
@@ -74,7 +82,8 @@
     "docs": "run-s build:doc docs:serve",
     "search-index": "create-search-index",
     "serve": "gatsby serve",
-    "start": "run-p -r dev-frontend dev-backend"
+    "start": "run-p -r dev-frontend dev-backend",
+    "storybook": "start-storybook -p 6006"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.4.0",

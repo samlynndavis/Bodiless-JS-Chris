@@ -30,16 +30,16 @@ const twConfig = {
     },
   },
   plugins: [
-    plugin(({ addBase }) => {
-      addBase({
-        '@font-face': {
-          fontFamily: 'linkicons',
-          fontWeight: 400,
-          fontStyle: 'normal',
-          src: 'url(\'@bodiless/cx-link/assets/font/linkicons.woff2\')',
-        },
-      });
-    }),
+    // plugin(({ addBase }) => {
+    //   addBase({
+    //     '@font-face': {
+    //       fontFamily: 'linkicons',
+    //       fontWeight: 400,
+    //       fontStyle: 'normal',
+    //       src: 'url(\'@bodiless/cx-link/assets/font/linkicons.woff2\')',
+    //     },
+    //   });
+    // }),
     plugin(({ addUtilities }) => {
       addUtilities(
         {

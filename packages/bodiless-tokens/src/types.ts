@@ -7,7 +7,7 @@ import {
 /**
  * Defines how token examples should be generated.
  */
-export type TokenDemoSpec<C extends DesignableComponents> {
+export type TokenDemoSpec<C extends DesignableComponents> = {
   tokens: TokenCollection<any, any>,
   /** The exported name that is passed to `tokens` */
   tokensExportName: string,
@@ -16,14 +16,18 @@ export type TokenDemoSpec<C extends DesignableComponents> {
   componentExportName: string,
   /** Slots used, keys are slot names */
   slots: Partial<
-    Record<
-      keyof C,
-      {
-        title: string;
-        description?: string;
-        /** to restrict which patterns can be used in this slot, supply an array of patternIds. If empty, NO patterns are allowed, if `null`, all patterns are allowed. */
-        allowedPatternIds?: string[];
-      }
-    >
+  Record<
+  keyof C,
+  {
+    title: string;
+    description?: string;
+    /**
+     * to restrict which patterns can be used in this slot, supply an array
+     * of patternIds. If empty, NO patterns are allowed, if `null`,
+     * all patterns are allowed.
+     */
+    allowedPatternIds?: string[];
+  }
+  >
   >;
-}
+};
