@@ -14,15 +14,22 @@
 
 import React from 'react';
 import {
-  flowHoc, replaceWith, on,
+  flowHoc, replaceWith, as
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { CardClean, vitalCard } from '@bodiless/vital-card';
+
+const BasicCard = as(vitalCard.Default)(CardClean);
+const CardVariations = (props: any) => (
+  <>
+    <BasicCard />
+  </>
+);
 
 export const Card = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Card'),
   Content: {
     Title: replaceWith(() => <>Card</>),
-    Examples: on(CardClean)(vitalCard.Default),
+    Examples: replaceWith(CardVariations),
   },
 });

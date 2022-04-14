@@ -16,14 +16,17 @@ import {
   addClasses, removeClasses, withDesign, remove, flowHoc,
   startWith, Div,
 } from '@bodiless/fclasses';
+import { vitalImage } from '@bodiless/vital-image';
 import { asCardToken } from '../Card';
 
 /**
  * Basic Card Design.
  */
 const Base = asCardToken({
+  Core: {
+    Image: vitalImage.Default,
+  },
   Schema: {
-    _: 'border border-red',
     ContentWrapper: flowHoc(startWith(Div)),
   },
   Layout: {
