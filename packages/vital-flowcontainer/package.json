@@ -6,9 +6,9 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "sideEffects": false,
-  "typings": "lib/index.d.ts"
+  "typings": "lib/index.d.ts",
   "files": [
-    "/lib",,
+    "/lib",
     "/bodiless.docs.json",
     "/getDocs.js",
     "/tailwind.config.js",
