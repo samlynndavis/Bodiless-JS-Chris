@@ -25,7 +25,7 @@ import {
   Fragment,
 } from '@bodiless/fclasses';
 import { withNode } from '@bodiless/core';
-import { asCxTokenSpec } from '@bodiless/cx-elements';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
 export type CardComponents = {
   CardWrapper: ComponentType<StylableProps>,
@@ -112,6 +112,6 @@ const CardClean = flow(
   withNode,
 )(CardBase);
 
-const asCardToken = asCxTokenSpec<CardComponents>();
+const asCardToken = asVitalTokenSpec<CardComponents>();
 
 export { CardClean, asCardToken };

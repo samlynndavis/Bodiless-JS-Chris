@@ -13,11 +13,8 @@
  */
 
 import {
-  addClasses,
-  removeClasses,
-  withDesign,
-  remove,
-  flowHoc,
+  addClasses, removeClasses, withDesign, remove, flowHoc,
+  startWith, Div,
 } from '@bodiless/fclasses';
 import { asCardToken } from '../Card';
 
@@ -27,9 +24,10 @@ import { asCardToken } from '../Card';
 const Base = asCardToken({
   Schema: {
     _: 'border border-red',
+    ContentWrapper: flowHoc(startWith(Div)),
   },
   Layout: {
-    ContentWrapper: 'border dewen',
+    ContentWrapper: 'border',
   },
   Spacing: {
     ContentWrapper: 'p-3',

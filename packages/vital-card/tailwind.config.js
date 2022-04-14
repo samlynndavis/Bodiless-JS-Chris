@@ -13,16 +13,24 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
+/**
+ * contains package level tailwind configuration
+ * the package does not perform tailwind compilation
+ * site is responsible for merging these settings into site level settings
+ */
 const resolver = (pkgName) => require.resolve(pkgName);
 
 const twConfig = {
-  // @todo: change purge to content
   content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 };
 
-export default getPackageTailwindConfig({
+module.exports = getPackageTailwindConfig({
   twConfig,
   resolver,
 });
