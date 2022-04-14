@@ -39,6 +39,7 @@
     "@bodiless/vital-editors": "^1.0.0-beta.5",
     "@bodiless/vital-elements": "^1.0.0-beta.5",
     "@bodiless/vital-image": "^1.0.0-beta.5",
+    "@bodiless/vital-list": "^1.0.0-beta.5",
     "@bodiless/fclasses": "^1.0.0-beta.5",
     "@bodiless/hydration": "^1.0.0-beta.5",
     "@bodiless/layouts": "^1.0.0-beta.5",

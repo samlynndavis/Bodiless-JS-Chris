@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { asFluidToken } from '@bodiless/cx-elements';
+import { asFluidToken } from '@bodiless/vital-elements';
 import { on, varyDesigns, flowHoc, } from '@bodiless/fclasses';
 import {
   asListToken, ListClean, ListStatic, vitalList, vitalListStatic

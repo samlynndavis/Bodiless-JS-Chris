@@ -15,8 +15,8 @@
 import {
   flowHoc, startWith, as, on
 } from '@bodiless/fclasses';
-import { LinkClean, cxLink } from '@bodiless/cx-link';
-import { withEditorPlain, withEditorRich } from '@bodiless/cx-editors';
+import { LinkClean, vitalLink } from '@bodiless/vital-link';
+import { withEditorPlain, withEditorRich } from '@bodiless/vital-editors';
 import { asListToken } from '../ListClean';
 import { TitleInfographicClean, vitalTitleInfographic } from '../../TitleInfographic';
 
@@ -43,7 +43,7 @@ const WithLinkedTitle = asListToken({
     Title: as(
       startWith(LinkClean),
       withEditorPlain('title', 'Link'),
-      cxLink.Sidecar,
+      vitalLink.Sidecar,
     ),
   },
 });

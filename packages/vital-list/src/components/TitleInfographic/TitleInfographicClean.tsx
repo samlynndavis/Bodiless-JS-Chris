@@ -21,8 +21,8 @@ import {
   Fragment,
   DesignableComponentsProps,
 } from '@bodiless/fclasses';
-import { asCxTokenSpec } from '@bodiless/cx-elements';
-import { RichTextClean } from '@bodiless/cx-editors';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { RichTextClean } from '@bodiless/vital-editors';
 import { withoutHydration } from '@bodiless/hydration';
 
 export type TitleInfographicComponents = {
@@ -60,6 +60,6 @@ const TitleInfographicBase = (props: Props) => {
 
 const TitleInfographicClean = designable(titleInfographicComponents, 'Title Infographic')(TitleInfographicBase);
 
-export const asTitleInfographicToken = asCxTokenSpec<TitleInfographicComponents>();
+export const asTitleInfographicToken = asVitalTokenSpec<TitleInfographicComponents>();
 
 export default withoutHydration()(TitleInfographicClean);

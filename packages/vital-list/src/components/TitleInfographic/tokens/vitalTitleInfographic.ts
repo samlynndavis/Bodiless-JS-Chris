@@ -12,16 +12,16 @@
  * limitations under the License.
  */
 
-import { cxRichText } from '@bodiless/cx-editors';
-import { cxImage } from '@bodiless/cx-image';
+import { vitalRichText } from '@bodiless/vital-editors';
+import { vitalImage } from '@bodiless/vital-image';
 import { addProps } from '@bodiless/fclasses';
-import { withNodeKey } from '../../../../../bodiless-components/node_modules/@bodiless/core/lib';
+import { withNodeKey } from '@bodiless/core';
 import { asTitleInfographicToken } from '../TitleInfographicClean';
 
 const Default = asTitleInfographicToken({
   Editors: {
-    Title: cxRichText.Default,
-    Image: cxImage.Default,
+    Title: vitalRichText.Default,
+    Image: vitalImage.Default,
   },
   Schema: {
     Title: withNodeKey('title'),
