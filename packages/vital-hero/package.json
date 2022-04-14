@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-hero",
   "sideEffects": false,
-  "version": "1.0.0-beta.5",
+  "version": "1.0.0-beta.7",
   "description": "Clean, designable Hero component for Vital based projects",
   "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "license": "UNLICENSED",
@@ -31,11 +31,11 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/components": "^1.0.0-beta.5",
-    "@bodiless/components-ui": "^1.0.0-beta.5",
-    "@bodiless/vital-elements": "^1.0.0-beta.5",
-    "@bodiless/fclasses": "^1.0.0-beta.5",
-    "@bodiless/hydration": "^1.0.0-beta.5",
-    "@bodiless/vital-youtube": "^1.0.0-beta.5"
+    "@bodiless/components": "^1.0.0-beta.7",
+    "@bodiless/components-ui": "^1.0.0-beta.7",
+    "@bodiless/vital-elements": "^1.0.0-beta.7",
+    "@bodiless/fclasses": "^1.0.0-beta.7",
+    "@bodiless/hydration": "^1.0.0-beta.7",
+    "@bodiless/vital-youtube": "^1.0.0-beta.7"
   }
 }
