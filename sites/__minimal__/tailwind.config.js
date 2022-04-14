@@ -18,7 +18,7 @@ const { buildTailwindConfig } = requireEsm(
 );
 
 const twConfig = {
-  purge: [
+  content: [
     './src/**/!(*.d).{ts,js,jsx,tsx}',
   ],
 };
