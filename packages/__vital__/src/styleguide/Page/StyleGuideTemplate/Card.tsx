@@ -12,39 +12,17 @@
  * limitations under the License.
  */
 
-import { asFluidToken } from '@bodiless/vital-elements';
+import React from 'react';
 import {
-  vitalPage,
-} from '@bodiless/vital-templates';
-import { __vital__StyleGuideTemplate } from './StyleGuideTemplate';
+  flowHoc, replaceWith, on,
+} from '@bodiless/fclasses';
+import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
+import { CardClean, vitalCard } from '@bodiless/vital-card';
 
-const {
-  Editors,
-  EditorsMonoFont,
-  Typography,
-  Layout,
-  Header,
-  FlowContainer,
-  Images,
-  Footer,
-  Card,
-  _default
-} = __vital__StyleGuideTemplate;
-
-const Default = asFluidToken({
-  ...vitalPage.Default,
-  Components: {
-    _default,
-    Editors,
-    EditorsMonoFont,
-    Typography,
-    Layout,
-    Header,
-    FlowContainer,
-    Images,
-    Footer,
-    Card,
+export const Card = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+  Meta: flowHoc.meta.term('Token')('Card'),
+  Content: {
+    Title: replaceWith(() => <>Card</>),
+    Examples: on(CardClean)(vitalCard.Default),
   },
 });
-
-export const __vital__StyleGuidePage = { Default };

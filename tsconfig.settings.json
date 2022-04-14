@@ -86,6 +86,8 @@
       "@bodiless/vital-navigation/*": ["vital-navigation/src/*"],
       "@bodiless/vital-templates": ["vital-templates/src/"],
       "@bodiless/vital-templates/*": ["vital-templates/src/*"],      
+      "@bodiless/vital-card": ["vital-card/src/"],
+      "@bodiless/vital-card/*": ["vital-card/src/*"],
       "@bodiless/youtube": ["bodiless-youtube/src"],
       "@bodiless/youtube/*": ["bodiless-youtube/src/*"],
       "@bodiless/webpack": ["bodiless-webpack/src"],

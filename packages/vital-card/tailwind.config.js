@@ -11,26 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-import { Editors, EditorsMonoFont } from './Editors';
-import { Typography } from './Typography';
-import { Layout } from './Layout';
-import { Header } from './Header';
-import { FlowContainer } from './FlowContainer';
-import { Images } from './Images';
-import { Footer } from './Footer';
-import { Card } from './Card';
-import { _default } from './_default';
+const resolver = (pkgName) => require.resolve(pkgName);
 
-export const __vital__StyleGuideTemplate = {
-  _default,
-  Editors,
-  EditorsMonoFont,
-  Typography,
-  Layout,
-  Header,
-  Images,
-  FlowContainer,
-  Footer,
-  Card,
+const twConfig = {
+  // @todo: change purge to content
+  content: [
+    './lib/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
 };
+
+export default getPackageTailwindConfig({
+  twConfig,
+  resolver,
+});

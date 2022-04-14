@@ -37,6 +37,7 @@
     "@bodiless/components-ui": "^1.0.0-beta.5",
     "@bodiless/core": "^1.0.0-beta.5",
     "@bodiless/vital-editors": "^1.0.0-beta.5",
+    "@bodiless/vital-card": "^1.0.0-beta.5",
     "@bodiless/vital-elements": "^1.0.0-beta.5",
     "@bodiless/vital-flowcontainer": "^1.0.0-beta.5",
     "@bodiless/vital-image": "^1.0.0-beta.5",
