@@ -12,4 +12,5 @@
  * limitations under the License.
  */
 
-export { staticTokenCollection as vitalImage } from '@bodiless/hydration';
+export * from './index.bl-edit';
+export { default as vitalImageBase } from './tokens/vitalImage';

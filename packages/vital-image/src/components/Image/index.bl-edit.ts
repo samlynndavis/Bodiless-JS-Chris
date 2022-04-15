@@ -12,5 +12,4 @@
  * limitations under the License.
  */
 
-// @todo Rename to index.bl-edit.ts when the static image is fixed.
 export { default as vitalImage } from './tokens';

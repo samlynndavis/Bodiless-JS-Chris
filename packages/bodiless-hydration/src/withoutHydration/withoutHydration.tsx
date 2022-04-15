@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 
-import { useNode } from '@bodiless/core';
 import { ComponentOrTag } from '@bodiless/fclasses';
 import React, {
   useState, useRef, useLayoutEffect, FC
 } from 'react';
+import { createHash } from 'crypto';
 import {
   WithoutHydrationFunction,
   WithoutHydrationProps
@@ -33,22 +33,52 @@ export const isStaticClientSide = !!(
 
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
 
-const useWrapperId = (props: any) => {
-  const { path } = useNode().node;
-  const { nodeKey = '' } = props;
-  return `${path.join('-')}-${nodeKey}`;
+const fullSelector = (element: HTMLElement | null) => {
+  let path;
+  while (element) {
+    let subSelector = element.localName;
+    if (!subSelector) {
+      break;
+    }
+    subSelector = subSelector.toLowerCase();
+
+    const parent = element.parentElement;
+
+    if (parent) {
+      const sameTagSiblings = parent.children;
+      if (sameTagSiblings.length > 1) {
+        let nameCount = 0;
+        const index = Array.from(sameTagSiblings).findIndex((child) => {
+          if (element?.localName === child.localName) {
+            nameCount += 1;
+          }
+          return child === element;
+        }) + 1;
+        if (index > 1 && nameCount > 1) {
+          subSelector += `:nth-child(${index})`;
+        }
+      }
+    }
+
+    path = subSelector + (path ? `> ${path}` : '');
+    // eslint-disable-next-line no-param-reassign
+    element = parent;
+  }
+  return path;
+};
+
+const useWrapperId = (element: HTMLElement | null) => {
+  const selector = fullSelector(element);
+  return createHash('md5').update(selector || '').digest('hex');
 };
 
 const withoutHydrationServerSide: WithoutHydrationFunction = (
   { WrapperElement = DEFAULT_WRAPPER } = {}
-) => WrappedComponent => props => {
-  const id = useWrapperId(props);
-  return (
-    <WrapperElement data-no-hydrate id={id} style={{ display: 'contents' }}>
-      <WrappedComponent {...props} />
-    </WrapperElement>
-  );
-};
+) => WrappedComponent => props => (
+  <WrapperElement data-no-hydrate style={{ display: 'contents' }}>
+    <WrappedComponent {...props} />
+  </WrapperElement>
+);
 
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
   onUpdate = null,
@@ -58,10 +88,10 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
     const { forceHydration = false } = props;
     const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
     const [shouldHydrate, setShouldHydrate] = useState<boolean | undefined>(undefined);
-
-    const id = useWrapperId(props);
+    const id = useWrapperId(rootRef.current);
     const tempId = `temp-${id}`;
-    const markup = document.getElementById(tempId)?.innerHTML || '';
+    const markup = rootRef.current?.innerHTML || document.getElementById(tempId)?.innerHTML || '';
+    document.getElementById(tempId)?.remove();
 
     useLayoutEffect(() => {
       if (shouldHydrate) return;
@@ -81,11 +111,12 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
     // component's dom manipulation), it renders the empty inner html.  Here, we grab
     // the server-rendered html and stash it in a hidden div so we can restore it if/when the
     // component re-mounts.
-    useLayoutEffect(() => {
+    useLayoutEffect(() => () => {
+      const tempId = `temp-${useWrapperId(rootRef.current)}`;
       const tempDiv = document.getElementById(tempId) || document.createElement('div');
       tempDiv.id = tempId;
       tempDiv.style.display = 'none';
-      tempDiv.innerHTML = document.getElementById(id)?.innerHTML || '';
+      tempDiv.innerHTML = rootRef.current?.innerHTML || '';
       document.body.append(tempDiv);
     }, []);
 
@@ -102,7 +133,6 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
         />
       );
     }
-
     return (
       <WrappedComponent {...props} />
     );

@@ -17,7 +17,7 @@ import { withNodeKey } from '@bodiless/core';
 import {
   Img, on, varyDesigns, withDesign, as, flowHoc
 } from '@bodiless/fclasses';
-import { vitalImage } from '../Img';
+import { vitalImage } from '../Image';
 
 const ImageWithNodeKey = asElementToken({
   ...vitalImage.Default,
