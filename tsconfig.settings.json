@@ -23,7 +23,7 @@
     "useDefineForClassFields": true,
     "baseUrl": "packages",
     "paths": {
-      "--vital--/": ["__vital__/src/"],
+      "--vital--": ["__vital__/src/"],
       "--vital--/*": ["__vital__/src/*"],
       "@bodiless/accordion": ["bodiless-accordion/src"],
       "@bodiless/accordion/*": ["bodiless-accordion/src/*"],
