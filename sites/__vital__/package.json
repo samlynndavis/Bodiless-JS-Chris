@@ -59,7 +59,7 @@
   },
   "scripts": {
     "build": "npm-run-all build:env-vars build:lib build:doc build:search",
-    "build:doc": "bl-docs-build",
+    "build:docs": "bl-docs-build",
     "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
     "build:search": "npm run search-index",
@@ -70,10 +70,10 @@
     "dev-frontend": "gatsby develop -p 8005",
     "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "prestart": "run-s build:env-vars build:doc",
-    "docs:serve": "docsify serve ./doc",
-    "docs": "run-s build:doc docs:serve",
+    "docs": "run-s build:docs serve:docs",
     "search-index": "create-search-index",
     "serve": "gatsby serve",
+    "serve:docs": "docsify serve ./doc",
     "start": "run-p -r dev-frontend dev-backend"
   },
   "devDependencies": {
