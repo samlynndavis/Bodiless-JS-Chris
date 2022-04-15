@@ -47,7 +47,7 @@ const mergeConfigs = (
   return {
     // content setting
     content: [
-      './src/**/!(*.d).{ts,js,jsx,tsx}',
+      // './src/**/!(*.d).{ts,js,jsx,tsx}',
       ...flatten(merge(packageConfigs).map((config: TailwindConfig) => config.content)),
     ],
     // theme setting
