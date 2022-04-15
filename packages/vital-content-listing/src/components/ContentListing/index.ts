@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-export * from './components/ContentListing';
-export * from './components/ContentListingFilters';
-export * from './components/ContentListingFlowContainer';
+export { default as ContentListingClean, asContentListingToken } from './ContentListingClean';
+export { default as vitalContentListing } from './tokens';
+export type { ContentListingComponents, ContentListingProps } from './types';

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-export * from './components/ContentListing';
-export * from './components/ContentListingFilters';
-export * from './components/ContentListingFlowContainer';
+import vitalContentListingFlowContainer from './vitalContentListingFlowContainer';
+
+export default vitalContentListingFlowContainer;
