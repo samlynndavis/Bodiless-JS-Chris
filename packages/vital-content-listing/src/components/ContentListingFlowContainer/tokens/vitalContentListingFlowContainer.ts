@@ -25,7 +25,7 @@ const Default = asFluidToken({
     ComponentWrapper: asFilterableByGroup(),
   },
   Components: {
-    // @TODO: Replace with cards on vital-cards has been implemented.
+    // @TODO: Replace with cards once vital-cards has been implemented.
     FilterableProductCardVariations: on(Img)(vitalImage.Default),
   },
   Layout: {
