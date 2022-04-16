@@ -23,13 +23,15 @@ import {
   StylableProps,
   DesignableProps,
   Fragment,
+  as,
 } from '@bodiless/fclasses';
 import { withNode } from '@bodiless/core';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { EditorPlainClean } from '@bodiless/vital-editors';
+import { LinkClean } from '@bodiless/vital-link';
 
 export type CardComponents = {
-  CardWrapper: ComponentType<StylableProps>,
-  ImageWrapper: ComponentType<StylableProps>,
+  Wrapper: ComponentType<StylableProps>,
   ImageLink: ComponentType<StylableProps>,
   Image: ComponentType<StylableProps>,
   EyebrowWrapper: ComponentType<StylableProps>,
@@ -42,24 +44,25 @@ export type CardComponents = {
   RatingWrapper: ComponentType<StylableProps>,
   Rating: ComponentType<StylableProps>,
   CTAWrapper: ComponentType<StylableProps>,
-  CTA: ComponentType<StylableProps>,
+  CTALink: ComponentType<StylableProps>,
+  CTAText: ComponentType<StylableProps>,
 };
 const cardComponentStart: CardComponents = {
-  CardWrapper: Div,
-  ImageWrapper: Fragment,
+  Wrapper: A,
   ImageLink: Fragment,
   Image: Img,
   EyebrowWrapper: Fragment,
   Eyebrow: Fragment,
-  ContentWrapper: Fragment,
+  ContentWrapper: Div,
   TitleWrapper: Fragment,
-  Title: Fragment,
-  Description: Fragment,
-  DescriptionWrapper: Fragment,
+  Title: as()(EditorPlainClean),
+  DescriptionWrapper: Div,
+  Description: as()(EditorPlainClean),
   Rating: Fragment,
   RatingWrapper: Fragment,
-  CTA: A,
-  CTAWrapper: A,
+  CTAText: as()(EditorPlainClean),
+  CTALink: as()(LinkClean),
+  CTAWrapper: Fragment,
 };
 
 export type CardProps = DesignableProps<CardComponents> & HTMLProps<HTMLElement>;
@@ -67,8 +70,7 @@ type CardBaseProps = DesignableComponentsProps<CardComponents> & HTMLProps<HTMLE
 
 const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
   const {
-    CardWrapper,
-    ImageWrapper,
+    Wrapper,
     Image,
     ImageLink,
     ContentWrapper,
@@ -79,16 +81,15 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
     RatingWrapper,
     Rating,
     CTAWrapper,
-    CTA,
+    CTALink,
+    CTAText,
   } = components;
 
   return (
-    <CardWrapper {...rest}>
-      <ImageWrapper>
-        <ImageLink>
-          <Image />
-        </ImageLink>
-      </ImageWrapper>
+    <Wrapper {...rest}>
+      <ImageLink>
+        <Image />
+      </ImageLink>
       <ContentWrapper>
         <TitleWrapper>
           <Title />
@@ -100,10 +101,12 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
           <Rating />
         </RatingWrapper>
         <CTAWrapper>
-          <CTA />
+          <CTALink>
+            <CTAText />
+          </CTALink>
         </CTAWrapper>
       </ContentWrapper>
-    </CardWrapper>
+    </Wrapper>
   );
 };
 
@@ -114,4 +117,5 @@ const CardClean = flow(
 
 const asCardToken = asVitalTokenSpec<CardComponents>();
 
+export default CardClean;
 export { CardClean, asCardToken };
