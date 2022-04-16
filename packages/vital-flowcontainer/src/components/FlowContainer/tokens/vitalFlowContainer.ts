@@ -23,6 +23,9 @@ import { asFluidToken, vitalSpacing } from '@bodiless/vital-elements';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
 import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
 
+const fluidToken = asFluidToken();
+type FluidToken = typeof fluidToken;
+
 import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
 
 const blacklistCategories = ['Group'];
@@ -155,7 +158,30 @@ const Hero = asFluidToken(
   WithBaseVariations,
 );
 
-export default {
+/**
+ * Tokens for the vital flow container
+ * @category Token Collections
+ */
+export type VitalFlowContainer = {
+  /**
+   * The base flow container token. This contains no components or spacings,
+   * but applies default constraints
+   */
+  Base: FluidToken,
+  Default: FluidToken,
+  Hero: FluidToken,
+  ContentRegion: FluidToken,
+  WithContentRegionVariations: FluidToken,
+  AsFlowContainerItem: FluidToken,
+  WithFullWidthConstraint: FluidToken,
+  WithTabletOneThirdConstraint: FluidToken,
+  WithSingleConstraint: FluidToken,
+};
+
+/**
+ * @category Token Collections
+ */
+const vitalFlowContainer: VitalFlowContainer = {
   Base,
   Default,
   Hero,
@@ -166,3 +192,5 @@ export default {
   WithTabletOneThirdConstraint,
   WithSingleConstraint,
 };
+
+export default vitalFlowContainer;
