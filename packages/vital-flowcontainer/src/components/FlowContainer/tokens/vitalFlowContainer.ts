@@ -162,7 +162,7 @@ const Hero = asFluidToken(
  * Tokens for the vital flow container
  * @category Token Collections
  */
-export type VitalFlowContainer = {
+export interface VitalFlowContainer {
   /**
    * The base flow container token. This contains no components or spacings,
    * but applies default constraints
