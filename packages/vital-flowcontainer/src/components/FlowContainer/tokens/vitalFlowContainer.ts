@@ -29,22 +29,6 @@ const blacklistCategories = ['Group'];
 const mandatoryCateogries = ['Type'];
 
 /**
- * Token which creates the VitalDS Default Base for a Flow Container
- */
-const Base = asFluidToken({
-  Core: {
-    _: as(
-      withAllTitlesFromTerms({ blacklistCategories }),
-      withMandatoryCategories(mandatoryCateogries),
-      addProps({ blacklistCategories }),
-    ),
-    // @todo restore tools and component id badge
-    // ComponentWrapper: flowIf(() => useInfoContext().enabled)(withComponentId),
-  },
-});
-
-/**
- * @private
  * SnapData function to use for a full width constrained flow container.
  */
 const snapData = () => ({
@@ -58,111 +42,125 @@ const snapData = () => ({
 });
 
 /**
- * Token which constrains a flow container to full width.
+ * Defines tokens for the vital flow container.
  */
-const WithFullWidthConstraint = asFluidToken({
-  Core: {
-    _: addProps({ snapData }),
-  },
-});
+class VitalFlowContainer {
+  /**
+   * Token which creates the VitalDS Default Base for a Flow Container
+   */
+  Base = asFluidToken({
+    Core: {
+      _: as(
+        withAllTitlesFromTerms({ blacklistCategories }),
+        withMandatoryCategories(mandatoryCateogries),
+        addProps({ blacklistCategories }),
+      ),
+    // @todo restore tools and component id badge
+    // ComponentWrapper: flowIf(() => useInfoContext().enabled)(withComponentId),
+    },
+  });
 
-/**
- * Token which constrains to a single component.
- */
-const WithSingleConstraint = asFluidToken({
-  Core: {
-    _: addProps({ maxComponents: 1, minComponents: 1 }),
-  },
-});
+  /**
+   * Token which constrains a flow container to full width.
+   */
+  WithFullWidthConstraint = asFluidToken({
+    Core: {
+      _: addProps({ snapData }),
+    },
+  });
 
-/**
+  /**
+   * Token which constrains to a single component.
+   */
+  WithSingleConstraint = asFluidToken({
+    Core: {
+      _: addProps({ maxComponents: 1, minComponents: 1 }),
+    },
+  });
+
+  /**
    * Token which constrains a flow container so that items are 1/3 width on tablet.
    */
-const WithTabletOneThirdConstraint = asFluidToken({
-  Core: {
-    Wrapper: 'w-full',
-    ComponentWrapper: 'w-full md:w-1/3',
-  },
-});
+  WithTabletOneThirdConstraint = asFluidToken({
+    Core: {
+      Wrapper: 'w-full',
+      ComponentWrapper: 'w-full md:w-1/3',
+    },
+  });
 
-/**
+  /**
    * Token which defines a "ContentRegion" (a default nested flow container).
    * another flow contaienr.
    */
-const AsFlowContainerItem = asFluidToken({
-  Meta: flowHoc.meta.term('Type')('Content Region'),
-  Core: {
-    _: as(
-      addProps({ itemButtonGroupLabel: 'Content Block', buttonGroupLabel: 'Content Block' }),
-      ifComponentSelector(
-        replaceWith(FlowContainerPreview),
+  AsFlowContainerItem = asFluidToken({
+    Meta: flowHoc.meta.term('Type')('Content Region'),
+    Core: {
+      _: as(
+        addProps({ itemButtonGroupLabel: 'Content Block', buttonGroupLabel: 'Content Block' }),
+        ifComponentSelector(
+          replaceWith(FlowContainerPreview),
+        ),
       ),
-    ),
-  },
-});
+    },
+  });
 
-const WithBaseVariations = asFluidToken(
-  vitalImageFlowContainer.WithImageVariations,
-  vitalEditorsFlowContainer.WithEditorVariations,
-);
+  protected WithBaseVariations = asFluidToken(
+    vitalImageFlowContainer.WithImageVariations,
+    vitalEditorsFlowContainer.WithEditorVariations,
+  );
 
-/**
+  /**
  * A content region is a flow container designed to be nested
  * inside another flow container.
  */
-const ContentRegion = asFluidToken(
-  omit(Base, 'Spacing'),
-  WithBaseVariations,
-  {
-    Compose: {
-      AsFlowContainerItem,
+  ContentRegion = asFluidToken(
+    omit(this.Base, 'Spacing'),
+    this.WithBaseVariations,
+    {
+      Compose: {
+        AsFlowContainerItem: this.AsFlowContainerItem,
+      },
+      Spacing: {
+        Wrapper: vitalSpacing.GutterOffset,
+        ComponentWrapper: vitalSpacing.Gutter,
+      },
     },
-    Spacing: {
-      Wrapper: vitalSpacing.GutterOffset,
-      ComponentWrapper: vitalSpacing.Gutter,
+  );
+
+  /**
+   * Adds a content region to a flow container.
+   */
+  WithContentRegionVariations = asFluidToken({
+    Components: {
+      ContentRegion: on(FlowContainerClean)(this.ContentRegion),
     },
-  },
-);
+  });
 
-/**
- * Adds a content region to a flow container.
- */
-const WithContentRegionVariations = asFluidToken({
-  Components: {
-    ContentRegion: on(FlowContainerClean)(ContentRegion),
-  },
-});
-
-const Default = asFluidToken(
-  {
-    ...Base,
-    Spacing: {
-      Wrapper: vitalSpacing.GutterOffset,
-      ComponentWrapper: vitalSpacing.Gutter,
+  /**
+   * Default Vital flow container. Incluces all components from `WithBaseVariations`
+   * as well as the "Content Region" (a nested flow container).
+   */
+  Default = asFluidToken(
+    {
+      ...this.Base,
+      Spacing: {
+        Wrapper: vitalSpacing.GutterOffset,
+        ComponentWrapper: vitalSpacing.Gutter,
+      },
     },
-  },
-  WithBaseVariations,
-  WithContentRegionVariations,
-);
+    this.WithBaseVariations,
+    this.WithContentRegionVariations,
+  );
 
-const Hero = asFluidToken(
-  {
-    ...Base,
-    Compose: {
-      WithFullWidthConstraint,
+  Hero = asFluidToken(
+    {
+      ...this.Base,
+      Compose: {
+        WithFullWidthConstraint: this.WithFullWidthConstraint,
+      },
     },
-  },
-  WithBaseVariations,
-);
+    this.WithBaseVariations,
+  );
+}
 
-export default {
-  Base,
-  Default,
-  Hero,
-  ContentRegion,
-  WithContentRegionVariations,
-  AsFlowContainerItem,
-  WithFullWidthConstraint,
-  WithTabletOneThirdConstraint,
-  WithSingleConstraint,
-};
+export default VitalFlowContainer;

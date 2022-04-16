@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalFlowContainer from './vitalFlowContainer';
+import VitalFlowContainer from './vitalFlowContainer';
 
-export default vitalFlowContainer;
+export default new VitalFlowContainer();

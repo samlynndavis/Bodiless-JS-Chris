@@ -16,15 +16,18 @@ import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
-  ...vitalFlowContainerBase.Default,
-  Spacing: {
-    ...vitalFlowContainerBase.Default.Spacing,
-    _: addProps({ 'data-shadowed-by': '__vital__FlowContainer' }),
+class __vital__FlowContainer extends vitalFlowContainerBase {
+  constructor() {
+    super();
+    this.Default = asFluidToken(
+      this.Default,
+      {
+        Content: {
+          Wrapper: addProps({ 'data-shadowed-by': '__vital__FlowContainer' }),
+        }
+      },
+    );
   }
-});
+}
 
-export default {
-  ...vitalFlowContainerBase,
-  Default,
-};
+export default new __vital__FlowContainer();

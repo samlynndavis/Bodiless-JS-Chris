@@ -15,8 +15,29 @@
 import React from 'react';
 // @todo add after static-replacement merges.
 // import { withoutHydration } from '@bodiess/hydration';
-import { FlowContainer as FlowContainerClean } from '@bodiless/layouts-ui';
+import { FlowContainer } from '@bodiless/layouts-ui';
 
+/**
+ * This is the base component for flow containers.
+ *
+ * @category Components
+ *
+ * @example
+ * Create a default flow container:
+ * ```
+ * const DefaultFlowContainer = on(FlowContainerClean)(vitalFlowContainer.Default)
+ * ```
+ * @example
+ * Create a custom flow container using a token defined in your pacakge
+ * ```
+ * const CustomFlowContainer = on(FlowContainerClean)(myBrandFlowContainer.Custom)
+ * ```
+ */
+const FlowContainerClean = FlowContainer;
+
+/**
+ * Used to provide a preview of the flow container inside the component selector.
+ */
 const FlowContainerPreview = () => (
   <div className="bl-bg-black">Content Region</div>
 );
