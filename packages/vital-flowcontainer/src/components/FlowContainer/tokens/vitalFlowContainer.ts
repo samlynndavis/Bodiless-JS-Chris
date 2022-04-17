@@ -163,11 +163,27 @@ const Hero = asFluidToken(
  * @category Token Collections
  */
 export interface VitalFlowContainer {
-  /**
-   * The base flow container token. This contains no components or spacings,
-   * but applies default constraints
-   */
   Base: FluidToken,
+    /**
+   * Defines the default flow container for the Vital DS.
+   * - Core domain defines constraints on categories.
+   * - Spacing domain defines gutters
+   * - Components domain adds the following basic Vital components:
+   *   - Images, Editors, Lists, Content Region (nested flow container).
+   *
+   * #### Customizing:
+   *
+   * @example Add a component
+   * ```js
+   * import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
+   *
+   * const Default = asFluidToken(vitalFlowContainerBase.Default, {
+   *   Components: {
+   *     MyComponent: on(MyComponentClean)(myComponent.Default),
+   *   }
+   * });
+   * ```
+   */
   Default: FluidToken,
   Hero: FluidToken,
   ContentRegion: FluidToken,
