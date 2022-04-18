@@ -57,7 +57,7 @@ const WithRichTitle = asListToken({
 
 const WithIndent = asListToken({
   Spacing: {
-    Wrapper: 'ltr:pl-10 rtl:pr-10',
+    Wrapper: 'pl-10 ltr:pl-10 rtl:pr-10',
   },
 });
 
@@ -67,7 +67,7 @@ const WithBullets = asListToken({
     Wrapper: 'list-disc',
   },
   Spacing: {
-    Wrapper: 'ltr:pl-5 rtl:pr-5',
+    Wrapper: 'pl-5 ltr:pl-5 rtl:pr-5',
   },
 });
 
@@ -77,7 +77,7 @@ const WithNumbers = asListToken({
     Wrapper: 'list-decimal',
   },
   Spacing: {
-    Wrapper: 'ltr:pl-5 rtl:pr-5',
+    Wrapper: 'pl-5 ltr:pl-5 rtl:pr-5',
   },
 });
 

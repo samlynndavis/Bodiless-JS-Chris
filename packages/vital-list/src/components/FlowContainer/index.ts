@@ -25,6 +25,7 @@ const BaseVariation = {
 const TitleVariations = {
   Linked: vitalList.WithLinkedTitle,
   RichText: vitalList.WithRichTitle,
+  PlainText: vitalList.WithPlainTitle,
 };
 
 const DecorationVariations = {
