@@ -40,7 +40,7 @@ const ListwithBullets = as(
 )(ListClean);
 
 const ListwithRichText = as(
-  vitalList.Default,
+  vitalList.Base,
   vitalList.WithRichTitle,
   withNodeKey('ListwithRichText'),
 )(ListClean);
@@ -52,13 +52,13 @@ const ListwithPlainTitle = as(
 )(ListClean);
 
 const ListwithInfographicTitle = as(
-  vitalList.Default,
+  vitalList.Base,
   vitalList.WithInfographicTitle,
   withNodeKey('ListwithInfographicTitle'),
 )(ListClean);
 
 const ListwithLinkedTitle = as(
-  vitalList.Default,
+  vitalList.Base,
   vitalList.WithLinkedTitle,
   withNodeKey('ListwithLinkedTitle'),
 )(ListClean);

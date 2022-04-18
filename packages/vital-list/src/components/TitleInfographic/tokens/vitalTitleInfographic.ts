@@ -32,7 +32,8 @@ const Default = asTitleInfographicToken({
   },
   Layout: {
     Wrapper: 'flex flex-row',
-    Image: 'max-w-24 pr-4 rtl:pl-4 rtl:pr-0 box-content',
+    TitleWrapper: 'flex flex-col justify-center',
+    ImageWrapper: 'max-w-24 pr-4 rtl:pl-4 rtl:pr-0 box-content',
   },
 });
 

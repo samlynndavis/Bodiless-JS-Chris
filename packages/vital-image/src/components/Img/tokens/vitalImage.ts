@@ -62,7 +62,7 @@ const Base = asElementToken({
       asGatsbyImage,
       stylable,
       withGatsbyImageLogger(),
-      withoutHydration(),
+      // withoutHydration(),
     ),
   },
   Meta: flowHoc.meta.term('Type')('Image'),

@@ -35,9 +35,9 @@ export type TitleInfographicComponents = {
 
 const titleInfographicComponents:TitleInfographicComponents = {
   Wrapper: Div,
-  ImageWrapper: Fragment,
+  ImageWrapper: Div,
   Image: Img,
-  TitleWrapper: Fragment,
+  TitleWrapper: Div,
   Title: RichTextClean,
 };
 
@@ -62,4 +62,5 @@ const TitleInfographicClean = designable(titleInfographicComponents, 'Title Info
 
 export const asTitleInfographicToken = asVitalTokenSpec<TitleInfographicComponents>();
 
-export default withoutHydration()(TitleInfographicClean);
+// export default withoutHydration()(TitleInfographicClean);
+export default TitleInfographicClean;
