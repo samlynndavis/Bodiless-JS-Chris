@@ -26,6 +26,7 @@ const DefaultCard = as(vitalCard.Default)(CardClean);
 const VerticalCard = as(asCardToken({
   ...vitalCard.Default,
   Schema: {
+    ...vitalCard.Default.Schema,
     Wrapper: withNodeKey('vertical-card'),
   },
   Spacing: {
@@ -38,6 +39,7 @@ const VerticalCard = as(asCardToken({
 const HorizontalCard = as(asCardToken({
   ...vitalCard.Default,
   Schema: {
+    ...vitalCard.Default.Schema,
     Wrapper: withNodeKey('horizontal-card'),
   },
   Spacing: {
@@ -48,7 +50,7 @@ const HorizontalCard = as(asCardToken({
   },
 }))(CardClean);
 
-const HeroCard = as(vitalCard.WithHeroCard)(CardClean);
+const HeroCard = as(vitalCard.Hero)(CardClean);
 
 const CardVariations = (props: any) => (
   <>

@@ -126,12 +126,13 @@ const WithNoDescriptionCard = asCardToken({
   Layout: {
     Title: 'flex-grow',
   },
+  Meta: flowHoc.meta.term('Type')('Card'),
 });
 
 /**
  * Hero Card Design.
  */
-const WithHeroCard = asCardToken({
+const Hero = asCardToken({
   ...Base,
   Editors: {
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
@@ -168,7 +169,8 @@ const WithHeroCard = asCardToken({
   Theme: {
     TitleWrapper: vitalTypography.H2,
     CTAWrapper: vitalColor.BgPrimaryPage,
-  }
+  },
+  Meta: flowHoc.meta.term('Type')('Card'),
 });
 
 const Default = asCardToken({
@@ -178,7 +180,7 @@ const Default = asCardToken({
 export default {
   Base,
   Default,
-  WithHeroCard,
+  Hero,
   WithNoDescriptionCard,
   WithNoTitleCard,
   WithHorizontalOrientationCard,
