@@ -20,6 +20,7 @@ import {
   Div,
   A,
   Img,
+  H2,
   StylableProps,
   DesignableProps,
   Fragment,
@@ -47,22 +48,26 @@ export type CardComponents = {
   CTALink: ComponentType<StylableProps>,
   CTAText: ComponentType<StylableProps>,
 };
+
 const cardComponentStart: CardComponents = {
   Wrapper: A,
-  ImageLink: Fragment,
+  ImageLink: A,
   Image: Img,
   EyebrowWrapper: Fragment,
-  Eyebrow: Fragment,
+  // @todo: use EditorPlainClean without as throws ts type error.
+  Eyebrow: as()(EditorPlainClean),
   ContentWrapper: Div,
-  TitleWrapper: Fragment,
-  Title: as()(EditorPlainClean),
-  DescriptionWrapper: Div,
-  Description: as()(EditorPlainClean),
+  TitleWrapper: H2,
+  Title: Fragment,
+  DescriptionWrapper: Fragment,
+  Description: Div,
   Rating: Fragment,
   RatingWrapper: Fragment,
+  // @todo: EditorPlainClean or RichTextClean?
   CTAText: as()(EditorPlainClean),
+  // @todo: use LinkClean without as throws ts type error.
   CTALink: as()(LinkClean),
-  CTAWrapper: Fragment,
+  CTAWrapper: Div,
 };
 
 export type CardProps = DesignableProps<CardComponents> & HTMLProps<HTMLElement>;
@@ -74,6 +79,8 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
     Image,
     ImageLink,
     ContentWrapper,
+    EyebrowWrapper,
+    Eyebrow,
     TitleWrapper,
     Title,
     DescriptionWrapper,
@@ -91,6 +98,9 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
         <Image />
       </ImageLink>
       <ContentWrapper>
+        <EyebrowWrapper>
+          <Eyebrow />
+        </EyebrowWrapper>
         <TitleWrapper>
           <Title />
         </TitleWrapper>

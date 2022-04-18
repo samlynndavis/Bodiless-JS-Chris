@@ -39,12 +39,12 @@ const Examples = () => (
         <li><a href="./editors">Editors</a></li>
         <li><a href="./editors-monofont">Editors with MonoFont</a></li>
         <li><a href="./typography">Typography</a></li>
-        <li><a href="./card">Card</a></li>
       </ul>
     </Para>
     <Subtitle>Components</Subtitle>
     <Para>
       <ul>
+        <li><a href="./card">Card</a></li>
         <li><a href="./flowcontainer">Flow Container</a></li>
         <li><a href="./images">Images</a></li>
       </ul>

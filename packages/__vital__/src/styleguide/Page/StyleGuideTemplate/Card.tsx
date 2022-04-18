@@ -13,16 +13,57 @@
  */
 
 import React from 'react';
+import { withNodeKey } from '@bodiless/core';
 import {
-  flowHoc, replaceWith, as
+  flowHoc, replaceWith, as, Div, H3
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { CardClean, vitalCard } from '@bodiless/vital-card';
+import { vitalTypography } from '@bodiless/vital-elements';
+import { asCardToken, CardClean, vitalCard } from '@bodiless/vital-card';
 
-const BasicCard = as(vitalCard.Default)(CardClean);
+const Subtitle = as(vitalTypography.H2, 'pt-4')(H3);
+const DefaultCard = as(vitalCard.Default)(CardClean);
+const VerticalCard = as(asCardToken({
+  ...vitalCard.Default,
+  Schema: {
+    Wrapper: withNodeKey('vertical-card'),
+  },
+  Spacing: {
+    ...vitalCard.WithVerticalOrientationCard.Spacing,
+  },
+  Layout: {
+    ...vitalCard.WithVerticalOrientationCard.Layout,
+  },
+}))(CardClean);
+const HorizontalCard = as(asCardToken({
+  ...vitalCard.Default,
+  Schema: {
+    Wrapper: withNodeKey('horizontal-card'),
+  },
+  Spacing: {
+    ...vitalCard.WithHorizontalOrientationCard.Spacing,
+  },
+  Layout: {
+    ...vitalCard.WithHorizontalOrientationCard.Layout,
+  },
+}))(CardClean);
+
+const HeroCard = as(vitalCard.WithHeroCard)(CardClean);
+
 const CardVariations = (props: any) => (
   <>
-    <BasicCard />
+    <Div className="md:w-1/3 mb-8">
+      <Subtitle>Default Card</Subtitle>
+      <DefaultCard />
+      <Subtitle>Vertical Card</Subtitle>
+      <VerticalCard />
+      <Subtitle>Horizontal Card</Subtitle>
+      <HorizontalCard />
+    </Div>
+    <Div className="mb-8">
+      <Subtitle>Hero Card</Subtitle>
+      <HeroCard />
+    </Div>
   </>
 );
 
