@@ -21,7 +21,7 @@ import { asTitleInfographicToken } from '../TitleInfographicClean';
 const Default = asTitleInfographicToken({
   Editors: {
     Title: vitalRichText.Default,
-    Image: vitalImage.Default,
+    Image: vitalImage.Plain,
   },
   Schema: {
     Title: withNodeKey('title'),
