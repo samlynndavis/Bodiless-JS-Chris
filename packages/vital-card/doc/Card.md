@@ -2,9 +2,7 @@
 
 ## Overview
 
-Vital card component displays information for a single object through an
-image,text or other media content allowing relevant quick actions to be
-triggered.
+Vital Card is a group of content which typically features a less than full size image alongside supporting content or a call to action (CTA). Cards are commonly used on websites to call out or offer something to the site visitor.
 
 The Vital Card package provides a clean Card component and following Card 
 design variants for quick and easier site build:

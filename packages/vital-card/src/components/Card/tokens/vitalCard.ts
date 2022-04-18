@@ -17,7 +17,6 @@ import { flowHoc, replaceWith, on } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { vitalImage } from '@bodiless/vital-image';
-import { vitalLink } from '@bodiless/vital-link';
 import { vitalTypography, vitalColor } from '@bodiless/vital-elements';
 import {
   EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText,
@@ -31,9 +30,12 @@ import { asCardToken } from '../CardClean';
  */
 const Base = asCardToken({
   Editors: {
-    // @todo: when do we need RichTextClean?
+    Wrapper: asBodilessLink(),
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
+    Eyebrow: on(EditorPlainClean)(vitalEditorPlain.Default),
     Description: on(RichTextClean)(vitalRichText.Default),
+    CTALink: asBodilessLink(),
+    CTAText: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
   Content: {
     Title: withPlaceholder('Card Title'),
@@ -41,18 +43,14 @@ const Base = asCardToken({
     Description: withPlaceholder('Card Description'),
   },
   Schema: {
-    // @todo: wrapper level nodeKey?
-    Wrapper: withNodeKey('card'),
     Title: withNodeKey('title'),
     Eyebrow: withNodeKey('eyebrow'),
     Description: withNodeKey('description'),
     Image: withNodeKey('image'),
-    ImageLink: asBodilessLink({ nodeKey: 'image-link' }),
+    CTAText: withNodeKey('cta')
   },
   Components: {
-    Wrapper: asBodilessLink(),
     Image: vitalImage.Default,
-    // @todo: confirm CTA is only for hero.
     CTAWrapper: replaceWith(() => null),
   },
   Core: {
@@ -61,19 +59,18 @@ const Base = asCardToken({
     Eyebrow: vitalTypography.Eyebrow,
     Title: vitalTypography.H2,
     Description: vitalTypography.Body,
-    ImageLink: vitalLink.Default,
   },
   Spacing: {
-    ImageLink: 'p-4 md:p-8',
+    ImageWrapper: 'p-4 md:p-8',
     Eyebrow: 'my-4',
   },
   Meta: flowHoc.meta.term('Type')('Card'),
 });
 
 /**
- * asCardVertical removes unnecessary wrappers from the card
+ * WithVerticalOrientation removes unnecessary wrappers from the card
  */
-const WithVerticalOrientationCard = asCardToken({
+const WithVerticalOrientation = asCardToken({
   Layout: {
     Wrapper: 'w-full flex h-full flex-col',
     Image: 'w-full',
@@ -86,13 +83,13 @@ const WithVerticalOrientationCard = asCardToken({
 });
 
 /**
- * asCardHorizontal splits the card in half with the image on the left
+ * WithHorizontalOrientation splits the card in half with the image on the left
  */
-const WithHorizontalOrientationCard = asCardToken({
+const WithHorizontalOrientation = asCardToken({
   Layout: {
     Wrapper: 'md:flex-row w-full flex flex-col',
     Image: 'w-full',
-    ImageLink: 'md:w-1/2 flex flex-col',
+    ImageWrapper: 'md:w-1/2 flex flex-col',
     ContentWrapper: 'md:w-1/2 flex flex-col',
     Description: 'flex-grow',
   },
@@ -103,9 +100,9 @@ const WithHorizontalOrientationCard = asCardToken({
 });
 
 /**
- * WithNoTitleCard removes title from the card
+ * WithNoTitle removes title from the card
  */
-const WithNoTitleCard = asCardToken({
+const WithNoTitle = asCardToken({
   Components: {
     TitleWrapper: replaceWith(() => null),
   },
@@ -114,12 +111,12 @@ const WithNoTitleCard = asCardToken({
 });
 
 /**
- * WithNoDescriptionCard removes the description from the card and adjusts title.
+ * WithNoDescription removes the description from the card and adjusts title.
  *
  *  where
  *     Title - adds grow because description will not exist
  */
-const WithNoDescriptionCard = asCardToken({
+const WithNoDescription = asCardToken({
   Components: {
     DescriptionWrapper: replaceWith(() => null),
   },
@@ -134,20 +131,6 @@ const WithNoDescriptionCard = asCardToken({
  */
 const Hero = asCardToken({
   ...Base,
-  Editors: {
-    Title: on(EditorPlainClean)(vitalEditorPlain.Default),
-    Description: on(RichTextClean)(vitalRichText.Default),
-    CTAText: vitalEditorPlain.Default,
-  },
-  Schema: {
-    Wrapper: withNodeKey('hero-card'),
-    Title: withNodeKey('title'),
-    Eyebrow: withNodeKey('eyebrow'),
-    Description: withNodeKey('description'),
-    Image: withNodeKey('image'),
-    ImageLink: asBodilessLink({ nodeKey: 'image-link' }),
-    CTALink: asBodilessLink({ nodeKey: 'cta-link' }),
-  },
   Components: {
     EyebrowWrapper: replaceWith(() => null),
     Wrapper: asBodilessLink(),
@@ -156,14 +139,14 @@ const Hero = asCardToken({
   Layout: {
     Wrapper: 'md:flex-row w-full flex flex-col',
     Image: 'w-full',
-    ImageLink: 'md:w-1/2 flex flex-col',
+    ImageWrapper: 'md:w-1/2 flex flex-col',
     ContentWrapper: 'md:w-1/2 flex flex-col',
     Description: 'flex-grow',
     CTAWrapper: 'md:w-1/2 flex flex-col mx-auto justify-center items-center',
   },
   Spacing: {
     ContentWrapper: 'px-10',
-    ImageLink: 'p-0',
+    ImageWrapper: 'p-0',
     CTAWrapper: 'py-4',
   },
   Theme: {
@@ -181,8 +164,8 @@ export default {
   Base,
   Default,
   Hero,
-  WithNoDescriptionCard,
-  WithNoTitleCard,
-  WithHorizontalOrientationCard,
-  WithVerticalOrientationCard,
+  WithNoDescription,
+  WithNoTitle,
+  WithHorizontalOrientation,
+  WithVerticalOrientation,
 };

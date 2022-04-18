@@ -15,14 +15,25 @@
 import React from 'react';
 import { withNodeKey } from '@bodiless/core';
 import {
-  flowHoc, replaceWith, as, Div, H3
+  flowHoc, replaceWith, as, Div, H2
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalTypography } from '@bodiless/vital-elements';
 import { asCardToken, CardClean, vitalCard } from '@bodiless/vital-card';
 
-const Subtitle = as(vitalTypography.H2, 'pt-4')(H3);
-const DefaultCard = as(vitalCard.Default)(CardClean);
+const Subtitle = as(vitalTypography.H2, 'pt-4')(H2);
+
+/**
+ * Default Card component.
+ */
+const DefaultCard = as(
+  vitalCard.Default,
+  withNodeKey('default-card'),
+)(CardClean);
+
+/**
+ * Vertical Card component.
+ */
 const VerticalCard = as(asCardToken({
   ...vitalCard.Default,
   Schema: {
@@ -30,10 +41,10 @@ const VerticalCard = as(asCardToken({
     Wrapper: withNodeKey('vertical-card'),
   },
   Spacing: {
-    ...vitalCard.WithVerticalOrientationCard.Spacing,
+    ...vitalCard.WithVerticalOrientation.Spacing,
   },
   Layout: {
-    ...vitalCard.WithVerticalOrientationCard.Layout,
+    ...vitalCard.WithVerticalOrientation.Layout,
   },
 }))(CardClean);
 const HorizontalCard = as(asCardToken({
@@ -43,14 +54,17 @@ const HorizontalCard = as(asCardToken({
     Wrapper: withNodeKey('horizontal-card'),
   },
   Spacing: {
-    ...vitalCard.WithHorizontalOrientationCard.Spacing,
+    ...vitalCard.WithHorizontalOrientation.Spacing,
   },
   Layout: {
-    ...vitalCard.WithHorizontalOrientationCard.Layout,
+    ...vitalCard.WithHorizontalOrientation.Layout,
   },
 }))(CardClean);
 
-const HeroCard = as(vitalCard.Hero)(CardClean);
+const HeroCard = as(
+  vitalCard.Hero,
+  withNodeKey('hero-card'),
+)(CardClean);
 
 const CardVariations = (props: any) => (
   <>

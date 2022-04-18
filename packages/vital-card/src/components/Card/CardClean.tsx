@@ -28,12 +28,11 @@ import {
 } from '@bodiless/fclasses';
 import { withNode } from '@bodiless/core';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { EditorPlainClean } from '@bodiless/vital-editors';
 import { LinkClean } from '@bodiless/vital-link';
 
 export type CardComponents = {
   Wrapper: ComponentType<StylableProps>,
-  ImageLink: ComponentType<StylableProps>,
+  ImageWrapper: ComponentType<StylableProps>,
   Image: ComponentType<StylableProps>,
   EyebrowWrapper: ComponentType<StylableProps>,
   Eyebrow: ComponentType<StylableProps>,
@@ -51,11 +50,10 @@ export type CardComponents = {
 
 const cardComponentStart: CardComponents = {
   Wrapper: A,
-  ImageLink: A,
+  ImageWrapper: Div,
   Image: Img,
   EyebrowWrapper: Fragment,
-  // @todo: use EditorPlainClean without as throws ts type error.
-  Eyebrow: as()(EditorPlainClean),
+  Eyebrow: Fragment,
   ContentWrapper: Div,
   TitleWrapper: H2,
   Title: Fragment,
@@ -63,8 +61,7 @@ const cardComponentStart: CardComponents = {
   Description: Div,
   Rating: Fragment,
   RatingWrapper: Fragment,
-  // @todo: EditorPlainClean or RichTextClean?
-  CTAText: as()(EditorPlainClean),
+  CTAText: Fragment,
   // @todo: use LinkClean without as throws ts type error.
   CTALink: as()(LinkClean),
   CTAWrapper: Div,
@@ -77,7 +74,7 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
   const {
     Wrapper,
     Image,
-    ImageLink,
+    ImageWrapper,
     ContentWrapper,
     EyebrowWrapper,
     Eyebrow,
@@ -94,9 +91,9 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
 
   return (
     <Wrapper {...rest}>
-      <ImageLink>
+      <ImageWrapper>
         <Image />
-      </ImageLink>
+      </ImageWrapper>
       <ContentWrapper>
         <EyebrowWrapper>
           <Eyebrow />
