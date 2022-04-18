@@ -41,7 +41,7 @@
     "@bodiless/vital-image": "^1.0.0-beta.7",
     "@bodiless/vital-link": "^1.0.0-beta.7",
     "@bodiless/vital-navigation": "^1.0.0-beta.7",
-    "@bodiless/vital-structuredata": "^1.0.0-beta.5",
+    "@bodiless/vital-structuredata": "^1.0.0-beta.7",
     "lodash": "^4.17.19",
     "mobx": "^6.0.0",
     "mobx-react": "^7.2.1",
