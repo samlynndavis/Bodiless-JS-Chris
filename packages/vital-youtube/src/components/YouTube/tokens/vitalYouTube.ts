@@ -96,6 +96,8 @@ const Responsive16By9Embed = asYouTubeToken({
   Meta: flowHoc.meta.term('Screen')('Widescreen (16:9)'),
 });
 
+const Hero = asYouTubeToken(Responsive16By9Embed, WithSchema);
+
 export default {
   WithDefaultPlayerSettings,
   WithFullScreenEnabled,
@@ -103,4 +105,5 @@ export default {
   Base,
   Default,
   Responsive16By9Embed,
+  Hero,
 };

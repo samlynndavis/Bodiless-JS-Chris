@@ -1,9 +1,0 @@
-{
-  "CX_DesignSystem": {
-    "Components": {
-      "CX_Hero": {
-        "README.md": "./doc/Hero.md"
-      }
-    }
-  }
-}

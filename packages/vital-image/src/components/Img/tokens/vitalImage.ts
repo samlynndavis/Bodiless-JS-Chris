@@ -188,6 +188,8 @@ const WithEager = asElementToken({
   },
 });
 
+const Hero = asElementToken(Default, WithLandscapePlaceholder);
+
 export default {
   Base,
   Plain: EditablePlain,
@@ -201,4 +203,5 @@ export default {
   WithLandscapePlaceholder,
   WithLink,
   WithEager,
+  Hero,
 };

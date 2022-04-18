@@ -1,7 +1,8 @@
-import { vitalHero } from '@bodiless/vital-hero';
+import { vitalImage } from '@bodiless/vital-image';
+import { vitalYouTube } from '@bodiless/vital-youtube';
 
 export default {
-  Default: vitalHero.Image,
-  Image: vitalHero.Image,
-  Video: vitalHero.Video,
+  Default: vitalImage.Hero,
+  Image: vitalImage.Hero,
+  Video: vitalYouTube.Hero,
 };

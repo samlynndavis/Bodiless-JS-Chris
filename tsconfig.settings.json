@@ -76,8 +76,6 @@
       "@bodiless/vital-elements/*": ["vital-elements/src/*"],
       "@bodiless/vital-flowcontainer": ["vital-flowcontainer/src/"],
       "@bodiless/vital-flowcontainer/*": ["vital-flowcontainer/src/*"],
-      "@bodiless/vital-hero": ["vital-hero/src/"],
-      "@bodiless/vital-hero/*": ["vital-hero/src/*"],
       "@bodiless/vital-image": ["vital-image/src/"],
       "@bodiless/vital-image/*": ["vital-image/src/*"],
       "@bodiless/vital-layout": ["vital-layout/src/"],

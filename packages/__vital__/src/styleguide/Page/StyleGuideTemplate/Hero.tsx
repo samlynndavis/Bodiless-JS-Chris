@@ -17,12 +17,14 @@ import {
   flowHoc,
   as,
   replaceWith,
+  Img,
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { HeroClean, vitalHero } from '@bodiless/vital-hero';
+import { vitalImage } from '@bodiless/vital-image';
+import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
 
-const ImageHero = as(vitalHero.Image)(HeroClean);
-const VideoHero = as(vitalHero.Video)(HeroClean);
+const ImageHero = as(vitalImage.Hero)(Img);
+const VideoHero = as(vitalYouTube.Hero)(YouTubeClean);
 
 const HeroVariations = (props: any) => (
   <>

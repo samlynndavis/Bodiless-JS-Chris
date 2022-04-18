@@ -16,15 +16,16 @@ import {
   on,
   as,
   addProps,
-  startWith,
   withDesign,
+  Img,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
-import { HeroClean, vitalHero } from '@bodiless/vital-hero';
+import { vitalImage } from '@bodiless/vital-image';
+import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
 
@@ -34,11 +35,10 @@ const Default = asGenericTemplateToken({
     // @todo breadcrumb placeholder
     Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
     TopContent: as(
-      startWith(HeroClean),
       asBodilessChameleon('hero', { component: 'Image' }),
       withDesign({
-        Image: vitalHero.Image,
-        Video: vitalHero.Video,
+        Image: on(Img)(vitalImage.Hero),
+        Video: on(YouTubeClean)(vitalYouTube.Hero),
       }),
     ),
     Content: as(vitalFlowContainer.Default),
@@ -50,7 +50,6 @@ const Default = asGenericTemplateToken({
     BottomContent: withNodeKey(GenericTemplateNodeKeys.BottomContent),
   },
   Spacing: {
-    TopContent: vitalSpacing.WithSiteXLConstraint,
     BreadcrumbWrapper: as(
       vitalSpacing.WithSiteMargin,
       vitalSpacing.WithSiteXLConstraint,
