@@ -18,7 +18,6 @@ import {
   designable,
   Div,
   Img,
-  Fragment,
   DesignableComponentsProps,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
@@ -62,5 +61,4 @@ const TitleInfographicClean = designable(titleInfographicComponents, 'Title Info
 
 export const asTitleInfographicToken = asVitalTokenSpec<TitleInfographicComponents>();
 
-// export default withoutHydration()(TitleInfographicClean);
-export default TitleInfographicClean;
+export default withoutHydration()(TitleInfographicClean);
