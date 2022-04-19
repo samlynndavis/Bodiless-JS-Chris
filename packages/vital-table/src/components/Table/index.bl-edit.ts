@@ -12,25 +12,7 @@
  * limitations under the License.
  */
 
-import { Editors, EditorsMonoFont } from './Editors';
-import { Typography } from './Typography';
-import { Layout } from './Layout';
-import { Header } from './Header';
-import { FlowContainer } from './FlowContainer';
-import { Images } from './Images';
-import { Footer } from './Footer';
-import { Table } from './Table';
-import { _default } from './_default';
-
-export const __vital__StyleGuideTemplate = {
-  _default,
-  Editors,
-  EditorsMonoFont,
-  Typography,
-  Layout,
-  Header,
-  Images,
-  FlowContainer,
-  Footer,
-  Table,
-};
+// In non "static" mode (in dev mode and during HTML render), we need the static version
+// of the token to be the same as the normal version.
+export { default as vitalLinkTable } from './tokens';
+export { TableStatic } from './TableClean';

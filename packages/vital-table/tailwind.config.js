@@ -1,3 +1,4 @@
+/* eslint-disable import/no-dynamic-require, global-require */
 /**
  * Copyright © 2022 Johnson & Johnson
  *
@@ -11,26 +12,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-import { Editors, EditorsMonoFont } from './Editors';
-import { Typography } from './Typography';
-import { Layout } from './Layout';
-import { Header } from './Header';
-import { FlowContainer } from './FlowContainer';
-import { Images } from './Images';
-import { Footer } from './Footer';
-import { Table } from './Table';
-import { _default } from './_default';
-
-export const __vital__StyleGuideTemplate = {
-  _default,
-  Editors,
-  EditorsMonoFont,
-  Typography,
-  Layout,
-  Header,
-  Images,
-  FlowContainer,
-  Footer,
-  Table,
+const twConfig = {
+  content: [
+    './lib/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
+  theme: {
+    extend: {},
+  },
 };
+
+module.exports = getPackageTailwindConfig({
+  twConfig,
+  resolver: (pkgName) => require.resolve(pkgName),
+});

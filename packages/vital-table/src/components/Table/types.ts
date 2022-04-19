@@ -12,25 +12,11 @@
  * limitations under the License.
  */
 
-import { Editors, EditorsMonoFont } from './Editors';
-import { Typography } from './Typography';
-import { Layout } from './Layout';
-import { Header } from './Header';
-import { FlowContainer } from './FlowContainer';
-import { Images } from './Images';
-import { Footer } from './Footer';
-import { Table } from './Table';
-import { _default } from './_default';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-export const __vital__StyleGuideTemplate = {
-  _default,
-  Editors,
-  EditorsMonoFont,
-  Typography,
-  Layout,
-  Header,
-  Images,
-  FlowContainer,
-  Footer,
-  Table,
+export type TableComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Table: ComponentOrTag<any>,
 };
+
+export type TableBaseProps = DesignableComponentsProps<TableComponents>;

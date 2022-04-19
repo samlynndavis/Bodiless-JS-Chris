@@ -12,25 +12,9 @@
  * limitations under the License.
  */
 
-import { Editors, EditorsMonoFont } from './Editors';
-import { Typography } from './Typography';
-import { Layout } from './Layout';
-import { Header } from './Header';
-import { FlowContainer } from './FlowContainer';
-import { Images } from './Images';
-import { Footer } from './Footer';
-import { Table } from './Table';
-import { _default } from './_default';
-
-export const __vital__StyleGuideTemplate = {
-  _default,
-  Editors,
-  EditorsMonoFont,
-  Typography,
-  Layout,
-  Header,
-  Images,
-  FlowContainer,
-  Footer,
-  Table,
-};
+// In "static" mode (in the browser in production) we do not need any of the static
+// token code bc it won't be hydrated.
+export {
+  staticTokenCollection as vitalTableStatic,
+  // todo ?? StaticTable as TableStatic,
+} from '@bodiless/hydration';
