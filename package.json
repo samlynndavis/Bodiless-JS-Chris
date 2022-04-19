@@ -7,7 +7,7 @@
   ],
   "license": "Apache-2.0",
   "scripts": {
-    "bootstrap": "npm run clean:symlinks && npx lerna bootstrap --hoist --strict",
+    "bootstrap": "npx lerna bootstrap --hoist --strict",
     "build": "cross-env NODE_ENV=production lerna run build --stream --ignore @bodiless/gatsby-starter-bodiless",
     "build:only": "cross-env NODE_ENV=production lerna run build --stream --scope",
     "build:packages": "cross-env NODE_ENV=production lerna run build --stream --ignore @sites/*",
@@ -81,7 +81,7 @@
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.158",
     "@types/rc-tooltip": "^3.7.1",
-    "@types/react-dom": "^17.0.2",
+    "@types/react-dom": "^17.0.11",
     "@types/slate": "^0.47.9",
     "@types/uuid": "^3.4.4",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
