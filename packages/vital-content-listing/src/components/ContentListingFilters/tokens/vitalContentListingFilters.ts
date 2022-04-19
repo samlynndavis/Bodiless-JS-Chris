@@ -14,6 +14,7 @@
 
 import {
   addProps,
+  as,
   flowHoc,
   withDesign,
 } from '@bodiless/fclasses';
@@ -21,6 +22,7 @@ import {
   withSingleAllowedTag,
   withMultipleAllowedTags,
 } from '@bodiless/filtering';
+import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { asContentListingFiltersToken } from '../ContentListingFiltersClean';
 
 const withTagListStyles = withDesign({
@@ -29,24 +31,26 @@ const withTagListStyles = withDesign({
     withDesign({
       FilterInputWrapper: 'flex pb-2 items-center',
       FilterGroupItemInput: 'mr-3 rtl:ml-3 rtl:mr-0',
-      FilterGroupItemPlaceholder: 'text-gray-600',
     }),
   ),
   Wrapper: 'm-2 pl-2',
 });
 
 const withCategoryList = withDesign({
-  Title: 'font-bold',
+  Title: as(
+    vitalColor.TextPrimaryHeaderCopy,
+    vitalTextDecoration.Bold,
+  ),
   Wrapper: 'p-2',
   Item: 'py-2',
 });
 
 const Default = asContentListingFiltersToken({
   Layout: {
-    Wrapper: 'flex flex-col flex flex-col lg:flex-row lg:min-h-screen',
+    Wrapper: 'flex flex-col lg:flex-row lg:min-h-screen',
     FilterWrapper: 'lg:w-1/3 lg:mr-5 lg:rtl:ml-5 lg:rtl:mr-0',
     FilterHeader: 'flex flex-col w-full lg:flex-row lg:justify-between lg:items-center',
-    ContentWrapper: 'w-full lg:w-1/3',
+    ContentWrapper: 'w-full',
     ResetButton: 'self-start',
   },
   Spacing: {
@@ -54,10 +58,14 @@ const Default = asContentListingFiltersToken({
     ResetButton: 'my-2',
   },
   Theme: {
-    FilterWrapper: 'bg-gray-400',
-    FilterHeader: 'bg-gray-500 p-2',
-    FilterTitle: 'text-xl font-bold',
-    ResetButton: 'underline',
+    FilterWrapper: vitalColor.BgPrimaryPage,
+    FilterHeader: 'p-2',
+    FilterTitle: as(
+      vitalColor.TextPrimaryHeaderCopy,
+      vitalTextDecoration.Bold,
+      'text-xl',
+    ),
+    ResetButton: vitalTextDecoration.Underline,
     Filter: withDesign({
       TagList: withTagListStyles,
       CategoryList: withCategoryList,

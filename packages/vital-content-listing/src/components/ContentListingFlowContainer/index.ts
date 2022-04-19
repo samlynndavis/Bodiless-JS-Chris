@@ -12,4 +12,8 @@
  * limitations under the License.
  */
 
-export { default as vitalContentListingFlowContainer } from './tokens';
+import vitalContentListingFlowContainer from './tokens';
+
+export {
+  vitalContentListingFlowContainer,
+};

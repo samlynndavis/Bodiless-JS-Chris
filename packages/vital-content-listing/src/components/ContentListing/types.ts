@@ -16,17 +16,9 @@ import { HTMLProps } from 'react';
 import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
 type ContentListingComponents = {
-  PageWrapper: ComponentOrTag<any>,
-  Breadcrumb: ComponentOrTag<any>,
-  MainWrapper: ComponentOrTag<any>,
-  // TitleRow: ComponentOrTag<any>,
-  HeroWrapper: ComponentOrTag<any>,
-  HeroImage: ComponentOrTag<any>,
   FilterWrapper: ComponentOrTag<any>,
   Filter: ComponentOrTag<any>,
   ContentListing: ComponentOrTag<any>,
-  BottomWrapper: ComponentOrTag<any>,
-  BottomContent: ComponentOrTag<any>,
 };
 
 type ContentListingProps = DesignableComponentsProps<ContentListingComponents>

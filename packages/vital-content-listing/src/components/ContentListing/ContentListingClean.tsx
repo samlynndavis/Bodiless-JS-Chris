@@ -16,47 +16,24 @@ import React, { FC } from 'react';
 import {
   designable,
   Div,
-  Fragment,
-  Img,
 } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
-import { LayoutClean } from '@bodiless/vital-layout';
 import { ContentListingFiltersClean } from '../ContentListingFilters';
 import type { ContentListingComponents, ContentListingProps } from './types';
 
 const contentListingComponents: ContentListingComponents = {
-  PageWrapper: LayoutClean,
-  Breadcrumb: Fragment,
-  // TitleRow: TitleRowClean,
-  MainWrapper: Div,
-  HeroWrapper: Div,
-  HeroImage: Img,
   FilterWrapper: Div,
   Filter: ContentListingFiltersClean,
   ContentListing: FlowContainerClean,
-  BottomWrapper: Div,
-  BottomContent: FlowContainerClean,
 };
 
 const ContentListingBase: FC<ContentListingProps> = ({ components: C, ...rest }) => (
-  <C.PageWrapper {...rest}>
-    <C.Breadcrumb />
-    <C.MainWrapper>
-      {/* <C.TitleRow /> */}
-      <C.HeroWrapper>
-        <C.HeroImage />
-      </C.HeroWrapper>
-      <C.FilterWrapper>
-        <C.Filter>
-          <C.ContentListing />
-        </C.Filter>
-      </C.FilterWrapper>
-      <C.BottomWrapper>
-        <C.BottomContent />
-      </C.BottomWrapper>
-    </C.MainWrapper>
-  </C.PageWrapper>
+  <C.FilterWrapper {...rest}>
+    <C.Filter>
+      <C.ContentListing />
+    </C.Filter>
+  </C.FilterWrapper>
 );
 
 const ContentListingClean = designable(contentListingComponents, 'ContentListing')(ContentListingBase);

@@ -12,6 +12,25 @@
  * limitations under the License.
  */
 
-export enum ContentListingNodeKeys {
-  ContentListing = 'content-listing-articles',
-}
+import React from 'react';
+import {
+  flowHoc,
+  on,
+  replaceWith,
+} from '@bodiless/fclasses';
+import {
+  ContentListingClean,
+  vitalContentListing,
+} from '@bodiless/vital-content-listing';
+import {
+  asStyleGuideTemplateToken,
+  vitalStyleGuideTemplate,
+} from '@bodiless/vital-templates';
+
+export const ContentListing = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+  Meta: flowHoc.meta.term('Token')('ContentListing'),
+  Content: {
+    Title: replaceWith(() => <>Content Listing</>),
+    Examples: on(ContentListingClean)(vitalContentListing.Default),
+  },
+});

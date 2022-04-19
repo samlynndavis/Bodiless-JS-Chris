@@ -12,5 +12,11 @@
  * limitations under the License.
  */
 
-export { default as ContentListingFiltersClean, asContentListingFiltersToken } from './ContentListingFiltersClean';
-export { default as vitalContentListingFilters } from './tokens';
+import ContentListingFiltersClean, { asContentListingFiltersToken } from './ContentListingFiltersClean';
+import vitalContentListingFilters from './tokens';
+
+export {
+  ContentListingFiltersClean,
+  asContentListingFiltersToken,
+  vitalContentListingFilters,
+};

@@ -13,32 +13,21 @@
  */
 
 import { withNodeKey } from '@bodiless/core';
-import { vitalImage } from '@bodiless/vital-image';
 import { vitalContentListingFilters } from '../../ContentListingFilters';
 import { vitalContentListingFlowContainer } from '../../ContentListingFlowContainer';
 import { asContentListingToken } from '../ContentListingClean';
 import { ContentListingNodeKeys } from './constants';
 
 const Default = asContentListingToken({
-  // ...vitalGenericTemplate.Default,
   Components: {
-    // ...vitalGenericTemplate.Default.Components,
-    HeroImage: vitalImage.Default,
     ContentListing: vitalContentListingFlowContainer.Default,
     Filter: vitalContentListingFilters.Default,
   },
   Schema: {
-    // ...vitalGenericTemplate.Default.Schema,
-    HeroImage: withNodeKey(ContentListingNodeKeys.HeroImage),
     ContentListing: withNodeKey(ContentListingNodeKeys.ContentListing),
   },
   Spacing: {
-    // TitleRow: withDesign({
-    //   TitleRowWrapper: 'my-4',
-    // }),
-    HeroWrapper: 'my-4 px-2percent',
-    FilterWrapper: 'my-4 px-2percent',
-    BottomWrapper: 'px-2percent',
+    FilterWrapper: 'my-4',
   },
 });
 

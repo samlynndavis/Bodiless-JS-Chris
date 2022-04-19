@@ -9,9 +9,10 @@
   "typings": "lib/index.d.ts",
   "files": [
     "/lib",
+    "/doc",
     "/bodiless.docs.json",
     "/getDocs.js",
-    "/doc"
+    "/tailwind.config.js"
   ],
   "repository": {
     "type": "git",
@@ -37,7 +38,6 @@
     "@bodiless/vital-elements": "^1.0.0-beta.7",
     "@bodiless/vital-flowcontainer": "^1.0.0-beta.7",
     "@bodiless/vital-image": "^1.0.0-beta.7",
-    "@bodiless/vital-layout": "^1.0.0-beta.7",
     "lodash": "^4.17.19"
   },
   "peerDependencies": {

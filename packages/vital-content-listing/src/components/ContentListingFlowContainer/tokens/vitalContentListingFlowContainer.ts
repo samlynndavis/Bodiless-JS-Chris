@@ -18,6 +18,7 @@ import { asFilterableByGroup } from '@bodiless/filtering';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { vitalImage } from '@bodiless/vital-image';
+import { withNodeKey } from '@bodiless/core';
 
 const Default = asFluidToken({
   ...omit(vitalFlowContainer.Base, 'Spacing'),
@@ -26,7 +27,12 @@ const Default = asFluidToken({
   },
   Components: {
     // @TODO: Replace with cards once vital-cards has been implemented.
-    FilterableContentImageVariations: on(Img)(vitalImage.Default),
+    FilterableContentImageVariations: on(Img)(
+      vitalImage.Default,
+      vitalImage.WithLink,
+      // Needs to provide key since WinLink invalidates default one.
+      withNodeKey('image'),
+    ),
   },
   Layout: {
     ComponentWrapper: 'flex flex-shrink',

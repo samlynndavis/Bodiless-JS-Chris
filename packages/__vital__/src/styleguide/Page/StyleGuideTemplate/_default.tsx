@@ -33,25 +33,26 @@ const Examples = () => (
     <Subtitle>Global Elements</Subtitle>
     <Para>
       <ul>
-        <li><a href="./layout">Layout</a></li>
-        <li><a href="./header">Header</a></li>
-        <li><a href="./footer">Footer</a></li>
-        <li><a href="./editors">Editors</a></li>
-        <li><a href="./editors-monofont">Editors with MonoFont</a></li>
-        <li><a href="./typography">Typography</a></li>
+        <li><a href="/styleguide/layout">Layout</a></li>
+        <li><a href="/styleguide/header">Header</a></li>
+        <li><a href="/styleguide/footer">Footer</a></li>
+        <li><a href="/styleguide/editors">Editors</a></li>
+        <li><a href="/styleguide/editors-monofont">Editors with MonoFont</a></li>
+        <li><a href="/styleguide/typography">Typography</a></li>
       </ul>
     </Para>
     <Subtitle>Components</Subtitle>
     <Para>
       <ul>
-        <li><a href="./flowcontainer">Flow Container</a></li>
-        <li><a href="./images">Images</a></li>
+        <li><a href="/styleguide/content-listing">Content Listing</a></li>
+        <li><a href="/styleguide/flow-container">Flow Container</a></li>
+        <li><a href="/styleguide/images">Images</a></li>
       </ul>
     </Para>
     <Subtitle>Templates</Subtitle>
     <Para>
       <ul>
-        <li><a href="./generic-template">Generic Template</a></li>
+        <li><a href="/styleguide/generic-template">Generic Template</a></li>
       </ul>
     </Para>
   </>

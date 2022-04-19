@@ -11,7 +11,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
-export enum ContentListingNodeKeys {
-  ContentListing = 'content-listing-articles',
-}
+const resolver = (pkgName) => require.resolve(pkgName);
+
+const twConfig = {
+  content: [
+    './lib/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
+};
+
+module.exports = getPackageTailwindConfig({
+  twConfig,
+  resolver,
+});

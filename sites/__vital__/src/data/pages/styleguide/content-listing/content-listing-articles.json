@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "uuid": "76cc9ab0-bfe1-11ec-9ff0-39dc6dcea05c",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
+      "uuid": "7e194730-bfe3-11ec-b6fd-5b8e76310bac",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
+      "uuid": "36b32ff0-bfed-11ec-a123-9fedd17f17d4",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
+      "uuid": "45d9f8b0-bfed-11ec-a123-9fedd17f17d4",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
+      "uuid": "4a6c2b00-bfed-11ec-a123-9fedd17f17d4",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
+      "uuid": "4fb21cf0-bfed-11ec-a123-9fedd17f17d4",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
+      "uuid": "5270a0b0-bfed-11ec-a123-9fedd17f17d4",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
+      "uuid": "57424d00-bfed-11ec-a123-9fedd17f17d4",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "FilterableContentImageVariations"
+    }
+  ]
+}

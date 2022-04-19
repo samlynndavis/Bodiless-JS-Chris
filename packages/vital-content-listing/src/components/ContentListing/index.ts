@@ -12,6 +12,13 @@
  * limitations under the License.
  */
 
-export { default as ContentListingClean, asContentListingToken } from './ContentListingClean';
-export { default as vitalContentListing } from './tokens';
-export type { ContentListingComponents, ContentListingProps } from './types';
+import ContentListingClean, { asContentListingToken } from './ContentListingClean';
+import vitalContentListing from './tokens';
+import type { ContentListingComponents, ContentListingProps } from './types';
+
+export {
+  ContentListingClean,
+  asContentListingToken,
+  vitalContentListing,
+};
+export type { ContentListingComponents, ContentListingProps };
