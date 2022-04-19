@@ -22,6 +22,7 @@ import {
   EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText,
 } from '@bodiless/vital-editors';
 import { asCardToken } from '../CardClean';
+import { CardNodeKeys } from './constants';
 
 /**
  * Basic Card Design.
@@ -43,17 +44,15 @@ const Base = asCardToken({
     Description: withPlaceholder('Card Description'),
   },
   Schema: {
-    Title: withNodeKey('title'),
-    Eyebrow: withNodeKey('eyebrow'),
-    Description: withNodeKey('description'),
-    Image: withNodeKey('image'),
-    CTAText: withNodeKey('cta')
+    Title: withNodeKey(CardNodeKeys.Title),
+    Eyebrow: withNodeKey(CardNodeKeys.Eyebrow),
+    Description: withNodeKey(CardNodeKeys.Description),
+    Image: withNodeKey(CardNodeKeys.Image),
+    CTAText: withNodeKey(CardNodeKeys.CTA),
   },
   Components: {
     Image: vitalImage.Default,
     CTAWrapper: replaceWith(() => null),
-  },
-  Core: {
   },
   Theme: {
     Eyebrow: vitalTypography.Eyebrow,
@@ -133,7 +132,6 @@ const Hero = asCardToken({
   ...Base,
   Components: {
     EyebrowWrapper: replaceWith(() => null),
-    Wrapper: asBodilessLink(),
     Image: vitalImage.Default,
   },
   Layout: {
