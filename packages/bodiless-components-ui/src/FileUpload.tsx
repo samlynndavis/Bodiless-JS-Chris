@@ -65,7 +65,7 @@ const Input = withForwardedRef()('input');
 const UploadArea = () => (
   <div className="bl-font-bold bl-text-base bl-text-center">
     {`${FileUploadStrings.DragOrClickToUpload}`}
-    <span className="material-icons bl-w-full">cloud_upload</span>
+    <span className="bl-material-icons bl-w-full">cloud_upload</span>
   </div>
 );
 
@@ -115,7 +115,7 @@ const UploadStatus = ({ status, selectedFile }: UploadStatusProps) => {
       statusText = '';
   }
   return (
-    <div className="bl-overflow-clip bl-overflow-hidden">{statusText}</div>
+    <div className="bl-text-clip bl-overflow-hidden">{statusText}</div>
   );
 };
 
