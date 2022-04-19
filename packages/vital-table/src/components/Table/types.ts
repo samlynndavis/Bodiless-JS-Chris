@@ -15,7 +15,6 @@
 import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
 export type TableComponents = {
-  Wrapper: ComponentOrTag<any>,
   Table: ComponentOrTag<any>,
 };
 

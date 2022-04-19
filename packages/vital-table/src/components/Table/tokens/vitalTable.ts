@@ -11,14 +11,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 import {
   withDesign,
   flowHoc,
+  // on,
 } from '@bodiless/fclasses';
 import {
   asBodilessTable,
 } from '@bodiless/table';
-import { withEditorFull } from '@bodiless/vital-editors';
+// import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
+import { withEditorRich } from '@bodiless/vital-editors';
 import { asTableToken } from '../TableClean';
 
 /**
@@ -27,17 +30,25 @@ import { asTableToken } from '../TableClean';
 
 /* TODO remove editor mb-6 */
 const Base = asTableToken({
+  Meta: flowHoc.meta.term('Type')('Table'),
   Theme: {
-    Wrapper: '',
     Table: '',
   },
   Schema: {
-    Table: flowHoc(
-      asBodilessTable(),
-      withDesign({
-        Cell: withEditorFull('cell', ''),
-      }),
-    ),
+    Table: asBodilessTable(),
+  },
+  /* @TODO  CellContent to the bodiless table design, and use that
+   * here rather than using withEditor...
+   * i'm not sure we actually need the nodeKey. For the placeholder,
+   * maybe we can just use the defautl placeholder, but if you want a
+   * unique one, add it via 'addProps'
+   * maybe in the 'Content' domain.
+   */
+  Editors: {
+    // CellContent: on(RichTextClean)(vitalRichText.Default),
+    Table: withDesign({
+      CellContent: withEditorRich('cell', ''),
+    }),
   },
 });
 
@@ -52,31 +63,31 @@ const Default = asTableToken({
       THead: 'border-b',
       TFoot: '',
       Row: 'border-b',
-      Cell: 'px-6 py-4 text-left',
+      Cell: 'px-6 text-left',
     }),
-  }
+  },
 });
 
-const StripedTable = asTableToken({
-  ...Base,
+const withStripes = asTableToken({
+  Meta: flowHoc.meta.term('Decoration')('Striped Rows'),
   Theme: {
-    ...Base.Theme,
     Table: withDesign({
-      Row: '', // @TO DO add stripes.
+      Row: 'row-heidi-stripes', // @TO DO add stripes.
     }),
   }
 });
 
 const withHoverable = asTableToken({
+  Meta: flowHoc.meta.term('Decoration')('Hoverable Rows'),
   Theme: {
     Table: withDesign({
-      Row: 'hover:bg-gray-100',
+      Row: 'row-heidi-hoverable hover:bg-gray-100',
     }),
   }
 });
 
 export default {
   Default,
-  StripedTable,
+  withStripes,
   withHoverable,
 };

@@ -30,11 +30,11 @@ const DefaultTable = as(
 
 const StripedTable = as(
   vitalTable.Default,
-  vitalTable.StripedTable,
+  vitalTable.withStripes,
   withNodeKey('stripedtable'),
 )(TableClean);
 
-const HoverDefaultTable = as(
+const HoverTable = as(
   vitalTable.Default,
   vitalTable.withHoverable,
   withNodeKey('defaulthoverabletable'),
@@ -50,7 +50,7 @@ const Examples = (props: any) => (
      <hr className="my-4" />
      <StripedTable />
      <hr className="my-4" />
-     <HoverDefaultTable />
+     <HoverTable />
    </>
 );
 

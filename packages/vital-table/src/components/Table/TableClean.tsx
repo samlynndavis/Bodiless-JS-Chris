@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 import { withoutHydrationInline } from '@bodiless/hydration';
 import {
-  Fragment, designable,
+  designable,
 } from '@bodiless/fclasses';
 import {
   CleanTable,
@@ -24,14 +24,11 @@ import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { TableComponents, TableBaseProps } from './types';
 
 const tableComponents: TableComponents = {
-  Wrapper: Fragment,
   Table: CleanTable,
 };
 
 const TableBase: FC<TableBaseProps> = ({ components: C, children, ...rest }) => (
-  <C.Wrapper {...rest}>
-    <C.Table />
-  </C.Wrapper>
+  <C.Table {...rest} />
 );
 
 const asTableToken = asVitalTokenSpec<TableComponents>();
