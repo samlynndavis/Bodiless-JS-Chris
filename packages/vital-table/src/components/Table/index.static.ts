@@ -16,5 +16,5 @@
 // token code bc it won't be hydrated.
 export {
   staticTokenCollection as vitalTableStatic,
-  // todo ?? StaticTable as TableStatic,
+  StaticBlock as TableStatic,
 } from '@bodiless/hydration';

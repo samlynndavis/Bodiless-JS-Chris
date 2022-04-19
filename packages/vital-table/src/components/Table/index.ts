@@ -11,9 +11,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import vitalTable from './tokens';
+import vitalTableBase from './tokens/vitalTable';
+import TableClean, { asTableToken } from './TableClean';
+
+export {
+  vitalTable,
+  vitalTableBase,
+  TableClean,
+  asTableToken,
+};
 
 export * from './index.bl-edit';
 
-export { default as vitalTable } from './tokens';
-export { default as TableClean, asTableToken } from './TableClean';
 export type { TableComponents, TableBaseProps } from './types';
