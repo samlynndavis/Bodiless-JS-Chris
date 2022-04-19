@@ -14,7 +14,6 @@
 
 import {
   addProps,
-  as,
   flowHoc,
 } from '@bodiless/fclasses';
 import {
@@ -30,13 +29,38 @@ import { asYouTubeToken } from '../YouTubeClean';
 import { defaultPlayerSettings } from '../util';
 
 /**
- * WithDefaultPlayerSettings provides standard default YouTube player settings.
+ * Token that provides VitalDS YouTube base component.
  */
-const WithDefaultPlayerSettings = asYouTubeToken({
+const Base = asYouTubeToken({
+  Core: {
+    _: asBodilessResponsiveYouTube,
+  },
+  Content: {
+    // Video placeholder.
+    Item: addProps({ src: 'https://www.youtube.com/embed/ukz74aLMvhc' }),
+  },
+  Meta: flowHoc.meta.term('Type')('YouTube'),
+});
+
+/**
+ * Token that provides VitalDS YouTube default component.
+ */
+const Default = asYouTubeToken({
+  ...Base,
   Components: {
     Item: withYouTubePlayerSettings(defaultPlayerSettings),
   },
-  Meta: flowHoc.meta.term('Settings')('Standard Player'),
+  Meta: flowHoc.meta.term('Screen')('Default'),
+});
+
+/**
+ * Responsive16By9Embed provides responsive YouTube component in widescreen format (16:9).
+ */
+const Responsive16By9Embed = asYouTubeToken({
+  Components: {
+    _: asBodilessResponsive16By9Embed,
+  },
+  Meta: flowHoc.meta.term('Screen')('Widescreen (16:9)'),
 });
 
 /**
@@ -60,46 +84,9 @@ const WithSchema = asYouTubeToken({
   Meta: flowHoc.meta.term('SEO')('With Schema'),
 });
 
-/**
- * Token that provides VitalDS YouTube base component.
- */
-const Base = asYouTubeToken({
-  Components: {
-    _: asBodilessResponsiveYouTube,
-  },
-  Content: {
-    // Video placeholder.
-    Item: addProps({ src: 'https://www.youtube.com/embed/ukz74aLMvhc' }),
-  },
-  Meta: flowHoc.meta.term('Type')('YouTube'),
-});
-
-/**
- * Token that provides VitalDS YouTube default component.
- */
-const Default = asYouTubeToken({
-  ...Base,
-  Meta: flowHoc.meta.term('Screen')('Default'),
-});
-
-/**
- * Responsive16By9Embed provides responsive YouTube component in widescreen format (16:9).
- */
-const Responsive16By9Embed = asYouTubeToken({
-  ...Base,
-  Components: {
-    _: as(
-      Base.Components?._,
-      asBodilessResponsive16By9Embed,
-    ),
-  },
-  Meta: flowHoc.meta.term('Screen')('Widescreen (16:9)'),
-});
-
-const Hero = asYouTubeToken(Responsive16By9Embed, WithSchema);
+const Hero = asYouTubeToken(Default, Responsive16By9Embed, WithSchema);
 
 export default {
-  WithDefaultPlayerSettings,
   WithFullScreenEnabled,
   WithSchema,
   Base,

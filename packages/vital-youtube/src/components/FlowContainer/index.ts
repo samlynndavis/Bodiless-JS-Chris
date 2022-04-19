@@ -12,71 +12,22 @@
  * limitations under the License.
  */
 
-import identity from 'lodash/identity';
-import {
-  as,
-  on,
-  varyDesigns,
-} from '@bodiless/fclasses';
+import { on } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { YouTubeClean, vitalYouTube } from '../YouTube';
 
 /**
- * YouTube base variation object definition.
- */
-const baseVariation = {
-  YouTube: on(YouTubeClean)(vitalYouTube.Base),
-};
-
-/**
- * YouTube settings variations object definition.
- */
-const settingsVariations = {
-  NoSettings: identity,
-  DefaultPlayer: as(
-    vitalYouTube.Base,
-    vitalYouTube.WithDefaultPlayerSettings,
-  ),
-  FullScreenEnabled: as(
-    vitalYouTube.Base,
-    vitalYouTube.WithFullScreenEnabled,
-  ),
-  DefaultSettings: as(
-    vitalYouTube.Base,
-    vitalYouTube.WithDefaultPlayerSettings,
-    vitalYouTube.WithFullScreenEnabled,
-  ),
-};
-
-/**
- * YouTube SEO variations object definition.
- */
-const seoVariations = {
-  NoSchema: identity,
-  Schema: as(
-    vitalYouTube.Base,
-    vitalYouTube.WithSchema,
-  ),
-};
-
-/**
- * YouTube screen variations object definition.
- */
-const screenVariations = {
-  Default: vitalYouTube.Default,
-  Responsive16By9Embed: vitalYouTube.Responsive16By9Embed,
-};
-
-/**
- * Flow Container variations for YouTube components.
+ * Flow Container variations for YouTube component.
  */
 const WithYouTubeVariations = asFluidToken({
-  Components: varyDesigns(
-    baseVariation,
-    settingsVariations,
-    seoVariations,
-    screenVariations,
-  ),
+  Components: {
+    YouTube: on(YouTubeClean)(
+      vitalYouTube.Default,
+      vitalYouTube.WithFullScreenEnabled,
+      vitalYouTube.Responsive16By9Embed,
+      vitalYouTube.WithSchema,
+    ),
+  },
 });
 
 export const vitalYouTubeFlowContainer = { WithYouTubeVariations };

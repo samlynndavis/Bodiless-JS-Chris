@@ -18,18 +18,51 @@ import {
   flowHoc,
   as,
   replaceWith,
+  H3,
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
+import { vitalTypography } from '@bodiless/vital-elements';
 
-const VideoHero = as(
+const C = {
+  H3: as(vitalTypography.H3)(H3),
+};
+
+const DefaultVideo = as(
+  vitalYouTube.Default,
+  withNodeKey('defaultvideo'),
+)(YouTubeClean);
+
+const WithFullScreenVideo = as(
+  vitalYouTube.Default,
+  vitalYouTube.WithFullScreenEnabled,
+  withNodeKey('withfullscreenvideo'),
+)(YouTubeClean);
+
+const ResponsiveBy9Video = as(
+  vitalYouTube.Default,
+  vitalYouTube.Responsive16By9Embed,
+  withNodeKey('responsive16by9video'),
+)(YouTubeClean);
+
+const HeroVideo = as(
   vitalYouTube.Hero,
-  withNodeKey('videohero'),
+  withNodeKey('herovideo'),
 )(YouTubeClean);
 
 const Examples = () => (
   <>
-    <VideoHero />
+    <C.H3>Default</C.H3>
+    <DefaultVideo />
+    <hr className="my-4" />
+    <C.H3>With full screen enabled</C.H3>
+    <WithFullScreenVideo />
+    <hr className="my-4" />
+    <C.H3>Responsive 16:9</C.H3>
+    <ResponsiveBy9Video />
+    <hr className="my-4" />
+    <C.H3>Hero</C.H3>
+    <HeroVideo />
   </>
 );
 

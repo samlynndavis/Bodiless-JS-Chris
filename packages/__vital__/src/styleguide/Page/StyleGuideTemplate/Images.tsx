@@ -19,9 +19,15 @@ import {
   as,
   replaceWith,
   Img,
+  H3,
 } from '@bodiless/fclasses';
 import { vitalImage } from '@bodiless/vital-image';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
+import { vitalTypography } from '@bodiless/vital-elements';
+
+const C = {
+  H3: as(vitalTypography.H3)(H3),
+};
 
 const DefaultImage = as(
   vitalImage.Default,
@@ -45,10 +51,13 @@ const ImageHero = as(
  */
 const Examples = (props: any) => (
   <>
+    <C.H3>Default</C.H3>
     <DefaultImage />
     <hr className="my-4" />
+    <C.H3>Landscape</C.H3>
     <DefaultLandscapeImage />
     <hr className="my-4" />
+    <C.H3>Hero</C.H3>
     <ImageHero />
   </>
 );
