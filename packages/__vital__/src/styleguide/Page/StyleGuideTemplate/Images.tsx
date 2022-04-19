@@ -34,6 +34,11 @@ const DefaultLandscapeImage = as(
   withNodeKey('defaultlandscapeimage'),
 )(Img);
 
+const ImageHero = as(
+  vitalImage.Hero,
+  withNodeKey('imagehero'),
+)(Img);
+
 /* @todo
  * Rendered only the two types of images available in flow container as separate components.
  * To do is provide all variations we want tested individually.
@@ -43,6 +48,8 @@ const Examples = (props: any) => (
     <DefaultImage />
     <hr className="my-4" />
     <DefaultLandscapeImage />
+    <hr className="my-4" />
+    <ImageHero />
   </>
 );
 

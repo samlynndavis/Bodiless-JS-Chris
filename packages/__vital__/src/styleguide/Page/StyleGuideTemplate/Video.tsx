@@ -13,31 +13,30 @@
  */
 
 import React from 'react';
+import { withNodeKey } from '@bodiless/core';
 import {
   flowHoc,
   as,
   replaceWith,
-  Img,
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
 
-const ImageHero = as(vitalImage.Hero)(Img);
-const VideoHero = as(vitalYouTube.Hero)(YouTubeClean);
+const VideoHero = as(
+  vitalYouTube.Hero,
+  withNodeKey('videohero'),
+)(YouTubeClean);
 
-const HeroVariations = (props: any) => (
+const Examples = () => (
   <>
-    <ImageHero />
-    <hr className="my-4" />
     <VideoHero />
   </>
 );
 
-export const Hero = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
-  Meta: flowHoc.meta.term('Token')('Hero'),
+export const Video = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
+  Meta: flowHoc.meta.term('Token')('Video'),
   Content: {
-    Title: replaceWith(() => <>Hero</>),
-    Examples: replaceWith(HeroVariations),
+    Title: replaceWith(() => <>Video</>),
+    Examples: replaceWith(Examples),
   },
 });
