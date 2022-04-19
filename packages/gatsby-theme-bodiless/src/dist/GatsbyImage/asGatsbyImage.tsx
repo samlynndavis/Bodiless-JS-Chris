@@ -142,7 +142,7 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
         };
         webp.srcSet = fluid.srcSetWebp;
         webp.sizes = fluid.sizes;
-        images.sources?.push(webp);
+        images.sources?.unshift(webp);
       }
     } else {
       const fixed = ((Array.isArray(gatsbyImg.fixed) && gatsbyImg.fixed.length)

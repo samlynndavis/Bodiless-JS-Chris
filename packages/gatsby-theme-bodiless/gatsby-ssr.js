@@ -24,6 +24,12 @@ exports.onRenderBody = ({
     flush(`@bodiless/gatsby-theme: gatsby ssr errors found on pathname: ${pathname}`);
   }
 
+  /**
+   * For the browser not supporting lazy loading, Gatsby Image performs the transition from the
+   * placeholder to the full image after the hydration, through a react hook.
+   * This script allows to transition from the placeholder to the full image
+   * for browers not supporting lazy loading, when gatsby image is not hydrated.
+   */
   const lazyLoadingFallbackScript = oneLine`const e = "undefined" != typeof HTMLImageElement && "loading" in HTMLImageElement.prototype;
   const b = "undefined" != typeof IntersectionObserver && "undefined" != typeof IntersectionObserverEntry && "intersectionRatio" in IntersectionObserverEntry.prototype && "isIntersecting" in IntersectionObserverEntry.prototype;
   !e && b && document.addEventListener("load", (function(e) {

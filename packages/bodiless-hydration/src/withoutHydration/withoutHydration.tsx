@@ -33,6 +33,12 @@ export const isStaticClientSide = !!(
 
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
 
+/**
+ * Gets the full selector for a dom element.
+ * Used to create a unique identifier for the element which can be used as a key
+ * to stash the rendered, non-hydrated element so it can be restored after a
+ * component remounts.
+ */
 const fullSelector = (element: HTMLElement | null) => {
   let path;
   while (element) {

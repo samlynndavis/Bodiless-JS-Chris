@@ -15,7 +15,7 @@
 import { asFluidToken, asMetaToken, asElementToken } from '@bodiless/vital-elements';
 import { withNodeKey } from '@bodiless/core';
 import {
-  Img, on, varyDesigns, withDesign, as, flowHoc
+  Img, on, varyDesigns, as, flowHoc
 } from '@bodiless/fclasses';
 import { vitalImage } from '../Image';
 
@@ -29,9 +29,7 @@ const ImageWithNodeKey = asElementToken({
 // For the base variation, we apply the default token to the design key of
 // the designable element. This can be overridden from the design context.
 const baseVariation = {
-  Image: on(Img)(withDesign({
-    Image: ImageWithNodeKey,
-  })),
+  Image: on(Img)(ImageWithNodeKey),
 };
 
 // For variations, we apply tokens directly (not to the design key). These will
