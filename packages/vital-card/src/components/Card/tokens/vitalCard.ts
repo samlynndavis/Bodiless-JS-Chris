@@ -55,12 +55,12 @@ const Base = asCardToken({
     CTAWrapper: replaceWith(() => null),
   },
   Theme: {
-    Eyebrow: vitalTypography.Eyebrow,
-    Title: vitalTypography.H2,
+    EyebrowWrapper: vitalTypography.Eyebrow,
+    TitleWrapper: vitalTypography.H3,
     Description: vitalTypography.Body,
   },
   Spacing: {
-    ImageWrapper: 'p-4 md:p-8',
+    ImageWrapper: 'py-4 md:py-8',
     Eyebrow: 'my-4',
   },
   Meta: flowHoc.meta.term('Type')('Card'),
