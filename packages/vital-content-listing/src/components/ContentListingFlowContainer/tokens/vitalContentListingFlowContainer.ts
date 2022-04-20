@@ -12,16 +12,13 @@
  * limitations under the License.
  */
 
-import omit from 'lodash/omit';
 import { Img, on } from '@bodiless/fclasses';
 import { asFilterableByGroup } from '@bodiless/filtering';
 import { asFluidToken } from '@bodiless/vital-elements';
-import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { vitalImage } from '@bodiless/vital-image';
 import { withNodeKey } from '@bodiless/core';
 
 const Default = asFluidToken({
-  ...omit(vitalFlowContainer.Base, 'Spacing'),
   Core: {
     ComponentWrapper: asFilterableByGroup(),
   },
