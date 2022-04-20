@@ -13,7 +13,9 @@
  */
 
 import { withNodeKey } from '@bodiless/core';
-import { flowHoc, replaceWith, on } from '@bodiless/fclasses';
+import {
+  flowHoc, replaceWith, on, Div,
+} from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { vitalImage } from '@bodiless/vital-image';
@@ -131,10 +133,13 @@ const WithNoDescription = asCardToken({
 const Hero = asCardToken({
   ...Base,
   Components: {
+    ...Base.Components,
     EyebrowWrapper: replaceWith(() => null),
     Image: vitalImage.Default,
+    CTAWrapper: replaceWith(Div),
   },
   Layout: {
+    ...Base.Layout,
     Wrapper: 'md:flex-row w-full flex flex-col',
     Image: 'w-full',
     ImageWrapper: 'md:w-1/2 flex flex-col',
@@ -143,12 +148,13 @@ const Hero = asCardToken({
     CTAWrapper: 'md:w-1/2 flex flex-col mx-auto justify-center items-center',
   },
   Spacing: {
+    ...Base.Spacing,
     ContentWrapper: 'px-10',
     ImageWrapper: 'p-0',
     CTAWrapper: 'py-4',
   },
   Theme: {
-    TitleWrapper: vitalTypography.H2,
+    ...Base.Theme,
     CTAWrapper: vitalColor.BgPrimaryPage,
   },
   Meta: flowHoc.meta.term('Type')('Card'),
