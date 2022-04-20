@@ -13,20 +13,21 @@
  */
 
 import {
+  addClassesIf,
+  and,
   flowHoc,
   on,
 } from '@bodiless/fclasses';
 import {
-  asBodilessTable,
+  asBodilessTable, useIsInBody, useIsOddRow,
 } from '@bodiless/table';
 import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
+import { vitalTextDecoration } from '@bodiless/vital-elements';
 import { asTableToken } from '../TableClean';
 
 /**
- * Token which produces a default VitalDS editable table.
+ * Token which produces a base VitalDS editable table with editable RTE cells
  */
-
-/* TODO remove editor mb-6 */
 const Base = asTableToken({
   Meta: flowHoc.meta.term('Type')('Table'),
   Schema: {
@@ -37,44 +38,83 @@ const Base = asTableToken({
   },
 });
 
-/* TODO make header bold/darker */
+/**
+ * Token which produces a default VitalDS editable table with minimal styling
+ */
 const Default = asTableToken({
   ...Base,
   Theme: {
     ...Base.Theme,
-    Wrapper: '',
     Table: 'min-w-full',
-    TBody: '',
-    THead: 'border-b',
-    TFoot: '',
-    Row: 'border-b',
-    Cell: '',
     CellContent: 'text-left',
+    THead: vitalTextDecoration.ExtraBold,
+    TFoot: vitalTextDecoration.ExtraBold,
   },
   Spacing: {
     ...Base.Spacing,
-    Wrapper: '',
-    Table: '',
-    TBody: '',
-    THead: '',
-    TFoot: '',
-    Row: '',
-    Cell: 'px-6',
-    CellContent: '',
+    Cell: 'pt-6 px-6',
   },
 });
 
+/**
+ * Token which add alternating striped rows
+ */
 const WithStripes = asTableToken({
   Meta: flowHoc.meta.term('Decoration')('Striped Rows'),
   Theme: {
-    Row: 'row-heidi-stripes', // @TO DO add stripes.
+    Row: addClassesIf(and(useIsInBody, useIsOddRow))('bg-gray-100'),
   }
 });
 
+/**
+ * Token which add hoverable rows
+ */
 const WithHoverable = asTableToken({
   Meta: flowHoc.meta.term('Decoration')('Hoverable Rows'),
   Theme: {
-    Row: 'row-heidi-hoverable hover:bg-gray-100',
+    Row: 'hover:bg-gray-100',
+  }
+});
+
+/**
+ * Token which add borders to all cells
+ */
+const WithBorders = asTableToken({
+  Meta: flowHoc.meta.term('Decoration')('Bordered Cells'),
+  Theme: {
+    Row: 'border',
+  }
+});
+
+/**
+ * Token which add borders to bottom of the rows
+ */
+const WithBottomBorders = asTableToken({
+  Meta: flowHoc.meta.term('Decoration')('Bottom Bordered Rows'),
+  Theme: {
+    THead: 'border-b',
+    Row: 'border-b',
+  }
+});
+
+/**
+ * Token which add header background to table.
+ */
+const WithLightHeaderFooter = asTableToken({
+  Meta: flowHoc.meta.term('Decoration')('Light Header'),
+  Theme: {
+    THead: 'bg-gray-50',
+    TFoot: 'bg-gray-50',
+  }
+});
+
+/**
+ * Token which add scrollbar if becomes to wide for viewport.
+ */
+const ScrollingTable = asTableToken({
+  Meta: flowHoc.meta.term('Decoration')('Scrolling Table'),
+  Theme: {
+    Wrapper: 'overflow-x-auto',
   }
 });
 
@@ -82,4 +122,8 @@ export default {
   Default,
   WithStripes,
   WithHoverable,
+  WithBorders,
+  WithBottomBorders,
+  WithLightHeaderFooter,
+  ScrollingTable,
 };

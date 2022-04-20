@@ -40,6 +40,30 @@ const HoverTable = as(
   withNodeKey('defaulthoverabletable'),
 )(TableClean);
 
+const BorderedTable = as(
+  vitalTable.Default,
+  vitalTable.WithBorders,
+  withNodeKey('borderedtable'),
+)(TableClean);
+
+const BottomBorderTable = as(
+  vitalTable.Default,
+  vitalTable.WithBottomBorders,
+  withNodeKey('bottomborderedtable'),
+)(TableClean);
+
+const HeaderFooterTable = as(
+  vitalTable.Default,
+  vitalTable.WithLightHeaderFooter,
+  withNodeKey('headerfootertable'),
+)(TableClean);
+
+const ScrollingTable = as(
+  vitalTable.Default,
+  vitalTable.ScrollingTable,
+  withNodeKey('scrollingtable'),
+)(TableClean);
+
 /* @todo
   * Rendered only the two types of images available in flow container as separate components.
   * To do is provide all variations we want tested individually.
@@ -51,6 +75,15 @@ const Examples = (props: any) => (
      <StripedTable />
      <hr className="my-4" />
      <HoverTable />
+     <hr className="my-4" />
+     <BorderedTable />
+     <hr className="my-4" />
+     <BottomBorderTable />
+     <hr className="my-4" />
+     <HeaderFooterTable />
+     <hr className="my-4" />
+     <ScrollingTable />
+
    </>
 );
 
