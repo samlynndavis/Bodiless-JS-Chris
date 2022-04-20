@@ -219,7 +219,7 @@ const useMenuOptions = (): TMenuOption[] => {
       group: 'page-group',
       isActive: useIsAnyPageOptionDisabled(node),
       isDisabled,
-      handler: () => render,
+      handler: () => (isDisabled() ? null : render),
     },
   ];
   return menuOptions$;
