@@ -23,17 +23,20 @@ import { ContentListingFiltersClean } from '../ContentListingFilters';
 import type { ContentListingComponents, ContentListingProps } from './types';
 
 const contentListingComponents: ContentListingComponents = {
+  Wrapper: Div,
   FilterWrapper: Div,
-  Filter: ContentListingFiltersClean,
-  ContentListing: FlowContainerClean,
+  Filters: ContentListingFiltersClean,
+  Content: FlowContainerClean,
 };
 
 const ContentListingBase: FC<ContentListingProps> = ({ components: C, ...rest }) => (
-  <C.FilterWrapper {...rest}>
-    <C.Filter>
-      <C.ContentListing />
-    </C.Filter>
-  </C.FilterWrapper>
+  <C.Wrapper {...rest}>
+    <C.FilterWrapper>
+      <C.Filters>
+        <C.Content />
+      </C.Filters>
+    </C.FilterWrapper>
+  </C.Wrapper>
 );
 
 const ContentListingClean = designable(contentListingComponents, 'ContentListing')(ContentListingBase);
