@@ -1,0 +1,95 @@
+{
+  "items": [
+    {
+      "uuid": "f7907900-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "RichText"
+    },
+    {
+      "uuid": "16401d20-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableStripesBorders"
+    },
+    {
+      "uuid": "261d3d90-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableStripesBottomBorders"
+    },
+    {
+      "uuid": "35949750-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableStripesNone"
+    },
+    {
+      "uuid": "496957c0-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableHoverableBorders"
+    },
+    {
+      "uuid": "564a4f30-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableHoverableBottomBorders"
+    },
+    {
+      "uuid": "5dd83550-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableHoverableNone"
+    },
+    {
+      "uuid": "657361e0-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableLightHeaderFooterBorders"
+    },
+    {
+      "uuid": "a5b96470-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableLightHeaderFooterBottomBorders"
+    },
+    {
+      "uuid": "c8a81c60-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableLightHeaderFooterNone"
+    },
+    {
+      "uuid": "d1583b60-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableScrollingTableBorders"
+    },
+    {
+      "uuid": "dbd0be50-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableScrollingTableBottomBorders"
+    },
+    {
+      "uuid": "e45ba210-c0ef-11ec-9097-cf2d141e9773",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableScrollingTableNone"
+    }
+  ]
+}

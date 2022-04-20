@@ -36,4 +36,6 @@ export default asTokenGroup(meta)({
   BgSecondaryFooter: 'bg-vital-secondary-footer-bg',
   TextPrimaryFooterCopy: 'text-vital-primary-footer-copy',
   TextSecondaryEyebrow: 'text-vital-secondary-eyebrow',
+  BgSecondaryTable: 'bg-vital-secondary-table',
+  BgSecondaryTableInteractive: 'hover:bg-vital-secondary-table',
 });

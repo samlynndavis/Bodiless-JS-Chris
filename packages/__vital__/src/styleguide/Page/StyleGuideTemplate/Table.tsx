@@ -60,7 +60,7 @@ const HeaderFooterTable = as(
 
 const ScrollingTable = as(
   vitalTable.Default,
-  vitalTable.ScrollingTable,
+  vitalTable.WithScrollingTable,
   withNodeKey('scrollingtable'),
 )(TableClean);
 

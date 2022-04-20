@@ -13,16 +13,17 @@
  */
 
 import {
-  addClassesIf,
+  flowIf,
   and,
   flowHoc,
   on,
+  as,
 } from '@bodiless/fclasses';
 import {
   asBodilessTable, useIsInBody, useIsOddRow,
 } from '@bodiless/table';
 import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
-import { vitalTextDecoration } from '@bodiless/vital-elements';
+import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { asTableToken } from '../TableClean';
 
 /**
@@ -62,7 +63,7 @@ const Default = asTableToken({
 const WithStripes = asTableToken({
   Meta: flowHoc.meta.term('Decoration')('Striped Rows'),
   Theme: {
-    Row: addClassesIf(and(useIsInBody, useIsOddRow))('bg-gray-100'),
+    Row: flowIf(and(useIsInBody, useIsOddRow))(as(vitalColor.BgSecondaryTable)),
   }
 });
 
@@ -72,7 +73,7 @@ const WithStripes = asTableToken({
 const WithHoverable = asTableToken({
   Meta: flowHoc.meta.term('Decoration')('Hoverable Rows'),
   Theme: {
-    Row: 'hover:bg-gray-100',
+    Row: vitalColor.BgSecondaryTableInteractive,
   }
 });
 
@@ -103,15 +104,15 @@ const WithBottomBorders = asTableToken({
 const WithLightHeaderFooter = asTableToken({
   Meta: flowHoc.meta.term('Decoration')('Light Header'),
   Theme: {
-    THead: 'bg-gray-50',
-    TFoot: 'bg-gray-50',
+    THead: vitalColor.BgSecondaryTable,
+    TFoot: vitalColor.BgSecondaryTable,
   }
 });
 
 /**
  * Token which add scrollbar if becomes to wide for viewport.
  */
-const ScrollingTable = asTableToken({
+const WithScrollingTable = asTableToken({
   Meta: flowHoc.meta.term('Decoration')('Scrolling Table'),
   Theme: {
     Wrapper: 'overflow-x-auto',
@@ -125,5 +126,5 @@ export default {
   WithBorders,
   WithBottomBorders,
   WithLightHeaderFooter,
-  ScrollingTable,
+  WithScrollingTable,
 };
