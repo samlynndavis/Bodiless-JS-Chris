@@ -13,7 +13,9 @@
  */
 
 import vitalContentListingFlowContainer from './tokens';
+import vitalContentListingFlowContainerBase from './tokens/vitalContentListingFlowContainer';
 
 export {
   vitalContentListingFlowContainer,
+  vitalContentListingFlowContainerBase,
 };

@@ -14,9 +14,11 @@
 
 import ContentListingFiltersClean, { asContentListingFiltersToken } from './ContentListingFiltersClean';
 import vitalContentListingFilters from './tokens';
+import vitalContentListingFiltersBase from './tokens/vitalContentListingFilters';
 
 export {
   ContentListingFiltersClean,
   asContentListingFiltersToken,
   vitalContentListingFilters,
+  vitalContentListingFiltersBase,
 };
