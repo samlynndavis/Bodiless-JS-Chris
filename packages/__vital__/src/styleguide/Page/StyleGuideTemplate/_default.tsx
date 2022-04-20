@@ -42,7 +42,7 @@ const Examples = () => (
     </List>
     <Subtitle>Components</Subtitle>
     <List>
-      <li><a href="./flowcontainer">Flow Container</a></li>
+      <li><a href="./flow-container">Flow Container</a></li>
       <li><a href="./images">Images</a></li>
       <li><a href="./list">List</a></li>
       <li><a href="./card">Card</a></li>
