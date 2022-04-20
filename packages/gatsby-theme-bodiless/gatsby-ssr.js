@@ -13,13 +13,22 @@
  */
 
 const React = require('react');
-const oneLine = require('common-tags/lib/oneLine');
-const { hasLogs, flush } = require('./dist/fsLogHandler');
+const commonTags = require('common-tags');
+const gatsbyPluginImageOnRenderBody= require('gatsby-plugin-image/gatsby-ssr').onRenderBody;
+const { hasLogs, flush } = require('./cjs/dist/fsLogHandler');
 
-exports.onRenderBody = ({
-  setHeadComponents,
-  pathname,
-}) => {
+const generateHtml = function generateHtml(str) {
+  return {
+    __html: commonTags.oneLine(str)
+  };
+};
+
+exports.onRenderBody = (ref) => {
+  const {
+    setHeadComponents,
+    pathname,
+  } = ref;
+
   if (hasLogs()) {
     flush(`@bodiless/gatsby-theme: gatsby ssr errors found on pathname: ${pathname}`);
   }
@@ -30,7 +39,7 @@ exports.onRenderBody = ({
    * This script allows to transition from the placeholder to the full image
    * for browers not supporting lazy loading, when gatsby image is not hydrated.
    */
-  const lazyLoadingFallbackScript = oneLine`const e = "undefined" != typeof HTMLImageElement && "loading" in HTMLImageElement.prototype;
+  const lazyLoadingFallbackScript = `const e = "undefined" != typeof HTMLImageElement && "loading" in HTMLImageElement.prototype;
   const b = "undefined" != typeof IntersectionObserver && "undefined" != typeof IntersectionObserverEntry && "intersectionRatio" in IntersectionObserverEntry.prototype && "isIntersecting" in IntersectionObserverEntry.prototype;
   !e && b && document.addEventListener("load", (function(e) {
       let options = {
@@ -58,9 +67,12 @@ exports.onRenderBody = ({
   setHeadComponents([
     React.createElement('script', {
       key: 'lazy-loading-fallback-script',
-      dangerouslySetInnerHTML: {
-        __html: lazyLoadingFallbackScript,
-      },
+      dangerouslySetInnerHTML: generateHtml(lazyLoadingFallbackScript),
     })
   ]);
+
+  if (process.env.BODILESS_GATSBY_PLUGIN_IMAGE_OMIT && process.env.NODE_ENV !== 'development') {
+    // Call on renderBody from gatsby-plugin-image to add the required not react JS and CSS.
+    gatsbyPluginImageOnRenderBody(ref);
+  }
 };
