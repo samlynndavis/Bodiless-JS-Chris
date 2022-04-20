@@ -24,4 +24,4 @@ export {
 
 export * from './index.bl-edit';
 
-export type { TableComponents, TableBaseProps } from './types';
+export type { TableComponents } from '@bodiless/table';

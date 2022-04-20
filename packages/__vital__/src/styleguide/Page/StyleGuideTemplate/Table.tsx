@@ -30,13 +30,13 @@ const DefaultTable = as(
 
 const StripedTable = as(
   vitalTable.Default,
-  vitalTable.withStripes,
+  vitalTable.WithStripes,
   withNodeKey('stripedtable'),
 )(TableClean);
 
 const HoverTable = as(
   vitalTable.Default,
-  vitalTable.withHoverable,
+  vitalTable.WithHoverable,
   withNodeKey('defaulthoverabletable'),
 )(TableClean);
 

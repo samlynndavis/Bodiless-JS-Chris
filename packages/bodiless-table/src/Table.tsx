@@ -46,8 +46,9 @@ const DefaultCell = (props:HTMLProps<StylableProps>) => {
   return <Cell {...props} />;
 };
 const tableComponentsStart:TableComponents = {
-  TableWrapper: Div,
-  Wrapper: Table,
+  Wrapper: Div,
+  // eslint-disable-next-line object-shorthand
+  Table: Table, // lint error  Expected property shorthand  object-shorthand
   TBody: Tbody,
   THead: Thead,
   TFoot: Tfoot,
@@ -57,7 +58,7 @@ const tableComponentsStart:TableComponents = {
 };
 const TableSection = (props:TableSectionProps) => {
   const {
-    Wrapper,
+    Table,
     Row,
     Cell,
     CellContent,
@@ -67,7 +68,7 @@ const TableSection = (props:TableSectionProps) => {
   } = props;
   return (
     <TableSectionContext.Provider value={section}>
-      <Wrapper>
+      <Table>
         {(rows || []).map((row, rowIndex) => (
           <TableRowContext.Provider key={String(`row-${row}`)} value={{ name: row, index: rowIndex }}>
             <Row
@@ -86,7 +87,7 @@ const TableSection = (props:TableSectionProps) => {
             </Row>
           </TableRowContext.Provider>
         ))}
-      </Wrapper>
+      </Table>
     </TableSectionContext.Provider>
   );
 };
@@ -101,8 +102,8 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
     ...rest
   } = props;
   const {
-    TableWrapper,
     Wrapper,
+    Table,
     TBody,
     THead,
     TFoot,
@@ -118,11 +119,11 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
       footRows,
     }}
     >
-      <TableWrapper>
-        <Wrapper {...rest}>
+      <Wrapper>
+        <Table {...rest}>
           <TableSection
             {...{
-              Wrapper: THead,
+              Table: THead,
               Row,
               Cell,
               CellContent,
@@ -133,7 +134,7 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
           />
           <TableSection
             {...{
-              Wrapper: TBody,
+              Table: TBody,
               Row,
               Cell,
               CellContent,
@@ -144,7 +145,7 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
           />
           <TableSection
             {...{
-              Wrapper: TFoot,
+              Table: TFoot,
               Row,
               Cell,
               CellContent,
@@ -153,8 +154,8 @@ const TableBase:FunctionComponent<TableProps> = (props) => {
               columns,
             }}
           />
-        </Wrapper>
-      </TableWrapper>
+        </Table>
+      </Wrapper>
     </TableContext.Provider>
   );
 };

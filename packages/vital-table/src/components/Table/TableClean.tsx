@@ -12,29 +12,17 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
-import { withoutHydrationInline } from '@bodiless/hydration';
-import {
-  designable,
-} from '@bodiless/fclasses';
+import { withoutHydration } from '@bodiless/hydration';
 import {
   CleanTable,
 } from '@bodiless/table';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { TableComponents, TableBaseProps } from './types';
+import type { TableComponents } from '@bodiless/table';
 
-const tableComponents: TableComponents = {
-  Table: CleanTable,
-};
+const TableClean = CleanTable;
 
-const TableBase: FC<TableBaseProps> = ({ components: C, children, ...rest }) => (
-  <C.Table {...rest} />
-);
-
+const TableStatic = withoutHydration()(CleanTable);
 const asTableToken = asVitalTokenSpec<TableComponents>();
-
-const TableClean = designable(tableComponents, 'Table')(TableBase);
-const TableStatic = withoutHydrationInline()(TableClean);
 
 export default TableClean;
 export { asTableToken, TableStatic };

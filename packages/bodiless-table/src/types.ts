@@ -21,8 +21,8 @@ enum Section {
   foot = 'foot',
 }
 export type TableComponents = {
-  TableWrapper: ComponentType<StylableProps>,
   Wrapper: ComponentType<StylableProps>,
+  Table: ComponentType<StylableProps>,
   TBody: ComponentType<StylableProps>,
   THead: ComponentType<StylableProps>,
   TFoot: ComponentType<StylableProps>,
@@ -41,7 +41,7 @@ type TableProps = TableBaseProps
 & DesignableComponentsProps<TableComponents> & HTMLProps<HTMLElement>;
 
 type TableSectionProps = {
-  Wrapper: ComponentType<StylableProps>,
+  Table: ComponentType<StylableProps>,
   Row: ComponentType<StylableProps>,
   Cell: ComponentType<StylableProps>,
   CellContent: ComponentType<StylableProps>,

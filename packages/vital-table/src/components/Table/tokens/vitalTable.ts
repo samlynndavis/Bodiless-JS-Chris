@@ -13,15 +13,13 @@
  */
 
 import {
-  withDesign,
   flowHoc,
-  // on,
+  on,
 } from '@bodiless/fclasses';
 import {
   asBodilessTable,
 } from '@bodiless/table';
-// import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
-import { withEditorRich } from '@bodiless/vital-editors';
+import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
 import { asTableToken } from '../TableClean';
 
 /**
@@ -31,24 +29,11 @@ import { asTableToken } from '../TableClean';
 /* TODO remove editor mb-6 */
 const Base = asTableToken({
   Meta: flowHoc.meta.term('Type')('Table'),
-  Theme: {
-    Table: '',
-  },
   Schema: {
-    Table: asBodilessTable(),
+    _: asBodilessTable(),
   },
-  /* @TODO  CellContent to the bodiless table design, and use that
-   * here rather than using withEditor...
-   * i'm not sure we actually need the nodeKey. For the placeholder,
-   * maybe we can just use the defautl placeholder, but if you want a
-   * unique one, add it via 'addProps'
-   * maybe in the 'Content' domain.
-   */
   Editors: {
-    // CellContent: on(RichTextClean)(vitalRichText.Default),
-    Table: withDesign({
-      CellContent: withEditorRich('cell', ''),
-    }),
+    CellContent: on(RichTextClean)(vitalRichText.Default),
   },
 });
 
@@ -57,37 +42,44 @@ const Default = asTableToken({
   ...Base,
   Theme: {
     ...Base.Theme,
-    Table: withDesign({
-      Wrapper: 'min-w-full',
-      TBody: '',
-      THead: 'border-b',
-      TFoot: '',
-      Row: 'border-b',
-      Cell: 'px-6 text-left',
-    }),
+    Wrapper: '',
+    Table: 'min-w-full',
+    TBody: '',
+    THead: 'border-b',
+    TFoot: '',
+    Row: 'border-b',
+    Cell: '',
+    CellContent: 'text-left',
+  },
+  Spacing: {
+    ...Base.Spacing,
+    Wrapper: '',
+    Table: '',
+    TBody: '',
+    THead: '',
+    TFoot: '',
+    Row: '',
+    Cell: 'px-6',
+    CellContent: '',
   },
 });
 
-const withStripes = asTableToken({
+const WithStripes = asTableToken({
   Meta: flowHoc.meta.term('Decoration')('Striped Rows'),
   Theme: {
-    Table: withDesign({
-      Row: 'row-heidi-stripes', // @TO DO add stripes.
-    }),
+    Row: 'row-heidi-stripes', // @TO DO add stripes.
   }
 });
 
-const withHoverable = asTableToken({
+const WithHoverable = asTableToken({
   Meta: flowHoc.meta.term('Decoration')('Hoverable Rows'),
   Theme: {
-    Table: withDesign({
-      Row: 'row-heidi-hoverable hover:bg-gray-100',
-    }),
+    Row: 'row-heidi-hoverable hover:bg-gray-100',
   }
 });
 
 export default {
   Default,
-  withStripes,
-  withHoverable,
+  WithStripes,
+  WithHoverable,
 };
