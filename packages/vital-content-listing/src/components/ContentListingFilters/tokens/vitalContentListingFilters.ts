@@ -48,13 +48,13 @@ const withCategoryList = withDesign({
 const Default = asContentListingFiltersToken({
   Layout: {
     Wrapper: 'flex flex-col lg:flex-row lg:min-h-screen',
-    FilterWrapper: 'lg:w-1/3 lg:mr-5 lg:rtl:ml-5 lg:rtl:mr-0',
     FilterHeader: 'flex flex-col w-full lg:flex-row lg:justify-between lg:items-center',
-    ContentWrapper: 'w-full',
     ResetButton: 'self-start',
   },
   Spacing: {
+    FilterWrapper: 'lg:w-1/3 lg:mr-5 lg:rtl:ml-5 lg:rtl:mr-0',
     FilterTitle: 'my-2 lg:my-0',
+    ContentWrapper: 'w-full',
     ResetButton: 'my-2',
   },
   Theme: {
