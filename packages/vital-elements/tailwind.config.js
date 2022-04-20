@@ -55,6 +55,7 @@ const twConfig = {
         eyebrow: '#CC0099',
         'footer-bg': '#2B2B33',
         table: '#E4E7EB',
+        separator: '#666666',
       },
     },
     extend: {

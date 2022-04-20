@@ -38,4 +38,5 @@ export default asTokenGroup(meta)({
   TextSecondaryEyebrow: 'text-vital-secondary-eyebrow',
   BgSecondaryTable: 'bg-vital-secondary-table',
   BgSecondaryTableInteractive: 'hover:bg-vital-secondary-table',
+  BorderSecondarySeparator: 'border-vital-secondary-separator',
 });
