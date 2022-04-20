@@ -1,8 +1,8 @@
 {
-  "name": "@bodiless/vital-structuredata",
+  "name": "@bodiless/schema-org",
   "sideEffects": false,
   "version": "1.0.0-beta.7",
-  "description": "Provides a Structure Data to support optimal SEO.",
+  "description": "Provides a Schema.org component that injects metadata into a page.",
   "author": "Lucas Varela <lvarelab@its.jnj.com>",
   "contributors": [
     "Aécio Tenório <atenorio2@its.jnj.com>",

@@ -19,7 +19,7 @@ import {
   flowIf,
   not,
 } from '@bodiless/fclasses';
-import { WithStructuredDataProvider } from '@bodiless/vital-structuredata';
+import { WithStructuredDataProvider } from '@bodiless/schema-org';
 import { asLayoutToken } from '../LayoutClean';
 import { vitalFooter } from '../../Footer';
 import { vitalHeader } from '../../Header';

@@ -1,7 +1,7 @@
 {
   "Components": {
     "SEO": {
-      "Schema": {
+      "Schema.org": {
         "README.md": "./doc/StructureData.md",
         "Organization.md": "./doc/Organization.md",
         "Website.md": "./doc/Website.md",

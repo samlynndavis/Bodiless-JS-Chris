@@ -19,7 +19,7 @@ import {
 import {
   asResponsive16By9Embed as asBodilessResponsive16By9Embed,
 } from '@bodiless/organisms';
-import { asSchemaSource, WithVideoSchema } from '@bodiless/vital-structuredata';
+import { asSchemaSource, WithVideoSchema } from '@bodiless/schema-org';
 import {
   asResponsiveYouTube as asBodilessResponsiveYouTube,
   withFullScreenEnabled as withBodilessFullScreenEnabled,

@@ -31,7 +31,7 @@
     "@bodiless/vital-elements": "^1.0.0-beta.7",
     "@bodiless/fclasses": "^1.0.0-beta.7",
     "@bodiless/organisms": "^1.0.0-beta.7",
-    "@bodiless/vital-structuredata": "^1.0.0-beta.7",
+    "@bodiless/schema-org": "^1.0.0-beta.7",
     "@bodiless/youtube": "^1.0.0-beta.7",
     "lodash": "^4.17.19"
   },

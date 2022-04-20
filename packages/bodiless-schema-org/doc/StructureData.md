@@ -1,6 +1,6 @@
-# VitalDS Structure Data
+# Bodiless Schema.org
 
-Provides a Structure Data component to support adding SEO schema information to content, as well as
+Provides a Schema component to support adding SEO schema information to content, as well as
 helper functions to get and return page/content data.
 
 The base package currently supports the following schemas:
@@ -20,7 +20,7 @@ using `asSchemaSource`. For instance, in the [Product Schema](#product-schema) s
 the following example:
 
 ```tsx
-import { asSchemaSource } from '@bodiless/vital-structuredata';
+import { asSchemaSource } from '@bodiless/schema-org';
 
   SEO: {
     TitleRow: withDesign({
@@ -43,7 +43,7 @@ JSON-LD following the Product schema is automatically generated for Product Page
     product name:
 
     ```tsx
-    import { asSchemaSource } from '@bodiless/vital-structuredata';
+    import { asSchemaSource } from '@bodiless/schema-org';
 
       SEO: {
         TitleRow: withDesign({
@@ -57,7 +57,7 @@ JSON-LD following the Product schema is automatically generated for Product Page
 01. Return data; you should set the schema component in your page:
 
     ```tsx
-    import { WithProductSchema } from '@bodiless/vital-structuredata';
+    import { WithProductSchema } from '@bodiless/schema-org';
 
       SEO: {
         PageWrapper: WithProductSchema,
@@ -67,7 +67,7 @@ JSON-LD following the Product schema is automatically generated for Product Page
 01. Set provider; you should define the schema provider in your page structure template:
 
     ```tsx
-    import { withStructuredDataProvider } from '@bodiless/vital-structuredata';
+    import { withStructuredDataProvider } from '@bodiless/schema-org';
 
       SEO: {
         _: withStructuredDataProvider as Token,
@@ -171,7 +171,7 @@ Developers
 01. Get data:
 
     ```tsx
-    import { asSchemaSource } from '@bodiless/vital-structuredata';
+    import { asSchemaSource } from '@bodiless/schema-org';
 
       SEO: {
         Item: asSchemaSource('youtube-iframe'),
@@ -181,7 +181,7 @@ Developers
 01. Return data:
 
     ```tsx
-    import { WithVideoSchema } from '@bodiless/vital-structuredata';
+    import { WithVideoSchema } from '@bodiless/schema-org';
 
       SEO: {
         Wrapper: WithVideoSchema,
@@ -191,7 +191,7 @@ Developers
 01. Set provider in page component:
 
     ```tsx
-    import { StructuredDataProvider } from '@bodiless/vital-structuredata';
+    import { StructuredDataProvider } from '@bodiless/schema-org';
 
         <StructuredDataProvider>
           <Layout>
