@@ -21,12 +21,7 @@ import { YouTubeClean, vitalYouTube } from '../YouTube';
  */
 const WithYouTubeVariations = asFluidToken({
   Components: {
-    YouTube: on(YouTubeClean)(
-      vitalYouTube.Default,
-      vitalYouTube.WithFullScreenEnabled,
-      vitalYouTube.Responsive16By9Embed,
-      vitalYouTube.WithSchema,
-    ),
+    YouTube: on(YouTubeClean)(vitalYouTube.Default),
   },
 });
 

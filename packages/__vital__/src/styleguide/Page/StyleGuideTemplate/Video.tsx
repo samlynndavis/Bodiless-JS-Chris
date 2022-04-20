@@ -33,18 +33,6 @@ const DefaultVideo = as(
   withNodeKey('defaultvideo'),
 )(YouTubeClean);
 
-const WithFullScreenVideo = as(
-  vitalYouTube.Default,
-  vitalYouTube.WithFullScreenEnabled,
-  withNodeKey('withfullscreenvideo'),
-)(YouTubeClean);
-
-const ResponsiveBy9Video = as(
-  vitalYouTube.Default,
-  vitalYouTube.Responsive16By9Embed,
-  withNodeKey('responsive16by9video'),
-)(YouTubeClean);
-
 const HeroVideo = as(
   vitalYouTube.Hero,
   withNodeKey('herovideo'),
@@ -54,12 +42,6 @@ const Examples = () => (
   <>
     <C.H3>Default</C.H3>
     <DefaultVideo />
-    <hr className="my-4" />
-    <C.H3>With full screen enabled</C.H3>
-    <WithFullScreenVideo />
-    <hr className="my-4" />
-    <C.H3>Responsive 16:9</C.H3>
-    <ResponsiveBy9Video />
     <hr className="my-4" />
     <C.H3>Hero</C.H3>
     <HeroVideo />

@@ -25,6 +25,7 @@ import {
   withFullScreenEnabled as withBodilessFullScreenEnabled,
   withYouTubePlayerSettings,
 } from '@bodiless/youtube';
+import omit from 'lodash/omit';
 import { asYouTubeToken } from '../YouTubeClean';
 import { defaultPlayerSettings } from '../util';
 
@@ -34,6 +35,7 @@ import { defaultPlayerSettings } from '../util';
 const Base = asYouTubeToken({
   Core: {
     _: asBodilessResponsiveYouTube,
+    Item: withYouTubePlayerSettings(defaultPlayerSettings),
   },
   Content: {
     // Video placeholder.
@@ -43,20 +45,9 @@ const Base = asYouTubeToken({
 });
 
 /**
- * Token that provides VitalDS YouTube default component.
+ * WithResponsive16By9Embed provides responsive YouTube component in widescreen format (16:9).
  */
-const Default = asYouTubeToken({
-  ...Base,
-  Components: {
-    Item: withYouTubePlayerSettings(defaultPlayerSettings),
-  },
-  Meta: flowHoc.meta.term('Screen')('Default'),
-});
-
-/**
- * Responsive16By9Embed provides responsive YouTube component in widescreen format (16:9).
- */
-const Responsive16By9Embed = asYouTubeToken({
+const WithResponsive16By9Embed = asYouTubeToken({
   Components: {
     _: asBodilessResponsive16By9Embed,
   },
@@ -84,13 +75,25 @@ const WithSchema = asYouTubeToken({
   Meta: flowHoc.meta.term('SEO')('With Schema'),
 });
 
-const Hero = asYouTubeToken(Default, Responsive16By9Embed, WithSchema);
+const Default = asYouTubeToken({
+  ...Base,
+  Compose: {
+    WithFullScreenEnabled,
+    WithResponsive16By9Embed,
+    WithSchema,
+  }
+});
+
+const Hero = asYouTubeToken({
+  ...Default,
+  Compose: omit(Default.Compose, 'WithFullScreenEnabled')
+});
 
 export default {
   WithFullScreenEnabled,
   WithSchema,
   Base,
   Default,
-  Responsive16By9Embed,
+  WithResponsive16By9Embed,
   Hero,
 };
