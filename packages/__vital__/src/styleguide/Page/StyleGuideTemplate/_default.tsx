@@ -44,7 +44,6 @@ const Examples = () => (
     <Subtitle>Components</Subtitle>
     <Para>
       <ul>
-        <li><a href="/styleguide/content-listing">Content Listing</a></li>
         <li><a href="/styleguide/flow-container">Flow Container</a></li>
         <li><a href="/styleguide/images">Images</a></li>
       </ul>

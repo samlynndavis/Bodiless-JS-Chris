@@ -17,14 +17,26 @@ import {
   as,
   Img,
   addProps,
+  flowIf,
+  replaceWith,
 } from '@bodiless/fclasses';
 import { vitalImage } from '@bodiless/vital-image';
 import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { withNodeKey } from '@bodiless/core';
+import { useNode, withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
+import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
+
+const isHomePage = () => useNode().node.pagePath === '/';
+
+const WithNoBreadcrumbOnHomePage = asGenericTemplateToken({
+  Flow: flowIf(isHomePage),
+  Components: {
+    BreadcrumbWrapper: replaceWith(() => null),
+  },
+});
 
 const Default = asGenericTemplateToken({
   Components: {
@@ -59,8 +71,21 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint
     ),
   },
+  Compose: {
+    WithNoBreadcrumbOnHomePage,
+  },
+});
+
+const ContentListing = asGenericTemplateToken({
+  ...Default,
+  Components: {
+    ...Default.Components,
+    Content: on(ContentListingClean)(vitalContentListing.Default),
+  },
 });
 
 export default {
   Default,
+  ContentListing,
+  WithNoBreadcrumbOnHomePage,
 };

@@ -28,7 +28,7 @@ const Default = asFluidToken({
   Components: {
     // @TODO: Replace with cards once vital-cards has been implemented.
     FilterableContentImageVariations: on(Img)(
-      vitalImage.Default,
+      vitalImage.WithEditorPlain,
       vitalImage.WithLink,
       // Needs to provide key since WinLink invalidates default one.
       withNodeKey('image'),

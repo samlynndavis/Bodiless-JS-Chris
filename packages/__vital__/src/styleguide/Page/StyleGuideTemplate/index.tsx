@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { ContentListing } from './ContentListing';
 import { Editors, EditorsMonoFont } from './Editors';
 import { Typography } from './Typography';
 import { Layout } from './Layout';
@@ -24,7 +23,6 @@ import { _default } from './_default';
 
 export const __vital__StyleGuideTemplate = {
   _default,
-  ContentListing,
   Editors,
   EditorsMonoFont,
   Typography,

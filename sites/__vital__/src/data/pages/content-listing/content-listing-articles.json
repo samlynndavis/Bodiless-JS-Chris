@@ -1,6 +1,13 @@
 {
   "items": [
     {
+      "uuid": "4977fb30-c096-11ec-b4cb-4b38911e4861",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/4"
+      },
+      "type": "FilterableContentImageVariations"
+    },
+    {
       "uuid": "76cc9ab0-bfe1-11ec-9ff0-39dc6dcea05c",
       "wrapperProps": {
         "className": "w-full lg:w-1/4"
