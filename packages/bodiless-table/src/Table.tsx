@@ -47,8 +47,7 @@ const DefaultCell = (props:HTMLProps<StylableProps>) => {
 };
 const tableComponentsStart:TableComponents = {
   Wrapper: Div,
-  // eslint-disable-next-line object-shorthand
-  Table: Table, // lint error  Expected property shorthand  object-shorthand
+  Table,
   TBody: Tbody,
   THead: Thead,
   TFoot: Tfoot,
