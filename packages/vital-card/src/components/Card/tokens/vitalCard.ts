@@ -34,7 +34,7 @@ const Base = asCardToken({
     Wrapper: asBodilessLink(),
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
     Eyebrow: on(EditorPlainClean)(vitalEditorPlain.Default),
-    Description: on(RichTextClean)(vitalRichText.Default),
+    Description: on(RichTextClean)(vitalRichText.BasicNoLink),
     CTALink: asBodilessLink(),
     CTAText: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
