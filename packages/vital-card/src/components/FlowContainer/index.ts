@@ -20,21 +20,21 @@ import {
   CardClean, vitalCard, CardStatic, vitalCardStatic,
 } from '../Card';
 
-// For the base variation, we apply the default token to the design key of
-// the designable element. This can be overridden from the design context.
 const BaseVariation = {
   Card: on(CardClean)(vitalCard.Base),
 };
 
 const OrientationVariations = {
-  Vertical: vitalCard.WithVerticalOrientation,
-  Horizontal: vitalCard.WithHorizontalOrientation,
+  Vertical: on(CardClean)(vitalCard.WithVerticalOrientation),
+  Horizontal: on(CardClean)(vitalCard.WithHorizontalOrientation),
 };
 const TitleVariations = {
-  NoTitle: vitalCard.WithNoTitle,
+  Title: on(CardClean)(vitalCard.Base),
+  NoTitle: on(CardClean)(vitalCard.WithNoTitle),
 };
 const DescriptionVariations = {
-  NoDescription: vitalCard.WithNoDescription,
+  Description: on(CardClean)(vitalCard.Base),
+  NoDescription: on(CardClean)(vitalCard.WithNoDescription),
 };
 
 /**
@@ -42,7 +42,8 @@ const DescriptionVariations = {
  */
 const WithCardVariations = asFluidToken({
   Components: {
-    Card: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.WithVerticalOrientation),
+    VerticalCard: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.WithVerticalOrientation),
+    HeroCard: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.Hero),
     ...varyDesigns(
       BaseVariation,
       OrientationVariations,

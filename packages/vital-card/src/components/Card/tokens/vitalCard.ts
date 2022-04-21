@@ -60,7 +60,6 @@ const Base = asCardToken({
     Description: vitalTypography.Body,
   },
   Spacing: {
-    ImageWrapper: 'py-4 md:py-8',
     Eyebrow: 'my-4',
   },
   Meta: flowHoc.meta.term('Type')('Card'),
@@ -77,6 +76,7 @@ const WithVerticalOrientation = asCardToken({
   },
   Spacing: {
     ContentWrapper: 'py-4',
+    ImageWrapper: 'py-4 md:py-8',
   },
   Meta: flowHoc.meta.term('Orientation')('Vertical'),
 });
@@ -106,7 +106,7 @@ const WithNoTitle = asCardToken({
   Components: {
     TitleWrapper: replaceWith(() => null),
   },
-  Meta: flowHoc.meta.term('Type')('Card'),
+  Meta: flowHoc.meta.term('Title')('No Title'),
 });
 
 /**
@@ -122,7 +122,7 @@ const WithNoDescription = asCardToken({
   Layout: {
     Title: 'flex-grow',
   },
-  Meta: flowHoc.meta.term('Type')('Card'),
+  Meta: flowHoc.meta.term('Title')('No Description'),
 });
 
 /**
@@ -155,7 +155,7 @@ const Hero = asCardToken({
     ...Base.Theme,
     CTAWrapper: vitalColor.BgPrimaryPage,
   },
-  Meta: flowHoc.meta.term('Type')('Card'),
+  Meta: flowHoc.meta.term('Title')('Hero'),
 });
 
 const Default = asCardToken({
