@@ -20,11 +20,19 @@ import {
   as,
 } from '@bodiless/fclasses';
 import {
-  asBodilessTable, useIsInBody, useIsOddRow,
+  asBodilessTable, useIsFirstColumn, useIsInBody, useIsOddRow,
 } from '@bodiless/table';
 import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
-import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
+import { vitalColor } from '@bodiless/vital-elements';
 import { asTableToken } from '../TableClean';
+
+// Redo Preview
+/*
+const withPreview = flowIf(hasProp('preview'))(
+  withoutProps(['preview']),
+  replaceWith(Img),
+);
+*/
 
 /**
  * Token which produces a base VitalDS editable table with editable RTE cells
@@ -37,6 +45,11 @@ const Base = asTableToken({
   Editors: {
     CellContent: on(RichTextClean)(vitalRichText.Default),
   },
+  /*
+  Compose: {
+    _: withPreview,
+  },
+  */
 });
 
 /**
@@ -48,8 +61,6 @@ const Default = asTableToken({
     ...Base.Theme,
     Table: 'min-w-full',
     CellContent: 'text-left',
-    THead: vitalTextDecoration.ExtraBold,
-    TFoot: vitalTextDecoration.ExtraBold,
   },
   Spacing: {
     ...Base.Spacing,
@@ -58,9 +69,19 @@ const Default = asTableToken({
 });
 
 /**
+ * Token which adds header design to first column
+ */
+const WithFirtColumnHeader = asTableToken({
+  Meta: flowHoc.meta.term('Decoration')('First Column as Header'),
+  Theme: {
+    Cell: flowIf(useIsFirstColumn)(as(vitalColor.BgSecondaryTable)),
+  }
+});
+
+/**
  * Token which add alternating striped rows
  */
-const WithStripes = asTableToken({
+const WithRowStripes = asTableToken({
   Meta: flowHoc.meta.term('Decoration')('Striped Rows'),
   Theme: {
     Row: flowIf(and(useIsInBody, useIsOddRow))(as(vitalColor.BgSecondaryTable)),
@@ -112,7 +133,7 @@ const WithLightHeaderFooter = asTableToken({
 /**
  * Token which add scrollbar if becomes to wide for viewport.
  */
-const WithScrollingTable = asTableToken({
+const WithScrolling = asTableToken({
   Meta: flowHoc.meta.term('Decoration')('Scrolling Table'),
   Theme: {
     Wrapper: 'overflow-x-auto',
@@ -121,10 +142,11 @@ const WithScrollingTable = asTableToken({
 
 export default {
   Default,
-  WithStripes,
+  WithRowStripes,
   WithHoverable,
   WithBorders,
   WithBottomBorders,
   WithLightHeaderFooter,
-  WithScrollingTable,
+  WithFirtColumnHeader,
+  WithScrolling,
 };

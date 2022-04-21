@@ -90,6 +90,13 @@
         "className": "w-full lg:w-1/2"
       },
       "type": "TableScrollingTableNone"
+    },
+    {
+      "uuid": "ef785830-c187-11ec-b3e3-b9594e11899a",
+      "wrapperProps": {
+        "className": "w-full lg:w-1/2"
+      },
+      "type": "TableFirstColumnHeaderNone"
     }
   ]
 }

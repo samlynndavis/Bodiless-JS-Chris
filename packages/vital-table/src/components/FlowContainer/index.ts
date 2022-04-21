@@ -23,10 +23,11 @@ const BaseVariation = {
 };
 
 const TableVariations = {
-  Stripes: vitalTable.WithStripes,
+  Stripes: vitalTable.WithRowStripes,
   Hoverable: vitalTable.WithHoverable,
   LightHeaderFooter: vitalTable.WithLightHeaderFooter,
-  ScrollingTable: vitalTable.WithScrollingTable,
+  FirstColumnHeader: vitalTable.WithFirtColumnHeader,
+  ScrollingTable: vitalTable.WithScrolling,
 };
 
 const BorderDecorationVariations = {

@@ -37,6 +37,7 @@ export default asTokenGroup(meta)({
   TextPrimaryFooterCopy: 'text-vital-primary-footer-copy',
   TextSecondaryEyebrow: 'text-vital-secondary-eyebrow',
   BgSecondaryTable: 'bg-vital-secondary-table',
-  BgSecondaryTableInteractive: 'hover:bg-vital-secondary-table',
+  BgSecondaryTableRowColumn: 'bg-vital-secondary-table-interactive',
+  BgSecondaryTableInteractive: 'hover:bg-vital-secondary-table-interactive',
   BorderSecondarySeparator: 'border-vital-secondary-separator',
 });

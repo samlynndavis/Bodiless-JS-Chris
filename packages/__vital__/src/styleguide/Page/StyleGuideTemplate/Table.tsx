@@ -30,7 +30,7 @@ const DefaultTable = as(
 
 const StripedTable = as(
   vitalTable.Default,
-  vitalTable.WithStripes,
+  vitalTable.WithRowStripes,
   withNodeKey('stripedtable'),
 )(TableClean);
 
@@ -58,9 +58,15 @@ const HeaderFooterTable = as(
   withNodeKey('headerfootertable'),
 )(TableClean);
 
+const FirstColumnHeaderTable = as(
+  vitalTable.Default,
+  vitalTable.WithFirtColumnHeader,
+  withNodeKey('firstcolumntable'),
+)(TableClean);
+
 const ScrollingTable = as(
   vitalTable.Default,
-  vitalTable.WithScrollingTable,
+  vitalTable.WithScrolling,
   withNodeKey('scrollingtable'),
 )(TableClean);
 
@@ -83,7 +89,8 @@ const Examples = (props: any) => (
      <HeaderFooterTable />
      <hr className="my-4" />
      <ScrollingTable />
-
+     <hr className="my-4" />
+     <FirstColumnHeaderTable />
    </>
 );
 
