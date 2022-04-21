@@ -42,27 +42,31 @@ exports.onRenderBody = (ref) => {
   const lazyLoadingFallbackScript = `const e = "undefined" != typeof HTMLImageElement && "loading" in HTMLImageElement.prototype;
   const b = "undefined" != typeof IntersectionObserver && "undefined" != typeof IntersectionObserverEntry && "intersectionRatio" in IntersectionObserverEntry.prototype && "isIntersecting" in IntersectionObserverEntry.prototype;
   !e && b && document.addEventListener("load", (function(e) {
-      let options = {
-          threshold: 0.1
-      };
-      const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting || entry.intersectionRatio > 0) {
-            if (void 0 === entry.target.dataset.src) return;
-            const t = entry.target;
-            let a = null;
-            let n = t;
-            for (; null === a && n;) void 0 !== n.parentNode.dataset.gatsbyImageWrapper && (a = n.parentNode), n = n.parentNode;
-            const o = a.querySelector("img[data-placeholder-image]");
-            t.src = t.dataset.src;
-            t.decode().catch((()=>{})).then((()=>{
-              t.style.opacity = 1; o&&(o.style.opacity = 0, o.style.transition = "opacity 500ms linear"); observer.unobserve(t);
-            }));
+    if(void 0===e.target.dataset.placeholderImage)return;
+    let options = {
+        threshold: 0.1
+    };
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting || entry.intersectionRatio > 0) {
+          const o = entry.target;
+          let a = null;
+          let n = o;
+          for (; null === a && n;) void 0 !== n.parentNode.dataset.gatsbyImageWrapper && (a = n.parentNode), n = n.parentNode;
+          const t = a.querySelector("img[data-gatsby-image-ssr]");
+          if(!t) {
+            observer.disconnect();
+            return;
           }
-        });
-      }, options);
-      const targets = document.querySelectorAll("img[loading='lazy']");
-      targets.forEach((target) => observer.observe(target));
+          t.src = t.dataset.src;
+          t.decode().catch((()=>{})).then((()=>{
+            t.style.opacity = 1; o&&(o.style.opacity = 0, o.style.transition = "opacity 500ms linear");
+          }));
+          observer.disconnect();
+        }
+      });
+    }, options);
+    observer.observe(e.target);
   }), !0);`;
   setHeadComponents([
     React.createElement('script', {
