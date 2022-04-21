@@ -13,5 +13,5 @@
  */
 
 export enum ContentListingNodeKeys {
-  ContentListing = 'content-listing-articles',
+  ContentListing = 'content-listing',
 }
