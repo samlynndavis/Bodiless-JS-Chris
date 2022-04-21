@@ -13,11 +13,9 @@
  */
 
 import { asFluidToken } from '@bodiless/vital-elements';
+import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
 import {
-  on, varyDesigns,
-} from '@bodiless/fclasses';
-import {
-  CardClean, vitalCard, CardStatic, vitalCardStatic,
+  CardClean, vitalCard, CardStatic, vitalCardStatic, asCardToken,
 } from '../Card';
 
 const BaseVariation = {
@@ -29,8 +27,18 @@ const OrientationVariations = {
   Horizontal: on(CardClean)(vitalCard.WithHorizontalOrientation),
 };
 const TitleVariations = {
-  Title: on(CardClean)(vitalCard.Base),
-  NoTitle: on(CardClean)(vitalCard.WithNoTitle),
+  Title: on(CardClean)(
+    vitalCard.Base,
+    asCardToken({
+      Meta: flowHoc.meta.term('Title')('With Title'),
+    }),
+  ),
+  NoTitle: on(CardClean)(
+    vitalCard.WithNoTitle,
+    asCardToken({
+      Meta: flowHoc.meta.term('Title')('With No Title'),
+    }),
+  ),
 };
 const DescriptionVariations = {
   Description: on(CardClean)(vitalCard.Base),
