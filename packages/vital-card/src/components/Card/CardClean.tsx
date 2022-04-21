@@ -13,7 +13,6 @@
  */
 
 import React, { FC, ComponentType, HTMLProps } from 'react';
-import flow from 'lodash/flow';
 import {
   designable,
   DesignableComponentsProps,
@@ -29,6 +28,7 @@ import {
 import { withNode } from '@bodiless/core';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { LinkClean } from '@bodiless/vital-link';
+import { withoutHydration } from '@bodiless/hydration';
 
 export type CardComponents = {
   Wrapper: ComponentType<StylableProps>,
@@ -117,7 +117,7 @@ const CardBase: FC<CardBaseProps> = ({ components, ...rest }) => {
   );
 };
 
-const CardClean = flow(
+const CardClean = as(
   designable(cardComponentStart, 'Card'),
   withNode,
 )(CardBase);
@@ -125,4 +125,5 @@ const CardClean = flow(
 const asCardToken = asVitalTokenSpec<CardComponents>();
 
 export default CardClean;
+export const CardStatic: ComponentType<CardProps> = withoutHydration()(CardClean);
 export { CardClean, asCardToken };

@@ -28,8 +28,6 @@ import { CardNodeKeys } from './constants';
 
 /**
  * Basic Card Design.
- *
- * @todo: static token?
  */
 const Base = asCardToken({
   Editors: {
@@ -96,6 +94,7 @@ const WithHorizontalOrientation = asCardToken({
   },
   Spacing: {
     ContentWrapper: 'px-4',
+    ImageWrapper: 'py-0 md:py-0',
   },
   Meta: flowHoc.meta.term('Orientation')('Horizontal'),
 });
@@ -107,7 +106,6 @@ const WithNoTitle = asCardToken({
   Components: {
     TitleWrapper: replaceWith(() => null),
   },
-  // @todo: Meta set as "Type: Card"?
   Meta: flowHoc.meta.term('Type')('Card'),
 });
 

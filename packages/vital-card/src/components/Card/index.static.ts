@@ -12,10 +12,9 @@
  * limitations under the License.
  */
 
-export * from './index.bl-edit';
-export {
-  default as CardClean,
-  asCardToken,
-} from './CardClean';
+import {
+  StaticBlock as CardStatic,
+  staticTokenCollection as vitalCardStatic,
+} from '@bodiless/hydration';
 
-export { default as vitalCard } from './tokens';
+export { CardStatic, vitalCardStatic };

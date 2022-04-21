@@ -12,10 +12,7 @@
  * limitations under the License.
  */
 
-export * from './index.bl-edit';
-export {
-  default as CardClean,
-  asCardToken,
-} from './CardClean';
+import { CardStatic } from './CardClean';
+import vitalCardStatic from './tokens';
 
-export { default as vitalCard } from './tokens';
+export { CardStatic, vitalCardStatic };
