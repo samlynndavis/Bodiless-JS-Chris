@@ -17,12 +17,11 @@ import {
   on,
 } from '@bodiless/fclasses';
 import {
-  FilterClean,
   withSingleAllowedTag,
   withMultipleAllowedTags,
 } from '@bodiless/filtering';
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
-import { vitalFilters } from '../../Filters';
+import { FilterClean, vitalFilters } from '../../Filters';
 import { asContentListingFiltersToken } from '../ContentListingFiltersClean';
 
 const Default = asContentListingFiltersToken({

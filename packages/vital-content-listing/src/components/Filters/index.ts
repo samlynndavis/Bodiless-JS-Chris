@@ -12,11 +12,12 @@
  * limitations under the License.
  */
 
-import { asFiltersListToken, asFiltersTagTitleToken, asFiltersToken } from './Filters';
+import FilterClean, { asFiltersListToken, asFiltersTagTitleToken, asFiltersToken } from './Filters';
 import vitalFilters from './tokens';
 import vitalFiltersBase from './tokens/vitalFilters';
 
 export {
+  FilterClean,
   asFiltersListToken,
   asFiltersTagTitleToken,
   asFiltersToken,

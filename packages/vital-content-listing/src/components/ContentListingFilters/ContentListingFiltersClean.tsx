@@ -12,13 +12,10 @@
  * limitations under the License.
  */
 
-import { flowHoc } from '@bodiless/fclasses';
 import { FilterByGroupClean, FilterByGroupComponents } from '@bodiless/filtering';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
-const ContentListingFiltersClean = flowHoc(
-  // @TODO: Add HOCs to ContentListingFilters clean.
-)(FilterByGroupClean);
+const ContentListingFiltersClean = FilterByGroupClean;
 
 export const asContentListingFiltersToken = asVitalTokenSpec<FilterByGroupComponents>();
 

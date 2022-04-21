@@ -13,7 +13,7 @@
  */
 
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import type { FilterComponents, TagTitleComponents } from '@bodiless/filtering';
+import { FilterClean, FilterComponents, TagTitleComponents } from '@bodiless/filtering';
 import type { FiltersListComponents } from './types';
 
 const asFiltersListToken = asVitalTokenSpec<FiltersListComponents>();
@@ -25,3 +25,5 @@ export {
   asFiltersTagTitleToken,
   asFiltersToken,
 };
+
+export default FilterClean;
