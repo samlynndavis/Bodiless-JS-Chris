@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import FilterClean from './Filter';
 import FilterByGroupClean from './FilterByGroupClean';
 import { TestableFilterByGroup, asTestableFilterByGroup } from './FilterByGroupTestable';
 import {
@@ -24,6 +25,8 @@ import asFilterableByGroup from './asFilterableByGroup';
 import { Tag } from './FilterByGroupStore';
 import type {
   FilterByGroupComponents,
+  FilterComponents,
+  TagTitleComponents,
   TagType,
   FilterTagType,
   FilteredItemType,
@@ -32,6 +35,7 @@ import withFilterByTags from './withFilterByTags';
 import withFilterSelection from './withFilterSelection';
 
 export {
+  FilterClean,
   FilterByGroupClean,
   TestableFilterByGroup,
   asTestableFilterByGroup,
@@ -47,6 +51,8 @@ export {
 
 export type {
   FilterByGroupComponents,
+  FilterComponents,
+  TagTitleComponents,
   TagType,
   FilterTagType,
   FilteredItemType,
