@@ -27,7 +27,7 @@ const Default = asFluidToken({
     FilterableContentImageVariations: on(Img)(
       vitalImage.WithEditorPlain,
       vitalImage.WithLink,
-      // Needs to provide key since WinLink invalidates default one.
+      // Needs to provide key since WithLink invalidates default one.
       withNodeKey('image'),
     ),
   },
