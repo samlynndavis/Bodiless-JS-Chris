@@ -15,7 +15,7 @@
 import { asFluidToken, asMetaToken, asElementToken } from '@bodiless/vital-elements';
 import { withNodeKey } from '@bodiless/core';
 import {
-  Img, on, varyDesigns, as, flowHoc
+  Img, on, as, flowHoc
 } from '@bodiless/fclasses';
 import { vitalImage } from '../Image';
 
@@ -26,29 +26,22 @@ const ImageWithNodeKey = asElementToken({
   }
 });
 
-const baseVariation = {
-  Image: on(Img)(ImageWithNodeKey),
-};
-
-const placeholderVariations = {
-  Square: as(
+const imageVariations = {
+  ImageSquare: on(Img)(as(
     ImageWithNodeKey,
     asMetaToken(flowHoc.meta.term('Placeholder')('Square')),
-  ),
-  Landscape: as(
+  )),
+  ImageLandscape: on(Img)(as(
     ImageWithNodeKey,
     vitalImage.WithLandscapePlaceholder,
-  ),
+  )),
 };
 
 /**
  * Token which adds image variations to a flow container.
  */
 const WithImageVariations = asFluidToken({
-  Components: varyDesigns(
-    baseVariation,
-    placeholderVariations,
-  ),
+  Components: imageVariations,
 });
 
 export const vitalImageFlowContainer = { WithImageVariations };
