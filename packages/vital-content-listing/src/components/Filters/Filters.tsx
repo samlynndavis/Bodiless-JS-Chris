@@ -12,7 +12,16 @@
  * limitations under the License.
  */
 
-export * from './components/ContentListing';
-export * from './components/ContentListingFilters';
-export * from './components/ContentListingFlowContainer';
-export * from './components/Filters';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import type { FilterComponents, TagTitleComponents } from '@bodiless/filtering';
+import type { FiltersListComponents } from './types';
+
+const asFiltersListToken = asVitalTokenSpec<FiltersListComponents>();
+const asFiltersTagTitleToken = asVitalTokenSpec<TagTitleComponents>();
+const asFiltersToken = asVitalTokenSpec<FilterComponents>();
+
+export {
+  asFiltersListToken,
+  asFiltersTagTitleToken,
+  asFiltersToken,
+};

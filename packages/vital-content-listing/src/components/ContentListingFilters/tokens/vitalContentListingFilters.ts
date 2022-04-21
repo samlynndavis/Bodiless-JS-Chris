@@ -13,39 +13,22 @@
  */
 
 import {
-  addProps,
   as,
-  flowHoc,
-  withDesign,
+  on,
 } from '@bodiless/fclasses';
 import {
+  FilterClean,
   withSingleAllowedTag,
   withMultipleAllowedTags,
 } from '@bodiless/filtering';
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
+import { vitalFilters } from '../../Filters';
 import { asContentListingFiltersToken } from '../ContentListingFiltersClean';
 
-const withTagListStyles = withDesign({
-  Title: flowHoc(
-    addProps({ emptyTitleText: 'Group' }),
-    withDesign({
-      FilterInputWrapper: 'flex pb-2 items-center',
-      FilterGroupItemInput: 'mr-3 rtl:ml-3 rtl:mr-0',
-    }),
-  ),
-  Wrapper: 'm-2 pl-2',
-});
-
-const withCategoryList = withDesign({
-  Title: as(
-    vitalColor.TextPrimaryHeaderCopy,
-    vitalTextDecoration.Bold,
-  ),
-  Wrapper: 'p-2',
-  Item: 'py-2',
-});
-
 const Default = asContentListingFiltersToken({
+  Components: {
+    Filter: on(FilterClean)(vitalFilters.Default),
+  },
   Layout: {
     Wrapper: 'flex flex-col lg:flex-row lg:min-h-screen',
     FilterHeader: 'flex flex-col w-full lg:flex-row lg:justify-between lg:items-center',
@@ -66,10 +49,6 @@ const Default = asContentListingFiltersToken({
       'text-xl',
     ),
     ResetButton: vitalTextDecoration.Underline,
-    Filter: withDesign({
-      TagList: withTagListStyles,
-      CategoryList: withCategoryList,
-    }),
   },
 });
 

@@ -12,7 +12,14 @@
  * limitations under the License.
  */
 
-export * from './components/ContentListing';
-export * from './components/ContentListingFilters';
-export * from './components/ContentListingFlowContainer';
-export * from './components/Filters';
+import { ComponentOrTag } from '@bodiless/fclasses';
+
+type FiltersListComponents = {
+  Title: ComponentOrTag<any>,
+  Wrapper: ComponentOrTag<any>,
+  Item: ComponentOrTag<any>,
+};
+
+export type {
+  FiltersListComponents,
+};

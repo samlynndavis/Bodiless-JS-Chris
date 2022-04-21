@@ -12,7 +12,14 @@
  * limitations under the License.
  */
 
-export * from './components/ContentListing';
-export * from './components/ContentListingFilters';
-export * from './components/ContentListingFlowContainer';
-export * from './components/Filters';
+import { asFiltersListToken, asFiltersTagTitleToken, asFiltersToken } from './Filters';
+import vitalFilters from './tokens';
+import vitalFiltersBase from './tokens/vitalFilters';
+
+export {
+  asFiltersListToken,
+  asFiltersTagTitleToken,
+  asFiltersToken,
+  vitalFilters,
+  vitalFiltersBase,
+};
