@@ -6,13 +6,6 @@
         "className": "w-full lg:w-full"
       },
       "type": "RichText"
-    },
-    {
-      "uuid": "b48f3450-c16e-11ec-af52-cbdeb76a296f",
-      "wrapperProps": {
-        "className": "w-full"
-      },
-      "type": "HeroCard"
     }
   ]
 }
