@@ -13,11 +13,11 @@
  */
 
 import { graphql } from 'gatsby';
-import { StyleGuideTemplateClean } from '@bodiless/cx-templates';
+import { StyleGuideTemplateClean } from '@bodiless/vital-templates';
 import { as } from '@bodiless/fclasses';
-import { __cxstarter__StyleGuidePage } from '@bodiless/__cxstarter__';
+import { __vital__StyleGuidePage } from '--vital--';
 
-const StyleGuidePage = as(__cxstarter__StyleGuidePage.Default)(StyleGuideTemplateClean);
+const StyleGuidePage = as(__vital__StyleGuidePage.Default)(StyleGuideTemplateClean);
 
 export default StyleGuidePage;
 

@@ -8,8 +8,8 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 const glob = require('glob');
-const { addTokenShadowPlugin, addStatoscopePlugin } = require('@bodiless/webpack');
-const shadow = require('@bodiless/__cxstarter__/shadow');
+const { addTokenShadowPlugin } = require('@bodiless/webpack');
+const shadow = require('--vital--/shadow');
 
 // Fix sourcemap issue
 // See: https://github.com/gatsbyjs/gatsby/issues/6278#issuecomment-402540404
@@ -47,18 +47,5 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
         ),
       }
     });
-  }
-  // Always on bottom to keep the plugin as last,
-  if (stage === 'build-javascript') {
-    const options = {
-      enabled: process.env.BODILESS_BUILD_STATS === '1',
-      sitePath: path.resolve('./'),
-      name: '__cxstarter__',
-      open: process.env.BODILESS_OPEN_STATS === '1' ? 'file' : false,
-    };
-
-    actions.setWebpackConfig(
-      addStatoscopePlugin({}, options)
-    );
   }
 };
