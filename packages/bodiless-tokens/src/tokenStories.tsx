@@ -1,26 +1,15 @@
 import {
-  DesignableComponents, DesignableProps, flowHoc, HOC, Token, as, TokenCollection
+  DesignableComponents, DesignableProps, flowHoc, HOC, TokenCollection, as,
 } from '@bodiless/fclasses';
 import React, { FC, useContext, ComponentType } from 'react';
 import omit from 'lodash/omit';
+// this addon is included in @storybook/addon-essentials
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { DocsContext } from '@storybook/addon-docs';
 import type { Meta, Story } from '@storybook/react/types-6-0';
 import withTokensFromProps from './withTokensFromProps';
 import TokenMap from './TokenMap';
 import { SbEditProvider } from './SbEditProvider';
-
-/**
- * Gets the 'Group' property of the token's metadata.
- *
- * @param token
- * The token with metadata.
- */
-const getGroupsForToken = (token: Token) => {
-  // @todo Here we apply token to produce metadata. We should probably get it from the token itself.
-  const test = as(token)(() => null);
-  const groups = Array.isArray(test.categories?.Group) ? test.categories?.Group : [];
-  return groups?.length ? groups : ['Other'];
-};
 
 /**
  * Builds a token map from a token collection.
@@ -37,7 +26,7 @@ export const buildTokenMap = <C extends DesignableComponents>(
     }),
     {}
   );
-  const map = new TokenMap<DesignableProps<C>>(getGroupsForToken);
+  const map = new TokenMap<DesignableProps<C>>();
   map.add(tokens);
   return map;
 };
@@ -169,7 +158,7 @@ export const createTokenStories = (def: TokenStoryDef) => {
           const context = useContext(DocsContext);
           const storyContext = context.getStoryContext(story);
           const { args } = storyContext;
-          console.log('sc', args);
+          // console.log('sc', args);
           const tokenNames = Object.values(args).reduce(
             (acc, next) => [
               ...acc,
@@ -208,9 +197,12 @@ export const createTokenStories = (def: TokenStoryDef) => {
     //     },
     //   },
     // };
+    console.log('tn', tokenNames);
     Story.args = tokenNames.reduce(
       (args, name) => {
         const groups = groupsFor(tokenMap, name);
+        console.log(name, groups);
+
         if (!groups.length) return args;
         const groupName = groups[0];
         const tokens = args?.[groupName] ? [...args[groupName], name] : [name];
@@ -223,6 +215,7 @@ export const createTokenStories = (def: TokenStoryDef) => {
     );
     return Story;
   };
+  console.log(tokenMap.groups);
 
   return {
     meta: {

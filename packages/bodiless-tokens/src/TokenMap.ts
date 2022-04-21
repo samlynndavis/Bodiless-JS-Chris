@@ -12,19 +12,29 @@
  * limitations under the License.
  */
 
-import { HOC, flowHoc } from '@bodiless/fclasses';
+import {
+  HOC, Token, TokenMeta, TokenSpec, TokenCollection, as
+} from '@bodiless/fclasses';
 
 export type Tokens = {
   [key: string]: HOC,
 };
 
+const extractMeta = (token?: Token): TokenMeta => {
+  if (typeof token === 'function') return token?.meta || {};
+  if (typeof token === 'string') return {};
+  return (token as TokenSpec<any, any>)?.Meta || {};
+};
+
 class TokenMap<P> {
-  protected map = new Map<string, HOC>();
+  protected map = new Map<string, Token>();
 
-  protected groupsFor: (token?: HOC) => string[];
+  protected groupsFor: (token?: Token) => string[];
 
-  constructor(groupsFor?: (token?: HOC) => string[]) {
-    this.groupsFor = groupsFor || ((token?: HOC) => token?.meta?.categories?.Category || []);
+  constructor(groupsFor?: (token?: Token) => string[]) {
+    this.groupsFor = groupsFor || (
+      (token?: Token) => extractMeta(token).categories?.Group || []
+    );
   }
 
   get names() {
@@ -51,11 +61,11 @@ class TokenMap<P> {
     }, [] as string[]);
   }
 
-  set(name: string, token: HOC) {
+  set(name: string, token: Token) {
     this.map.set(name, token);
   }
 
-  add(tokens: Tokens) {
+  add(tokens: TokenCollection<any>) {
     Object.keys(tokens).forEach(
       key => this.set(key, tokens[key]),
     );
@@ -65,16 +75,13 @@ class TokenMap<P> {
     this.map.delete(name);
   }
 
-  flow<P>(tokens: string[] = []) {
-    const tokenHOCs = tokens.reduce((hocs, name) => {
-      const hoc = this.map.get(name);
-      if (!hoc) return [...hocs];
-      return [...hocs, hoc];
-    }, [] as HOC[]);
-    return flowHoc(
-      {}, // see https://github.com/microsoft/TypeScript/issues/28010
-      ...tokenHOCs,
-    );
+  flow<P>(tokenNames: string[] = []) {
+    const tokens = tokenNames.reduce((toks, name) => {
+      const tok = this.map.get(name);
+      if (!tok) return [...toks];
+      return [...toks, tok];
+    }, [] as Token[]);
+    return as(...tokens);
   }
 }
 

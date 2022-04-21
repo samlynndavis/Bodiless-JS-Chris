@@ -25,6 +25,7 @@
     "@bodiless/fclasses": "^1.0.0-beta.7",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.7",
     "@bodiless/search": "^1.0.0-beta.7",
+    "@bodiless/tokens": "^1.0.0-beta.7",
     "@bodiless/ui": "^1.0.0-beta.7",
     "@bodiless/webpack": "^1.0.0-beta.7",
     "@storybook/addon-actions": "^6.3.12",
