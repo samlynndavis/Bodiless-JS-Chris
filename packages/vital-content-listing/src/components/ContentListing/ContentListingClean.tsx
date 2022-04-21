@@ -24,18 +24,15 @@ import type { ContentListingComponents, ContentListingProps } from './types';
 
 const contentListingComponents: ContentListingComponents = {
   Wrapper: Div,
-  FilterWrapper: Div,
-  Filters: ContentListingFiltersClean,
+  Filter: ContentListingFiltersClean,
   Content: FlowContainerClean,
 };
 
 const ContentListingBase: FC<ContentListingProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
-    <C.FilterWrapper>
-      <C.Filters>
-        <C.Content />
-      </C.Filters>
-    </C.FilterWrapper>
+    <C.Filter>
+      <C.Content />
+    </C.Filter>
   </C.Wrapper>
 );
 

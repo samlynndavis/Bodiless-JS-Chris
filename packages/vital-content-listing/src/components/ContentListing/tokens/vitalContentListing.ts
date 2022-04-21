@@ -21,25 +21,25 @@ import { ContentListingNodeKeys } from './constants';
 const Default = asContentListingToken({
   Components: {
     Content: vitalContentListingFlowContainer.Default,
-    Filters: vitalContentListingFilters.Default,
+    Filter: vitalContentListingFilters.Default,
   },
   Schema: {
     Content: withNodeKey(ContentListingNodeKeys.ContentListing),
   },
   Spacing: {
-    FilterWrapper: 'my-4',
+    Wrapper: 'my-4',
   },
 });
 
 const WithMultipleAllowedTags = asContentListingToken({
   Core: {
-    Filters: vitalContentListingFilters.WithMultipleAllowedTags,
+    Filter: vitalContentListingFilters.WithMultipleAllowedTags,
   },
 });
 
 const WithSingleAllowedTag = asContentListingToken({
   Core: {
-    Filters: vitalContentListingFilters.WithSingleAllowedTag,
+    Filter: vitalContentListingFilters.WithSingleAllowedTag,
   },
 });
 
