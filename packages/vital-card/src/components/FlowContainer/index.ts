@@ -23,14 +23,12 @@ const BaseVariation = {
 };
 
 const OrientationVariations = {
-  Vertical: on(CardClean)(vitalCard.WithVerticalOrientation),
-  Horizontal: on(CardClean)(vitalCard.WithHorizontalOrientation),
+  Vertical: vitalCard.WithVerticalOrientation,
+  Horizontal: vitalCard.WithHorizontalOrientation,
 };
 const ContentVariations = {
-  NoTitle: on(CardClean)(vitalCard.WithNoTitle),
-  NoDescription: on(CardClean)(
-    vitalCard.WithNoDescription,
-  ),
+  NoTitle: vitalCard.WithNoTitle,
+  NoDescription: vitalCard.WithNoDescription,
 };
 
 /**
@@ -38,7 +36,6 @@ const ContentVariations = {
  */
 const WithCardVariations = asFluidToken({
   Components: {
-    HeroCard: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.Hero),
     Vertical: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.WithVerticalOrientation),
     Horizontal: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.WithHorizontalOrientation),
     ...varyDesigns(
