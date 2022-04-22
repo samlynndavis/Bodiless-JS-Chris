@@ -36,6 +36,7 @@ const ContentVariations = {
  */
 const WithCardVariations = asFluidToken({
   Components: {
+    HeroCard: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.Hero),
     Vertical: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.WithVerticalOrientation),
     Horizontal: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.WithHorizontalOrientation),
     ...varyDesigns(
