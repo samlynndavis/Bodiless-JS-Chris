@@ -21,12 +21,12 @@ import {
   withMultipleAllowedTags,
 } from '@bodiless/filtering';
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
-import { FilterClean, vitalFilters } from '../../Filters';
+import { FilterClean, vitalFilter } from '../../Filter';
 import { asContentListingFiltersToken } from '../ContentListingFiltersClean';
 
 const Default = asContentListingFiltersToken({
   Components: {
-    Filter: on(FilterClean)(vitalFilters.Default),
+    Filter: on(FilterClean)(vitalFilter.Default),
   },
   Layout: {
     Wrapper: 'flex flex-col lg:flex-row lg:min-h-screen',

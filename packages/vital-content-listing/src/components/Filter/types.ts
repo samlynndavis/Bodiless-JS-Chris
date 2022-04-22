@@ -12,18 +12,14 @@
  * limitations under the License.
  */
 
-import { asVitalTokenSpec } from '@bodiless/vital-elements';
-import { FilterClean, FilterComponents, TagTitleComponents } from '@bodiless/filtering';
-import type { FiltersListComponents } from './types';
+import { ComponentOrTag } from '@bodiless/fclasses';
 
-const asFiltersListToken = asVitalTokenSpec<FiltersListComponents>();
-const asFiltersTagTitleToken = asVitalTokenSpec<TagTitleComponents>();
-const asFiltersToken = asVitalTokenSpec<FilterComponents>();
-
-export {
-  asFiltersListToken,
-  asFiltersTagTitleToken,
-  asFiltersToken,
+type FilterListComponents = {
+  Title: ComponentOrTag<any>,
+  Wrapper: ComponentOrTag<any>,
+  Item: ComponentOrTag<any>,
 };
 
-export default FilterClean;
+export type {
+  FilterListComponents,
+};

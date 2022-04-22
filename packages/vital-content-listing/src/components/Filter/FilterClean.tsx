@@ -12,15 +12,18 @@
  * limitations under the License.
  */
 
-import FilterClean, { asFiltersListToken, asFiltersTagTitleToken, asFiltersToken } from './Filters';
-import vitalFilters from './tokens';
-import vitalFiltersBase from './tokens/vitalFilters';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { FilterClean, FilterComponents, TagTitleComponents } from '@bodiless/filtering';
+import type { FilterListComponents } from './types';
+
+const asFilterListToken = asVitalTokenSpec<FilterListComponents>();
+const asFilterTagTitleToken = asVitalTokenSpec<TagTitleComponents>();
+const asFilterToken = asVitalTokenSpec<FilterComponents>();
 
 export {
-  FilterClean,
-  asFiltersListToken,
-  asFiltersTagTitleToken,
-  asFiltersToken,
-  vitalFilters,
-  vitalFiltersBase,
+  asFilterListToken,
+  asFilterTagTitleToken,
+  asFilterToken,
 };
+
+export default FilterClean;

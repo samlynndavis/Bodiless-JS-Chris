@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalFilters from './vitalFilters';
+import vitalFilter from './vitalFilter';
 
-export default vitalFilters;
+export default vitalFilter;

@@ -12,14 +12,15 @@
  * limitations under the License.
  */
 
-import { ComponentOrTag } from '@bodiless/fclasses';
+import FilterClean, { asFilterListToken, asFilterTagTitleToken, asFilterToken } from './FilterClean';
+import vitalFilter from './tokens';
+import vitalFilterBase from './tokens/vitalFilter';
 
-type FiltersListComponents = {
-  Title: ComponentOrTag<any>,
-  Wrapper: ComponentOrTag<any>,
-  Item: ComponentOrTag<any>,
-};
-
-export type {
-  FiltersListComponents,
+export {
+  FilterClean,
+  asFilterListToken,
+  asFilterTagTitleToken,
+  asFilterToken,
+  vitalFilter,
+  vitalFilterBase,
 };

@@ -17,9 +17,9 @@ import {
   as,
 } from '@bodiless/fclasses';
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
-import { asFiltersToken, asFiltersTagTitleToken, asFiltersListToken } from '../Filters';
+import { asFilterToken, asFilterTagTitleToken, asFilterListToken } from '../FilterClean';
 
-const WithTagTitleStyles = asFiltersTagTitleToken({
+const WithTagTitleStyles = asFilterTagTitleToken({
   Layout: {
     FilterInputWrapper: 'flex items-center',
   },
@@ -29,7 +29,7 @@ const WithTagTitleStyles = asFiltersTagTitleToken({
   },
 });
 
-const WithTagListStyles = asFiltersListToken({
+const WithTagListStyles = asFilterListToken({
   Content: {
     Title: addProps({ emptyTitleText: 'Groups' }),
   },
@@ -41,7 +41,7 @@ const WithTagListStyles = asFiltersListToken({
   },
 });
 
-const WithCategoryListStyles = asFiltersListToken({
+const WithCategoryListStyles = asFilterListToken({
   Spacing: {
     Wrapper: 'p-2',
     Item: 'py-2',
@@ -54,7 +54,7 @@ const WithCategoryListStyles = asFiltersListToken({
   },
 });
 
-const Default = asFiltersToken({
+const Default = asFilterToken({
   Theme: {
     CategoryList: WithCategoryListStyles,
     TagList: WithTagListStyles,
