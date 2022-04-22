@@ -12,17 +12,21 @@
  * limitations under the License.
  */
 
-import { as, Token, withShowDesignKeys } from '@bodiless/fclasses';
+import {
+  Token,
+  as,
+  on,
+  withShowDesignKeys,
+} from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
-import { asElementToken } from '@bodiless/vital-elements';
+import { asFluidToken } from '@bodiless/vital-elements';
 import { asBodilessPage } from '../asBodilessPage';
-// import { vitalGenericTemplate, GenericTemplateClean } from '../../Generic';
-// import { vitalStyleGuideTemplate, StyleGuideTemplateClean } from '../../StyleGuideTemplate';
+import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
 
 // @todo token to GTM package when created
 const withGTMDesignKeys = withShowDesignKeys(true, 'layer-region');
 
-const Default = asElementToken({
+const Default = asFluidToken({
   Core: {
     _: as(
       asBodilessChameleon('template', undefined, () => ({
@@ -50,8 +54,8 @@ const Default = asElementToken({
     _: as(withGTMDesignKeys as Token),
   },
   Components: {
-    // _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
-    // StyleGuide: on(StyleGuideTemplateClean)(vitalStyleGuideTemplate.Default),
+    Default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
+    ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
   },
 });
 

@@ -12,20 +12,11 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
-import {
-  vitalPage,
-  GenericTemplateClean,
-  vitalGenericTemplate,
-} from '@bodiless/vital-templates';
+import { vitalPage } from '@bodiless/vital-templates';
 
 const Default = asFluidToken({
   ...vitalPage.Default,
-  Components: {
-    Default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
-    ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
-  },
 });
 
 export default {
