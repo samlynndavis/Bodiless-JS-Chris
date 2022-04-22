@@ -106,7 +106,7 @@ const WithNoTitle = asCardToken({
   Components: {
     TitleWrapper: replaceWith(() => null),
   },
-  Meta: flowHoc.meta.term('Content')('No Title'),
+  Meta: flowHoc.meta.term('Description')('No Title'),
 });
 
 /**
@@ -122,7 +122,7 @@ const WithNoDescription = asCardToken({
   Layout: {
     Title: 'flex-grow',
   },
-  Meta: flowHoc.meta.term('Content')('No Description'),
+  Meta: flowHoc.meta.term('Description')('No Description'),
 });
 
 /**
@@ -155,7 +155,7 @@ const Hero = asCardToken({
     ...Base.Theme,
     CTAWrapper: vitalColor.BgPrimaryPage,
   },
-  Meta: flowHoc.meta.term('Content')('Hero'),
+  Meta: flowHoc.meta.term('Description')('Hero'),
 });
 
 const Default = asCardToken({
