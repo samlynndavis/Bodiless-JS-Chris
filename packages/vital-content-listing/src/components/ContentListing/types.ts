@@ -12,15 +12,18 @@
  * limitations under the License.
  */
 
-import ContentListingClean, { asContentListingToken } from './ContentListingClean';
-import vitalContentListing from './tokens';
-import vitalContentListingBase from './tokens/vitalContentListing';
-import type { ContentListingComponents, ContentListingProps } from './types';
+import { HTMLProps } from 'react';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
 
-export {
-  ContentListingClean,
-  asContentListingToken,
-  vitalContentListing,
-  vitalContentListingBase,
+type ContentListingComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Content: ComponentOrTag<any>,
 };
-export type { ContentListingComponents, ContentListingProps };
+
+type ContentListingProps = DesignableComponentsProps<ContentListingComponents>
+& HTMLProps<HTMLElement>;
+
+export type {
+  ContentListingComponents,
+  ContentListingProps,
+};

@@ -12,19 +12,26 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { addProps, as, flowHoc } from '@bodiless/fclasses';
-import { FilterByGroupClean, FilterByGroupComponents } from '@bodiless/filtering';
+import React, { FC } from 'react';
+import { designable } from '@bodiless/fclasses';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
-import { vitalContentListingFlowContainer } from '../ContentListingFlowContainer';
+import { FilterByGroupClean } from '../FilterByGroup';
+import type { ContentListingComponents, ContentListingProps } from './types';
 
-const FlowContainer = as(vitalContentListingFlowContainer.Default)(FlowContainerClean);
+const contentListingComponents: ContentListingComponents = {
+  Wrapper: FilterByGroupClean,
+  Content: FlowContainerClean,
+};
 
-const ContentListingClean = flowHoc(
-  addProps({ children: <FlowContainer /> }),
-)(FilterByGroupClean);
+const ContentListingBase: FC<ContentListingProps> = ({ components: C, ...rest }) => (
+  <C.Wrapper {...rest}>
+    <C.Content />
+  </C.Wrapper>
+);
 
-export const asContentListingToken = asVitalTokenSpec<FilterByGroupComponents>();
+const ContentListingClean = designable(contentListingComponents, 'ContentListing')(ContentListingBase);
+
+export const asContentListingToken = asVitalTokenSpec<ContentListingComponents>();
 
 export default ContentListingClean;

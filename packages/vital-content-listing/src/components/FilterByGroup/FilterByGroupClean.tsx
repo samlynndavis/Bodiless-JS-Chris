@@ -12,7 +12,9 @@
  * limitations under the License.
  */
 
-export enum ContentListingFlowContainerNodeKeys {
-  ContentListing = 'content-listing',
-  FilterableContentImage = 'image',
-}
+import { FilterByGroupClean, FilterByGroupComponents } from '@bodiless/filtering';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
+
+export const asFilterByGroupToken = asVitalTokenSpec<FilterByGroupComponents>();
+
+export default FilterByGroupClean;

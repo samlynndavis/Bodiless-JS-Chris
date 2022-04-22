@@ -12,15 +12,6 @@
  * limitations under the License.
  */
 
-import ContentListingClean, { asContentListingToken } from './ContentListingClean';
-import vitalContentListing from './tokens';
-import vitalContentListingBase from './tokens/vitalContentListing';
-import type { ContentListingComponents, ContentListingProps } from './types';
-
-export {
-  ContentListingClean,
-  asContentListingToken,
-  vitalContentListing,
-  vitalContentListingBase,
-};
-export type { ContentListingComponents, ContentListingProps };
+export enum ContentListingNodeKeys {
+  ContentListing = 'content-listing',
+}

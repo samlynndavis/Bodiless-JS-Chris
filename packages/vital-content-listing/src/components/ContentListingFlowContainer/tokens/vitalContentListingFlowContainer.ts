@@ -12,12 +12,11 @@
  * limitations under the License.
  */
 
+import { withNodeKey } from '@bodiless/core';
 import { Img, on } from '@bodiless/fclasses';
 import { asFilterableByGroup } from '@bodiless/filtering';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalImage } from '@bodiless/vital-image';
-import { withNodeKey } from '@bodiless/core';
-import { ContentListingFlowContainerNodeKeys } from './constants';
 
 const Default = asFluidToken({
   Core: {
@@ -29,7 +28,7 @@ const Default = asFluidToken({
       vitalImage.WithEditorPlain,
       vitalImage.WithLink,
       // Needs to provide key since WithLink invalidates default one.
-      withNodeKey(ContentListingFlowContainerNodeKeys.FilterableContentImage),
+      withNodeKey('image'),
     ),
   },
   Layout: {
@@ -38,9 +37,6 @@ const Default = asFluidToken({
   Spacing: {
     ComponentWrapper: 'p-3',
     Wrapper: '-m-3',
-  },
-  Schema: {
-    _: withNodeKey(ContentListingFlowContainerNodeKeys.ContentListing),
   },
 });
 

@@ -12,52 +12,31 @@
  * limitations under the License.
  */
 
-import { as } from '@bodiless/fclasses';
-import {
-  withSingleAllowedTag,
-  withMultipleAllowedTags,
-} from '@bodiless/filtering';
-import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
-import { vitalFilter } from '../../Filter';
+import { withNodeKey } from '@bodiless/core';
+import { vitalContentListingFlowContainer } from '../../ContentListingFlowContainer';
+import { vitalFilterByGroup } from '../../FilterByGroup';
 import { asContentListingToken } from '../ContentListingClean';
+import { ContentListingNodeKeys } from './constants';
 
 const Default = asContentListingToken({
   Components: {
-    Filter: vitalFilter.Default,
+    Wrapper: vitalFilterByGroup.Default,
+    Content: vitalContentListingFlowContainer.Default,
   },
-  Layout: {
-    Wrapper: 'flex flex-col lg:flex-row lg:min-h-screen',
-    FilterHeader: 'flex flex-col w-full lg:flex-row lg:justify-between lg:items-center',
-    ResetButton: 'self-start',
-  },
-  Spacing: {
-    Wrapper: 'my-4',
-    FilterWrapper: 'lg:w-1/3 lg:mr-5 lg:rtl:ml-5 lg:rtl:mr-0',
-    FilterTitle: 'my-2 lg:my-0',
-    ContentWrapper: 'w-full',
-    ResetButton: 'my-2',
-  },
-  Theme: {
-    FilterWrapper: vitalColor.BgPrimaryPage,
-    FilterHeader: 'p-2',
-    FilterTitle: as(
-      vitalColor.TextPrimaryHeaderCopy,
-      vitalTextDecoration.Bold,
-      'text-xl',
-    ),
-    ResetButton: vitalTextDecoration.Underline,
+  Schema: {
+    Content: withNodeKey(ContentListingNodeKeys.ContentListing),
   },
 });
 
 const WithMultipleAllowedTags = asContentListingToken({
   Core: {
-    _: withMultipleAllowedTags,
+    Wrapper: vitalFilterByGroup.WithMultipleAllowedTags,
   },
 });
 
 const WithSingleAllowedTag = asContentListingToken({
   Core: {
-    _: withSingleAllowedTag,
+    Wrapper: vitalFilterByGroup.WithSingleAllowedTag,
   },
 });
 

@@ -12,15 +12,13 @@
  * limitations under the License.
  */
 
-import ContentListingClean, { asContentListingToken } from './ContentListingClean';
-import vitalContentListing from './tokens';
-import vitalContentListingBase from './tokens/vitalContentListing';
-import type { ContentListingComponents, ContentListingProps } from './types';
+import FilterByGroupClean, { asFilterByGroupToken } from './FilterByGroupClean';
+import vitalFilterByGroup from './tokens';
+import vitalFilterByGroupBase from './tokens/vitalFilterByGroup';
 
 export {
-  ContentListingClean,
-  asContentListingToken,
-  vitalContentListing,
-  vitalContentListingBase,
+  FilterByGroupClean,
+  asFilterByGroupToken,
+  vitalFilterByGroup,
+  vitalFilterByGroupBase,
 };
-export type { ContentListingComponents, ContentListingProps };
