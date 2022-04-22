@@ -21,10 +21,10 @@ import { vitalContentListingFlowContainer } from '../ContentListingFlowContainer
 
 const FlowContainer = as(vitalContentListingFlowContainer.Default)(FlowContainerClean);
 
-const ContentListingFiltersClean = flowHoc(
+const ContentListingClean = flowHoc(
   addProps({ children: <FlowContainer /> }),
 )(FilterByGroupClean);
 
-export const asContentListingFiltersToken = asVitalTokenSpec<FilterByGroupComponents>();
+export const asContentListingToken = asVitalTokenSpec<FilterByGroupComponents>();
 
-export default ContentListingFiltersClean;
+export default ContentListingClean;

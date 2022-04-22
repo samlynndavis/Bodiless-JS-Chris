@@ -19,9 +19,9 @@ import {
 } from '@bodiless/filtering';
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { vitalFilter } from '../../Filter';
-import { asContentListingFiltersToken } from '../ContentListingFiltersClean';
+import { asContentListingToken } from '../ContentListingClean';
 
-const Default = asContentListingFiltersToken({
+const Default = asContentListingToken({
   Components: {
     Filter: vitalFilter.Default,
   },
@@ -49,13 +49,13 @@ const Default = asContentListingFiltersToken({
   },
 });
 
-const WithMultipleAllowedTags = asContentListingFiltersToken({
+const WithMultipleAllowedTags = asContentListingToken({
   Core: {
     _: withMultipleAllowedTags,
   },
 });
 
-const WithSingleAllowedTag = asContentListingFiltersToken({
+const WithSingleAllowedTag = asContentListingToken({
   Core: {
     _: withSingleAllowedTag,
   },

@@ -25,7 +25,7 @@ import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { useNode, withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
-import { ContentListingFiltersClean, vitalContentListingFilters } from '@bodiless/vital-content-listing';
+import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
 
@@ -80,7 +80,7 @@ const ContentListing = asGenericTemplateToken({
   ...Default,
   Components: {
     ...Default.Components,
-    Content: on(ContentListingFiltersClean)(vitalContentListingFilters.Default),
+    Content: on(ContentListingClean)(vitalContentListing.Default),
   },
 });
 

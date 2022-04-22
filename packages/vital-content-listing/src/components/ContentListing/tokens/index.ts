@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalContentListingFilters from './vitalContentListingFilters';
+import vitalContentListing from './vitalContentListing';
 
-export default vitalContentListingFilters;
+export default vitalContentListing;

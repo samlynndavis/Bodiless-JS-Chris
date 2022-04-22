@@ -14,4 +14,5 @@
 
 export enum ContentListingFlowContainerNodeKeys {
   ContentListing = 'content-listing',
+  FilterableContentImage = 'image',
 }

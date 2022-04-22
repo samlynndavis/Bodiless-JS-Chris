@@ -12,13 +12,13 @@
  * limitations under the License.
  */
 
-import ContentListingFiltersClean, { asContentListingFiltersToken } from './ContentListingFiltersClean';
-import vitalContentListingFilters from './tokens';
-import vitalContentListingFiltersBase from './tokens/vitalContentListingFilters';
+import ContentListingClean, { asContentListingToken } from './ContentListingClean';
+import vitalContentListing from './tokens';
+import vitalContentListingBase from './tokens/vitalContentListing';
 
 export {
-  ContentListingFiltersClean,
-  asContentListingFiltersToken,
-  vitalContentListingFilters,
-  vitalContentListingFiltersBase,
+  ContentListingClean,
+  asContentListingToken,
+  vitalContentListing,
+  vitalContentListingBase,
 };

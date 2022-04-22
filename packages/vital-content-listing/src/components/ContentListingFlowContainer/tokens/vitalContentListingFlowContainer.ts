@@ -29,7 +29,7 @@ const Default = asFluidToken({
       vitalImage.WithEditorPlain,
       vitalImage.WithLink,
       // Needs to provide key since WithLink invalidates default one.
-      withNodeKey('image'),
+      withNodeKey(ContentListingFlowContainerNodeKeys.FilterableContentImage),
     ),
   },
   Layout: {
