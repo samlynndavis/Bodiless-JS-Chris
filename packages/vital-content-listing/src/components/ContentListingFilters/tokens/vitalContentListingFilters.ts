@@ -12,21 +12,18 @@
  * limitations under the License.
  */
 
-import {
-  as,
-  on,
-} from '@bodiless/fclasses';
+import { as } from '@bodiless/fclasses';
 import {
   withSingleAllowedTag,
   withMultipleAllowedTags,
 } from '@bodiless/filtering';
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
-import { FilterClean, vitalFilter } from '../../Filter';
+import { vitalFilter } from '../../Filter';
 import { asContentListingFiltersToken } from '../ContentListingFiltersClean';
 
 const Default = asContentListingFiltersToken({
   Components: {
-    Filter: on(FilterClean)(vitalFilter.Default),
+    Filter: vitalFilter.Default,
   },
   Layout: {
     Wrapper: 'flex flex-col lg:flex-row lg:min-h-screen',
@@ -34,6 +31,7 @@ const Default = asContentListingFiltersToken({
     ResetButton: 'self-start',
   },
   Spacing: {
+    Wrapper: 'my-4',
     FilterWrapper: 'lg:w-1/3 lg:mr-5 lg:rtl:ml-5 lg:rtl:mr-0',
     FilterTitle: 'my-2 lg:my-0',
     ContentWrapper: 'w-full',

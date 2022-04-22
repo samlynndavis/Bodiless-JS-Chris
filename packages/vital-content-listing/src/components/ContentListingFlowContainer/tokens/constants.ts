@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import vitalContentListing from './vitalContentListing';
-
-export default vitalContentListing;
+export enum ContentListingFlowContainerNodeKeys {
+  ContentListing = 'content-listing',
+}

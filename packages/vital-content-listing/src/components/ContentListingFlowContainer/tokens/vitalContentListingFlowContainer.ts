@@ -17,6 +17,7 @@ import { asFilterableByGroup } from '@bodiless/filtering';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalImage } from '@bodiless/vital-image';
 import { withNodeKey } from '@bodiless/core';
+import { ContentListingFlowContainerNodeKeys } from './constants';
 
 const Default = asFluidToken({
   Core: {
@@ -37,6 +38,9 @@ const Default = asFluidToken({
   Spacing: {
     ComponentWrapper: 'p-3',
     Wrapper: '-m-3',
+  },
+  Schema: {
+    _: withNodeKey(ContentListingFlowContainerNodeKeys.ContentListing),
   },
 });
 

@@ -12,10 +12,18 @@
  * limitations under the License.
  */
 
+import React from 'react';
+import { addProps, as, flowHoc } from '@bodiless/fclasses';
 import { FilterByGroupClean, FilterByGroupComponents } from '@bodiless/filtering';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
+import { vitalContentListingFlowContainer } from '../ContentListingFlowContainer';
 
-const ContentListingFiltersClean = FilterByGroupClean;
+const FlowContainer = as(vitalContentListingFlowContainer.Default)(FlowContainerClean);
+
+const ContentListingFiltersClean = flowHoc(
+  addProps({ children: <FlowContainer /> }),
+)(FilterByGroupClean);
 
 export const asContentListingFiltersToken = asVitalTokenSpec<FilterByGroupComponents>();
 
