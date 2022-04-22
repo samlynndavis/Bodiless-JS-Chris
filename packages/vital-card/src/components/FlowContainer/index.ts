@@ -13,9 +13,9 @@
  */
 
 import { asFluidToken } from '@bodiless/vital-elements';
-import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
+import { on, varyDesigns } from '@bodiless/fclasses';
 import {
-  CardClean, vitalCard, CardStatic, vitalCardStatic, asCardToken,
+  CardClean, vitalCard, CardStatic, vitalCardStatic,
 } from '../Card';
 
 const BaseVariation = {
@@ -26,23 +26,11 @@ const OrientationVariations = {
   Vertical: on(CardClean)(vitalCard.WithVerticalOrientation),
   Horizontal: on(CardClean)(vitalCard.WithHorizontalOrientation),
 };
-const TitleVariations = {
-  Title: on(CardClean)(
-    vitalCard.Base,
-    asCardToken({
-      Meta: flowHoc.meta.term('Title')('With Title'),
-    }),
+const ContentVariations = {
+  NoTitle: on(CardClean)(vitalCard.WithNoTitle),
+  NoDescription: on(CardClean)(
+    vitalCard.WithNoDescription,
   ),
-  NoTitle: on(CardClean)(
-    vitalCard.WithNoTitle,
-    asCardToken({
-      Meta: flowHoc.meta.term('Title')('With No Title'),
-    }),
-  ),
-};
-const DescriptionVariations = {
-  Description: on(CardClean)(vitalCard.Base),
-  NoDescription: on(CardClean)(vitalCard.WithNoDescription),
 };
 
 /**
@@ -50,13 +38,13 @@ const DescriptionVariations = {
  */
 const WithCardVariations = asFluidToken({
   Components: {
-    VerticalCard: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.WithVerticalOrientation),
     HeroCard: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.Hero),
+    Vertical: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.WithVerticalOrientation),
+    Horizontal: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.WithHorizontalOrientation),
     ...varyDesigns(
       BaseVariation,
+      ContentVariations,
       OrientationVariations,
-      TitleVariations,
-      DescriptionVariations,
     ),
   }
 });
