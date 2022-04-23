@@ -17,13 +17,6 @@ import {
   withParent,
 } from '@bodiless/core';
 import {
-  GatsbyImagePresets,
-  withoutGatsbyImageProps,
-  asGatsbyImage,
-  withGatsbyImageLogger,
-  withGatsbyImageNode,
-} from '@bodiless/gatsby-theme-bodiless';
-import {
   flowHoc,
   stylable,
   addProps,
@@ -34,6 +27,14 @@ import {
 import { withImagePlaceholder } from '@bodiless/components';
 import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/vital-elements';
+import {
+  GatsbyImagePresets,
+  withoutGatsbyImageProps,
+  asGatsbyImage,
+  withGatsbyImageLogger,
+  withGatsbyImageNode,
+// } from '@bodiless/gatsby-theme-bodiless';
+} from '../mock-gatsby';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';
