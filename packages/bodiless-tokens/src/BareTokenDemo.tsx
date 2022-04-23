@@ -62,4 +62,4 @@ export const createDemo = (options: TokenDemoOptions) => flowHoc(
   withTokensFromProps,
   asTokenDemo(options),
   withDemosFromQueryString,
-)(options.spec.component);
+)(options.spec.component as ComponentOrTag<any>);
