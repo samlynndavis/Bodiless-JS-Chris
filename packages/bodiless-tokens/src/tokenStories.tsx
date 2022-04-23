@@ -6,7 +6,7 @@ import omit from 'lodash/omit';
 // this addon is included in @storybook/addon-essentials
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { DocsContext } from '@storybook/addon-docs';
-import type { Meta, Story } from '@storybook/react/types-6-0';
+import type { Story } from '@storybook/react/types-6-0';
 import union from 'lodash/union';
 import withTokensFromProps from './withTokensFromProps';
 import TokenMap from './TokenMap';
@@ -81,7 +81,6 @@ export const asSbTemplate = (tokenMap: TokenMap) => flowHoc(
 /**
  * Extends the Storybook Meta type to include tokens.
  */
-export type TokenStoryDef<D extends object> = Meta & TokenDemoSpec<D>;
 
 type BuildSourceParams = {
   tokenNames: string[],
@@ -109,7 +108,7 @@ const buildSource = ({
  *
  * @param def
  */
-export const createTokenStories = <D extends object>(def: TokenStoryDef<D>) => {
+export const createTokenStories = <D extends object>(def: TokenDemoSpec<D>) => {
   const {
     tokens, tokensExportName, componentExportName, defaultTokens = [], ...meta
   } = def;
