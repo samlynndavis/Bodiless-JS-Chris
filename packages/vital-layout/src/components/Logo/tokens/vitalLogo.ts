@@ -12,15 +12,15 @@
  * limitations under the License.
  */
 
-import {
-  vitalImage
-} from '@bodiless/vital-image';
+// import {
+//   vitalImage,
+// } from '@bodiless/vital-image';
 import {
   withNode,
   withNodeKey,
   withSidecarNodes,
 } from '@bodiless/core';
-import { asBodilessLink } from '@bodiless/components-ui';
+import { asBodilessImage, asBodilessLink } from '@bodiless/components-ui';
 import { asLogoToken } from '../LogoClean';
 
 const Default = asLogoToken({
@@ -32,11 +32,12 @@ const Default = asLogoToken({
     Wrapper: 'mx-4 lg:ml-0 lg:mr-8',
   },
   Components: {
-    Image: vitalImage.Default,
+    // Image: vitalImage.Default,
+    Image: asBodilessImage(),
   },
-  Behavior: {
-    Image: vitalImage.WithEager,
-  },
+  // Behavior: {
+  //   Image: vitalImage.WithEager,
+  // },
   Schema: {
     Image: withNodeKey({ nodeKey: 'SiteLogo', nodeCollection: 'site' }),
     // @todo should this be a vital-link?
