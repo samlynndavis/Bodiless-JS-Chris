@@ -20,7 +20,6 @@ const resolver = (pkgName) => require.resolve(pkgName);
 
 const fontPath = require.resolve('@bodiless/vital-link/assets/font/linkicons.woff2');
 
-
 const twConfig = {
   content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',

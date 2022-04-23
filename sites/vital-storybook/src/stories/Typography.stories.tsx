@@ -1,21 +1,16 @@
 import {
-  addProps,
   Span,
 } from '@bodiless/fclasses';
-import type { PropsWithChildren } from 'react';
 import { vitalTypography } from '@bodiless/vital-elements';
 import { createTokenStories } from '@bodiless/tokens';
 
-const content: PropsWithChildren<{}> = {
-  children: 'Lorem ipsum dolor sit amet',
-};
-
 const { meta, story } = createTokenStories({
   title: 'Elements/Typography',
-  component: addProps(content)(Span),
+  component: Span,
   tokens: vitalTypography,
-  componentName: 'Span',
-  tokenCollectionName: 'vitalTypography',
+  defaultTokens: ['WithDemoContent'],
+  componentExportName: 'Span',
+  tokensExportName: 'vitalTypography',
 });
 
 export default meta;

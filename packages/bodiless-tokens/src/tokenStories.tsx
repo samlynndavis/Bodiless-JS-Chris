@@ -1,5 +1,5 @@
 import {
-  DesignableComponents, DesignableProps, flowHoc, HOC, TokenCollection, as,
+  flowHoc, HOC,
 } from '@bodiless/fclasses';
 import React, { FC, useContext, ComponentType } from 'react';
 import omit from 'lodash/omit';
@@ -7,36 +7,18 @@ import omit from 'lodash/omit';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { DocsContext } from '@storybook/addon-docs';
 import type { Meta, Story } from '@storybook/react/types-6-0';
+import union from 'lodash/union';
 import withTokensFromProps from './withTokensFromProps';
 import TokenMap from './TokenMap';
 import { SbEditProvider } from './SbEditProvider';
-
-/**
- * Builds a token map from a token collection.
- *
- * @param collection
- */
-export const buildTokenMap = <C extends DesignableComponents>(
-  collection: TokenCollection<C>
-): TokenMap<DesignableProps<C>> => {
-  const tokens = Object.keys(collection).reduce(
-    (toks, key) => ({
-      ...toks,
-      [key]: as(collection[key]),
-    }),
-    {}
-  );
-  const map = new TokenMap<DesignableProps<C>>();
-  map.add(tokens);
-  return map;
-};
+import type { TokenDemoSpec } from './types';
 
 /**
  * Generates the storybook argTypes descriptor from a token map.
  *
  * @param tokenMap
  */
-export const getSbArgTypes = (tokenMap: TokenMap<any>) => (
+export const getSbArgTypes = (tokenMap: TokenMap) => (
   tokenMap.groups.reduce((acc, cat) => ({
     ...acc,
     [cat]: {
@@ -59,7 +41,7 @@ export const getSbArgTypes = (tokenMap: TokenMap<any>) => (
  *
  * @param tokenMap
  */
-const withTokensPropFromSbTemplateProps = (tokenMap: TokenMap<any>): HOC => Component => {
+const withTokensPropFromSbTemplateProps = (tokenMap: TokenMap): HOC => Component => {
   const WithTokensPropFromSbTemplateProps: FC<any> = props => {
     // Filter out props which are not defined in the token map.
     const groups: string[] = Object.keys(props).filter(
@@ -91,7 +73,7 @@ const withTokensPropFromSbTemplateProps = (tokenMap: TokenMap<any>): HOC => Comp
  *
  * @param tokenMap
  */
-export const asSbTemplate = (tokenMap: TokenMap<any>) => flowHoc(
+export const asSbTemplate = (tokenMap: TokenMap) => flowHoc(
   withTokensFromProps,
   withTokensPropFromSbTemplateProps(tokenMap)
 );
@@ -99,16 +81,7 @@ export const asSbTemplate = (tokenMap: TokenMap<any>) => flowHoc(
 /**
  * Extends the Storybook Meta type to include tokens.
  */
-export type TokenStoryDef = Meta & {
-  tokens: TokenCollection<any>,
-  tokenCollectionName: string,
-  componentName: string,
-};
-
-const groupsFor = (tokenMap: TokenMap<any>, name: string): string[] => tokenMap.groups.reduce(
-  (groups, group) => (tokenMap.namesFor(group).includes(name) ? [...groups, group] : groups),
-  [] as string[],
-);
+export type TokenStoryDef<D extends object> = Meta & TokenDemoSpec<D>;
 
 type BuildSourceParams = {
   tokenNames: string[],
@@ -136,12 +109,12 @@ const buildSource = ({
  *
  * @param def
  */
-export const createTokenStories = (def: TokenStoryDef) => {
+export const createTokenStories = <D extends object>(def: TokenStoryDef<D>) => {
   const {
-    tokens, tokenCollectionName, componentName, ...meta
+    tokens, tokensExportName, componentExportName, defaultTokens = [], ...meta
   } = def;
   const { component } = meta;
-  const tokenMap = buildTokenMap(tokens);
+  const tokenMap = new TokenMap().add(tokens);
   const Template = asSbTemplate(tokenMap)(component as FC<any>) as Story;
 
   const withEditProvider = (Story: ComponentType<any>) => (
@@ -150,7 +123,8 @@ export const createTokenStories = (def: TokenStoryDef) => {
     </SbEditProvider>
   );
 
-  const story = (...tokenNames: string[]) => {
+  const story = (...tokenNamesParam: string[]) => {
+    const tokenNames = union(tokenNamesParam, defaultTokens);
     const Story = Template.bind({});
     Story.parameters = {
       docs: {
@@ -167,7 +141,9 @@ export const createTokenStories = (def: TokenStoryDef) => {
             [],
           );
           return buildSource({
-            tokenNames, tokenCollectionName, componentName,
+            tokenNames,
+            tokenCollectionName: tokensExportName,
+            componentName: componentExportName,
           });
 
           // const cleanInput = input.toLowerCase().replace('\n', ' ');
@@ -197,11 +173,9 @@ export const createTokenStories = (def: TokenStoryDef) => {
     //     },
     //   },
     // };
-    console.log('tn', tokenNames);
     Story.args = tokenNames.reduce(
       (args, name) => {
-        const groups = groupsFor(tokenMap, name);
-        console.log(name, groups);
+        const groups = tokenMap.groupsFor(name);
 
         if (!groups.length) return args;
         const groupName = groups[0];
@@ -215,7 +189,6 @@ export const createTokenStories = (def: TokenStoryDef) => {
     );
     return Story;
   };
-  console.log(tokenMap.groups);
 
   return {
     meta: {
