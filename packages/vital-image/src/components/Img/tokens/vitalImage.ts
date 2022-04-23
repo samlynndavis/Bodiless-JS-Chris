@@ -33,8 +33,7 @@ import {
   asGatsbyImage,
   withGatsbyImageLogger,
   withGatsbyImageNode,
-// } from '@bodiless/gatsby-theme-bodiless';
-} from '../mock-gatsby';
+} from '../vital-gatsby-image';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';

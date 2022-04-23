@@ -1,3 +1,5 @@
+const { NormalModuleReplacementPlugin } = require('webpack');
+
 const babelConfig = {
   "plugins": [
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
@@ -23,7 +25,13 @@ const babelConfig = {
 };
 
 module.exports = async ({ config, mode }) => {
-  console.log(config.module.rules);
+  // Omit gatsby image plugin
+  config.plugins.push(
+    new NormalModuleReplacementPlugin(
+      /\.\.\/vital-gatsby-image/,
+      '../vital-gatsby-image/mocks',
+    )
+  );
   config.module.rules.push(
             {
               test: (file) =>
