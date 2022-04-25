@@ -26,6 +26,7 @@ import { withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
+import { CardClean, vitalCard } from '@bodiless/vital-card';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
 
@@ -39,6 +40,7 @@ const Default = asGenericTemplateToken({
       withDesign({
         Image: on(Img)(vitalImage.Hero),
         Video: on(YouTubeClean)(vitalYouTube.Hero),
+        HeroCard: on(CardClean)(vitalCard.Hero),
       }),
     ),
     Content: as(vitalFlowContainer.Default),
