@@ -21,7 +21,7 @@ const vitalHeaderSpec: TokenDemoSpec = {
   title: 'Global Components/Header',
   component: HeaderClean,
   tokens: vitalHeader,
-  // defaultTokens: ['WithDemoContent'],
+  defaultTokens: ['Default'],
   componentExportName: 'HeaderClean',
   tokensExportName: 'vitalHeader',
 };
