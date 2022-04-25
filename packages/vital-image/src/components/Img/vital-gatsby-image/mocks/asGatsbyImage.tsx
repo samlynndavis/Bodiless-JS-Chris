@@ -25,10 +25,9 @@ const asMockGatsbyImage: HOC = Image => props => {
     'preset',
     'canonicalPreset',
     '_nodeKey',
-    'imgStyle',
-  );
+    'imgStyle',);
   return <Image {...finalProps} />;
-}
+};
 
 export default asMockGatsbyImage;
 export { identity as withoutGatsbyImageProps };
