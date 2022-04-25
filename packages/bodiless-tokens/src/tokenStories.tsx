@@ -117,7 +117,7 @@ export const createTokenStories = <D extends object>(def: TokenDemoSpec<D>) => {
   const Template = asSbTemplate(tokenMap)(component as FC<any>) as Story;
 
   const withEditProvider = (Story: ComponentType<any>) => (
-    <SbEditProvider>
+    <SbEditProvider pageContext={{ slug: componentExportName }}>
       <Story />
     </SbEditProvider>
   );
