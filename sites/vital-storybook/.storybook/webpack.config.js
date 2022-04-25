@@ -1,4 +1,4 @@
-const { NormalModuleReplacementPlugin } = require('webpack');
+const { createNoGatsbyWebpackPlugin } = require('@bodiless/webpack');
 
 const babelConfig = {
   "plugins": [
@@ -27,10 +27,7 @@ const babelConfig = {
 module.exports = async ({ config, mode }) => {
   // Omit gatsby image plugin
   config.plugins.push(
-    new NormalModuleReplacementPlugin(
-      /\.\.\/vital-gatsby-image/,
-      '../vital-gatsby-image/mocks',
-    )
+    createNoGatsbyWebpackPlugin(),
   );
   config.module.rules.push(
             {
