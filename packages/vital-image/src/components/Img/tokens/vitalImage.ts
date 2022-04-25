@@ -15,6 +15,7 @@
 import {
   withNode,
   withParent,
+  withSidecarNodes,
 } from '@bodiless/core';
 import {
   GatsbyImagePresets,
@@ -149,7 +150,7 @@ const WithLandscapePlaceholder = asElementToken({
   Meta: extendMeta(flowHoc.meta.term('Placeholder')('Landscape')),
 });
 
-const LinkBase = asBodilessLink('link')(A);
+const LinkBase = withSidecarNodes(asBodilessLink('link'))(A);
 
 /**
  * Token which wrap the image in a link.
