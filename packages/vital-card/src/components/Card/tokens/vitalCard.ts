@@ -14,7 +14,7 @@
 
 import { withNodeKey } from '@bodiless/core';
 import {
-  flowHoc, replaceWith, on, Div, extendMeta,
+  flowHoc, replaceWith, on, Div, extendMeta, H1, H4,
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
@@ -135,6 +135,8 @@ const Hero = asCardToken({
     EyebrowWrapper: replaceWith(() => null),
     Image: vitalImage.Default,
     CTAWrapper: replaceWith(Div),
+    TitleWrapper: replaceWith(H1),
+    DescriptionWrapper: replaceWith(H4),
   },
   Layout: {
     ...Base.Layout,
@@ -154,6 +156,8 @@ const Hero = asCardToken({
   Theme: {
     ...Base.Theme,
     CTAWrapper: vitalColor.BgPrimaryPage,
+    TitleWrapper: vitalTypography.H1,
+    DescriptionWrapper: vitalTypography.H4,
   },
   Meta: extendMeta(
     flowHoc.meta.term('Description')('Hero'),
