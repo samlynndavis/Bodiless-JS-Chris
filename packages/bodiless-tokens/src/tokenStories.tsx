@@ -22,10 +22,10 @@ export const getSbArgTypes = (tokenMap: TokenMap) => (
   tokenMap.groups.reduce((acc, cat) => ({
     ...acc,
     [cat]: {
+      options: tokenMap.namesFor(cat),
       control: {
         // type: 'multi-select',
         type: 'check',
-        options: tokenMap.namesFor(cat),
       },
     },
   }), {})

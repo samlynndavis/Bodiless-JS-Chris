@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { addProps, as } from '@bodiless/fclasses';
+import { addProps, as, flowHoc } from '@bodiless/fclasses';
 import { asElementToken } from '../../../util';
 import { vitalColor } from '../../Color';
 import { vitalFontSize } from '../../FontSize';
@@ -168,6 +168,7 @@ const Rest = asElementToken({
 });
 
 const WithDemoContent = asElementToken({
+  Meta: flowHoc.meta.term('Group')('Demo'),
   Core: {
     _: addProps({ children: 'Lorem ipsum dolor sit amet' }),
   },
