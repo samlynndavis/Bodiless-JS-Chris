@@ -1,9 +1,10 @@
 /* eslint-disable class-methods-use-this */
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { HOC, as, Enhancer } from '@bodiless/fclasses';
 import {
-  BodilessStoreProvider, PageEditor, useEditContext, BodilessMobxStore,
-  BodilessStoreBackend, BodilessStore, getStoreKeyFromResourcePath,
+  BodilessStoreProvider, useEditContext, BodilessMobxStore,
+  BodilessStoreBackend, getStoreKeyFromResourcePath, getFromSessionStorage,
+  PageEditor,
 } from '@bodiless/core';
 import { LocalContextMenu } from '@bodiless/core-ui';
 
@@ -38,7 +39,7 @@ class SbStore extends BodilessMobxStore<any> {
 
   protected parseData(data: object): Map<string, any> {
     const parsedData = new Map<string, any>();
-    Object.entries(data).forEach(
+    Object.entries(data || {}).forEach(
       ([resourcePath, value]) => {
         const key = getStoreKeyFromResourcePath(resourcePath);
         parsedData.set(key, value);
@@ -70,23 +71,12 @@ const writeDataToSessionStorage = (slug: string, data: object) => {
   }
 };
 
-type SbSessionStoreProviderProps = Pick<
-React.ComponentProps<typeof BodilessStoreProvider>,
-'pageContext'
->;
-
-const SbSessionStoreProvider: FC<SbSessionStoreProviderProps> = props => {
-  const { pageContext: { slug } } = props;
-  const data = getDataFromSessionStorage(slug);
-  return <SbStoreProvider {...props} data={data} />;
+const SbSessionStoreProvider: FC<{ slug: string }> = props => {
+  const { slug, ...rest } = props;
+  const store = useMemo(() => new SbStore(slug), []);
+  const data = useMemo(() => getFromSessionStorage(slug), []);
+  return <BodilessStoreProvider {...rest} pageContext={{ slug }} data={data} store={store} />;
 };
-
-class SbStoreProvider extends BodilessStoreProvider {
-  protected createStore(): BodilessStore<any> {
-    const { pageContext: { slug } } = this.props;
-    return new SbStore(slug);
-  }
-}
 
 const ui = {
   GlobalContextMenu: () => null,
@@ -106,10 +96,10 @@ export const withAlwaysEditable: HOC = Component => props => {
   return <Component {...props} />;
 };
 
-export const withBodilessStore: Enhancer<SbSessionStoreProviderProps> = Component => props => {
-  const { pageContext, ...rest } = props;
+export const withBodilessStore: Enhancer<{ slug: string }> = Component => props => {
+  const { slug, ...rest } = props;
   return (
-    <SbSessionStoreProvider pageContext={pageContext}>
+    <SbSessionStoreProvider slug={slug}>
       <Component {...rest as any} />
     </SbSessionStoreProvider>
   );
