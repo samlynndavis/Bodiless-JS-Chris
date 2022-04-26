@@ -84,10 +84,7 @@ const Default = asYouTubeToken({
   }
 });
 
-const Hero = asYouTubeToken({
-  ...Default,
-  Compose: omit(Default.Compose, 'WithFullScreenEnabled')
-});
+const Hero = asYouTubeToken(Default);
 
 export default {
   WithFullScreenEnabled,
