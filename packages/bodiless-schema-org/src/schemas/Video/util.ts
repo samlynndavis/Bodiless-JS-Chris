@@ -101,6 +101,7 @@ export const getYouTubeSchema = async (schemaSourceKeys: Array<DataStructureSche
     }));
     return schemaYouTube;
   }
+
   // eslint-disable-next-line no-console
-  console.error(`Unable to retrieve Youtube API googleYTApiKey: ${googleYTApiKey}.`);
+  console.warn(`YouTube API key missing or invalid: ${googleYTApiKey}. No schema will be generated for these video ids: ${ids?.join(', ')}.`);
 };
