@@ -14,6 +14,7 @@
 
 import {
   withNode,
+  withNodeKey,
   withParent,
 } from '@bodiless/core';
 import {
@@ -188,6 +189,9 @@ const WithEager = asElementToken({
 
 const Hero = asElementToken({
   ...Default,
+  Schema: {
+    _: withNodeKey('hero-image'),
+  },
   Compose: {
     WithEager,
     WithLandscapePlaceholder,
