@@ -145,6 +145,9 @@ const Hero = asCardToken({
     TitleWrapper: replaceWith(H1),
     DescriptionWrapper: replaceWith(H4),
   },
+  Behavior: {
+    Image: vitalImage.WithEager,
+  },
   Layout: {
     ...Base.Layout,
     Wrapper: 'md:flex-row w-full flex flex-col',
