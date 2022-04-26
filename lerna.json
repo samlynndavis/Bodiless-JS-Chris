@@ -9,8 +9,8 @@
       "message": "chore(release): publish %s"
     },
     "version": {
-      "allowBranch": "main"
+      "allowBranch": "release"
     }
   },
-  "version": "1.0.0-beta.9"
+  "version": "1.0.0-beta.10"
 }
