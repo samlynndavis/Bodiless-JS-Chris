@@ -26,11 +26,8 @@ const OrientationVariations = {
   Horizontal: vitalCard.WithHorizontalOrientation,
 };
 const ContentVariations = {
-  Title: asCardToken({
-    Meta: flowHoc.meta.term('Description')('With Title'),
-  }),
-  Description: asCardToken({
-    Meta: flowHoc.meta.term('Description')('With Description'),
+  TitleDescription: asCardToken({
+    Meta: flowHoc.meta.term('Description')('With Title + Description'),
   }),
   NoTitle: vitalCard.WithNoTitle,
   NoDescription: vitalCard.WithNoDescription,

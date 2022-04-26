@@ -14,7 +14,7 @@
 
 import { withNodeKey } from '@bodiless/core';
 import {
-  flowHoc, replaceWith, on, Div,
+  flowHoc, replaceWith, on, Div, extendMeta, H1, H4,
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
@@ -35,7 +35,6 @@ const Base = asCardToken({
     Title: on(EditorPlainClean)(vitalEditorPlain.Default),
     Eyebrow: on(EditorPlainClean)(vitalEditorPlain.Default),
     Description: on(RichTextClean)(vitalRichText.BasicNoLink),
-    CTALink: asBodilessLink(),
     CTAText: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
   Content: {
@@ -58,6 +57,9 @@ const Base = asCardToken({
     EyebrowWrapper: vitalTypography.Eyebrow,
     TitleWrapper: vitalTypography.H3,
     Description: vitalTypography.Body,
+  },
+  Layout: {
+    Wrapper: 'w-full flex flex-col',
   },
   Spacing: {
     Eyebrow: 'my-4',
@@ -130,11 +132,18 @@ const WithNoDescription = asCardToken({
  */
 const Hero = asCardToken({
   ...Base,
+  Editors: {
+    ...Base.Editors,
+    CTALink: asBodilessLink(),
+  },
   Components: {
     ...Base.Components,
+    Wrapper: replaceWith(Div),
     EyebrowWrapper: replaceWith(() => null),
     Image: vitalImage.Default,
     CTAWrapper: replaceWith(Div),
+    TitleWrapper: replaceWith(H1),
+    DescriptionWrapper: replaceWith(H4),
   },
   Layout: {
     ...Base.Layout,
@@ -154,8 +163,13 @@ const Hero = asCardToken({
   Theme: {
     ...Base.Theme,
     CTAWrapper: vitalColor.BgPrimaryPage,
+    TitleWrapper: vitalTypography.H1,
+    DescriptionWrapper: vitalTypography.H4,
   },
-  Meta: flowHoc.meta.term('Description')('Hero'),
+  Meta: extendMeta(
+    flowHoc.meta.term('Description')('Hero'),
+    flowHoc.meta.term('Orientation')('Horizontal'),
+  ),
 });
 
 const Default = asCardToken({
