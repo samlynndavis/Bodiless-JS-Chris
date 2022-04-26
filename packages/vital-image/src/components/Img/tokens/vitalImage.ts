@@ -186,7 +186,13 @@ const WithEager = asElementToken({
   },
 });
 
-const Hero = asElementToken(Default, WithLandscapePlaceholder);
+const Hero = asElementToken({
+  ...Default,
+  Compose: {
+    WithEager,
+    WithLandscapePlaceholder,
+  }
+});
 
 export default {
   Base,

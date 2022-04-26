@@ -30,13 +30,21 @@ import { CardClean, vitalCard } from '@bodiless/vital-card';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
 
+const heroDefaultData = {
+  component: 'Image',
+};
+
+const heroUseOverrides = () => ({
+  groupLabel: 'Hero'
+});
+
 const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(vitalLayout.Default),
     // @todo breadcrumb placeholder
     Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
     TopContent: as(
-      asBodilessChameleon('hero', { component: 'Image' }),
+      asBodilessChameleon('hero', heroDefaultData, heroUseOverrides),
       withDesign({
         Image: on(Img)(vitalImage.Hero),
         Video: on(YouTubeClean)(vitalYouTube.Hero),
@@ -68,6 +76,9 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint
     ),
   },
+  Layout: {
+    TopWrapper: 'flex justify-center'
+  }
 });
 
 export default {
