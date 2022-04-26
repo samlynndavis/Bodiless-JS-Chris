@@ -21,4 +21,9 @@ const ExamplePage = () => (
     ...
   </ExampleWrapper>
 );
-``` 
+```
+
+# Schema.org
+
+VitalDS YouTube components may be used as a schema source for a Video entity. See 
+[@bodiless/schema-org docs](../../bodiless/Components/Schema) for more information.
