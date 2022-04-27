@@ -9,7 +9,7 @@ Upon completion of this tutorial, you will end up with code similar to that foun
 [here](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/test-site/src/data/pages/gallery-final/
 ':target=_blank'). As you go through the tutorial, feel free to reference this code as needed.
 
-## Prerequisite: Create a Site
+## 0. Prerequisite: Create a Site
 
 To begin, follow the directions to [create a new
 site](../../About/GettingStarted#creating-a-new-site). All the pages created in this tutorial will
@@ -31,11 +31,10 @@ remove the type information from the examples below). You can use the following 
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Page, PageProps } from '@bodiless/gatsby-theme-bodiless';
-import Layout from '../../../components/Layout';
 
 export default (props: PageProps) => (
   <Page {...props}>
-    <Layout>
+    <div>
       <h1>About BodilessJS</h1>
       <p>
         Donec metus sapien, cursus vel cursus quis, accumsan vitae purus.
@@ -45,7 +44,7 @@ export default (props: PageProps) => (
         Donec quis velit varius, sagittis quam eu, fermentum metus. Morbi a
         pretium dui. Maecenas condimentum pellentesque convallis.
       </p>
-    </Layout>
+    </div>
   </Page>
 );
 
@@ -59,8 +58,8 @@ export const query = graphql`
 
 A few things to note:
 
-01. The whole page, _including the layout_, is wrapped in the `Page` component from
-    `gatsby-theme-bodiless`. This encapsulates the editing framework.
+01. The whole page is wrapped in the `Page` component from `gatsby-theme-bodiless`. This
+    encapsulates the editing framework.
 01. A page query incorporating two fragments (also defined in `gatsby-theme-bodiless`) ensures that
     Bodiless is able to find and load content for the page.
 
@@ -88,7 +87,7 @@ You can modify the template by editing the contents of this file — or remove t
 replace it with a custom page component. For more information, see [Creating
 Pages](../Architecture/Data#creating-pages).
 
-## 2. Styling the Page Title using Functional CSS and Design Token HOCs
+## 2. Styling the Page using Functional CSS and Design Token HOCs
 
 BodilessJS allows you to style your site using any technique you prefer. However, we recommend using
 ["Functional" or "Atomic" CSS](https://johnpolacek.github.io/the-case-for-atomic-css/
@@ -97,33 +96,67 @@ higher-order components (HOCs). This is the pattern used in the examples below, 
 `@bodiless/fclasses` library contains some utilities to make it easier. We also use the
 [Tailwind](https://tailwindcss.com ':target=_blank') library to generate our utility classes.
 
-Begin by refactoring the page title using this pattern. Add the following imports to your
-`index.tsx`:
+As you can see on your page, everything goes to the edge of the viewport, which isn't ideal. So,
+we'll begin by bringing things in a bit, and creating a [`container <div>`](https://tailwindcss.com/docs/container#using-the-container
+':target=_blank') to contain the layout of your page.
 
-```tsx
-import { addClasses, H1 } from '@bodiless/fclasses';
-```
+01. First, add the following imports to your `index.tsx` file:
+    ```tsx
+    import { addClasses, flowHoc, Div } from '@bodiless/fclasses';
+    ```
+01. Define a couple [Element Tokens](/Design/DesignSystem#element-tokens) for your container:
+    ```tsx
+    const asPageContainer = addClasses('container mx-auto');
+    const asYMargin = addClasses('my-2');
+    ```
+01. Apply the tokens to the imported `Div` component (we will explain this in a minute):
+    ```tsx
+    const Container = flowHoc(
+      asPageContainer,
+      asYMargin,
+    )(Div);
+    ```
+01. Finally, replace the `<div>` element on your page with your newly created `Container` component
+    (just replace the tags — keep the contents):
+    ```tsx
+    export default (props: PageProps) => (
+      <Page {...props}>
+        <Container>
+          // ...
+        </Container>
+      </Page>
+    );
+    ```
+01. Refresh your page to view the results.
 
-Now, create a reusable primary header token by adding the following above the default export:
+Note the use of `flowHoc` in the above code. This is a custom composition utility provided by
+BodilessJS. We will go into it in more detail in subsequent tutorials; for now, just treat it as an
+equivalent to Lodash's [`flow`](https://lodash.com/docs/4.17.15#flow ':target=_blank').
 
-```tsx
-const withPrimaryHeaderStyles = addClasses('text-3xl font-bold');
-const PrimaryHeader = withPrimaryHeaderStyles(H1);
-```
+Now, let's refactor the page title using the same pattern as above:
 
-A _design token_ for your site's primary headers, and a component to which that token is applied
-have been created. The value of creating (and exporting) both will become more apparent once the
-[Design API](../Architecture/FClasses#the-design-api) is in use.
+01. Add the `H1` component to your imports from `@bodiless/fclasses` in your `index.tsx`:
+    ```tsx
+    import { addClasses, flowHoc, Div, H1 } from '@bodiless/fclasses';
+    ```
+01. Create a reusable primary header token by adding the following above the default export:
+    ```tsx
+    const withPrimaryHeaderStyles = addClasses('text-3xl font-bold');
+    const PrimaryHeader = withPrimaryHeaderStyles(H1);
+    ```
+    - A _design token_ for your site's primary headers, and a component to which that token is
+      applied have been created. The value of creating (and exporting) both will become more
+      apparent once the [Design API](../Architecture/FClasses#the-design-api) is in use.
+01. Now replace the `<h1>` tag with `<PrimaryHeader>`:
+    ```tsx
+    <PrimaryHeader>About BodilessJS</PrimaryHeader>
+    ```
+01. Refresh your page to view the results.
 
-Now replace the `<h1>` tag with `<PrimaryHeader>`:
-
-```tsx
-<PrimaryHeader>About BodilessJS</PrimaryHeader>
-```
-
-Note that the token is applied to the imported `H1` component. This is because the class utilities
-provided by `@bodiless/fclasses` must operate on a `stylable` component. The definition of `H1`
-(from `@bodiless/fclasses`) should make this clear:
+Note that — like with the `Div` component for the `Container` above — the token is applied to the
+imported `H1` component. This is because the class utilities provided by `@bodiless/fclasses` must
+operate on a `stylable` component. The definition of `H1` (from `@bodiless/fclasses`) should make
+this clear:
 
 ```tsx
 export const H1 = stylable<HTMLProps<HTMLHeadElement>>('h1');
@@ -154,11 +187,10 @@ documentation](../../Design/DesignSystem).
 Bodiless provides a number of core HOCs To make various components editable. The simplest of these
 is `asEditable` — a simple, unformatted text field.
 
-Add the following imports to the top of your `index.tsx`:
+Add `asEditable` to your imports at the top of your `index.tsx` file:
 
 ```tsx
 import { asEditable } from '@bodiless/components';
-import { addClasses, H1, flowHoc } from '@bodiless/fclasses';
 ```
 
 And then update your `PrimaryHeader` definition to make it editable:
@@ -173,6 +205,9 @@ const PrimaryHeader = flowHoc(
 Navigate to [`localhost:8000/my-first-page`](http://localhost:8000/my-first-page ':target=_blank')
 again. Click on the "About BodilessJS" text and start typing. The text is editable! Now refresh the
 page. The title has been saved!
+
+?> **Note:** Throughout this tutorial, any time you want to edit an editable component, make sure
+you're in [Edit Mode](/ContenteditorUserGuide/#edit-mode).
 
 ### 3a. What's Happening Here?
 
@@ -207,10 +242,6 @@ see the content update in the browser without reloading, courtesy of `gatsby-sou
 hot reload. Or, open the same URL in a different browser window and start editing — the changes will
 propagate to the other window in near-realtime. Cool!
 
-Note the use of `flowHoc` in the above code. This is a custom composition utility provided by
-BodilessJS. We will go into it in more detail in subsequent tutorials; for now, just treat it as an
-equivalent to Lodash's [`flow`](https://lodash.com/docs/4.17.15#flow ':target=_blank').
-
 ## 4. Adding Images and Links to the Page
 
 BodilessJS has built-in support for editable images and links, so let's add an image link to our
@@ -219,7 +250,7 @@ page.
 Change the imports from `@bodiless/components` and `@bodiless/fclasses`:
 
 ```tsx
-import { H1, Img, A, addClasses, flowHoc } from '@bodiless/fclasses';
+import { addClasses, flowHoc, Div, H1, Img, A } from '@bodiless/fclasses';
 import { asEditable, asBodilessLink } from '@bodiless/components';
 import { asBodilessImage } from '@bodiless/components-ui';
 ```
@@ -281,7 +312,9 @@ Add the following to your `index.tsx`:
 
 ```tsx
 // Add `Section` to your imports from `@bodiless/fclasses`.
-import { H1, Img, A, addClasses, flowHoc, Section } from '@bodiless/fclasses';
+import {
+  addClasses, flowHoc, Div, H1, Img, A, Section,
+} from '@bodiless/fclasses';
 
 const Footer = asEditable(
   { nodeKey: 'footer', nodeCollection: 'site' },
@@ -289,7 +322,7 @@ const Footer = asEditable(
 )(Section);
 ```
 
-And, just before the closing `</Layout>` tag:
+And, just before the closing `</Container>` tag, add:
 
 ```tsx
 <Footer />
@@ -337,14 +370,7 @@ First, create your configured editor. Create a `withSimpleEditor.tsx` file along
 ```tsx
 import { RichText } from '@bodiless/richtext-ui';
 import {
-  Strong,
-  addClasses,
-  withDesign,
-  flowHoc,
-  Token,
-  replaceWith,
-  Em,
-  A,
+  addClasses, flowHoc, replaceWith, withDesign, A, Em, Strong,
 } from '@bodiless/fclasses';
 import { asBodilessLink, withPlaceholder } from '@bodiless/components';
 import { withChild, withNodeKey } from '@bodiless/core';
@@ -390,10 +416,6 @@ export default withSimpleEditor;
 
 Now, in your `index.tsx` in the `gallery` directory:
 
-01. Import `Div` from `@bodiless/fclasses` by adding it into the import.
-    ```tsx
-    import { H1, Img, A, addClasses, flowHoc, Section, Div } from '@bodiless/fclasses';
-    ```
 01. Import your `withSimpleEditor` HOC into your `index.tsx`:
     ```tsx
     import withSimpleEditor from './withSimpleEditor';
@@ -402,7 +424,7 @@ Now, in your `index.tsx` in the `gallery` directory:
     ```tsx
     const Body = withSimpleEditor('body', 'Body')(Div);
     ```
-01. And replace the _lorem ipsum_ paragraph with the following:
+01. And replace the _lorem ipsum_ paragraph (the `<p>` element and its contents) with the following:
     ```tsx
     <Body />
     ```
@@ -593,7 +615,7 @@ this, BodilessJS provides a simple, Flow Container-based grid container, and a s
 an Editor to select and place components within it. Refactor the `Gallery` component to use the
 `FlowContainer` container.
 
-First, create some styled variations of`GalleryTile` with different colored borders. Add the
+First, create some styled variations of `GalleryTile` with different colored borders. Add the
 following to `Gallery.tsx` just after the line where `asGalleryTile` is defined:
 
 ```tsx
@@ -611,31 +633,38 @@ can be found in our [Design System documentation](../../Design/DesignSystem).
 Now we'll use these tokens to define the components which will be available for placement in our
 gallery:
 
-```tsx
-const design = {
-    BlueImageTile: flowHoc(
-      replaceWith(CaptionedImage),
-      asGalleryTile,
-      withBlueBorder,
-      { title: 'Blue Image Tile' },
-      flowHoc.meta.term('Color')('Blue'),
-    ),
-    TealImageTile: flowHoc(
-      replaceWith(CaptionedImage),
-      asGalleryTile,
-      withTealBorder,
-      { title: 'Teal Image Tile' },
-      flowHoc.meta.term('Color')('Teal'),
-    ),
-    OrangeImageTile: flowHoc(
-      replaceWith(CaptionedImage),
-      asGalleryTile,
-      withOrangeBorder,
-      { title: 'Orange Image Tile' },
-      flowHoc.meta.term('Color')('Orange'),
-    ),
-  };
-```
+01. Add `replaceWith` to your imports from `@bodiless/fclasses`:
+    ```tsx
+    import {
+      H2, Section, Div, addClasses, stylable, flowHoc, replaceWith,
+    } from '@bodiless/fclasses';
+    ```
+01. After your styled variations (`withBlueBorder`, etc.), add your component definitions:
+    ```tsx
+    const design = {
+      BlueImageTile: flowHoc(
+        replaceWith(CaptionedImage),
+        asGalleryTile,
+        withBlueBorder,
+        { title: 'Blue Image Tile' },
+        flowHoc.meta.term('Color')('Blue'),
+      ),
+      TealImageTile: flowHoc(
+        replaceWith(CaptionedImage),
+        asGalleryTile,
+        withTealBorder,
+        { title: 'Teal Image Tile' },
+        flowHoc.meta.term('Color')('Teal'),
+      ),
+      OrangeImageTile: flowHoc(
+        replaceWith(CaptionedImage),
+        asGalleryTile,
+        withOrangeBorder,
+        { title: 'Orange Image Tile' },
+        flowHoc.meta.term('Color')('Orange'),
+      ),
+    };
+    ```
 
 The `flowHoc` utility is used to compose tokens onto the`CaptionedImage` component. In addition to
 the styling, _metadata_ is attached to our components (via the `{ title: '...' }` objects). This
@@ -645,59 +674,48 @@ The `design` object here is similar to the one we used above to populate the ric
 a keyed set of HOCs which are used to produce a set of available components. In both cases, we start
 with the special `replaceWith` HOC, which injects the specified component as a starting point.
 
-Next, replace the `Body` of the gallery with a Flow Container (a flexbox-based layout builder) which
-makes our three tiles available for placement by a Content Editor:
+Next, we'll replace the `Body` of the gallery with a Flow Container (a flexbox-based layout builder)
+which makes our three tiles available for placement by a Content Editor:
 
-```tsx
-const Body = withDesign(design)(FlowContainer);
-```
+01. In `Gallery.tsx`, add `withDesign` and `FlowContainer` to your imports:
+    ```tsx
+    import {
+      H2, Section, Div, addClasses, stylable, flowHoc, replaceWith, withDesign,
+    } from '@bodiless/fclasses';
+    import { FlowContainer } from '@bodiless/layouts-ui';
+    ```
+01. Replace the definition of `Body` with the following:
+    ```tsx
+    const Body = withDesign(design)(FlowContainer);
+    ```
+01. Remove the children where the `<Body>` tag appears — change:
+    ``` tsx
+    <Body>
+      {children}
+    </Body>
+    ```
+    to:
+    ```tsx
+    <Body />
+    ```
+01. Now remove the following from `index.tsx`:
+    ```tsx
+    <Gallery nodeKey="gallery-content">
+      <GalleryTile nodeKey="tile1" />
+      <GalleryTile nodeKey="tile2" />
+    </Gallery>
+    ```
+    And replace it with:
+    ```tsx
+    <Gallery nodeKey="gallery-content" />
+    ```
+01. Refresh your page.
 
-And remove the children where the `<Body />` tag appears — change:
-
-``` tsx
-<Body>
-  {children}
-</Body>
-```
-
-to:
-
-```tsx
-<Body />
-```
-
-Now remove the following from `index.tsx`:
-
-```tsx
-<Gallery nodeKey="gallery-content">
-  <GalleryTile nodeKey="tile1" />
-  <GalleryTile nodeKey="tile2" />
-</Gallery>
-```
-
-And replace it with:
-
-```tsx
-<Gallery nodeKey="gallery-content" />
-```
-
-Be sure to update the imports in `Gallery.tsx`. They should now be:
-
-```tsx
-import React, { FC, HTMLProps } from 'react';
-import {
-  H2, Section, Div, addClasses, stylable, flowHoc, replaceWith, withDesign, addProps,
-} from '@bodiless/fclasses';
-import { FlowContainer } from '@bodiless/layouts-ui';
-import { withNode } from '@bodiless/core';
-import CaptionedImage from './CaptionedImage';
-```
-
-Reload your page. Click on the "Empty FlowContainer" text below the "Gallery" title. Notice that a
-plus-sign (+) icon appears in the context menu. Click it to open the component selector. You'll see
-the three styled components rendered (i.e., `BlueImageTile`, `TealImageTile`, and
-`OrangeImageTile`). You can filter them by the facets on the left, or search for them by name — both
-using the metadata you attached above.
+Click on the "Empty FlowContainer" text below the "Gallery" title. Notice that a plus-sign (+) icon
+appears in the context menu. Click it to open the component selector. You'll see the three styled
+components rendered (i.e., `BlueImageTile`, `TealImageTile`, and `OrangeImageTile`). You can filter
+them by the facets on the left, or search for them by name — both using the metadata you attached
+above.
 
 Click one of the components to select it. It will be inserted at full-width into your gallery. You
 can use the resize handle at the right edge to change its size — notice that it snaps to a
