@@ -22,6 +22,7 @@ The CX Image Component provides a set of tokens to compose an Image Component:
 | `EditableNoEffect`         | A token which recomposes the base image as a NoEffect Image. |
 | `WithLandscapePlaceholder` | A token which applies a Landscape Placeholder.               |
 | `WithLink`                 | A token which wraps the image in a link.                     |
+| `WithFullWidthImage`       | A token which makes the image full-width.                    |
 
 ### Hero Image
 
