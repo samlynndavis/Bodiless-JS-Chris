@@ -1,5 +1,5 @@
 /**
- * Copyright © 2019 Johnson & Johnson
+ * Copyright © 2022 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -11,17 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import {
+  Fragment,
+  withShowDesignKeys,
+} from '@bodiless/fclasses';
 
-import GatsbyMobxStore from './dist/GatsbyMobxStore';
-import GatsbyNodeProvider from './dist/GatsbyNodeProvider';
-import Page from './dist/Page.bl-edit';
+const ShowDesignKeys = (
+  process.env.NODE_ENV === 'development' || process.env.BODILESS_SHOWDESIGNKEYS === '1'
+) ? withShowDesignKeys()(Fragment) : Fragment;
 
-export {
-  GatsbyMobxStore,
-  GatsbyNodeProvider,
-  Page,
-};
-
-export type { PageProps } from './dist/types';
-export * from './dist/GatsbyLink';
-export * from './dist/GatsbyImage';
+export default ShowDesignKeys;
