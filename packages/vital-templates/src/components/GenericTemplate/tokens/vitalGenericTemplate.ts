@@ -76,9 +76,6 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint
     ),
   },
-  Layout: {
-    TopWrapper: 'flex justify-center'
-  }
 });
 
 export default {

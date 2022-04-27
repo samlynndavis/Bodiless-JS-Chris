@@ -31,6 +31,7 @@ import {
   A,
   extendMeta,
   as,
+  withDesign,
 } from '@bodiless/fclasses';
 import { withImagePlaceholder } from '@bodiless/components';
 import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
@@ -162,6 +163,25 @@ const WithLink = asElementToken({
 });
 
 /**
+ * Token which makes the non-GatbsyImage <img> component full-width.
+ *
+ * When adding a new image into a page, it is placed as a normal <img> tag instead of a GatsbyImage
+ * component. After refreshing the page, it is rendered as a GatsbyImage, which is full-width by
+ * default. Although not desirable, this behavior is expected.
+ *
+ * Applying this token makes this <img> tag full-width, so it renders just like a GatsbyImage. This
+ * is only required if you don't want the image to "change its size" when refreshing the page
+ * after placing it.
+ */
+const WithFullWidthImage = asElementToken({
+  Layout: {
+    _: withDesign({
+      Image: 'w-full',
+    }),
+  }
+});
+
+/**
  * Token which recompose the base image as Plain Image.
 */
 const EditablePlain = asElementToken(Base, WithEditorPlain);
@@ -195,6 +215,7 @@ const Hero = asElementToken({
   Compose: {
     WithEager,
     WithLandscapePlaceholder,
+    WithFullWidthImage,
   }
 });
 
@@ -210,6 +231,7 @@ export default {
   EditableNoEffect,
   WithLandscapePlaceholder,
   WithLink,
+  WithFullWidthImage,
   WithEager,
   Hero,
 };
