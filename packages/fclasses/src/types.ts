@@ -174,6 +174,8 @@ export type FlowHoc<A = {}> =
 
 /**
  * This is the type to use for the components prop of a component with a fluid design.
+ *
+ * @categor Design API
  */
 export type DesignableComponents = {
   [key: string]: ComponentOrTag<any>,
@@ -182,19 +184,44 @@ export type DesignableComponents = {
 /**
  * This is the type of a design which can be applied to a component which accepts
  * a components prop of type "C".
+ *
+ * @private
  */
 export type HocDesign<C extends DesignableComponents = DesignableComponents> = {
   [Key in keyof C]?: HOC
 } & { _final?: HocDesign<Omit<C, '_final'>> };
 
 /**
- * This is the type of the props for a designable whose underlying component
- * accepts a components prop of type "C".
+ * This is the type of the props for a designable component.
+ *
+ * @param C
+ * The components or "sots" accepted by this designable component.
+ *
+ * @category Design API
  */
 export type DesignableProps<C extends DesignableComponents = DesignableComponents> = {
   design?: Design<C>;
 };
 
+/**
+ * TYpe of the props of a base component which can be made designable.
+ *
+ * @param C
+ * The components or "sots" accepted by this designable component.
+ *
+ *
+ * @example
+ * ```
+ * const Foo: FC<DesignableComponentsProps> = props => {
+ *   const { components: C, ...rest } = props;
+ *   return (
+ *     <C.Wrapper>
+ *       <C.Content />
+ *     ...
+ * ```
+ *
+ * @category Design API
+ */
 export type DesignableComponentsProps<C extends DesignableComponents = DesignableComponents> = {
   components: C,
 };
@@ -202,6 +229,8 @@ export type DesignableComponentsProps<C extends DesignableComponents = Designabl
 /**
  * This is the type of a  Higher order design which can be applied to a component which accepts
  * a components prop of type "C".
+ *
+ * @category Desigh API
  */
 export type HOD<
   C extends DesignableComponents,

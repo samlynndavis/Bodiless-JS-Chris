@@ -1,4 +1,4 @@
 module.exports = {
   readme: 'none',
-  categorizeByGroup: false,
+  categorizeByGroup: true,
 };

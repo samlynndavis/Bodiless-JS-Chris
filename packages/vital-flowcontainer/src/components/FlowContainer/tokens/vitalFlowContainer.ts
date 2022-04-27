@@ -160,7 +160,10 @@ const Hero = asFluidToken(
 
 /**
  * Tokens for the vital flow container
+ *
  * @category Token Collections
+ *
+ * [[Base]]
  */
 export interface VitalFlowContainer {
   Base: FluidToken,
