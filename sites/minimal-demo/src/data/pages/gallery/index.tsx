@@ -7,7 +7,7 @@ import {
 import { asEditable, asBodilessLink } from '@bodiless/components';
 import { asBodilessImage } from '@bodiless/components-ui';
 import withSimpleEditor from './withSimpleEditor';
-import Gallery, { GalleryTile } from './Gallery';
+import Gallery from './Gallery';
 
 const asPageContainer = addClasses('container mx-auto');
 const asYMargin = addClasses('my-2');

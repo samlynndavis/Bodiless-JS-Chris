@@ -31,7 +31,7 @@ const simpleDesign = {
 
 const withSimpleEditor = (nodeKey?: string, placeholder?: string) => flowHoc(
   addClasses('overflow-hidden'),
-  withChild(RichText, 'Editor'),
+  withChild(RichText as any, 'Editor'),
   withDesign({
     Editor: flowHoc(
       withDesign(simpleDesign),
