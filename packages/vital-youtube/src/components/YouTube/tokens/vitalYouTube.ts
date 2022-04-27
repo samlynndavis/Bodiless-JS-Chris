@@ -25,7 +25,6 @@ import {
   withFullScreenEnabled as withBodilessFullScreenEnabled,
   withYouTubePlayerSettings,
 } from '@bodiless/youtube';
-import omit from 'lodash/omit';
 import { asYouTubeToken } from '../YouTubeClean';
 import { defaultPlayerSettings } from '../util';
 
