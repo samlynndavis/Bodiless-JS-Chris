@@ -43,7 +43,7 @@ const Body = withDesign(design)(FlowContainer);
 const GalleryBase: FC<HTMLProps<HTMLDivElement>> = ({ children, ...rest }) => (
   <Wrapper {...rest}>
     <Header>Gallery</Header>
-    <Body nodeKey="" />
+    <Body nodeKey="gallery-body" />
   </Wrapper>
 );
 

@@ -558,7 +558,7 @@ const Body = addClasses('flex')(Div);
 const GalleryBase: FC<HTMLProps<HTMLDivElement>> = ({ children, ...rest }) => (
   <Wrapper {...rest}>
     <Header>Gallery</Header>
-    <Body>
+    <Body nodeKey="gallery-body">
       {children}
     </Body>
   </Wrapper>
@@ -694,13 +694,13 @@ which makes our three tiles available for placement by a Content Editor:
     ```
 01. Remove the children where the `<Body>` tag appears — change:
     ``` tsx
-    <Body>
+    <Body nodeKey="gallery-body">
       {children}
     </Body>
     ```
     to:
     ```tsx
-    <Body />
+    <Body nodeKey="gallery-body" />
     ```
 01. Now remove the following from `index.tsx`:
     ```tsx
