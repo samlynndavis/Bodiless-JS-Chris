@@ -57,5 +57,31 @@
         "text": " to try editing this page."
       }
     ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "To see how this page was created, see our "
+      },
+      {
+        "data": {
+          "openModal": true,
+          "slatenode": {
+            "href": "/___docs/#/Development/Guides/IntroToBodilessConcepts",
+            "aria-label": "\"Creating a Gallery Page\" tutorial"
+          }
+        },
+        "type": "Link",
+        "children": [
+          {
+            "text": "tutorial"
+          }
+        ]
+      },
+      {
+        "text": "!"
+      }
+    ]
   }
 ]

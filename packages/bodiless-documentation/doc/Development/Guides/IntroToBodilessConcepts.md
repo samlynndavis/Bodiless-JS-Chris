@@ -6,8 +6,12 @@ simple gallery page on an editable BodilessJS site.
 ![Gallery Page](./assets/GalleryPage.jpg)
 
 Upon completion of this tutorial, you will end up with code similar to that found
-[here](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/test-site/src/data/pages/gallery-final/
+[here](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/minimal-demo/src/data/pages/gallery/
 ':target=_blank'). As you go through the tutorial, feel free to reference this code as needed.
+
+?> **Note:** If you start the included Minimal Demo site (`cd sites/minimal-demo && npm run start`),
+you can view a version of what we'll be creating here:
+[`http://localhost:8000/gallery`](http://localhost:8000/gallery ':target=_blank').
 
 ## 0. Prerequisite: Create a Site
 
