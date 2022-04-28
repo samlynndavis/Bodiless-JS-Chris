@@ -216,7 +216,7 @@ const Hero = asElementToken({
     WithEager,
     WithLandscapePlaceholder,
     WithFullWidthImage,
-  }
+  },
 });
 
 export default {
