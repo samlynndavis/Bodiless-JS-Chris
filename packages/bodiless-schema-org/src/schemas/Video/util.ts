@@ -16,7 +16,7 @@ import { DataStructureSchemaProps } from '../../types';
 import { getSchemaSourceData } from '../../util';
 
 const part = 'snippet,statistics,contentDetails';
-const googleYTApiKey = process.env.BODILESS_GOOGLE_YOUTUBE_API_KEY || null;
+const googleYTApiKey = process.env.GATSBY_BODILESS_GOOGLE_YOUTUBE_API_KEY || null;
 
 /**
  * getYouTubeIds applies a Regex to separate the video ID for use in

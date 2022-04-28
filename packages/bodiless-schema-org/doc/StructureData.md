@@ -203,7 +203,7 @@ Developers
 01. Define API key in `.env.site`:
 
     ```shell
-    BODILESS_GOOGLE_YOUTUBE_API_KEY=API_KEY_GOOGLE_YOUTUBE
+    GATSBY_BODILESS_GOOGLE_YOUTUBE_API_KEY=API_KEY_GOOGLE_YOUTUBE
     ```
 
 !>  **Important:** The compatible API is **Version 3 (v3)** of the YouTube Data API.  
