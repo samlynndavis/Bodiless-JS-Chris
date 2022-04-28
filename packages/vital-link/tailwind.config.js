@@ -38,7 +38,6 @@ const twConfig = {
           fontFamily: 'linkicons',
           fontWeight: 400,
           fontStyle: 'normal',
-          // @todo test/fix this path
           src: `url('${fontPath}')`,
         },
       });
