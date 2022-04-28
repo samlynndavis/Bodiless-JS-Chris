@@ -100,6 +100,7 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
     ...rest
   } = props;
 
+  const gatsbyImageLoading = loading === 'auto' ? 'lazy' : loading;
   if (gatsbyImg !== undefined) {
     /**
      * fallback for placeholder, dominantColor | blurred | tracedSVG
@@ -175,6 +176,7 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
       image,
       alt,
       backgroundColor,
+      loading: gatsbyImageLoading,
       ...rest,
     };
   }
@@ -183,6 +185,7 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
     components,
     image: undefined,
     alt,
+    loading: gatsbyImageLoading,
     ...rest,
   };
 };
