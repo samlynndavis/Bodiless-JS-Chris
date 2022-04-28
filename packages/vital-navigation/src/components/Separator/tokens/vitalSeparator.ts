@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { asElementToken } from '@bodiless/vital-elements';
+import { asElementToken, vitalColor } from '@bodiless/vital-elements';
 import { as } from '@bodiless/fclasses';
 
 /**
@@ -27,15 +27,15 @@ const FooterMenu = asElementToken({
   },
   Theme: {
     _: as(
-      'border-white-400 border-b last:border-0',
+      vitalColor.BorderSecondarySeparator,
+      'border-b last:border-0',
       'md:border-b-0 md:border-r md:last:border-0',
     ),
   },
   Spacing: {
     _: as(
       'mb-7 pb-8 last:mb-0 last:pb-0',
-      'md:mb-0 md:pb-0 md:px-10 md:first:pl-0 md:last:pr-0',
-      'lg:px-12',
+      'md:mb-0 md:pb-0',
     ),
   },
 });

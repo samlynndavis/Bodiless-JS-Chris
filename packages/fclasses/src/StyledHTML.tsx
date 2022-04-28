@@ -250,6 +250,10 @@ export const Li = stylable<HTMLProps<HTMLLIElement>>('li');
 /**
  * @category Styled HTML
  */
+export const Main = stylable<HTMLProps<HTMLElement>>('main');
+/**
+ * @category Styled HTML
+ */
 export const Map = stylable<HTMLProps<HTMLMapElement>>('map');
 /**
  * @category Styled HTML
