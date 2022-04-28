@@ -64,6 +64,9 @@ const Base = asElementToken({
       withGatsbyImageLogger(),
     ),
   },
+  Schema: {
+    _: withNodeKey('image'),
+  },
   Meta: flowHoc.meta.term('Type')('Image'),
 });
 
@@ -209,9 +212,6 @@ const WithEager = asElementToken({
 
 const Hero = asElementToken({
   ...Default,
-  Schema: {
-    _: withNodeKey('hero-image'),
-  },
   Compose: {
     WithEager,
     WithLandscapePlaceholder,

@@ -14,6 +14,7 @@
 
 import {
   addProps,
+  as,
   flowHoc,
 } from '@bodiless/fclasses';
 import {
@@ -25,6 +26,7 @@ import {
   withFullScreenEnabled as withBodilessFullScreenEnabled,
   withYouTubePlayerSettings,
 } from '@bodiless/youtube';
+import { withNodeKey } from '@bodiless/core';
 import { asYouTubeToken } from '../YouTubeClean';
 import { defaultPlayerSettings } from '../util';
 
@@ -33,7 +35,10 @@ import { defaultPlayerSettings } from '../util';
  */
 const Base = asYouTubeToken({
   Core: {
-    _: asBodilessResponsiveYouTube,
+    _: as(
+      withNodeKey('youtube'),
+      asBodilessResponsiveYouTube,
+    ),
     Item: withYouTubePlayerSettings(defaultPlayerSettings),
   },
   Content: {

@@ -22,7 +22,7 @@ import {
 import { asBodilessChameleon } from '@bodiless/components';
 import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
@@ -44,7 +44,7 @@ const Default = asGenericTemplateToken({
     // @todo breadcrumb placeholder
     Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
     TopContent: as(
-      asBodilessChameleon('hero', heroDefaultData, heroUseOverrides),
+      asBodilessChameleon('component', heroDefaultData, heroUseOverrides),
       withDesign({
         Image: on(Img)(vitalImage.Hero),
         Video: on(YouTubeClean)(vitalYouTube.Hero),
@@ -55,7 +55,7 @@ const Default = asGenericTemplateToken({
     BottomContent: as(vitalFlowContainer.Default),
   },
   Schema: {
-    TopContent: withNodeKey(GenericTemplateNodeKeys.TopContent),
+    TopContent: as(withNode, withNodeKey(GenericTemplateNodeKeys.TopContent)),
     Content: withNodeKey(GenericTemplateNodeKeys.Content),
     BottomContent: withNodeKey(GenericTemplateNodeKeys.BottomContent),
   },
