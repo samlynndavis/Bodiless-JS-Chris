@@ -14,11 +14,12 @@
 
 import { withNodeKey } from '@bodiless/core';
 import {
-  flowHoc, replaceWith, on, Div, extendMeta, H1, H4,
+  flowHoc, replaceWith, on, Div, extendMeta, H1, H4, as
 } from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { vitalImage } from '@bodiless/vital-image';
+import { vitalLink } from '@bodiless/vital-link';
 import { vitalTypography, vitalColor } from '@bodiless/vital-elements';
 import {
   EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText,
@@ -41,6 +42,7 @@ const Base = asCardToken({
     Title: withPlaceholder('Card Title'),
     Eyebrow: withPlaceholder('Card Eyebrow'),
     Description: withPlaceholder('Card Description'),
+    CTAText: withPlaceholder('Call To Action Link'),
   },
   Schema: {
     Title: withNodeKey(CardNodeKeys.Title),
@@ -156,18 +158,20 @@ const Hero = asCardToken({
     ContentWrapper: 'md:w-1/2 flex flex-col',
     Description: 'flex-grow',
     CTAWrapper: 'md:w-1/2 flex flex-col mx-auto justify-center items-center',
+    CTALink: 'w-full text-center',
   },
   Spacing: {
     ...Base.Spacing,
     ContentWrapper: 'px-10',
     ImageWrapper: 'p-0',
-    CTAWrapper: 'py-4',
+    CTALink: 'px-8 py-4',
   },
   Theme: {
     ...Base.Theme,
     CTAWrapper: vitalColor.BgPrimaryPage,
     TitleWrapper: vitalTypography.H1,
     DescriptionWrapper: vitalTypography.H4,
+    CTALink: as(vitalLink.WithDownloadStyles, vitalLink.WithExternalStyles),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Description')('Hero'),
