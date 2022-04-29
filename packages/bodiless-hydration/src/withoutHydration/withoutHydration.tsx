@@ -31,6 +31,13 @@ export const isStaticClientSide = !!(
   && process.env.NODE_ENV === 'production'
 );
 
+export const isEditClientSide = !!(
+  typeof window !== 'undefined'
+  && window.document
+  && window.document.createElement
+  && process.env.NODE_ENV === 'development'
+);
+
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
 
 /**
@@ -77,6 +84,13 @@ const useWrapperId = (element: HTMLElement | null) => {
   const selector = fullSelector(element);
   return createHash('md5').update(selector || '').digest('hex');
 };
+
+const withoutHydrationEditServerSide: WithoutHydrationFunction = (
+) => WrappedComponent => props => (
+  <>
+    <WrappedComponent {...props} />
+  </>
+);
 
 const withoutHydrationServerSide: WithoutHydrationFunction = (
   { WrapperElement = DEFAULT_WRAPPER } = {}
@@ -183,7 +197,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
  */
 export const withoutHydration: WithoutHydrationFunction = (options) => {
   if (isStaticClientSide) return withoutHydrationClientSide(options);
-
+  if (isEditClientSide) return withoutHydrationEditServerSide(options);
   return withoutHydrationServerSide(options);
 };
 
