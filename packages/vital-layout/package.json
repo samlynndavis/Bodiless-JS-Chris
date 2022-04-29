@@ -36,7 +36,7 @@
     "@bodiless/fclasses": "^1.0.0-beta.11",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-beta.11",
     "@bodiless/hydration": "^1.0.0-beta.11",
-    "@bodiless/schema-org": "^1.0.0-beta.10",
+    "@bodiless/schema-org": "^1.0.0-beta.11",
     "@bodiless/vital-editors": "^1.0.0-beta.11",
     "@bodiless/vital-elements": "^1.0.0-beta.11",
     "@bodiless/vital-image": "^1.0.0-beta.11",
