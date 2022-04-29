@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { Fragment } from 'react';
 import { withNodeKey } from '@bodiless/core';
 import {
   flowHoc, replaceWith, on, Div, extendMeta, H1, H4, as
@@ -140,7 +141,7 @@ const Hero = asCardToken({
   },
   Components: {
     ...Base.Components,
-    Wrapper: replaceWith(Div),
+    Wrapper: replaceWith(Fragment),
     EyebrowWrapper: replaceWith(() => null),
     Image: vitalImage.Default,
     CTAWrapper: replaceWith(Div),
