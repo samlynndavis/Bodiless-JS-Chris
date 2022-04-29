@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { withNodeKey } from '@bodiless/core';
 import { as } from '@bodiless/fclasses';
 import {
   withSingleAllowedTag,
@@ -20,6 +21,7 @@ import {
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { vitalFilter } from '../../Filter';
 import { asFilterByGroupToken } from '../FilterByGroupClean';
+import { FilterByGroupNodeKeys } from './constants';
 
 const Default = asFilterByGroupToken({
   Components: {
@@ -47,6 +49,16 @@ const Default = asFilterByGroupToken({
     ),
     ResetButton: vitalTextDecoration.Underline,
   },
+  Schema: {
+    Filter: withNodeKey(FilterByGroupNodeKeys.Filter),
+  },
+});
+
+const SiteWide = asFilterByGroupToken({
+  ...Default,
+  Schema: {
+    Filter: withNodeKey({ nodeKey: FilterByGroupNodeKeys.Filter, nodeCollection: 'site' }),
+  },
 });
 
 const WithMultipleAllowedTags = asFilterByGroupToken({
@@ -63,6 +75,7 @@ const WithSingleAllowedTag = asFilterByGroupToken({
 
 export default {
   Default,
+  SiteWide,
   WithMultipleAllowedTags,
   WithSingleAllowedTag,
 };

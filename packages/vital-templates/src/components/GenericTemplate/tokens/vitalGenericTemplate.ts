@@ -80,7 +80,7 @@ const ContentListing = asGenericTemplateToken({
   ...Default,
   Components: {
     ...Default.Components,
-    Content: on(ContentListingClean)(vitalContentListing.Default),
+    Content: on(ContentListingClean)(vitalContentListing.SiteWide),
   },
 });
 

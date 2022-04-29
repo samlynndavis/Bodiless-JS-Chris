@@ -12,19 +12,21 @@
  * limitations under the License.
  */
 
-import { withNodeKey } from '@bodiless/core';
 import { vitalContentListingFlowContainer } from '../../ContentListingFlowContainer';
 import { vitalFilterByGroup } from '../../FilterByGroup';
 import { asContentListingToken } from '../ContentListingClean';
-import { ContentListingNodeKeys } from './constants';
 
 const Default = asContentListingToken({
   Components: {
     Wrapper: vitalFilterByGroup.Default,
     Content: vitalContentListingFlowContainer.Default,
   },
-  Schema: {
-    Content: withNodeKey(ContentListingNodeKeys.ContentListing),
+});
+
+const SiteWide = asContentListingToken({
+  Components: {
+    Wrapper: vitalFilterByGroup.SiteWide,
+    Content: vitalContentListingFlowContainer.SiteWide,
   },
 });
 
@@ -42,6 +44,7 @@ const WithSingleAllowedTag = asContentListingToken({
 
 export default {
   Default,
+  SiteWide,
   WithMultipleAllowedTags,
   WithSingleAllowedTag,
 };

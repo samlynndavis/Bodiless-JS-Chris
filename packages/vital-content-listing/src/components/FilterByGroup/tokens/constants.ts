@@ -12,27 +12,6 @@
  * limitations under the License.
  */
 
-import { ContentListing } from './ContentListing';
-import { Editors, EditorsMonoFont } from './Editors';
-import { Typography } from './Typography';
-import { Layout } from './Layout';
-import { Header } from './Header';
-import { FlowContainer } from './FlowContainer';
-import { Images } from './Images';
-import { Footer } from './Footer';
-import { List } from './List';
-import { _default } from './_default';
-
-export const __vital__StyleGuideTemplate = {
-  _default,
-  ContentListing,
-  Editors,
-  EditorsMonoFont,
-  Typography,
-  Layout,
-  Header,
-  Images,
-  FlowContainer,
-  Footer,
-  List,
-};
+export enum FilterByGroupNodeKeys {
+  Filter = 'filter',
+}

@@ -29,13 +29,18 @@ const withGTMDesignKeys = withShowDesignKeys(true, 'layer-region');
 const Default = asFluidToken({
   Core: {
     _: as(
-      asBodilessChameleon('template', undefined, () => ({
-        root: true,
-        label: 'Template',
-        icon: 'grid_view',
-        group: 'page-group',
-        formTitle: 'Choose a template for this page',
-      })),
+      asBodilessChameleon(
+        'template',
+        // Sets 'Default' for new pages creation.
+        { component: 'Default' },
+        () => ({
+          root: true,
+          label: 'Template',
+          icon: 'grid_view',
+          group: 'page-group',
+          formTitle: 'Choose a template for this page',
+        }),
+      ),
     ),
   },
   // @todo restore tools
