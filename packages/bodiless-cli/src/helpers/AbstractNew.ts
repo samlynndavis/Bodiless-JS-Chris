@@ -375,8 +375,8 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
         delete data.scripts['build:packages'];
         data.scripts.setup = 'npm run bootstrap';
         data.scripts['setup:gatsby-cloud'] = 'npm run bootstrap:gatsby-cloud';
-        data.scripts.lint = 'eslint --fix  --cache --ext .js,.jsx,.ts,.tsx sites -- ',
-        data.scripts.fix = 'eslint --cache --ext .js,.jsx,.ts,.tsx sites -- ',
+        data.scripts.lint = 'eslint --fix  --cache --ext .js,.jsx,.ts,.tsx sites -- ';
+        data.scripts.fix = 'eslint --cache --ext .js,.jsx,.ts,.tsx sites -- ';
       }
       data.scripts.start = `lerna run start --stream --scope ${siteName}`;
       data.scripts.serve = `lerna run serve --stream --scope ${siteName}`;
