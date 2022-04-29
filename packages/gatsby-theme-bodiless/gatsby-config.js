@@ -59,6 +59,12 @@ const plugins = [
     },
   },
   {
+    resolve: 'gatsby-plugin-env-variables',
+    options: {
+      allowList: ['BODILESS_GOOGLE_YOUTUBE_API_KEY']
+    },
+  },
+  {
     resolve: 'gatsby-plugin-sharp',
   },
   'gatsby-transformer-sharp',
