@@ -374,6 +374,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
       if (!fs.existsSync(templatePackageDir)) {
         delete data.scripts['build:packages'];
         data.scripts.setup = 'npm run bootstrap';
+        data.scripts['setup:gatsby-cloud'] = 'npm run bootstrap:gatsby-cloud';
       }
       data.scripts.start = `lerna run start --stream --scope ${siteName}`;
       data.scripts.serve = `lerna run serve --stream --scope ${siteName}`;

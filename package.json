@@ -8,6 +8,7 @@
   "license": "Apache-2.0",
   "scripts": {
     "bootstrap": "npm run clean:symlinks && npx lerna bootstrap --hoist --strict",
+    "bootstrap:gatsby-cloud": "npm i && npx lerna bootstrap", 
     "build": "cross-env NODE_ENV=production lerna run build --stream --ignore @bodiless/gatsby-starter-bodiless",
     "build:only": "cross-env NODE_ENV=production lerna run build --stream --scope",
     "build:packages": "cross-env NODE_ENV=production lerna run build --stream --ignore @sites/*",
@@ -40,6 +41,7 @@
     "lerna:canary": "lerna publish --canary --include-merged-tags --preid ks-canary --dist-tag ks-canary --force-publish",
     "serve": "lerna run serve --scope @sites/${APP_SITE_NAME:-test-site} --stream",
     "setup": "npm run bootstrap && npm run build:packages",
+    "setup:gatsby-cloud": "npm run bootstrap:gatsby-cloud && npm run build:packages",
     "sites:pack": "lerna exec --no-private --stream -- npm pack",
     "sites:clone-local": "node ./scripts/sites-clone",
     "sites:install": "node ./scripts/sites-install",
