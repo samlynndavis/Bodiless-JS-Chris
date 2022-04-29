@@ -375,6 +375,8 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
         delete data.scripts['build:packages'];
         data.scripts.setup = 'npm run bootstrap';
         data.scripts['setup:gatsby-cloud'] = 'npm run bootstrap:gatsby-cloud';
+        data.scripts.lint = ' eslint --fix  --cache --ext .js,.jsx,.ts,.tsx sites -- ",
+        data.scripts.fix = ' eslint --cache --ext .js,.jsx,.ts,.tsx sites -- ",
       }
       data.scripts.start = `lerna run start --stream --scope ${siteName}`;
       data.scripts.serve = `lerna run serve --stream --scope ${siteName}`;
@@ -485,13 +487,14 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     spawner.options.cwd = dest;
     await spawner.spawn('git', 'init');
     await spawner.spawn('git', 'checkout', '-b', 'main');
+    if (!await this.getArg('no-setup')) {
+      const setup = await this.getArg('setup');
+      const command = setup ? setup.split(' ') : ['npm', 'run', 'setup'];
+      this.log(`Running ${setup}...`);
+      await spawner.spawn(...command);
+    }
     await spawner.spawn('git', 'add', '.');
-    await spawner.spawn('git', 'commit', '-m', '"Initial Commit"');
-    if (await this.getArg('no-setup')) return Promise.resolve();
-    const setup = await this.getArg('setup');
-    const command = setup === 'install' ? ['npm', 'install'] : ['npm', 'run', 'setup'];
-    this.log(`Running ${setup}...`);
-    return spawner.spawn(...command);
+    return spawner.spawn('git', 'commit', '-m', '"Initial Commit"');
   }
 
   async run() {

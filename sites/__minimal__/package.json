@@ -11,6 +11,7 @@
     "test": "__tests__"
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.4.0",
     "@bodiless/backend": "^1.0.0-beta.10",
     "@bodiless/cli": "^1.0.0-beta.10",
     "@bodiless/components": "^1.0.0-beta.10",

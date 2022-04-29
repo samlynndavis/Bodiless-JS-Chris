@@ -47,6 +47,7 @@
     "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\""
   },
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.4.0",
     "@bodiless/accordion": "^1.0.0-beta.10",
     "@bodiless/card": "^1.0.0-beta.10",
     "@bodiless/cli": "^1.0.0-beta.10",
