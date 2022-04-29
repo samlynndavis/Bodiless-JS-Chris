@@ -29,6 +29,7 @@ const {
   Footer,
   Video,
   Card,
+  Table,
   List,
   _default
 } = __vital__StyleGuideTemplate;
@@ -47,6 +48,7 @@ const Default = asFluidToken({
     Footer,
     Video,
     Card,
+    Table,
     List
   },
 });

@@ -20,6 +20,7 @@ import { FlowContainer } from './FlowContainer';
 import { Images } from './Images';
 import { Footer } from './Footer';
 import { Card } from './Card';
+import { Table } from './Table';
 import { List } from './List';
 import { _default } from './_default';
 import { Video } from './Video';
@@ -36,5 +37,6 @@ export const __vital__StyleGuideTemplate = {
   Footer,
   Video,
   Card,
+  Table,
   List,
 };
