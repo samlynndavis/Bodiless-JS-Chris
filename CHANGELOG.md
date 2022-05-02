@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.11](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-28)
+
+
+### Bug Fixes
+
+* **bodiless-layouts & layouts-ui:** empty = gray ([#1646](https://github.com/johnsonandjohnson/bodiless-js/issues/1646)) ([eef363a](https://github.com/johnsonandjohnson/bodiless-js/commit/eef363ae64bf6c840f093ef70ee1518dd762aca1))
+* **bodiless-page:** 500 error message update ([#1665](https://github.com/johnsonandjohnson/bodiless-js/issues/1665)) ([9ab9161](https://github.com/johnsonandjohnson/bodiless-js/commit/9ab91615be2e81c9b4b3989c4f63a128d4076608))
+* **bodiless-psh:** git credential helper issues. ([1b536dc](https://github.com/johnsonandjohnson/bodiless-js/commit/1b536dc2fa41a6db3b1ed3b88dc7e25a5aacbe06))
+* **layouts-ui:** Add missing tailwind export. ([#1656](https://github.com/johnsonandjohnson/bodiless-js/issues/1656)) ([601bc7d](https://github.com/johnsonandjohnson/bodiless-js/commit/601bc7d65c0dee07830e664589b0f5c0196ff554))
+* trigger setup updated ([#1650](https://github.com/johnsonandjohnson/bodiless-js/issues/1650)) ([#1653](https://github.com/johnsonandjohnson/bodiless-js/issues/1653)) ([b237514](https://github.com/johnsonandjohnson/bodiless-js/commit/b237514eef9b57fcf07931cfba84088ebce10d8e))
+* **vital-list:** change none to undecorated ([#1662](https://github.com/johnsonandjohnson/bodiless-js/issues/1662)) ([57c6e7b](https://github.com/johnsonandjohnson/bodiless-js/commit/57c6e7b934f4094f15f442cbf292b3dc3b76df99))
+
+
+
+
+
+# [1.0.0-beta.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-04-26)
+
+
+### Bug Fixes
+
+* **bodiless-psh:** hide git credential on platform.sh ([531888a](https://github.com/johnsonandjohnson/bodiless-js/commit/531888ad022124a36fc5078113103ada54b06750))
+* **vital-header, vital-footer:** convert to default breakpoints and adjust header/footer  ([#1575](https://github.com/johnsonandjohnson/bodiless-js/issues/1575)) ([537cbab](https://github.com/johnsonandjohnson/bodiless-js/commit/537cbab75e960b805ac0b4ea7826d96dae0f5dbd))
+* **vital-list:** fix images on list page, bug in image size, updated /styleguide page to content ([#1633](https://github.com/johnsonandjohnson/bodiless-js/issues/1633)) ([cbac699](https://github.com/johnsonandjohnson/bodiless-js/commit/cbac699c4bfa44c4815fda9ea85f5c2ec6b65401))
+* **vital-list:** Fix typo in static infographic token. ([#1623](https://github.com/johnsonandjohnson/bodiless-js/issues/1623)) ([179b6c2](https://github.com/johnsonandjohnson/bodiless-js/commit/179b6c20a08a8fb4fe10425910a733da07fc5d31))
+
+
+
+
+
 # [1.0.0-beta.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.5...v1.0.0-beta.9) (2022-04-21)
 
 
