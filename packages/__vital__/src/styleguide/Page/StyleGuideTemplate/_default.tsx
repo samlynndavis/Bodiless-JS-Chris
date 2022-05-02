@@ -45,6 +45,7 @@ const Examples = () => (
       <li><a href="/styleguide/flow-container">Flow Container</a></li>
       <li><a href="/styleguide/images">Images</a></li>
       <li><a href="/styleguide/list">List</a></li>
+      <li><a href="/styleguide/table">Table</a></li>
     </List>
     <Subtitle>Templates</Subtitle>
     <List>
