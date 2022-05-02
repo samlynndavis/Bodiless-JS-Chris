@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { Fragment } from 'react';
 import { withNodeKey } from '@bodiless/core';
 import {
   flowHoc, replaceWith, on, Div, extendMeta, H1, H4, as

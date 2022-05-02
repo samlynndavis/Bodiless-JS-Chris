@@ -12,27 +12,19 @@
  * limitations under the License.
  */
 
-import { asFluidToken, asMetaToken, asElementToken } from '@bodiless/vital-elements';
-import { withNodeKey } from '@bodiless/core';
+import { asFluidToken, asMetaToken } from '@bodiless/vital-elements';
 import {
   Img, on, as, flowHoc
 } from '@bodiless/fclasses';
 import { vitalImage } from '../Image';
 
-const ImageWithNodeKey = asElementToken({
-  ...vitalImage.Default,
-  Schema: {
-    _: withNodeKey('image')
-  }
-});
-
 const imageVariations = {
   ImageSquare: on(Img)(as(
-    ImageWithNodeKey,
+    vitalImage.Default,
     asMetaToken(flowHoc.meta.term('Placeholder')('Square')),
   )),
   ImageLandscape: on(Img)(as(
-    ImageWithNodeKey,
+    vitalImage.Default,
     vitalImage.WithLandscapePlaceholder,
   )),
 };
