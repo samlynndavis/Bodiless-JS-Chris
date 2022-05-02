@@ -138,10 +138,11 @@ const Hero = asCardToken({
   Editors: {
     ...Base.Editors,
     CTALink: asBodilessLink(),
+    Wrapper: undefined,
   },
   Components: {
     ...Base.Components,
-    Wrapper: replaceWith(Fragment),
+    Wrapper: replaceWith(Div),
     EyebrowWrapper: replaceWith(() => null),
     Image: vitalImage.Default,
     CTAWrapper: replaceWith(Div),
