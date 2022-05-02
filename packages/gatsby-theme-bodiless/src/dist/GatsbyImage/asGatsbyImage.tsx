@@ -134,7 +134,6 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
           },
         ],
       };
-
       if (fluid.srcSetWebp) {
         const webp = {
           sizes: '',
@@ -143,7 +142,7 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
         };
         webp.srcSet = fluid.srcSetWebp;
         webp.sizes = fluid.sizes;
-        images.sources?.push(webp);
+        images.sources?.unshift(webp);
       }
     } else {
       const fixed = ((Array.isArray(gatsbyImg.fixed) && gatsbyImg.fixed.length)
@@ -158,6 +157,14 @@ const getGatsbyPluginImageProps = (props: GatsbyImageProps): BodilessGatsbyImage
           src: fixed.src,
         },
       };
+      if (fixed.srcSetWebp) {
+        images.sources = [
+          {
+            type: 'image/webp',
+            srcSet: fixed.srcSetWebp,
+          }
+        ];
+      }
     }
 
     const image: IGatsbyImageData = {
@@ -208,7 +215,6 @@ const asDesignableGatsbyImage = (ImageComponent: CT<any>) => {
       GatsbyImage,
       Image,
     } = components;
-
     if (imageData !== undefined) {
       return (
         <GatsbyImage {...omit(rest, 'canonicalPreset', '_nodeKey')} alt={alt} image={imageData} />

@@ -11,6 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { asElementToken } from '@bodiless/vital-elements';
+import { withoutHydration } from '@bodiless/hydration';
 
-export * from './index.temp';
-export { default as vitalImageBase } from './tokens/vitalImage';
+export const vitalImage = new Proxy({}, {
+  get: () => asElementToken({
+    Core: {
+      _: withoutHydration(),
+    },
+  }),
+});
