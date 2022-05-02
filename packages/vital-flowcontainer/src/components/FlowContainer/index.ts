@@ -13,11 +13,21 @@
  * limitations under the License.
  */
 
-import FlowContainerClean from './FlowContainerClean';
+import FlowContainerClean, { FlowContainerComponents } from './FlowContainerClean';
 import vitalFlowContainer from './tokens';
-import vitalFlowContainerBase, { VitalFlowContainer } from './tokens/vitalFlowContainer';
+import vitalFlowContainerOrig, { VitalFlowContainer } from './tokens/vitalFlowContainer';
 
-export { FlowContainerClean, vitalFlowContainer, vitalFlowContainerBase, VitalFlowContainer };
+/**
+ * Use this version of the vital flow container tokens when extending or shadowing.
+ * @category Token Collection
+ * @see vitalFlowContainer
+ */
+const vitalFlowContainerBase = vitalFlowContainerOrig;
+
+export {
+  FlowContainerClean, vitalFlowContainer, vitalFlowContainerBase,
+  VitalFlowContainer, FlowContainerComponents,
+};
 
 // Static flow container has edit/static alternatives.
 export * from './index.bl-edit';

@@ -16,19 +16,22 @@ import React from 'react';
 // @todo add after static-replacement merges.
 // import { withoutHydration } from '@bodiess/hydration';
 import { FlowContainer } from '@bodiless/layouts-ui';
+import { withoutHydration } from '@bodiless/hydration';
+
+export type { FlowContainerComponents } from '@bodiless/layouts';
 
 /**
  * This is the base component for flow containers.
  *
- * @category Components
+ * @category Component
  *
  * @example
- * Create a default flow container:
+ * **Create a default flow container:**
  * ```
  * const DefaultFlowContainer = on(FlowContainerClean)(vitalFlowContainer.Default)
  * ```
  * @example
- * Create a custom flow container using a token defined in your pacakge
+ * **Create a custom flow container using a token defined in your package**
  * ```
  * const CustomFlowContainer = on(FlowContainerClean)(myBrandFlowContainer.Custom)
  * ```
@@ -44,7 +47,10 @@ const FlowContainerPreview = () => (
 
 export default FlowContainerClean;
 
-// @todo add after static replacement merges.
-// export const FlowContainerStatic = withoutHydration(FlowContainerClean);
+/**
+ * Use this version of the flow container when all components are static.
+ * @category Component
+ */
+const FlowContainerStatic = withoutHydration()(FlowContainerClean);
 
-export { FlowContainerPreview };
+export { FlowContainerPreview, FlowContainerStatic };

@@ -73,7 +73,7 @@ type PP<P, A, R> = Omit<P & A, keyof R> & Partial<R>;
  *   The type of the resulting component's props will be the the base components props with
  *   these removed.
  */
-export type HOCBase<B = {}, A = {}, R = {}> =
+export type HOC<B = {}, A = {}, R = {}> =
   <P extends B>(C: ComponentOrTag<P>) => ComponentWithMeta<PP<P, A, R>>;
 
 /**
@@ -101,7 +101,7 @@ export type TokenProps = {
  *
  * Tokens may be composed of other tokens using the `flowHoc` utility.
  */
-export type HOC<B = {}, A = {}, R = {}> = HOCBase<B, A, R> & TokenProps;
+export type HOCWithMeta<B = {}, A = {}, R = {}> = HOC<B, A, R> & TokenProps;
 
 /**
  * An "Enhancer" is a token which produces a component which accepts additional props.
@@ -141,7 +141,7 @@ export type TokenFilterTest = (token: HOC) => boolean;
  * Type of the parameters to flowHoc  Overloaded to accept metadata
  * objects (or undefined) in addition to tokens.
  */
-export type TokenDef<B = {}, A = {}, R = {}> = HOC<B, A, R> | TokenMeta | undefined;
+export type TokenDef<B = {}, A = {}, R = {}> = HOCWithMeta<B, A, R> | TokenMeta | undefined;
 
 /**
  * Type of a token composition function.
@@ -244,7 +244,7 @@ export type FluidHOD = HOD<DesignableComponents>;
 export type FluidDesign = Design<DesignableComponents>;
 
 export type Designable<C extends DesignableComponents = DesignableComponents>
-  = HOCBase<{}, DesignableProps<C>, DesignableComponentsProps<C>>;
+  = HOC<{}, DesignableProps<C>, DesignableComponentsProps<C>>;
 
 export type ReservedDomains<
   C extends DesignableComponents,
@@ -277,12 +277,12 @@ export type ReservedDomains<
  * - A token specified as an HOC
  * - A token specified as a string of classes.
  */
-export type Token = TokenSpec<any, {}> | HOCBase | string | undefined;
+export type Token = TokenSpec<any, {}> | HOC | string | undefined;
 
 export type ComposedToken<
   C extends DesignableComponents,
   D extends object,
-> = TokenSpec<C, D> | HOCBase | string | undefined;
+> = TokenSpec<C, D> | HOC | string | undefined;
 
 /**
    * Type of a collection of tokens which apply to a specific designable component.

@@ -19,9 +19,9 @@ import { startWith } from './replaceable';
 import type {
   TokenDef,
   DesignableComponents, HocDesign,
-  ReservedDomains, Design, Token, HOCBase, HOD, AsTokenSpec, FinalDesign, TokenSpec, FinalDomains,
+  ReservedDomains, Design, Token, HOD, AsTokenSpec, FinalDesign, TokenSpec, FinalDomains,
 } from './types';
-import { $TokenSpec } from './types';
+import { $TokenSpec, HOC } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
 import { addClasses } from './addClasses';
 import { withHocDesign } from './withHocDesign';
@@ -64,7 +64,7 @@ function getHocForDomain<C extends DesignableComponents, D extends object = any>
 function as(
   ...args$: Token[]
 
-): HOCBase<any, any, any> {
+): HOC<any, any, any> {
   const args = args$.filter(Boolean);
 
   // Ensure that all token specs have been passed through `asTokenSpec`
@@ -112,7 +112,7 @@ function as(
  */
 function withDesign<C extends DesignableComponents = any, D extends object = any>(
   design: Design<C, D>
-): HOCBase {
+): HOC {
   const hocDesign: HocDesign<C> = Object.keys(design)
     .filter(k => k !== '_')
     .reduce(
@@ -123,7 +123,7 @@ function withDesign<C extends DesignableComponents = any, D extends object = any
       {} as HocDesign<any>
     );
   return flowHoc(
-    as(design._) as HOCBase,
+    as(design._),
     withHocDesign(hocDesign)
   );
   // return withHocDesign(hocDesign);

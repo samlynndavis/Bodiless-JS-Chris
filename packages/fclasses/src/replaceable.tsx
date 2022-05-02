@@ -21,7 +21,7 @@ import React, {
   Fragment,
 } from 'react';
 import pick from 'lodash/pick';
-import { HOCBase, ComponentOrTag, HOC } from './types';
+import { ComponentOrTag, HOC } from './types';
 import { flowHoc } from './flowHoc';
 
 const designContextDefault = undefined as undefined | ComponentType<any>;
@@ -68,7 +68,7 @@ export const replaceable: HOC = Component => {
  *  ```
  */
 
-export const startWith = (ReplacementComponent: ComponentType<any>): HOCBase => Component => {
+export const startWith = (ReplacementComponent: ComponentType<any>): HOC => Component => {
   const StartWith: FC<any> = props => {
     const UpstreamComponent = useContext(DesignContext);
     return UpstreamComponent

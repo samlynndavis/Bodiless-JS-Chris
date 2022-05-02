@@ -23,11 +23,10 @@ import { asFluidToken, vitalSpacing } from '@bodiless/vital-elements';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
 import { vitalEditorsFlowContainer } from '@bodiless/vital-editors';
 import { vitalListFlowContainer } from '@bodiless/vital-list';
+import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
 
 const fluidToken = asFluidToken();
 type FluidToken = typeof fluidToken;
-
-import FlowContainerClean, { FlowContainerPreview } from '../FlowContainerClean';
 
 const blacklistCategories = ['Group'];
 const mandatoryCateogries = ['Type'];
@@ -129,9 +128,6 @@ const ContentRegion = asFluidToken(
   },
 );
 
-/**
- * Adds a content region to a flow container.
- */
 const WithContentRegionVariations = asFluidToken({
   Components: {
     ContentRegion: on(FlowContainerClean)(ContentRegion),
@@ -163,13 +159,12 @@ const Hero = asFluidToken(
 /**
  * Tokens for the vital flow container
  *
- * @category Token Collections
- *
- * [[Base]]
+ * @category Token Collection
+ * @see [[FlowContainerClean]]
  */
 export interface VitalFlowContainer {
   Base: FluidToken,
-    /**
+  /**
    * Defines the default flow container for the Vital DS.
    * - Core domain defines constraints on categories.
    * - Spacing domain defines gutters
@@ -191,23 +186,43 @@ export interface VitalFlowContainer {
    */
   Default: FluidToken,
   Hero: FluidToken,
+  /**
+   * Defins a flow container which is to be used as a content region (that is,
+   * nested within another flow container). This contains all components
+   * defined in the `Default` flow container with the exception of
+   * the Content Region itself (i.e. you can't have double nesting).
+   *
+   * You can shadow this token to change the components which are available
+   * in a content region.  For example:
+   * ```ts
+   * const ContentRegion = asFluidToken({
+   *    ...vitalContentRegionBase.ContentRegion,
+   *    Components: {
+   *      ...vitalContentRegionBase.ContentRegion.Components,
+   *      SomethingNew: on(MyComponentClean)(myComponent.Default),
+   *   },
+   * });
+   * ```
+   */
   ContentRegion: FluidToken,
-  WithContentRegionVariations: FluidToken,
   AsFlowContainerItem: FluidToken,
   WithFullWidthConstraint: FluidToken,
   WithTabletOneThirdConstraint: FluidToken,
   WithSingleConstraint: FluidToken,
-};
+}
 
 /**
- * @category Token Collections
+ * Tokens for flow containers.
+ *
+ * @category Token Collection
+ * @see [[VitalFlowContainer]]
+ * @see [[FlowContainerClean]]
  */
 const vitalFlowContainer: VitalFlowContainer = {
   Base,
   Default,
   Hero,
   ContentRegion,
-  WithContentRegionVariations,
   AsFlowContainerItem,
   WithFullWidthConstraint,
   WithTabletOneThirdConstraint,
