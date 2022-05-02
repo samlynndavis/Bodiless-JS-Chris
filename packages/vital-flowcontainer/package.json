@@ -43,13 +43,13 @@
     "@bodiless/richtext": "^1.0.0-beta.12",
     "@bodiless/richtext-ui": "^1.0.0-beta.12",
     "@bodiless/tokens": "^1.0.0-beta.12",
-    "@bodiless/vital-card": "^1.0.0-beta.11",
+    "@bodiless/vital-card": "^1.0.0-beta.12",
     "@bodiless/vital-editors": "^1.0.0-beta.12",
     "@bodiless/vital-elements": "^1.0.0-beta.12",
     "@bodiless/vital-image": "^1.0.0-beta.12",
     "@bodiless/vital-list": "^1.0.0-beta.12",
     "@bodiless/vital-table": "^1.0.0-beta.12",
-    "@bodiless/vital-youtube": "^1.0.0-beta.11",
+    "@bodiless/vital-youtube": "^1.0.0-beta.12",
     "lodash": "^4.17.19"
   }
 }
