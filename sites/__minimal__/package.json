@@ -54,8 +54,7 @@
     "clean": "gatsby clean",
     "dev-backend": "bodiless-backend",
     "dev-frontend": "gatsby develop",
-    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
-    "prestart": "build:doc",
+    "prestart": "npm run build:doc",
     "serve": "gatsby serve",
     "serve:docs": "docsify serve ./doc",
     "start": "run-p -r dev-frontend dev-backend"
