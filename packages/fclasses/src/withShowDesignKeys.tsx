@@ -27,7 +27,7 @@ FClassesContext.displayName = 'DesignKeys';
  * all children. When enabled, the design key of the component which renders
  * an HTML element will be shown in the markup as an attribute.
  *
- * @param showDesignKeys 
+ * @param showDesignKeys
  * Whether or not to show the design keys in the markup.
  *
  * @param designKeysAttributeName
