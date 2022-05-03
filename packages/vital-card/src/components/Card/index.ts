@@ -13,9 +13,3 @@
  */
 
 export * from './index.bl-edit';
-export {
-  default as CardClean,
-  asCardToken,
-} from './CardClean';
-
-export { default as vitalCard } from './tokens';

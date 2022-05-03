@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { CardStatic } from './CardClean';
-import vitalCardStatic from './tokens';
+import { CardStatic as CardClean, asCardToken } from './CardClean';
+import vitalCard from './tokens';
 
-export { CardStatic, vitalCardStatic };
+export { CardClean, vitalCard, asCardToken };

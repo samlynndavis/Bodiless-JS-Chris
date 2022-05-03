@@ -15,7 +15,7 @@
 import { asFluidToken } from '@bodiless/vital-elements';
 import { on, varyDesigns, flowHoc } from '@bodiless/fclasses';
 import {
-  CardClean, vitalCard, CardStatic, vitalCardStatic, asCardToken,
+  CardClean, vitalCard, asCardToken,
 } from '../Card';
 
 const BaseVariation = {
@@ -38,7 +38,7 @@ const ContentVariations = {
  */
 const WithCardVariations = asFluidToken({
   Components: {
-    HeroCard: on(CardStatic)(vitalCardStatic.Base, vitalCardStatic.Hero),
+    HeroCard: on(CardClean)(vitalCard.Base, vitalCard.Hero),
     ...varyDesigns(
       BaseVariation,
       ContentVariations,
