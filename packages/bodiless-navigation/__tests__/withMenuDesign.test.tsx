@@ -104,7 +104,7 @@ describe('withMenuDesign', () => {
       withMenuDesign()(withDataAttr('menu')),
     )(TestMenu);
 
-    const wrapper = mount(<Wrapper />);
+    const wrapper = mount(<Wrapper nodeKey="wrapper" />);
 
     expect(wrapper.find('ul[data-test-submenu="menu"]').length).toBe(5); // Menu, List, Cards, Columns(x2)
     expect(wrapper.find('a[data-test-submenu="menu-title"]').length).toBe(9); // 3 Top, 2 List, 2 Columns, 2 Sub Columns
@@ -131,7 +131,7 @@ describe('withMenuDesign', () => {
       withMenuDesign('Main', 1)(withWrongKeyDesign),
     )(TestMenu);
 
-    const wrapper = mount(<Wrapper />);
+    const wrapper = mount(<Wrapper nodeKey="wrapper" />);
 
     expect(wrapper.find('ul#main-wrapper').prop('data-test-main')).toBe('wrapper');
     expect(wrapper.find('ul#list-wrapper').prop('data-test-main')).toBeUndefined();
@@ -148,7 +148,7 @@ describe('withMenuDesign', () => {
       withMenuDesign(['Cards', 'Columns'])(withPropsC),
     )(TestMenu);
 
-    const wrapper = mount(<Wrapper />);
+    const wrapper = mount(<Wrapper nodeKey="wrapper" />);
 
     expect(wrapper.find('ul#main-wrapper').prop('data-test-a')).toBe('wrapper');
     expect(wrapper.find('ul#main-wrapper').prop('data-test-b')).toBe('wrapper');
@@ -178,7 +178,7 @@ describe('withMenuDesign', () => {
       withMenuDesign('Columns')(withDataAttr('Columns')),
     )(TestMenu);
 
-    const wrapper = mount(<Wrapper />);
+    const wrapper = mount(<Wrapper nodeKey="wrapper" />);
 
     expect(wrapper.find('ul[data-test-submenu="list"]').length).toBe(1);
     expect(wrapper.find('a[data-test-submenu="list-title"]').length).toBe(2);
@@ -200,7 +200,7 @@ describe('withMenuDesign', () => {
       withMenuDesign(undefined, 2)(withPropsC),
     )(TestMenu);
 
-    const wrapper = mount(<Wrapper />);
+    const wrapper = mount(<Wrapper nodeKey="wrapper" />);
 
     expect(wrapper.find('ul#main-wrapper').prop('data-test-a')).toBe('wrapper');
     expect(wrapper.find('ul#main-wrapper').prop('data-test-b')).toBeUndefined();
@@ -231,7 +231,7 @@ describe('withMenuDesign', () => {
       withMenuDesign('Columns', [1, 2])(withPropsC),
     )(TestMenu);
 
-    const wrapper = mount(<Wrapper />);
+    const wrapper = mount(<Wrapper nodeKey="wrapper" />);
 
     expect(wrapper.find('ul#main-wrapper').prop('data-test-a')).toBeUndefined();
     expect(wrapper.find('ul#main-wrapper').prop('data-test-b')).toBeUndefined();
@@ -255,11 +255,11 @@ describe('withMenuDesign', () => {
   });
 
   it('Applies multiple token to the specified depth and submenu type', () => {
-    const Wrapper = flow(
+    const Wrapper = flowHoc(
       withMenuDesign(['List', 'Cards'])(withPropsA, withPropsB, withPropsC),
     )(TestMenu);
 
-    const wrapper = mount(<Wrapper />);
+    const wrapper = mount(<Wrapper nodeKey="wrapper" />);
 
     expect(wrapper.find('ul#list-wrapper').prop('data-test-a')).toBe('wrapper');
     expect(wrapper.find('ul#list-wrapper').prop('data-test-b')).toBe('wrapper');
