@@ -39,7 +39,7 @@ import { as, extendDesign } from './tokenSpec';
  * @returns
  * HOC which attaches the display name.
  *
- * @category NOC Utility
+ * @category HOC Utility
  */
 export const withDisplayName = <P extends Object> (name: string) => (
   Component: ComponentType<P>,

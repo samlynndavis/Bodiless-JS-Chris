@@ -20,6 +20,8 @@ import type { ComponentOrTag, Enhancer, Condition } from './types';
 
 /**
  * A single CSS class string or an array of them.
+ *
+ * @category FClasses API
  */
 export type Classes = string|string[];
 

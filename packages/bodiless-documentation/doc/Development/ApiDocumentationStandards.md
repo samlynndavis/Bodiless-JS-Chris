@@ -150,6 +150,29 @@ BasicList(options: ListProps): Element
 ```
 But in this case, `ListProps` **would not be linked to the actual type definition** and would not have any additional information associated with the original `Props` type. You would have to trace this type down manually.
 
+### Include a README
+Typedoc will create a landing page for the API documentation using the package README.md.
+Every package should have a README.md which properly introduces the API.
+
+If you want to omit the README, or change the file which is displayed, 
+you can create a customized `typedoc.js` at package root,
+and refer to it via the `npm build:api-doc` script:
+
+*typedoc.js*
+```js
+module.exports = {``
+  readme: 'API.md' // Or use 'none' to remove landing page entirely.
+}
+```
+
+*package.json*
+```json
+"scripts": {
+  "build:api-doc": "typedoc --options ./typedoc.js --out doc/api src",
+  ...
+}
+```
+
 ### Categorizing API documentation
 TypeDoc's tag `@category` allows grouping reflections on a page.
 
@@ -220,7 +243,7 @@ For example, the Vital Design System uses interfaces to document token collectio
   its designable components.  Document the purpose of each slot:
   ```ts
   /**
-   * Designbable components fpr FooClean.
+   * Designable components fpr FooClean.
    */
   interface FooComponents extends DesignableComponents {
     /**

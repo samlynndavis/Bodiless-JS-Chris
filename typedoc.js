@@ -1,4 +1,4 @@
 module.exports = {
-  readme: 'none',
-  categorizeByGroup: true,
+  // readme: './API.md',
+  // categorizeByGroup: true,
 };

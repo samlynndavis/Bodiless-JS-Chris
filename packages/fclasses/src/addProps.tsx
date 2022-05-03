@@ -70,7 +70,7 @@ export const addProps = <B extends object, I extends NotAFunction>(
   propsToAdd: I | ((props: B) => I)
 ) => addPropsIf<B>(() => true)<I>(propsToAdd);
 
-/*
+/**
  * Creates an HOC which strips all but the specified props.
  *
  * @param keys A list of the prop-names to keep.
@@ -170,6 +170,6 @@ export const withPropsIf = addPropsIf;
  * version of the `Fragment` ensures this doesn't trigger a React
  * warning.
  *
- * @category HOC Utility Component
+ * @category HOC Utility
  */
 export const Fragment = withOnlyProps('key', 'children')(BaseFragment);

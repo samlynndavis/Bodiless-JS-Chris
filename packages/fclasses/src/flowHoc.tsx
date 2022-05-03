@@ -19,11 +19,11 @@ import union from 'lodash/union';
 import flow from 'lodash/flow';
 import identity from 'lodash/identity';
 import type {
-  TokenDef, ComponentOrTag, ComponentWithMeta, TokenMeta,
+  HOCDef, ComponentOrTag, ComponentWithMeta, TokenMeta,
   HOC, TokenFilterTest, FlowHoc, HOCWithMeta,
 } from './types';
 
-const isToken = (def: TokenDef<any, any, any>) => typeof def === 'function';
+const isToken = (def: HOCDef<any, any, any>) => typeof def === 'function';
 
 // Custom merge behavior for token categories.
 function mergeMeta(objValue:any, srcValue:any) {
@@ -129,7 +129,7 @@ const filterMembers = <P extends object>(tokens: HOC[]): HOC[] => {
 /**
  * Type of the helper functions provided for generating token metadata.
  *
- * @category Token API
+ * @category HOC Utility
  */
 export type FlowHocMeta = {
   /**
@@ -147,13 +147,15 @@ export type FlowHocMeta = {
  * objects as arguments in addition to tokens.
  *
  * @see TokenProps
- * @see TokenDefinition
+ * @see HOCDefinition
  *
  * @param tokens
  * List of tokens and token metadata objects to compose.
  *
  * @return
  * A composed token.
+ *
+ * @category HOC Utility
  */
 const flowHoc: FlowHoc & { meta: FlowHocMeta } = (...args) => {
   // We allow "undefined" in args and simply ignore them.
