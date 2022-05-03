@@ -12,4 +12,5 @@
  * limitations under the License.
  */
 
-export * from './index.bl-edit';
+export { CardClean, vitalCard } from './index.bl-edit';
+export { asCardToken } from './CardClean';
