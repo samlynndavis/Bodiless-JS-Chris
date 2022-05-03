@@ -15,7 +15,7 @@
 /* eslint-disable quote-props */
 import React from 'react';
 import flow from 'lodash/flow';
-import { withDesign, addProps } from '@bodiless/fclasses';
+import { withDesign, addProps, flowHoc } from '@bodiless/fclasses';
 import { mount } from 'enzyme';
 
 import {
@@ -37,7 +37,7 @@ const withSubMenuDesign = (submenuType: string = 'List') => withMenuDesign(subme
 describe('Bodiless Menu', () => {
   it('Creates a one level menu by default', () => {
     const menuItems = ['Item 1', 'Item 2', 'Item 3'];
-    const DefaultMenu = flow(
+    const DefaultMenu = flowHoc(
       withMainMenuItems(...menuItems),
       withMenuDesign('Main')(withMenuTitleEditors()),
     )(MenuBase);
