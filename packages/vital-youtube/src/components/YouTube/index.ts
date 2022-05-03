@@ -12,6 +12,9 @@
  * limitations under the License.
  */
 
-export { default as YouTubeClean, asYouTubeToken } from './YouTubeClean';
-export { default as vitalYouTube } from './tokens';
+export {
+  YouTubeClean,
+  asYouTubeToken,
+  vitalYouTube,
+} from './index.bl-edit';
 export type { YouTubeComponents } from './types';
