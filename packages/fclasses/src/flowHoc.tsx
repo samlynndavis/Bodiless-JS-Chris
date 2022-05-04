@@ -157,7 +157,7 @@ export type FlowHocMeta = {
  *
  * @category HOC Utility
  */
-const flowHoc: FlowHoc & { meta: FlowHocMeta } = (...args) => {
+const flowHoc: FlowHoc<{}> & { meta: FlowHocMeta } = (...args) => {
   // We allow "undefined" in args and simply ignore them.
   const args$ = args.filter(a => a !== undefined);
   const metaBits: TokenMeta[] = args$.filter(a => !isToken(a)) as TokenMeta[];

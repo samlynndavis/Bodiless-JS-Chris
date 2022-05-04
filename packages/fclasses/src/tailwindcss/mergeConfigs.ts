@@ -19,7 +19,7 @@ import type { TailwindConfig } from 'tailwindcss/tailwind-config';
 
 export type Package = {
   root: string,
-  tailwindConfig: TailwindConfig,
+  tailwindConfig: Partial<TailwindConfig>,
 };
 
 /**

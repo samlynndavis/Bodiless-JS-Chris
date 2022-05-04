@@ -164,7 +164,7 @@ export type Injector<R, B = {}> = HOC<B & Partial<R>, {}, R>;
  * @see withTokenFilter
  * @hidden
  */
-export type TokenFilterTest = (token: HOC) => boolean;
+export type TokenFilterTest = (token: HOCWithMeta) => boolean;
 
 /**
  * Type of the parameters to flowHoc  Overloaded to accept metadata
@@ -172,7 +172,7 @@ export type TokenFilterTest = (token: HOC) => boolean;
  *
  * @category HOC Utility
  */
-export type HOCDef<B = {}, A = {}, R = {}> = HOCWithMeta<B, A, R> | TokenMeta | undefined;
+export type HOCDef<B = {}, A = {}, R = {}> = HOC<B, A, R> | TokenMeta | undefined;
 
 /**
  * Type of a token composition function.
@@ -203,7 +203,7 @@ export type FlowHoc<A = {}> =
     t9?: HOCDef<{}, A9, R9>,
     ...t: HOCDef<any, any, any>[]
     // eslint-disable-next-line max-len
-  ) => HOC<B1, A & A1 & A2 & A3 & A4 & A5 & A6 & A7 & A8 & A9, R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9>;
+  ) => HOCWithMeta<B1, A & A1 & A2 & A3 & A4 & A5 & A6 & A7 & A8 & A9, R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 & R9>;
 
 /**
  * This is the type to use for the components prop of a component with a fluid design.
