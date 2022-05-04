@@ -12,7 +12,20 @@
  * limitations under the License.
  */
 
-export { LayoutClean, asLayoutToken } from './LayoutClean';
-export { vitalLayout } from './tokens';
-export type { LayoutComponents, LayoutProps } from './types';
-export { default as vitalLayoutBase } from './tokens/vitalLayout';
+import { vitalLayoutBase } from '@bodiless/vital-layout';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { addProps } from '@bodiless/fclasses';
+
+const Default = asFluidToken({
+  ...vitalLayoutBase.Default,
+  Components: {
+    ...vitalLayoutBase.Default.Components,
+    // Not rendering on OuterContainer
+    OuterContainer: addProps({ 'data-shadowed-by': '__vitalstarter_:Layout' }),
+  },
+});
+
+export default {
+  ...vitalLayoutBase,
+  Default,
+};

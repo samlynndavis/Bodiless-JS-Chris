@@ -34,7 +34,7 @@ const asSimpleToken = (...tokens: Token[]) => asElementToken({
 // SEO tokens
 
 const WithPageTitle = asSimpleToken(withTitle({
-  name: 'title', label: 'Title', placeholder: 'Rec 30-65 charecterr',
+  name: 'title', label: 'Title', placeholder: 'Rec 30-65 character',
 })('page-title'));
 
 const WithPageDescription = asSimpleToken(withMeta({
