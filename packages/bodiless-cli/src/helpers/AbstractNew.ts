@@ -36,6 +36,8 @@ const ora = require('ora');
 
 const NO_TEMPLATE = '*** NONE';
 
+const kebabToCamel = (n: string) => n.replace(/-([a-z])/g, g => g[1].toUpperCase());
+
 const abstractNewFlags: Flags<AbstractNewOptions> = {
   ...Wizard.flags,
 
@@ -112,7 +114,7 @@ const abstractNewFlags: Flags<AbstractNewOptions> = {
   setup: {
     ...commandFlags.string({
       description: 'Name of setup script',
-      default: 'setup',
+      default: 'npm run setup',
       parse: d => d.trim(),
     }),
     prompt: false,
@@ -178,7 +180,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const sitesDir = await this.getArg('sites-dir');
     const name = await this.getArg('name');
     const newName = await this.getArg('name');
-    const newTokenName = newName.replace(/-([a-z])/g, g => g[1].toUpperCase());
+    const newTokenName = kebabToCamel(newName);
     const ns = await this.getNamespace();
     const cwd = path.resolve(await this.getArg('dest'));
     const commonOptions = {
@@ -343,7 +345,7 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
         promises.push(recursiveRename({
           rootPath: path.join(sitesDir, name),
           search: template,
-          replace: name,
+          replace: kebabToCamel(name),
           exclude: pathName => /node_modules/.test(pathName) || /lib/.test(pathName),
         }));
       }
