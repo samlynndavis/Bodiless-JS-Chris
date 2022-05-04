@@ -17,7 +17,9 @@ import pick from 'lodash/pick';
 import omit from 'lodash/omit';
 import identity from 'lodash/identity';
 import flowRight from 'lodash/flowRight';
-import type { Enhancer, HOC, ComponentOrTag } from '@bodiless/fclasses';
+import type {
+  Enhancer, HOC, ComponentOrTag, HOCWithMeta
+} from '@bodiless/fclasses';
 import { withoutProps } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from './withNode';
 import {
@@ -55,8 +57,10 @@ type AsBodiless<P, D, E = {}> = (
   nodeKeys?: WithNodeKeyProps,
   defaultData?: D,
   useOverrides?: UseBodilessOverrides<P, D, E>,
-) => Enhancer<Partial<WithNodeProps>>;
+// ) => Enhancer<Partial<WithNodeProps>>;
+) => HOCWithMeta<{}, Partial<WithNodeProps>>;
 
+// export type Enhancer<A, B = {}> = HOC<B, A>;
 /**
  * Given an event name and a wrapper component, provides an HOC which will wrap the base component
  * the wrapper, passing the event prop to the wrapper, and all other props to the base component.
