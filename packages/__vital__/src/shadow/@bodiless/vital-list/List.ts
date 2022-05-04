@@ -12,15 +12,19 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { flowHoc, on, replaceWith } from '@bodiless/fclasses';
-import { vitalLayoutBase, LayoutClean } from '@bodiless/vital-layout';
+import { vitalListBase } from '@bodiless/vital-list';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { addProps } from '@bodiless/fclasses';
 
-export const Layout = asStyleGuideTemplateToken(vitalStyleGuideTemplate.NoLayout, {
-  Meta: flowHoc.meta.term('Token')('Layout'),
-  Content: {
-    Title: replaceWith(() => <>Layout</>),
-    Examples: on(LayoutClean)(vitalLayoutBase.StyleGuide),
+const Default = asFluidToken({
+  ...vitalListBase.Default,
+  Behavior: {
+    ...vitalListBase.Default.Behavior,
+    _: addProps({ 'data-shadowed-by': '__vitalstarter_:List' }),
   },
 });
+
+export default {
+  ...vitalListBase,
+  Default,
+};

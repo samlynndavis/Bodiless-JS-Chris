@@ -38,7 +38,16 @@ const SEO = asElementToken({
   },
 });
 
+const Share = asElementToken({
+  ...vitalMetaHelmetBase.Share,
+  Compose: {
+    ...vitalMetaHelmetBase.Share.Compose,
+    WithMetaKeywords,
+  },
+});
+
 export default {
   ...vitalMetaHelmetBase,
   SEO,
+  Share,
 };
