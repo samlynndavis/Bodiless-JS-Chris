@@ -12,15 +12,20 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
-import { flowHoc, on, replaceWith } from '@bodiless/fclasses';
-import { vitalLayoutBase, LayoutClean } from '@bodiless/vital-layout';
+import { vitalMenuBase } from '@bodiless/vital-navigation';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { addProps } from '@bodiless/fclasses';
 
-export const Layout = asStyleGuideTemplateToken(vitalStyleGuideTemplate.NoLayout, {
-  Meta: flowHoc.meta.term('Token')('Layout'),
-  Content: {
-    Title: replaceWith(() => <>Layout</>),
-    Examples: on(LayoutClean)(vitalLayoutBase.StyleGuide),
+// TODO not rendering
+const Default = asFluidToken({
+  ...vitalMenuBase.Default,
+  Compose: {
+    ...vitalMenuBase.Default.Compose,
+    _: addProps({ 'data-shadowed-by': '__vitalstarter_:MenuO' }),
   },
 });
+
+export default {
+  ...vitalMenuBase,
+  Default,
+};

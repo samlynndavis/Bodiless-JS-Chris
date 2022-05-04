@@ -118,8 +118,10 @@ const Burger = asSubMenuToken({
   },
 });
 
+const Default = Base;
+
 export default {
-  Base,
+  Default,
   Burger,
   Footer,
   TopNav,

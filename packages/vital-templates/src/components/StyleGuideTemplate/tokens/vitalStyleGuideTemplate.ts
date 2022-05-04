@@ -21,12 +21,12 @@ import { withNodeKey } from '@bodiless/core';
 import {
   on, replaceWith, Fragment, as
 } from '@bodiless/fclasses';
-import { vitalLayout, LayoutClean } from '@bodiless/vital-layout';
+import { vitalLayoutBase, LayoutClean } from '@bodiless/vital-layout';
 import { asStyleGuideTemplateToken } from '../StyleGuideTemplateClean';
 
 const Base = asStyleGuideTemplateToken({
   Components: {
-    Wrapper: on(LayoutClean)(vitalLayout.Default),
+    Wrapper: on(LayoutClean)(vitalLayoutBase.Default),
   },
   Theme: {
     TitleWrapper: vitalTypography.H1,
