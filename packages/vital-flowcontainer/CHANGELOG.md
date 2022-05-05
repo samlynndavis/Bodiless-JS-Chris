@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.14](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-beta.14) (2022-05-05)
+
+
+### Bug Fixes
+
+* **vital-flowcontainer:** update publishConfig ([cdf2407](https://github.com/johnsonandjohnson/bodiless-js/commit/cdf2407177e2fc26ccfaee44f30bd73aff0556e7))
+
+
+### Features
+
+* **vital-list:** Add new vital list component ([#1554](https://github.com/johnsonandjohnson/bodiless-js/issues/1554)) ([18d6278](https://github.com/johnsonandjohnson/bodiless-js/commit/18d6278865bc21ab4c7f541a595b3e5f46b433f2)), closes [#1559](https://github.com/johnsonandjohnson/bodiless-js/issues/1559)
+* **vital-table:** add vital table ([#1598](https://github.com/johnsonandjohnson/bodiless-js/issues/1598)) ([cb145ed](https://github.com/johnsonandjohnson/bodiless-js/commit/cb145ed8b22fd0d87f9bbd3eafbefcdfa1444c65))
+
+
+
+
+
 # [1.0.0-beta.13](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-05-05)
 
 **Note:** Version bump only for package @bodiless/vital-flowcontainer

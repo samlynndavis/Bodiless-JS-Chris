@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.14](https://github.com/johnsonandjohnson/bodiless-js/compare/v0.3.1...v1.0.0-beta.14) (2022-05-05)
+
+
+### Bug Fixes
+
+* **vital-header, vital-footer:** convert to default breakpoints and adjust header/footer  ([#1575](https://github.com/johnsonandjohnson/bodiless-js/issues/1575)) ([537cbab](https://github.com/johnsonandjohnson/bodiless-js/commit/537cbab75e960b805ac0b4ea7826d96dae0f5dbd))
+
+
+
+
+
 # [1.0.0-beta.13](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-05-05)
 
 **Note:** Version bump only for package @bodiless/vital-link
