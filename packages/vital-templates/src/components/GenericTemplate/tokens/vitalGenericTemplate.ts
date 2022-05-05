@@ -19,7 +19,7 @@ import {
   addProps,
 } from '@bodiless/fclasses';
 import { vitalImage } from '@bodiless/vital-image';
-import { vitalLayoutBase } from '@bodiless/vital-layout';
+import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
@@ -34,7 +34,7 @@ const Default = asGenericTemplateToken({
      * Error in function Module.../../packages/vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts in http://localhost:
      * Cannot read properties of undefined (reading 'Default')
      */
-    PageWrapper: as(vitalLayoutBase.Default),
+    PageWrapper: vitalLayout.Default,
     // @todo breadcrumb placeholder
     Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
     // @todo in Hero ticket is change this to chameleon.
