@@ -16,12 +16,13 @@ import { vitalSubMenuBase } from '@bodiless/vital-navigation';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
-// TODO Not rendering probably can delete.
+// TODO Not rendering
+
 const Footer = asFluidToken({
   ...vitalSubMenuBase.Footer,
   Compose: {
     ...vitalSubMenuBase.Footer.Compose,
-    _: addProps({ 'data-shadowed-by': '__vitalstarter_:FooterSubMenu' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:FooterSubMenu' }),
   },
 });
 
@@ -42,6 +43,7 @@ const Burger = asFluidToken({
 });
 
 export default {
+  ...vitalSubMenuBase,
   Footer,
   TopNav,
   Burger,
