@@ -20,7 +20,7 @@ import {
   Img,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
-import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
+import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { withNode, withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
@@ -46,7 +46,7 @@ const Default = asGenericTemplateToken({
      * Error in function Module.../../packages/vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts in http://localhost:
      * Cannot read properties of undefined (reading 'Default')
      */
-    PageWrapper: as(vitalLayoutBase.Default),
+    PageWrapper: vitalLayout.Default,
     // @todo breadcrumb placeholder
     Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
     TopContent: as(
