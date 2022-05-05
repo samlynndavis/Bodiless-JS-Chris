@@ -30,6 +30,7 @@ const vitalFontSize = asTokenGroup(meta)({
   L: 'text-m-lg lg:text-lg',
   XS: 'text-m-xs lg:text-xs',
   WithDemoContent: undefined,
+  BurgerMenu: 'text-m-lg xl:text-lg',
 });
 
 vitalFontSize.WithDemoContent = asElementToken({
