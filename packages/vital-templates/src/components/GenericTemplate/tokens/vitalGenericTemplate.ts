@@ -40,12 +40,6 @@ const heroUseOverrides = () => ({
 
 const Default = asGenericTemplateToken({
   Components: {
-
-    /*
-     * Replaced as(vitalLayout.Default), -> as(vitalLayoutBase.Default),
-     * Error in function Module.../../packages/vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts in http://localhost:
-     * Cannot read properties of undefined (reading 'Default')
-     */
     PageWrapper: vitalLayout.Default,
     // @todo breadcrumb placeholder
     Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),

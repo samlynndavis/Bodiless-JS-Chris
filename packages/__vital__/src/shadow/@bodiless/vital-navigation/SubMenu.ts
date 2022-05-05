@@ -16,7 +16,7 @@ import { vitalSubMenuBase } from '@bodiless/vital-navigation';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
-// TODO Not rendering
+// TODO Not rendering probably can delete.
 const Footer = asFluidToken({
   ...vitalSubMenuBase.Footer,
   Compose: {

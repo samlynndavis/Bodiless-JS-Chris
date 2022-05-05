@@ -20,7 +20,6 @@ const Default = asFluidToken({
   ...vitalLayoutBase.Default,
   Components: {
     ...vitalLayoutBase.Default.Components,
-    // Not rendering on OuterContainer
     OuterContainer: addProps({ 'data-shadowed-by': '__vitalstarter_:Layout' }),
   },
 });
