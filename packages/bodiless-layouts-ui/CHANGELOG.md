@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-beta.13](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2022-05-05)
+
+**Note:** Version bump only for package @bodiless/layouts-ui
+
+
+
+
+
+# [1.0.0-beta.12](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2022-05-02)
+
+**Note:** Version bump only for package @bodiless/layouts-ui
+
+
+
+
+
+# [1.0.0-beta.11](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2022-04-28)
+
+
+### Bug Fixes
+
+* **bodiless-layouts & layouts-ui:** empty = gray ([#1646](https://github.com/johnsonandjohnson/bodiless-js/issues/1646)) ([eef363a](https://github.com/johnsonandjohnson/bodiless-js/commit/eef363ae64bf6c840f093ef70ee1518dd762aca1))
+* **layouts-ui:** Add missing tailwind export. ([#1656](https://github.com/johnsonandjohnson/bodiless-js/issues/1656)) ([601bc7d](https://github.com/johnsonandjohnson/bodiless-js/commit/601bc7d65c0dee07830e664589b0f5c0196ff554))
+
+
+
+
+
 # [1.0.0-beta.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2022-04-26)
 
 **Note:** Version bump only for package @bodiless/layouts-ui
