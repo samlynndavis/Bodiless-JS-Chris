@@ -20,14 +20,14 @@ const FooterMenu = asFluidToken({
   ...vitalSeparatorBase.FooterMenu,
   Behavior: {
     ...vitalSeparatorBase.FooterMenu.Behavior,
-    _: addProps({ 'data-shadowed-by': '__vitalstarter_:FooterMenuSeparator' }),
+    _: addProps({ 'data-shadowed-by': '__vital__:FooterMenuSeparator' }),
   },
 });
 const UtilityMenu = asFluidToken({
   ...vitalSeparatorBase.UtilityMenu,
   Behavior: {
     ...vitalSeparatorBase.UtilityMenu.Behavior,
-    _: addProps({ 'data-shadowed-by': '__vitalstarter_:UtilityMenu' }),
+    _: addProps({ 'data-shadowed-by': '__vital__:UtilityMenuSeparator' }),
   },
 });
 

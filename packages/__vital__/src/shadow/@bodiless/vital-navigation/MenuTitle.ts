@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalMenuTitleBase.Default,
   Compose: {
     ...vitalMenuTitleBase.Default.Compose,
-    _: addProps({ 'data-shadowed-by': '__vitalstarter_:MenuTitle' }),
+    _: addProps({ 'data-shadowed-by': '__vital__:MenuTitle' }),
   },
 });
 

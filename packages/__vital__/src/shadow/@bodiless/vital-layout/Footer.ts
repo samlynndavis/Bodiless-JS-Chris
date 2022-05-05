@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalFooterBase.Default,
   Components: {
     ...vitalFooterBase.Default.Components,
-    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:Footer' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Footer' }),
   },
 });
 

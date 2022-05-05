@@ -12,19 +12,19 @@
  * limitations under the License.
  */
 
-import { vitalLayoutBase } from '@bodiless/vital-layout';
+import { vitalYouTubeBase } from '@bodiless/vital-youtube';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asFluidToken({
-  ...vitalLayoutBase.Default,
+  ...vitalYouTubeBase.Default,
   Components: {
-    ...vitalLayoutBase.Default.Components,
-    OuterContainer: addProps({ 'data-shadowed-by': '__vital__:Layout' }),
+    ...vitalYouTubeBase.Default.Components,
+    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:YouTube' }),
   },
 });
 
 export default {
-  ...vitalLayoutBase,
+  ...vitalYouTubeBase,
   Default,
 };

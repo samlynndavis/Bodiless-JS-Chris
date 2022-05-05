@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalLogoBase.Default,
   Components: {
     ...vitalLogoBase.Default.Components,
-    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:Logo' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Logo' }),
   },
 });
 

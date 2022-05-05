@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalImageBase.Default,
   Behavior: {
     ...vitalImageBase.Default.Behavior,
-    _: addProps({ 'data-shadowed-by': '__vitalstarter_:Image' }),
+    _: addProps({ 'data-shadowed-by': '__vital__:Image' }),
   },
 });
 

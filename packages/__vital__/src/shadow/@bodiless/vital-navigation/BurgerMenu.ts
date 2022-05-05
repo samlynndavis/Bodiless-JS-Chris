@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalBurgerMenuBase.Default,
   Behavior: {
     ...vitalBurgerMenuBase.Default.Behavior,
-    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:BurgerMenu' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:BurgerMenu' }),
   },
 });
 

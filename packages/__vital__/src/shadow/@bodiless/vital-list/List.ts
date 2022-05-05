@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalListBase.Default,
   Behavior: {
     ...vitalListBase.Default.Behavior,
-    _: addProps({ 'data-shadowed-by': '__vitalstarter_:List' }),
+    _: addProps({ 'data-shadowed-by': '__vital__:List' }),
   },
 });
 

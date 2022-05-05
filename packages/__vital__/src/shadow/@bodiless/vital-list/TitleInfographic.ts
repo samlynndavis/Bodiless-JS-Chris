@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalTitleInfographicBase.Default,
   Behavior: {
     ...vitalTitleInfographicBase.Default.Behavior,
-    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:TitleInfographic' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:TitleInfographic' }),
   },
 });
 

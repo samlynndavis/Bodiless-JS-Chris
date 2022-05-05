@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalRichTextBase.Default,
   Compose: {
     ...(vitalRichTextBase.Default.Compose || {}),
-    WithShadowedBy: addProps({ 'data-shadowed-by': '__vitalstarter_:RichText' }),
+    WithShadowedBy: addProps({ 'data-shadowed-by': '__vital__:RichText' }),
   },
   // Demonstrates how to remove a component from the default editor.
   // Core: {

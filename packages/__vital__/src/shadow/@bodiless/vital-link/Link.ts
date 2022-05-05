@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalLinkBase.Default,
   Components: {
     ...vitalLinkBase.Default.Components,
-    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:Link' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Link' }),
   },
 
 });

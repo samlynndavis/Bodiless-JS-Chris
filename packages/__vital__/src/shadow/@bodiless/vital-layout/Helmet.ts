@@ -20,7 +20,7 @@ const Default = asFluidToken({
   ...vitalHelmetBase.Default,
   Components: {
     ...vitalHelmetBase.Default.Components,
-    BodyHelmet: addProps({ 'data-shadowed-by': '__vitalstarter_:Helmet' }),
+    BodyHelmet: addProps({ 'data-shadowed-by': '__vital__:Helmet' }),
   },
 });
 

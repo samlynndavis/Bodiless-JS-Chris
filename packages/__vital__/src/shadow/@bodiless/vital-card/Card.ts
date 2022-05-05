@@ -25,18 +25,17 @@ const Default = asFluidToken({
   ...vitalCardBase.Default,
   Components: {
     ...vitalCardBase.Default.Components,
-    Wrapper: addProps({ 'data-shadowed-by': '__vitalstarter_:Card' }),
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:Card' }),
   },
 });
 
-// TODO not rendering
 const Hero = asFluidToken({
   ...vitalCardBase.Hero,
   Components: {
     ...vitalCardBase.Hero.Components,
     Wrapper: flowHoc(
       startWith(Div),
-      addProps({ 'data-shadowed-by': '__vitalstarter_:HeroCard' }),
+      addProps({ 'data-shadowed-by': '__vital__:HeroCard' }),
     ),
   },
 });
