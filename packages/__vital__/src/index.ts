@@ -12,5 +12,4 @@
  * limitations under the License.
  */
 
-export * from './components/Page';
 export * from './styleguide';
