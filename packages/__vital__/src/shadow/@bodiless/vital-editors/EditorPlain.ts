@@ -12,38 +12,20 @@
  * limitations under the License.
  */
 
-import { vitalSubMenuBase } from '@bodiless/vital-navigation';
 import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalEditorPlainBase } from '@bodiless/vital-editors';
 import { addProps } from '@bodiless/fclasses';
 
-// SHADOWTODO FooterSubMenu is Not rendering
-const Footer = asFluidToken({
-  ...vitalSubMenuBase.Footer,
-  Compose: {
-    ...vitalSubMenuBase.Footer.Compose,
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:FooterSubMenu' }),
-  },
-});
-
-const TopNav = asFluidToken({
-  ...vitalSubMenuBase.TopNav,
-  Compose: {
-    ...vitalSubMenuBase.TopNav.Compose,
-    _: addProps({ 'data-shadowed-by': '__vital__:TopNavSubMenu' }),
-  },
-});
-
-const Burger = asFluidToken({
-  ...vitalSubMenuBase.Burger,
-  Compose: {
-    ...vitalSubMenuBase.Burger.Compose,
-    _: addProps({ 'data-shadowed-by': '__vital__:BurgerSubMenu' }),
+// SHADOWTODO not rendering
+const Default = asFluidToken({
+  ...vitalEditorPlainBase.Default,
+  Core: {
+    ...vitalEditorPlainBase.Default.Core,
+    _: addProps({ 'data-shadowed-by': '__vital__:EditorPlain' }),
   },
 });
 
 export default {
-  ...vitalSubMenuBase,
-  Footer,
-  TopNav,
-  Burger,
+  ...vitalEditorPlainBase,
+  Default,
 };

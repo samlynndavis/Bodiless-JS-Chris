@@ -16,12 +16,12 @@ import { vitalMenuBase } from '@bodiless/vital-navigation';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { addProps } from '@bodiless/fclasses';
 
-// TODO not rendering
+// SHADOWTODO not rendering
 const Default = asFluidToken({
   ...vitalMenuBase.Default,
-  Compose: {
-    ...vitalMenuBase.Default.Compose,
-    _: addProps({ 'data-shadowed-by': '__vitalstarter_:MenuO' }),
+  Core: {
+    ...vitalMenuBase.Default.Core,
+    Wrapper: addProps({ 'data-shadowed-by': '__vital__:MenuO' }),
   },
 });
 

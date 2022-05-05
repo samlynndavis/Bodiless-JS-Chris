@@ -29,7 +29,7 @@ const WithMetaKeywords = asSimpleToken(withMeta({
   placeholder: 'No more than 10 keyword phrases',
 })('page-keywords'));
 
-// Not rendering over the SEO form.
+// SHADOWTODO Not rendering over the SEO form.
 const SEO = asElementToken({
   ...vitalMetaHelmetBase.SEO,
   Compose: {
