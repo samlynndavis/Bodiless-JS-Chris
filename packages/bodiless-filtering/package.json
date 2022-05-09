@@ -33,10 +33,10 @@
   },
   "dependencies": {
     "@bodiless/accordion": "^1.0.0-beta.14",
-    "@bodiless/cli": "^1.0.0-beta.12",
+    "@bodiless/cli": "^1.0.0-beta.14",
     "@bodiless/components": "^1.0.0-beta.14",
-    "@bodiless/core": "^1.0.0-beta.12",
-    "@bodiless/fclasses": "^1.0.0-beta.12",
+    "@bodiless/core": "^1.0.0-beta.14",
+    "@bodiless/fclasses": "^1.0.0-beta.14",
     "@bodiless/organisms": "^1.0.0-beta.14",
     "informed": "^3.34.0",
     "lodash": "^4.17.19",
