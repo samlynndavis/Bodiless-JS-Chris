@@ -92,48 +92,48 @@ const SEO = asElementToken({
 });
 
 // Social Share OG & UTM tokens
-export const WithUTMCampaign = asSimpleToken(withMetaStatic({
+const WithUTMCampaign = asSimpleToken(withMetaStatic({
   name: 'utm_campaign',
 })({ nodeKey: 'utm-campaign', nodeCollection: 'site' }));
 
-export const WithSiteName = asSimpleToken(withMetaStatic({
+const WithSiteName = asSimpleToken(withMetaStatic({
   name: 'og:site_name', attribute: 'property',
 })({ nodeKey: 'og-sitename', nodeCollection: 'site' }));
 
-export const WithTwitterCard = asSimpleToken(withMetaStatic({
+const WithTwitterCard = asSimpleToken(withMetaStatic({
   name: 'twitter:card',
 })({ nodeKey: 'twitter-card', nodeCollection: 'site' }, 'summary'));
 
-export const WithShareType = asSimpleToken(withMeta({
+const WithShareType = asSimpleToken(withMeta({
   name: 'og:type', attribute: 'property', label: 'OG Type',
 })({ nodeKey: 'og-type' }));
 
-export const WithTwitterTitle = asSimpleToken(withMeta({
+const WithTwitterTitle = asSimpleToken(withMeta({
   name: 'twitter:title', label: 'Twitter Title',
 })('twitter-title'));
 
-export const WithUTMContent = asSimpleToken(withMeta({
+const WithUTMContent = asSimpleToken(withMeta({
   name: 'utm_content', label: 'utm-content',
 })('utm-content'));
 
-export const WithShareDescription = asSimpleToken(withMeta({
+const WithShareDescription = asSimpleToken(withMeta({
   name: 'og:description',
   useFormElement: () => useMenuOptionUI().ComponentFormTextArea,
   label: 'Description',
   attribute: 'property',
 })('og-description'));
 
-export const WithShareUrl = asSimpleToken(withMeta({
+const WithShareUrl = asSimpleToken(withMeta({
   name: 'og:url', label: 'Url', attribute: 'property',
 })('og-url'));
 
-export const WithShareImage = asSimpleToken(withMeta({
+const WithShareImage = asSimpleToken(withMeta({
   name: 'og:image',
   label: 'Image (provide absolute URL)',
   attribute: 'property',
 })('og-image'));
 
-export const WithShareTitle = asSimpleToken(withMeta({
+const WithShareTitle = asSimpleToken(withMeta({
   name: 'og:title', label: 'Title', attribute: 'property',
 })('og-title'));
 
@@ -144,7 +144,7 @@ const WithShareForm = asElementToken({
 });
 
 // All Social Share OG & UTM tokens packaged
-export const Share = asElementToken({
+const Share = asElementToken({
   Compose: {
     WithUTMCampaign,
     WithSiteName,
@@ -163,6 +163,9 @@ export const Share = asElementToken({
 export default {
   SEO,
   Share,
+};
+
+export {
   WithUTMCampaign,
   WithSiteName,
   WithTwitterCard,
@@ -180,4 +183,7 @@ export default {
   WithOrganizationContactType,
   WithOrganizationContactOption,
   WithOrganizationAreaServed,
+  WithSeoForm,
+  WithShareForm,
+  WithHomePageSchemas,
 };

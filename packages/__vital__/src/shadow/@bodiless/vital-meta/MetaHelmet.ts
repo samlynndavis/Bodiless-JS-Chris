@@ -14,7 +14,25 @@
 
 import { withMeta } from '@bodiless/components';
 import { asElementToken } from '@bodiless/vital-elements';
-import { vitalMetaHelmetBase } from '@bodiless/vital-meta';
+import {
+  vitalMetaHelmetBase,
+  WithHtml,
+  WithHomePageSchemas,
+  WithPageDescription,
+  WithPageTitle,
+  WithSeoForm,
+  WithShareForm,
+  WithShareDescription,
+  WithShareImage,
+  WithShareTitle,
+  WithShareType,
+  WithShareUrl,
+  WithSiteName,
+  WithTwitterCard,
+  WithTwitterTitle,
+  WithUTMCampaign,
+  WithUTMContent
+} from '@bodiless/vital-meta';
 import { Token, as } from '@bodiless/fclasses';
 
 const asSimpleToken = (...tokens: Token[]) => asElementToken({
@@ -29,20 +47,46 @@ const WithMetaKeywords = asSimpleToken(withMeta({
   placeholder: 'No more than 10 keyword phrases',
 })('page-keywords'));
 
-// SHADOWTODO Not rendering over the SEO form.
+/*
+ * SHADOWTODO I think there order problem as this didn't work.
+ * Recomposing the whole thing worked.
 const SEO = asElementToken({
-  ...vitalMetaHelmetBase.SEO,
   Compose: {
     ...vitalMetaHelmetBase.SEO.Compose,
     WithMetaKeywords,
   },
 });
+*/
+
+const SEO = asElementToken({
+  Compose: {
+    WithHtml,
+    WithHomePageSchemas,
+    WithMetaKeywords, // Added
+    WithPageDescription,
+    WithPageTitle,
+    WithSeoForm,
+  },
+});
+
+const WithTwitterDescription = asSimpleToken(withMeta({
+  name: 'twitter:description', label: 'Twitter Description',
+})('twitter-description'));
 
 const Share = asElementToken({
-  ...vitalMetaHelmetBase.Share,
   Compose: {
-    ...vitalMetaHelmetBase.Share.Compose,
-    WithMetaKeywords,
+    WithUTMCampaign,
+    WithSiteName,
+    WithTwitterCard,
+    WithShareType,
+    WithTwitterDescription, // Added
+    WithTwitterTitle,
+    WithUTMContent,
+    WithShareDescription,
+    WithShareUrl,
+    WithShareImage,
+    WithShareTitle,
+    WithShareForm,
   },
 });
 
