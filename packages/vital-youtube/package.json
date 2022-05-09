@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/vital-youtube",
   "sideEffects": false,
-  "version": "1.0.0-beta.14",
+  "version": "1.0.0-beta.12",
   "description": "Clean, designable YouTube components for VitalDS based projects.",
   "author": "Guilherme Zeni <gzeni@its.jnj.com>",
   "license": "Apache-2.0",

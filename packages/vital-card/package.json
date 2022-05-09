@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/vital-card",
-  "version": "1.0.0-beta.14",
+  "version": "1.0.0-beta.12",
   "description": "Card component to display information through an image,text or other media content",
   "author": "Dewen Li <dli94@its.jnj.com>",
   "license": "Apache-2.0",
