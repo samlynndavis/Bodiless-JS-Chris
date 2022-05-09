@@ -73,7 +73,6 @@ const findApiDocPaths = async () => locateFiles({
   // filePattern: /docs.json$/,
   startingRoot: './',
   action: filePath => {
-    console.log(filePath);
     // filePath is a path to index file, navigating up to get api doc root.
     const apiDocPath = pathUtil.resolve(filePath, '..');
     // determine based on settings how many levels should we navigate up to get package path.

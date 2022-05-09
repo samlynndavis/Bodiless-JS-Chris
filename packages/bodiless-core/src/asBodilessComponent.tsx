@@ -57,10 +57,8 @@ type AsBodiless<P, D, E = {}> = (
   nodeKeys?: WithNodeKeyProps,
   defaultData?: D,
   useOverrides?: UseBodilessOverrides<P, D, E>,
-// ) => Enhancer<Partial<WithNodeProps>>;
 ) => HOCWithMeta<{}, Partial<WithNodeProps>>;
 
-// export type Enhancer<A, B = {}> = HOC<B, A>;
 /**
  * Given an event name and a wrapper component, provides an HOC which will wrap the base component
  * the wrapper, passing the event prop to the wrapper, and all other props to the base component.

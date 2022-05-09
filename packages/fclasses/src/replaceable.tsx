@@ -49,8 +49,10 @@ const DesignContext = React.createContext(designContextDefault);
  * const withRepl = withDesign({
  *   Wrapper: startWith(Section),
  * });
+ * const BlackAndGreenDiv = withBase(Div); // A 'div' with black bg and green text
+ * const GreenSection = withRepl(BlackAndGreenDiv); // A 'section' with green text.
  * ```
- * Because of the addition of `replaceable`, the resulting `Section` will not
+ * Because of the addition of `replaceable`, the resulting `GreenSection` will not
  * have the black background, though it will have the green text.
  *
  * @see startWith

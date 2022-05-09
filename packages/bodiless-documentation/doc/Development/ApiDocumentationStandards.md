@@ -243,7 +243,7 @@ For example, the Vital Design System uses interfaces to document token collectio
   its designable components.  Document the purpose of each slot:
   ```ts
   /**
-   * Designable components fpr FooClean.
+   * Designable components for FooClean.
    */
   interface FooComponents extends DesignableComponents {
     /**

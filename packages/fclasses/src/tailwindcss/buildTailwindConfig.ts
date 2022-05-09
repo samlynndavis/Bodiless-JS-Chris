@@ -42,11 +42,12 @@ import type { GetTwConfigProps } from './getPackageTailwindConfig';
  *  // (be sure to add a `content` section to prevent purging of any classes used in your site).
  * };
  *
- & module.exports = buildTailwindConfig({
- &   twConfig,
- &   resolver: (pkgName) => require.resolve(pkgName),
- &   // prefer: ['@sites/--minimal--'],
- & });
+ * module.exports = buildTailwindConfig({
+ *   twConfig,
+ *   resolver: (pkgName) => require.resolve(pkgName),
+ *   // Ensure that site-level config takes precedence over packages.
+ *   prefer: ['@sites/--minimal--'],
+ * });
  * ```
  *
  * @category Tailwind Utility
