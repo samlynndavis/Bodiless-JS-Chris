@@ -12,11 +12,10 @@
  * limitations under the License.
  */
 
-import { vitalFooterBase } from '@bodiless/vital-layout';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalFooterBase, asFooterToken } from '@bodiless/vital-layout';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
+const Default = asFooterToken({
   ...vitalFooterBase.Default,
   Components: {
     ...vitalFooterBase.Default.Components,

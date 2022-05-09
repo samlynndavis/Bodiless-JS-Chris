@@ -12,20 +12,30 @@
  * limitations under the License.
  */
 
-import { vitalMenuBase } from '@bodiless/vital-navigation';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalMenuBase, asMenuToken } from '@bodiless/vital-navigation';
 import { addProps } from '@bodiless/fclasses';
 
-// SHADOWTODO not rendering
-const Default = asFluidToken({
-  ...vitalMenuBase.Default,
+const TopNav = asMenuToken(vitalMenuBase.TopNav, {
   Core: {
-    ...vitalMenuBase.Default.Core,
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:MenuO' }),
+    _: addProps({ 'data-shadowed-by': '__vital__Menu_TopNav' }),
+  },
+});
+
+const Footer = asMenuToken(vitalMenuBase.Footer, {
+  Core: {
+    _: addProps({ 'data-shadowed-by': '__vital__Menu_Footer' }),
+  },
+});
+
+const Utility = asMenuToken(vitalMenuBase.Utility, {
+  Core: {
+    _: addProps({ 'data-shadowed-by': '__vital__Menu_Utility' }),
   },
 });
 
 export default {
   ...vitalMenuBase,
-  Default,
+  TopNav,
+  Footer,
+  Utility,
 };

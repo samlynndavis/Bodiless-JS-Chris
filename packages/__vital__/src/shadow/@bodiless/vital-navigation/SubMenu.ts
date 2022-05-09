@@ -12,20 +12,19 @@
  * limitations under the License.
  */
 
-import { vitalSubMenuBase } from '@bodiless/vital-navigation';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalSubMenuBase, asSubMenuToken } from '@bodiless/vital-navigation';
 import { addProps } from '@bodiless/fclasses';
 
 // SHADOWTODO FooterSubMenu is Not rendering
-const Footer = asFluidToken({
+const Footer = asSubMenuToken({
   ...vitalSubMenuBase.Footer,
   Compose: {
     ...vitalSubMenuBase.Footer.Compose,
-    Wrapper: addProps({ 'data-shadowed-by': '__vital__:FooterSubMenu' }),
+    _: addProps({ 'data-shadowed-by': '__vital__:FooterSubMenu' }),
   },
 });
 
-const TopNav = asFluidToken({
+const TopNav = asSubMenuToken({
   ...vitalSubMenuBase.TopNav,
   Compose: {
     ...vitalSubMenuBase.TopNav.Compose,
@@ -33,7 +32,7 @@ const TopNav = asFluidToken({
   },
 });
 
-const Burger = asFluidToken({
+const Burger = asSubMenuToken({
   ...vitalSubMenuBase.Burger,
   Compose: {
     ...vitalSubMenuBase.Burger.Compose,

@@ -12,11 +12,10 @@
  * limitations under the License.
  */
 
-import { vitalHeaderBase } from '@bodiless/vital-layout';
-import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalHeaderBase, asHeaderToken } from '@bodiless/vital-layout';
 import { addProps } from '@bodiless/fclasses';
 
-const Default = asFluidToken({
+const Default = asHeaderToken(vitalHeaderBase.Base, {
   ...vitalHeaderBase.Default,
   Components: {
     ...vitalHeaderBase.Default.Components,
