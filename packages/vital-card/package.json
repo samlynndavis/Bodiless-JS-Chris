@@ -29,11 +29,11 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/core": "^1.0.0-beta.14",
+    "@bodiless/core": "^1.0.0-beta.12",
     "@bodiless/components": "^1.0.0-beta.14",
     "@bodiless/components-ui": "^1.0.0-beta.14",
-    "@bodiless/fclasses": "^1.0.0-beta.14",
-    "@bodiless/hydration": "^1.0.0-beta.14",
+    "@bodiless/fclasses": "^1.0.0-beta.12",
+    "@bodiless/hydration": "^1.0.0-beta.12",
     "@bodiless/vital-editors": "^1.0.0-beta.14",
     "@bodiless/vital-elements": "^1.0.0-beta.14",
     "@bodiless/vital-image": "^1.0.0-beta.14",

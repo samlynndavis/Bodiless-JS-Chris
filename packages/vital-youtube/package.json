@@ -26,13 +26,13 @@
   },
   "dependencies": {
     "@bodiless/components": "^1.0.0-beta.14",
-    "@bodiless/core": "^1.0.0-beta.14",
+    "@bodiless/core": "^1.0.0-beta.12",
     "@bodiless/vital-editors": "^1.0.0-beta.14",
     "@bodiless/vital-elements": "^1.0.0-beta.14",
-    "@bodiless/fclasses": "^1.0.0-beta.14",
-    "@bodiless/hydration": "^1.0.0-beta.14",
+    "@bodiless/fclasses": "^1.0.0-beta.12",
+    "@bodiless/hydration": "^1.0.0-beta.12",
     "@bodiless/organisms": "^1.0.0-beta.14",
-    "@bodiless/schema-org": "^1.0.0-beta.14",
+    "@bodiless/schema-org": "^1.0.0-beta.12",
     "@bodiless/youtube": "^1.0.0-beta.14",
     "lodash": "^4.17.19"
   },
