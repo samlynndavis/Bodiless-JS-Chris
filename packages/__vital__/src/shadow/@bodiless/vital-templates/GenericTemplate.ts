@@ -12,6 +12,23 @@
  * limitations under the License.
  */
 
-import __vital__Page from './__vital__Page';
+import {
+  addProps, Div, flowHoc, replaceWith
+} from '@bodiless/fclasses';
+import { asGenericTemplateToken, vitalGenericTemplateBase } from '@bodiless/vital-templates';
 
-export { __vital__Page };
+const Default = asGenericTemplateToken({
+  ...vitalGenericTemplateBase.Default,
+  Core: {
+    ...vitalGenericTemplateBase.Default.Core,
+    TemplateWrapper: flowHoc(
+      replaceWith(Div),
+      addProps({ 'data-shadowed-by': '__vital__GenericTemplate' }),
+    ),
+  },
+});
+
+export default {
+  ...vitalGenericTemplateBase,
+  Default,
+};

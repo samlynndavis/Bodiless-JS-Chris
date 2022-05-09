@@ -12,17 +12,19 @@
  * limitations under the License.
  */
 
-import { asFluidToken } from '@bodiless/vital-elements';
+import { asElementToken } from '@bodiless/vital-elements';
 import { vitalEditorPlainBase } from '@bodiless/vital-editors';
-import { addProps } from '@bodiless/fclasses';
+// import { vitalEditorPlainBase, withAutoSuperscript } from '@bodiless/vital-editors';
 
-// SHADOWTODO not rendering
-const Default = asFluidToken({
-  ...vitalEditorPlainBase.Default,
-  Core: {
-    ...vitalEditorPlainBase.Default.Core,
-    _: addProps({ 'data-shadowed-by': '__vital__:EditorPlain' }),
+const Default = asElementToken({
+  ...vitalEditorPlainBase.Default
+  // Uncomment the following example will super script the
+  // following ®™© (as well as uncomment import)
+  /*
+  Behavior: {
+    _: withAutoSuperscript('®™©', 'align-baseline'),
   },
+  */
 });
 
 export default {

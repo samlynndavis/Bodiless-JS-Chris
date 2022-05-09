@@ -13,4 +13,3 @@
  */
 
 export * from './styleguide';
-export * from './src/components/Page';

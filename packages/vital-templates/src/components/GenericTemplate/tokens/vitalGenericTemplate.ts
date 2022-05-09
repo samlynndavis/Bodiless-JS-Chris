@@ -18,11 +18,14 @@ import {
   addProps,
   withDesign,
   Img,
+  replaceWith,
+  Fragment,
+  flowIf,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
@@ -38,7 +41,17 @@ const heroUseOverrides = () => ({
   groupLabel: 'Hero'
 });
 
-const Default = asGenericTemplateToken({
+const isHomePage = () => useNode().node.pagePath === '/';
+
+const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
+  Flow: flowIf(isHomePage),
+  Components: {
+    BreadcrumbWrapper: replaceWith(Fragment),
+    Breadcrumb: replaceWith(Fragment),
+  },
+});
+
+const Base = asGenericTemplateToken({
   Components: {
     PageWrapper: vitalLayout.Default,
     // @todo breadcrumb placeholder
@@ -76,8 +89,16 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint
     ),
   },
+  Compose: {
+    WithNoBreadcrumbsOnHomePage,
+  }
+});
+
+const Default = asGenericTemplateToken({
+  ...Base,
 });
 
 export default {
+  Base,
   Default,
 };

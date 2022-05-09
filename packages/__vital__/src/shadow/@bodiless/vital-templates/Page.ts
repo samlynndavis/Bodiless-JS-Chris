@@ -12,47 +12,24 @@
  * limitations under the License.
  */
 
-import React from 'react';
-import negate from 'lodash/negate';
 import {
-  as,
-  flowIf,
   on,
-  replaceWith
 } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
 import {
-  vitalPage,
+  vitalPageBase,
   GenericTemplateClean,
   vitalGenericTemplate,
-  asGenericTemplateToken
 } from '@bodiless/vital-templates';
-import { useNode } from '@bodiless/core';
-
-// @todo remove NoBreadcrumbsGeneric when breadcrumbs is implemented and
-// content editor can choose to use breadcrumb
-const NoBreadcrumbsGeneric = asGenericTemplateToken({
-  ...vitalGenericTemplate.Default,
-  Components: {
-    ...vitalGenericTemplate.Default.Components,
-    BreadcrumbWrapper: replaceWith(React.Fragment),
-    Breadcrumb: replaceWith(React.Fragment),
-  },
-});
-
-const isHomePage = () => useNode().node.pagePath === '/';
 
 const Default = asFluidToken({
-  ...vitalPage.Default,
+  ...vitalPageBase.Default,
   Components: {
-    _default: on(GenericTemplateClean)(
-      flowIf(isHomePage)(as(NoBreadcrumbsGeneric)),
-      flowIf(negate(isHomePage))(as(vitalGenericTemplate.Default)),
-    ),
+    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
   },
 });
 
 export default {
-  ...vitalPage,
+  ...vitalPageBase,
   Default,
 };
