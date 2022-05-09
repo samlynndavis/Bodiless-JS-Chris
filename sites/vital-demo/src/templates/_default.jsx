@@ -18,6 +18,11 @@ import { as } from '@bodiless/fclasses';
 import { __vital__Page } from '--vital--';
 
 const DefaultPage = as(__vital__Page.Default)(Fragment);
+/*
+import { vitalPage } from '@bodiless/vital-templates';
+
+const DefaultPage = as(vitalPage.Default)(Fragment);
+*/
 
 export default DefaultPage;
 

@@ -12,5 +12,6 @@
  * limitations under the License.
  */
 
-export * from './styleguide';
-export * from './src/components/Page';
+import __vital__Page from './__vital__Page';
+
+export { __vital__Page };
