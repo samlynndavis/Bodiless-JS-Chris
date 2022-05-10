@@ -1,7 +1,7 @@
 {
   "name": "bodiless-js",
   "description": "Bodiless-JS",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-beta.15",
   "keywords": [
     "gatsby"
   ],
@@ -74,6 +74,7 @@
     "symlink-dir": "^3.0.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.20.0",
     "@types/enzyme": "^3.9.1",
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.158",
