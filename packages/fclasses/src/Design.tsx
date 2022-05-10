@@ -34,7 +34,7 @@ import { as, extendDesign } from './tokenSpec';
  * Creates an HOC that will attach a displayName to an object.
  *
  * @param name
- * name the name of the displayName.
+ * The displayName to add.
  *
  * @returns
  * HOC which attaches the display name.

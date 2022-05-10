@@ -46,7 +46,7 @@ export const flowIf = <P extends object>(condition: Condition<P>): FlowHoc<P> =>
  * The [[Condition]]s to AND together.
  *
  * @returns
- * A [[Condition]] which evaluates to true of all of the
+ * A [[Condition]] which evaluates to true if all of the
  * supplied [[Condition]]s evaluate to true.
  *
  * @category HOC Utility
@@ -62,7 +62,7 @@ export const and = <A extends object>(...funcs: Condition<A>[]) => (props: A) =>
  * The [[Condition]]s to OR together.
  *
  * @returns
- * A [[Condition]] which evaluates to rue of any of the
+ * A [[Condition]] which evaluates to true of any of the
  * supplied [[Condition]]s evaluates to true.
  *
  * @category HOC Utility
@@ -78,7 +78,7 @@ export const or = <A extends object>(...funcs:Condition<A>[]) => (props: A) => (
  * The [[Condition]]s to negate
  *
  * @returns
- * A [[Condition]] which evaluates to rue if all the
+ * A [[Condition]] which evaluates to true if all the
  * supplied [[Condition]]s evaluate to false.
  *
  * @category HOC Utility

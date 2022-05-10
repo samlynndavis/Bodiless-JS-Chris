@@ -99,7 +99,7 @@ const modifyClassesIf = (operation: 'add' | 'remove') => <A extends object>(
  * React hooks.
  *
  * @returns
- * A HOC factory function wit the same signature as [[addClasses]].
+ * A HOC factory function with the same signature as [[addClasses]].
  *
  * @cateogry FClasses API
  *
@@ -179,9 +179,6 @@ type ForwardRefProps = {
  * When the component is * wrapped by `addClasses()` or `removeClasses()`, the
  * specified operations will be applied in reverse order up the component tree,
  * so that the outermost operations take precedence.
- *
- * Note, when making HTML tags stylable, you should include a type parameter
- * to ensure that the resuting
  *
  * Adds [[StylableProps]] to the component.
  *
