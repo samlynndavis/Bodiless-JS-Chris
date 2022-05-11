@@ -17,7 +17,10 @@ import {
   addProps, replaceWith, as, on, flowHoc,
 } from '@bodiless/fclasses';
 import {
-  withMandatoryCategories, withAllTitlesFromTerms, ifComponentSelector,
+  withMandatoryCategories,
+  withAllTitlesFromTerms,
+  ifComponentSelector,
+  withLibraryComponents,
 } from '@bodiless/layouts';
 import { asFluidToken, vitalSpacing } from '@bodiless/vital-elements';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
@@ -31,7 +34,7 @@ const fluidToken = asFluidToken();
 type FluidToken = typeof fluidToken;
 
 const blacklistCategories = ['Group'];
-const mandatoryCateogries = ['Type'];
+const mandatoryCategories = ['Type'];
 
 /**
  * Token which creates the VitalDS Default Base for a Flow Container
@@ -40,7 +43,7 @@ const Base = asFluidToken({
   Core: {
     _: as(
       withAllTitlesFromTerms({ blacklistCategories }),
-      withMandatoryCategories(mandatoryCateogries),
+      withMandatoryCategories(mandatoryCategories),
       addProps({ blacklistCategories }),
     ),
     // @todo restore tools and component id badge
@@ -159,6 +162,15 @@ const Hero = asFluidToken(
   WithBaseVariations,
 );
 
+const WithContentLibrary = asFluidToken(
+  {
+    ...Default,
+    Core: {
+      _: withLibraryComponents()
+    },
+  },
+);
+
 /**
  * Tokens for the vital flow container
  *
@@ -188,6 +200,10 @@ export interface VitalFlowContainer {
    * ```
    */
   Default: FluidToken,
+  /**
+   * @deprecated
+   * Flow container which can be used in the Hero slot.
+   */
   Hero: FluidToken,
   /**
    * Defins a flow container which is to be used as a content region (that is,
@@ -208,10 +224,26 @@ export interface VitalFlowContainer {
    * ```
    */
   ContentRegion: FluidToken,
+  /**
+   * Composable token which enables a flow container to be nested inside another.
+   */
   AsFlowContainerItem: FluidToken,
+  /**
+   * Composable token which constrains all items to full width.
+   */
   WithFullWidthConstraint: FluidToken,
+  /**
+   * Composable token which constrains all items to 1/3 width on tablet.
+   */
   WithTabletOneThirdConstraint: FluidToken,
+  /**
+   * Allows only a single item in the flow container.
+   */
   WithSingleConstraint: FluidToken,
+  /**
+   * Composable token which adds content library functionality.
+   */
+  WithContentLibrary: FluidToken,
 }
 
 /**
@@ -230,6 +262,7 @@ const vitalFlowContainer: VitalFlowContainer = {
   WithFullWidthConstraint,
   WithTabletOneThirdConstraint,
   WithSingleConstraint,
+  WithContentLibrary,
 };
 
 export default vitalFlowContainer;
