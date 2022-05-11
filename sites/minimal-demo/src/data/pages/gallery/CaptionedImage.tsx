@@ -2,12 +2,12 @@ import React, { FC, HTMLProps } from 'react';
 import { asBodilessImage } from '@bodiless/components-ui';
 import { withNode } from '@bodiless/core';
 import {
-  Img, Section, Div, addClasses, stylable, flowHoc,
+  Img, Section, Div, addClasses, as, stylable,
 } from '@bodiless/fclasses';
 import withSimpleEditor from './withSimpleEditor';
 
 const Wrapper = Section;
-const Image = flowHoc(addClasses('w-full'), asBodilessImage('image'))(Img);
+const Image = as(addClasses('w-full'), asBodilessImage('image'))(Img);
 const Body = withSimpleEditor('caption', 'Caption')(Div);
 
 const CaptionedImageBase: FC<HTMLProps<HTMLElement>> = props => (
@@ -17,7 +17,7 @@ const CaptionedImageBase: FC<HTMLProps<HTMLElement>> = props => (
   </Wrapper>
 );
 
-const CaptionedImage = flowHoc(
+const CaptionedImage = as(
   stylable,
   withNode,
 )(CaptionedImageBase);

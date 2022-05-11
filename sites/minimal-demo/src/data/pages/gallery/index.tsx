@@ -2,7 +2,7 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page, PageProps } from '@bodiless/gatsby-theme-bodiless';
 import {
-  addClasses, flowHoc, Div, H1, Img, A, Section,
+  addClasses, as, Div, H1, Img, A, Section,
 } from '@bodiless/fclasses';
 import { asEditable, asBodilessLink } from '@bodiless/components';
 import { asBodilessImage } from '@bodiless/components-ui';
@@ -12,13 +12,13 @@ import Gallery from './Gallery';
 const asPageContainer = addClasses('container mx-auto');
 const asYMargin = addClasses('my-2');
 
-const Container = flowHoc(
+const Container = as(
   asPageContainer,
   asYMargin,
 )(Div);
 
 const withPrimaryHeaderStyles = addClasses('text-3xl font-bold');
-const PrimaryHeader = flowHoc(
+const PrimaryHeader = as(
   asEditable('title', 'Title'),
   withPrimaryHeaderStyles,
 )(H1);

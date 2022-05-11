@@ -1,6 +1,6 @@
 import React, { FC, HTMLProps } from 'react';
 import {
-  H2, Section, addClasses, stylable, flowHoc, replaceWith, withDesign,
+  H2, Section, addClasses, as, stylable, flowHoc, replaceWith, withDesign,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { withNode } from '@bodiless/core';
@@ -47,7 +47,7 @@ const GalleryBase: FC<HTMLProps<HTMLDivElement>> = ({ children, ...rest }) => (
   </Wrapper>
 );
 
-const Gallery = flowHoc(
+const Gallery = as(
   stylable,
   withNode,
 )(GalleryBase);
