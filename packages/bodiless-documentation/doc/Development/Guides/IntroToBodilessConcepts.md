@@ -9,10 +9,6 @@ Upon completion of this tutorial, you will end up with code similar to that foun
 [here](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/minimal-demo/src/data/pages/gallery/
 ':target=_blank'). As you go through the tutorial, feel free to reference this code as needed.
 
-?> **Note:** If you start the included Minimal Demo site (`cd sites/minimal-demo && npm run start`),
-you can view a version of what we'll be creating here:
-[`http://localhost:8000/gallery`](http://localhost:8000/gallery ':target=_blank').
-
 ## 0. Prerequisite: Create a Site
 
 To begin, follow the directions to [create a new
@@ -106,7 +102,7 @@ we'll begin by bringing things in a bit, and creating a [`container <div>`](http
 
 01. First, add the following imports to your `index.tsx` file:
     ```tsx
-    import { addClasses, flowHoc, Div } from '@bodiless/fclasses';
+    import { addClasses, as, Div } from '@bodiless/fclasses';
     ```
 01. Define a couple [Element Tokens](/Design/DesignSystem#element-tokens) for your container:
     ```tsx
@@ -115,7 +111,7 @@ we'll begin by bringing things in a bit, and creating a [`container <div>`](http
     ```
 01. Apply the tokens to the imported `Div` component (we will explain this in a minute):
     ```tsx
-    const Container = flowHoc(
+    const Container = as(
       asPageContainer,
       asYMargin,
     )(Div);
@@ -133,15 +129,15 @@ we'll begin by bringing things in a bit, and creating a [`container <div>`](http
     ```
 01. Refresh your page to view the results.
 
-Note the use of `flowHoc` in the above code. This is a custom composition utility provided by
-BodilessJS. We will go into it in more detail in subsequent tutorials; for now, just treat it as an
-equivalent to Lodash's [`flow`](https://lodash.com/docs/4.17.15#flow ':target=_blank').
+?> **Note:** Note the use of `as` in the above code. This is a custom composition utility provided
+by BodilessJS. We will go into it in more detail in subsequent tutorials; for now, just treat it as
+an equivalent to Lodash's [`flow`](https://lodash.com/docs/4.17.15#flow ':target=_blank').
 
 Now, let's refactor the page title using the same pattern as above:
 
 01. Add the `H1` component to your imports from `@bodiless/fclasses` in your `index.tsx`:
     ```tsx
-    import { addClasses, flowHoc, Div, H1 } from '@bodiless/fclasses';
+    import { addClasses, as, Div, H1 } from '@bodiless/fclasses';
     ```
 01. Create a reusable primary header token by adding the following above the default export:
     ```tsx
@@ -200,7 +196,7 @@ import { asEditable } from '@bodiless/components';
 And then update your `PrimaryHeader` definition to make it editable:
 
 ```tsx
-const PrimaryHeader = flowHoc(
+const PrimaryHeader = as(
   asEditable('title', 'Title'),
   withPrimaryHeaderStyles,
 )(H1);
@@ -254,7 +250,7 @@ page.
 Change the imports from `@bodiless/components` and `@bodiless/fclasses`:
 
 ```tsx
-import { addClasses, flowHoc, Div, H1, Img, A } from '@bodiless/fclasses';
+import { addClasses, as, Div, H1, Img, A } from '@bodiless/fclasses';
 import { asEditable, asBodilessLink } from '@bodiless/components';
 import { asBodilessImage } from '@bodiless/components-ui';
 ```
@@ -317,7 +313,7 @@ Add the following to your `index.tsx`:
 ```tsx
 // Add `Section` to your imports from `@bodiless/fclasses`.
 import {
-  addClasses, flowHoc, Div, H1, Img, A, Section,
+  addClasses, as, Div, H1, Img, A, Section,
 } from '@bodiless/fclasses';
 
 const Footer = asEditable(
@@ -368,30 +364,30 @@ You can create additional collections by writing your own queries.
 The BodilessJS core component `RichText` is used to make the body of the page editable — allowing
 Content Editors to add some text formatting.
 
-First, create your configured editor. Create a `withSimpleEditor.tsx` file alongside your
+First, create your configured editor by creating a `withSimpleEditor.tsx` file alongside your
 `index.tsx` file in the new gallery page folder with the following contents:
 
 ```tsx
 import { RichText } from '@bodiless/richtext-ui';
 import {
-  addClasses, flowHoc, replaceWith, withDesign, A, Em, Strong,
+  addClasses, as, startWith, withDesign, A, Em, Strong,
 } from '@bodiless/fclasses';
 import { asBodilessLink, withPlaceholder } from '@bodiless/components';
 import { withChild, withNodeKey } from '@bodiless/core';
 
-const asBold = flowHoc(
-  replaceWith(Strong),
+const asBold = as(
+  startWith(Strong),
   addClasses('font-bold'),
 );
 
-const asItalic = flowHoc(
-  replaceWith(Em),
+const asItalic = as(
+  startWith(Em),
 );
 
 const asUnderline = addClasses('underline');
 
-const asLink = flowHoc(
-  replaceWith(A),
+const asLink = as(
+  startWith(A),
   asBodilessLink(),
   addClasses('text-blue-700 underline')
 );
@@ -403,11 +399,11 @@ const simpleDesign = {
   Link: asLink,
 };
 
-const withSimpleEditor = (nodeKey?: string, placeholder?: string) => flowHoc(
+const withSimpleEditor = (nodeKey?: string, placeholder?: string) => as(
   addClasses('overflow-hidden'),
   withChild(RichText, 'Editor'),
   withDesign({
-    Editor: flowHoc(
+    Editor: as(
       withDesign(simpleDesign),
       withPlaceholder(placeholder),
       withNodeKey(nodeKey),
@@ -445,19 +441,19 @@ text-formatting options. Normally, these would be defined by the styleguide of a
 very simple ones:
 
 ```tsx
-const asBold = flowHoc(
-  replaceWith(Strong),
+const asBold = as(
+  startWith(Strong),
   addClasses('font-bold'),
 );
 
-const asItalic = flowHoc(
-  replaceWith(Em),
+const asItalic = as(
+  startWith(Em),
 );
 
 const asUnderline = addClasses('underline');
 
-const asLink = flowHoc(
-  replaceWith(A),
+const asLink = as(
+  startWith(A),
   asBodilessLink(),
   addClasses('text-blue-700 underline'),
 );
@@ -480,11 +476,11 @@ Finally, we created a HOC which would add a simple rich text editor as a child t
 which it was applied (just as `asEditable()` added an editor for unformatted text):
 
 ```tsx
-const withSimpleEditor = (nodeKey?: string, placeholder?: string) => flowHoc(
+const withSimpleEditor = (nodeKey?: string, placeholder?: string) => as(
   addClasses('overflow-hidden'),
   withChild(RichText, 'Editor'),
   withDesign({
-    Editor: flowHoc(
+    Editor: as(
       withDesign(simpleDesign),
       withPlaceholder(placeholder),
       withNodeKey(nodeKey),
@@ -510,12 +506,12 @@ import React, { FC, HTMLProps } from 'react';
 import { asBodilessImage } from '@bodiless/components-ui';
 import { withNode } from '@bodiless/core';
 import {
-  Img, Section, Div, addClasses, stylable, flowHoc,
+  Img, Section, Div, addClasses, as, stylable,
 } from '@bodiless/fclasses';
 import withSimpleEditor from './withSimpleEditor';
 
 const Wrapper = Section;
-const Image = flowHoc(addClasses('w-full'), asBodilessImage('image'))(Img);
+const Image = as(addClasses('w-full'), asBodilessImage('image'))(Img);
 const Body = withSimpleEditor('caption', 'Caption')(Div);
 
 const CaptionedImageBase: FC<HTMLProps<HTMLElement>> = props => (
@@ -525,7 +521,7 @@ const CaptionedImageBase: FC<HTMLProps<HTMLElement>> = props => (
   </Wrapper>
 );
 
-const CaptionedImage = flowHoc(
+const CaptionedImage = as(
   stylable,
   withNode,
 )(CaptionedImageBase);
@@ -544,7 +540,7 @@ Next create a `Gallery.tsx` file as follows:
 ```tsx
 import React, { FC, HTMLProps } from 'react';
 import {
-  H2, Section, Div, addClasses, stylable, flowHoc,
+  H2, Section, Div, addClasses, as, stylable,
 } from '@bodiless/fclasses';
 import { withNode } from '@bodiless/core';
 import CaptionedImage from './CaptionedImage';
@@ -564,7 +560,7 @@ const GalleryBase: FC<HTMLProps<HTMLDivElement>> = ({ children, ...rest }) => (
   </Wrapper>
 );
 
-const Gallery = flowHoc(
+const Gallery = as(
   stylable,
   withNode,
 )(GalleryBase);
@@ -637,10 +633,10 @@ can be found in our [Design System documentation](../../Design/DesignSystem).
 Now we'll use these tokens to define the components which will be available for placement in our
 gallery:
 
-01. Add `replaceWith` to your imports from `@bodiless/fclasses`:
+01. Add `flowHoc` and `replaceWith` to your imports from `@bodiless/fclasses`:
     ```tsx
     import {
-      H2, Section, Div, addClasses, stylable, flowHoc, replaceWith,
+      H2, Section, Div, addClasses, as, stylable, flowHoc, replaceWith,
     } from '@bodiless/fclasses';
     ```
 01. After your styled variations (`withBlueBorder`, etc.), add your component definitions:
@@ -684,10 +680,11 @@ which makes our three tiles available for placement by a Content Editor:
 01. In `Gallery.tsx`, add `withDesign` and `FlowContainer` to your imports:
     ```tsx
     import {
-      H2, Section, Div, addClasses, stylable, flowHoc, replaceWith, withDesign,
+      H2, Section, Div, addClasses, as, stylable, flowHoc, replaceWith, withDesign,
     } from '@bodiless/fclasses';
     import { FlowContainer } from '@bodiless/layouts-ui';
     ```
+    (And you can remove `Div`, as we'll no longer be using it.)
 01. Replace the definition of `Body` with the following:
     ```tsx
     const Body = withDesign(design)(FlowContainer);
