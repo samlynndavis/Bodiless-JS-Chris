@@ -24,13 +24,9 @@ const Default = asFluidToken({
   },
 });
 
-export default {
-  /* TODO:  works as is but if uncomment line 34 it gives error:
-   src/shadow/@bodiless/vital-navigation/MenuTitle.ts(28,1): error TS2742:
-    The inferred type of 'default' cannot be named without a reference to
-  '../vital-navigation/node_modules/@bodiless/navigation/lib'.
-  This is likely not portable. A type annotation is necessary.
-  */
-  // ...vitalMenuTitleBase,
+const vitalMenuTitle: typeof vitalMenuTitleBase = {
+  ...vitalMenuTitleBase,
   Default,
 };
+
+export default vitalMenuTitle;

@@ -20,7 +20,7 @@ const Footer = asSubMenuToken({
   ...vitalSubMenuBase.Footer,
   Compose: {
     ...vitalSubMenuBase.Footer.Compose,
-    _: addProps({ 'data-shadowed-by': '__vital__:FooterSubMenu' }),
+    _: addProps({ 'data-shadowed-by-2': '__vital__:FooterSubMenu' }),
   },
 });
 

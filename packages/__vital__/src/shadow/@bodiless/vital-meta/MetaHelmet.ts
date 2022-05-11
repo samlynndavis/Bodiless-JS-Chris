@@ -16,11 +16,11 @@ import { withMeta } from '@bodiless/components';
 import { asElementToken } from '@bodiless/vital-elements';
 import {
   vitalMetaHelmetBase,
-  WithHtml,
-  WithHomePageSchemas,
-  WithPageDescription,
-  WithPageTitle,
-  WithSeoForm,
+  // WithHtml,
+  // WithHomePageSchemas,
+  // WithPageDescription,
+  // WithPageTitle,
+  // WithSeoForm,
   WithShareForm,
   WithShareDescription,
   WithShareImage,
@@ -50,24 +50,24 @@ const WithMetaKeywords = asSimpleToken(withMeta({
 /*
  * SHADOWTODO I think there order problem as this didn't work.
  * Recomposing the whole thing worked.
+*/
 const SEO = asElementToken({
   Compose: {
     ...vitalMetaHelmetBase.SEO.Compose,
     WithMetaKeywords,
   },
 });
-*/
 
-const SEO = asElementToken({
-  Compose: {
-    WithHtml,
-    WithHomePageSchemas,
-    WithMetaKeywords, // Added
-    WithPageDescription,
-    WithPageTitle,
-    WithSeoForm,
-  },
-});
+// const SEO = asElementToken({
+//   Compose: {
+//     WithHtml,
+//     WithHomePageSchemas,
+//     WithMetaKeywords, // Added
+//     WithPageDescription,
+//     WithPageTitle,
+//     WithSeoForm,
+//   },
+// });
 
 const WithTwitterDescription = asSimpleToken(withMeta({
   name: 'twitter:description', label: 'Twitter Description',

@@ -18,7 +18,7 @@ import {
 import { useMenuOptionUI } from '@bodiless/core';
 import { asElementToken } from '@bodiless/vital-elements';
 import {
-  flowIf, HOC, Token, as
+  flowIf, HOC, Token, as, FlowHoc, flowHoc, TokenDef
 } from '@bodiless/fclasses';
 
 import {
@@ -80,14 +80,21 @@ const WithSeoForm = asElementToken({
   },
 });
 
+const flowWithFinally = (
+  ...finalTokens: Token[]
+): FlowHoc<any> => (...tokens: TokenDef<any, any, any>[]) => flowHoc(
+  ...tokens,
+  as(...finalTokens),
+);
+
 // All SEO tokens packaged
 const SEO = asElementToken({
+  Flow: flowWithFinally(WithSeoForm),
   Compose: {
     WithHtml,
     WithHomePageSchemas,
     WithPageDescription,
     WithPageTitle,
-    WithSeoForm,
   },
 });
 
