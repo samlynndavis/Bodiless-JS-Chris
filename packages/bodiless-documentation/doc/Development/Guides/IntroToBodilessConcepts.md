@@ -165,11 +165,10 @@ export const H1 = stylable<HTMLProps<HTMLHeadElement>>('h1');
 We could have defined our token as—
 
 ```tsx
-// We need to also import `stylable` and `flow` for this example.
-import { addClasses, H1, stylable } from '@bodiless/fclasses';
-import flow from 'lodash/flow';
+// We need to also import `as` and `stylable` for this example.
+import { addClasses, H1, as, stylable } from '@bodiless/fclasses';
 
-const withPrimaryHeaderStyles = flow(stylable, addClasses('text-3xl font-bold'));
+const withPrimaryHeaderStyles = as(stylable, addClasses('text-3xl font-bold'));
 ```
 
 —but, fortunately, you don't have to, since `@bodiless/fclasses` exports a stylable version of every
