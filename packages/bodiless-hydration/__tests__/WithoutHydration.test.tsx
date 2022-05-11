@@ -103,18 +103,6 @@ describe('when using withoutHydration', () => {
         expect($('section').text()).toBe('This component has not been hydrated.');
       });
 
-      it('should hydrate when using forceHydration', () => {
-        const { DryComponent, root } = initializeProductionTest();
-
-        act(() => {
-          ReactDOM.hydrate(<DryComponent forceHydration />, root);
-        });
-
-        const $ = cheerio.load(root.outerHTML);
-
-        expect($('section').text()).toBe('This component has been hydrated.');
-      });
-
       it('should run onUpdate when provided', () => {
         let receivedProps;
         let receivedElement;

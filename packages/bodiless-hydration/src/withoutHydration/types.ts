@@ -19,11 +19,5 @@ type WithoutHydrationOptions = {
   WrapperElement?: 'div'|'span',
 };
 
-export type WithoutHydrationProps = {
-  forceHydration?: boolean
-};
-
-export type HydrationHOC = HOC<{}, WithoutHydrationProps>;
-
 // eslint-disable-next-line max-len
-export type WithoutHydrationFunction = (options?: WithoutHydrationOptions) => HydrationHOC;
+export type WithoutHydrationFunction = (options?: WithoutHydrationOptions) => HOC;

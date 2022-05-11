@@ -13,13 +13,10 @@
  */
 
 import { ComponentOrTag } from '@bodiless/fclasses';
-import React, {
-  useState, useRef, useLayoutEffect, FC
-} from 'react';
-import { createHash } from 'crypto';
+import React, { FC, useRef, useLayoutEffect } from 'react';
+import memoize from 'lodash/memoize';
 import {
   WithoutHydrationFunction,
-  WithoutHydrationProps
 } from './types';
 
 const DEFAULT_WRAPPER = 'div';
@@ -38,6 +35,14 @@ export const isEditClientSide = !!(
   && process.env.NODE_ENV === 'development'
 );
 
+/**
+ * InnerHtml is memoized to allow retrieving it on component remount.
+ */
+const getInnerHTML = memoize(
+  (element: HTMLDivElement&HTMLSpanElement | null) => element?.innerHTML || '',
+  (element) => fullSelector(element)
+);
+
 const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof WrappedComponent !== 'string' && (WrappedComponent.displayName || WrappedComponent.name)) || 'Component';
 
 /**
@@ -45,6 +50,8 @@ const getDisplayName = (WrappedComponent: ComponentOrTag<any>) => (typeof Wrappe
  * Used to create a unique identifier for the element which can be used as a key
  * to stash the rendered, non-hydrated element so it can be restored after a
  * component remounts.
+ *
+ * @todo replace it with useId once upgraded to React 18
  */
 const fullSelector = (element: HTMLElement | null) => {
   let path;
@@ -80,14 +87,9 @@ const fullSelector = (element: HTMLElement | null) => {
   return path;
 };
 
-const useWrapperId = (element: HTMLElement | null) => {
-  const selector = fullSelector(element);
-  return createHash('md5').update(selector || '').digest('hex');
-};
-
-const withoutHydrationServerSide: WithoutHydrationFunction = (
-  { WrapperElement = DEFAULT_WRAPPER } = {}
-) => WrappedComponent => props => (
+const withoutHydrationServerSide: WithoutHydrationFunction = ({
+  WrapperElement = DEFAULT_WRAPPER,
+} = {}) => WrappedComponent => props => (
   <WrapperElement data-no-hydrate style={isEditClientSide ? {} : { display: 'contents' }}>
     <WrappedComponent {...props} />
   </WrapperElement>
@@ -97,62 +99,46 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
   onUpdate = null,
   WrapperElement = DEFAULT_WRAPPER,
 } = {}) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
-  const WithoutHydration: FC<P & WithoutHydrationProps> = (props) => {
-    const { forceHydration = false } = props;
-    const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
-    const [shouldHydrate, setShouldHydrate] = useState<boolean | undefined>(undefined);
-    const id = useWrapperId(rootRef.current);
-    const tempId = `temp-${id}`;
-    const markup = rootRef.current?.innerHTML || document.getElementById(tempId)?.innerHTML || '';
-    document.getElementById(tempId)?.remove();
+  const WithoutHydration: FC<P> = (props) => {
+    const BrowserVersion$ = () => {
+      const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
+      // When a non-hydrated component is re-mounted in the browser (eg due to a parent
+      // component's dom manipulation), it renders the empty inner html.  Here, we grab
+      // the server-rendered html and stash it in a hidden div so we can restore it if/when the
+      // component re-mounts.
+      useLayoutEffect(() => {
+        // Component did mount.
+        if (rootRef.current) {
+          if (onUpdate) {
+            onUpdate(props, rootRef.current);
+          }
+          if (rootRef.current.innerHTML === '') {
+            rootRef.current.innerHTML = getInnerHTML(rootRef.current);
+          }
+        }
+        // Component did unmount.
+        return () => {
+          // Memoize the innerHTML
+          getInnerHTML(rootRef.current);
+        };
+      }, []);
 
-    useLayoutEffect(() => {
-      if (shouldHydrate) return;
-      const wasRenderedServerSide = !!rootRef.current?.getAttribute(
-        'data-no-hydrate'
-      );
-
-      setShouldHydrate(!wasRenderedServerSide || forceHydration);
-    });
-
-    useLayoutEffect(() => {
-      if (shouldHydrate || shouldHydrate === undefined || !onUpdate) return;
-      onUpdate(props, rootRef.current);
-    });
-
-    // When a non-hydrated component is re-mounted in the browser (eg due to a parent
-    // component's dom manipulation), it renders the empty inner html.  Here, we grab
-    // the server-rendered html and stash it in a hidden div so we can restore it if/when the
-    // component re-mounts.
-    useLayoutEffect(() => () => {
-      const tempId = `temp-${useWrapperId(rootRef.current)}`;
-      const tempDiv = document.getElementById(tempId) || document.createElement('div');
-      tempDiv.id = tempId;
-      tempDiv.style.display = 'none';
-      tempDiv.innerHTML = rootRef.current?.innerHTML || '';
-      document.body.append(tempDiv);
-    }, []);
-
-    if (!shouldHydrate) {
       return (
         <WrapperElement
-          data-no-hydrate
-          id={id}
           ref={rootRef}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: markup }}
-          suppressHydrationWarning
           style={{ display: 'contents' }}
+          suppressHydrationWarning
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: '' }}
         />
       );
-    }
-    return (
-      <WrappedComponent {...props} />
-    );
+    };
+    const BrowserVersion = React.memo(BrowserVersion$, () => true);
+
+    return <BrowserVersion />;
   };
 
   WithoutHydration.displayName = `WithoutHydration(${getDisplayName(WrappedComponent)})`;
-
   return WithoutHydration;
 };
 
@@ -194,7 +180,7 @@ export const withoutHydration: WithoutHydrationFunction = (options) => {
   return withoutHydrationServerSide(options);
 };
 
-export const withoutHydrationInline: WithoutHydrationFunction = options => withoutHydration({
-  ...options,
+export default withoutHydration;
+export const withoutHydrationInline = () => withoutHydration({
   WrapperElement: 'span',
 });
