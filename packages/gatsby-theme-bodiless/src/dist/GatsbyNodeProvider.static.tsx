@@ -12,16 +12,13 @@
  * limitations under the License.
  */
 
-import GatsbyMobxStore from './dist/GatsbyMobxStore';
-import GatsbyNodeProvider from './dist/GatsbyNodeProvider.bl-edit';
-import Page from './dist/Page.bl-edit';
+import { BodilessStoreProvider } from '@bodiless/core';
+import GatsbyMobxStore from './GatsbyMobxStore';
 
-export {
-  GatsbyMobxStore,
-  GatsbyNodeProvider,
-  Page,
-};
+class GatsbyNodeProvider extends BodilessStoreProvider {
+  protected createStore() {
+    return new GatsbyMobxStore({ slug: this.slug });
+  }
+}
 
-export type { PageProps } from './dist/types';
-export * from './dist/GatsbyLink';
-export * from './dist/GatsbyImage';
+export default GatsbyNodeProvider;
