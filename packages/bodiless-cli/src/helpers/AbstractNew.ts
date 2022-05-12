@@ -437,7 +437,15 @@ abstract class AbstractNew<O extends AbstractNewOptions> extends Wizard<O> {
     const files = [
       path.join(dest, 'jenkins'),
       path.join(dest, 'cypress'),
-      path.join(dest, 'github'),
+      path.join(dest, 'cypress.json'),
+      path.join(dest, 'playwright'),
+      path.join(dest, 'playwright.config.ts'),
+      path.join(dest, '.github'),
+      path.join(dest, '.vscode'),
+      path.join(dest, 'sonar-project.properties.'),
+      path.join(dest, 'Dockerfile'),
+      path.join(dest, 'UPGRADE.md'),
+      path.join(dest, 'CONTRIBUTING.md'),
       // remove the starter eslintrcs.  They exist only to disable
       // rules which flag the underscores in the __starter__ template.
       path.join(dest, packagesDir, name, 'eslintrc.js'),
