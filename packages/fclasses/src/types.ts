@@ -448,7 +448,7 @@ export type FinalDomains<
    *   be individually reused, extended or overridden by downstream consumers.
    *
    * @param C
-   * The type of the design elements for the target componetn.
+   * The type of the design elements for the target component.
    *
    * @param D
    * An object type describing the domain keys available in this token.
