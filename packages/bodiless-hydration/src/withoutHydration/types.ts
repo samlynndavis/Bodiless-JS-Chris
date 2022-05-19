@@ -13,11 +13,16 @@
  */
 
 import { HOC } from '@bodiless/fclasses';
+import type { CSSProperties } from 'react';
 
-type WithoutHydrationOptions = {
+export type WithoutHydrationOptions = {
   onUpdate?: (props: Record<string, any>, element: HTMLElement | null) => void
-  WrapperElement?: 'div'|'span',
+  WrapperStyle?: CSSProperties
+  WrapperElement: 'div'|'span',
 };
 
 // eslint-disable-next-line max-len
-export type WithoutHydrationFunction = (options?: WithoutHydrationOptions) => HOC;
+export type WithoutHydrationFunction = (options: WithoutHydrationOptions) => HOC;
+
+// eslint-disable-next-line max-len
+export type WithoutHydrationWrapperFunction = (options?: WithoutHydrationOptions) => HOC;

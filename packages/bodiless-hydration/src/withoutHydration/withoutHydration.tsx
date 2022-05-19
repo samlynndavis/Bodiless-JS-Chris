@@ -17,9 +17,14 @@ import React, { FC, useRef, useLayoutEffect } from 'react';
 import memoize from 'lodash/memoize';
 import {
   WithoutHydrationFunction,
+  WithoutHydrationWrapperFunction,
+  WithoutHydrationOptions,
 } from './types';
 
-const DEFAULT_WRAPPER = 'div';
+const DEFAULT_OPTIONS: WithoutHydrationOptions = {
+  WrapperElement: 'div',
+  WrapperStyle: { display: 'contents' },
+};
 
 export const isStaticClientSide = !!(
   typeof window !== 'undefined'
@@ -87,18 +92,25 @@ const fullSelector = (element: HTMLElement | null) => {
   return path;
 };
 
+const withoutHydrationClientSideEdit: WithoutHydrationFunction = (
+) => WrappedComponent => props => (
+  <WrappedComponent {...props} />
+);
+
 const withoutHydrationServerSide: WithoutHydrationFunction = ({
-  WrapperElement = DEFAULT_WRAPPER,
-} = {}) => WrappedComponent => props => (
-  <WrapperElement data-no-hydrate style={isEditClientSide ? {} : { display: 'contents' }}>
+  WrapperElement,
+  WrapperStyle
+}) => WrappedComponent => props => (
+  <WrapperElement data-no-hydrate style={WrapperStyle}>
     <WrappedComponent {...props} />
   </WrapperElement>
 );
 
 const withoutHydrationClientSide: WithoutHydrationFunction = ({
-  onUpdate = null,
-  WrapperElement = DEFAULT_WRAPPER,
-} = {}) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
+  onUpdate,
+  WrapperElement,
+  WrapperStyle,
+}) => <P,>(WrappedComponent: ComponentOrTag<P>) => {
   const WithoutHydration: FC<P> = (props) => {
     const BrowserVersion$ = () => {
       const rootRef = useRef<HTMLDivElement&HTMLSpanElement>(null);
@@ -126,7 +138,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
       return (
         <WrapperElement
           ref={rootRef}
-          style={{ display: 'contents' }}
+          style={WrapperStyle}
           suppressHydrationWarning
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: '' }}
@@ -160,9 +172,13 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
  *
  * The given component will be wrapped in an HTML element that tells React whether to hydrate it
  * or not. By default, the given component will be wrapped in a `div`. You can change the wrapper
- * element by passing the `WrapperElement` option. Possible values are 'div' and 'span'. You can
- * also use `withoutHydrationInline` instead of this function, which defaults to a `span`.
- *
+ * element by passing the `WrapperElement` option. Possible values are 'div' and 'span'.
+ * By default the WrapperElement has the style property display set to `contents` to prevent
+ * interfering with the component style.
+ * Anyway, is some cases the WrapperElement could impact the look of given component even having
+ * display set to `contents`. E.g. if the component has a child with position absolute.
+ * To handle these cases, the property `WrapperStyle` override the default Wrapper style.
+ * You can also use `withoutHydrationInline` instead of this function, which defaults to a `span`.
  * Finally, the given component will also be able to receive a new prop: `forceHydration`. If you
  * set it to `true`, your component will hydrate on both the server and client side, regardless of
  * the current environment.
@@ -174,10 +190,17 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
  * A HOC which places the given component inside a no-hydration wrapper. The components inside
  * this wrapper won't hydrate on the client side in production environments.
  */
-export const withoutHydration: WithoutHydrationFunction = (options) => {
-  if (isStaticClientSide) return withoutHydrationClientSide(options);
+export const withoutHydration: WithoutHydrationWrapperFunction = (options) => {
+  const optionsWithDefault: WithoutHydrationOptions = {
+    ...DEFAULT_OPTIONS,
+    ...options,
+  };
 
-  return withoutHydrationServerSide(options);
+  if (isStaticClientSide) return withoutHydrationClientSide(optionsWithDefault);
+
+  if (isEditClientSide) return withoutHydrationClientSideEdit(optionsWithDefault);
+
+  return withoutHydrationServerSide(optionsWithDefault);
 };
 
 export default withoutHydration;
