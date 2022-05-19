@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/core';
 import { as } from '@bodiless/fclasses';
 import {
   withSingleAllowedTag,
@@ -50,14 +50,12 @@ const Default = asFilterByGroupToken({
     ResetButton: vitalTextDecoration.Underline,
   },
   Schema: {
+    _: withNode,
     Filter: withNodeKey(FilterByGroupNodeKeys.Filter),
-  },
-});
-
-const SiteWide = asFilterByGroupToken({
-  ...Default,
-  Schema: {
-    Filter: withNodeKey({ nodeKey: FilterByGroupNodeKeys.Filter, nodeCollection: 'site' }),
+    ContentWrapper: as(
+      withNode,
+      withNodeKey(FilterByGroupNodeKeys.Content),
+    ),
   },
 });
 
@@ -75,7 +73,6 @@ const WithSingleAllowedTag = asFilterByGroupToken({
 
 export default {
   Default,
-  SiteWide,
   WithMultipleAllowedTags,
   WithSingleAllowedTag,
 };

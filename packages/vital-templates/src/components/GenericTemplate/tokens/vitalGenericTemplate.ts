@@ -19,6 +19,7 @@ import {
   addProps,
   flowIf,
   replaceWith,
+  flowHoc,
 } from '@bodiless/fclasses';
 import { vitalImage } from '@bodiless/vital-image';
 import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
@@ -80,8 +81,18 @@ const ContentListing = asGenericTemplateToken({
   ...Default,
   Components: {
     ...Default.Components,
-    Content: on(ContentListingClean)(vitalContentListing.SiteWide),
+    Content: on(ContentListingClean)(vitalContentListing.Default),
   },
+  Schema: {
+    ...Default.Schema,
+    // We put the content-listing into the site collection so that the template
+    // can be reused with the same data (to provide different default filters).
+    Content: flowHoc(
+      // withNodeKey(GenericTemplateNodeKeys.Content),
+      // withNode,
+      withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
+    ),
+  }
 });
 
 export default {

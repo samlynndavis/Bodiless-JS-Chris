@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNodeKey, withNode } from '@bodiless/core';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import {
   H2, as, flowHoc, replaceWith,
@@ -25,18 +25,16 @@ const Subtitle = as(vitalTypography.H2, 'pt-8')(H2);
 
 const Default = as(
   vitalContentListing.Default,
+  withNodeKey({ nodeKey: 'styleguide-content-listing', nodeCollection: 'site' }),
   withNode,
-  withNodeKey('default'),
+  withNodeKey({ nodeKey: 'default-filters-1' }),
 )(ContentListingClean);
 
 const WithMultipleAllowedTags = as(
   vitalContentListing.Default,
   vitalContentListing.WithMultipleAllowedTags,
-  withNode,
   withNodeKey('multiple'),
 )(ContentListingClean);
-
-const SiteWide = as(vitalContentListing.SiteWide)(ContentListingClean);
 
 const Examples = () => (
   <>
@@ -45,7 +43,6 @@ const Examples = () => (
     <Subtitle>Filter With Multiple Allowed Tags:</Subtitle>
     <WithMultipleAllowedTags />
     <Subtitle>Preset Filter (SiteWide):</Subtitle>
-    <SiteWide />
   </>
 );
 

@@ -17,7 +17,6 @@ import { Img, on } from '@bodiless/fclasses';
 import { asFilterableByGroup } from '@bodiless/filtering';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalImage } from '@bodiless/vital-image';
-import { ContentListingFlowContainerNodeKeys } from './constants';
 
 const Default = asFluidToken({
   Core: {
@@ -39,19 +38,8 @@ const Default = asFluidToken({
     ComponentWrapper: 'p-3 w-full lg:w-1/3',
     Wrapper: '-m-3',
   },
-  Schema: {
-    _: withNodeKey(ContentListingFlowContainerNodeKeys.ContentListing),
-  },
-});
-
-const SiteWide = asFluidToken({
-  ...Default,
-  Schema: {
-    _: withNodeKey({ nodeKey: ContentListingFlowContainerNodeKeys.ContentListing, nodeCollection: 'site' }),
-  },
 });
 
 export default {
   Default,
-  SiteWide,
 };

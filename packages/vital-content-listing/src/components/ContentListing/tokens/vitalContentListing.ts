@@ -12,21 +12,28 @@
  * limitations under the License.
  */
 
+import { withNode } from '@bodiless/core';
+import { withFilterSelection } from '@bodiless/filtering';
 import { vitalContentListingFlowContainer } from '../../ContentListingFlowContainer';
 import { vitalFilterByGroup } from '../../FilterByGroup';
 import { asContentListingToken } from '../ContentListingClean';
 
+const WithFilterSelector = asContentListingToken({
+  Core: {
+    Wrapper: withFilterSelection({ nodeKey: 'filter-selector', nodeCollection: '_default' }),
+  },
+});
+
 const Default = asContentListingToken({
+  Core: {
+    _: withNode,
+  },
   Components: {
     Wrapper: vitalFilterByGroup.Default,
     Content: vitalContentListingFlowContainer.Default,
   },
-});
-
-const SiteWide = asContentListingToken({
-  Components: {
-    Wrapper: vitalFilterByGroup.SiteWide,
-    Content: vitalContentListingFlowContainer.SiteWide,
+  Compose: {
+    WithFilterSelector,
   },
 });
 
@@ -44,7 +51,6 @@ const WithSingleAllowedTag = asContentListingToken({
 
 export default {
   Default,
-  SiteWide,
   WithMultipleAllowedTags,
   WithSingleAllowedTag,
 };

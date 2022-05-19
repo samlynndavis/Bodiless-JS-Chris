@@ -282,17 +282,36 @@ const withFilterDefaultSelection = <P extends object>(Component: ComponentOrTag<
 };
 
 /**
- * HOC adds default filter form and data to filter list. Selected filter data has
- * default nodeKey as 'default-filters'.
+ * Creates an HOC which allows a content editor to specify a set of default
+ * filter selections which will be applied whenever a filterable content
+ * listing is displayed.
  *
- * @param nodeKey Default filter nodeKey for page level storage.
- * @param defaultData default data for default filter selection.
- * @return
- * A composed token.
+ * This adds a button to the local context menu which, when clicked, saves
+ * the current state of the filter selection as the default.
+ *
+ * For example, imagine your filters consisted a single "Color" category
+ * with "Red", "Blue" and "Green" terms. A content editor could select
+ * "Blue", and use the button to save this choice as the default
+ * filter selection for this page. Whenever a site visitor viewed the
+ * page in the browser, this filter would be pre-selected.
+ *
+ * If the filtered items themselves were stored at site level, then multiple
+ * such pages could be created, each with a different set of defautl filters,
+ * and these could be used as the basis for category landing pages.
+ *
+ * @param nodeKey
+ * The node key defining where the default filter selection will be stored.
+ * Should usually be a page-level node.
+ *
+ * @param defaultData
+ * Initial defaults for the default filter selections.
+ * 
+ * @returns
+ * HOC which adds the functionality
  */
 const withFilterSelection = (
-  nodeKey = 'default-filters',
-  defaultData = { tags: [] },
+  nodeKey: Parameters<typeof withNodeKey>[0] = 'content-listing',
+  defaultData: Parameters<typeof withNodeDataHandlers>[0] = { tags: [] },
 ) => flowHoc(
   withoutProps(['componentData', 'setComponentData']),
   withSidecarNodes(
