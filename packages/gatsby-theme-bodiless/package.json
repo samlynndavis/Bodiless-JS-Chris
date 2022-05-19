@@ -41,9 +41,9 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-p copy build:lib",
-    "build:lib": "tsc -p ./tsconfig.json",
-    "build:watch": "npm run build:lib -- --watch",
+    "build": "npm run copy && npm run build:lib && npm run build:api-doc",
+    "build:lib": "tsc -p ./tsconfig.json && tsc -p ./src/tsconfig.json",
+    "build:watch": "run-p tsc -p ./tsconfig.json --watch && tsc -p ./src/tsconfig.json --watch",
     "build:api-doc": "typedoc --options ../../typedoc.js --out doc/api --tsconfig src/tsconfig.json ./src",
     "clean": "rimraf -rf \"dist\" && rimraf -rf \"cjs\" && rimraf index* && rimraf \"doc/api\"",
     "copy": "copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \".\" && copyfiles -u 1 \"./src/dist/**/*.{json,jpg,png}\" \"./cjs\""
