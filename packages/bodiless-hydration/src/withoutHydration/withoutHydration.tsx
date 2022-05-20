@@ -137,6 +137,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
 
       return (
         <WrapperElement
+          data-no-hydrate
           ref={rootRef}
           style={WrapperStyle}
           suppressHydrationWarning
