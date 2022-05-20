@@ -54,13 +54,6 @@ const Default = asFilterByGroupToken({
   },
 });
 
-const SiteWide = asFilterByGroupToken({
-  ...Default,
-  Schema: {
-    Filter: withNodeKey({ nodeKey: FilterByGroupNodeKeys.Filter, nodeCollection: 'site' }),
-  },
-});
-
 const WithMultipleAllowedTags = asFilterByGroupToken({
   Core: {
     _: withMultipleAllowedTags,
@@ -75,7 +68,6 @@ const WithSingleAllowedTag = asFilterByGroupToken({
 
 export default {
   Default,
-  SiteWide,
   WithMultipleAllowedTags,
   WithSingleAllowedTag,
 };

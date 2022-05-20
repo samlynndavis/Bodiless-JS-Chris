@@ -44,14 +44,6 @@ const Default = asFluidToken({
   },
 });
 
-const SiteWide = asFluidToken({
-  ...Default,
-  Schema: {
-    _: withNodeKey({ nodeKey: ContentListingFlowContainerNodeKeys.ContentListing, nodeCollection: 'site' }),
-  },
-});
-
 export default {
   Default,
-  SiteWide,
 };

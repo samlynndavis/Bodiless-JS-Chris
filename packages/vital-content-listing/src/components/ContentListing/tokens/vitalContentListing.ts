@@ -23,13 +23,6 @@ const Default = asContentListingToken({
   },
 });
 
-const SiteWide = asContentListingToken({
-  Components: {
-    Wrapper: vitalFilterByGroup.SiteWide,
-    Content: vitalContentListingFlowContainer.SiteWide,
-  },
-});
-
 const WithMultipleAllowedTags = asContentListingToken({
   Core: {
     Wrapper: vitalFilterByGroup.WithMultipleAllowedTags,
@@ -44,7 +37,6 @@ const WithSingleAllowedTag = asContentListingToken({
 
 export default {
   Default,
-  SiteWide,
   WithMultipleAllowedTags,
   WithSingleAllowedTag,
 };

@@ -97,8 +97,15 @@ const ContentListing = asGenericTemplateToken({
   ...Default,
   Components: {
     ...Default.Components,
-    Content: on(ContentListingClean)(vitalContentListing.SiteWide),
+    Content: on(ContentListingClean)(vitalContentListing.Default),
   },
+  Schema: {
+    ...Default.Schema,
+    Content: as(
+      withNode,
+      withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
+    ),
+  }
 });
 
 export default {

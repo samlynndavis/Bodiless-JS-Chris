@@ -36,16 +36,12 @@ const WithMultipleAllowedTags = as(
   withNodeKey('multiple'),
 )(ContentListingClean);
 
-const SiteWide = as(vitalContentListing.SiteWide)(ContentListingClean);
-
 const Examples = () => (
   <>
     <Subtitle>Default Filter:</Subtitle>
     <Default />
     <Subtitle>Filter With Multiple Allowed Tags:</Subtitle>
     <WithMultipleAllowedTags />
-    <Subtitle>Preset Filter (SiteWide):</Subtitle>
-    <SiteWide />
   </>
 );
 
