@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey } from '@bodiless/core';
 import { as } from '@bodiless/fclasses';
 import {
   withSingleAllowedTag,

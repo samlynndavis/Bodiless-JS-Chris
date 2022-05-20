@@ -101,10 +101,7 @@ const ContentListing = asGenericTemplateToken({
   },
   Schema: {
     ...Default.Schema,
-    Content: as(
-      withNode,
-      withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
-    ),
+    Content: withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
   }
 });
 

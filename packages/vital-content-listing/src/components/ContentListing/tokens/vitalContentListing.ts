@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import { withNode, withNodeKey } from '@bodiless/core';
 import { vitalContentListingFlowContainer } from '../../ContentListingFlowContainer';
 import { vitalFilterByGroup } from '../../FilterByGroup';
 import { asContentListingToken } from '../ContentListingClean';
@@ -20,6 +21,10 @@ const Default = asContentListingToken({
   Components: {
     Wrapper: vitalFilterByGroup.Default,
     Content: vitalContentListingFlowContainer.Default,
+  },
+  Schema: {
+    _: withNode,
+    Content: withNodeKey('content'),
   },
 });
 
