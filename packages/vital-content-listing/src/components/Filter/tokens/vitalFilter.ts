@@ -15,6 +15,7 @@
 import {
   addProps,
   as,
+  withDesign,
 } from '@bodiless/fclasses';
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { asFilterToken, asFilterTagTitleToken, asFilterListToken } from '../FilterClean';
@@ -31,13 +32,18 @@ const WithTagTitleStyles = asFilterTagTitleToken({
 
 const WithTagListStyles = asFilterListToken({
   Content: {
-    Title: addProps({ emptyTitleText: 'Groups' }),
+    Title: addProps({ emptyTitleText: 'Groups', baz: 'bizzle' }),
   },
   Spacing: {
     Wrapper: 'm-2 pl-2',
   },
   Theme: {
     Title: WithTagTitleStyles,
+  },
+  Behavior: {
+    Title: withDesign({
+      FilterGroupItemInput: addProps({ foo: 'bar' }),
+    }),
   },
 });
 

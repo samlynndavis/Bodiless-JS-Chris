@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { withNode, withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/core';
 import { as } from '@bodiless/fclasses';
 import {
   withSingleAllowedTag,
@@ -26,7 +26,7 @@ import { FilterByGroupNodeKeys } from './constants';
 
 const WithFilterSelector = asFilterByGroupToken({
   Core: {
-    Wrapper: withFilterSelection({ nodeKey: 'filter-selector', nodeCollection: '_default' }),
+    Filter: withFilterSelection({ nodeKey: 'filter-selector', nodeCollection: '_default' }),
   },
 });
 
