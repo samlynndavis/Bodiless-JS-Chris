@@ -17,6 +17,18 @@ import { vitalContentListingFlowContainer } from '../../ContentListingFlowContai
 import { vitalFilterByGroup } from '../../FilterByGroup';
 import { asContentListingToken } from '../ContentListingClean';
 
+const WithFilterSelector = asContentListingToken({
+  Core: {
+    Wrapper: vitalFilterByGroup.WithFilterSelector,
+  }
+});
+
+const WithMultipleAllowedTags = asContentListingToken({
+  Core: {
+    Wrapper: vitalFilterByGroup.WithMultipleAllowedTags,
+  },
+});
+
 const Default = asContentListingToken({
   Components: {
     Wrapper: vitalFilterByGroup.Default,
@@ -26,13 +38,12 @@ const Default = asContentListingToken({
     _: withNode,
     Content: withNodeKey('content'),
   },
-});
-
-const WithMultipleAllowedTags = asContentListingToken({
-  Core: {
-    Wrapper: vitalFilterByGroup.WithMultipleAllowedTags,
+  Compose: {
+    WithFilterSelector,
+    // WithMultipleAllowedTags,
   },
 });
+
 
 const WithSingleAllowedTag = asContentListingToken({
   Core: {
@@ -42,6 +53,7 @@ const WithSingleAllowedTag = asContentListingToken({
 
 export default {
   Default,
+  WithFilterSelector,
   WithMultipleAllowedTags,
   WithSingleAllowedTag,
 };

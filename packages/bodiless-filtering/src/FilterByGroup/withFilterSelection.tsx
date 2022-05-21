@@ -36,6 +36,7 @@ import {
   addProps,
   ComponentOrTag,
   flowIf,
+  addPropsIf,
 } from '@bodiless/fclasses';
 import { useFilterByGroupContext } from './FilterByGroupContext';
 import type { NodeTagType, FilterTagType } from './types';
@@ -245,13 +246,16 @@ const useFilterSelectionMenuOptions = () => {
   return filterSelectionMenuOptions;
 };
 
+const useIsDisabled = (props: any) => {
+  const { tags } = useDefaultFiltersData();
+  console.log('props', props);
+  console.log('tags', tags);
+  return tags.length !== 0;
+}
+
 const withTagListDesign = withDesign({
   Title: withDesign({
-    FilterGroupItemInput: ifReadOnly(
-      flowIf(() => useDefaultFiltersData().tags.length !== 0)(
-        addProps({ disabled: true })
-      ),
-    )
+    FilterGroupItemInput: addPropsIf(useIsDisabled)({ disabled: true }),
   }),
 });
 export const asDefaultFilter = withDesign({

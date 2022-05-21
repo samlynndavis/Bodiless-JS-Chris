@@ -17,11 +17,18 @@ import { as } from '@bodiless/fclasses';
 import {
   withSingleAllowedTag,
   withMultipleAllowedTags,
+  withFilterSelection,
 } from '@bodiless/filtering';
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { vitalFilter } from '../../Filter';
 import { asFilterByGroupToken } from '../FilterByGroupClean';
 import { FilterByGroupNodeKeys } from './constants';
+
+const WithFilterSelector = asFilterByGroupToken({
+  Core: {
+    Wrapper: withFilterSelection({ nodeKey: 'filter-selector', nodeCollection: '_default' }),
+  },
+});
 
 const Default = asFilterByGroupToken({
   Components: {
@@ -70,4 +77,5 @@ export default {
   Default,
   WithMultipleAllowedTags,
   WithSingleAllowedTag,
+  WithFilterSelector,
 };
