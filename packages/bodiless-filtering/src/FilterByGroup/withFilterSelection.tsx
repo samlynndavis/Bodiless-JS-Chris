@@ -35,7 +35,6 @@ import {
   withDesign,
   withoutProps,
   ComponentOrTag,
-  addPropsIf,
   addProps,
   flowIf,
 } from '@bodiless/fclasses';
