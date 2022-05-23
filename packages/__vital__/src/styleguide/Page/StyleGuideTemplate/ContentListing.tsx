@@ -16,7 +16,7 @@ import React from 'react';
 import { withNode, withNodeKey } from '@bodiless/core';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import {
-  as, flowHoc, replaceWith, H2,
+  as, flowHoc, replaceWith,
 } from '@bodiless/fclasses';
 import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 

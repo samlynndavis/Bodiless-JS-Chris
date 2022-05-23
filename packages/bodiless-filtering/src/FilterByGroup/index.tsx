@@ -30,6 +30,7 @@ import type {
   TagType,
   FilterTagType,
   FilteredItemType,
+  DefaultFilterData,
 } from './types';
 import withFilterByTags from './withFilterByTags';
 import withFilterSelection from './withFilterSelection';
@@ -56,6 +57,7 @@ export type {
   TagType,
   FilterTagType,
   FilteredItemType,
+  DefaultFilterData,
 };
 
 export * from './CategoryListContext';

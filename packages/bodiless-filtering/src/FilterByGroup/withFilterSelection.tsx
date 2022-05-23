@@ -36,6 +36,8 @@ import {
   withoutProps,
   ComponentOrTag,
   addPropsIf,
+  addProps,
+  flowIf,
 } from '@bodiless/fclasses';
 import { useFilterByGroupContext } from './FilterByGroupContext';
 import type { NodeTagType, DefaultFilterData } from './types';
@@ -234,19 +236,21 @@ const useFilterSelectionMenuOptions = () => {
 
 const useIsDisabled = (props: any) => {
   const { node } = useNode<DefaultFilterData>();
+  console.log('node', node.path, node.data);
   const { tags } = node.data;
   const { isEdit } = useEditContext();
-  return tags?.length !== 0 && !isEdit;
+  console.log('tags', tags);
+  return !!tags?.length && !isEdit;
 };
 
 const withTagListDesign = withDesign({
   Title: withDesign({
-    FilterGroupItemInput: addPropsIf(useIsDisabled)({ disabled: true }),
+    FilterGroupItemInput: addProps({ disabled: true }),
   }),
 });
-export const asDefaultFilter = withDesign({
+export const asDefaultFilter = flowIf(useIsDisabled)(withDesign({
   TagList: withTagListDesign,
-});
+}));
 
 /**
  * HOC applies page default filter to Filter component.
@@ -257,11 +261,11 @@ export const asDefaultFilter = withDesign({
  */
 const withFilterDefaultSelection = <P extends object>(Component: ComponentOrTag<P>) => {
   const WithFilterDefaultSelection = (props: P) => {
-    const { updateSelectedTags, hasTagFromQueryParams } = useFilterByGroupContext();
+    const { updateSelectedTags } = useFilterByGroupContext();
     const { node } = useNode<DefaultFilterData>();
     const { tags = [] } = node.data;
     useEffect(() => {
-      if (!hasTagFromQueryParams()) {
+      if (tags.length > 0) {
         updateSelectedTags(tags);
       }
     }, []);
@@ -316,8 +320,8 @@ const withFilterSelection = (
       withContextActivator('onClick'),
       withLocalContextMenu,
     ),
+    asDefaultFilter,
   ),
-  asDefaultFilter,
 );
 
 export default withFilterSelection;

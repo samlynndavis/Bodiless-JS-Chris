@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import { withNodeKey } from '@bodiless/core';
-import { as } from '@bodiless/fclasses';
+import { useEditContext, useNode, withNodeKey } from '@bodiless/core';
+import { as, flowIf, replaceWith } from '@bodiless/fclasses';
 import {
   withSingleAllowedTag,
   withMultipleAllowedTags,
@@ -24,9 +24,24 @@ import { vitalFilter } from '../../Filter';
 import { asFilterByGroupToken } from '../FilterByGroupClean';
 import { FilterByGroupNodeKeys } from './constants';
 
+/**
+ * Peek into the default filter node
+ */
+const useHasFilterDelection = () => {
+  const { node } = useNode('_default');
+  const { isEdit } = useEditContext();
+  const fsNode = node.child<any>(FilterByGroupNodeKeys.FiterSelector);
+  return fsNode.data.tags?.length && !isEdit;
+};
+
 const WithFilterSelector = asFilterByGroupToken({
   Core: {
-    Filter: withFilterSelection({ nodeKey: 'filter-selector', nodeCollection: '_default' }),
+    // Hide reset button if default filters are set.
+    ResetButton: flowIf(useHasFilterDelection)(replaceWith(() => null)),
+    Filter: withFilterSelection({
+      nodeKey: FilterByGroupNodeKeys.FiterSelector,
+      nodeCollection: '_default',
+    }),
   },
 });
 
