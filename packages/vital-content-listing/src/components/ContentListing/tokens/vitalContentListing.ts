@@ -44,7 +44,6 @@ const Default = asContentListingToken({
   },
 });
 
-
 const WithSingleAllowedTag = asContentListingToken({
   Core: {
     Wrapper: vitalFilterByGroup.WithSingleAllowedTag,

@@ -20,6 +20,7 @@ import { __vital__StyleGuideTemplate } from './StyleGuideTemplate';
 
 const {
   ContentListing,
+  ContentListingMultiple,
   Editors,
   EditorsMonoFont,
   Typography,
@@ -40,6 +41,7 @@ const Default = asFluidToken({
   Components: {
     _default,
     ContentListing,
+    ContentListingMultiple,
     Editors,
     EditorsMonoFont,
     Typography,
