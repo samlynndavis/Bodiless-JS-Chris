@@ -19,9 +19,6 @@ import {
   as, flowHoc, replaceWith, H2,
 } from '@bodiless/fclasses';
 import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
-import { vitalTypography } from '@bodiless/vital-elements';
-
-const Subtitle = as(vitalTypography.H2, 'pt-8')(H2);
 
 const Default = as(
   vitalContentListing.Default,
@@ -41,8 +38,7 @@ const Multiple = as(
 export const ContentListing = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('ContentListing'),
   Content: {
-    Title: replaceWith(() => <>Content Listing (Default)</>),
-    Examples: replaceWith(Default),
+    Examples: replaceWith(() => <Default />),
   },
 });
 
@@ -50,6 +46,6 @@ export const ContentListingMultiple = asStyleGuideTemplateToken(vitalStyleGuideT
   Meta: flowHoc.meta.term('Token')('ContentListingMultiple'),
   Content: {
     Title: replaceWith(() => <>Content Listing (Multiple)</>),
-    Examples: replaceWith(Multiple),
+    Examples: replaceWith(() => <Multiple />),
   },
 });
