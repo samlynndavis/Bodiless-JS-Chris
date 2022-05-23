@@ -236,10 +236,8 @@ const useFilterSelectionMenuOptions = () => {
 
 const useIsDisabled = (props: any) => {
   const { node } = useNode<DefaultFilterData>();
-  console.log('node', node.path, node.data);
   const { tags } = node.data;
   const { isEdit } = useEditContext();
-  console.log('tags', tags);
   return !!tags?.length && !isEdit;
 };
 
