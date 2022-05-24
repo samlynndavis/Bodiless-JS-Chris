@@ -15,5 +15,5 @@
 export enum FilterByGroupNodeKeys {
   Filter = 'filter',
   Content = 'content',
-  FiterSelector = 'filter-selector',
+  FilterSelector = 'filter-selector',
 }

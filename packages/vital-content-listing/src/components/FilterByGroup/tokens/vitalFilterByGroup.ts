@@ -18,6 +18,7 @@ import {
   withSingleAllowedTag,
   withMultipleAllowedTags,
   withFilterSelection,
+  DefaultFilterData,
 } from '@bodiless/filtering';
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 import { vitalFilter } from '../../Filter';
@@ -30,8 +31,8 @@ import { FilterByGroupNodeKeys } from './constants';
 const useHasFilterDelection = () => {
   const { node } = useNode('_default');
   const { isEdit } = useEditContext();
-  const fsNode = node.child<any>(FilterByGroupNodeKeys.FiterSelector);
-  return fsNode.data.tags?.length && !isEdit;
+  const fsNode = node.child<DefaultFilterData>(FilterByGroupNodeKeys.FilterSelector);
+  return !!fsNode.data.tags?.length && !isEdit;
 };
 
 const WithFilterSelector = asFilterByGroupToken({
@@ -39,7 +40,7 @@ const WithFilterSelector = asFilterByGroupToken({
     // Hide reset button if default filters are set.
     ResetButton: flowIf(useHasFilterDelection)(replaceWith(() => null)),
     Filter: withFilterSelection({
-      nodeKey: FilterByGroupNodeKeys.FiterSelector,
+      nodeKey: FilterByGroupNodeKeys.FilterSelector,
       nodeCollection: '_default',
     }),
   },
