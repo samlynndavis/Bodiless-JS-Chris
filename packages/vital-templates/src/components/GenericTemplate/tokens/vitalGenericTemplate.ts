@@ -12,10 +12,15 @@
  * limitations under the License.
  */
 
+import { Fragment } from 'react';
 import {
   on,
   as,
+<<<<<<< HEAD
   flowIf,
+=======
+  addProps,
+>>>>>>> upstream/main
   replaceWith,
   withDesign,
   Img,
@@ -26,6 +31,7 @@ import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 import { useNode, withNode, withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
+import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
@@ -76,6 +82,7 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint,
       'my-2.5',
     ),
+    TopWrapper: vitalSpacing.GutterBottom,
     // @todo move styling of breadcrumb to breadcrumb component when it exists.
     Breadcrumb: vitalTypography.Rest,
     ContentWrapper: as(
@@ -108,8 +115,18 @@ const ContentListing = asGenericTemplateToken({
   }
 });
 
+const Search = asGenericTemplateToken(Default, {
+  Components: {
+    Breadcrumb: addProps({ children: 'Search', }),
+    TopContent: replaceWith(Fragment),
+    Content: on(SearchLayoutClean)(vitalSearchLayout.Default),
+    BottomContent: replaceWith(Fragment),
+  }
+});
+
 export default {
   Default,
   ContentListing,
   WithNoBreadcrumbOnHomePage,
+  Search,
 };
