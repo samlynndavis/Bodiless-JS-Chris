@@ -16,11 +16,8 @@ import { Fragment } from 'react';
 import {
   on,
   as,
-<<<<<<< HEAD
   flowIf,
-=======
   addProps,
->>>>>>> upstream/main
   replaceWith,
   withDesign,
   Img,
