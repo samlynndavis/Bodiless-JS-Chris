@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC, useRef } from 'react';
+import React, { FC } from 'react';
 import differenceWith from 'lodash/differenceWith';
 import isEmpty from 'lodash/isEmpty';
 import omit from 'lodash/omit';
@@ -92,7 +92,7 @@ const ifTagsNotSelected = flowIf(negate(useToggleByTags));
  * access to the node containing the item's tags, and within the FilterByGroup context.
  */
 const withFilterByTags: Enhancer<WithFilterByTagsProps> = Component => {
-  const WithFilterByTags: FC<any> = (props: WithFilterByTagsProps & { style?:  any }) => {
+  const WithFilterByTags: FC<any> = (props: WithFilterByTagsProps & { style?: any }) => {
     const { node } = useNode();
     const [id] = node.path.slice(-2);
     const isDisplayed = useToggleByTags(props);
