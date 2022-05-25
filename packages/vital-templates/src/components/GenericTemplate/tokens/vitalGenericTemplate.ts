@@ -15,7 +15,6 @@
 import {
   on,
   as,
-  addProps,
   flowIf,
   replaceWith,
   withDesign,
@@ -27,6 +26,7 @@ import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 import { useNode, withNode, withNodeKey } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
+import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
 import { CardClean, vitalCard } from '@bodiless/vital-card';
@@ -53,8 +53,7 @@ const WithNoBreadcrumbOnHomePage = asGenericTemplateToken({
 const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: on(LayoutClean)(vitalLayout.Default),
-    // @todo breadcrumb placeholder
-    Breadcrumb: addProps({ children: 'Breadcrumb Placeholder', }),
+    Breadcrumb: as(vitalBreadcrumbs.Default),
     TopContent: as(
       asBodilessChameleon('component', heroDefaultData, heroUseOverrides),
       withDesign({
