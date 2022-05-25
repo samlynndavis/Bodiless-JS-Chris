@@ -23,6 +23,7 @@ import { Footer } from './Footer';
 import { Card } from './Card';
 import { Table } from './Table';
 import { List } from './List';
+import { Buttons } from './Buttons';
 import { _default } from './_default';
 import { Video } from './Video';
 
@@ -42,4 +43,5 @@ export const __vital__StyleGuideTemplate = {
   Card,
   Table,
   List,
+  Buttons,
 };
