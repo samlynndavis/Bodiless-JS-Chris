@@ -32,7 +32,7 @@ import { recursiveRename } from './recursiveRename';
 import { rootPackageJson } from './package-json';
 
 const replaceInFile = require('replace-in-file');
-const findGitRoot = require('find-it-root');
+const findGitRoot = require('find-git-root');
 const ora = require('ora');
 
 const NO_TEMPLATE = '*** NONE';

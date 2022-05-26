@@ -12,8 +12,15 @@ Upon completion of this tutorial, you will end up with code similar to that foun
 ## 0. Prerequisite: Create a Site
 
 To begin, follow the directions to [create a new
-site](../../About/GettingStarted#creating-a-new-site). All the pages created in this tutorial will
-be in this new site.
+site](../../About/GettingStarted#creating-a-new-site).  Choose the `__minimal__` starter
+template.  All the pages created in this tutorial will be in this new site.
+
+> Note: The site created by the `@bodiless/cli new` command is structured as a *monorepo*.
+> The Gatsby site itself is located at `/sites/{site-name}`, where `site-name` is the name
+> you chose for your site. In this tutorial, we will only be creating files at site level,
+> and all paths are relative to this site directory.  In later tutorials, you will learn
+> how to take full advantage of the monorepo structure to create one or more packages
+> your site can depend on.
 
 ## 1. Creating a Page
 

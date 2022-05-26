@@ -1,9 +1,8 @@
 # Design Element Concepts
 
-In this guide, we will continue the gallery tutorial to apply some design
-element concepts and implement some best practices. We will also introduce the
-Bodiless Design API. You can
-[read more about it here](../../Design/DesignSystem), but at a high level this
+In this guide, we will continue the gallery tutorial to learn how to use
+Bodiless Design API tooling to build a design system package. You can
+[read more about it here](../../Design/DesignSystem), but at a high level, 
 is a set of tools and patterns for applying a *Design System* to a React site.
 It encourages defining the building blocks of the system (tokens, elements,
 components) at the site level, and then applying them consistently across your
@@ -15,10 +14,9 @@ same design system to multiple sites, extending it as needed.
 * Complete the [Intro to Bodiless Concepts](./IntroToBodilessConcepts) tutorial.
   * Alternatively, if you already have a fair understanding of BodilessJS
     fundamentals and want to fast-forward to this tutorial, copy over the
-    [gallery-final folder & contents](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/examples/test-site/src/data/pages/gallery-final)
+    [gallery folder & contents](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/minimal-demo/src/data/pages/gallery)
     and place in a [new site](../../About/GettingStarted?id=creating-a-new-site) at
-    `src/data/pages/gallery`. Remember to rename the folder from `gallery-final`
-    to `gallery`.
+    `src/data/pages/gallery`.
 * Read through the high level introduction to the
   [Bodiless Design System](../../Design/DesignSystem). Even if you don't
   follow everything, it will give essential insight into the "why" of
@@ -33,62 +31,103 @@ same design system to multiple sites, extending it as needed.
 In this step we are going to move the editor and typography tokens definitions
 from page level to site level.  In general, the types of editors available on a site should be
 standardized to provide a consistent user experience. There is rarely a need for
-custom editors on individual pages.  Similarly, a sites typography should also be
+custom editors on individual pages.  Similarly, a site's typography should also be
 consistent.
+
+It would be possible to create our design system entirely at site level, for example, in
+a /src/components directory.  However, we consider it a best practice to place all
+code (components and tokens) into a design system package.  This has several advantages:
+- it is easy to publish this package so the design system can be used by other sites
+- it is easy to reorganize the internal structure of the package without changing imports
+  in site level files.
+- it is possible to use [Bodiless Token Shadowing]() to override token collections from
+  upstream packages.
+- there are performance penalties due to incomplete tree-shaking if you use typescript and
+  import core bodiless packages directly from your Gatsby site.
+
+To facilitate creating a design system package, most Bodiless sites are created in
+a *monorepo*, and this is what is created by the `@bodiless/cli new` command you
+used to create a new site in the first tutorial.  Your new site should already
+contain a stub design system package at `/packages/{your-site-name}`, and that is
+where we'll be implementing our design system.
+
+> Note: in the examples below, we assume you have created a new site called `mysite`.
 
 ### Move typography tokens.
 
-If it does not exist already, create a `/src/components/Elements` directory
-at the root of your project.  In this, create a `tokens.ts` file, and add
-the following lines there:
+1. Create a file called `mysiteElment.ts` inside your design system package at
+   `/packages/mysite/src/components/Element/tokens`, and put the following lines there:
 
-```ts
-import {
-  addClasses,
-  flowHoc,
-} from '@bodiless/fclasses';
-import type {
-  TokenDef
-} from '@bodiless/fclasses';
-import type {
-  WithNodeKeyProps,
-} from '@bodiless/core';
-import {
-  asBodilessLink,
-} from '@bodiless/components';
+   ```ts
+   import {
+     asTokenSpec as asTokenSpecBase, DesignableComponents, FinalDomains, HOC
+   } from '@bodiless/fclasses';
 
-export const asElementToken = (...attributes: string[]) => (...defs: TokenDef<any>[]) => flowHoc(
-  ...defs,
-  {
-    categories: {
-      Component: ['Element'],
-      Attribute: attributes,
-    },
-  },
-);
+   const Bold = asTokenSpec()('font-bold');
+   const Underline = asTokenSpec()('underline');
+   const Italic = asTokenSpec()('italic');
+   const Link = asTokenSpec()('text-blue-700', Underline);
+   
+   export default {
+     Bold,
+     Underline,
+     Italic,
+     Link,
+   };
+   ```
 
-export const asBold = asElementToken('Font Weight')();
-export const asItalic = asElementToken('Font Style')();
-export const asUnderline = asElementToken('Text Decoration')(
-  addClasses('underline')
-);
-export const withLinkStyles = asElementToken('Text Decoration', 'Text Color')(
-  addClasses('text-blue-700 underline'),
-);
-export const withLinkEditor = (nodeKeys?: WithNodeKeyProps) => asElementToken('Link Editor')(
-  asBodilessLink(nodeKeys),
-);
-```
+1. Now export these from your package by creating the following files:
 
-Remove the corresponding typography tokens (`asBold`, etc) from
-`/src/data/pages/gallery/withSimpleEditor.tsx`, and replace them with
-those we have just created:
+   /packages/mysite/src/components/Element/tokens/index.ts
+   ```ts
+   import mysiteElement from './mysiteElement';
+   
+   export default mysiteElement;
+   ```
+   
+   /packages/mysite/src/components/Element/index.ts
+   ```ts
+   import mysiteElement from './tokens';
+   
+   export { mysiteElement };
+   ```
+   
+   /packages/mysite/src/index.ts
+   ```ts
+   export * from './components/Element';
+   ```
 
-> NOTE: If you're not familiar with the idea of design tokens and how
-> they are implemented in Bodiless, please read the [introduction to
-> the Bodiless Design System](../../../Design/DesignSystem).
+   > Note: There are many ways to organize exports from component packages. Choosing a
+   > standard pattern such as the one described above) will help keep your code organized
+   > and make it easier to maintain. Following this pattern will also allow you to
+   > take advantage of some BodilessJS tools for extending and optimizing your design
+   > system, like [Token Shadowing]() and [Static Replacement]().
 
-The first thing to note in the code above is the use of `flowHoc`. This is a
+1. Add your package as a dependency in `/sites/mysite/package.json`:
+   ```json
+   "dependencies:" {
+     ...,
+     "mysite": "^0.0.0",
+   }
+   ```
+
+1. Run `npm run setup` from the root of your repository to build your package and link it
+   to your site.
+
+1. Finally, remove the corresponding typography tokens (`asBold`, etc) from
+   `/sites/mysite/src/data/pages/gallery/withSimpleEditor.tsx`, and refactor the `simpleDesign`
+   to use the tokens we have just created:
+   
+   ```ts
+   const simpleDesign = {
+     Bold: tutElement.Bold,
+     Italic: tutElement.Italic,
+     Underline: tutElement.Underline,
+     Link: as(tutElement.Link, asBodilessLink()),
+   };
+   ```
+
+The first thing to note in the code above is the use of `asTokenSpec`.
 composition utility provided by the Bodiless
 [FClasses](../../Architecture/FClasses) package. It is similar to the `flow`
 utility from Lodash: it accepts a list of higher order components and returns a
