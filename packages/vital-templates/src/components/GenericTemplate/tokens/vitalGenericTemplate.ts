@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { Fragment } from 'react';
 import {
   on,
   as,
@@ -21,19 +20,19 @@ import {
   replaceWith,
   withDesign,
   Img,
+  Fragment,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
-import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
+import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
-import { useNode, withNode, withNodeKey } from '@bodiless/core';
+import { withNode, withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
 import { CardClean, vitalCard } from '@bodiless/vital-card';
-import { omit } from 'lodash';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
 
@@ -47,19 +46,17 @@ const heroUseOverrides = () => ({
 
 const isHomePage = () => useNode().node.pagePath === '/';
 
-const WithNoBreadcrumbOnHomePage = asGenericTemplateToken({
+const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
   Flow: flowIf(isHomePage),
   Components: {
-    BreadcrumbWrapper: replaceWith(() => null),
+    BreadcrumbWrapper: replaceWith(Fragment),
+    Breadcrumb: replaceWith(Fragment),
   },
 });
 
-const Default = asGenericTemplateToken({
-  Meta: {
-    title: 'Default',
-  },
+const Base = asGenericTemplateToken({
   Components: {
-    PageWrapper: on(LayoutClean)(vitalLayout.Default),
+    PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
     TopContent: as(
       asBodilessChameleon('component', heroDefaultData, heroUseOverrides),
@@ -96,31 +93,38 @@ const Default = asGenericTemplateToken({
     ),
   },
   Compose: {
-    WithNoBreadcrumbOnHomePage,
+    WithNoBreadcrumbsOnHomePage,
   },
 });
 
 const ContentListing = asGenericTemplateToken({
-  ...Default,
+  ...Base,
   Meta: {
     title: 'Content Listing',
   },
   Components: {
-    ...Default.Components,
+    ...Base.Components,
     Content: on(ContentListingClean)(vitalContentListing.Default),
   },
   Schema: {
-    ...Default.Schema,
+    ...Base.Schema,
     Content: as(
       withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
       withNode,
-      Default.Schema.Content,
+      Base.Schema.Content,
     ),
   }
 });
 
+const Default = asGenericTemplateToken({
+  ...Base,
+  Meta: {
+    title: 'Default',
+  },
+});
+
 const Search = asGenericTemplateToken({
-  ...Default,
+  ...Base,
   Meta: {
     title: 'Search',
   },
@@ -134,8 +138,9 @@ const Search = asGenericTemplateToken({
 });
 
 export default {
+  Base,
   Default,
   ContentListing,
-  WithNoBreadcrumbOnHomePage,
+  WithNoBreadcrumbsOnHomePage,
   Search,
 };

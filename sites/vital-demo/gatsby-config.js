@@ -100,6 +100,9 @@ const plugins = [
   // ),
   {
     resolve: '--vital--',
+  },
+  {
+    resolve: '@bodiless/vital-test',
   }
 ];
 
