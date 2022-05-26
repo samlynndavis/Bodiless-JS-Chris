@@ -15,8 +15,6 @@ import { asElementToken } from '@bodiless/vital-elements';
 import { withoutHydration } from '@bodiless/hydration';
 import { withNodeKey } from '@bodiless/core';
 
-// withParent(LinkBase, 'ImageLink'),
-// withSidecarNodes(withNodeKey('link))
 export const vitalImage = new Proxy({}, {
   get: (target, prop) => {
     const nodeKey = prop === 'WithLink' ? 'link' : 'image';

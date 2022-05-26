@@ -26,7 +26,7 @@ const Default = asFluidToken({
     FilterableContentImageVariations: on(Img)(
       vitalImage.WithEditorPlain,
       vitalImage.WithLink,
-      // Base must applied as last token in order to apply wrap everything in withoutHydration.
+      // Base token must applied after the others to wrap everything in withoutHydration.
       vitalImage.Base,
     ),
   },
