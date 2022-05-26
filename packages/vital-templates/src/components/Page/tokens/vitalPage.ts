@@ -32,8 +32,9 @@ const Default = asFluidToken({
     _: as(
       asBodilessChameleon(
         'template',
+        {},
         // Sets 'Default' for new pages creation.
-        { component: 'Default' },
+        // { component: 'Default' },
         () => ({
           root: true,
           label: 'Template',
@@ -60,8 +61,9 @@ const Default = asFluidToken({
     _: as(withGTMDesignKeys as Token),
   },
   Components: {
-    Default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
+    _default: on(GenericTemplateClean)(vitalGenericTemplate.Default),
     ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
+    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
   },
 });
 
