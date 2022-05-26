@@ -12,7 +12,6 @@
  * limitations under the License.
  */
 
-import { withNodeKey } from '@bodiless/core';
 import { Img, on } from '@bodiless/fclasses';
 import { asFilterableByGroup } from '@bodiless/filtering';
 import { asFluidToken } from '@bodiless/vital-elements';
@@ -25,11 +24,10 @@ const Default = asFluidToken({
   Components: {
     // @TODO: Replace with cards once vital-cards has been implemented.
     FilterableContentImageVariations: on(Img)(
-      vitalImage.WithLink,
-      vitalImage.Base,
       vitalImage.WithEditorPlain,
-      // Needs to provide key since WithLink invalidates default one.
-      withNodeKey('image'),
+      vitalImage.WithLink,
+      // Base token must applied after the others to wrap everything in withoutHydration.
+      vitalImage.Base,
     ),
   },
   Layout: {
