@@ -33,9 +33,9 @@ import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
 import { CardClean, vitalCard } from '@bodiless/vital-card';
+import { omit } from 'lodash';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { GenericTemplateNodeKeys } from '../constants';
-import { omit } from 'lodash';
 
 const heroDefaultData = {
   component: 'Image',
