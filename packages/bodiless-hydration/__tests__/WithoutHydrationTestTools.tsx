@@ -1,4 +1,5 @@
 import React, { useState, useEffect, FC } from 'react';
+import { HOC } from '@bodiless/fclasses';
 import { WithoutHydrationWrapperFunction } from '../src/withoutHydration/types';
 
 export const createWithoutHydration = (env = 'development'): WithoutHydrationWrapperFunction => {
@@ -59,4 +60,14 @@ export const RemountingComponent: FC = ({ children }) => {
       My children are gone!
     </aside>
   );
+};
+
+export const RerenderingComponent: HOC = Component => {
+  const withRerenderingComponent: FC<any> = (props: any) => {
+    const isDisplayed = true;
+    return isDisplayed
+      ? <Component {...props} />
+      : <></>;
+  };
+  return withRerenderingComponent;
 };
