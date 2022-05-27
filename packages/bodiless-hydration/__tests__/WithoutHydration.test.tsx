@@ -58,7 +58,6 @@ describe('when using withoutHydration', () => {
       it.each([
         false, 'span', 'div'
       ])('should place the given component inside a %s wrapper element', (element) => {
-
         const withoutHydration = createWithoutHydration('production');
         const options = element ? {
           WrapperElement: element as any
