@@ -52,10 +52,13 @@ describe('when using withoutHydration', () => {
       });
     });
 
+    const withoutHydration = createWithoutHydration('production');
+
     describe('on production', () => {
       it.each([
         false, 'span', 'div'
       ])('should place the given component inside a %s wrapper element', (element) => {
+
         const withoutHydration = createWithoutHydration('production');
         const options = element ? {
           WrapperElement: element as any
@@ -70,6 +73,7 @@ describe('when using withoutHydration', () => {
       it('the wrapper element should have display contents style by default', () => {
         const WrapperStyle = {display: 'contents'};
         const withoutHydration = createWithoutHydration('production');
+
         const DryComponent = withoutHydration()(InteractiveComponent);
         const wrapper = mount(<DryComponent />);
         const component = wrapper.find('div[data-no-hydrate]');
@@ -80,6 +84,7 @@ describe('when using withoutHydration', () => {
       it('the wrapper element should have custom style when provided', () => {
         const WrapperStyle = {margin: 0, padding: 0};
         const withoutHydration = createWithoutHydration('production');
+
         const DryComponent = withoutHydration({
           WrapperStyle
         })(InteractiveComponent);

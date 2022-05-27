@@ -88,6 +88,7 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
 
       const markup = staticElement
         ? getInnerHTML(staticElement as HTMLDivElement&HTMLSpanElement) : '';
+
       // When a non-hydrated component is re-mounted in the browser (eg due to a parent
       // component's dom manipulation), it renders the empty inner html.  Here, we grab
       // the server-rendered html and stash it in a hidden div so we can restore it if/when the

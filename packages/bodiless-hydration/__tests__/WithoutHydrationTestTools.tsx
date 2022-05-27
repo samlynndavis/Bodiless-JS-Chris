@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FC } from 'react';
 import { HOC } from '@bodiless/fclasses';
+
 import { WithoutHydrationWrapperFunction } from '../src/withoutHydration/types';
 
 export const createWithoutHydration = (env = 'development'): WithoutHydrationWrapperFunction => {
