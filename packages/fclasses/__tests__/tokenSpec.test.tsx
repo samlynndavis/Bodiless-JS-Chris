@@ -94,7 +94,7 @@ describe('asTokenSpec', () => {
       },
     });
     expect(test.Core).toBeDefined();
-    // Check that core domain and default domains ar allowed
+    // Check that core domain and default domains are allowed
     const test1 = asTokenSpec()({
       Core: {
         _: 'test',
