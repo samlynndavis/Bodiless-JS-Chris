@@ -19,7 +19,7 @@ import {
   withShowDesignKeys,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
-import { asElementToken, asFluidToken } from '@bodiless/vital-elements';
+import { asFluidToken } from '@bodiless/vital-elements';
 import { withSearchResult, withSearchMenuProvider } from '@bodiless/vital-search';
 import { asBodilessPage } from '../asBodilessPage';
 import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
@@ -27,7 +27,7 @@ import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplat
 // @todo token to GTM package when created
 const withGTMDesignKeys = withShowDesignKeys(true, 'layer-region');
 
-const Default = asFluidToken({
+const Base = asFluidToken({
   Core: {
     _: as(
       asBodilessChameleon(
@@ -67,13 +67,18 @@ const Default = asFluidToken({
   },
 });
 
-const WithSearchContext = asElementToken({
+const Default = asFluidToken({
+  ...Base,
+});
+
+const WithSearchContext = asFluidToken({
   Compose: {
     _: as(withSearchMenuProvider, withSearchResult),
   }
 });
 
 export default {
+  Base,
   Default,
   WithSearchContext,
 };
