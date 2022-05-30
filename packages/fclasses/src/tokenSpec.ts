@@ -240,7 +240,7 @@ const on = (
  * in this parameter.
  *
  * @returns
- * Function which receives a set of partial token speciications and returnsa normalized token
+ * Function which receives a set of partial token speciications and returns a normalized token
  * specification created by merging those partials.  Each parameter may be:
  * - a partial tokens specification object, in which case the keys must belong to the set of
  *   allowed domains.  Keys will be re-ordered to match the canonoical order, and missing keys
