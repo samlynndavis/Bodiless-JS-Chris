@@ -12,19 +12,21 @@
  * limitations under the License.
  */
 
-import { Fragment } from 'react';
 import {
   on,
   as,
+  flowIf,
   addProps,
   replaceWith,
   withDesign,
   Img,
+  Fragment,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
-import { LayoutClean, vitalLayout } from '@bodiless/vital-layout';
+import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { withNode, withNodeKey } from '@bodiless/core';
+import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
+import { withNode, withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
 import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
@@ -42,9 +44,19 @@ const heroUseOverrides = () => ({
   groupLabel: 'Hero'
 });
 
-const Default = asGenericTemplateToken({
+const isHomePage = () => useNode().node.pagePath === '/';
+
+const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
+  Flow: flowIf(isHomePage),
   Components: {
-    PageWrapper: on(LayoutClean)(vitalLayout.Default),
+    BreadcrumbWrapper: replaceWith(Fragment),
+    Breadcrumb: replaceWith(Fragment),
+  },
+});
+
+const Base = asGenericTemplateToken({
+  Components: {
+    PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
     TopContent: as(
       asBodilessChameleon('component', heroDefaultData, heroUseOverrides),
@@ -80,11 +92,45 @@ const Default = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint
     ),
   },
+  Compose: {
+    WithNoBreadcrumbsOnHomePage,
+  },
 });
 
-const Search = asGenericTemplateToken(Default, {
+const ContentListing = asGenericTemplateToken({
+  ...Base,
+  Meta: {
+    title: 'Content Listing',
+  },
   Components: {
-    Breadcrumb: addProps({ children: 'Search', }),
+    ...Base.Components,
+    Content: on(ContentListingClean)(vitalContentListing.Default),
+  },
+  Schema: {
+    ...Base.Schema,
+    Content: as(
+      withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
+      withNode,
+      Base.Schema.Content,
+    ),
+  }
+});
+
+const Default = asGenericTemplateToken({
+  ...Base,
+  Meta: {
+    title: 'Default',
+  },
+});
+
+const Search = asGenericTemplateToken({
+  ...Base,
+  Meta: {
+    title: 'Search',
+  },
+  Components: {
+    ...Default.Components,
+    Breadcrumb: as(Default.Components.Breadcrumb, addProps({ children: 'Search', })),
     TopContent: replaceWith(Fragment),
     Content: on(SearchLayoutClean)(vitalSearchLayout.Default),
     BottomContent: replaceWith(Fragment),
@@ -92,6 +138,9 @@ const Search = asGenericTemplateToken(Default, {
 });
 
 export default {
+  Base,
   Default,
+  ContentListing,
+  WithNoBreadcrumbsOnHomePage,
   Search,
 };
