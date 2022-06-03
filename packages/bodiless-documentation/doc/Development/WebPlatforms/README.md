@@ -4,4 +4,4 @@ For information on setting up and deploying your BodilessJS site using a support
 please see:
 
 - [Netlify](./Netlify)
-- [Platform.sh](./Platform.sh)
+- [Platform.sh](./Platform_sh.md)
