@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* **vital-test, __vital__:** fix Shadowing and move to vital-test ([#1787](https://github.com/johnsonandjohnson/bodiless-js/issues/1787)) ([33be350](https://github.com/johnsonandjohnson/bodiless-js/commit/33be350c21971f0a083efba94e360fbe928a071e))
+
+
+### Features
+
+* **i18n:** Implement i18n ([#1621](https://github.com/johnsonandjohnson/bodiless-js/issues/1621)) ([7680403](https://github.com/johnsonandjohnson/bodiless-js/commit/7680403f3d1df3e1321e665e665e73140126640b))
+* **search:** Add @bodiless/vital-search ([#1628](https://github.com/johnsonandjohnson/bodiless-js/issues/1628)) ([7ce3fb8](https://github.com/johnsonandjohnson/bodiless-js/commit/7ce3fb8e943d50be19e59758a8bc4452a06e61f9))
+* **vital-buttons:** Add Buttons ([#1781](https://github.com/johnsonandjohnson/bodiless-js/issues/1781)) ([e9dc1e5](https://github.com/johnsonandjohnson/bodiless-js/commit/e9dc1e55ed6f9d19dfa7d86375efd2b5ce5ca612))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
 
 

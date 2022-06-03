@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* **fclasses:** Improve mobx warning. ([#1794](https://github.com/johnsonandjohnson/bodiless-js/issues/1794)) ([3d22eef](https://github.com/johnsonandjohnson/bodiless-js/commit/3d22eefdb358a8261495c031e675d491ad644812))
+* **fclasses:** Remove empty design props from DOM ([#1816](https://github.com/johnsonandjohnson/bodiless-js/issues/1816)) ([74157db](https://github.com/johnsonandjohnson/bodiless-js/commit/74157dba070acc97d020b4d5e4d117ee70c82117))
+
+
+### Features
+
+* **fclasses:** Overload asTokenSpec. ([#1817](https://github.com/johnsonandjohnson/bodiless-js/issues/1817)) ([d1ba18b](https://github.com/johnsonandjohnson/bodiless-js/commit/d1ba18b9e56b5df2d788b2efcbe6e53e12a03218))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
 
 

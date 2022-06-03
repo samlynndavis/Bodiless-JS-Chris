@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
+
+
+### Features
+
+* **vital-navigation:** Add Breadcrumbs ([#1778](https://github.com/johnsonandjohnson/bodiless-js/issues/1778)) ([756284e](https://github.com/johnsonandjohnson/bodiless-js/commit/756284e2955c22fa398af293dec61b04021f0834))
+
+
+
+
+
 # [1.0.0-rc.1](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.18...v1.0.0-rc.1) (2022-05-20)
 
 **Note:** Version bump only for package @bodiless/navigation
