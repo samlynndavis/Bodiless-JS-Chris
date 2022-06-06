@@ -51,10 +51,10 @@ instructions as needed.
 01. Switch to the project root on the local machine, e.g. `~/bodiless-minimal`
 01. Using commandline run
     ```
+    npm run setup
     npm run psh:setup-starter
     ```
-01. Make sure that all of the requirements listed are present.  
+01. Make sure that all of the requirements listed are met.  
 ![Prerequisites](./assets/platformsh/SetupPshCliStep1.png)
-01. Provide requried input parameters.
-
-
+01. Provide requried input parameters. The script will return 'Success' response to the console, if all the parameters were provided correctly and integration with Platform.sh and project variables are created.
+01. After integration is created the deploy of the main branch will be triggered automatically.
