@@ -15,7 +15,7 @@
 import React, {
   createContext, useContext, FC, useLayoutEffect,
 } from 'react';
-import { useNode, useEditContext } from '@bodiless/core';
+import { useNode } from '@bodiless/core';
 import type { LinkData } from '@bodiless/components';
 import { observer } from 'mobx-react';
 import type { HOC } from '@bodiless/fclasses';
@@ -69,7 +69,6 @@ const asBreadcrumb = ({
   titleNodeKey,
 }: BreadcrumbSettings): HOC => Component => {
   const AsBreadcrumb = observer((props: any) => {
-    const { isEdit } = useEditContext();
     const current = useBreadcrumbContext();
     const store = useBreadcrumbStore();
     if (store === undefined) return <Component {...props} />;
@@ -95,7 +94,9 @@ const asBreadcrumb = ({
       store,
     });
 
-    if (!isEdit) {
+    const isProduction = process.env.NODE_ENV === 'production';
+
+    if (isProduction) {
       // To avoid flicker, we need to populate the store on render
       // otherwise the breadcrumbs render with no items before
       // a layout effect is executed.
@@ -112,7 +113,7 @@ const asBreadcrumb = ({
     useLayoutEffect(() => () => {
       // Only necessary in edit mode since items are not added or removed
       // under any other circumstances.
-      if (isEdit) {
+      if (!isProduction) {
         store.deleteItem(id);
       }
     }, []);
