@@ -31,6 +31,7 @@ const {
   Card,
   Table,
   List,
+  Accordion,
   Buttons,
   _default
 } = VitalTestStyleGuideTemplate;
@@ -53,6 +54,7 @@ const Default = asFluidToken({
     Card,
     Table,
     List,
+    Accordion,
     Buttons
   },
 });

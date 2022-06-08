@@ -56,8 +56,8 @@ const mergeAccordionsData = (questions: any, answers: any) => {
 };
 
 export const FAQSchemaPropsList: Array<DataStructureSchemaProps> = [
-  { name: 'accordion-question', type: 'node' },
-  { name: 'accordion-answer', type: 'node' },
+  { name: 'faq-question', type: 'node' },
+  { name: 'faq-answer', type: 'node' },
 ];
 
 export const withFAQPageSchema = (
@@ -68,8 +68,8 @@ export const withFAQPageSchema = (
 
     useEffect(() => {
       const {
-        'accordion-question': accordionQuestions,
-        'accordion-answer': accordionAnswers,
+        'faq-question': accordionQuestions,
+        'faq-answer': accordionAnswers,
       } = getSchemaSourceData(schemaSourceKeys);
 
       // Since accordion schema fields are retrieved apart,
