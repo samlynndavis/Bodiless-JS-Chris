@@ -1,0 +1,10 @@
+[
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "A number of layout and functional components are bundled into the Bodiless Package as an extensible design system known as Vital DS, reducing build time."
+      }
+    ]
+  }
+]
