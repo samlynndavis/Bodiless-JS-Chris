@@ -1,4 +1,3 @@
-
 import { asCardToken, vitalCardBase } from '@bodiless/vital-card';
 
 const Hero = asCardToken(vitalCardBase.Hero, {
