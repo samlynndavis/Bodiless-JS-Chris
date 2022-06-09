@@ -40,10 +40,15 @@ const VerticalCard = as(
   withNodeKey('vertical-card'),
 )(CardClean);
 
-const HorizontalCard = as(
+const HorizontalLeftCard = as(
   vitalCard.Default,
-  vitalCard.WithHorizontalOrientation,
-  withNodeKey('horizontal-card'),
+  vitalCard.WithHorizontalLeftOrientation,
+  withNodeKey('horizontal-left-card'),
+)(CardClean);
+const HorizontalRightCard = as(
+  vitalCard.Default,
+  vitalCard.WithHorizontalRightOrientation,
+  withNodeKey('horizontal-right-card'),
 )(CardClean);
 
 const HeroCard = as(
@@ -68,8 +73,12 @@ const CardVariations = (props: any) => (
       <DefaultCard />
       <Subtitle>Vertical Card</Subtitle>
       <VerticalCard />
-      <Subtitle>Horizontal Card</Subtitle>
-      <HorizontalCard />
+    </Div>
+    <Div className="md:w-1/2 mb-8">
+      <Subtitle>Horizontal Card: Left </Subtitle>
+      <HorizontalLeftCard />
+      <Subtitle>Horizontal Card: Right </Subtitle>
+      <HorizontalRightCard />
     </Div>
     <Div className="mb-8">
       <Subtitle>Hero Card</Subtitle>

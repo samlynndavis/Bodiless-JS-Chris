@@ -15,7 +15,12 @@
 import { flowHoc, replaceWith } from '@bodiless/fclasses';
 import { asCardToken } from '../CardClean';
 
-import Base, { WithFlowContainerPreview, WithHorizontalOrientation, WithVerticalOrientation} from './Base';
+import Base, {
+  WithFlowContainerPreview,
+  WithHorizontalLeftOrientation,
+  WithHorizontalRightOrientation,
+  WithVerticalOrientation,
+} from './Base';
 import { Hero, WithPrimaryButton, WithSecondaryButton } from './Hero';
 
 /**
@@ -74,7 +79,8 @@ export default {
   WithNoDescription,
   WithNoTitle,
   WithNoEyebrow,
-  WithHorizontalOrientation,
+  WithHorizontalLeftOrientation,
+  WithHorizontalRightOrientation,
   WithVerticalOrientation,
   WithFlowContainerPreview,
   WithFlexGrowImage,

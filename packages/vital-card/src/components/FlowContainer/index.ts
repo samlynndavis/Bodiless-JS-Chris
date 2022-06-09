@@ -16,6 +16,7 @@ import { asFluidToken } from '@bodiless/vital-elements';
 import {
   as, on, varyDesigns, flowHoc
 } from '@bodiless/fclasses';
+import identity from 'lodash/identity';
 import {
   CardClean, vitalCard, asCardToken,
 } from '../Card';
@@ -25,7 +26,8 @@ const BaseVariation = {
 };
 const OrientationVariations = {
   Vertical: vitalCard.WithVerticalOrientation,
-  Horizontal: vitalCard.WithHorizontalOrientation,
+  HorizontalLeft: vitalCard.WithHorizontalLeftOrientation,
+  HorizontalRight: vitalCard.WithHorizontalRightOrientation,
 };
 const ContentVariations = {
   TitleDescription: asCardToken({
@@ -41,9 +43,7 @@ const HeroVariations = varyDesigns(
     HeroCard: on(CardClean)(vitalCard.Hero, vitalCard.WithFlowContainerPreview),
   },
   {
-    Link: asCardToken({
-      Meta: flowHoc.meta.term('Style')('Text Link'),
-    }),
+    Link: identity,
     PrimaryButton: as(vitalCard.Hero, vitalCard.WithPrimaryButton),
     SecondaryButton: as(vitalCard.Hero, vitalCard.WithSecondaryButton),
   },

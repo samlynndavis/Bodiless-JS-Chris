@@ -21,7 +21,7 @@ import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
 import { vitalTypography } from '@bodiless/vital-elements';
 import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { asCardToken } from '../CardClean';
-import Base, { WithHorizontalOrientation } from './Base';
+import Base, { WithHorizontalLeftOrientation } from './Base';
 
 /**
  * Hero Base Card Design.
@@ -43,7 +43,7 @@ const BaseHero = asCardToken({
   Behavior: {
     Image: vitalImage.WithEager,
   },
-  Layout: WithHorizontalOrientation.Layout,
+  Layout: WithHorizontalLeftOrientation.Layout,
   Spacing: {
     ...Base.Spacing,
     ContentWrapper: 'px-10',

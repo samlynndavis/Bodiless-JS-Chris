@@ -87,11 +87,10 @@ const WithVerticalOrientation = asCardToken({
 });
 
 /**
- * WithHorizontalOrientation splits the card in half with the image on the left
+ * WithHorizontalOrientationBase splits the card in half
  */
-const WithHorizontalOrientation = asCardToken({
+const WithHorizontalOrientationBase = asCardToken({
   Layout: {
-    Wrapper: 'md:flex-row w-full flex flex-col',
     Image: 'w-full',
     ImageWrapper: 'md:w-1/2 flex flex-col',
     ContentWrapper: 'md:w-1/2 flex flex-col',
@@ -102,6 +101,26 @@ const WithHorizontalOrientation = asCardToken({
     ImageWrapper: 'py-0 md:py-0',
   },
   Meta: flowHoc.meta.term('Orientation')('Horizontal'),
+});
+
+/**
+ * WithHorizontalOrientation splits the card in half with the image on the left
+ */
+const WithHorizontalLeftOrientation = asCardToken(WithHorizontalOrientationBase, {
+  Layout: {
+    Wrapper: 'flex-col md:flex-row w-full flex',
+  },
+  Meta: flowHoc.meta.term('Orientation')('Left Image'),
+});
+
+/**
+ * WithHorizontalOrientation splits the card in half with the image on the right
+ */
+const WithHorizontalRightOrientation = asCardToken(WithHorizontalOrientationBase, {
+  Layout: {
+    Wrapper: 'flex-col md:flex-row-reverse w-full flex',
+  },
+  Meta: flowHoc.meta.term('Orientation')('Right Image'),
 });
 
 const WithFlowContainerPreview = asCardToken({
@@ -115,6 +134,7 @@ export default Base;
 
 export {
   WithVerticalOrientation,
-  WithHorizontalOrientation,
+  WithHorizontalLeftOrientation,
+  WithHorizontalRightOrientation,
   WithFlowContainerPreview,
 };
