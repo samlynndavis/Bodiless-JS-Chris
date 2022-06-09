@@ -49,6 +49,7 @@ const Examples = () => (
       <li><a href="./styleguide/list">List</a></li>
       <li><a href="./styleguide/card">Card</a></li>
       <li><a href="./styleguide/table">Table</a></li>
+      <li><a href="./styleguide/accordion">Accordion</a></li>
     </List>
     <Subtitle>Templates</Subtitle>
     <List>
