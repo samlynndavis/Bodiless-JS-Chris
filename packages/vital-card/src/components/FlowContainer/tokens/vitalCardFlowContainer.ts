@@ -14,7 +14,7 @@
 
 import { asFluidToken } from '@bodiless/vital-elements';
 import {
-  as, on, varyDesigns, flowHoc, extendDesign,
+  on, varyDesigns, flowHoc, extendDesign,
 } from '@bodiless/fclasses';
 import {
   CardClean, vitalCard, asCardToken,
