@@ -12,5 +12,30 @@
  * limitations under the License.
  */
 
-export * from './components/Card';
-export { vitalCardFlowContainer, vitalCardFlowContainerBase } from './components/FlowContainer';
+import {
+  flowHoc, replaceWith, extendMeta,
+} from '@bodiless/fclasses';
+import { asCardToken } from '../CardClean';
+import Base from './Base';
+
+/**
+  * TBD: STUB Category Base Card Design.
+  */
+const BaseCategory = asCardToken(Base, {
+  ...Base,
+  Components: {
+    EyebrowWrapper: replaceWith(() => null),
+    DescriptionWrapper: replaceWith(() => null),
+    RatingWrapper: replaceWith(() => null),
+  },
+  Meta: extendMeta(
+    flowHoc.meta.term('Usage')('Category'),
+    flowHoc.meta.term('CTA Type')('Fully Clickable'),
+  ),
+});
+
+const Category = BaseCategory;
+
+export {
+  Category,
+};

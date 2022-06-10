@@ -14,14 +14,16 @@
 
 import omit from 'lodash/omit';
 import {
-  flowHoc, replaceWith, Div, extendMeta, H1, H4, as
+  flowHoc, replaceWith, Div, extendMeta, H1, H4,
 } from '@bodiless/fclasses';
 import { vitalImage } from '@bodiless/vital-image';
-import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
 import { vitalTypography } from '@bodiless/vital-elements';
-import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { asCardToken } from '../CardClean';
-import Base, { WithHorizontalLeftOrientation } from './Base';
+import Base, {
+  WithHorizontalOrientationBase,
+  WithHorizontalLeftOrientation,
+  WithHorizontalContentCentered,
+} from './Base';
 
 /**
  * Hero Base Card Design.
@@ -43,7 +45,7 @@ const BaseHero = asCardToken({
   Behavior: {
     Image: vitalImage.WithEager,
   },
-  Layout: WithHorizontalLeftOrientation.Layout,
+  Layout: WithHorizontalOrientationBase.Layout,
   Spacing: {
     ...Base.Spacing,
     ContentWrapper: 'px-10',
@@ -57,54 +59,20 @@ const BaseHero = asCardToken({
   },
   Meta: extendMeta(
     flowHoc.meta.term('Type')('Card'),
-    flowHoc.meta.term('Description')('Hero'),
-    flowHoc.meta.term('Orientation')('Horizontal'),
+    flowHoc.meta.term('Usage')('Engagement'),
   ),
 });
 
 /*
- * Hero with vitalArrowLink
+ * Compose a Default Hero with Left Image & Content Centered and Primary Text Link
  */
-const Hero = asCardToken(BaseHero, {
-  Components: {
-    CTALink: replaceWith(LinkClean),
-  },
-  Theme: {
-    CTALink: vitalLink.PrimaryLink,
-  },
-  Meta: flowHoc.meta.term('Style')('Link'),
-});
-
-/*
- * With vitalPrimaryButton
- */
-const WithPrimaryButton = asCardToken({
-  Components: {
-    CTAWrapper: replaceWith(Div),
-    CTALink: replaceWith(ButtonClean),
-  },
-  Theme: {
-    CTALink: as(vitalButtons.Primary, vitalButtons.WithArrow),
-  },
-  Meta: flowHoc.meta.term('Style')('Primary Button'),
-});
-
-/*
- * With vitalSecondaryButton
- */
-const WithSecondaryButton = asCardToken({
-  Components: {
-    CTAWrapper: replaceWith(Div),
-    CTALink: replaceWith(ButtonClean),
-  },
-  Theme: {
-    CTALink: as(vitalButtons.Secondary, vitalButtons.WithArrow),
-  },
-  Meta: flowHoc.meta.term('Style')('Secondary Button'),
-});
+const Hero = asCardToken(
+  BaseHero,
+  WithHorizontalContentCentered,
+  WithHorizontalLeftOrientation,
+);
 
 export {
+  BaseHero,
   Hero,
-  WithPrimaryButton,
-  WithSecondaryButton,
 };

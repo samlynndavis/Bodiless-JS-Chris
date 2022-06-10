@@ -12,5 +12,24 @@
  * limitations under the License.
  */
 
-export * from './components/Card';
-export { vitalCardFlowContainer, vitalCardFlowContainerBase } from './components/FlowContainer';
+import {
+  flowHoc, extendMeta,
+} from '@bodiless/fclasses';
+import { asCardToken } from '../CardClean';
+import Base from './Base';
+
+/**
+  * TBD: STUB Product Base Card Design.
+  */
+const BaseProduct = asCardToken(Base, {
+  ...Base,
+  Meta: extendMeta(
+    flowHoc.meta.term('Usage')('Product'),
+  ),
+});
+
+const Product = BaseProduct;
+
+export {
+  Product,
+};

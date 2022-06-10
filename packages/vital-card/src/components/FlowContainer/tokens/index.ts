@@ -12,5 +12,6 @@
  * limitations under the License.
  */
 
-export * from './components/Card';
-export { vitalCardFlowContainer, vitalCardFlowContainerBase } from './components/FlowContainer';
+import vitalCardFlowContainer from './vitalCardFlowContainer';
+
+export default vitalCardFlowContainer;

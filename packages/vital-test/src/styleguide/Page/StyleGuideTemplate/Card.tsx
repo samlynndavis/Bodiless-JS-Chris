@@ -43,12 +43,26 @@ const VerticalCard = as(
 const HorizontalLeftCard = as(
   vitalCard.Default,
   vitalCard.WithHorizontalLeftOrientation,
+  vitalCard.WithHorizontalContentAtTop,
   withNodeKey('horizontal-left-card'),
+)(CardClean);
+const HorizontalLeftImageCenteredContentCard = as(
+  vitalCard.Default,
+  vitalCard.WithHorizontalLeftOrientation,
+  vitalCard.WithHorizontalContentCentered,
+  withNodeKey('horizontal-left-centered-card'),
 )(CardClean);
 const HorizontalRightCard = as(
   vitalCard.Default,
   vitalCard.WithHorizontalRightOrientation,
+  vitalCard.WithHorizontalContentAtTop,
   withNodeKey('horizontal-right-card'),
+)(CardClean);
+const HorizontalRightImageCenteredContentCard = as(
+  vitalCard.Default,
+  vitalCard.WithHorizontalRightOrientation,
+  vitalCard.WithHorizontalContentCentered,
+  withNodeKey('horizontal-right-centered-card'),
 )(CardClean);
 
 const HeroCard = as(
@@ -74,11 +88,16 @@ const CardVariations = (props: any) => (
       <Subtitle>Vertical Card</Subtitle>
       <VerticalCard />
     </Div>
+    <Subtitle>Horizontal Card Variations</Subtitle>
     <Div className="md:w-1/2 mb-8">
-      <Subtitle>Horizontal Card: Left </Subtitle>
+      <Subtitle>Left Image : Content Top Aligned </Subtitle>
       <HorizontalLeftCard />
-      <Subtitle>Horizontal Card: Right </Subtitle>
+      <Subtitle>Left Image : Content Centered</Subtitle>
+      <HorizontalLeftImageCenteredContentCard />
+      <Subtitle>Right Image : Content Top Aligned </Subtitle>
       <HorizontalRightCard />
+      <Subtitle>Right Image : Content Centered</Subtitle>
+      <HorizontalRightImageCenteredContentCard />
     </Div>
     <Div className="mb-8">
       <Subtitle>Hero Card</Subtitle>

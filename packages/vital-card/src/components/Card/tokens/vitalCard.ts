@@ -12,16 +12,24 @@
  * limitations under the License.
  */
 
-import { flowHoc, replaceWith } from '@bodiless/fclasses';
+import { extendMeta, flowHoc, replaceWith } from '@bodiless/fclasses';
 import { asCardToken } from '../CardClean';
 
 import Base, {
   WithFlowContainerPreview,
   WithHorizontalLeftOrientation,
   WithHorizontalRightOrientation,
+  WithHorizontalContentAtTop,
+  WithHorizontalContentCentered,
   WithVerticalOrientation,
+  WithPrimaryTextLink,
+  WithPrimaryButton,
+  WithSecondaryButton,
 } from './Base';
-import { Hero, WithPrimaryButton, WithSecondaryButton } from './Hero';
+import { BaseHero, Hero } from './Hero';
+import { Category } from './Category';
+import { Topic } from './Topic';
+import { Product } from './Product';
 
 /**
  * WithNoTitle removes title from the card
@@ -30,7 +38,7 @@ const WithNoTitle = asCardToken({
   Components: {
     TitleWrapper: replaceWith(() => null),
   },
-  Meta: flowHoc.meta.term('Description')('No Title'),
+  Meta: flowHoc.meta.term('Features')('No Title'),
 });
 
 /**
@@ -40,7 +48,7 @@ const WithNoEyebrow = asCardToken({
   Components: {
     EyebrowWrapper: replaceWith(() => null),
   },
-  Meta: flowHoc.meta.term('Description')('No Eyebrow'),
+  Meta: flowHoc.meta.term('Features')('No Eyebrow'),
 });
 
 /**
@@ -56,24 +64,37 @@ const WithNoDescription = asCardToken({
   Layout: {
     Title: 'flex-grow',
   },
-  Meta: flowHoc.meta.term('Description')('No Description'),
+  Meta: flowHoc.meta.term('Features')('No Description'),
 });
 
 const WithFlexGrowImage = asCardToken({
   Layout: {
     ImageWrapper: 'flex-grow',
   },
-  Meta: flowHoc.meta.term('Description')('Flex Grow on Image Wrapper'),
+  Meta: flowHoc.meta.term('Features')('Flex Grow on Image Wrapper'),
 });
 
 const Default = asCardToken({
   ...Base,
 });
 
+const Basic = asCardToken(Default, {
+  Meta: extendMeta(
+    flowHoc.meta.term('Usage')('Basic'),
+    flowHoc.meta.term('CTA Type')('Fully Clickable'),
+  ),
+});
+
 export default {
   Base,
   Default,
+  Basic,
+  BaseHero,
   Hero,
+  Category,
+  Topic,
+  Product,
+  WithPrimaryTextLink,
   WithPrimaryButton,
   WithSecondaryButton,
   WithNoDescription,
@@ -81,6 +102,8 @@ export default {
   WithNoEyebrow,
   WithHorizontalLeftOrientation,
   WithHorizontalRightOrientation,
+  WithHorizontalContentAtTop,
+  WithHorizontalContentCentered,
   WithVerticalOrientation,
   WithFlowContainerPreview,
   WithFlexGrowImage,

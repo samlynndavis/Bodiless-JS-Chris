@@ -15,7 +15,9 @@
 import omit from 'lodash/omit';
 import { withNodeKey } from '@bodiless/core';
 import { ifComponentSelector } from '@bodiless/layouts';
-import { flowHoc, replaceWith, on } from '@bodiless/fclasses';
+import {
+  flowHoc, replaceWith, on, as, extendMeta, Div,
+} from '@bodiless/fclasses';
 import { withPlaceholder } from '@bodiless/components';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { vitalImage } from '@bodiless/vital-image';
@@ -23,6 +25,8 @@ import { vitalTypography, asFluidToken } from '@bodiless/vital-elements';
 import {
   EditorPlainClean, vitalEditorPlain, RichTextClean, vitalRichText,
 } from '@bodiless/vital-editors';
+import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
+import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { asCardToken, CardDescriptionPreview } from '../CardClean';
 import { CardNodeKeys } from './constants';
 
@@ -94,7 +98,6 @@ const WithHorizontalOrientationBase = asCardToken({
     Image: 'w-full',
     ImageWrapper: 'md:w-1/2 flex flex-col',
     ContentWrapper: 'md:w-1/2 flex flex-col',
-    Description: 'flex-grow',
   },
   Spacing: {
     ContentWrapper: 'px-4',
@@ -103,6 +106,36 @@ const WithHorizontalOrientationBase = asCardToken({
   Meta: flowHoc.meta.term('Orientation')('Horizontal'),
 });
 
+/*
+ * WithHorizontalContentAtTop & WithHorizontalContentCentered are
+ * mutually exclusive and shouldn't be combined together.
+ */
+/**
+ * WithHorizontalContentAtTop positions the content at top
+ */
+const WithHorizontalContentAtTop = asCardToken({
+  Layout: {
+    Description: 'flex-grow',
+  },
+  Meta: flowHoc.meta.term('Orientation')('Content Top Aligned'),
+});
+/**
+ * WithHorizontalContentCentered positions the content at top
+ */
+const WithHorizontalContentCentered = asCardToken({
+  Layout: {
+    ContentWrapper: as(
+      'md:grow', // fill all right column
+      'md:content-center md:justify-center', // vertically center
+    ),
+  },
+  Meta: flowHoc.meta.term('Orientation')('Content Centered'),
+});
+
+/*
+ * WithHorizontalLeftOrientation & WithHorizontalRightOrientation are
+ * mutually exclusive and shouldn't be combined together.
+ */
 /**
  * WithHorizontalOrientation splits the card in half with the image on the left
  */
@@ -130,11 +163,67 @@ const WithFlowContainerPreview = asCardToken({
   },
 });
 
+/*
+ * with vital Primary Text Link
+ */
+const WithPrimaryTextLink = asCardToken({
+  Components: {
+    CTALink: replaceWith(LinkClean),
+  },
+  Theme: {
+    CTALink: vitalLink.PrimaryLink,
+  },
+  Meta: extendMeta(
+    flowHoc.meta.term('CTA Style')('Text Link'),
+    flowHoc.meta.term('CTA Type')('Visible Link'),
+  ),
+});
+
+/*
+ * With vitalPrimaryButton
+ */
+const WithPrimaryButton = asCardToken({
+  Components: {
+    CTAWrapper: replaceWith(Div),
+    CTALink: replaceWith(ButtonClean),
+  },
+  Theme: {
+    CTALink: as(vitalButtons.Primary, vitalButtons.WithArrow),
+  },
+  Meta: extendMeta(
+    flowHoc.meta.term('CTA Style')('Primary Button'),
+    flowHoc.meta.term('CTA Type')('Visible Link'),
+  ),
+});
+
+/*
+ * With vitalSecondaryButton
+ */
+const WithSecondaryButton = asCardToken({
+  Components: {
+    CTAWrapper: replaceWith(Div),
+    CTALink: replaceWith(ButtonClean),
+  },
+  Theme: {
+    CTALink: as(vitalButtons.Secondary, vitalButtons.WithArrow),
+  },
+  Meta: extendMeta(
+    flowHoc.meta.term('CTA Style')('Secondary Button'),
+    flowHoc.meta.term('CTA Type')('Visible Link'),
+  ),
+});
+
 export default Base;
 
 export {
   WithVerticalOrientation,
+  WithHorizontalOrientationBase,
   WithHorizontalLeftOrientation,
   WithHorizontalRightOrientation,
+  WithHorizontalContentAtTop,
+  WithHorizontalContentCentered,
   WithFlowContainerPreview,
+  WithPrimaryTextLink,
+  WithPrimaryButton,
+  WithSecondaryButton,
 };
