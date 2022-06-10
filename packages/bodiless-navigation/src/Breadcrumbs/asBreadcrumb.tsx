@@ -95,7 +95,6 @@ const asBreadcrumb = ({
     });
 
     const isProduction = process.env.NODE_ENV === 'production';
-
     if (isProduction) {
       // To avoid flicker, we need to populate the store on render
       // otherwise the breadcrumbs render with no items before
@@ -104,18 +103,10 @@ const asBreadcrumb = ({
     }
 
     useLayoutEffect(() => {
-      if (!isSSR()) {
-        store.setItem(item);
-      }
-    }, [titleNode.data, linkNode.data]);
-
-    // Deleting item from store on unmount.
-    useLayoutEffect(() => () => {
-      // Only necessary in edit mode since items are not added or removed
-      // under any other circumstances.
-      if (!isProduction) {
-        store.deleteItem(id);
-      }
+      store.setItem(item);
+      return () => {
+        store.deleteItem(item);
+      };
     }, []);
 
     return (
