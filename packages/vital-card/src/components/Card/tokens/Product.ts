@@ -16,6 +16,7 @@ import {
   flowHoc, extendMeta,
 } from '@bodiless/fclasses';
 import { asCardToken } from '../CardClean';
+import type { CardToken } from '../CardClean';
 import Base from './Base';
 
 /**
@@ -24,11 +25,21 @@ import Base from './Base';
 const BaseProduct = asCardToken(Base, {
   ...Base,
   Meta: extendMeta(
-    flowHoc.meta.term('Usage')('Product'),
+    flowHoc.meta.term('Sub Type')('Product'),
   ),
 });
 
 const Product = BaseProduct;
+export interface VitalCardProduct {
+  /**
+   * Defines the Product card for the Vital DS.
+   * - Extends the Base card with vertical orientation.
+   *
+   * <b>NOTE</b> Not Fully Implemented.
+   *
+   */
+  Product: CardToken,
+}
 
 export {
   Product,

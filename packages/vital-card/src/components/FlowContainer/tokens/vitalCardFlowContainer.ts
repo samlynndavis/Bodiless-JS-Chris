@@ -21,8 +21,8 @@ import {
 } from '../../Card';
 
 /*
-  * Content Variations to use all fields or remove specic fields.
-  */
+ * Content Variations to use all fields or remove specic fields.
+ */
 const ContentVariations = {
   All: asCardToken({
     Meta: flowHoc.meta.term('Features')('With All Fields'),
@@ -33,8 +33,8 @@ const ContentVariations = {
 };
 
 /*
-  * Horizontal Variations to vary on Left or Right Images & Content Top & Centered.
-  */
+ * Horizontal Variations to vary on Left or Right Images & Content Top & Centered.
+ */
 const HorizontalVariations = varyDesigns(
   {
     Left: vitalCard.WithHorizontalLeftOrientation,
@@ -55,8 +55,8 @@ const HorizontalOrientationVariations = varyDesigns(
 );
 
 /*
-  * Vary Vertical Variations over Content Varitions
-  */
+ * Vary Vertical Variations over Content Varitions
+ */
 const VerticalOrientationVariations = varyDesigns(
   {
     Vertical: vitalCard.WithVerticalOrientation,
@@ -65,19 +65,22 @@ const VerticalOrientationVariations = varyDesigns(
 );
 
 /*
-  * Combine Horizontal with Vertical
-  */
+ * Combine Horizontal with Vertical
+ */
 const OrientationVariations = extendDesign(
   HorizontalOrientationVariations,
   VerticalOrientationVariations,
 );
 
 /*
-  * Compose the Basic Variations
-  * Defined by Fully clickable card with no visible CTA varied over
-  *  - Orientation Properties
-  *  - Content Varitions
-  */
+ * Link CTA variations
+ */
+const LinkVariations = {
+  Link: vitalCard.WithPrimaryTextLink,
+  PrimaryButton: vitalCard.WithPrimaryButton,
+  SecondaryButton: vitalCard.WithSecondaryButton,
+};
+
 const BasicVariation = {
   Card: on(CardClean)(vitalCard.Basic, vitalCard.WithFlowContainerPreview),
 };
@@ -87,49 +90,41 @@ const BasicVariations = varyDesigns(
   OrientationVariations,
 );
 
-/*
-  * Link CTA variations
-  */
-const LinkVariations = {
-  Link: vitalCard.WithPrimaryTextLink,
-  PrimaryButton: vitalCard.WithPrimaryButton,
-  SecondaryButton: vitalCard.WithSecondaryButton,
-};
+const WithBasicVariations = asFluidToken({
+  Components: {
+    ...BasicVariations,
+  },
+});
 
-/*
-  * Compose the Hero Variations
-  * Defined by horizontal only cards with visible CTA varied over
-  *  - Link Styles
-  *  - Horizontal Variations to vary on Left or Right Images & Content Top & Centered.
-  */
 const HeroVariations = varyDesigns(
   {
-    Hero: on(CardClean)(vitalCard.BaseHero, vitalCard.WithFlowContainerPreview),
+    Hero: on(CardClean)(vitalCard.HeroBase, vitalCard.WithFlowContainerPreview),
   },
   LinkVariations,
   HorizontalVariations,
 );
+
+const WithHeroVariations = asFluidToken({
+  Components: {
+    ...HeroVariations,
+  },
+});
 
 /*
   * TBD: Stubbing out future Category / Topic / Product
   * Will comment out so these don't have to fully built & tested yet.
   */
 
-/*
-  * Compose the Category Variations
-  * Defined by vertical only cards and fully clickable and only image & title.
-  * No variations
-  */
 const CategoryVariations = {
   Category: on(CardClean)(vitalCard.Category, vitalCard.WithFlowContainerPreview),
 };
 
-/*
-  * Compose the Topic Variations
-  * Defined by vertical only cards and with CTA varied over
-  * - Link Variations
-  * - Content remove of eyebrow
-  */
+const WithCategoryVariations = asFluidToken({
+  Components: {
+    ...CategoryVariations,
+  },
+});
+
 const TopicVariations = varyDesigns(
   {
     Topic: on(CardClean)(vitalCard.Topic, vitalCard.WithFlowContainerPreview),
@@ -143,9 +138,15 @@ const TopicVariations = varyDesigns(
   }
 );
 
+const WithTopicVariations = asFluidToken({
+  Components: {
+    ...TopicVariations,
+  },
+});
+
 /*
-  * Product Content Variations to use all fields or remove specic fields.
-  */
+ * Product Content Variations to use all fields or remove specic fields.
+ */
 const ProductContentVariations = {
   All: asCardToken({
     Meta: flowHoc.meta.term('Features')('With All Fields'),
@@ -157,12 +158,6 @@ const ProductContentVariations = {
   }),
 };
 
-/*
-  * Compose the Product Variations
-  * Defined by vertical only cards
-  * - Fully Clickable or with Link Variations
-  * - Product content varations
-  */
 const ProductVariations = varyDesigns(
   {
     Product: on(CardClean)(vitalCard.Product, vitalCard.WithFlowContainerPreview),
@@ -174,26 +169,107 @@ const ProductVariations = varyDesigns(
   ProductContentVariations,
 );
 
-/**
-  * Token which adds Card variations to a flow container.
-  */
-const WithCardVariations = asFluidToken({
+const WithProductVariations = asFluidToken({
   Components: {
-    ...BasicVariations,
-    ...HeroVariations,
-    ...CategoryVariations,
-    ...TopicVariations,
     ...ProductVariations,
   },
 });
 
-const vitalCardFlowContainer = {
-  WithCardVariations,
+const WithCardVariations = asFluidToken({
+  Compose: {
+    WithBasicVariations,
+    WithHeroVariations,
+    WithCategoryVariations,
+    WithTopicVariations,
+    WithProductVariations,
+  },
+});
+
+const fluidToken = asFluidToken();
+type FluidToken = typeof fluidToken;
+
+/**
+ * Tokens for the vital card flow container
+ *
+ * @category Token Collection
+ */
+export interface VitalCardFlowContainer {
+  /**
+   * Composable token which adds all card variations.
+   *
+   * #### Shadowing:
+   *
+   * @example Add a component
+   * ```js
+   * const WithCardVariations = asFluidToken({
+   *   Components: {
+   *     ...vitalCardFlowContainerBase.BasicVariations,
+   *     ...vitalCardFlowContainerBase.HeroVariations
+   *   },
+   * });
+   */
+  WithCardVariations: FluidToken,
+  /**
+   * Token defining the basic variations
+   * Defined by Fully clickable card with no visible CTA varied over
+   *  - Orientation Properties
+   *  - Content Varitions
+   */
+  BasicVariations: FluidToken,
+  /**
+   * Token defining the hero variations
+   * Defined by HeroBase - horizontal only cards with visible CTA varied over
+   *  - Link Styles
+   *  - Horizontal Variations to vary on Left or Right Images & Content Top & Centered.
+   */
+  HeroVariations: FluidToken,
+  /**
+   * Token defining the topic variations
+   * Defined by vertical only cards and with CTA varied over
+   * - Link Variations
+   * - Content remove of eyebrow
+   */
+  TopicVariations: FluidToken,
+  /**
+   * Token defining the product variations
+   * Defined by vertical only cards
+   * - Fully Clickable or with Link Variations
+   * - Product content varations
+   */
+  ProductVariations: FluidToken,
+  /**
+   * Composable token which adds basic card variations.
+   */
+  WithBasicVariations: FluidToken,
+  /**
+   * Composable token which adds hero card variations.
+   */
+  WithHeroVariations: FluidToken,
+  /**
+   * Composable token which adds category card - no variations.
+   */
+  WithCategoryVariations: FluidToken,
+  /**
+   * Composable token which adds topic card variations.
+   */
+  WithTopicVariations: FluidToken,
+  /**
+   * Composable token which adds product card variations.
+   */
+  WithProductVariations: FluidToken,
+}
+
+const vitalCardFlowContainer: VitalCardFlowContainer = {
   BasicVariations,
   HeroVariations,
-  CategoryVariations,
   TopicVariations,
   ProductVariations,
+  WithBasicVariations,
+  WithHeroVariations,
+  WithCategoryVariations,
+  WithTopicVariations,
+  WithProductVariations,
+  WithCardVariations,
 };
 
 export default vitalCardFlowContainer;

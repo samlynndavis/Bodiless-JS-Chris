@@ -13,4 +13,4 @@
  */
 
 export * from './components/Card';
-export { vitalCardFlowContainer, vitalCardFlowContainerBase } from './components/FlowContainer';
+export * from './components/FlowContainer';
