@@ -13,7 +13,15 @@
  */
 
 import vitalCardFlowContainer from './tokens';
+import vitalCardFlowContainerBaseOrig from './tokens/vitalCardFlowContainer';
+import type VitalCardFlowContainer from './tokens';
 
-export { vitalCardFlowContainer };
+/**
+ * Use this version of the vital card tokens when extending or shadowing.
+ * @category Token Collection
+ * @see vitalCard
+ */
+const vitalCardFlowContainerBase = vitalCardFlowContainerBaseOrig;
 
-export { default as vitalCardFlowContainerBase } from './tokens/vitalCardFlowContainer';
+export { vitalCardFlowContainer, vitalCardFlowContainerBase };
+export type { VitalCardFlowContainer };

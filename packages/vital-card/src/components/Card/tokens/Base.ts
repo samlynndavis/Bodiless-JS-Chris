@@ -28,13 +28,11 @@ import {
 import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
 import { LinkClean, vitalLink } from '@bodiless/vital-link';
 import { asCardToken, CardDescriptionPreview } from '../CardClean';
+import type { CardToken } from '../CardClean';
 import { CardNodeKeys } from './constants';
 
 const RTENoTheme = asFluidToken(omit(vitalRichText.BasicNoLink, 'Theme'));
 
-/**
-  * Basic Card Design.
-  */
 const Base = asCardToken({
   Editors: {
     Wrapper: asBodilessLink(),
@@ -74,9 +72,6 @@ const Base = asCardToken({
   Meta: flowHoc.meta.term('Type')('Card'),
 });
 
-/**
- * WithVerticalOrientation removes unnecessary wrappers from the card
- */
 const WithVerticalOrientation = asCardToken({
   Layout: {
     Wrapper: 'w-full flex h-full flex-col',
@@ -90,9 +85,6 @@ const WithVerticalOrientation = asCardToken({
   Meta: flowHoc.meta.term('Orientation')('Vertical'),
 });
 
-/**
- * WithHorizontalOrientationBase splits the card in half
- */
 const WithHorizontalOrientationBase = asCardToken({
   Layout: {
     Image: 'w-full',
@@ -106,22 +98,13 @@ const WithHorizontalOrientationBase = asCardToken({
   Meta: flowHoc.meta.term('Orientation')('Horizontal'),
 });
 
-/*
- * WithHorizontalContentAtTop & WithHorizontalContentCentered are
- * mutually exclusive and shouldn't be combined together.
- */
-/**
- * WithHorizontalContentAtTop positions the content at top
- */
 const WithHorizontalContentAtTop = asCardToken({
   Layout: {
     Description: 'flex-grow',
   },
   Meta: flowHoc.meta.term('Orientation')('Content Top Aligned'),
 });
-/**
- * WithHorizontalContentCentered positions the content at top
- */
+
 const WithHorizontalContentCentered = asCardToken({
   Layout: {
     ContentWrapper: as(
@@ -132,13 +115,6 @@ const WithHorizontalContentCentered = asCardToken({
   Meta: flowHoc.meta.term('Orientation')('Content Centered'),
 });
 
-/*
- * WithHorizontalLeftOrientation & WithHorizontalRightOrientation are
- * mutually exclusive and shouldn't be combined together.
- */
-/**
- * WithHorizontalOrientation splits the card in half with the image on the left
- */
 const WithHorizontalLeftOrientation = asCardToken(WithHorizontalOrientationBase, {
   Layout: {
     Wrapper: 'flex-col md:flex-row w-full flex',
@@ -146,9 +122,6 @@ const WithHorizontalLeftOrientation = asCardToken(WithHorizontalOrientationBase,
   Meta: flowHoc.meta.term('Orientation')('Left Image'),
 });
 
-/**
- * WithHorizontalOrientation splits the card in half with the image on the right
- */
 const WithHorizontalRightOrientation = asCardToken(WithHorizontalOrientationBase, {
   Layout: {
     Wrapper: 'flex-col md:flex-row-reverse w-full flex',
@@ -163,9 +136,6 @@ const WithFlowContainerPreview = asCardToken({
   },
 });
 
-/*
- * with vital Primary Text Link
- */
 const WithPrimaryTextLink = asCardToken({
   Components: {
     CTALink: replaceWith(LinkClean),
@@ -179,9 +149,6 @@ const WithPrimaryTextLink = asCardToken({
   ),
 });
 
-/*
- * With vitalPrimaryButton
- */
 const WithPrimaryButton = asCardToken({
   Components: {
     CTAWrapper: replaceWith(Div),
@@ -196,9 +163,6 @@ const WithPrimaryButton = asCardToken({
   ),
 });
 
-/*
- * With vitalSecondaryButton
- */
 const WithSecondaryButton = asCardToken({
   Components: {
     CTAWrapper: replaceWith(Div),
@@ -212,6 +176,87 @@ const WithSecondaryButton = asCardToken({
     flowHoc.meta.term('CTA Type')('Visible Link'),
   ),
 });
+
+export interface VitalCardBase {
+  /**
+   * Defines the base card for the Vital DS.
+   * - Editor/Content/Schema domains defines editors on Title/Eyebrow/Description/CTA
+   *   and makes the entire Card clickable.
+   * - Components domain hides the CTA and adds in vitalImage.Default for Image.
+   * - Theme domain styles Wrappers for Eyebrow, Title, Description.
+   * - Layout domain defines a basic full-width component in flex.
+   * - Spacing domain: add spacing to Eyebrow
+   *
+   * #### Customizing:
+   *
+   * @example Add a component
+   * ```js
+   * import { vitalCard } from '@bodiless/vital-flowcontainer';
+   *
+   * const Default = asFluidToken(vitalCard.Default, {
+   *   Components: {
+   *     MyComponent: on(cardClean)(vitalCard.Default, WithCustomBorder),
+   *   }
+   * });
+   * ```
+   */
+  Base: CardToken,
+  /**
+   * Composable token which removes unnecessary wrappers from the card
+   */
+  WithVerticalOrientation: CardToken,
+  /**
+   * Composable token which split cards in half with Image / Content on each side.
+   */
+  WithHorizontalOrientationBase: CardToken,
+  /**
+   * Composable token that extends WithHorizontalOrientationBase and
+   * which defines Image on Left / Content on Right.
+   *
+   * <b>NOTE</b>:  WithHorizontalLeftOrientation & WithHorizontalRightOrientation are
+   * mutually exclusive and shouldn't be combined together.
+   */
+  WithHorizontalLeftOrientation: CardToken,
+  /**
+   * Composable token that extends WithHorizontalOrientationBase and
+   * which defines Image on Right / Content on Left.
+   *
+   * <b>NOTE</b>:  WithHorizontalLeftOrientation & WithHorizontalRightOrientation are
+   * mutually exclusive and shouldn't be combined together.
+   */
+  WithHorizontalRightOrientation: CardToken,
+  /**
+   * Composable token which positions the content at top of card.
+   *
+   * <b>NOTE</b>: WithHorizontalContentAtTop & WithHorizontalContentCentered are
+   * mutually exclusive and shouldn't be combined together.
+   */
+  WithHorizontalContentAtTop: CardToken,
+  /**
+   * Composable token which positions the content vertically centered in the card.
+   *
+   * <b>NOTE</b>: WithHorizontalContentAtTop & WithHorizontalContentCentered are
+   * mutually exclusive and shouldn't be combined together.
+   */
+  WithHorizontalContentCentered: CardToken,
+  /**
+   * Composable token which repaces the flow container description (RTE preview)
+   * with the word 'Description'
+   */
+  WithFlowContainerPreview: CardToken,
+  /**
+   * Composable token which adds a visible CTA with style primary text link
+   */
+  WithPrimaryTextLink: CardToken,
+  /**
+   * Composable token which adds a visible CTA with style primary button
+   */
+  WithPrimaryButton: CardToken,
+  /**
+   * Composable token which adds a visible CTA with style secondary button
+   */
+  WithSecondaryButton: CardToken,
+}
 
 export default Base;
 

@@ -16,6 +16,7 @@ import {
   flowHoc, replaceWith, extendMeta,
 } from '@bodiless/fclasses';
 import { asCardToken } from '../CardClean';
+import type { CardToken } from '../CardClean';
 import Base from './Base';
 
 /**
@@ -29,12 +30,23 @@ const BaseCategory = asCardToken(Base, {
     RatingWrapper: replaceWith(() => null),
   },
   Meta: extendMeta(
-    flowHoc.meta.term('Usage')('Category'),
+    flowHoc.meta.term('Sub Type')('Category'),
     flowHoc.meta.term('CTA Type')('Fully Clickable'),
   ),
 });
 
 const Category = BaseCategory;
+export interface VitalCardCategory {
+  /**
+   * Defines the Category card for the Vital DS.
+   * - Extends the Base card with vertical orientation & the fully clickable card.
+   * - Components domain:
+   *   - Removes Eyebrow, Description, Rating
+   *
+   * <b>NOTE</b> Not Fully Implemented.
+   */
+  Category: CardToken,
+}
 
 export {
   Category,

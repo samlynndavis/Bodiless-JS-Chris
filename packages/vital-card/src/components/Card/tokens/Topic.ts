@@ -16,6 +16,7 @@ import {
   flowHoc, replaceWith, extendMeta, Div,
 } from '@bodiless/fclasses';
 import { asCardToken } from '../CardClean';
+import type { CardToken } from '../CardClean';
 import Base from './Base';
 
 /**
@@ -29,11 +30,24 @@ const BaseTopic = asCardToken(Base, {
     CTAWrapper: replaceWith(Div),
   },
   Meta: extendMeta(
-    flowHoc.meta.term('Usage')('Topic'),
+    flowHoc.meta.term('Sub Type')('Topic'),
   ),
 });
 
 const Topic = BaseTopic;
+
+export interface VitalCardTopic {
+  /**
+   * Defines the Topic card for the Vital DS.
+   * - Extends the Base card with vertical orientation.
+   * - Components domain:
+   *   - Removes Description, Rating
+   *
+   * <b>NOTE</b> Not Fully Implemented.
+   *
+   */
+  Topic: CardToken,
+}
 
 export {
   Topic,

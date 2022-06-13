@@ -19,16 +19,14 @@ import {
 import { vitalImage } from '@bodiless/vital-image';
 import { vitalTypography } from '@bodiless/vital-elements';
 import { asCardToken } from '../CardClean';
+import type { CardToken } from '../CardClean';
 import Base, {
   WithHorizontalOrientationBase,
   WithHorizontalLeftOrientation,
   WithHorizontalContentCentered,
 } from './Base';
 
-/**
- * Hero Base Card Design.
- */
-const BaseHero = asCardToken({
+const HeroBase = asCardToken({
   ...Base,
   Editors: {
     ...Base.Editors,
@@ -59,20 +57,54 @@ const BaseHero = asCardToken({
   },
   Meta: extendMeta(
     flowHoc.meta.term('Type')('Card'),
-    flowHoc.meta.term('Usage')('Engagement'),
+    flowHoc.meta.term('Sub Type')('Hero'),
   ),
 });
 
-/*
- * Compose a Default Hero with Left Image & Content Centered and Primary Text Link
- */
 const Hero = asCardToken(
-  BaseHero,
+  HeroBase,
   WithHorizontalContentCentered,
   WithHorizontalLeftOrientation,
 );
 
+export interface VitalCardHero {
+  /**
+   * Defines the Hero card for the Vital DS.  Intended use is first card on a page.
+   * - Extends the Base card.
+   * - Remove the Wrapper removes setting link for the the fully clickable card.
+   * - Components domain:
+   *   - Replaces Wrapper 'A' -> 'Div' to remove fully clickable feature
+   *   - Enables CTA Wrapper to make the CTA visible.
+   *   - Removes Eyebrow
+   *   - Title is replaced with H1.
+   *   - Description is replaced with H4.
+   * - Layout domain defines Hero with Horizontal Base
+   * - Spacing domain: add custom spacing to the hero card
+   * - Theme: eliminates the Typography spacing to allow Spacing domain to take fully control.
+   *
+   * #### Customizing:
+   *
+   * @example Add a component
+   * ```js
+   * import { vitalCard } from '@bodiless/vital-flowcontainer';
+   *
+   * const MyCustomHero = asCardToken(
+   *   HeroBase,
+   *   WithHorizontalContentCentered,
+   *   WithHorizontalRightOrientation,
+   *   WithNoDescription,
+   * );
+   * ```
+   */
+  HeroBase: CardToken,
+  /**
+   * Hero extends the HeroBase token and combines it to have image on left
+   * and content is vertically centered.
+   */
+  Hero: CardToken,
+}
+
 export {
-  BaseHero,
+  HeroBase,
   Hero,
 };

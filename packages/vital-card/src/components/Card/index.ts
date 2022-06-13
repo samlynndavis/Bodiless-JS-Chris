@@ -12,6 +12,16 @@
  * limitations under the License.
  */
 
-export { CardClean, vitalCard } from './index.bl-edit';
-export { default as vitalCardBase } from './tokens/vitalCard';
+import vitalCardBaseOrig, { VitalCard } from './tokens/vitalCard';
+
+/**
+ * Use this version of the vital card tokens when extending or shadowing.
+ * @category Token Collection
+ * @see [[VitalCard]]
+ */
+const vitalCardBase = vitalCardBaseOrig;
+
 export { asCardToken } from './CardClean';
+export type { CardComponents } from './CardClean';
+export { VitalCard, vitalCardBase };
+export { CardClean, vitalCard } from './index.bl-edit';
