@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2022-06-10)
+
+
+### Bug Fixes
+
+* duplicate call removed ([#1825](https://github.com/johnsonandjohnson/bodiless-js/issues/1825)) ([b028f13](https://github.com/johnsonandjohnson/bodiless-js/commit/b028f138d7398c9e092d4aca8b08d189456210e8))
+* **vital-demo:** Add Homepage Content & minor fixes ([#1911](https://github.com/johnsonandjohnson/bodiless-js/issues/1911)) ([6ca035c](https://github.com/johnsonandjohnson/bodiless-js/commit/6ca035cf968aab46b2170651a8223244c708d8d8))
+
+
+### Features
+
+* **bodiless-ga4 & akamai-auth:** Update the Bodiless GA4 plugin and add Akamai Auth Plugin [canary] ([#1647](https://github.com/johnsonandjohnson/bodiless-js/issues/1647)) ([200d935](https://github.com/johnsonandjohnson/bodiless-js/commit/200d93523da2d68e8740a98bf18a496d3c077060))
+* **vital-accordion:** Add vital-accordion package ([#1899](https://github.com/johnsonandjohnson/bodiless-js/issues/1899)) ([d5e75a6](https://github.com/johnsonandjohnson/bodiless-js/commit/d5e75a60d33938d09c6b727506991d871e4b7975))
+
+
+
+
+
 # [1.0.0-rc.2](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.1...v1.0.0-rc.2) (2022-06-03)
 
 
