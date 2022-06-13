@@ -15,16 +15,14 @@ import { vitalCardFlowContainerBase } from '@bodiless/vital-card';
 import { asFluidToken } from '@bodiless/vital-elements';
 
 // Demostrating only showing Basic & Hero Card Variations in Component Picker
-/*
 const WithCardVariations = asFluidToken({
   Components: {
     ...vitalCardFlowContainerBase.BasicVariations,
     ...vitalCardFlowContainerBase.HeroVariations,
   },
 });
-*/
 
-const WithCardVariations = asFluidToken(vitalCardFlowContainerBase.WithCardVariations);
+// const WithCardVariations = asFluidToken(vitalCardFlowContainerBase.WithCardVariations);
 
 export default {
   WithCardVariations,

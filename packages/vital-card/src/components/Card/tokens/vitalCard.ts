@@ -71,7 +71,7 @@ const WithFlexGrowImage = asCardToken({
   Layout: {
     ImageWrapper: 'flex-grow',
   },
-  Meta: flowHoc.meta.term('Features')('Flex Grow on Image Wrapper'),
+  Meta: flowHoc.meta.term('Features')('Image controls height of Vertical cards in a row'),
 });
 
 const Default = asCardToken({

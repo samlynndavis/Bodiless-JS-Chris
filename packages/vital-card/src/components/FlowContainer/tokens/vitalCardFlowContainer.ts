@@ -87,6 +87,12 @@ const BasicVariations = varyDesigns(
   OrientationVariations,
 );
 
+const WithBasicVariations = asFluidToken({
+  Components: {
+    ...BasicVariations,
+  },
+});
+
 /*
   * Link CTA variations
   */
@@ -110,6 +116,12 @@ const HeroVariations = varyDesigns(
   HorizontalVariations,
 );
 
+const WithHeroVariations = asFluidToken({
+  Components: {
+    ...HeroVariations,
+  },
+});
+
 /*
   * TBD: Stubbing out future Category / Topic / Product
   * Will comment out so these don't have to fully built & tested yet.
@@ -123,6 +135,12 @@ const HeroVariations = varyDesigns(
 const CategoryVariations = {
   Category: on(CardClean)(vitalCard.Category, vitalCard.WithFlowContainerPreview),
 };
+
+const WithCategoryVariations = asFluidToken({
+  Components: {
+    ...CategoryVariations,
+  },
+});
 
 /*
   * Compose the Topic Variations
@@ -142,6 +160,12 @@ const TopicVariations = varyDesigns(
     NoEyebrow: vitalCard.WithNoEyebrow,
   }
 );
+
+const WithTopicVariations = asFluidToken({
+  Components: {
+    ...TopicVariations,
+  },
+});
 
 /*
   * Product Content Variations to use all fields or remove specic fields.
@@ -174,16 +198,22 @@ const ProductVariations = varyDesigns(
   ProductContentVariations,
 );
 
+const WithProductVariations = asFluidToken({
+  Components: {
+    ...ProductVariations,
+  },
+});
+
 /**
   * Token which adds Card variations to a flow container.
   */
 const WithCardVariations = asFluidToken({
-  Components: {
-    ...BasicVariations,
-    ...HeroVariations,
-    ...CategoryVariations,
-    ...TopicVariations,
-    ...ProductVariations,
+  Compose: {
+    WithBasicVariations,
+    WithHeroVariations,
+    WithCategoryVariations,
+    WithTopicVariations,
+    WithProductVariations,
   },
 });
 
@@ -194,6 +224,11 @@ const vitalCardFlowContainer = {
   CategoryVariations,
   TopicVariations,
   ProductVariations,
+  WithBasicVariations,
+  WithHeroVariations,
+  WithCategoryVariations,
+  WithTopicVariations,
+  WithProductVariations,
 };
 
 export default vitalCardFlowContainer;
