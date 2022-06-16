@@ -17,6 +17,7 @@ import { asCardToken } from '../CardClean';
 import type { CardToken } from '../CardClean';
 import Base, {
   WithFlowContainerPreview,
+  WithHorizontalOrientationBase,
   WithHorizontalLeftOrientation,
   WithHorizontalRightOrientation,
   WithHorizontalContentAtTop,
@@ -150,7 +151,7 @@ interface VitalCardCore {
  * @category Token Collection
  * @see [[CardClean]]
  */
-interface VitalCard extends
+export interface VitalCard extends
   VitalCardBase,
   VitalCardHero,
   VitalCardCategory,
@@ -159,9 +160,12 @@ interface VitalCard extends
   VitalCardCore
 {}
 
-export type { VitalCard };
-
-export default {
+/**
+ * Tokens for cards.
+ *
+ * @category Token Collection
+ */
+const vitalCard: VitalCard = {
   Base,
   Default,
   Basic,
@@ -176,6 +180,7 @@ export default {
   WithNoDescription,
   WithNoTitle,
   WithNoEyebrow,
+  WithHorizontalOrientationBase,
   WithHorizontalLeftOrientation,
   WithHorizontalRightOrientation,
   WithHorizontalContentAtTop,
@@ -184,3 +189,5 @@ export default {
   WithFlowContainerPreview,
   WithFlexGrowImage,
 };
+
+export default vitalCard;
