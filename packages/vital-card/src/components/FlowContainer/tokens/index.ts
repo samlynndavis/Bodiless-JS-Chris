@@ -12,17 +12,6 @@
  * limitations under the License.
  */
 
-import vitalCardFlowContainer from './tokens';
-import vitalCardFlowContainerBaseOrig, {
-  VitalCardFlowContainer
-} from './tokens/vitalCardFlowContainer';
+import vitalCardFlowContainer from './vitalCardFlowContainer';
 
-/**
- * Use this version of the vital card tokens when extending or shadowing.
- * @category Token Collection
- * @see vitalCard
- */
-const vitalCardFlowContainerBase = vitalCardFlowContainerBaseOrig;
-
-export { vitalCardFlowContainer, vitalCardFlowContainerBase };
-export type { VitalCardFlowContainer };
+export default vitalCardFlowContainer;

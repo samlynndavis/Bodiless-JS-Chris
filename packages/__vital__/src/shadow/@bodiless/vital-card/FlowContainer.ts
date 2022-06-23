@@ -11,18 +11,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { as } from '@bodiless/fclasses';
+import { vitalCardFlowContainerBase } from '@bodiless/vital-card';
 
-import vitalCardFlowContainer from './tokens';
-import vitalCardFlowContainerBaseOrig, {
-  VitalCardFlowContainer
-} from './tokens/vitalCardFlowContainer';
+// Demostrating only showing Basic & Hero Card Variations in Component Picker
+const WithCardVariations = as(
+  vitalCardFlowContainerBase.WithBasicVariations,
+  vitalCardFlowContainerBase.WithHeroVariations,
+);
 
-/**
- * Use this version of the vital card tokens when extending or shadowing.
- * @category Token Collection
- * @see vitalCard
- */
-const vitalCardFlowContainerBase = vitalCardFlowContainerBaseOrig;
+// const WithCardVariations = vitalCardFlowContainerBase.WithCardVariations;
 
-export { vitalCardFlowContainer, vitalCardFlowContainerBase };
-export type { VitalCardFlowContainer };
+export default {
+  ...vitalCardFlowContainerBase,
+  WithCardVariations,
+};
