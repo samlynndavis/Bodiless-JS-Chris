@@ -298,11 +298,11 @@ these files are defined by the `nodeKey` passed as an argument to `asBodilessLin
 </Link>
 ```
 
-Note the name of the file containing the image data. Because the image element is a child of the
+?> **Note:** the name of the file containing the image data. Because the image element is a child of the
 link, its content file is namespaced to its parent. This allows you to compose editable primitives
 into reusable components. We'll come back to this later.
 
-Note, also, the second argument to `asBodilessImage` above. This is a way to provide a placeholder
+?> **Note:** also, the second argument to `asBodilessImage` above. This is a way to provide a placeholder
 value for the image data when no image has been uploaded. Here we use it to provide a landscape
 placeholder to improve the layout of an empty page. Of course, the image is not actually
 constrained, and will take the dimensions of any file you upload.
@@ -547,7 +547,7 @@ stylable. Since all props are passed on to the `Wrapper` component, this allows 
 to be styled when the `CaptionedImage` is placed. We'll explore a more efficient way of styling the
 wrapper (and the other internal elements) later when we introduce the Design API.
 
-Next create a `Gallery.tsx` file as follows:
+Next, create a `Gallery.tsx` file as follows:
 
 ```tsx
 import React, { FC, HTMLProps } from 'react';
@@ -757,6 +757,11 @@ and the tiles now stack one per row. However, you can alter this behavior by res
 reordering) the tiles while at tablet size. In fact, the Flow Container grid remembers the layout
 you set at every breakpoint, allowing you to create completely customized, responsive layouts.
 
+**Tablet with tiles stacked:**
+![Tablet Unsized](./assets/tabletunsized.jpg)
+
+**Tablet with tiles resized to 33%:**
+![Tablet Resized](./assets/tabletsized.jpg)
 ## 10. Selection vs Configuration
 
 BodilessJS favors selection over configuration. It follows the belief that it is better to create
@@ -764,3 +769,5 @@ lots of simple components than to create a few complex components. The component
 this pattern by providing sophisticated search and filter capabilities, allowing a Content Editor to
 find the exact component they are looking for quickly and easily. You can read more about this in
 our [Core Principles](../../About/CorePrinciples).
+
+![Component Selector](./assets/componentselector.jpg)
