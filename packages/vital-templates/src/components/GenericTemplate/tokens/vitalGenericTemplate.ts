@@ -17,24 +17,24 @@ import {
   as,
   flowIf,
   addProps,
-  replaceWith,
   withDesign,
   Img,
   Fragment,
+  replaceWith,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
 import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 import { withNode, withNodeKey, useNode } from '@bodiless/core';
-import { vitalSpacing, vitalTypography } from '@bodiless/vital-elements';
+import { vitalSpacing } from '@bodiless/vital-elements';
 import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
-import { CardClean, vitalCard } from '@bodiless/vital-card';
+import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
-import { GenericTemplateNodeKeys } from '../constants';
+import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
 
 const heroDefaultData = {
   component: 'Image',
@@ -63,16 +63,16 @@ const Base = asGenericTemplateToken({
       withDesign({
         Image: on(Img)(vitalImage.Hero),
         Video: on(YouTubeClean)(vitalYouTube.Hero),
-        HeroCard: on(CardClean)(vitalCard.Hero),
+        HeroCard: on(CardStatic)(vitalCardStatic.Hero),
       }),
     ),
     Content: as(vitalFlowContainer.Default),
     BottomContent: as(vitalFlowContainer.Default),
   },
   Schema: {
-    TopContent: as(withNode, withNodeKey(GenericTemplateNodeKeys.TopContent)),
-    Content: withNodeKey(GenericTemplateNodeKeys.Content),
-    BottomContent: withNodeKey(GenericTemplateNodeKeys.BottomContent),
+    TopContent: as(withNode, withNodeKey(TemplateNodeKeys.TopContent)),
+    Content: withNodeKey(TemplateNodeKeys.Content),
+    BottomContent: withNodeKey(TemplateNodeKeys.BottomContent),
   },
   Spacing: {
     BreadcrumbWrapper: as(
@@ -80,9 +80,10 @@ const Base = asGenericTemplateToken({
       vitalSpacing.WithSiteXLConstraint,
       'my-2.5',
     ),
-    TopWrapper: vitalSpacing.GutterBottom,
-    // @todo move styling of breadcrumb to breadcrumb component when it exists.
-    Breadcrumb: vitalTypography.Rest,
+    TopWrapper: as(
+      vitalSpacing.GutterBottom,
+      vitalSpacing.WithSiteXLConstraint
+    ),
     ContentWrapper: as(
       vitalSpacing.WithSiteMargin,
       vitalSpacing.WithSiteXLConstraint
@@ -116,10 +117,10 @@ const ContentListing = asGenericTemplateToken({
   }
 });
 
-const Default = asGenericTemplateToken({
+const Generic = asGenericTemplateToken({
   ...Base,
   Meta: {
-    title: 'Default',
+    title: 'Generic',
   },
 });
 
@@ -129,8 +130,8 @@ const Search = asGenericTemplateToken({
     title: 'Search',
   },
   Components: {
-    ...Default.Components,
-    Breadcrumb: as(Default.Components.Breadcrumb, addProps({ children: 'Search', })),
+    ...Base.Components,
+    Breadcrumb: as(Base.Components.Breadcrumb, addProps({ children: 'Search', })),
     TopContent: replaceWith(Fragment),
     Content: on(SearchLayoutClean)(vitalSearchLayout.Default),
     BottomContent: replaceWith(Fragment),
@@ -139,7 +140,7 @@ const Search = asGenericTemplateToken({
 
 export default {
   Base,
-  Default,
+  Generic,
   ContentListing,
   WithNoBreadcrumbsOnHomePage,
   Search,

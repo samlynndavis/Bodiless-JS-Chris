@@ -26,6 +26,7 @@ import { List } from './List';
 import { Buttons } from './Buttons';
 import { _default } from './_default';
 import { Video } from './Video';
+import { Accordion } from './Accordion';
 
 export const VitalTestStyleGuideTemplate = {
   _default,
@@ -43,5 +44,6 @@ export const VitalTestStyleGuideTemplate = {
   Card,
   Table,
   List,
+  Accordion,
   Buttons,
 };
