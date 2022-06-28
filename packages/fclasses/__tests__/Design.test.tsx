@@ -335,6 +335,7 @@ describe('replaceWith', () => {
   });
 });
 
+// eslint-disable-next-line jest/no-focused-tests
 describe.only('foo', () => {
   // eslint-disable-next-line jest/expect-expect
   it('bar', () => {
