@@ -310,7 +310,7 @@ provide a higher order component (a "token") which will be applied to the
 component in that slot. This allows us to *layer* styling or behavior for
 individual elements.
 
-#### Creating a clean component.
+### Creating a "clean" component.
 
 Let's create "clean" versions of our `CaptionedImage` and `Gallery` components.
 In `packages/mysite/src/componants/CaptionedImage`, create `CaptionedImageClean.tsx`:
@@ -422,10 +422,10 @@ This exemplifies the 3-step process involved in creating a clean component:
    The second parameter to `designable` is an string which can be used
    to identify the element in the rendered markup.
 
-#### Adding styling
+### Adding styling
 
 As you can see, our clean component has no styling or behavior.  Let's create a
-token collection to provide it.
+token collection to provide those.
 
 As usual, create `mysiteCaptionedImage.ts` in
 `packages/mysite/src/components/CaptionedImage/tokens`:
@@ -507,7 +507,7 @@ By now, this should look very familiar.  A few things to note:
   variations (by convention, such tokens are often prefixed by `With...` or
   `As...`).
 
-#### Use the CaptionedImage token
+### Use the CaptionedImage token
 
 To finish up, export the clean component from your package as before:
 
@@ -676,6 +676,7 @@ const Custom2 = omit(Base, 'Editors');
 Here we remove all Bodiless editors from the token. We can now use our design
 system in a context where content comes from another source, like an external
 CMS:
+
 ```ts
 const useContentFromCMS = () => { ... } // Fetch content, eg using Gatsby useStaticQuery()
 const WithContentFromCMS = asCaptionedImageToken({
@@ -695,11 +696,87 @@ const WithContentFromCMS = asCaptionedImageToken({
 ```
 
 The above example has some limitations.  The image and caption both need to know where
-to get their own data
+to get their own data, so the token cannot be used to fetch data dynamically depending,
+We could perhaps enhance the example using React context, but there is an easier way.
+We can simply rewrite the *clean* component:
+```ts
+const CMSCaptioneImageClean = (props: CaptionedImageProps & { contentId: string }) => {
+  const { contentId, components: C, ...rest } = props;
+  const content = useContentFromCMS(contentId);
+  return (
+    <C.Wrapper {...rest}>
+      <C.Image src={coontent.src} />
+      <C.Body>
+        {content.caption}
+      </C.Body>
+    </C.Wrapper>
+  );
+};
+```
+Because our new clean component uses the same design as the original, the tokens
+we created for the original will apply seamlessly to this one as well. This makes
+it possible to extend a component in ways which are not so easy via tokens alone,
+and still leverage existing design system implementations.
 
-## 3. Creating reusable page templates.
+## 3. Using custom Tailwind classes
+
+The lowest level of a Bodiless design system is usually a library of utility
+classes which can be applied via the [Bodiless FClasses API]() to produce
+tokens. Bodiless includes built-in support for the [Tailwind]() library to
+create such classes. Up til now, we have composed all our styling using
+standard, out-of-the box Tailwind classes. These are often more than adequate
+for things like spacing and layout, but a design system will often require
+custom classes.  Let's modify our color scheme to use some custom colors.
+
+A detailed explanation of how to create custom Tailwind clases is out of scope
+for this tutorial. The good news is that much of the initial configuraiton is
+handled out of the box by Bodiless.  All you need to do is create a `tailwind.config.js`
+which defines your classes.
+
+Normally, this is created at site level.  However, since our design system is
+being created in a package, it makes more sense to define our custom classes
+at the package level.
+
+Modify `packages/mysite/tailwind.config.js`, adding the `them` key to he `twConfig`
+definition.
+
+```js
+import { getPackageTailwindConfig } from '@bodiless/fclasses';
+
+const resolver = (pkgName) => require.resolve(pkgName);
+
+const twConfig = {
+  content: [
+    './lib/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
+  theme: {
+    colors: {
+      'mysite-teal': '#45818e',
+      'mysite-blue': '#455c8e',
+      'mysite-orange': '#8e5245',
+      'mysite-dark-gray': '#060c0e',
+      'mysite-light-gray': '#ecf2f3',
+    },
+  },
+};
+
+module.exports = getPackageTailwindConfig({
+  twConfig,
+  resolver,
+});
+```
 
 
+
+## 3. Creating extensible page templates.
+
+Templates in Bodiless are just large components, and are styled and extended the
+same way as any other component. This makes it easy to keep parts of the page
+consistent while varying others.  Here, we'll create a page template which can
+be used both for "Gallery" pages and for "Default" pages.  Much of the template
+will be the same on both types of pages; only the main content will change.
+
+Create `packages/mysite/src/components/Page/PageClean.tsx`:
 
 
 ## 3. Create a re-useable Primary Header for the site
