@@ -26,17 +26,15 @@ same design system to multiple sites, extending it as needed.
   articles on the web on this topic.  While you can use the Bodiless design system
   with other css-in-js paradigms, this is the one we recommend.
 
-## 1. Make the editor and typography reusable
+## 1. Typography
 
-In this step we are going to move the editor and typography tokens definitions
-from page level to site level.  In general, the types of editors available on a site should be
-standardized to provide a consistent user experience. There is rarely a need for
-custom editors on individual pages.  Similarly, a site's typography should also be
-consistent.
+In this step we are going to move typography token definitions from
+page level to a package, to ensure consistency across the site.
 
-It would be possible to create our design system entirely at site level, for example, in
-a /src/components directory.  However, we consider it a best practice to place all
-code (components and tokens) into a design system package.  This has several advantages:
+It would be possible to create our design system entirely at site level, for
+example, in a `/src/components` directory. However, we consider it a best
+practice to place all code (components and tokens) into a design system package.
+This has several advantages:
 - it is easy to publish this package so the design system can be used by other sites
 - it is easy to reorganize the internal structure of the package without changing imports
   in site level files.
@@ -45,60 +43,65 @@ code (components and tokens) into a design system package.  This has several adv
 - there are performance penalties due to incomplete tree-shaking if you use typescript and
   import core bodiless packages directly from your Gatsby site.
 
-To facilitate creating a design system package, most Bodiless sites are created in
+To facilitate creating a design system package, most Bodiless sites are structured as 
 a *monorepo*, and this is what is created by the `@bodiless/cli new` command you
 used to create a new site in the first tutorial.  Your new site should already
 contain a stub design system package at `/packages/{your-site-name}`, and that is
 where we'll be implementing our design system.
 
-> Note: in the examples below, we assume you have created a new site called `mysite`.
+> Note: in the examples below, we assume you have created a new site called `mysite`
+> using the `__minimal__` template.
 
-### Move typography tokens.
-
-1. Create a file called `mysiteElment.ts` inside your design system package at
-   `/packages/mysite/src/components/Element/tokens`, and put the following lines there:
+1. Create a file called `mysiteElement.ts` inside your design system package at
+   `packages/mysite/src/components/Element/tokens`, and put the following lines there:
 
    ```ts
-   import {
-     asTokenSpec as asTokenSpecBase, DesignableComponents, FinalDomains, HOC
-   } from '@bodiless/fclasses';
+   import { asTokenSpec } from '@bodiless/fclasses';
 
    const Bold = asTokenSpec()('font-bold');
    const Underline = asTokenSpec()('underline');
    const Italic = asTokenSpec()('italic');
-   const Link = asTokenSpec()('text-blue-700', Underline);
+   const SuperScript =  asTokenSpec()('align-baseline');
+   const Link = asTokenSpec()('text-blue-400', Underline);
+   const H1 = asTokenSpec()('text-3xl', Bold);
+   const H2 = asTokenSpec()('text-2xl', Bold);
+   const H3 = asTokenSpec()('text-xl');
    
    export default {
      Bold,
      Underline,
      Italic,
      Link,
+     SuperScript,
+     H1,
+     H2,
+     H3,
    };
    ```
 
-1. Now export these from your package by creating the following files:
+1. Now export these tokens from your package by creating the following files:
 
-   /packages/mysite/src/components/Element/tokens/index.ts
+   *packages/mysite/src/components/Element/tokens/index.ts*
    ```ts
    import mysiteElement from './mysiteElement';
    
    export default mysiteElement;
    ```
    
-   /packages/mysite/src/components/Element/index.ts
+   *packages/mysite/src/components/Element/index.ts*
    ```ts
    import mysiteElement from './tokens';
    
    export { mysiteElement };
    ```
    
-   /packages/mysite/src/index.ts
+   *packages/mysite/src/index.ts*
    ```ts
    export * from './components/Element';
    ```
 
    > Note: There are many ways to organize exports from component packages. Choosing a
-   > standard pattern such as the one described above) will help keep your code organized
+   > standard pattern such as the one described above will help keep your code organized
    > and make it easier to maintain. Following this pattern will also allow you to
    > take advantage of some BodilessJS tools for extending and optimizing your design
    > system, like [Token Shadowing]() and [Static Replacement]().
@@ -114,135 +117,590 @@ where we'll be implementing our design system.
 1. Run `npm run setup` from the root of your repository to build your package and link it
    to your site.
 
+1. Now let's use these tokens in our Gallery page. Add the following import to
+   `/sites/mysite/src/data/pages/gallery/index.tsx`:
+   ```ts
+   import { mysiteElement } from 'mysite';
+   ```
+   And replace the definition of the `PrimaryHeader` component:
+   ```ts
+   const PrimaryHeader = as(
+     asEditable('title', 'Title'),
+     mysiteElement.H1,
+   )(H1);
+   ```
+
 1. Finally, remove the corresponding typography tokens (`asBold`, etc) from
    `/sites/mysite/src/data/pages/gallery/withSimpleEditor.tsx`, and refactor the `simpleDesign`
    to use the tokens we have just created:
    
    ```ts
    const simpleDesign = {
-     Bold: tutElement.Bold,
-     Italic: tutElement.Italic,
-     Underline: tutElement.Underline,
-     Link: as(tutElement.Link, asBodilessLink()),
+     Bold: mysiteElement.Bold,
+     Italic: mysiteElement.Italic,
+     Underline: mysiteElement.Underline,
+     Link: as(mysiteElement.Link, asBodilessLink()),
    };
    ```
+   Be sure to import `mysiteElement` as before.
 
-The first thing to note in the code above is the use of `asTokenSpec`.
-composition utility provided by the Bodiless
-[FClasses](../../Architecture/FClasses) package. It is similar to the `flow`
-utility from Lodash: it accepts a list of higher order components and returns a
-new higher order component which composes them. However, `flowHoc` adds some
-additional functionality. In this example, we use it to specify
-*metadata* which should attached to the resulting token.
+In the code above we have created a collection of *element tokens* which apply classes to
+basic HTML elements, exported this collection as an object (`mysiteElement`), and used the
+tokens to apply typography styling to our text editor and primary header. These
+*element tokens* correspond roughly to *atoms* in the parlance of atomic
+design. They are usually simple HOC's which add classes or props to the element
+(though they may also add behaviors).
 
-This metadata is useful for several reasons:
-- It encourages us to think of tokens in a structured way.
-- It provides a basis for browsing and editing tokens using the Bodiless token
-  browser (experimental).
-- It allows *fitering* of tokens (we'll get to this in a later tutorial).
+Note the use of `asTokenSpec` to define our tokens. Bodiless tokens are normally
+expressed as React higher order components (HOCs). However, Bodiless provides an
+extended format for describing tokens known as a *Token Specification*. The
+`asTokenSpec()('font-bold')` utility produces a token in this format:
+```ts
+{
+  Core: {
+    _: 'font-bold',
+  },
+};
+```
+This  can be converted to a simple HOC via the Bodiless `as` utility:
+```ts
+const BoldSpan = as(mysiteElement.Bold)(Span);
+```
+which is identical to:
+```ts
+const BoldSpan = addClasses('font-bold')(Span);
+```
+We will go into the uses of token specifications in more detail in a later
+section. For now, you can think of `asTokenSpec` as a utility for creating
+tokens.
 
-To attach metadata to a token, you simply provide an object as one of the
-arguments to `flowHoc`.  This should have a `categories` key, which is itself
-consists of any number of facets, each of which is an array of terms.
+### Providing a site-wide rich text editor.
+To complete the standardization of our site's typography, let's add to the design
+system package a rich text editor which uses the standard typography tokens.
+Create `packages/mysite/src/components/RichText/tokens/mysiteRichText.ts`:
 
-It's up to you how you want to classify your tokens -- Bodiless
-allows arbitrary "categories".  Here we specify 3 categories for each token:
-- `Component`: The name of the component to which the token can be applied. We use
-  `Element` to indicate that these tokens apply to any HTML element.
-- 'Attribute': The attribute(s) which this token specifies. The general convention
-  here is that two tokens which specify the same attribute should not be applied
-  at the same time.
+```ts
+import { asTokenSpec, as, stylable } from '@bodiless/fclasses';
+import { asBodilessLink } from '@bodiless/components-ui';
+import { withPlaceholder } from '@bodiless/components';
+import { mysiteElement } from '../../Element';
 
-Note that we have created "empty" tokens for `asBold` and `asItalic`. As we'll see,
-creating these empty tokens will facilitate making site-wide changes to styling.
+const Simple = asTokenSpec<any>()({
+  Core: {
+    _: as(stylable, withPlaceholder('Rich text...')),
+    Bold: mysiteElement.Bold,
+    Italic: mysiteElement.Italic,
+    Underline: mysiteElement.Underline,
+    Link: as(mysiteElement.Link, asBodilessLink()),
+  },
+});
 
-Note also that in addition to styling tokens, we have created a "behavioral"
-token `withLinkEditor`. This is an example of how Bodiless extends the notion of
-design tokens beyond the purely visual sphere. *Any bit of reusable styling or
-behavior which can be applied to a component is considered a "Token" in
-Bodiless* Here, `withLinkEditor` is just a pass-through to
-[`asBodilessLink`](/Components/Link/) -- but we could customize it here
-(eg to provide a different href normalizer). Also, defining it at site level
-allows us to attach metadata to it.
+export default {
+  Simple,
+};
+```
 
-Actually, `withLinkEditor` is not itself a token; it is a *token generator*. That is,
-it is a function which accepts some parameters and *returns* a token.  In this
-case, it accepts a node key, and returns a token which makes a link editable, and
-stores its data at the specified location.  This pattern is very common in
-Bodiless.
+Export the tokens from the package as you did before for `mysiteElement`:
 
-Note that here, since we are placing the editable link in a rich text editor,
-we don't need to specify the node key.  The rich text editor itself will
-manage the storage locations assigned to its children.
-
-### Move the text editor token.
-
-Now let's move another "behavioral" token to the site level. 
-- Move `withSimpleEditor` from `/src/data/pages/gallery` to `/src/components/Element`.
-- Remove the typography tokens (`asBold`, etc). and instead import them from `./tokens`.
-- Replace `asLink` with a composition of the link styles and the link editor:
-
-  ```ts
-  import {
-    asBold, asItalic, asUnderline, withLinkStyles, withLinkEditor
-  } from './tokens';
-
-  const simpleDesign = {
-    Bold: asBold,
-    Italic: asItalic,
-    Underline: asUnderline,
-    Link: flowHoc(withLinkStyles, withLinkEditor()),
-  };
-  ```
-
-- Finally, add some metadata to our new `withSimpleEditor` token by wrapping it
-  in `asElementToken`:
-
-  ```ts
-  const withSimpleEditor = (nodeKey?: string, placeholder?: string) => asElementToken('Text Editor')(
-    addClasses('overflow-hidden'),
-    withChild(
-      flow(
-        withDesign(simpleDesign),
-        withPlaceholder(placeholder),
-        withNodeKey(nodeKey),
-      )(RichText),
-      'Editor',
-    ),
-  );
-  ```
-
-Now let's use these site-level tokens on our gallery page:
-1. Create an `index.ts` file in `/src/components/Element` with the following contents:
+   *packages/mysite/src/components/RichText/tokens/index.ts*
    ```ts
-   import withSimpleEditor from './withSimpleEditor';
-   export * from './tokens';
-   export { withSimpleEditor }
+   import mysiteRichText from './mysiteRichText';
+   
+   export default mysiteRichText;
    ```
-1. In `/src/data/pages/gallery`, replace  
-   `import withSimpleEditor from './withSimpleEditor';` with  
-   `import { withSimpleEditor } from '../../../components/Element';`
-1. Repeat above steps in `CaptionedImage.tsx`
-1. Delete the file `withSimpleEditor.tsx`
-1. Run your site and visit the gallery page (http://localhost:8000/gallery) and
-   it should run exactly as it did before.
+   
+   *packages/mysite/src/components/RichText/index.ts*
+   ```ts
+   import mysiteRichText from './tokens';
+   
+   export { mysiteRichText };
+   ```
+   
+   *packages/mysite/src/index.ts*
+   ```ts
+   export * from './components/RichText';
+   ```
+Rebuild your package (execute `npm run build` from the package directory or
+`npm run build:packages` from outside it), and use these tokens in the Gallery.
+In `sites/mysite/src/data/pages/gallery/index.tsx`, add these imports:
+```ts
+import { RichText } from '@bodiless/richtext-ui';
+import { withPlaceholder } from '@bodiless/components';
+import { mysiteElement, mysiteRichText } from 'mysite';
+```
+and then change:
+```ts
+const Body = withSimpleEditor('body', 'Body')(Div);
+```
+to
+```ts
+const Body = as(
+  mysiteRichText.Simple,
+  withPlaceholder('Body'),
+  withNodeKey('body'),
+)(RichText);
+```
+Similarly, in `sites/mysite/src/data/pages/Gallery/CaptionedImage.tsx`, add the imports
+and change
+```ts
+const Body = withSimpleEditor('caption', 'Caption')(Div);
+```
+to
+```ts
+const Body = as(
+  mysiteRichText.Simple,
+  withPlaceholder('Caption'),
+  withNodeKey('caption'),
+)(RichText);
+```
 
-## 2. Make the Gallery reusable.
+First, let's look at the `mysiteRichText` token collection. It contains a single
+token, `Simple`, expressed as a *token specification*. A token described in this
+notation is a 2-level nested object. The inner keys of this object are simply
+the design keys of the component to which the token applies, and their values
+are higher-order components which should be applied to each element. The top
+level keys represent "domains" -- pieces of the token which might be selectively
+reused, extended or overridden by a downstream consumer. Here we are using just
+a single domain, `Core`. We'll show later on how to define and use multiple
+domains to facilitate extension and customization.
 
-If you have components which may appear on more than one page in your site, its
-best practice to place them in `src/components` so they can be reused by any
-page/template. While you could theoretically import them from another page,
-keeping reusable components organized in one place makes a site much easier to
-maintain.
+In this case, the design keys represent the components which are available in
+the editor to render different text formats, as described in [the first tutorial](../IntroToBodilessConcepts#6-configuring-the-rich-text-editor). We apply our
+typography tokens to each, thus ensuring that any changes will propagate to all
+simple rich text editors on the site. 
 
-1. Create a folder called `Gallery` in `src/components`
-1. Move the `Gallery.tsx` & `CaptionedImage.tsx` files to the
-   `/src/components/Gallery` folder
-1. Rename `Gallery.tsx` -> `index.tsx` 
-1. Change the import on the page to import `Gallery` & `GalleryTile` from
-   `../../../components/Gallery`
-1. Run your site and visit the gallery page (http://localhost:8000/gallery) and
-   it should run exactly as it did before.
+Note the special design key `_`. Tokens supplied in this key apply to the editor
+as a whole. Here we make the editor `stylable` -- that is capable of receiving
+classes via the FClasses API. We alo supply a placeholder to be used as a
+default, though this will usually be overridden where the editor is used. This is
+because the placeholder--like the node key--is usually defined by the context
+in which the token is placed, and therefore not reusable.
+
+Applying our token with `as(mysiteRichText.Simple)` is equivalent to the following:
+
+```ts
+as(
+  withPlaceholder('Rich text...'),
+  withDesign({
+    Bold: mysiteElement.Bold,
+    Italic: mysiteElement.Italic,
+    Underline: mysiteElement.Underline,
+    Link: as(mysiteElement.Link, asBodilessLink()),
+  }),
+);
+```
+
+## 2. Make the Gallery reusable
+
+If you have components which may appear on more than one page in your site, you
+can export them from your design system package, and make them
+"designable" so that they can be easily styled to implement different variations.
+
+In a Bodiless design system, *components* are usually bare templates which do
+little or nothing in themselves until one or more *tokens* are applied to them.
+They are often referred to as "clean" components. Such a component is always
+"designable" via the
+[Bodiless Design API](../Architecture/FClasses?id=the-design-api). That is, it
+exposes an api which allows tokens to be applied to constituent elements within
+the component. This is very similar to the basic
+[slots pattern](https://daveceddia.com/pluggable-slots-in-react-components/) in
+React. The key difference is that, with the Design API, we don't inject the
+actual React nodes which should be rendered in a particular slot. Instead we
+provide a higher order component (a "token") which will be applied to the
+component in that slot. This allows us to *layer* styling or behavior for
+individual elements.
+
+#### Creating a clean component.
+
+Let's create "clean" versions of our `CaptionedImage` and `Gallery` components.
+In `packages/mysite/src/componants/CaptionedImage`, create `CaptionedImageClean.tsx`:
+
+```tsx
+import React from 'react';
+import type { FC, HTMLProps } from 'react';
+import {
+  ComponentOrTag, DesignableComponentsProps, Img, Section, designable, asTokenSpec
+} from '@bodiless/fclasses';
+import { RichText } from '@bodiless/richtext-ui';
+
+type CaptionedImageComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Image: ComponentOrTag<any>,
+  Body: ComponentOrTag<any>,
+};
+
+type CaptionedImageProps =
+  HTMLProps<HTMLElement> & DesignableComponentsProps<CaptionedImageComponents>;
+
+const CaptionedImageBase: FC<CaptionedImageProps> = ({ components: C, ...rest }) => (
+  <C.Wrapper {...rest}>
+    <C.Image />
+    <C.Body />
+  </C.Wrapper>
+);
+
+const captionedImageComponents: CaptionedImageComponents = {
+  Wrapper: Section,
+  Image: Img,
+  Body: RichText,
+};
+
+const CaptionedImageClean = designable(captionedImageComponents, 'CaptionedImage')(CaptionedImageBase);
+
+const asCaptionedImageToken = asTokenSpec<CaptionedImageComponents>();
+
+export default CaptionedImageClean;
+export { asCaptionedImageToken };
+```
+
+This exemplifies the 3-step process involved in creating a clean component:
+1. Define the "design" of the component. This is a set of base components which
+   will be used in the component itself, and which can be targeted by the bodiless
+   `withDesign` function (or as inner keys in a token specification).  In the
+   `CaptionedImage` component, we define  a design consisting of three components:
+   ```ts
+   type CaptionedImageComponents = {
+     Wrapper: ComponentOrTag<any>,
+     Image: ComponentOrTag<any>,
+     Body: ComponentOrTag<any>,
+   };
+   ```
+2. Write the jSX code for the component itself.  Usually, this has no styling and
+   very little functionality.  It is just a bare template on which styles and
+   behaviors can be hung:
+   ```ts
+   type CaptionedImageProps =
+     HTMLProps<HTMLElement> & DesignableComponentsProps<CaptionedImageComponents>;
+   const CaptionedImageBase: FC<CaptionedImageProps> = ({ components: C, ...rest }) => (
+     <C.Wrapper {...rest}>
+       <C.Image />
+       <C.Body />
+     </C.Wrapper>
+   );
+   ```
+   We use the Bodiless generic type `DesignableComponentsProps` to help define
+   the props of our component, which will now include a `components` prop captaining
+   the fully styled constituent components which make up the clean component.
+
+3. Make the component "designable":
+   ```ts
+   const captionedImageComponents: CaptionedImageComponents = {
+     Wrapper: Section,
+     Image: Img,
+     Body: RichText,
+   };
+   
+   const CaptionedImageClean = designable(captionedImageComponents, 'CaptionedImage')(CaptionedImageBase);
+   ```
+   In this step, we first define the starting sub-components in our design.
+   These are the base components to which any HOC's provided by `withDesign` will
+   be applied. Here we use stylable HTML elements exported by
+   `@bodiless/fclasses`. Such stylable elements are capable of having their
+   `className` prop modified by the [FClasses API]().
+
+   Then, we pass this set of starting components to the Bodiless `designable`
+   HOC. A component so wrapped can receive a `design` prop (usually provided by
+   `withDesign` or `as`) containing the HOC's which should be applied to each
+   constituent. So, for example:
+   ```ts
+   withDesign({
+     Image: 'border',
+   });
+   ```
+   or
+   ```ts
+   as(
+     asTokenSpec<CaptionedImageComponents>)()({
+       Core: {
+         Image: 'border'
+       },
+    }),
+   );
+   ```
+   would both apply the `border` class to the `Image` element.
+
+   The second parameter to `designable` is an string which can be used
+   to identify the element in the rendered markup.
+
+#### Adding styling
+
+As you can see, our clean component has no styling or behavior.  Let's create a
+token collection to provide it.
+
+As usual, create `mysiteCaptionedImage.ts` in
+`packages/mysite/src/components/CaptionedImage/tokens`:
+
+```ts
+import { as } from '@bodiless/fclasses';
+import { asBodilessImage } from '@bodiless/components-ui';
+import { withNodeKey } from '@bodiless/core';
+import { withPlaceholder } from '@bodiless/components';
+import { mysiteRichText } from '../../RichText';
+import { asCaptionedImageToken } from '../CaptionedImageClean';
+
+const Base = asCaptionedImageToken({
+  Core: {
+    Wrapper: 'mx-2 border-8 rounded-t-lg h-full flex flex-col',
+    Image: as(
+      asBodilessImage(),
+      'w-full',
+      withNodeKey('image'),
+    ),
+    Body: as(
+      mysiteRichText.Simple,
+      withPlaceholder('Caption'),
+      withNodeKey('caption'),
+      'text-white bg-black p-2 flex-grow',
+    ),
+  },
+});
+
+const WithBlueBorder = asCaptionedImageToken({
+  Core: {
+    Wrapper: 'border-blue-400',
+  },
+  Meta: {
+    categories: {
+      Border: ['Blue'],
+    },
+  },
+});
+
+const WithTealBorder = asCaptionedImageToken({
+  Core: {
+    Wrapper: 'border-teal-400',
+  },
+  Meta: {
+    categories: {
+      Border: ['Teal'],
+    },
+  },
+});
+
+const WithOrangeBorder = asCaptionedImageToken({
+  Core: {
+    Wrapper: 'border-orange-400',
+  },
+  Meta: {
+    categories: {
+      Border: ['Orange'],
+    },
+  },
+});
+
+export default {
+  Base,
+  WithBlueBorder,
+  WithOrangeBorder,
+  WithTealBorder,
+};
+```
+
+By now, this should look very familiar.  A few things to note:
+- We use `asCaptionedImageToken` to define the token specifications.  This is a
+  utility we exported from our clean component and provides both type safety and
+  autocompletion of the design keys in our token specification.
+- We create a set of tokens to produce different color variations, and attach
+  necessary metadata (for the flow container component selector) via the
+  reserved `Meta` domain. These tokens are not intended to be used alone, but
+  rather *composed* with the `Base` token to produce the actual
+  variations (by convention, such tokens are often prefixed by `With...` or
+  `As...`).
+
+#### Use the CaptionedImage token
+
+To finish up, export the clean component from your package as before:
+
+   *packages/mysite/src/components/CaptionedImage/tokens/index.ts*
+   ```ts
+   import mysiteCaptionedImage from './mysiteCaptionedImage';
+   
+   export default mysiteCaptionedImage;
+   ```
+   
+   *packages/mysite/src/components/CaptionedImage/index.ts*
+   ```ts
+   import CaptionedImageClean, { asCaptionedImageToken } from './CaptionedImageClean';
+   import mysiteCaptionedImage from './tokens';
+   
+   export { CaptionedImageClean, mysiteCaptionedImage, asCaptionedImageToken };
+   ```
+   
+   *packages/mysite/src/index.ts*
+   ```ts
+   ...
+   export * from './components/CaptionedImage';
+   ```
+
+Now use it in the gallery. Remove the tokens which apply to the captioned image
+(`with...Border`), and replace the `design` with:
+
+```ts
+const design = {
+  BlueImageTile: on(CaptionedImageClean)(
+    mysiteCaptionedImage.Base,
+    mysiteCaptionedImage.WithBlueBorder,
+  ),
+  TealImageTile: on(CaptionedImageClean)(
+    mysiteCaptionedImage.Base,
+    mysiteCaptionedImage.WithTealBorder,
+  ),
+  OrangeImageTile: on(CaptionedImageClean)(
+    mysiteCaptionedImage.Base,
+    mysiteCaptionedImage.WithOrangeBorder,
+  ),
+};
+```
+
+Rebuild your package and reload the gallery page.  It should look and function exactly
+as before.
+
+> Extra Credit: Refactor and move the Gallery component itself (`Gallery.tsx`)
+> using the same patterns.
+
+## 3. Extending Tokens using Token Domains
+
+Let's look again at our `Base` captioned image token:
+
+```ts
+const Base = asCaptionedImageToken({
+  Core: {
+    Wrapper: 'mx-2 border-8 rounded-t-lg h-full flex flex-col',
+    Image: as(
+      asBodilessImage(),
+      'w-full',
+      withNodeKey('image'),
+    ),
+    Body: as(
+      mysiteRichText.Simple,
+      withPlaceholder('Caption'),
+      withNodeKey('caption'),
+      'text-white bg-black p-2 flex-grow',
+    ),
+  },
+});
+```
+What if we wanted to reuse this token to create a differently styled gallery
+page, say one without the inverted colors in the caption. As it stands, all the
+styling and behavior of our component are mixed together into a single token.
+This makes it difficult to customize one aspect of the styling without recomposing
+the whole token.  To simplify the process, Bodiless token specifications introduce
+the notion of token "domains".
+
+As mentioned previously, domains serve to divide a token into pieces which can
+be selectively extended or overridden.  Let's rewrite the token above to separate
+behavior (our editors), layout and theme:
+```ts
+const Base = asCaptionedImageToken({
+  Core: {
+    Image: as(
+      asBodilessImage(),
+      withNodeKey('image')
+    ),
+    Body: as(
+      mysiteRichText.Simple,
+      withPlaceholder('Caption'),
+      withNodeKey('caption'),
+    ),
+  },
+  Layout: {
+    Wrapper: 'mx-2 h-full flex flex-col',
+    Image: 'w-full',
+    Body: 'p-2 flex-grow',
+  },
+  Theme: {
+    Wrapper: 'border-8 rounded-t-lg',
+    Body: 'text-white bg-black',
+  },
+});
+```
+
+Notice that if you try to compile `mysiteCaptionedImage.ts` now, you'll get a typescript
+error.  This is because the set of allowed domains is constrained. By default, Bodiless
+only allows a single `Core` domain -- but usually a design system will define its own
+set of domains once and reuse them in all their tokens.  For the sake of demonstration,
+we will create a system that allows three.
+
+Create `packages/mysite/src/asTokenSpec.ts` with the following contents:
+```ts
+import { DesignableComponents, asTokenSpec as asTokenSpecBase } from '@bodiless/fclasses';
+
+const domains = {
+  Core: {},
+  Schema: {},
+  Layout: {},
+  Theme: {},
+};
+
+type D = typeof domains;
+
+const asTokenSpec = <C extends DesignableComponents>() => asTokenSpecBase<C, D>(domains);
+
+export { asTokenSpec };
+```
+
+And make sure this is exported from your package by adding the following to
+`packages/mysite/src/index.ts`:
+```ts
+export { asTokenSpec } from './asTokenSpec';
+```
+
+Now, modify the import of `asTokenSpec` in every file in your package which uses it,
+so that your custom version is imported instead of the default.  This should include:
+- packages/mysite/src/components/CaptionedImage/CaptionedImageClean.tsx
+- packages/mysite/src/components/Element/tokens/mysiteElement.ts
+- packages/mysite/src/components/Gallery/GalleryClean.tsx
+- packages/mysite/src/components/RichText/tokens/mysiteRichText.ts
+
+
+In the above example, we defined three custom domains. In general, this choice
+will be based on an understanding of how the token would likely be reused or
+extended by downstream consumers. In this case, we separate "editors" (the
+way the component behaves to content editors), "layout" (how the individual parts
+of the component are laid out within the outer container), and "theme" (the
+look and feel of the component, which is most likely to be overridden).
+
+Now, if we want to create a variation on the captioned image without the
+inverted caption, we can simply override the `Body` key from the 'Theme' domain. 
+```ts
+```
+Everything else about the token will remain the same, so we don't have to worry about
+recreating the layout or plugging in the editors.
+
+Another example:
+
+```ts
+import omit from 'lodash/omit';
+const Custom2 = omit(Base, 'Editors');
+```
+Here we remove all Bodiless editors from the token. We can now use our design
+system in a context where content comes from another source, like an external
+CMS:
+```ts
+const useContentFromCMS = () => { ... } // Fetch content, eg using Gatsby useStaticQuery()
+const WithContentFromCMS = asCaptionedImageToken({
+  Core: {
+    // Replace the default RichText starting component. 
+    Body: startWith(Div),
+  },
+  Editors: {
+    Body: addProps(() => ({
+      children: useContentFromCMS().caption,
+    })),
+    Image: addProps(() => 
+      src: useContentFromCMS().imgSrc,
+    })),
+  },
+});
+```
+
+The above example has some limitations.  The image and caption both need to know where
+to get their own data
+
+## 3. Creating reusable page templates.
+
+
+
 
 ## 3. Create a re-useable Primary Header for the site
 

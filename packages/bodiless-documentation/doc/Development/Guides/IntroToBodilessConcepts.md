@@ -395,7 +395,7 @@ const asUnderline = addClasses('underline');
 const asLink = as(
   startWith(A),
   asBodilessLink(),
-  addClasses('text-blue-700 underline')
+  addClasses('text-blue-400 underline')
 );
 
 const simpleDesign = {
@@ -461,7 +461,7 @@ const asUnderline = addClasses('underline');
 const asLink = as(
   startWith(A),
   asBodilessLink(),
-  addClasses('text-blue-700 underline'),
+  addClasses('text-blue-400 underline'),
 );
 ```
 
@@ -516,9 +516,15 @@ import {
 } from '@bodiless/fclasses';
 import withSimpleEditor from './withSimpleEditor';
 
-const Wrapper = Section;
-const Image = as(addClasses('w-full'), asBodilessImage('image'))(Img);
-const Body = withSimpleEditor('caption', 'Caption')(Div);
+const Wrapper = addClasses('flex flex-col rounded-t-lg h-full mx-2 border-8')(Section);
+const Image = as(
+  addClasses('w-full'),
+  asBodilessImage('image')
+)(Img);
+const Body = as(
+  addClasses('text-white bg-black flex-grow p-2'),
+  withSimpleEditor('caption', 'Caption')
+)(Div);
 
 const CaptionedImageBase: FC<HTMLProps<HTMLElement>> = props => (
   <Wrapper {...props}>
@@ -551,8 +557,6 @@ import {
 import { withNode } from '@bodiless/core';
 import CaptionedImage from './CaptionedImage';
 
-const asGalleryTile = addClasses('mx-2 border-8');
-
 const Wrapper = addClasses('my-2')(Section);
 const Header = addClasses('text-2xl')(H2);
 const Body = addClasses('flex')(Div);
@@ -571,22 +575,22 @@ const Gallery = as(
   withNode,
 )(GalleryBase);
 
-export const GalleryTile = asGalleryTile(CaptionedImage);
 export default Gallery;
 ```
 
 Once again, we see the same compositional pattern. Finally, import this into your `index.tsx`:
 
 ```tsx
-import Gallery, { GalleryTile } from './Gallery';
+import Gallery from './Gallery';
+import CaptionedImage from './CaptionedImage';
 ```
 
 And place it on the page after the `<Body />` tag:
 
 ```tsx
 <Gallery nodeKey="gallery-content">
-  <GalleryTile nodeKey="tile1" />
-  <GalleryTile nodeKey="tile2" />
+  <CaptionedImage nodeKey="tile1" />
+  <CaptionedImage nodeKey="tile2" />
 </Gallery>
 ```
 
@@ -621,8 +625,8 @@ this, BodilessJS provides a simple, Flow Container-based grid container, and a s
 an Editor to select and place components within it. Refactor the `Gallery` component to use the
 `FlowContainer` container.
 
-First, create some styled variations of `GalleryTile` with different colored borders. Add the
-following to `Gallery.tsx` just after the line where `asGalleryTile` is defined:
+First, create some styled variations of `CaptionedImage` with different colored borders. Add the
+following to `Gallery.tsx` just after the imports:
 
 ```tsx
 const withBlueBorder = addClasses('border-blue-400');
@@ -650,7 +654,6 @@ gallery:
     const design = {
       BlueImageTile: as(
         replaceWith(CaptionedImage),
-        asGalleryTile,
         withBlueBorder,
         withMeta({
           title: 'Blue Image Tile',
@@ -661,7 +664,6 @@ gallery:
       ),
       TealImageTile: as(
         replaceWith(CaptionedImage),
-        asGalleryTile,
         withTealBorder,
         withMeta({
           title: 'Teal Image Tile',
@@ -672,7 +674,6 @@ gallery:
       ),
       OrangeImageTile: as(
         replaceWith(CaptionedImage),
-        asGalleryTile,
         withOrangeBorder,
         withMeta({
           title: 'Orange Image Tile',
@@ -720,8 +721,8 @@ which makes our three tiles available for placement by a Content Editor:
 01. Now remove the following from `index.tsx`:
     ```tsx
     <Gallery nodeKey="gallery-content">
-      <GalleryTile nodeKey="tile1" />
-      <GalleryTile nodeKey="tile2" />
+      <CaptionedImage nodeKey="tile1" />
+      <CaptionedImage nodeKey="tile2" />
     </Gallery>
     ```
     And replace it with:
