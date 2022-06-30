@@ -1175,3 +1175,6 @@ Feel free to add components and text to your new page.
 At this point, your entire site is running from code within the package and no
 code is within the page. This is site of your design system package that is easy
 to publish, reuse, extend in future.
+
+A future tutorial will hook the page component to a template picker that's
+allows content editor what template they would like to use.
