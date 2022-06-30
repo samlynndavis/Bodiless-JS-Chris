@@ -6,6 +6,7 @@ import {
 import { RichText } from '@bodiless/richtext-ui';
 import { asTokenSpec } from '../../asTokenspec';
 
+// Design: set of base components which will be used in the component itself
 type CaptionedImageComponents = {
   Wrapper: ComponentOrTag<any>,
   Image: ComponentOrTag<any>,
@@ -16,6 +17,7 @@ type CaptionedImageComponents = {
 type CaptionedImageProps =
   HTMLProps<HTMLElement> & DesignableComponentsProps<CaptionedImageComponents>;
 
+// JSX: Bare Template usually with minimal styling/functionality
 const CaptionedImageBase: FC<CaptionedImageProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.Image />
@@ -25,6 +27,7 @@ const CaptionedImageBase: FC<CaptionedImageProps> = ({ components: C, ...rest })
   </C.Wrapper>
 );
 
+// Designable: Define the starting sub-components of the design
 const captionedImageComponents: CaptionedImageComponents = {
   Wrapper: Section,
   Image: Img,

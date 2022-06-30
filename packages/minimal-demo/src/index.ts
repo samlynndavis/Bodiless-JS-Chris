@@ -16,5 +16,6 @@ export * from './components/CaptionedImage';
 export * from './components/Element';
 export * from './components/Footer';
 export * from './components/Gallery';
+export * from './components/Page';
 export * from './components/RichText';
 export { asTokenSpec } from './asTokenSpec';

@@ -352,7 +352,7 @@ provide a higher order component (a "token") which will be applied to the
 component in that slot. This allows us to *layer* styling or behavior for
 individual elements.
 
-### Creating a "clean" component.
+### Creating a "clean" component
 
 Let's create "clean" versions of our `CaptionedImage` and `Gallery` components.
 In `packages/mysite/src/components/CaptionedImage`, create `CaptionedImageClean.tsx`:
@@ -365,6 +365,7 @@ import {
 } from '@bodiless/fclasses';
 import { RichText } from '@bodiless/richtext-ui';
 
+// Design: set of base components which will be used in the component itself
 type CaptionedImageComponents = {
   Wrapper: ComponentOrTag<any>,
   Image: ComponentOrTag<any>,
@@ -375,6 +376,7 @@ type CaptionedImageComponents = {
 type CaptionedImageProps =
   HTMLProps<HTMLElement> & DesignableComponentsProps<CaptionedImageComponents>;
 
+// JSX: Bare Template usually with minimal styling/functionality
 const CaptionedImageBase: FC<CaptionedImageProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.Image />
@@ -384,6 +386,7 @@ const CaptionedImageBase: FC<CaptionedImageProps> = ({ components: C, ...rest })
   </C.Wrapper>
 );
 
+// Designable: Define the starting sub-components of the design
 const captionedImageComponents: CaptionedImageComponents = {
   Wrapper: Section,
   Image: Img,
@@ -412,7 +415,7 @@ This exemplifies the 3-step process involved in creating a clean component:
     Body: ComponentOrTag<any>,
    };
    ```
-2. Write the jSX code for the component itself.  Usually, this has no styling and
+2. Write the JSX code for the component itself.  Usually, this has no styling and
    very little functionality.  It is just a bare template on which styles and
    behaviors can be hung:
    ```ts
@@ -595,6 +598,8 @@ To finish up, export the clean component from your package as before:
    export * from './components/CaptionedImage';
    ```
 
+?> **REMINDER:** Rebuild Package.
+
 Now use it in the gallery page:
 `/src/data/pages/gallery/Gallery.tsx`.
 
@@ -623,6 +628,8 @@ const design = {
   ),
 };
 ```
+
+?> **REMINDER:** Rebuild Package.
 
 Rebuild your package and reload the gallery page.  It should look and function exactly
 as before.
@@ -772,6 +779,8 @@ export `LightCaption` from the token collection at the end of file.
 
 Everything else about the token will remain the same, so we don't have to worry about
 recreating the layout or plugging in the editors.
+
+?> **REMINDER:** Rebuild Package.
 
 Then token can now be used in `src/data/pages/gallery/Gallery.tsx` page and
 create 3 additional variations in your `design{}`
@@ -930,21 +939,207 @@ module.exports = getPackageTailwindConfig({
 
 Then replace the colors in the borders, `WithBlueBorder`, `withTealBorder`, `WithOrangeBorder` to the custom colors of border-mysite-blue, border-mysite-teal, border-mysite-orange.
 
-?> **Tip:** If you modify the Tailwind config, you must restart/rebuild the site
-to have the tailwind css properly rebuild.
+?> **IMPORTANT:** If you modify the Tailwind config, you must rebuild & restart
+the site to have the tailwind css properly rebuild. The tailwind config creation
+is part of the build and not updated on watch.
 
 ## 5. Extra Credit: Make the Footer a component at package level
 
-Apply your learnings and create a re-useable Footer in the package by adding clean footer component, tokens, apply some styling in those tokens and use in the gallery page.
+Apply your learnings and create a re-useable Footer in the package by adding
+clean footer component, tokens, apply some styling in those tokens and use in
+the gallery page.
 
 ## 6. Creating extensible page templates
 
 Templates in Bodiless are just large components, and are styled and extended the
 same way as any other component. This makes it easy to keep parts of the page
-consistent while varying others.  Here, we'll create a page template which can
-be used both for "Gallery" pages and for "Default" pages.  Much of the template
-will be the same on both types of pages; only the main content will change.
+consistent while varying others. Here, we'll convert the existing gallery page
+into a template that all pages uses.
 
+### Add the Clean Component
 Create `packages/mysite/src/components/Page/PageClean.tsx`:
 
-TODO
+Let's add the PageClean and by now this should be a similar exercise to all the
+rest of the components you have built.
+
+```tsx
+import React from 'react';
+import type { FC, HTMLProps } from 'react';
+import { Page } from '@bodiless/gatsby-theme-bodiless';
+import {
+  ComponentOrTag, DesignableComponentsProps, Img, designable, Div, H1, A,
+} from '@bodiless/fclasses';
+import { RichText } from '@bodiless/richtext-ui';
+import { asTokenSpec } from '../../asTokenspec';
+import { GalleryClean } from '../Gallery';
+import { FooterClean } from '../Footer';
+
+// Design: set of base components which will be used in the component itself
+type PageComponents = {
+  Page: ComponentOrTag<any>,
+  Container: ComponentOrTag<any>,
+  HeroLink: ComponentOrTag<any>,
+  HeroImage: ComponentOrTag<any>,
+  PrimaryHeader: ComponentOrTag<any>,
+  BodyWrapper: ComponentOrTag<any>,
+  Body: ComponentOrTag<any>,
+  Gallery: ComponentOrTag<any>,
+  Footer: ComponentOrTag<any>,
+};
+
+type PageProps =
+  HTMLProps<HTMLElement> & DesignableComponentsProps<PageComponents>;
+
+// JSX: Bare Template usually with minimal styling/functionality
+const PageBase: FC<PageProps> = ({ components: C, ...rest }) => (
+  <C.Page {...rest}>
+    <C.Container>
+      <C.HeroLink>
+        <C.HeroImage />
+      </C.HeroLink>
+      <C.PrimaryHeader />
+      <C.BodyWrapper>
+        <C.Body />
+      </C.BodyWrapper>
+      <C.Gallery />
+      <C.Footer />
+    </C.Container>
+  </C.Page>
+);
+
+// Designable: Define the starting sub-components of the design
+const pageComponents: PageComponents = {
+  Page,
+  Container: Div,
+  HeroLink: A,
+  HeroImage: Img,
+  PrimaryHeader: H1,
+  BodyWrapper: Div,
+  Body: RichText,
+  Gallery: GalleryClean,
+  Footer: FooterClean,
+};
+
+const PageClean = designable(pageComponents, 'Page')(PageBase);
+
+const asPageToken = asTokenSpec<PageComponents>();
+
+export default PageClean;
+export { asPageToken };
+```
+You can see all the components that were `src/data/pages/gallery/index.tsx` are
+transferred into the page. A slight difference we renamed the top slots for
+image & link to HeroLink & HeroImage to be more precise in their usage. This is
+good practice as just having Link & Image are very generic names and not clear
+of purpose. In addition, we wrapped the Body with BodyWrapper (Div) for
+styling. In the designable section. you will see that we transferred the
+starting sub-components.
+
+### Add the Tokens
+Create `packages/mysite/src/components/Page/tokens/mysitePage.tsx`:
+
+Then proceed with copying the styling and functionity to the correct domains &
+slots.
+
+```jsx
+import { as } from '@bodiless/fclasses';
+import { withNode, withNodeKey } from '@bodiless/core';
+import { asBodilessImage, asBodilessLink, withPlaceholder } from '@bodiless/components';
+import { mysiteRichText } from '../../RichText';
+import { mysiteGallery } from '../../Gallery';
+import { mysiteElement } from '../../Element';
+import { mysiteFooter } from '../../Footer';
+import { asPageToken } from '../PageClean';
+
+const Base = asPageToken({
+  Editors: {
+    HeroLink: asBodilessLink('hero-link'),
+    HeroImage: asBodilessImage('hero-image', {
+      src: 'https://via.placeholder.com/6000x1200.png?text=HERO+IMAGE',
+      alt: 'Hero Image',
+      title: 'Hero Image',
+    }),
+    Body: as(
+      mysiteRichText.Simple,
+      withPlaceholder('Body'),
+      withNodeKey('body'),
+    ),
+    Gallery: as(
+      mysiteGallery.Base,
+      withNode,
+      withNodeKey('gallery-content'),
+    ),
+    Footer: as(mysiteFooter.Base),
+  },
+  Theme: {
+    Container: 'container mx-auto my-2',
+    PrimaryHeader: mysiteElement.H1,
+  },
+});
+
+export default {
+  Base,
+};
+```
+
+### Add the index files and export the components.
+Add the index files and import/export the appropriate named components as we
+have done in previous steps.
+1. Add the `packages/mysite/src/components/Page/index.tsx`
+1. Add the `packages/mysite/src/components/Page/tokens/index.tsx`
+1. Update the `packages/minimal-demo/src/index.ts`
+
+?> **REMINDER:** Rebuild Package.
+
+### Update the Site's Default Template to use package's Page component.
+
+We next want to updates the sites template file `sites/mysite/src/templates/_default.jsx`
+
+It becomes a very simple job of composing the DefaultPage with
+as(mysitePage.Base)(PageClean) and exporting it.
+
+```jsx
+import { graphql } from 'gatsby';
+import { PageClean, mysitePage} from '@bodiless/minimal-demo';
+import { as } from '@bodiless/fclasses';
+
+const DefaultPage = as(mysitePage.Base)(PageClean);
+
+export default DefaultPage;
+
+// The allSite query is extraneous and exists only to prevent
+// a webpack linting error produced by default gatsby config(the $slug variable
+// is used in the fragments, but the graphql doesn't pick that up and
+// raises an unused parameter error).
+export const query = graphql`
+  query($slug: String!) {
+    ...PageQuery
+    ...SiteQuery
+    ...DefaultContentQuery
+    allSite(filter: {pathPrefix: {eq: $slug}}) {
+      edges {
+        node {
+          buildTime
+        }
+      }
+    }
+  }
+`;
+```
+
+Feel free to delete `sites/minimal-demo/src/components/Page/index.tsx` that came
+with new site as it's no longer being used and now use our package level Page.
+### Try the new template
+In edit mode, click on Page | New and create a new page and go to that new page.
+This page should behave identical look & behavior to the previous hard coded
+gallery's index.tsx file.
+
+If you look at the `src/data/pages/YOURPAGENAME`, you will see a single file
+index.json that its contents `{ "#template": "_default" }` say its using the
+site's_default tempalte.  A standard gatsby template convention.
+
+Feel free to add components and text to your new page.
+
+At this point, your entire site is running from code within the package and no
+code is within the page. This is site of your design system package that is easy
+to publish, reuse, extend in future.

@@ -6,6 +6,7 @@ import {
 import { FlowContainer } from '@bodiless/layouts-ui';
 import { asTokenSpec } from '../../asTokenspec';
 
+// Design: set of base components which will be used in the component itself
 type GalleryComponents = {
   Wrapper: ComponentOrTag<any>,
   Header: ComponentOrTag<any>,
@@ -15,6 +16,7 @@ type GalleryComponents = {
 type GalleryProps =
   HTMLProps<HTMLElement> & DesignableComponentsProps<GalleryComponents>;
 
+// JSX: Bare Template usually with minimal styling/functionality
 const GalleryBase: FC<GalleryProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.Header />
@@ -22,6 +24,7 @@ const GalleryBase: FC<GalleryProps> = ({ components: C, ...rest }) => (
   </C.Wrapper>
 );
 
+// Designable: Define the starting sub-components of the design
 const galleryComponents: GalleryComponents = {
   Wrapper: Section,
   Header: H2,

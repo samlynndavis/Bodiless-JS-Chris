@@ -6,6 +6,7 @@ import {
 import { RichText } from '@bodiless/richtext-ui';
 import { asTokenSpec } from '../../asTokenspec';
 
+// Design: set of base components which will be used in the component itself
 type FooterComponents = {
   Wrapper: ComponentOrTag<any>,
   Body: ComponentOrTag<any>,
@@ -14,12 +15,14 @@ type FooterComponents = {
 type FooterProps =
   HTMLProps<HTMLElement> & DesignableComponentsProps<FooterComponents>;
 
+// JSX: Bare Template usually with minimal styling/functionality
 const FooterBase: FC<FooterProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.Body />
   </C.Wrapper>
 );
 
+// Designable: Define the starting sub-components of the design
 const footerComponents: FooterComponents = {
   Wrapper: Section,
   Body: RichText,
