@@ -1,15 +1,7 @@
-/*
- * FOR TUTORIAL REFERENCE ONLY
- * not used by this page as its moved to packages/minimal-demo/src/components/Gallery
- */
-
-import React, { FC, HTMLProps } from 'react';
-import {
-  H2, Section, addClasses, as, stylable, withDesign, on,
-} from '@bodiless/fclasses';
-import { FlowContainer } from '@bodiless/layouts-ui';
-import { withNode } from '@bodiless/core';
-import { CaptionedImageClean, mysiteCaptionedImage } from '@bodiless/minimal-demo';
+import { as, withDesign, on, } from '@bodiless/fclasses';
+import { withNodeKey } from '@bodiless/core';
+import { asGalleryToken } from '../GalleryClean';
+import { CaptionedImageClean, mysiteCaptionedImage } from '../../CaptionedImage';
 
 const design = {
   BlueImageTile: on(CaptionedImageClean)(
@@ -42,20 +34,19 @@ const design = {
   ),
 };
 
-const Wrapper = addClasses('my-2')(Section);
-const Header = addClasses('text-2xl')(H2);
-const Body = withDesign(design)(FlowContainer);
+const Base = asGalleryToken({
+  Editors: {
+    Body: as(
+      withDesign(design),
+      withNodeKey('gallery-body'),
+    ),
+  },
+  Theme: {
+    Wrapper: 'my-2',
+    Header: 'text-2xl',
+  },
+});
 
-const GalleryBase: FC<HTMLProps<HTMLDivElement>> = ({ children, ...rest }) => (
-  <Wrapper {...rest}>
-    <Header>Gallery</Header>
-    <Body nodeKey="gallery-body" />
-  </Wrapper>
-);
-
-const Gallery = as(
-  stylable,
-  withNode,
-)(GalleryBase);
-
-export default Gallery;
+export default {
+  Base,
+};

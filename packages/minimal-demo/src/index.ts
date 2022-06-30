@@ -12,7 +12,9 @@
  * limitations under the License.
  */
 
-export * from './components/Element';
-export * from './components/RichText';
 export * from './components/CaptionedImage';
+export * from './components/Element';
+export * from './components/Footer';
+export * from './components/Gallery';
+export * from './components/RichText';
 export { asTokenSpec } from './asTokenSpec';

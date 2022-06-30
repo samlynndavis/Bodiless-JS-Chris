@@ -2,14 +2,15 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { Page, PageProps } from '@bodiless/gatsby-theme-bodiless';
 import {
-  addClasses, as, Div, H1, Img, A, Section,
+  addClasses, as, Div, H1, Img, A,
 } from '@bodiless/fclasses';
 import { asEditable, asBodilessLink, withPlaceholder } from '@bodiless/components';
 import { asBodilessImage } from '@bodiless/components-ui';
 import { RichText } from '@bodiless/richtext-ui';
-import { mysiteElement, mysiteRichText } from '@bodiless/minimal-demo';
-import { withNodeKey } from '@bodiless/core';
-import Gallery from './Gallery';
+import {
+  mysiteElement, mysiteRichText, mysiteFooter, FooterClean, mysiteGallery, GalleryClean,
+} from '@bodiless/minimal-demo';
+import { withNode, withNodeKey } from '@bodiless/core';
 
 const asPageContainer = addClasses('container mx-auto');
 const asYMargin = addClasses('my-2');
@@ -37,10 +38,13 @@ const Body = as(
   withNodeKey('body'),
 )(RichText);
 
-const Footer = asEditable(
-  { nodeKey: 'footer', nodeCollection: 'site' },
-  'Footer text. Click to edit!',
-)(Section);
+const Footer = as(mysiteFooter.Base)(FooterClean);
+
+const Gallery = as(
+  mysiteGallery.Base,
+  withNode,
+  withNodeKey('gallery-content'),
+)(GalleryClean);
 
 export default (props: PageProps) => (
   <Page {...props}>
@@ -49,7 +53,7 @@ export default (props: PageProps) => (
       <Link><Image /></Link>
       <PrimaryHeader>About BodilessJS</PrimaryHeader>
       <Body />
-      <Gallery nodeKey="gallery-content" />
+      <Gallery />
       <Footer />
     </Container>
   </Page>
