@@ -20,17 +20,17 @@ As you go through the tutorial, feel free to reference this code as needed.
 
 ## Prerequisites
 
-* Complete the [Intro to Bodiless Concepts](./IntroToBodilessConcepts) tutorial.
-  * Alternatively, if you already have a fair understanding of BodilessJS
+- Complete the [Intro to Bodiless Concepts](./IntroToBodilessConcepts) tutorial.
+  - Alternatively, if you already have a fair understanding of BodilessJS
     fundamentals and want to fast-forward to this tutorial, copy over the
     [gallery folder & contents](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/minimal-demo/src/data/pages/gallery)
     and place in a [new site](../../About/GettingStarted?id=creating-a-new-site) at
     `src/data/pages/gallery`.
-* Read through the high level introduction to the
+- Read through the high level introduction to the
   [Bodiless Design System](../../Design/DesignSystem). Even if you don't
   follow everything, it will give essential insight into the "why" of
   what you will do in this tutorial.
-* Acquire a basic understanding of utility first CSS (aka "Atomic" or "Functional" CSS)
+- Acquire a basic understanding of utility first CSS (aka "Atomic" or "Functional" CSS)
   and the [Tailwind](https://tailwindcss.com/) library.  There are many excellent
   articles on the web on this topic.  While you can use the Bodiless design system
   with other css-in-js paradigms, this is the one we recommend.
@@ -44,6 +44,7 @@ It would be possible to create our design system entirely at site level, for
 example, in a `/src/components` directory. However, we consider it a best
 practice to place all code (components and tokens) into a design system package.
 This has several advantages:
+
 - it is easy to publish this package so the design system can be used by other sites
 - it is easy to reorganize the internal structure of the package without changing imports
   in site level files.
@@ -52,7 +53,7 @@ This has several advantages:
 - there are performance penalties due to incomplete tree-shaking if you use typescript and
   import core bodiless packages directly from your Gatsby site.
 
-To facilitate creating a design system package, most Bodiless sites are structured as 
+To facilitate creating a design system package, most Bodiless sites are structured as
 a *monorepo*, and this is what is created by the `@bodiless/cli new` command you
 used to create a new site in the first tutorial.  Your new site should already
 contain a stub design system package at `/packages/{your-site-name}`, and that is
@@ -60,6 +61,8 @@ where we'll be implementing our design system.
 
 ?> **Note:**  in the examples below, we assume you have created a new site called `mysite`
 using the `__minimal__` template.
+
+### Create Element component within the package
 
 1. Create a file called `mysiteElement.ts` inside your design system package at
    `packages/mysite/src/components/Element/tokens`, and put the following lines there:
@@ -117,6 +120,8 @@ using the `__minimal__` template.
    > and make it easier to maintain. Following this pattern will also allow you to
    > take advantage of some BodilessJS tools for extending and optimizing your design
    > system, like [Token Shadowing]() and [Static Replacement]().
+
+### Update your site to use new package & Element component
 
 1. Add your package as a dependency in `/sites/mysite/package.json`:
 
@@ -197,7 +202,8 @@ We will go into the uses of token specifications in more detail in a later
 section. For now, you can think of `asTokenSpec` as a utility for creating
 tokens.
 
-### Providing a site-wide rich text editor.
+### Providing a site-wide rich text editor
+
 To complete the standardization of our site's typography, let's add to the design
 system package a rich text editor which uses the standard typography tokens.
 Create `packages/mysite/src/components/RichText/tokens/mysiteRichText.ts`:
@@ -305,7 +311,7 @@ domains to facilitate extension and customization.
 In this case, the design keys represent the components which are available in
 the editor to render different text formats, as described in [the first tutorial](../IntroToBodilessConcepts#6-configuring-the-rich-text-editor). We apply our
 typography tokens to each, thus ensuring that any changes will propagate to all
-simple rich text editors on the site. 
+simple rich text editors on the site.
 
 Note the special design key `_`. Tokens supplied in this key apply to the editor
 as a whole. Here we make the editor `stylable` -- that is capable of receiving
@@ -403,10 +409,12 @@ export { asCaptionedImageToken };
 ```
 
 This exemplifies the 3-step process involved in creating a clean component:
+
 1. Define the "design" of the component. This is a set of base components which
    will be used in the component itself, and which can be targeted by the bodiless
    `withDesign` function (or as inner keys in a token specification).  In the
    `CaptionedImage` component, we define  a design consisting of three components:
+
    ```ts
    type CaptionedImageComponents = {
      Wrapper: ComponentOrTag<any>,
@@ -415,9 +423,11 @@ This exemplifies the 3-step process involved in creating a clean component:
     Body: ComponentOrTag<any>,
    };
    ```
+
 2. Write the JSX code for the component itself.  Usually, this has no styling and
    very little functionality.  It is just a bare template on which styles and
    behaviors can be hung:
+
    ```ts
    type CaptionedImageProps =
      HTMLProps<HTMLElement> & DesignableComponentsProps<CaptionedImageComponents>;
@@ -428,6 +438,7 @@ This exemplifies the 3-step process involved in creating a clean component:
      </C.Wrapper>
    );
    ```
+
    We use the Bodiless generic type `DesignableComponentsProps` to help define
    the props of our component, which will now include a `components` prop captaining
    the fully styled constituent components which make up the clean component.
@@ -486,7 +497,7 @@ This exemplifies the 3-step process involved in creating a clean component:
   component. If you replace the body with different type of editor, it will
   maintain the same styles you apply to BodyWrapper div.
 
-### Adding styling
+### Adding styling & functionality with tokens
 
 As you can see, our clean component has no styling or behavior.  Let's create a
 token collection to provide those.
@@ -561,6 +572,7 @@ export default {
 ```
 
 By now, this should look very familiar.  A few things to note:
+
 - We use `asCaptionedImageToken` to define the token specifications.  This is a
   utility we exported from our clean component and provides both type safety and
   autocompletion of the design keys in our token specification.
@@ -571,11 +583,12 @@ By now, this should look very familiar.  A few things to note:
   variations (by convention, such tokens are often prefixed by `With...` or
   `As...`).
 
-### Use the CaptionedImage token
+### Export all the components & tokens
 
 To finish up, export the clean component from your package as before:
 
    *packages/mysite/src/components/CaptionedImage/tokens/index.ts*
+
    ```ts
    import mysiteCaptionedImage from './mysiteCaptionedImage';
    
@@ -599,6 +612,8 @@ To finish up, export the clean component from your package as before:
    ```
 
 ?> **REMINDER:** Rebuild Package.
+
+### Use the CaptionedImage token within your site
 
 Now use it in the gallery page:
 `/src/data/pages/gallery/Gallery.tsx`.
@@ -629,16 +644,14 @@ const design = {
 };
 ```
 
-?> **REMINDER:** Rebuild Package.
+Reload the gallery page. It should look and function exactly as before.
 
-Rebuild your package and reload the gallery page.  It should look and function exactly
-as before.
+At this point, it is safe to delete the file
+`src/data/pages/gallery/CaptionedImage.tsx` as you have successfully moved it to
+the package.
 
 > Extra Credit: Refactor and move the Gallery component itself (`Gallery.tsx`)
 > using the same patterns.
-
-At this point, its safe to delete the file `src/data/pages/gallery/CaptionedImage.tsx`
-as you have successfully moved it to packages.
 
 ## 3. Extending Tokens using Token Domains
 
@@ -723,6 +736,8 @@ system will define its own set of domains once and reuse them in all their
 tokens. For the sake of demonstration, we will create a system that allows six.
 Also, the categories were added to define the base behavior.
 
+### Create custom asTokenSpec
+
 Create `packages/mysite/src/asTokenSpec.ts` with the following contents:
 
 ```ts
@@ -746,17 +761,18 @@ export { asTokenSpec };
 
 And make sure this is exported from your package by adding the following to
 `packages/mysite/src/index.ts`:
+
 ```ts
 export { asTokenSpec } from './asTokenSpec';
 ```
 
 Now, modify the import of `asTokenSpec` in every file in your package which uses it,
 so that your custom version is imported instead of the default.  This should include:
+
 - packages/mysite/src/components/CaptionedImage/CaptionedImageClean.tsx
 - packages/mysite/src/components/Element/tokens/mysiteElement.ts
 - packages/mysite/src/components/Gallery/GalleryClean.tsx
 - packages/mysite/src/components/RichText/tokens/mysiteRichText.ts
-
 
 Now, if we want to create a variation on the captioned image without the
 inverted caption. This example, will use the Base token and omit anything from
@@ -802,6 +818,7 @@ create 3 additional variations in your `design{}`
 
 Visit the gallery page and in the gallery section, click on a component and click Add and you
 will see you have additional categories with Light and Dark captions that can be chosen.
+
 ### Extension token: Content sourced from CMS
 
 We can now use our design system in a context where content comes from another
@@ -846,6 +863,7 @@ to get their own data, so the token cannot be used to fetch data dynamically dep
 We could perhaps enhance the example using React context, but there is an easier way.
 
 We can simply rewrite the *clean* component:
+
 ```ts
 const CMSCaptionImageClean = (props: CaptionedImageProps & { contentId: string }) => {
   const { contentId, components: C, ...rest } = props;
@@ -868,16 +886,16 @@ and still leverage existing design system implementations.
 
 ### Naming convention for Extension & Composition
 
-The difference between _extension_ and _ composition_ is subtle, and deciding
+The difference between *extension* and *composition* is subtle, and deciding
 which to use is not an exact science. As a rule of thumb:
 
-- Use _composition_ when you are adding styling or behavior which creates a
+- Use *composition* when you are adding styling or behavior which creates a
   variation of the original component which downstream consumers may choose to
   add, remove, customize, or combine with other variations. In general, export
   the tokens which produce these variations using the `With...` prefix. The
   `WithContentFromCMS` token above is a good example of when this pattern should
   be used.
-- Use _extension_ when you are customizing an existing token at the brand or
+- Use *extension* when you are customizing an existing token at the brand or
   site level, and especially when you want to completely override one or more
   domains from the original token, as this is not possible with composition. In
   general, do not export tokens which are meant to extend other tokens; export
@@ -885,7 +903,7 @@ which to use is not an exact science. As a rule of thumb:
   earlier in this article is a good example of when this pattern should be used.
 
 This will help when you start composing your tokens into multiple variations.
-You will usually only want one _extension_ and can have multiple _compositions_.
+You will usually only want one *extension* and can have multiple *compositions*.
 
 ## 4. Using custom Tailwind classes
 
@@ -908,8 +926,13 @@ Normally, this is created at site level.  However, since our design system is
 being created in a package, it makes more sense to define our custom classes
 at the package level.
 
-Modify `packages/mysite/tailwind.config.js`, adding the `them` key to he
-`twConfig` definition.
+### Update the package's tailwind config.js
+
+Modify `packages/mysite/tailwind.config.js`, adding the `theme` key to the
+`twConfig` definition. We also suggest to extend the colors. If you were to
+leave off `extend`, you would overwrite colors and not get default tailwind
+colors. If default tailwind colors are not used in the site they will be purged
+and not bloat the css/package.
 
 ```js
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
@@ -937,7 +960,11 @@ module.exports = getPackageTailwindConfig({
 });
 ```
 
-Then replace the colors in the borders, `WithBlueBorder`, `withTealBorder`, `WithOrangeBorder` to the custom colors of border-mysite-blue, border-mysite-teal, border-mysite-orange.
+### Use the custom colors
+
+Then replace the colors in the CaptionImaged component borders,
+`WithBlueBorder`, `withTealBorder`, `WithOrangeBorder` to the custom colors of
+border-mysite-blue, border-mysite-teal, border-mysite-orange.
 
 ?> **IMPORTANT:** If you modify the Tailwind config, you must rebuild & restart
 the site to have the tailwind css properly rebuild. The tailwind config creation
@@ -957,6 +984,7 @@ consistent while varying others. Here, we'll convert the existing gallery page
 into a template that all pages uses.
 
 ### Add the Clean Component
+
 Create `packages/mysite/src/components/Page/PageClean.tsx`:
 
 Let's add the PageClean and by now this should be a similar exercise to all the
@@ -1026,14 +1054,14 @@ const asPageToken = asTokenSpec<PageComponents>();
 
 export default PageClean;
 export { asPageToken };
-```
-You can see all the components that were `src/data/pages/gallery/index.tsx` are
-transferred into the page. A slight difference we renamed the top slots for
-image & link to HeroLink & HeroImage to be more precise in their usage. This is
-good practice as just having Link & Image are very generic names and not clear
-of purpose. In addition, we wrapped the Body with BodyWrapper (Div) for
-styling. In the designable section. you will see that we transferred the
-starting sub-components.
+```jsx
+You can see all the components that were in `src/data/pages/gallery/index.tsx`
+are transferred into the page component. A slight difference is we renamed the
+top slots for image & link to HeroLink & HeroImage to be more precise in their
+usage. This is good practice as just having Link & Image are very generic names
+and not clear of purpose. In addition, we wrapped the Body with BodyWrapper
+(Div) for styling. In the designable section. you will see that we transferred
+the starting sub-components.
 
 ### Add the Tokens
 Create `packages/mysite/src/components/Page/tokens/mysitePage.tsx`:
@@ -1082,16 +1110,18 @@ export default {
 };
 ```
 
-### Add the index files and export the components.
+### Add the index files and export the components
+
 Add the index files and import/export the appropriate named components as we
 have done in previous steps.
+
 1. Add the `packages/mysite/src/components/Page/index.tsx`
 1. Add the `packages/mysite/src/components/Page/tokens/index.tsx`
 1. Update the `packages/minimal-demo/src/index.ts`
 
 ?> **REMINDER:** Rebuild Package.
 
-### Update the Site's Default Template to use package's Page component.
+### Update the Site's Default Template to use package's Page component
 
 We next want to updates the sites template file `sites/mysite/src/templates/_default.jsx`
 
@@ -1129,7 +1159,9 @@ export const query = graphql`
 
 Feel free to delete `sites/minimal-demo/src/components/Page/index.tsx` that came
 with new site as it's no longer being used and now use our package level Page.
+
 ### Try the new template
+
 In edit mode, click on Page | New and create a new page and go to that new page.
 This page should behave identical look & behavior to the previous hard coded
 gallery's index.tsx file.
