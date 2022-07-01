@@ -998,7 +998,7 @@ import {
   ComponentOrTag, DesignableComponentsProps, Img, designable, Div, H1, A,
 } from '@bodiless/fclasses';
 import { RichText } from '@bodiless/richtext-ui';
-import { asTokenSpec } from '../../asTokenspec';
+import { asTokenSpec } from '../../asTokenSpec';
 import { GalleryClean } from '../Gallery';
 import { FooterClean } from '../Footer';
 

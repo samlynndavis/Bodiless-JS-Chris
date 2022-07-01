@@ -2,7 +2,7 @@ import { as, stylable } from '@bodiless/fclasses';
 import { asBodilessLink } from '@bodiless/components-ui';
 import { withPlaceholder } from '@bodiless/components';
 import { mysiteElement } from '../../Element';
-import { asTokenSpec } from '../../../asTokenspec';
+import { asTokenSpec } from '../../../asTokenSpec';
 
 const Simple = asTokenSpec<any>()({
   Core: {

@@ -4,7 +4,7 @@ import {
   ComponentOrTag, DesignableComponentsProps, Section, designable,
 } from '@bodiless/fclasses';
 import { RichText } from '@bodiless/richtext-ui';
-import { asTokenSpec } from '../../asTokenspec';
+import { asTokenSpec } from '../../asTokenSpec';
 
 // Design: set of base components which will be used in the component itself
 type FooterComponents = {

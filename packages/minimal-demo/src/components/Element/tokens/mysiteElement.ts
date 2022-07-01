@@ -1,4 +1,4 @@
-import { asTokenSpec } from '../../../asTokenspec';
+import { asTokenSpec } from '../../../asTokenSpec';
 
 const Bold = asTokenSpec()('font-bold');
 const Underline = asTokenSpec()('underline');

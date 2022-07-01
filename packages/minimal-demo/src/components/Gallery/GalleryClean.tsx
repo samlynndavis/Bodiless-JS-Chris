@@ -4,7 +4,7 @@ import {
   ComponentOrTag, DesignableComponentsProps, Section, designable, H2,
 } from '@bodiless/fclasses';
 import { FlowContainer } from '@bodiless/layouts-ui';
-import { asTokenSpec } from '../../asTokenspec';
+import { asTokenSpec } from '../../asTokenSpec';
 
 // Design: set of base components which will be used in the component itself
 type GalleryComponents = {
