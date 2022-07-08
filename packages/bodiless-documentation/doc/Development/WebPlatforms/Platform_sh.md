@@ -25,7 +25,7 @@
         ![Organization Details](./assets/platformsh/OrganizationDetails.png)
     01. Click **Create** button.
 
-01. Once the organization is created procced with adding billing details.
+01. Once the organization is created proceed with adding billing details.
     01. On the top right corner click on the user name. For now there should be your organization. Click **Billing**.  
         ![Billing](./assets/platformsh/Billing.png)
 
