@@ -29,7 +29,7 @@
     01. On the top right corner click on the user name. For now there should be your organization. Click **Billing**.  
         ![Billing](./assets/platformsh/Billing.png)
 
-        - If no organization appeared in the drop-down, go to the "All Projects" page by clicking the Plathform.sh icon top left corner, click on the **All projects** drop-down and select the organization created previously. After that follow the instructions provided in point above.
+        - If no organization appeared in the drop-down, go to the "All Projects" page by clicking the Platform.sh icon top left corner, click on the **All projects** drop-down and select the organization created previously. After that follow the instructions provided in point above.
 
     01. Fill in the "Credit Card" and "Billing Details".
 
