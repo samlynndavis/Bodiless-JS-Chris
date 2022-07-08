@@ -32,7 +32,7 @@ import { SearchLayoutClean, vitalSearchLayout } from '@bodiless/vital-search';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
-import { CardClean, vitalCard } from '@bodiless/vital-card';
+import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
 import { asGenericTemplateToken } from '../GenericTemplateClean';
 import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
 
@@ -55,9 +55,6 @@ const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
 });
 
 const Base = asGenericTemplateToken({
-  Meta: {
-    title: 'Default',
-  },
   Components: {
     PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
@@ -66,7 +63,7 @@ const Base = asGenericTemplateToken({
       withDesign({
         Image: on(Img)(vitalImage.Hero),
         Video: on(YouTubeClean)(vitalYouTube.Hero),
-        HeroCard: on(CardClean)(vitalCard.Hero),
+        HeroCard: on(CardStatic)(vitalCardStatic.Hero),
       }),
     ),
     Content: as(vitalFlowContainer.Default),
@@ -120,10 +117,10 @@ const ContentListing = asGenericTemplateToken({
   }
 });
 
-const Default = asGenericTemplateToken({
+const Generic = asGenericTemplateToken({
   ...Base,
   Meta: {
-    title: 'Default',
+    title: 'Generic',
   },
 });
 
@@ -133,8 +130,8 @@ const Search = asGenericTemplateToken({
     title: 'Search',
   },
   Components: {
-    ...Default.Components,
-    Breadcrumb: as(Default.Components.Breadcrumb, addProps({ children: 'Search', })),
+    ...Base.Components,
+    Breadcrumb: as(Base.Components.Breadcrumb, addProps({ children: 'Search', })),
     TopContent: replaceWith(Fragment),
     Content: on(SearchLayoutClean)(vitalSearchLayout.Default),
     BottomContent: replaceWith(Fragment),
@@ -143,7 +140,7 @@ const Search = asGenericTemplateToken({
 
 export default {
   Base,
-  Default,
+  Generic,
   ContentListing,
   WithNoBreadcrumbsOnHomePage,
   Search,

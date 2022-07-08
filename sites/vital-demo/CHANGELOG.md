@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.11](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.10...v1.0.0-rc.11) (2022-07-05)
+
+**Note:** Version bump only for package @sites/vital-demo
+
+
+
+
+
+# [1.0.0-rc.10](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.9...v1.0.0-rc.10) (2022-06-28)
+
+**Note:** Version bump only for package @sites/vital-demo
+
+
+
+
+
+# [1.0.0-rc.9](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.8...v1.0.0-rc.9) (2022-06-27)
+
+**Note:** Version bump only for package @sites/vital-demo
+
+
+
+
+
+# [1.0.0-rc.8](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.7...v1.0.0-rc.8) (2022-06-23)
+
+
+### Bug Fixes
+
+* **vital-cards:** reorg of cards & api doc [canary] ([#1916](https://github.com/johnsonandjohnson/bodiless-js/issues/1916)) ([0752ecc](https://github.com/johnsonandjohnson/bodiless-js/commit/0752ecccf793ad819c8432b601ddf9505d859156))
+
+
+
+
+
+# [1.0.0-rc.7](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.6...v1.0.0-rc.7) (2022-06-17)
+
+**Note:** Version bump only for package @sites/vital-demo
+
+
+
+
+
+# [1.0.0-rc.6](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.5...v1.0.0-rc.6) (2022-06-16)
+
+**Note:** Version bump only for package @sites/vital-demo
+
+
+
+
+
+# [1.0.0-rc.5](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.4...v1.0.0-rc.5) (2022-06-16)
+
+
+### Features
+
+* **bodiless-table:** Add extra tokens to target second & third columns ([#1918](https://github.com/johnsonandjohnson/bodiless-js/issues/1918)) ([76148f5](https://github.com/johnsonandjohnson/bodiless-js/commit/76148f59d88d60f9d38350697b580ec21980ce42))
+
+
+
+
+
+# [1.0.0-rc.4](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.3...v1.0.0-rc.4) (2022-06-16)
+
+**Note:** Version bump only for package @sites/vital-demo
+
+
+
+
+
 # [1.0.0-rc.3](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.2...v1.0.0-rc.3) (2022-06-10)
 
 
