@@ -20,7 +20,7 @@ BodilessJS is being developed at J&J to meet specific use-cases in the consumer 
 
 ## Getting Started
 
-- Follow the instructions to create a new site in our [Getting Started Guide](./GettingStarted.md).
+- Follow the instructions to create a new site in our [Getting Started Guide](./About/GettingStarted).
 - Learn the basics of site-building on BodilessJS, see our tutorial: [Intro To Bodiless Concepts:
 Creating a Gallery Page](/Development/Guides/IntroToBodilessConcepts).
 ```
