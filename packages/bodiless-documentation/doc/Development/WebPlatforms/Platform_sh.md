@@ -1,17 +1,19 @@
 # Using Platform.sh with BodilessJS
 
-?> **Note:** Bodiless deployment on Platform.sh requires at least 15GB of storage available, so
-the paid plan is requried.
+## Pre-requisites
 
-?> **Note:** In the following instructions, GitHub is used as an example source code
-provider. If you're using a different supported provider (e.g., GitLab or Bitbucket), adapt the
-instructions as needed.
+- A Platform.sh account.  Sign up at https://auth.api.platform.sh/register?trial_type=general.
+  > Note: Bodiless deployment on Platform.sh requires at least 15GB of storage available, so
+  > you will have to upgrade to a paid "development" plan and upgrade your storage as described
+  > below.
+- A GitHub Account
+  > Note: In the following instructions, GitHub is used as an example source
+  > code provider. If you're using a different supported provider (e.g., GitLab
+  > or Bitbucket), adapt the instructions as needed.
+- A [Platform.sh API token](https://docs.platform.sh/development/cli/api-tokens.html)
+- A [GitHub personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
-?> **Note:** The following instruction assumes that you have a Platform.sh account registered already.
-
-?> **Note:** The following instruction assumes that you have a Platform.sh account API Token created.
-
-?> **Note:** The following instruction assumes that you have a GitHub personal access token generated.
+## Create a Platform.sh organization and add a payment method.
 
 01. Go to [https://console.platform.sh](https://console.platform.sh ':target=_blank').
 
@@ -31,6 +33,8 @@ instructions as needed.
 
     01. Fill in the "Credit Card" and "Billing Details".
 
+## Create a Project
+
 01. Switch back to the "All Projects" page and select the organization.
 
 01. On the top right cornect click **Create Project** button.
@@ -43,10 +47,14 @@ instructions as needed.
 01. Click on the **Create Project** button.
     - In case of "Plan & Pricing" pop-up click **Continue**.
 
+## Add necessary storage.
+
 01. Go to the project page and click **Upgrade button** near the development Plan.
 ![Upgrade Plan](./assets/platformsh/CreateNewProject.png)
 
 01. On the "Upgrade plan" page scroll to "Storage" option and select 15GB fromt the drop-down. Click **Save** on the bottom right corner and **Back To Project** on the top left corner.
+
+## Run the provisioning Script.
 
 01. Switch to the project root on the local machine, e.g. `~/bodiless-minimal`
 01. Using commandline run
@@ -55,6 +63,15 @@ instructions as needed.
     npm run psh:setup-starter
     ```
 01. Make sure that all of the requirements listed are met.  
-![Prerequisites](./assets/platformsh/SetupPshCliStep1.png)
-01. Provide requried input parameters. The script will return 'Success' response to the console, if all the parameters were provided correctly and integration with Platform.sh and project variables are created.
+![Prerequisites](./assets/platformsh/SetupPshCliStep1.png).  You will also need your
+GitHub username and password.
+01. Provide required input parameters. The script will return 'Success' response to the console, if all the parameters were provided correctly and integration with Platform.sh and project variables are created.
 01. After integration is created the deploy of the main branch will be triggered automatically.
+
+## Troubleshooting
+
+### 409 Error from Platform.sh API
+This usually means that a orevious automated or manual provisioning was
+attempted, leaving some variable definitions or integrations associated with the
+project. To resolve, visit your project setting on platform.sh and remove all
+variables and and integrations, and then try again.
