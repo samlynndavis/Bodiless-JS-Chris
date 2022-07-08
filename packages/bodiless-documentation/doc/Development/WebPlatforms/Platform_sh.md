@@ -71,7 +71,7 @@ GitHub username and password.
 ## Troubleshooting
 
 ### 409 Error from Platform.sh API
-This usually means that a orevious automated or manual provisioning was
+This usually means that a previous automated or manual provisioning was
 attempted, leaving some variable definitions or integrations associated with the
 project. To resolve, visit your project setting on platform.sh and remove all
 variables and and integrations, and then try again.
