@@ -55,6 +55,7 @@ export const rootPackageJson = {
     check: 'cross-env NODE_ENV=production lerna run check --stream',
     fix: 'eslint --fix  --cache --ext .js,.jsx,.ts,.tsx packages sites',
     lint: 'eslint --cache --ext .js,.jsx,.ts,.tsx packages sites',
+    'psh:setup-starter': 'node ./scripts/psh-setup-starter',
     setup: 'npm run bootstrap && npm run build:packages',
     'setup:gatsby-cloud': 'npm run bootstrap:gatsby-cloud && npm run build:packages',
     start: 'lerna run start --stream --scope @sites/tutorial',
