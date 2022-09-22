@@ -5,9 +5,8 @@ tutorial to learn how to use Bodiless Design API tooling to build a design syste
 You can [read more about it here](../../Design/DesignSystem), but at a high level,
 is a set of tools and patterns for applying a *Design System* to a React site.
 It encourages defining the building blocks of the system (tokens, elements,
-components) at the site level, and then applying them consistently across your
-site--or even abstracting them to a reusable package, allowing you to apply the
-same design system to multiple sites, extending it as needed.
+components) at the package level, and then applying them consistently across your
+site--or even multiple sites, extending and adapting it as needed.
 
 Upon completion of this tutorial, you will end up with code similar to the following:
 
@@ -22,10 +21,12 @@ As you go through the tutorial, feel free to reference this code as needed.
 
 - Complete the [Intro to Bodiless Concepts](./IntroToBodilessConcepts) tutorial.
   - Alternatively, if you already have a fair understanding of BodilessJS
-    fundamentals and want to fast-forward to this tutorial, copy over the
+    fundamentals and want to fast-forward to this tutorial,
+    [create a new site](../../About/GettingStarted?id=creating-a-new-site) and
+    copy over the
     [gallery folder & contents](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/minimal-demo/src/data/pages/gallery)
-    and place in a [new site](../../About/GettingStarted?id=creating-a-new-site) at
-    `src/data/pages/gallery`.
+    from the main bodiless repository, and place in a
+    `sites/{your-site-name}/src/data/pages/gallery` directory.
 - Read through the high level introduction to the
   [Bodiless Design System](../../Design/DesignSystem). Even if you don't
   follow everything, it will give essential insight into the "why" of
@@ -41,9 +42,9 @@ In this step, we are going to move typography token definitions from
 page level to a package, to ensure consistency across the site.
 
 It would be possible to create our design system entirely at site level, for
-example, in a `/src/components` directory. However, we consider it a best
-practice to place all code (components and tokens) into a design system package.
-This has several advantages:
+example, in a `/sites/{mysite}/src/components` directory. However, we consider
+it a best practice to place all code (components and tokens) into a design
+system package. This has several advantages:
 
 - it is easy to publish this package so the design system can be used by other sites
 - it is easy to reorganize the internal structure of the package without changing imports
@@ -59,8 +60,9 @@ used to create a new site in the first tutorial.  Your new site should already
 contain a stub design system package at `/packages/{your-site-name}`, and that is
 where we'll be implementing our design system.
 
-?> **Note:**  in the examples below, we assume you have created a new site called `mysite`
-using the `__minimal__` template.
+> **Note:**  in the examples below, we assume you have created a new site called `mysite`
+using the `__minimal__` template. If you used a different name, then alter file
+and variable names accrdingly.
 
 ### Create Element component within the package
 
@@ -121,7 +123,7 @@ using the `__minimal__` template.
    > take advantage of some BodilessJS tools for extending and optimizing your design
    > system, like [Token Shadowing]() and [Static Replacement]().
 
-### Update your site to use new package & Element component
+### Update your site to use the new package & Element component
 
 1. Add your package as a dependency in `/sites/mysite/package.json`:
 
@@ -173,34 +175,34 @@ tokens to apply typography styling to our text editor and primary header. These
 design. They are usually simple HOC's which add classes or props to the element
 (though they may also add behaviors).
 
-?> **Note:**  the use of `asTokenSpec` to define our tokens. Bodiless tokens are normally
-expressed as React higher order components (HOCs). However, Bodiless provides an
-extended format for describing tokens known as a *Token Specification*. The
-`asTokenSpec()('font-bold')` utility produces a token in this format:
-
-```ts
-{
-  Core: {
-    _: 'font-bold',
-  },
-};
-```
-
-This  can be converted to a simple HOC via the Bodiless `as` utility:
-
-```ts
-const BoldSpan = as(mysiteElement.Bold)(Span);
-```
-
-which is identical to:
-
-```ts
-const BoldSpan = addClasses('font-bold')(Span);
-```
-
-We will go into the uses of token specifications in more detail in a later
-section. For now, you can think of `asTokenSpec` as a utility for creating
-tokens.
+> Note the use of `asTokenSpec` to define our tokens. Bodiless tokens are normally
+> expressed as React higher order components (HOCs). However, Bodiless provides an
+> extended format for describing tokens known as a *Token Specification*. The
+> `asTokenSpec()('font-bold')` utility produces a token in this format:
+> 
+> ```ts
+> {
+>   Core: {
+>     _: 'font-bold',
+>   },
+> };
+> ```
+> 
+> This  can be converted to a simple HOC via the Bodiless `as` utility:
+> 
+> ```ts
+> const BoldSpan = as(mysiteElement.Bold)(Span);
+> ```
+> 
+> which is identical to:
+> 
+> ```ts
+> const BoldSpan = addClasses('font-bold')(Span);
+> ```
+> 
+> We will go into the uses of token specifications in more detail in a later
+> section. For now, you can think of `asTokenSpec` as a utility for creating
+> tokens.
 
 ### Providing a site-wide rich text editor
 
@@ -284,17 +286,20 @@ Similarly, in `sites/mysite/src/data/pages/Gallery/CaptionedImage.tsx`, add the 
 and change
 
 ```ts
-const Body = withSimpleEditor('caption', 'Caption')(Div);
+const Body = as(
+  addClasses('text-white bg-black flex-grow p-2'),
+  withSimpleEditor('caption', 'Caption')
+)(Div);
 ```
 
 to
 
 ```ts
 const Body = as(
-  addClasses('text-white bg-black flex-grow p-2'),
   mysiteRichText.Simple,
   withPlaceholder('Caption'),
   withNodeKey('caption'),
+  addClasses('text-white bg-black flex-grow p-2'),
 )(RichText);
 ```
 
