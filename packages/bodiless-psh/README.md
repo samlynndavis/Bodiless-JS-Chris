@@ -3,6 +3,18 @@
 This package provides standard configuration files and helper scripts which
 make it easy for a bodiless site to be deployed to platform.sh.
 
+If you are only looking to host the *static* site (production and static preview
+environments), then [other options](../WebPlatforms/) may be cost effective. We recommend using
+platform.sh to host your *edit* environments in the cloud, so that content
+editors can update the site without having to run the Bodiless application
+locally. While you *can* host your production site on platform.sh as well, the
+most economical option for many sites will be to host the edit environments on
+platform.sh, while keeping the production site on a different host.
+
+Bear in mind that you may not need to host edit environments in the cloud at
+all. You can derive many of the benefits of using Bodiless by running the edit
+application locally.
+
 ## Setting up your project
 
 ### Pre-requisites

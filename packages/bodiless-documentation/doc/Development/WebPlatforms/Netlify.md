@@ -58,3 +58,8 @@ instructions as needed.
         ![Build and Deployment Settings](./assets/BuildAndDeploySettings.png)
 
 01. Click the **Deploy site** button.
+
+> Please note that only the static site (not the edit environment) can
+> be hosted on Netlify.  If you want to make edit environments
+> accessible in the cloud, the most fully supported option at present is
+> through [platform.sh](../Platform.sh.md);
