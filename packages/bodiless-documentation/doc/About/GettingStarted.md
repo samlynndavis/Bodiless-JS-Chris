@@ -98,7 +98,7 @@ version which isn't a pre-release) will be used.
 
 ## Going Live
 
-A Bodiless site is not too different from any other Gatsby site, and
+A BodilessJS site is not too different from any other Gatsby site, and
 can easily be hosted on a variety of JAMstack-optimized web platforms.
 You can also host the edit application in the cloud so that content
 editors can make site updates without having to run it locally.
