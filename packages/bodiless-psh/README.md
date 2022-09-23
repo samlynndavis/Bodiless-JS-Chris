@@ -13,7 +13,7 @@ the edit environments on platform.sh, while keeping the production site on a
 different host.
 
 Bear in mind that you may not need to host edit environments in the cloud at
-all. You can derive many of the benefits of using Bodiless by running the edit
+all. You can derive many of the benefits of using BodilessJS by running the edit
 application locally.
 
 ## Setting up your project

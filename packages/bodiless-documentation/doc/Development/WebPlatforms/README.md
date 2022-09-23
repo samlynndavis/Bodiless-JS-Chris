@@ -1,6 +1,6 @@
 # Web Platforms
 
-A Bodiless site is, in essence, just a normal Gatsby site and as such it can be hosted
+A BodilessJS site is, in essence, just a normal Gatsby site and as such it can be hosted
 on a variety of platforms.  In this section, we provide step-by-step
 instructions for hosting your production site on  
 

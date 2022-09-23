@@ -95,11 +95,11 @@ The version numbers are calculated using [Lerna](https://lerna.js.org/ ':target=
 
 </div>
 
-Additionally there is an option to run RC Release manually.
+Additionally there is an option to run a RC Release manually.
 
 ![BodilessJS Release Workflow](./assets/PrereleaseWorkflowManual.png)
 
-To execute RC Release manually perform the following steps from the [Actions](https://github.com/johnsonandjohnson/Bodiless-JS/actions ':target=_blank')
+To execute a RC Release manually perform the following steps from the [Actions](https://github.com/johnsonandjohnson/Bodiless-JS/actions ':target=_blank')
 tab of the BodilessJS GitHub page::
 
 01. Under the _Workflows_ list, select the **Prerelease** workflow.
