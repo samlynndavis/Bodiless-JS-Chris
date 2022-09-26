@@ -30,16 +30,16 @@
     "react": "^17.0.2"
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.15",
-    "@bodiless/components": "^1.0.0-rc.15",
-    "@bodiless/components-ui": "^1.0.0-rc.15",
-    "@bodiless/core": "^1.0.0-rc.15",
-    "@bodiless/documentation": "^1.0.0-rc.15",
-    "@bodiless/fclasses": "^1.0.0-rc.15",
-    "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.15",
-    "@bodiless/layouts-ui": "^1.0.0-rc.15",
-    "@bodiless/richtext-ui": "^1.0.0-rc.15",
-    "@bodiless/ui": "^1.0.0-rc.15",
+    "@bodiless/cli": "^1.0.0-rc.16",
+    "@bodiless/components": "^1.0.0-rc.16",
+    "@bodiless/components-ui": "^1.0.0-rc.16",
+    "@bodiless/core": "^1.0.0-rc.16",
+    "@bodiless/documentation": "^1.0.0-rc.16",
+    "@bodiless/fclasses": "^1.0.0-rc.16",
+    "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.16",
+    "@bodiless/layouts-ui": "^1.0.0-rc.16",
+    "@bodiless/richtext-ui": "^1.0.0-rc.16",
+    "@bodiless/ui": "^1.0.0-rc.16",
     "lodash": "^4.17.19",
     "tailwindcss": "^3.0.23"
   }
