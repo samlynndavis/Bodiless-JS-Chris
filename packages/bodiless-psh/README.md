@@ -55,7 +55,7 @@ application locally.
 
 01. Switch back to the "All Projects" page and select the organization.
 
-01. On the top right cornect click **Create Project** button.
+01. On the top right corner click **Create Project** button.
 
 01. On the "New Project" pop-up click on the **Create from scratch** option.
 !["New Project" pop-up](./assets/platformsh/CreateNewProject.png)
@@ -70,12 +70,12 @@ application locally.
 01. Go to the project page and click **Upgrade button** near the development Plan.
 ![Upgrade Plan](./assets/platformsh/CreateNewProject.png)
 
-01. On the "Upgrade plan" page scroll to "Storage" option and select 15GB fromt the drop-down. Click **Save** on the bottom right corner and **Back To Project** on the top left corner.
+01. On the "Upgrade plan" page scroll to "Storage" option and select 15GB from the drop-down. Click **Save** on the bottom right corner and **Back To Project** on the top left corner.
 
 ### Run the provisioning Script.
 
 01. Switch to the project root on the local machine, e.g. `~/bodiless-minimal`
-01. Using commandline run
+01. Using command line run
     ```
     npm run setup
     npm run psh:setup-starter
@@ -97,7 +97,7 @@ variables and and integrations, and then try again.
 
 #### Verify the GitHub integration
 
-- Visit the "webhooks" section of your GitHubrepository settings, eg
+- Visit the "webhooks" section of your GitHub repository settings, eg
   ```
   https://github.com/project/repo/settings/hooks
   ```
@@ -139,7 +139,7 @@ packages to be installed must be namespaced. Set the following 3 environment
 variables on p.sh. All variables should be visible at both build and run time:
 - `env:APP_NPM_REGISTRY`: the full path to your registry, eg
   `//my-artifactory.com/api/npm/my-registry/`.
-- `env:APP_NPM_AUTH`: Ypur NPM authentication token. This should be marked as sensitive.
+- `env:APP_NPM_AUTH`: Your NPM authentication token. This should be marked as sensitive.
   To obtain your token:
   1. Login to your registry:
      ```
@@ -155,7 +155,7 @@ variables on p.sh. All variables should be visible at both build and run time:
   3. Copy the token value to the `env:APP_NPM_AUTH` variable in your p.sh project.
 
 - `env:APP_NPM_NAMESPACE`: The namespace of the packages in your private
-  regsitry, eg `@mynamespace`.
+  registry, eg `@mynamespace`.
 
 ## Building and Deploying
 
@@ -166,8 +166,9 @@ requests, so that every PR to your repository will be deployed to its own
 environment. Be aware of the following:
 - It is easy to reach your quota of development environments with this enabled, so use cautiously.
   One way to limit environment use is to create *draft* pull requests, as these are not deployed.
-- Edit environments for pull requests are currently only supported on GitHub -- and pushing changes
-  from the edit environment is not supported even there.
+- Edit environments for pull requests are currently only supported on GitHub repos -- and pushing 
+  changes from the edit environment is not supported on cross repository pull request(e.g. PR's
+  source branch from fork).
 - Changes pushed to code outside the `/edit` directory will
   not automatically be deployed to the edit environment.  You must manually update the
   edit environment as described under [Pushing Changes](#pushing-changes) below.
@@ -477,7 +478,7 @@ depending on your environment type via Server Side Includes (SSI) mechanism.
 ### Activate SSI
 
 * Activate SSI for your route(s) in your routes.yaml file. See: https://docs.platform.sh/configuration/routes/ssi.html
-* Use SSI_ENV enviroment variable to specify type of your environment. Default value is 'dev'.
+* Use SSI_ENV environment variable to specify type of your environment. Default value is 'dev'.
 * Ensure ssi configs are loaded to psh container and set SSI_CONF_PATH environment variable to path to json file containing SSI configs.
 * Ensure your .platform.app.yaml contains invocation of generate-ssi-files.js node scripts. The script should be invoked during build and deploy phases. PSH phase (build or deploy) should be passed as an argument to the script.
 * Ensure the files of you app, that will be served by psh, contain SSI directives.
@@ -515,7 +516,7 @@ SSI configuration file should be in json format.
 ```
 ### How it works
 
-* during build phase, generate-ssi-files reads SSI configs and for each key it creates symlink from PLATFORM_DOCUMENT_ROOT/filename.html into APP_VOLUME/filename.html. Filename is generated based on key. There is an opportunity to improve this logic. We can read and parse pragma field, exract filename from it. But it makes the things more complicated and in addition, pragma may not have files at all.
+* during build phase, generate-ssi-files reads SSI configs and for each key it creates symlink from PLATFORM_DOCUMENT_ROOT/filename.html into APP_VOLUME/filename.html. Filename is generated based on key. There is an opportunity to improve this logic. We can read and parse pragma field, extract filename from it. But it makes the things more complicated and in addition, pragma may not have files at all.
 * during deploy phase, generate-ssi-files reads SSI configs and SSI_ENV and for each key it copies the file defined in conf.{key}.{env}.{file} to APP_VOLUME/filename.html that was created during build phase.
 
 ## How to replace your site prod url with psh environment url in a public file
