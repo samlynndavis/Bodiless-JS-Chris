@@ -37,4 +37,4 @@ Cloud](https://support.gatsbyjs.com/hc/en-us/articles/360059253654-Create-a-Site
 > Please note that only the static site (not the edit environment) can
 > be hosted on Gatsby Cloud.  If you want to make edit environments
 > accessible in the cloud, the most fully supported option at present is
-> through [platform.sh](../Pla)
+> through [platform.sh](./Platform.sh.md)
