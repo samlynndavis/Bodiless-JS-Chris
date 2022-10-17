@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.18](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.17...v1.0.0-rc.18) (2022-10-17)
+
+
+### Bug Fixes
+
+* **documentation:** fixing root README.md links ([#1961](https://github.com/johnsonandjohnson/bodiless-js/issues/1961)) ([fff7416](https://github.com/johnsonandjohnson/bodiless-js/commit/fff741665047cee2a58414719d0677c7b8031688))
+
+
+
+
+
 # [1.0.0-rc.17](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.16...v1.0.0-rc.17) (2022-09-30)
 
 **Note:** Version bump only for package bodiless-js
