@@ -345,14 +345,16 @@ this to the package level.
 
 ## 2. Make the Gallery reusable
 
-If you have components which may appear on more than one page in your site, you
-can export them from your design system package, and make them
-"designable" so that they can be easily styled to implement different variations.
+If you have components which may appear on more than one page in your site (or
+be reused across multiple sites) you can export them from your design system
+package, and make them "designable" so that they can be easily customized to
+implement different variations.
 
 In a Bodiless design system, *components* are usually bare templates which do
 little or nothing in themselves until one or more *tokens* are applied to them.
-They are often referred to as "clean" components. Such a component is always
-"designable" via the
+They are often referred to as "clean" components.
+
+A clean component is always "designable" via the
 [Bodiless Design API](../Architecture/FClasses?id=the-design-api). That is, it
 exposes an api which allows tokens to be applied to constituent elements within
 the component. This is very similar to the basic
@@ -418,16 +420,18 @@ This exemplifies the 3-step process involved in creating a clean component:
 1. Define the "design" of the component. This is a set of base components which
    will be used in the component itself, and which can be targeted by the bodiless
    `withDesign` function (or as inner keys in a token specification).  In the
-   `CaptionedImage` component, we define  a design consisting of three components:
+   `CaptionedImage` component, we define  a design consisting of four components:
 
    ```ts
    type CaptionedImageComponents = {
      Wrapper: ComponentOrTag<any>,
      Image: ComponentOrTag<any>,
-    BodyWrapper: ComponentOrTag<any>,
-    Body: ComponentOrTag<any>,
+     Body: ComponentOrTag<any>,
+     BodyWrapper: ComponentOrTag<any>,
    };
    ```
+   Each is typed as `ComponentOrTag<any>`, indicating that a React component or
+   HTML tag with any prop signature can be used in the slot.
 
 2. Write the JSX code for the component itself.  Usually, this has no styling and
    very little functionality.  It is just a bare template on which styles and
