@@ -410,23 +410,27 @@ const copyFileToStatic = (node, reporter, pathPrefix = '') => {
   );
 
   if (!fse.existsSync(publicPath)) {
-    fse.copySync(
-      fileAbsolutePath,
-      publicPath,
-      { dereference: true },
-      err => {
-        if (err) {
-          reporter.panic(
-            {
-              context: {
-                sourceMessage: `error copying file from ${fileAbsolutePath} to ${publicPath}`,
+    try {
+      fse.copySync(
+        fileAbsolutePath,
+        publicPath,
+        { dereference: true },
+        err => {
+          if (err) {
+            reporter.panic(
+              {
+                context: {
+                  sourceMessage: `error copying file from ${fileAbsolutePath} to ${publicPath}`,
+                },
               },
-            },
-            err,
-          );
-        }
-      },
-    );
+              err,
+            );
+          }
+        },
+      );
+    } catch (e) {
+      console.warn(`Could not copy image from ${fileAbsolutePath} to ${publicPath}`, e);
+    }
   }
 
   return `${pathPrefix}/static/${fileName}`;
@@ -438,6 +442,8 @@ const createImageNode = ({ node, content }) => {
     return undefined;
   }
   const imgSrc = parsedContent.src;
+  // Don't create an image node for external images.
+  if (/^http/.test(imgSrc)) return undefined;
   const fileExtension = pathUtil.extname(imgSrc).substr(1);
   if (!supportedExtensions[fileExtension]) {
     return undefined;
