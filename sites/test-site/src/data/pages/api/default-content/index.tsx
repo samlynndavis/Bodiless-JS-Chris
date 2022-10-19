@@ -12,13 +12,12 @@
  * limitations under the License.
  */
 
-import React, { ComponentType, FC } from 'react';
+import React, { ComponentType } from 'react';
 import { graphql } from 'gatsby';
 import {
   A,
   H3,
   flowHoc,
-  Span,
   Div,
 } from '@bodiless/fclasses';
 import { withNode, withNodeKey, withDefaultContent } from '@bodiless/core';
