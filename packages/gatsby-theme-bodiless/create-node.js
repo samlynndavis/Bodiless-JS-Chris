@@ -415,21 +415,16 @@ const copyFileToStatic = (node, reporter, pathPrefix = '') => {
         fileAbsolutePath,
         publicPath,
         { dereference: true },
-        err => {
-          if (err) {
-            reporter.panic(
-              {
-                context: {
-                  sourceMessage: `error copying file from ${fileAbsolutePath} to ${publicPath}`,
-                },
-              },
-              err,
-            );
-          }
-        },
       );
-    } catch (e) {
-      console.warn(`Could not copy image from ${fileAbsolutePath} to ${publicPath}`, e);
+    } catch (err) {
+      reporter.warn(
+        {
+          context: {
+            sourceMessage: `error copying file from ${fileAbsolutePath} to ${publicPath}`,
+          },
+        },
+        err,
+      );
     }
   }
 
@@ -443,7 +438,7 @@ const createImageNode = ({ node, content }) => {
   }
   const imgSrc = parsedContent.src;
   // Don't create an image node for external images.
-  if (/^http/.test(imgSrc)) return undefined;
+  if (/^http/i.test(imgSrc)) return undefined;
   const fileExtension = pathUtil.extname(imgSrc).substr(1);
   if (!supportedExtensions[fileExtension]) {
     return undefined;
