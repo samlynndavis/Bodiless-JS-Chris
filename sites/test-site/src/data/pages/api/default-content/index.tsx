@@ -28,7 +28,6 @@ import Layout from '../../../../components/Layout';
 import { asHeader3, asLink } from '../../../../components/Elements.token';
 
 const SubTitle: ComponentType = asHeader3(H3);
-const Foo: ComponentType = () => null;
 
 const DefaultContentLink = flowHoc(
   asBodilessLink(),
@@ -44,7 +43,6 @@ const DefaultContentEditable = asEditable('editable', 'Default editable')(Div);
 
 const PageContent$ = () => (
   <>
-    <Foo>a</Foo>
     <SubTitle>Default content from current node</SubTitle>
     <DefaultContentLink>Test Link</DefaultContentLink>
     <DefaultContentEditable />

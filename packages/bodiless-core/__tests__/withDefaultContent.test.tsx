@@ -108,10 +108,6 @@ describe('withDefaultContent', () => {
         <Bar />
       </>
     );
-    // const Baz = withDefaultContent({
-    //   foo: 'defaultFooValue',
-    //   bar: 'defaultBarValue',
-    // })(BazBase) as ComponentType<any>;
     const Baz = flow(
       withDefaultContent({
         foo: 'defaultFooValue',
@@ -121,7 +117,6 @@ describe('withDefaultContent', () => {
       }),
     )(BazBase) as ComponentType<any>;
     const wrapper = mount(<Baz />);
-    console.log(wrapper.debug());
     expect(wrapper.find('Foo').html()).toBe('defaultFooValue');
     expect(wrapper.find('Bar').html()).toBe('defaultBarValue');
   });
@@ -216,7 +211,6 @@ describe('withDefaultContent', () => {
         withDefaultContent(barContent),
       )(Test$);
       const wrapper = mount(<Test />);
-      console.log(wrapper.debug());
       expect(wrapper.find('Foo').html()).toBe('defaultFooContent');
       expect(wrapper.find('Bar').html()).toBe('defaultBarContent');
     });
@@ -247,7 +241,6 @@ describe('withDefaultContent', () => {
       )(Foo);
       const wrapper = mount(<Test />);
       const text = wrapper.html();
-      console.log(text);
       expect(text).toBe('fooOuterContent');
     });
 
@@ -292,25 +285,25 @@ describe('withDefaultContent', () => {
       ...defaultStore,
       root$foo: value,
     })(FooBase);
-    it('uses store data when stpre data is an empty array', () => {
+    it('uses store data when store data is an empty array', () => {
       const fooValue: any[] = [];
       const Foo = withFooStore(fooValue);
       const wrapper = mount(<Foo />);
       expect(JSON.parse(wrapper.find('pre#test').text())).toEqual(fooValue);
     });
-    it('uses store data when stpre data is an object', () => {
+    it('uses store data when store data is an object', () => {
       const fooValue = { foo: 'bar '};
       const Foo = withFooStore(fooValue);
       const wrapper = mount(<Foo />);
       expect(JSON.parse(wrapper.find('pre#test').text())).toEqual(fooValue);
     });
-    it('uses default data when stpre data is an empty object', () => {
+    it('uses default data when store data is an empty object', () => {
       const fooValue = {};
       const Foo = withFooStore(fooValue);
       const wrapper = mount(<Foo />);
       expect(JSON.parse(wrapper.find('pre#test').text())).toEqual('fooDefaultContent');
     });
-    it('uses default data when stpre data is undefined', () => {
+    it('uses default data when store data is undefined', () => {
       const fooValue = undefined;
       const Foo = withFooStore(fooValue);
       const wrapper = mount(<Foo />);
