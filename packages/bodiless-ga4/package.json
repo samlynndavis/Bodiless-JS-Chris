@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/ga4",
-  "version": "1.0.0-rc.20",
+  "version": "1.0.0-rc.21",
   "description": "Provides integration to support DataLayer in Google Analytics",
   "author": "Heidi Vanyo <hvanyo@its.jnj.com>",
   "license": "Apache-2.0",
@@ -28,13 +28,13 @@
     "copy": "copyfiles -u 1 \"./src/**/*.{css,png}\" \"./lib/\""
   },
   "dependencies": {
-    "@bodiless/cli": "^1.0.0-rc.20",
-    "@bodiless/components": "^1.0.0-rc.20",
-    "@bodiless/core": "^1.0.0-rc.20",
-    "@bodiless/fclasses": "^1.0.0-rc.20",
-    "@bodiless/filtering": "^1.0.0-rc.20",
-    "@bodiless/layouts": "^1.0.0-rc.20",
-    "@bodiless/search": "^1.0.0-rc.20",
+    "@bodiless/cli": "^1.0.0-rc.21",
+    "@bodiless/components": "^1.0.0-rc.21",
+    "@bodiless/core": "^1.0.0-rc.21",
+    "@bodiless/fclasses": "^1.0.0-rc.21",
+    "@bodiless/filtering": "^1.0.0-rc.21",
+    "@bodiless/layouts": "^1.0.0-rc.21",
+    "@bodiless/search": "^1.0.0-rc.21",
     "common-tags": "^1.8.0",
     "lodash": "^4.17.19"
   },
