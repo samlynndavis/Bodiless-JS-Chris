@@ -17,14 +17,9 @@ BodilessJS provides a CLI tool for creating a new site from a template.
 npx @bodiless/cli@next new -r next
 ```
 
-<!-- Inlining HTML to add multi-line info block with code blocks. -->
-<div class="warn">
-  <strong>Note:</strong> Bodiless-JS is currently in pre-1.x state, so you will need
-  to install the "next" version as described above.  A full 1.0 release is planned
-  for December, 2022.
-</div>
-
-</div>
+  > Note: Bodiless-JS is currently in pre-1.x state, so you will need
+  > to install the "next" version as described above.  A full 1.0 release is planned
+  > for December, 2022.
 
 This will walk you through the process of creating a new Bodiless site locally. It will prompt you
 for:
