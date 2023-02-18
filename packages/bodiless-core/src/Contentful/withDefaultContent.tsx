@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 import type { Enhancer } from '@bodiless/fclasses';
 import NodeProvider, { useNode } from '../NodeProvider';
-import ContentfulNode from './ContentfulNode';
+import ContentfulNode, { ContentMergeFunc } from './ContentfulNode';
 import { DefaultContentNode } from '../ContentNode';
 
 /**
@@ -37,6 +37,7 @@ import { DefaultContentNode } from '../ContentNode';
  */
 const withDefaultContent = <P extends object, D extends object>(
   content: D | ((props: P) => D),
+  mergeFunc?: ContentMergeFunc,
 ): Enhancer<{ content?: D }> => Component => {
     const WithDefaultContent: FC<any> = (
       { content: contentFromProp, ...rest }: { content?: D },
@@ -45,7 +46,11 @@ const withDefaultContent = <P extends object, D extends object>(
       const content$ = contentFromProp || content;
       const content$$ = typeof content$ === 'function'
         ? (content$ as ((props: P) => D))(rest as P) : content$;
-      const contentNode = ContentfulNode.create((node as DefaultContentNode<object>), content$$);
+      const contentNode = ContentfulNode.create(
+        (node as DefaultContentNode<object>),
+        content$$,
+        mergeFunc,
+      );
       return (
         <NodeProvider node={contentNode}>
           <Component {...rest as any} />

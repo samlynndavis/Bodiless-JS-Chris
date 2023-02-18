@@ -12,8 +12,8 @@
  * limitations under the License.
  */
 
-import ContentfulNode from '../src/Contentful/ContentfulNode';
-import { DefaultContentNode } from '../src/ContentNode';
+import ContentfulNode, { ContentMergeFunc } from '../src/Contentful/ContentfulNode';
+import { DefaultContentNode, ContentNode } from '../src/ContentNode';
 
 interface StoreData {
   [key: string]: string | undefined | object;
@@ -57,6 +57,24 @@ describe('ContentfulNode', () => {
   });
 
   describe('when there is a single node', () => {
+    it.only('Uses a custom merge function if provided', () => {
+      const { actions, getters } = createMockStore({
+        ...defaultStoreData,
+        root$foo: 'fooValue',
+      });
+      const mergeFunc: ContentMergeFunc = (node, defaultData) => {
+        if (node.data) return `${node.data} ${defaultData}`;
+        return defaultData;
+      };
+      const defaultContentNode = new DefaultContentNode(actions, getters, 'root');
+      const defaultContent = {
+        foo: 'fooDefaultContent',
+      };
+      const contentfulNode = ContentfulNode.create(defaultContentNode, defaultContent, mergeFunc);
+      const fooNode = contentfulNode.child('foo');
+      expect(fooNode.data).toBe('fooValue fooDefaultContent');
+    });
+
     describe('when node data exists in store', () => {
       it('returns data from store', () => {
         const { actions, getters } = createMockStore({

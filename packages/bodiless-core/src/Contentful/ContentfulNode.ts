@@ -40,6 +40,28 @@ export type DefaultContent = {
   [nodePath: string]: DefaultNodeContent,
 };
 
+/**
+ * Type of a function used to merge real content with default content.
+ */
+export type ContentMergeFunc = (
+  node: ContentNode<any>,
+  defaultContent: any,
+) => any;
+
+/**
+ * Determines whether a node is empty.
+ * @param data
+ * The node data to test.
+ *
+ * @returns
+ * True if the node is empty (has no data). False otherwise.
+ */
+const isNodeDataEmpty = <D extends object>(data: D) => {
+  // Ensure that an empty array counts as existing data.
+  if (Array.isArray(data)) return false;
+  return !(data && Object.keys(data).length > 0);
+};
+
 export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
   const delimiter = '$';
   const baseNodeKey = Array.isArray(basePath) ? basePath.join(delimiter) : basePath;
@@ -57,16 +79,23 @@ export const getAbsoluteNodeKey = (basePath: Path, contentPath: Path) => {
 
 // TODO: this class should expose a method that allows to check if node has value in store
 export default class ContentfulNode<D extends object, K extends object> extends DefaultContentNode<D> {
+  protected mergeFunc?: ContentMergeFunc;
+
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
   protected sourceNode: DefaultContentNode<K>;
 
   // @ts-ignore has no initializer and is not definitely assigned in the constructor
   private content: DefaultContent;
 
-  static create(node: DefaultContentNode<object>, content: object) {
+  static create(
+    node: DefaultContentNode<object>,
+    content: object,
+    mergeFunc?: ContentMergeFunc,
+  ) {
     const contentfulNode = new ContentfulNode(node.getActions(), node.getGetters(), node.path);
     contentfulNode.setContent(content);
     contentfulNode.setSourceNode(node);
+    contentfulNode.setMergeFunc(mergeFunc);
     return contentfulNode;
   }
 
@@ -89,6 +118,17 @@ export default class ContentfulNode<D extends object, K extends object> extends 
   }
 
   /**
+   * Provides a custom content merge function, which will be used to combine
+   * default content with actual content to produce the value of the node.
+   *
+   * @param mergeFunc
+   * A function used to merge default content with actual content.
+   */
+  public setMergeFunc(mergeFunc?: ContentMergeFunc) {
+    this.mergeFunc = mergeFunc;
+  }
+
+  /**
    * when default content is not a function
    * then take data from store
    * if data does not exist in store then return default content
@@ -104,9 +144,8 @@ export default class ContentfulNode<D extends object, K extends object> extends 
       return (defaultContent as GetContentFrom<D>)(this.sourceNode.peer(this.path));
     }
     const nodeData = this.sourceNode.peer(this.path).data;
-    // Ensure that an empty array counts as existing data.
-    if (Array.isArray(nodeData)) return nodeData;
-    return (nodeData && Object.keys(nodeData).length > 0) ? nodeData : defaultContent;
+    if (this.mergeFunc) return this.mergeFunc(nodeData, defaultContent);
+    return isNodeDataEmpty(nodeData) ? defaultContent : nodeData;
   }
 
   get keys() {
@@ -121,6 +160,7 @@ export default class ContentfulNode<D extends object, K extends object> extends 
     const peerNode = new ContentfulNode<E, K>(this.actions, this.getters, path);
     peerNode.setContent(this.content);
     peerNode.setSourceNode(this.sourceNode);
+    peerNode.setMergeFunc(this.mergeFunc);
     return peerNode;
   }
 }
