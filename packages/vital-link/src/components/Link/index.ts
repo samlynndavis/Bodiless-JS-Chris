@@ -15,6 +15,8 @@
 export * from './index.bl-edit';
 
 export { default as vitalLink } from './tokens';
+// Some base exports like this are used within a `./vital-test/src/shadow/@bodiless/vital-list/`
+// Should we updadte to use `vitalLink`?
 export { default as vitalLinkBase } from './tokens/vitalLink';
 export {
   useExternalLinkToggle, useIsDownloadLink, asEditableLink, anchorTo,

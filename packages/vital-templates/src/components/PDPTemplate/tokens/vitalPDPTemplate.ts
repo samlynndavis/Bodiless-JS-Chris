@@ -53,6 +53,8 @@ const Default = asPDPTemplateToken(vitalGenericTemplate.Base, {
     ProductDetailWrapper: 'lg:pl-2 pt-4 lg:pt-0',
   },
   Theme: {
+    // If we edit vitalTypography.H1 and move `vitalFontSize` from 'Core' to 'Theme',
+    // we could do just "TitleWrapper: vitalTypography.H1.Theme,"
     ProductTitleWrapper: omit(vitalTypography.H1, 'Spacing'),
     ProductEyebrowWrapper: omit(vitalTypography.Eyebrow, 'Spacing'),
   },

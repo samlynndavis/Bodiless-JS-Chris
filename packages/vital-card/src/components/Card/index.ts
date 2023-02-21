@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 
+import vitalCard from './tokens';
+import type { VitalCard } from './tokens';
 import vitalCardBaseOrig from './tokens/vitalCard';
-import type { VitalCard } from './tokens/vitalCard';
 import CardClean, { asCardToken } from './CardClean';
 import type { CardComponents } from './CardClean';
-import vitalCard from './tokens';
 import { vitalCardStatic, CardStatic } from './index.bl-edit';
 
 /**

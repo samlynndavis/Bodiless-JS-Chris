@@ -39,8 +39,7 @@ const WhereToBuy = asButtonToken({
       vitalColor.TextPrimaryFooterCopy,
       vitalTextDecoration.Bold,
       vitalTextDecoration.Uppercase,
-      // @TODO: Create token? It should be same size for both mobile and desktop...
-      'text-m-base',
+      vitalTextDecoration.ButtonTextBase,
       'rounded',
     ),
     Icon: 'w-6 h-6',

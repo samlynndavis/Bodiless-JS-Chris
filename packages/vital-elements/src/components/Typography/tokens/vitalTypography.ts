@@ -38,7 +38,7 @@ const Link = asElementToken({
 
 const H1 = asElementToken({
   Core: {
-    _: vitalFontSize.XXXL,
+    _: vitalFontSize.XXXL, // Should Font Size be in Core for all these tokens?
   },
   Theme: {
     _: as(

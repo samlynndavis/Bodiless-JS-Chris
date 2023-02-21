@@ -29,4 +29,5 @@ export default asTokenGroup(TextDecorationMeta)({
   Medium: 'font-medium',
   Normal: 'font-normal',
   Superscript: 'align-baseline',
+  ButtonTextBase: 'text-m-base',
 });

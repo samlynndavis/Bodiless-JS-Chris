@@ -67,11 +67,11 @@ const Base = asHeaderToken({
       'py-3 lg:py-0',
     ),
     ActionMenuContainer: 'pl-5',
-    // @todo perhaps this should be an element spcing token ike "LargeIconSize".
-    MenuToggler: 'w-6 h-6',
     MenuTogglerWrapper: 'my-4',
   },
   Theme: {
+    // @todo perhaps this should be an element spcing token ike "LargeIconSize".
+    MenuToggler: 'w-6 h-6',
     Wrapper: vitalColor.BgPrimaryPage,
   },
   Schema: {

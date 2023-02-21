@@ -52,6 +52,8 @@ const HeroBase = asCardToken({
     DescriptionWrapper: 'mb-5 lg:mb-6',
   },
   Theme: {
+    // If we edit vitalTypography.H1 and move `vitalFontSize` from 'Core' to 'Theme',
+    // we could do just "TitleWrapper: vitalTypography.H1.Theme," and same for `Meta`
     TitleWrapper: omit(vitalTypography.H1, 'Spacing'),
     DescriptionWrapper: omit(vitalTypography.H4, 'Spacing'),
   },
