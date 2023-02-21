@@ -31,9 +31,9 @@ const asImageToken = asVitalTokenSpec<BodilessImageComponents>();
  */
 const vitalImageBase = vitalImageBaseOrig;
 
+export type { VitalImage, BodilessImageComponents };
 export {
   vitalImageBase, asImageToken,
-  VitalImage, BodilessImageComponents,
 };
 
 export * from './index.bl-edit';

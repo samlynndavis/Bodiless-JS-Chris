@@ -13,7 +13,7 @@
  */
 
 import vitalCard from './tokens';
-import type { VitalCard } from './tokens';
+import type { VitalCard } from './tokens/vitalCard';
 import vitalCardBaseOrig from './tokens/vitalCard';
 import CardClean, { asCardToken } from './CardClean';
 import type { CardComponents } from './CardClean';
