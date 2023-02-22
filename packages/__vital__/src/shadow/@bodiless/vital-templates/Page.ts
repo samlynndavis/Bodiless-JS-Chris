@@ -16,8 +16,6 @@ import { withLanguages } from '@bodiless/i18n';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalPageBase } from '@bodiless/vital-templates';
 
-// `vitalPage.Base` is the same as `vitalPageBase.Base`.
-// Can we reuse initial default vital components here?
 const Default = asFluidToken(vitalPageBase.Base, {
   Core: {
     _: withLanguages([
