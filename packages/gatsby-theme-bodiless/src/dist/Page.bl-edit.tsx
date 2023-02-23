@@ -104,6 +104,6 @@ const EditPage: FC<PageProps> = observer(({ children, ui, ...rest }) => {
   );
 });
 
-const Page = process.env.BODILESS_DISABLE_EDITOR ? StaticPage : EditPage;
+const Page = process.env.BODILESS_DISABLE_EDITOR === '1' ? StaticPage : EditPage;
 
 export default Page;
