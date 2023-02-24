@@ -41,7 +41,7 @@ const H1 = asElementToken({
     /**
      * Note that in scope of a Typography Token, we consider
      * `font-size` and `font-weight` as an attribute of the 'Core' Domain
-     * since they are likely to be preserved when channging H1 Theme.
+     * since they are likely to be preserved when changing H1 Theme.
      */
     _: as(
       vitalFontSize.XXXL,
@@ -62,7 +62,7 @@ const H2 = asElementToken({
     /**
      * Note that in scope of a Typography Token, we consider
      * `font-size` and `font-weight` as an attribute of the 'Core' Domain
-     * since they are likely to be preserved when channging H1 Theme.
+     * since they are likely to be preserved when changing H1 Theme.
      */
     _: as(
       vitalTextDecoration.Bold,
@@ -83,7 +83,7 @@ const H3 = asElementToken({
     /**
      * Note that in scope of a Typography Token, we consider
      * `font-size` and `font-weight` as an attribute of the 'Core' Domain
-     * since they are likely to be preserved when channging H1 Theme.
+     * since they are likely to be preserved when changing H1 Theme.
      */
     _: as(
       vitalFontSize.XL,
@@ -104,7 +104,7 @@ const H4 = asElementToken({
     /**
      * Note that in scope of a Typography Token, we consider
      * `font-size` and `font-weight` as an attribute of the 'Core' Domain
-     * since they are likely to be preserved when channging H1 Theme.
+     * since they are likely to be preserved when changing H1 Theme.
      */
     _: as(
       vitalFontSize.XL,
@@ -124,7 +124,7 @@ const H5 = asElementToken({
     /**
      * Note that in scope of a Typography Token, we consider
      * `font-size` and `font-weight` as an attribute of the 'Core' Domain
-     * since they are likely to be preserved when channging H1 Theme.
+     * since they are likely to be preserved when changing H1 Theme.
      */
     _: as(
       vitalFontSize.Base,
