@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.25](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.1...v1.0.0-rc.25) (2023-02-26)
+
+
+### Bug Fixes
+
+* **docs:** fixing failed gh-page publishing ([c61e13d](https://github.com/johnsonandjohnson/bodiless-js/commit/c61e13d333de8217bcaf2bc46eb661356f8c41bb))
+
+
+
+
+
 # [1.0.0-rc.24](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.23...v1.0.0-rc.24) (2023-02-23)
 
 **Note:** Version bump only for package @sites/minimal-demo

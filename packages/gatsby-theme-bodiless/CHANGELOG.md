@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.25](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.1...v1.0.0-rc.25) (2023-02-26)
+
+
+### Bug Fixes
+
+* **bodiless-core:** Unhandled Runtime Error when node data is not available ([#1776](https://github.com/johnsonandjohnson/bodiless-js/issues/1776)) ([7519417](https://github.com/johnsonandjohnson/bodiless-js/commit/7519417eb3cb99d03bf7efac8013b1d3f7740f5e))
+* **gatsby-theme-bodiless:** add autoprefixer ([#1685](https://github.com/johnsonandjohnson/bodiless-js/issues/1685)) ([f501c3a](https://github.com/johnsonandjohnson/bodiless-js/commit/f501c3a3b9d9a3efc54375bd4ba89e23d3931732))
+* **gatsby-theme-bodiless:** Include gatsby-ssr in the package files ([#1934](https://github.com/johnsonandjohnson/bodiless-js/issues/1934)) ([cfd18d4](https://github.com/johnsonandjohnson/bodiless-js/commit/cfd18d402443cebadef6d3820f797c299f0f7148))
+* **gatsby-theme-bodiless:** Prevent crash when setting image source t… ([#1963](https://github.com/johnsonandjohnson/bodiless-js/issues/1963)) ([3003905](https://github.com/johnsonandjohnson/bodiless-js/commit/30039051f58a5c6f524196f0d669fbbdaf247f15))
+* **gatsby-theme-bodiless:** Properly prefix paths for bodiless gatsby… ([#1502](https://github.com/johnsonandjohnson/bodiless-js/issues/1502)) ([806b41d](https://github.com/johnsonandjohnson/bodiless-js/commit/806b41d15da01c3b650410a1be0d6cf373e2dd8d)), closes [#1501](https://github.com/johnsonandjohnson/bodiless-js/issues/1501)
+* **gatsby-theme-bodiless:** remove null-loader package dep. ([#1493](https://github.com/johnsonandjohnson/bodiless-js/issues/1493)) ([18c3273](https://github.com/johnsonandjohnson/bodiless-js/commit/18c327348bdeb83ce0dca6aa74105b9dbf3f14f1))
+* **gatsby-theme-bodiless:** Revert crypto-js ([4cb1c8a](https://github.com/johnsonandjohnson/bodiless-js/commit/4cb1c8ab61186e138bed7d3ce47436d4530f90a2))
+* Remove fs and os node imports in the browser ([#1806](https://github.com/johnsonandjohnson/bodiless-js/issues/1806)) ([b77f873](https://github.com/johnsonandjohnson/bodiless-js/commit/b77f87310942a0cd2f96d4f1ded5b593dcf626f5))
+* **vital-test, __vital__:** fix Shadowing and move to vital-test ([#1787](https://github.com/johnsonandjohnson/bodiless-js/issues/1787)) ([33be350](https://github.com/johnsonandjohnson/bodiless-js/commit/33be350c21971f0a083efba94e360fbe928a071e))
+
+
+### Features
+
+* Add static replacement mechanism ([#1440](https://github.com/johnsonandjohnson/bodiless-js/issues/1440)) ([22384f1](https://github.com/johnsonandjohnson/bodiless-js/commit/22384f184e73366bc00ec619e7b08fa3e5dfc29d))
+* **bodiless-core:** BodilessJS Remove AsBodilessComponent Edit code from Static bundle [#1542](https://github.com/johnsonandjohnson/bodiless-js/issues/1542) ([#1785](https://github.com/johnsonandjohnson/bodiless-js/issues/1785)) ([3ab1ba8](https://github.com/johnsonandjohnson/bodiless-js/commit/3ab1ba88b03811a4a9100125d4a649db5667e89c))
+* **cli:** Bodiless new ([#1568](https://github.com/johnsonandjohnson/bodiless-js/issues/1568)) ([3bc0e2c](https://github.com/johnsonandjohnson/bodiless-js/commit/3bc0e2c8e06fe78751c0712d7e1d3cfb8d1fb04d)), closes [#1520](https://github.com/johnsonandjohnson/bodiless-js/issues/1520)
+* **gatsby-theme-bodiless:** Allow disabling of editor in dev mode. ([#1989](https://github.com/johnsonandjohnson/bodiless-js/issues/1989)) ([93d67b8](https://github.com/johnsonandjohnson/bodiless-js/commit/93d67b849dbc39129afe2f2a2c13285b3e7d53e2))
+* **vital-hero, vital-image, vital-card:** Add Hero & Card component and update Image  ([#1500](https://github.com/johnsonandjohnson/bodiless-js/issues/1500)) ([95f2c3d](https://github.com/johnsonandjohnson/bodiless-js/commit/95f2c3dcf06c6f51bb6b3d252ca6f4f576899dd4)), closes [pr#1498](https://github.com/pr/issues/1498)
+
+
+
+
+
 # [1.0.0-rc.24](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.23...v1.0.0-rc.24) (2023-02-23)
 
 

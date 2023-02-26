@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.25](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-beta.1...v1.0.0-rc.25) (2023-02-26)
+
+
+### Bug Fixes
+
+* **bodiless-ui:** fix close/submit icon, Warning, RTE icons ([#1604](https://github.com/johnsonandjohnson/bodiless-js/issues/1604)) ([5f4ca2c](https://github.com/johnsonandjohnson/bodiless-js/commit/5f4ca2c8a112a08a9ec441bf4ae151af32c50569))
+* Correct exports of package tailwind configs and starter activation. ([#1538](https://github.com/johnsonandjohnson/bodiless-js/issues/1538)) ([51f5a54](https://github.com/johnsonandjohnson/bodiless-js/commit/51f5a547517880cce55622f81c1aef906ca661f7))
+* **fclasses:** Fix replaceWith passing extra props to Fragments ([#1530](https://github.com/johnsonandjohnson/bodiless-js/issues/1530)) ([8390ff6](https://github.com/johnsonandjohnson/bodiless-js/commit/8390ff69e2b306587c540c017ee8bc7f00c2f619))
+* **fclasses:** Improve mobx warning. ([#1794](https://github.com/johnsonandjohnson/bodiless-js/issues/1794)) ([3d22eef](https://github.com/johnsonandjohnson/bodiless-js/commit/3d22eefdb358a8261495c031e675d491ad644812))
+* **fclasses:** Remove empty design props from DOM ([#1816](https://github.com/johnsonandjohnson/bodiless-js/issues/1816)) ([74157db](https://github.com/johnsonandjohnson/bodiless-js/commit/74157dba070acc97d020b4d5e4d117ee70c82117))
+* **tailwindcss, fclasses:** Demo site content changes causing HMR bundle rebuild on edit env ([4b6fa0e](https://github.com/johnsonandjohnson/bodiless-js/commit/4b6fa0eda18d36b49d3a4c567ce52cb138457ef0))
+* **Tailwind:** unit test tailwind ([#1606](https://github.com/johnsonandjohnson/bodiless-js/issues/1606)) ([9074f39](https://github.com/johnsonandjohnson/bodiless-js/commit/9074f3916997e89b697e4a202b8659c2ffc0b5de))
+
+
+### Features
+
+* **bc-footer:** Add Brand.com Footer ([#1450](https://github.com/johnsonandjohnson/bodiless-js/issues/1450)) ([9025ae5](https://github.com/johnsonandjohnson/bodiless-js/commit/9025ae5351253b71b2193ccb95bcb43919583220)), closes [#7](https://github.com/johnsonandjohnson/bodiless-js/issues/7) [#8](https://github.com/johnsonandjohnson/bodiless-js/issues/8) [#10](https://github.com/johnsonandjohnson/bodiless-js/issues/10) [#13](https://github.com/johnsonandjohnson/bodiless-js/issues/13) [#16](https://github.com/johnsonandjohnson/bodiless-js/issues/16) [#17](https://github.com/johnsonandjohnson/bodiless-js/issues/17)
+* **cli:** Bodiless new ([#1568](https://github.com/johnsonandjohnson/bodiless-js/issues/1568)) ([3bc0e2c](https://github.com/johnsonandjohnson/bodiless-js/commit/3bc0e2c8e06fe78751c0712d7e1d3cfb8d1fb04d)), closes [#1520](https://github.com/johnsonandjohnson/bodiless-js/issues/1520)
+* **cx-templates, cx-flowcontainer:** Add generic template  ([#1483](https://github.com/johnsonandjohnson/bodiless-js/issues/1483)) ([d1c1e46](https://github.com/johnsonandjohnson/bodiless-js/commit/d1c1e4652e2be95e3dcf2aba50acf2a6249a1aa9)), closes [#1455](https://github.com/johnsonandjohnson/bodiless-js/issues/1455)
+* **fclasses:** Overload asTokenSpec. ([#1817](https://github.com/johnsonandjohnson/bodiless-js/issues/1817)) ([d1ba18b](https://github.com/johnsonandjohnson/bodiless-js/commit/d1ba18b9e56b5df2d788b2efcbe6e53e12a03218))
+* **vital-hero, vital-image, vital-card:** Add Hero & Card component and update Image  ([#1500](https://github.com/johnsonandjohnson/bodiless-js/issues/1500)) ([95f2c3d](https://github.com/johnsonandjohnson/bodiless-js/commit/95f2c3dcf06c6f51bb6b3d252ca6f4f576899dd4)), closes [pr#1498](https://github.com/pr/issues/1498)
+
+
+
+
+
 # [1.0.0-rc.24](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.23...v1.0.0-rc.24) (2023-02-23)
 
 **Note:** Version bump only for package @bodiless/fclasses
