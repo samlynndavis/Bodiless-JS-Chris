@@ -145,30 +145,30 @@ const HeaderLink = as(
   vitalTextDecoration.Underline,
 );
 
-const H1Link = asElementToken({
-  ...H1,
-  Theme: { _: as(HeaderLink) },
-});
+// const H1Link = asElementToken({
+//   ...H1,
+//   Theme: { _: as(HeaderLink) },
+// });
 
-const H2Link = asElementToken({
-  ...H2,
-  Theme: { _: as(HeaderLink) },
-});
+// const H2Link = asElementToken({
+//   ...H2,
+//   Theme: { _: as(HeaderLink) },
+// });
 
-const H3Link = asElementToken({
-  ...H3,
-  Theme: { _: as(HeaderLink) },
-});
+// const H3Link = asElementToken({
+//   ...H3,
+//   Theme: { _: as(HeaderLink) },
+// });
 
-const H4Link = asElementToken({
-  ...H4,
-  Theme: { _: as(HeaderLink) },
-});
+// const H4Link = asElementToken({
+//   ...H4,
+//   Theme: { _: as(HeaderLink) },
+// });
 
-const H5Link = asElementToken({
-  ...H5,
-  Theme: { _: as(HeaderLink) },
-});
+// const H5Link = asElementToken({
+//   ...H5,
+//   Theme: { _: as(HeaderLink) },
+// });
 
 const Body = asElementToken({
   Core: {
@@ -240,11 +240,7 @@ export default {
   H3,
   H4,
   H5,
-  H1Link,
-  H2Link,
-  H3Link,
-  H4Link,
-  H5Link,
+  HeaderLink,
   Body,
   Eyebrow,
   EyebrowNoSpacing,
