@@ -39,7 +39,7 @@ const WhereToBuy = asButtonToken({
       vitalColor.TextPrimaryFooterCopy,
       vitalTextDecoration.Bold,
       vitalTextDecoration.Uppercase,
-      vitalFontSize.MobileBase,
+      vitalFontSize.Base,
       'rounded',
     ),
     Icon: 'w-6 h-6',
