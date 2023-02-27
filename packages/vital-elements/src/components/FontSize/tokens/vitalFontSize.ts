@@ -22,6 +22,7 @@ export const FontSizeMeta = {
 };
 
 export default asTokenGroup(FontSizeMeta)({
+  MobileBase: 'text-m-base',
   Base: 'text-m-base lg:text-base',
   XXXL: 'text-m-3xl lg:text-3xl',
   XXL: 'text-m-2xl lg:text-2xl',
