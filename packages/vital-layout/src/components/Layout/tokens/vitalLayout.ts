@@ -50,13 +50,14 @@ const Base = asLayoutToken({
     ),
   },
   Layout: {
+    OuterContainer: 'flex flex-col',
+    ContainerWrapper: 'flex-grow',
     Helmet: flowIf(
       not(useIsBurgerMenuHidden),
     )(as(vitalHelmet.WithFixedBody, vitalHelmet.WithDesktopStaticBody)),
   },
   Theme: {
-    OuterContainer: 'flex flex-col h-screen',
-    ContainerWrapper: 'flex-grow',
+    OuterContainer: 'h-screen',
   },
   Content: {
     Header: addProps({ id: LayoutIds.HeaderContent }),

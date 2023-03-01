@@ -77,7 +77,7 @@ const WithSingleConstraint = asFluidToken({
 });
 
 const WithTabletOneThirdConstraint = asFluidToken({
-  Core: {
+  Layout: {
     Wrapper: 'w-full',
     ComponentWrapper: 'w-full md:w-1/3',
   },
