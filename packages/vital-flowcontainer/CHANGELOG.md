@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.25](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.24...v1.0.0-rc.25) (2023-03-01)
+
+
+### Features
+
+* **chore:** Cleanup Vital Component tokens ([723c773](https://github.com/johnsonandjohnson/bodiless-js/commit/723c7736311c5b6f3d79bdddec76bdcb1e75551a))
+
+
+
+
+
 # [1.0.0-rc.24](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.23...v1.0.0-rc.24) (2023-02-23)
 
 **Note:** Version bump only for package @bodiless/vital-flowcontainer

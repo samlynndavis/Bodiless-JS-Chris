@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.25](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.24...v1.0.0-rc.25) (2023-03-01)
+
+
+### Features
+
+* **chore:** Address PR Feedback, remove Header Links from Typography ([62eaf2a](https://github.com/johnsonandjohnson/bodiless-js/commit/62eaf2a54ca00cd9dda6036f9a52618e3ad61f8a))
+
+
+
+
+
 # [1.0.0-rc.24](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.23...v1.0.0-rc.24) (2023-02-23)
 
 **Note:** Version bump only for package @bodiless/vital-search
