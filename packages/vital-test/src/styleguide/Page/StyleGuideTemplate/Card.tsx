@@ -18,12 +18,13 @@ import {
 } from '@bodiless/fclasses';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { vitalCardFlowContainer } from '@bodiless/vital-card';
-import StyleGuideExamples from '../../Examples';
+import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const eyebrow = {
   text: 'LOREM EYEBROW'
 };
 
+// @todo Provide actual default image in package rather than manual upload.
 const image = {
   src: '/images/pages/styleguide/card/89e732f5d5bfe4a4a80eebfa4e01a8bd/image1.png',
   alt: '',
@@ -32,7 +33,7 @@ const image = {
 };
 
 const title = {
-  text: 'Ipsum Title&nbsp;'
+  text: 'Ipsum Title'
 };
 
 const description = [
@@ -60,17 +61,18 @@ const description = [
   }
 ];
 
+const content = {
+  title, description, eyebrow, image
+};
+
 export const Card = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
   Meta: flowHoc.meta.term('Token')('Card'),
   Content: {
     Title: replaceWith(() => <>Card</>),
-    Examples: on(StyleGuideExamples)(
+    Examples: on(StyleGuideExamplesClean)(
+      vitalStyleGuideExamples.Default,
       vitalCardFlowContainer.WithCardVariations,
-      addProps({
-        content: {
-          image, title, description, eyebrow,
-        }
-      }),
+      addProps({ content }),
     ),
   },
 });
