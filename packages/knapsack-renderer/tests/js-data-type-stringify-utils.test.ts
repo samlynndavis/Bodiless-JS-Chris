@@ -1,9 +1,10 @@
+/* eslint-disable jest/expect-expect */
 import test from 'ava';
 import { formatCodeSync } from '@knapsack/file-utils/format';
 import {
   getJsDataTypeAsString,
   JsDataTypeInfo,
-} from '../dist/js-data-type-stringify-utils';
+} from '../lib/js-data-type-stringify-utils';
 
 /** format code string */
 const f = (code: string) => formatCodeSync({
@@ -43,7 +44,7 @@ test('func: invoke w/ string & var params', (t) => {
         ],
       }).string,
     ),
-    f('myFunc(\'a\', b)'),
+    f("myFunc('a', b)"),
   );
 });
 

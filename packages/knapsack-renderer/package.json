@@ -17,7 +17,7 @@
     "build": "tsc",
     "start": "npm run build -- --watch",
     "clean": "rm -rf ./dist",
-    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src",
+    "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx ./src ./tests",
     "test": "ava"
   },
   "dependencies": {

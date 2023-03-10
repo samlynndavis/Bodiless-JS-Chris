@@ -1,6 +1,7 @@
+/* eslint-disable jest/expect-expect */
 import test from 'ava';
 import { formatCodeSync } from '@knapsack/file-utils/format';
-import { getUsage } from '../dist/utils';
+import { getUsage } from '../lib/utils';
 
 /** format code string */
 const f = (code: string) => formatCodeSync({
