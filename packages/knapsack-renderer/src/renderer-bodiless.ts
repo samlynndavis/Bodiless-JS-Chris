@@ -1,18 +1,12 @@
 import { KnapsackRendererBase, log } from '@knapsack/app';
 import { KnapsackRendererWebpackBase } from '@knapsack/renderer-webpack-base';
-import {
-  KnapsackConfig,
-  KnapsackRenderParams,
-  KnapsackTemplateRenderer as Renderer,
-  KnapsackTemplateRendererBase,
-  Patterns,
-} from '@knapsack/app/types';
+import { KnapsackTemplateRenderer as Renderer } from '@knapsack/app/types';
 import { KnapsackReactRenderer as Base } from '@knapsack/renderer-react';
 import {
   isObjectProp,
   KsJsImport,
   KsTemplateSpec as KsTemplateSpecBase,
-  ObjectProp,
+  isSlottedTemplateReference,
 } from '@knapsack/types';
 import { findUpPkgJson } from '@knapsack/file-utils';
 import { isObject } from '@knapsack/utils';
@@ -57,7 +51,9 @@ type KsTemplateSpecMeta = {
 type KsTemplateSpec = KsTemplateSpecBase<KsTemplateSpecMeta>;
 
 function isKsTemplateSpecMeta(meta: unknown): meta is KsTemplateSpecMeta {
-  return isObject(meta) && meta.tokensExportName && meta.componentExportName;
+  return (
+    isObject(meta) && !!meta.tokensExportName && !!meta.componentExportName
+  );
 }
 
 export class KnapsackBodilessRenderer extends Base implements Renderer {
@@ -187,11 +183,17 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
               (t) => t.id === slotItem.templateId,
             );
 
+            if (isSlottedTemplateReference(slotItem)) {
+              throw new Error(
+                `Unsupported "SlottedTemplateReference" item: ${slotItem}`,
+              );
+            }
+
             const { usage, imports: slotImports } =
               await this.getUsageAndImports({
                 pattern: slotPattern,
                 template: slotTemplate,
-                demo: slotTemplate?.demosById[slotItem.demoId],
+                demo: slotItem.demo || slotTemplate?.demosById[slotItem.demoId],
                 patternManifest,
                 isForCodeBlock,
               });
