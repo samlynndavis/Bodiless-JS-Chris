@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { KnapsackRendererBase, log } from '@knapsack/app';
 import { KnapsackRendererWebpackBase } from '@knapsack/renderer-webpack-base';
 import { KnapsackTemplateRenderer as Renderer } from '@knapsack/app/types';
@@ -58,6 +59,7 @@ function isKsTemplateSpecMeta(meta: unknown): meta is KsTemplateSpecMeta {
 
 export class KnapsackBodilessRenderer extends Base implements Renderer {
   title: string;
+
   constructor({
     webpackConfig,
     demoWrapperPath,
@@ -88,10 +90,9 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
   }
 
   getTemplateName(opt: { patternId: string; templateId: string }): string {
-    const hasSingleTemplate =
-      this.getMyTemplates().allTemplates.filter(
-        (t) => t.patternId === opt.patternId,
-      ).length === 1;
+    const hasSingleTemplate = this.getMyTemplates().allTemplates.filter(
+      (t) => t.patternId === opt.patternId,
+    ).length === 1;
     return this.changeCase(
       hasSingleTemplate ? opt.patternId : `${opt.patternId}-${opt.templateId}`,
     );
@@ -177,26 +178,30 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
             if (KnapsackRendererBase.isSlottedText(slotItem)) {
               throw new Error(`Unsupported slotted text item: ${slotItem}`);
             }
-            const slotPattern = this.patterns.getPattern(slotItem.patternId);
-
-            const slotTemplate = slotPattern.templates.find(
-              (t) => t.id === slotItem.templateId,
-            );
-
             if (isSlottedTemplateReference(slotItem)) {
               throw new Error(
                 `Unsupported "SlottedTemplateReference" item: ${slotItem}`,
               );
             }
+            const slotPattern = this.patterns.getPattern(slotItem.patternId);
 
-            const { usage, imports: slotImports } =
-              await this.getUsageAndImports({
-                pattern: slotPattern,
-                template: slotTemplate,
-                demo: slotItem.demo || slotTemplate?.demosById[slotItem.demoId],
-                patternManifest,
-                isForCodeBlock,
-              });
+            const slotTemplate = slotPattern?.templates?.find(
+              (t) => t.id === slotItem.templateId,
+            );
+            if (!slotTemplate) {
+              throw new Error(
+                `Slot ${slotName} of ${pattern.id} ${template.id} ${demo?.id} references a template that does not exist: ${slotItem.templateId}`,
+              );
+            }
+
+            const { usage, imports: slotImports } = await this.getUsageAndImports({
+              pattern: slotPattern,
+              template: slotTemplate,
+              demo:
+                  slotItem.demo || slotTemplate?.demosById?.[slotItem.demoId],
+              patternManifest,
+              isForCodeBlock,
+            });
             imports.push(...slotImports);
             return usage;
           }),
@@ -214,7 +219,7 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
       (cur, { slotName, usages }) => {
         if (usages.length > 1) {
           throw new Error(
-            `This renderer does not support multiple items in a single slot; it can only have one item in a slot.`,
+            'This renderer does not support multiple items in a single slot; it can only have one item in a slot.',
           );
         }
         const [value] = usages;
@@ -228,11 +233,12 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
       {} as WithDesign,
     );
 
-    const { usage, refs } = await getUsage({
+    const { usage } = await getUsage({
       bodilessTokens: Object.entries(props)
         .flatMap(([name, value]) => {
           if (isObject(value)) {
-            // in `inferSpec` we will make an object of boolean for pure-presentational purposes, so let's flatten them here.
+            // in `inferSpec` we will make an object of boolean for
+            // pure-presentational purposes, so let's flatten them here.
             return Object.entries(value);
           }
           return [[name, value]];
@@ -259,7 +265,7 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
   }
 
   async render(opt: Parameters<Base['render']>[0]): ReturnType<Base['render']> {
-    const { patternManifest, pattern, template, demo } = opt;
+    const { pattern, template, demo } = opt;
     const { componentExportName: componentExportName2 } = this.getSpec({
       patternId: pattern.id,
       templateId: template.id,
@@ -276,21 +282,21 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
       });
       const templateName = Base.isTemplateDemo(opt.demo)
         ? this.getJsImport({
-            patternId: pattern.id,
-            templateId: template.id,
-            demoId: demo.id,
-          }).importInfo.name
+          patternId: pattern.id,
+          templateId: template.id,
+          demoId: demo.id,
+        }).importInfo.name
         : this.getTemplateName({
-            patternId: pattern.id,
-            templateId: template.id,
-          });
+          patternId: pattern.id,
+          templateId: template.id,
+        });
       const prep = Base.isTemplateDemo(opt.demo)
         ? usage
         : `const ${templateName} = ${usage}(${
-            isForCodeBlock
-              ? `${componentExportName2}`
-              : `${template.alias}.component`
-          })`;
+          isForCodeBlock
+            ? `${componentExportName2}`
+            : `${template.alias}.component`
+        })`;
 
       let importsForCodeBlock = '';
       if (isForCodeBlock) {
@@ -332,15 +338,14 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
       return { code, imports };
     };
 
-    const [{ code: demoApp, imports }, { code: demoAppUsage }] =
-      await Promise.all([
-        createDemoCode({
-          isForCodeBlock: false,
-        }),
-        createDemoCode({
-          isForCodeBlock: true,
-        }),
-      ]);
+    const [{ code: demoApp, imports }, { code: demoAppUsage }] = await Promise.all([
+      createDemoCode({
+        isForCodeBlock: false,
+      }),
+      createDemoCode({
+        isForCodeBlock: true,
+      }),
+    ]);
     return this.prepClientRenderResults({
       demoApp,
       usage: demoAppUsage,
@@ -363,8 +368,9 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
           `No named export "${template.alias}" found after importing from "${templatePath}"`,
         );
       }
-      const { tokens, slots, componentExportName, tokensExportName } =
-        bodilessSpec;
+      const {
+        tokens, slots, componentExportName, tokensExportName
+      } = bodilessSpec;
       const props: KsTemplateSpec['props'] = Object.entries(tokens).reduce(
         (cur, [tokenName, token]) => {
           const group = token.Meta?.categories?.Group?.[0];
@@ -429,7 +435,12 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
         },
       };
     } catch (e) {
-      log.warn(`Failed to infer spec for "${templatePath}": ${e.message}`, e);
+      log.warn(
+        `Failed to infer spec for "${templatePath}": ${
+          e instanceof Error ? e.message : ''
+        }`,
+        e,
+      );
       return false;
     }
   };

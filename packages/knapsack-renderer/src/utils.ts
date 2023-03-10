@@ -17,9 +17,9 @@ export async function getUsage({
   withDesign?: Extract<JsDataTypeInfo, { type: 'object' }>['value'];
   withDefaultContent?: Record<string, unknown>;
 }): Promise<{
-  usage: string;
-  refs: Set<string>;
-}> {
+    usage: string;
+    refs: Set<string>;
+  }> {
   const withDefaultContentInfo: JsDataTypeInfo = {
     type: 'func',
     name: 'withDefaultContent',

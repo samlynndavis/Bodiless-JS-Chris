@@ -3,11 +3,10 @@ import { formatCodeSync } from '@knapsack/file-utils/format';
 import { getUsage } from '../dist/utils';
 
 /** format code string */
-const f = (code: string) =>
-  formatCodeSync({
-    contents: code,
-    path: 'fake-path.jsx',
-  });
+const f = (code: string) => formatCodeSync({
+  contents: code,
+  path: 'fake-path.jsx',
+});
 
 test('list of bodiless token vars', async (t) => {
   const { usage: actual } = await getUsage({

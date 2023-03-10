@@ -1,9 +1,18 @@
 {
-  "extends": "@knapsack/typescript-config-starter/tsconfig.build.json",
+  "extends": "../../tsconfig.settings.json",
   "compilerOptions": {
-    "module": "CommonJS",
-    "noImplicitAny": true,
-    "outDir": "./dist"
+    "module": "commonjs",
+    "strictNullChecks": false,
+    "target": "ESNext",
+    "rootDir": "src",
+    "outDir": "lib",
+    "baseUrl": "."
   },
-  "include": ["./src"]
+  "include": ["src"],
+  "exclude": [
+    "lib",
+    "node_modules",
+    "__tests__/**/*.*",
+    "src/**/__tests__/**/*.*"
+  ]
 }

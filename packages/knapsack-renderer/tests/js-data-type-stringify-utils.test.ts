@@ -6,12 +6,11 @@ import {
 } from '../dist/js-data-type-stringify-utils';
 
 /** format code string */
-const f = (code: string) =>
-  formatCodeSync({
-    // splitting & re-joining normalizes the code
-    contents: code.split('\n').join(' '),
-    path: 'fake-path.jsx',
-  });
+const f = (code: string) => formatCodeSync({
+  // splitting & re-joining normalizes the code
+  contents: code.split('\n').join(' '),
+  path: 'fake-path.jsx',
+});
 
 test('func: invoke w/no params', (t) => {
   t.is(
@@ -22,7 +21,7 @@ test('func: invoke w/no params', (t) => {
         params: [],
       }).string,
     ),
-    f(`myFunc()`),
+    f('myFunc()'),
   );
 });
 
@@ -44,7 +43,7 @@ test('func: invoke w/ string & var params', (t) => {
         ],
       }).string,
     ),
-    f(`myFunc('a', b)`),
+    f('myFunc(\'a\', b)'),
   );
 });
 
@@ -67,7 +66,7 @@ test('func: invoke w/ string & invoked func params', (t) => {
         ],
       }).string,
     ),
-    f(`myFunc(a, b())`),
+    f('myFunc(a, b())'),
   );
 });
 
