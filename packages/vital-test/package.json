@@ -38,6 +38,8 @@
     "@bodiless/components": "^1.0.0-rc.25",
     "@bodiless/components-ui": "^1.0.0-rc.25",
     "@bodiless/core": "^1.0.0-rc.25",
+    "@bodiless/layouts": "^1.0.0-rc.25",
+    "@bodiless/layouts-ui": "^1.0.0-rc.25",
     "@bodiless/fclasses": "^1.0.0-rc.25",
     "@bodiless/richtext": "^1.0.0-rc.25",
     "@bodiless/richtext-ui": "^1.0.0-rc.25",
