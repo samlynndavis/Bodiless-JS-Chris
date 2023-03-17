@@ -20,20 +20,12 @@ const ourImports: KsJsImport[] = [
   {
     type: 'extra',
     importInfo: {
-      path: '@canvasx/elements',
-      name: 'as',
-      type: 'named',
-    },
-  },
-  {
-    type: 'extra',
-    importInfo: {
       path: '@bodiless/core',
       name: 'withDefaultContent',
       type: 'named',
     },
   },
-  ...['addProps', 'withDesign', 'asToken'].map((name) => ({
+  ...['addProps', 'withDesign', 'asToken', 'as'].map((name) => ({
     type: 'extra' as const,
     importInfo: {
       path: '@bodiless/fclasses',
