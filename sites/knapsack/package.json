@@ -1,0 +1,41 @@
+{
+  "name": "@sites/knapsack",
+  "private": true,
+  "version": "1.0.0-rc.25",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johnsonandjohnson/Bodiless-JS",
+    "directory": "sites/knapsack"
+  },
+  "scripts": {
+    "build": "npm run ks:build",
+    "clean": "rm -rf ./lib",
+    "ks:build": "NODE_ENV=production knapsack build",
+    "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
+    "start": "knapsack start",
+    "serve": "NODE_ENV=production knapsack serve",
+    "test": "knapsack test"
+  },
+  "dependencies": {
+    "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.25",
+    "@knapsack/app": "^3.103.3",
+    "@bodiless/fclasses": "^1.0.0-rc.25",
+    "@bodiless/core": "^1.0.0-rc.25",
+    "@bodiless/knapsack-renderer": "^1.0.0-rc.25",
+    "@bodiless/card": "^1.0.0-rc.25",
+    "@types/react": "^17.0.39",
+    "react": "^17.0.2",
+    "esm": "^3.2.25",
+    "crypto-browserify": "^3.12.0",
+    "path-browserify": "^1.0.1",
+    "postcss-loader": "^6.2.1",
+    "stream-browserify": "^3.0.0",
+    "style-loader": "^3.3.1",
+    "css-loader": "^6.5.1",
+    "typescript": "^4.0.0",
+    "webpack": "^5.69.1"
+  },
+  "files": [
+    "/lib"
+  ]
+}

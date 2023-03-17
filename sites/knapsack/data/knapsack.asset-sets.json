@@ -1,0 +1,5 @@
+{
+  "$schema": "https://unpkg.com/@knapsack/types@3.24.12/json-schemas/schemaKnapsackAssetSetsConfig.json",
+  "globalAssetSetIds": [],
+  "allAssetSets": {}
+}

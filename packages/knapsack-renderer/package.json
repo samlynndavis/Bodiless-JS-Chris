@@ -35,7 +35,6 @@
   },
   "devDependencies": {
     "@bodiless/fclasses": "^1.0.0-rc.25",
-    "@knapsack/prettier-config": "^3.103.3",
     "@knapsack/test-ava": "^3.103.3",
     "@knapsack/typescript-config-starter": "^3.103.3",
     "@types/babel__core": "^7.1.16",
