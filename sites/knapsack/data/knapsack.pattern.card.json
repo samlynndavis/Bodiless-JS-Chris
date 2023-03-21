@@ -20,9 +20,26 @@
           "type": "data",
           "data": {
             "props": {
-              "WithHorizontalLeftOrientation": true
+              "WithHorizontalLeftOrientation": true,
+              "Base": true,
+              "Default": true
             },
-            "slots": {}
+            "slots": {},
+            "extras": {
+              "title": {
+                "text": "This is a whole title"
+              },
+              "body": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Hello World!"
+                    }
+                  ]
+                }
+              ]
+            }
           }
         }
       },

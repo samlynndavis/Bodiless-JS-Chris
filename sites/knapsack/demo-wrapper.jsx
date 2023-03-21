@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import { KsEditProvider } from '@canvasx/elements';
+import { KsEditProvider } from '@bodiless/vital-elements';
 import './demo-wrapper.css';
 
 /** should be either 'yes' or 'no' - set from Asset Sets defined in `knapsack.asset-sets.json` */
@@ -8,9 +8,11 @@ const isEditable = attr === 'yes';
 
 const DemoWrapper = ({ children }) => {
   const className = 'demo-wrapper';
-  // return React.createElement(KsEditProvider, { className: "demo-wrapper" }, children);
-  // return <div className="demo-wrapper">{children}</div>;
-  return React.createElement('div', { className }, children);
+  return isEditable
+    ? React.createElement(KsEditProvider, { className }, children)
+    // @todo When it is not editable, components still show edit controls
+    // even though no data gets saved (since `KsEditProvider` is not rendered).
+    : React.createElement('div', { className }, children);
 };
 
 export default DemoWrapper;
