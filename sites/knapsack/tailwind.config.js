@@ -18,6 +18,12 @@ const { buildTailwindConfig } = requireEsm(
   '@bodiless/fclasses'
 );
 
+const twConfig = {
+  content: [
+    // './src/**/!(*.d).{ts,js,jsx,tsx}',
+  ],
+};
+
 // Get configs sorted by precedence and/or exclude some packages:
 // const getTwConfig = () => getPackageTailwindConfig({
 //   pkgJson,
@@ -27,7 +33,14 @@ const { buildTailwindConfig } = requireEsm(
 //   exclude: ['@bodiless/organisms', '@bodiless/accordion'],
 // });
 
+// console.log(buildTailwindConfig({
+//   twConfig,
+//   resolver: (pkgName) => require.resolve(pkgName),
+//   // prefer: ['@sites/--minimal--'],
+// }));
+
 module.exports = buildTailwindConfig({
-  resolver: pkg => requireEsm.resolve(pkg),
-  prefer: ['@bodiless/__cxstarter__'],
+  twConfig,
+  resolver: (pkgName) => require.resolve(pkgName),
+  // prefer: ['@sites/--minimal--'],
 });

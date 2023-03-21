@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const babelConfig = require('../../babel.config');
+const babelConfig = require('./.babelrc.json');
 const { demoWrapperPath } = require('./common-config');
 
 const webpackMajorVersion = parseInt(webpack.version.split('.')[0], 10);

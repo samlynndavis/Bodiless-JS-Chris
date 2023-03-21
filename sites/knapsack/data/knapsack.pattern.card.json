@@ -1,0 +1,60 @@
+{
+  "id": "card",
+  "title": "Card",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-Kmd8Nb3inj",
+      "title": "Vital Card",
+      "path": "@bodiless/vital-card",
+      "alias": "cardSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demosById": {
+        "main": {
+          "id": "main",
+          "title": "Main",
+          "type": "data",
+          "data": {
+            "props": {
+              "WithHorizontalLeftOrientation": true
+            },
+            "slots": {}
+          }
+        }
+      },
+      "demos": ["main"],
+      "slices": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "subPage",
+      "id": "overview"
+    },
+    {
+      "type": "template",
+      "id": "bodiless-Kmd8Nb3inj"
+    }
+  ],
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "slices": [
+        {
+          "id": "ks-content-block-z6oyLDb-mS",
+          "blockId": "markdown-slice",
+          "data": {
+            "autoEdit": false,
+            "md": ["This is our card!"],
+            "columns": 1
+          }
+        }
+      ]
+    }
+  ]
+}

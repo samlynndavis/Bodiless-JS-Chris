@@ -2,13 +2,13 @@
   "primary": [],
   "secondary": [
     {
-      "id": "Components",
+      "id": "components",
       "name": "Components",
       "path": "",
       "parentId": "root"
     },
     {
-      "id": "Docs",
+      "id": "docs",
       "name": "Docs",
       "path": "",
       "parentId": "root"
@@ -17,7 +17,13 @@
       "id": "intro",
       "name": "Intro",
       "path": "/pages/intro",
-      "parentId": "Docs"
+      "parentId": "docs"
+    },
+    {
+      "path": "/pattern/card",
+      "parentId": "components",
+      "id": "card",
+      "name": "Card"
     }
   ]
 }
