@@ -25,7 +25,7 @@ const ourImports: KsJsImport[] = [
       type: 'named',
     },
   },
-  ...['addProps', 'withDesign', 'asToken', 'as'].map((name) => ({
+  ...['addProps', 'withDesign', 'as'].map((name) => ({
     type: 'extra' as const,
     importInfo: {
       path: '@bodiless/fclasses',
