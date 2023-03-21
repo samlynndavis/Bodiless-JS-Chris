@@ -11,6 +11,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
+import React from 'react';
+import {
+  TokenCollection, Div, Strong, Small
+} from '@bodiless/fclasses';
 
 export * from './components/Typography';
 export * from './components/Color';
@@ -19,3 +24,26 @@ export * from './components/Spacing';
 export * from './components/TextDecoration';
 export * from './util';
 export * from './KsEditProvider';
+
+// @todo - Ivan please remove the `as`
+export const tokens = {
+  Strong,
+  Small,
+} as unknown as TokenCollection<any, any>;
+
+export const ElementClean = (props: any) => (
+  <Div {...props}>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua
+  </Div>
+);
+
+export const elementsSpec: KnapsackBodilessSpec = {
+  tokens,
+  tokensExportName: 'tokens',
+  // @todo Provide a default content hoc in the spec which allows adding
+  // some basic demo content, even if the component is later editable.
+  component: ElementClean,
+  componentExportName: 'ElementClean',
+  slots: {},
+};

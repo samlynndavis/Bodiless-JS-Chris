@@ -24,7 +24,15 @@
               "Base": true,
               "Default": true
             },
-            "slots": {},
+            "slots": {
+              "Title": [
+                {
+                  "patternId": "elements",
+                  "templateId": "bodiless-6GKNPvcRI7",
+                  "demoId": "main"
+                }
+              ]
+            },
             "extras": {
               "title": {
                 "text": "This is a whole title"
@@ -35,6 +43,16 @@
                   "children": [
                     {
                       "text": "Hello World!"
+                    }
+                  ]
+                }
+              ],
+              "description": [
+                {
+                  "type": "paragraph",
+                  "children": [
+                    {
+                      "text": "Lorem ipsum dolar sit amet etc."
                     }
                   ]
                 }
@@ -49,12 +67,12 @@
   ],
   "tabs": [
     {
-      "type": "subPage",
-      "id": "overview"
-    },
-    {
       "type": "template",
       "id": "bodiless-Kmd8Nb3inj"
+    },
+    {
+      "type": "subPage",
+      "id": "overview"
     }
   ],
   "subPages": [

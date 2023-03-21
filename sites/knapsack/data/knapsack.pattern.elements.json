@@ -1,0 +1,64 @@
+{
+  "id": "elements",
+  "title": "Elements",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI7",
+      "title": "Template",
+      "path": "@bodiless/vital-elements",
+      "alias": "elementsSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demosById": {
+        "main": {
+          "id": "main",
+          "title": "Bold Text",
+          "type": "data",
+          "data": {
+            "props": {
+              "Strong": true
+            },
+            "slots": {}
+          }
+        },
+        "CihCHWJntY": {
+          "id": "CihCHWJntY",
+          "title": "Small Text",
+          "type": "data",
+          "data": {
+            "props": {
+              "Strong": false,
+              "Small": true
+            },
+            "slots": {}
+          }
+        },
+        "9b3gwi1whT": {
+          "id": "9b3gwi1whT",
+          "title": "Bold Small Text",
+          "type": "data",
+          "data": {
+            "props": {
+              "Strong": true,
+              "Small": true
+            },
+            "slots": {}
+          }
+        }
+      },
+      "demos": ["main", "CihCHWJntY", "9b3gwi1whT"],
+      "slices": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcRI7"
+    }
+  ],
+  "subPages": []
+}

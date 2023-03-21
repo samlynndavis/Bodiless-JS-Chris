@@ -24,6 +24,12 @@
       "parentId": "components",
       "id": "card",
       "name": "Card"
+    },
+    {
+      "path": "/pattern/elements",
+      "parentId": "components",
+      "id": "elements",
+      "name": "Elements"
     }
   ]
 }
