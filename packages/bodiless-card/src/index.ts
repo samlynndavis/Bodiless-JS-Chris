@@ -11,10 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
-import * as cxCard from './components/Cards.tokens';
-import { CardClean } from './components/Cards';
-
 import type {
   CardComponents,
   CardProps,
@@ -40,22 +36,3 @@ export {
   asCardOverlayTitle,
   asCardOverlayCta,
 } from './components/Cards.tokens';
-
-export const cardSpec: KnapsackBodilessSpec<CardComponents> = {
-  tokens: cxCard,
-  tokensExportName: 'cxCard',
-  component: CardClean,
-  componentExportName: 'CardClean',
-  slots: {
-    Title: {
-      title: 'Title',
-      description: 'The title of the card',
-      allowedPatternIds: ['element'],
-    },
-    Body: {
-      title: 'Body',
-      description: 'The body of the card',
-      allowedPatternIds: ['element'],
-    },
-  },
-};
