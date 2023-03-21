@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { KnapsackRendererBase, log } from '@knapsack/app';
+import { KnapsackRendererBase } from '@knapsack/app';
 import { KnapsackRendererWebpackBase } from '@knapsack/renderer-webpack-base';
 import { KnapsackTemplateRenderer as Renderer } from '@knapsack/app/types';
 import { KnapsackReactRenderer as Base } from '@knapsack/renderer-react';
@@ -350,16 +350,16 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
     template,
     templatePath,
   }): ReturnType<Base['inferSpec']> => {
+    const x = await this.importJsModule({
+      path: templatePath,
+    });
+    const bodilessSpec = x[template.alias] as KnapsackBodilessSpec;
+    if (!bodilessSpec) {
+      throw new Error(
+        `No named export "${template.alias}" found after importing from "${templatePath}"`,
+      );
+    }
     try {
-      const x = await this.importJsModule({
-        path: templatePath,
-      });
-      const bodilessSpec = x[template.alias] as KnapsackBodilessSpec;
-      if (!bodilessSpec) {
-        throw new Error(
-          `No named export "${template.alias}" found after importing from "${templatePath}"`,
-        );
-      }
       const {
         tokens, slots, componentExportName, tokensExportName
       } = bodilessSpec;
@@ -427,13 +427,11 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
         },
       };
     } catch (e) {
-      log.warn(
+      throw new Error(
         `Failed to infer spec for "${templatePath}": ${
           e instanceof Error ? e.message : ''
-        }`,
-        e,
+        }`
       );
-      return false;
     }
   };
 
