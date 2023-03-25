@@ -14,7 +14,9 @@
 
 import { withLanguages } from '@bodiless/i18n';
 import { asFluidToken } from '@bodiless/vital-elements';
-import { vitalPageBase } from '@bodiless/vital-templates';
+import {
+  vitalPageBase, vitalPDPTemplate, vitalGenericTemplate, GenericTemplateClean, PDPTemplateClean,
+} from '@bodiless/vital-templates';
 
 const Default = asFluidToken(vitalPageBase.Default, {
   Core: {
@@ -29,6 +31,11 @@ const Default = asFluidToken(vitalPageBase.Default, {
         label: 'Español',
       },
     ]),
+  },
+  Components: {
+    PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
+    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
+    ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
   },
 });
 

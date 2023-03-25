@@ -14,7 +14,7 @@
 
 import {
   on,
-  as,
+  a
   flowIf,
   addProps,
   withDesign,

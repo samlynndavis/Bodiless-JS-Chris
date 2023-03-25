@@ -42,6 +42,7 @@
     "@bodiless/ga4": "^1.0.0-rc.25",
     "@bodiless/search": "^1.0.0-rc.25",
     "@bodiless/vital-elements": "^1.0.0-rc.25",
+    "@bodiless/vital-templates": "^1.0.0-rc.25",
     "lodash": "^4.17.19"
   }
 }
