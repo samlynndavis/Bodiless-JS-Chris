@@ -17,7 +17,7 @@ import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer';
 import { vitalImageFlowContainer } from '@bodiless/vital-image';
 import { FlowContainerClean, vitalEditorsFlowContainer } from '@bodiless/vital-editors';
-import { vitalYouTubeFlowContainer } from '@bodiless/@bodiless/vital-youtube';
+import { vitalYouTubeFlowContainer } from '@bodiless/vital-youtube';
 import { vitalListFlowContainer } from '@bodiless/vital-list';
 import { vitalCardFlowContainer } from '@bodiless/vital-card';
 import { vitalTableFlowContainer } from '@bodiless/vital-table';
@@ -57,13 +57,15 @@ const ContentRegion = asFluidToken(
 );
 
 /**
- * Add variations to the default flow container.
+ * Overide the vital default flow container to add component variations.
+ * These will be availalbe for content editors to choose when editing
+ * a page.
  */
 const Default = asFluidToken(
   vitalFlowContainerBase.Default,
   WithBaseVariations,
   WithContentRegionVariations,
-};
+);
 
 /**
  * Add varitions to the Hero flow container.

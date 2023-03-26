@@ -12,11 +12,15 @@
  * limitations under the License.
  */
 
+import { on } from '@bodiless/@bodiless/fclasses';
 import { withLanguages } from '@bodiless/i18n';
 import { asFluidToken } from '@bodiless/vital-elements';
 import {
   vitalPageBase, vitalPDPTemplate, vitalGenericTemplate, GenericTemplateClean, PDPTemplateClean,
 } from '@bodiless/vital-templates';
+import {
+  vitalSearchGenericTemplate
+} from '@bodiless/vital-search';
 
 const Default = asFluidToken(vitalPageBase.Default, {
   Core: {
@@ -34,7 +38,7 @@ const Default = asFluidToken(vitalPageBase.Default, {
   },
   Components: {
     PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
-    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
+    Search: on(GenericTemplateClean)(vitalSearchGenericTemplate.Search),
     ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
   },
 });
