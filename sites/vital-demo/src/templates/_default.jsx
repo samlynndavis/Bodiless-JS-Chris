@@ -25,7 +25,6 @@ const WithSearchContext = asFluidToken({
   }
 });
 
-
 const DefaultPage = as(
   vitalPage.Default,
   // @todo why do we apply this here and not in __vital__

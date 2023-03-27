@@ -13,7 +13,7 @@
  */
 
 import { on } from '@bodiless/fclasses';
-import { asHeaderToken, vitalHeader } from '@bodiless/vital-layout';
+import { asHeaderToken } from '@bodiless/vital-layout';
 import { SearchMenuClean, vitalSearchMenu } from '../../SearchMenu';
 import { SearchTogglerClean, vitalSearchToggler, asSearchMenuToggler } from '../../SearchToggler';
 
@@ -28,12 +28,6 @@ const WithSearch = asHeaderToken({
   },
 });
 
-const Default = asHeaderToken(
-  vitalHeader.Default,
-  WithSearch,
-);
-
 export default {
   WithSearch,
-  Default,
 };
