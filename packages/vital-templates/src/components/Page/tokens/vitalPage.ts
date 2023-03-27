@@ -18,7 +18,6 @@ import { asFluidToken } from '@bodiless/vital-elements';
 import { WithGA4DesignKeys } from '@bodiless/ga4';
 import { asBodilessPage } from '../asBodilessPage';
 import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
-import { PDPTemplateClean, vitalPDPTemplate } from '../../PDPTemplate';
 
 const Base = asFluidToken({
   Core: {
@@ -38,9 +37,6 @@ const Base = asFluidToken({
   },
   Components: {
     _default: on(GenericTemplateClean)(vitalGenericTemplate.Generic),
-    PDP: on(PDPTemplateClean)(vitalPDPTemplate.Default),
-    Search: on(GenericTemplateClean)(vitalGenericTemplate.Search),
-    ContentListing: on(GenericTemplateClean)(vitalGenericTemplate.ContentListing),
   },
   // @todo restore tools
   // Behavior: {
@@ -66,5 +62,4 @@ const Default = asFluidToken({
 export default {
   Base,
   Default,
-  WithSearchContext,
 };

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { on } from '@bodiless/@bodiless/fclasses';
+import { on } from '@bodiless/fclasses';
 import { withLanguages } from '@bodiless/i18n';
 import { asFluidToken } from '@bodiless/vital-elements';
 import {
