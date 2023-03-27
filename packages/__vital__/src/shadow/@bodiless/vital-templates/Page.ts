@@ -49,7 +49,6 @@ const Default = asFluidToken(vitalPageBase.Default, {
     WithSearchContext: as(withSearchMenuProvider, withSearchResult),
   },
 });
-});
 
 const vitalPage: typeof vitalPageBase = {
   ...vitalPageBase,
