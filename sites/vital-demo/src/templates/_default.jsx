@@ -17,19 +17,8 @@ import { graphql } from 'gatsby';
 import { as } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalPage } from '@bodiless/vital-templates';
-import { withSearchMenuProvider, withSearchResult } from '@bodiless/vital-search';
 
-const WithSearchContext = asFluidToken({
-  Compose: {
-    _: as(withSearchMenuProvider, withSearchResult),
-  }
-});
-
-const DefaultPage = as(
-  vitalPage.Default,
-  // @todo why do we apply this here and not in __vital__
-  WithSearchContext
-)(Fragment);
+const DefaultPage = as(vitalPage.Default)(Fragment);
 
 export default DefaultPage;
 
