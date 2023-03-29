@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
-import { TokenCollection } from '@bodiless/fclasses';
+// import { TokenCollection } from '@bodiless/fclasses';
 import vitalCard from './components/Card/tokens/vitalCard';
 import CardClean, { CardComponents } from './components/Card/CardClean';
 
@@ -20,11 +20,11 @@ export * from './components/Card';
 export * from './components/FlowContainer';
 
 // @todo - Ivan please remove the `as`
-const tokens = vitalCard as unknown as TokenCollection<any, any>;
+// const tokens = vitalCard as unknown as TokenCollection<any, any>;
 
 // @todo - Ivan please make sure `CardComponents` has type errors fixed
 export const cardSpec: KnapsackBodilessSpec<CardComponents> = {
-  tokens,
+  tokens: vitalCard,
   tokensExportName: 'vitalCard',
   component: CardClean,
   componentExportName: 'CardClean',

@@ -57,9 +57,9 @@ class KsStoreProvider extends BodilessStoreProvider {
   }
 }
 const ui = {
-  GlobalContextMenu: (): React.ReactElement => null,
+  GlobalContextMenu: (): React.ReactElement | null => null,
   LocalContextMenu,
-  PageOverlay: (): React.ReactElement => null,
+  PageOverlay: (): React.ReactElement | null => null,
 };
 
 export const withPageEditor: HOC = Component => props => (

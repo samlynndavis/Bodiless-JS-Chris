@@ -1,5 +1,4 @@
-import { ComponentType } from 'react';
-import { ComponentWithMeta, TokenCollection } from '@bodiless/fclasses';
+import { ComponentOrTag, ComponentWithMeta, TokenCollection } from '@bodiless/fclasses';
 
 /**
  * Defines how Knapsack and Bodiless should handle a component.
@@ -19,9 +18,9 @@ export interface KnapsackBodilessSpec<
   /**
    * The sub-components of the component. For example `CardComponents`
    */
-  SubComponents extends Record<string, ComponentType> = Record<
+  SubComponents extends Record<string, ComponentOrTag<any>> = Record<
   string,
-  ComponentType
+  ComponentOrTag<any>
   >,
 > {
   tokens: TokenCollection<any, any>;
