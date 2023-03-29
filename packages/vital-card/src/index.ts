@@ -27,17 +27,17 @@ export const cardSpec: KnapsackBodilessSpec<CardComponents> = {
     Title: {
       title: 'Title',
       description: 'The title of the card',
-      allowedPatternIds: ['element'],
+      allowedPatternIds: ['elements'],
     },
     Body: {
       title: 'Body',
       description: 'The body of the card',
-      allowedPatternIds: ['element'],
+      allowedPatternIds: ['elements'],
     },
     ContentWrapper: {
       title: 'Content Wrapper',
       description: 'The wrapper for the card content',
-      allowedPatternIds: ['element'],
+      allowedPatternIds: ['elements'],
     }
   },
 };

@@ -13,9 +13,8 @@
  */
 import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
 import React from 'react';
-import {
-  TokenCollection, Div, Strong, Small
-} from '@bodiless/fclasses';
+import { Div } from '@bodiless/fclasses';
+import { vitalTextDecoration } from './components/TextDecoration';
 
 export * from './components/Typography';
 export * from './components/Color';
@@ -25,12 +24,6 @@ export * from './components/TextDecoration';
 export * from './util';
 export * from './KsEditProvider';
 
-// @todo - Ivan please remove the `as`
-export const tokens = {
-  Strong,
-  Small,
-} as unknown as TokenCollection<any, any>;
-
 export const ElementClean = (props: any) => (
   <Div {...props}>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -39,8 +32,8 @@ export const ElementClean = (props: any) => (
 );
 
 export const elementsSpec: KnapsackBodilessSpec = {
-  tokens,
-  tokensExportName: 'tokens',
+  tokens: vitalTextDecoration,
+  tokensExportName: 'vitalTextDecoration',
   // @todo Provide a default content hoc in the spec which allows adding
   // some basic demo content, even if the component is later editable.
   component: ElementClean,

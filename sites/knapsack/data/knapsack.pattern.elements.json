@@ -20,31 +20,36 @@
           "type": "data",
           "data": {
             "props": {
-              "Strong": true
+              "FontDecoration": {
+                "Bold": true
+              }
             },
             "slots": {}
           }
         },
         "CihCHWJntY": {
           "id": "CihCHWJntY",
-          "title": "Small Text",
+          "title": "Uppercase",
           "type": "data",
           "data": {
             "props": {
-              "Strong": false,
-              "Small": true
+              "FontDecoration": {
+                "Uppercase": true
+              }
             },
             "slots": {}
           }
         },
         "9b3gwi1whT": {
           "id": "9b3gwi1whT",
-          "title": "Bold Small Text",
+          "title": "Bold Uppercase",
           "type": "data",
           "data": {
             "props": {
-              "Strong": true,
-              "Small": true
+              "FontDecoration": {
+                "Bold": true,
+                "Uppercase": true
+              }
             },
             "slots": {}
           }
