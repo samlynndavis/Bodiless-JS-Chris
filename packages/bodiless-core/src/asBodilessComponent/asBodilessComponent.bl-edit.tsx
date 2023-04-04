@@ -39,7 +39,7 @@ import type { BodilessOptions, AsBodiless } from '../Types/AsBodilessTypes';
  * @param Wrapper The component to wrap with
  * @private
  */
-export const withActivatorWrapper = (event: string, Wrapper: ComponentOrTag<any>): HOC => (
+const withActivatorWrapper$ = (event: string, Wrapper: ComponentOrTag<any>): HOC => (
   Component => props => {
     const wrapperPropNames = Object.getOwnPropertyNames(useContextActivator(event));
     const eventProps = pick(props, wrapperPropNames);
@@ -51,6 +51,46 @@ export const withActivatorWrapper = (event: string, Wrapper: ComponentOrTag<any>
     );
   }
 );
+
+export const withActivatorWrapper: typeof withActivatorWrapper$ = process.env.NODE_ENV === 'production'
+  ? (() => identity) : withActivatorWrapper$;
+
+// eslint-disable-next-line max-len
+const withEditor$ = <P extends object, D extends object>(options: BodilessOptions<P, D>): AsBodiless<P, D> => (
+  (
+    nodeKeys?,
+    defaultData = {} as D,
+    useOverrides?: UseBodilessOverrides<P, D>,
+  ) => {
+    const {
+      activateEvent = 'onClick',
+      Wrapper,
+      defaultData: defaultDataOption = {},
+      ...rest
+    } = options;
+    const editButtonOptions = useOverrides
+      ? (props: P & EditButtonProps<D>) => ({ ...rest, ...useOverrides(props) })
+      : rest;
+    const useHasLocalContext = (props: P & EditButtonProps<D>): boolean => {
+      const def = typeof editButtonOptions === 'function'
+        ? editButtonOptions(props) : editButtonOptions;
+      return !(def.root || def.peer);
+    };
+    return flowRight(
+      ifEditable(
+        withEditButton(editButtonOptions),
+        ifToggledOn(useHasLocalContext)(
+          withContextActivator(activateEvent),
+          withLocalContextMenu,
+          Wrapper ? withActivatorWrapper(activateEvent, Wrapper) : identity,
+        ),
+      ),
+    );
+  }
+);
+
+const withEditor: typeof withEditor$ = process.env.NODE_ENV === 'production'
+  ? (() => () => identity) : withEditor$;
 
 /**
  * Makes a component "Bodiless" by connecting it to the Bodiless-jS data flow and giving it
@@ -80,33 +120,15 @@ const asBodilessComponent = <P extends object, D extends object>(options: Bodile
     useOverrides?: UseBodilessOverrides<P, D>,
   ) => {
     const {
-      activateEvent = 'onClick',
-      Wrapper,
       defaultData: defaultDataOption = {},
-      ...rest
     } = options;
-    const editButtonOptions = useOverrides
-      ? (props: P & EditButtonProps<D>) => ({ ...rest, ...useOverrides(props) })
-      : rest;
-    const useHasLocalContext = (props: P & EditButtonProps<D>): boolean => {
-      const def = typeof editButtonOptions === 'function'
-        ? editButtonOptions(props) : editButtonOptions;
-      return !(def.root || def.peer);
-    };
     const finalData = { ...defaultDataOption, ...defaultData };
     return flowRight(
       withBodilessData(nodeKeys, finalData),
       ifReadOnly(
         withoutProps(['setComponentData']),
       ),
-      ifEditable(
-        withEditButton(editButtonOptions),
-        ifToggledOn(useHasLocalContext)(
-          withContextActivator(activateEvent),
-          withLocalContextMenu,
-          Wrapper ? withActivatorWrapper(activateEvent, Wrapper) : identity,
-        ),
-      ),
+      withEditor(options)(nodeKeys, defaultData, useOverrides),
       withData,
     );
   }
