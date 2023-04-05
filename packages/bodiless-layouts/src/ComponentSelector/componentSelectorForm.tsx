@@ -46,4 +46,5 @@ const componentSelectorForm = (props: ComponentSelectorFormProps) => contextMenu
   ),
 );
 
-export default componentSelectorForm;
+const componentSelectorFormStatic: typeof componentSelectorForm = () => () => null;
+export default process.env.NODE_ENV === 'production' ? componentSelectorFormStatic : componentSelectorForm;

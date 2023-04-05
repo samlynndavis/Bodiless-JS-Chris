@@ -137,7 +137,7 @@ export const ContextMenuForm = <D extends object>(props: ContextMenuPropsType<D>
 
 export const contextMenuForm = <D extends object>(options: Options<D> = {}) => (
   renderForm?: FormBodyRenderer<D>,
-) => (
+): FC<Omit<ContextMenuFormProps, 'children'>> => (
   (props: Omit<ContextMenuFormProps, 'children'>) => (
     <ContextMenuForm {...options} {...props}>
       {renderForm || (() => <></>)}
