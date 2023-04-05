@@ -44,6 +44,8 @@
       "@bodiless/curator/*": ["bodiless-curator/src/*"], 
       "@bodiless/filtering": ["bodiless-filtering/src"],
       "@bodiless/filtering/*": ["bodiless-filtering/src/*"],
+      "@bodiless/git": ["bodiless-git/src"],
+      "@bodiless/git/*": ["bodiless-git/src/*"],
       "@bodiless/hydration": ["bodiless-hydration/src"],
       "@bodiless/hydration/*": ["bodiless-hydration/src/*"],
       "@bodiless/layouts": ["bodiless-layouts/src"],

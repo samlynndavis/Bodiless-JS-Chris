@@ -13,8 +13,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { useEditContext } from '../hooks';
-import { getUI } from '../components';
+import { useEditContext, getUI } from '@bodiless/core';
 
 type Commit = {
   hash: string,

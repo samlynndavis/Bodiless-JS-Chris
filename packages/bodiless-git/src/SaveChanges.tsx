@@ -17,10 +17,9 @@ import { FormApi, FormState } from 'informed';
 
 import { AxiosError, AxiosPromise } from 'axios';
 import Cookies from 'universal-cookie';
+import { getUI, ContextMenuUI, useEditContext } from '@bodiless/core';
 
 import { GitClient } from './types';
-import { getUI, ContextMenuUI } from '../components';
-import { useEditContext } from '../hooks';
 
 enum SaveState {
   Init,

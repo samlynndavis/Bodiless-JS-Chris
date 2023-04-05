@@ -16,14 +16,17 @@
 import React, {
   useState, useEffect, useCallback, useMemo,
 } from 'react';
-import type { TMenuOption } from '../Types/ContextMenuTypes';
-import ContextSubMenu from '../ContextMenu/ContextSubMenu';
-import { useRegisterMenuOptions } from '../PageContextProvider';
-import { contextMenuForm } from '../contextMenuForm';
-import { getUI } from '../components';
-import { useEditContext, useGetter } from '../hooks';
-import { useNotify } from '../NotificationProvider';
-import { BodilessBackendClient } from '../BackendClient';
+import {
+  getUI,
+  useGetter,
+  useEditContext,
+  ContextSubMenu,
+  useRegisterMenuOptions,
+  contextMenuForm,
+  useNotify,
+  BodilessBackendClient
+} from '@bodiless/core';
+import type { TMenuOption } from '@bodiless/core';
 import CommitsList from './CommitsList';
 import RemoteChanges from './RemoteChanges';
 import Reset from './Reset';

@@ -15,9 +15,8 @@
 import React, { useEffect, useState } from 'react';
 import { FormApi, FormState } from 'informed';
 import { AxiosError } from 'axios';
+import { getUI, ContextMenuUI, useEditContext } from '@bodiless/core';
 import { GitClient } from './types';
-import { getUI, ContextMenuUI } from '../components';
-import { useEditContext } from '../hooks';
 
 enum ResetState {
   Init,
