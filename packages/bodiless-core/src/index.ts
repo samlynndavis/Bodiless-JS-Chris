@@ -94,7 +94,6 @@ export * from './components';
 export * from './Contentful';
 export * from './Store';
 export * from './BackendClient';
-export * from './Git';
 
 export {
   asBodilessComponent,

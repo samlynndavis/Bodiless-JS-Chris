@@ -60,6 +60,7 @@
     "@bodiless/core": "^1.0.0-rc.35",
     "@bodiless/core-ui": "^1.0.0-rc.35",
     "@bodiless/fclasses": "^1.0.0-rc.35",
+    "@bodiless/git": "^1.0.0-rc.35",
     "@bodiless/layouts": "^1.0.0-rc.35",
     "@bodiless/navigation": "^1.0.0-rc.35",
     "@bodiless/organisms": "^1.0.0-rc.35",

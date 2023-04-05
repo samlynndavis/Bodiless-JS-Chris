@@ -18,8 +18,9 @@ import { FieldProps } from 'informed';
 import { withoutProps } from '@bodiless/fclasses';
 import {
   useNode, withNodeKey, withNode, withSidecarNodes, withNodeDataHandlers,
-  withData, ifEditable, asReadOnly, useGitContext,
+  withData, ifEditable, asReadOnly,
 } from '@bodiless/core';
+import { useGitContext } from '@bodiless/git';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import flowRight from 'lodash/flowRight';
 import { withMetaSnippet } from './withMetaForm.bl-edit';

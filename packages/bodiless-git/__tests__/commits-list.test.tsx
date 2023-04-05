@@ -14,7 +14,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import CommitsList from '../src/Git/CommitsList';
+import CommitsList from '../src/CommitsList';
 
 const mockedGitLogOutput = `
   hash 1

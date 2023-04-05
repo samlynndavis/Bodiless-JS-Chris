@@ -19,7 +19,7 @@ import {
   FetchChanges,
   PullChanges,
   ResponseData,
-} from '../src/Git/RemoteChanges';
+} from '../src/RemoteChanges';
 
 const mockBackendResponse = (data: ResponseData, status = 200) => ({
   status,

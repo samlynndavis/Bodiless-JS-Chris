@@ -15,9 +15,8 @@
 import React, { useState, useEffect } from 'react';
 import uniq from 'lodash/uniq';
 import { useFormApi } from 'informed';
-import { useEditContext } from '../hooks';
+import { useEditContext, ContextMenuUI, getUI } from '@bodiless/core';
 import type { ChangeNotifier } from './useGitButtons';
-import { ContextMenuUI, getUI } from '../components';
 
 export type BranchUpdateType = {
   branch: string | null,
