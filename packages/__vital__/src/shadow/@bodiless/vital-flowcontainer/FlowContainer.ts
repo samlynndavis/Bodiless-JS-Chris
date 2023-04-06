@@ -40,21 +40,21 @@ const WithBaseVariations = asFluidToken(
 );
 
 /**
- * A composable token that adds a content region
- */
-const WithContentRegionVariations = asFluidToken({
-  Components: {
-    ContentRegion: on(FlowContainerClean)(WithBaseVariations),
-  }
-});
-
-/**
  * Add variations to the content region.
  */
 const ContentRegion = asFluidToken(
   vitalFlowContainerBase.ContentRegion,
   WithBaseVariations,
 );
+
+/**
+ * A composable token that adds a content region
+ */
+const WithContentRegionVariations = asFluidToken({
+  Components: {
+    ContentRegion: on(FlowContainerClean)(ContentRegion),
+  }
+});
 
 /**
  * Overide the vital default flow container to add component variations.
