@@ -13,13 +13,11 @@
  */
 
 import withDefaultContent from './withDefaultContent';
-import withResetButton from './withResetButton';
 import getContentFrom from './getContentFrom';
 import type { GetContentFrom, DefaultContent, DefaultNodeContent } from './ContentfulNode';
 
 export {
   withDefaultContent,
-  withResetButton,
   getContentFrom,
 };
 export type { GetContentFrom, DefaultContent, DefaultNodeContent };

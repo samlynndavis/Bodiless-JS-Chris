@@ -20,13 +20,15 @@ import { observer } from 'mobx-react';
 import pickBy from 'lodash/pickBy';
 import identity from 'lodash/identity';
 import {
+  useEditContext,
+} from '@bodiless/core';
+import {
   withNode,
   useNode,
-  useEditContext,
   WithNodeProps,
   WithNodeKeyProps,
   withNodeKey,
-} from '@bodiless/core';
+} from '@bodiless/data';
 import './Editable.css';
 import { HOC, flowHoc } from '@bodiless/fclasses';
 

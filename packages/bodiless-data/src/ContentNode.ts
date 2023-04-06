@@ -41,18 +41,18 @@ export type Getters = {
   getBaseResourcePath(collection: string): string;
 };
 
-export type Path = string | string[];
+export type ContentNodePath = string | string[];
 
 export type ContentNode<D> = {
   data: D;
   setData: (data: D) => void;
-  delete: (path?: Path) => void;
+  delete: (path?: ContentNodePath) => void;
   keys: string[];
   path: string[];
   pagePath: string;
   baseResourcePath: string;
   child<E extends object>(path: string): ContentNode<E>;
-  peer<E extends object>(path: Path): ContentNode<E>;
+  peer<E extends object>(path: ContentNodePath): ContentNode<E>;
   hasError: () => boolean;
   proxy: (processors: Processors<D>) => ContentNode<D>;
 };
@@ -84,7 +84,7 @@ class ContentNodeProxy<D> implements ContentNode<D> {
           case 'setData':
             return (data: D) => target.setData(setData(data));
           case 'peer':
-            return (path: Path) => target.peer<any>(path).proxy(processors);
+            return (path: ContentNodePath) => target.peer<any>(path).proxy(processors);
           default:
             // return target[prop];
             return Reflect.get(target, prop, receiver);
@@ -102,18 +102,18 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
 
   path: string[];
 
-  constructor(actions: Actions, getters: Getters, path: Path) {
+  constructor(actions: Actions, getters: Getters, path: ContentNodePath) {
     this.actions = actions;
     this.getters = getters;
     const path$1 = path || [];
     this.path = Array.isArray(path$1) ? path$1 : path$1.split('$');
   }
 
-  peer<E extends object>(path: Path) {
+  peer<E extends object>(path: ContentNodePath) {
     return new DefaultContentNode<E>(this.actions, this.getters, path);
   }
 
-  child<E extends object>(path: Path) {
+  child<E extends object>(path: ContentNodePath) {
     const paths = Array.isArray(path) ? path : [path];
     return this.peer<E>([...this.path, ...paths]);
   }
@@ -138,7 +138,7 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
     setNode(this.path, dataObj);
   }
 
-  delete(path?: Path) {
+  delete(path?: ContentNodePath) {
     const { deleteNode } = this.actions;
     const path$ = (typeof path === 'string') ? [path] : path;
     const path$$ = path$ || this.path;
@@ -176,7 +176,7 @@ export class DefaultContentNode<D extends object> implements ContentNode<D> {
     const getPagePath = () => '/';
     const getBaseResourcePath = () => '/';
     const hasError = () => false;
-    const setNode = (p: Path, d: any) => {
+    const setNode = (p: ContentNodePath, d: any) => {
       store.setData(d);
     };
     const deleteNode = () => {};

@@ -14,8 +14,11 @@
 
 import React, { FC } from 'react';
 import {
-  useMenuOptionUI, ContextMenuForm, ifEditable, withMenuOptions, useNode,
+  useMenuOptionUI, ContextMenuForm, ifEditable, withMenuOptions
 } from '@bodiless/core';
+import {
+  useNode,
+} from '@bodiless/data';
 import type {
   ContextMenuFormProps,
 } from '@bodiless/core';

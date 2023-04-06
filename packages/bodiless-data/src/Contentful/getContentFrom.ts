@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import type { Path, ContentNode } from '../ContentNode';
+import type { ContentNodePath, ContentNode } from '../ContentNode';
 import type { GetContentFrom } from './ContentfulNode';
 
 /**
@@ -21,7 +21,7 @@ import type { GetContentFrom } from './ContentfulNode';
  * @param path - path to node read content from
  */
 const getContentFrom = <D extends object, E extends object = D>(
-  path: Path,
+  path: ContentNodePath,
 ): GetContentFrom<D, E> => (node: ContentNode<D>) => node.peer<E>(path).data;
 
 export default getContentFrom;

@@ -13,13 +13,13 @@
  */
 
 import { flowHoc, HOC } from '@bodiless/fclasses';
+import { useNode } from '@bodiless/data';
 import {
   withContextActivator,
   withLocalContextMenu,
-} from '../hoc';
-import { withMenuOptions } from '../PageContextProvider';
-import { useNode } from '../NodeProvider';
-import { TMenuOption } from '../Types/ContextMenuTypes';
+} from './hoc';
+import { withMenuOptions } from './PageContextProvider';
+import { TMenuOption } from './Types/ContextMenuTypes';
 
 type MenuOptionWithNodeKey = (Partial<TMenuOption> & {
   nodeKey?: string | string[];

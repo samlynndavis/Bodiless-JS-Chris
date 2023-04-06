@@ -15,8 +15,7 @@
 import React, { Component } from 'react';
 import pick from 'lodash/pick';
 import path from 'path';
-import NodeProvider from '../NodeProvider';
-import { DefaultContentNode } from '../ContentNode';
+import { NodeProvider, DefaultContentNode } from '@bodiless/data';
 import { BodilessBackendClient } from '../BackendClient/BodilessBackendClient';
 import { BodilessMobxStore } from './BodilessMobxStore';
 import { BodilessStore } from './types';

@@ -20,12 +20,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import flowRight from 'lodash/flowRight';
 import pick from 'lodash/pick';
-import { HOC, Injector } from '@bodiless/fclasses';
+import { HOC } from '@bodiless/fclasses';
 import { useContextActivator, useExtendHandler, useClickOutside } from './hooks';
-import { useNodeDataHandlers, NodeDataHandlers } from './NodeProvider';
-import withNode from './withNode';
 import LocalContextMenu from './components/LocalContextMenu';
 
 /**
@@ -104,38 +101,6 @@ export const withLocalContextMenu: HOC = Component => {
   );
   return WithLocalContextMenu;
 };
-
-// @TODO: Combine withNode and withNodeDataHandlers and fix types
-/**
- * Creates an HOC which reads data from the current content node and injects two
- * props to the target component:
- * - `componentData`: The `data` property from the node.
- * - `setComponentData`: A function which calls the `setData` method
- *    on the node,
- *
- * @param defaultData
- * A default value for `componentData` when the node's `data` property is empty.
- *
- * @returns
- * A component which passes data handlers to the base component.
- */
-export const withNodeDataHandlers = <D extends object>(
-  defaultData?: D,
-): Injector<NodeDataHandlers<D>> => Component => observer(
-    (props: any) => {
-      const enhancedDefaultData = {
-        ...defaultData,
-        ...(defaultData ? pick(props, Object.keys(defaultData)) : {}),
-      };
-      return (<Component {...props} {...useNodeDataHandlers(undefined, enhancedDefaultData)} />);
-    },
-  );
-
-export const withNodeAndHandlers = (defaultData?: any) => flowRight(
-  // @ts-ignore
-  withNode,
-  withNodeDataHandlers(defaultData),
-);
 
 export type ClickOutsideProps = {
   onClickOutside?: (e: KeyboardEvent | MouseEvent) => void;

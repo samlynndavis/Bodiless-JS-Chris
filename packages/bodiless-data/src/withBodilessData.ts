@@ -14,9 +14,9 @@
 
 import flowRight from 'lodash/flowRight';
 import type { Enhancer } from '@bodiless/fclasses';
-import withNode, { withNodeKey } from '../withNode';
-import { withNodeDataHandlers } from '../hoc';
-import type { WithNodeProps, WithNodeKeyProps } from '../Types/NodeTypes';
+import withNode, { withNodeKey } from './withNode';
+import { withNodeDataHandlers } from './hoc';
+import type { WithNodeProps, WithNodeKeyProps } from './NodeTypes';
 
 /**
  * Convenience HOC to plug a component into the bodiless data model.

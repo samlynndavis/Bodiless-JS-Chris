@@ -33,6 +33,7 @@
     "@bodiless/components": "^1.0.0-rc.35",
     "@bodiless/components-ui": "^1.0.0-rc.35",
     "@bodiless/core": "^1.0.0-rc.35",
+    "@bodiless/data": "^1.0.0-rc.35",
     "@bodiless/fclasses": "^1.0.0-rc.35",
     "@bodiless/filtering": "^1.0.0-rc.35",
     "@bodiless/ga4": "^1.0.0-rc.35",

@@ -18,12 +18,14 @@ import {
   useContextMenuForm,
   createMenuOptionGroup,
   useMenuOptionUI,
-  useNode,
-  ContentNode,
-  NodeProvider,
   useEditContext,
   useGetter,
 } from '@bodiless/core';
+import {
+  useNode,
+  ContentNode,
+  NodeProvider,
+} from '@bodiless/data';
 import type { OptionGroupDefinition } from '@bodiless/core';
 import {
   withDesign, HOC, flowHoc, flowIf,
