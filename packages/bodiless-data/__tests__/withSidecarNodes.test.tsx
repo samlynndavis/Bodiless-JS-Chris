@@ -16,10 +16,10 @@ import React, { ComponentType } from 'react';
 import flowRight from 'lodash/flowRight';
 import { mount } from 'enzyme';
 import type { HOC } from '@bodiless/fclasses';
+import { flowIf } from '@bodiless/fclasses';
 import withNode, { withNodeKey } from '../src/withNode';
 import { useNode } from '../src/NodeProvider';
 import withSidecarNodes, { endSidecarNodes } from '../src/withSidecarNodes';
-import { ifToggledOn } from '../src/withFlowToggle';
 
 type Bodiless = (key?: string) => HOC;
 
@@ -56,15 +56,15 @@ const withBaz: Bodiless = (nodeKey?: string) => flowRight(
 const spanWithId = (id: string) => (props: any) => <span {...props} id={id} />;
 
 describe('Sidecar Node Use Cases', () => {
-  describe('Adding a toggle', () => {
+  describe('Adding a flowIf', () => {
     const mockNodeData = jest.fn();
-    const useDataToggle = () => mockNodeData(useNode<any>().node.path.join('$'));
-    const withToggleTo = (ToComponent: ComponentType<any>) => (
+    const useDataCondition = () => mockNodeData(useNode<any>().node.path.join('$'));
+    const withFlowIfTo = (ToComponent: ComponentType<any>) => (
       nodeKey?: string,
     ): HOC => flowRight(
       withNodeKey(nodeKey),
       withNode,
-      ifToggledOn(useDataToggle)(
+      flowIf(useDataCondition)(
         () => ToComponent,
       ),
     ) as HOC;
@@ -77,47 +77,47 @@ describe('Sidecar Node Use Cases', () => {
     describe('Without sidecar', () => {
       const Bar = withBar('foo')(spanWithId('bar'));
       const Test = flowRight(
-        withToggleTo(Bar)('toggle'),
+        withFlowIfTo(Bar)('flowif'),
         withFoo('foo'),
       )(Span) as ComponentType<any>;
-      it('modifies the child nodekey when toggled off', () => {
+      it('modifies the child nodekey when flow condition is false', () => {
         mockNodeData.mockReset();
         mockNodeData.mockReturnValueOnce(false);
         const wrapper = mount(<Test />);
-        expect(mockNodeData.mock.calls[0][0]).toBe('root$toggle');
+        expect(mockNodeData.mock.calls[0][0]).toBe('root$flowif');
         expect(wrapper.find('span#bar')).toHaveLength(0);
-        expect(wrapper.find('span#test').prop('data-enh-foo')).toBe('root$toggle$foo');
+        expect(wrapper.find('span#test').prop('data-enh-foo')).toBe('root$flowif$foo');
       });
-      it('modifies the child nodekey when toggled on', () => {
+      it('modifies the child nodekey when flow condition is true', () => {
         mockNodeData.mockReset();
         mockNodeData.mockReturnValueOnce(true);
         const wrapper = mount(<Test />);
-        expect(mockNodeData.mock.calls[0][0]).toBe('root$toggle');
+        expect(mockNodeData.mock.calls[0][0]).toBe('root$flowif');
         expect(wrapper.find('span#test')).toHaveLength(0);
-        expect(wrapper.find('span#bar').prop('data-enh-bar')).toBe('root$toggle$foo');
+        expect(wrapper.find('span#bar').prop('data-enh-bar')).toBe('root$flowif$foo');
       });
     });
     describe('With sidecar', () => {
       const Bar = withBar('foo')(spanWithId('bar'));
       const Test = flowRight(
         withSidecarNodes(
-          withToggleTo(endSidecarNodes(Bar))('toggle'),
+          withFlowIfTo(endSidecarNodes(Bar))('flowif'),
         ),
         withFoo('foo'),
       )(Span);
-      it('does not change the child nodekey when toggled off', () => {
+      it('does not change the child nodekey when flow condition is false', () => {
         mockNodeData.mockReset();
         mockNodeData.mockReturnValueOnce(false);
         const wrapper = mount(<Test />);
-        expect(mockNodeData.mock.calls[0][0]).toBe('root$toggle');
+        expect(mockNodeData.mock.calls[0][0]).toBe('root$flowif');
         expect(wrapper.find('span#bar')).toHaveLength(0);
         expect(wrapper.find('span#test').prop('data-enh-foo')).toBe('root$foo');
       });
-      it('does not modify the child nodekey when toggled on', () => {
+      it('does not modify the child nodekey when flow condition is true', () => {
         mockNodeData.mockReset();
         mockNodeData.mockReturnValueOnce(true);
         const wrapper = mount(<Test />);
-        expect(mockNodeData.mock.calls[0][0]).toBe('root$toggle');
+        expect(mockNodeData.mock.calls[0][0]).toBe('root$flowif');
         expect(wrapper.find('span#test')).toHaveLength(0);
         expect(wrapper.find('span#bar').prop('data-enh-bar')).toBe('root$foo');
       });

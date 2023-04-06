@@ -17,7 +17,7 @@ import { shallow, mount } from 'enzyme';
 import { observable } from 'mobx';
 import type { Tag } from '@bodiless/fclasses';
 import {
-  withContextActivator, withLocalContextMenu, withNodeDataHandlers, withOnlyProps,
+  withContextActivator, withLocalContextMenu, withOnlyProps,
 } from '../src/hoc';
 
 const TestComponent = ({ element: Element }: any) => (
@@ -49,17 +49,5 @@ describe('withLocalContextMenu', () => {
     const withMenu = mount(<ContextMenuChild id="testDiv" />);
     expect(withMenu.find('#testDiv')).toHaveLength(2);
     expect(withMenu.name()).toEqual('WithLocalContextMenu');
-  });
-});
-
-describe('withNodeDataHandlers', () => {
-  it('should have componentData', () => {
-    const values = {
-      some: Math.random(),
-    };
-    const data = observable(values);
-    const DataComponent = withNodeDataHandlers(data)(TestComponent);
-    const withProps = shallow(<DataComponent />);
-    expect(withProps.props().componentData).toEqual(values);
   });
 });

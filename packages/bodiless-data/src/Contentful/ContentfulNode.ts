@@ -15,7 +15,8 @@
 /* eslint-disable max-len */
 
 import union from 'lodash/union';
-import { DefaultContentNode, Path } from '../ContentNode';
+
+import { DefaultContentNode, ContentNodePath } from '../ContentNode';
 import type { ContentNode } from '../ContentNode';
 
 /**
@@ -40,7 +41,7 @@ export type DefaultContent = {
   [nodePath: string]: DefaultNodeContent,
 };
 
-export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
+export const getRelativeNodeKey = (basePath: ContentNodePath, nodePath: ContentNodePath) => {
   const delimiter = '$';
   const baseNodeKey = Array.isArray(basePath) ? basePath.join(delimiter) : basePath;
   const baseNodeKeyLength = baseNodeKey.length + delimiter.length;
@@ -48,7 +49,7 @@ export const getRelativeNodeKey = (basePath: Path, nodePath: Path) => {
   return nodeKey.startsWith(baseNodeKey) ? nodeKey.substring(baseNodeKeyLength) : nodeKey;
 };
 
-export const getAbsoluteNodeKey = (basePath: Path, contentPath: Path) => {
+export const getAbsoluteNodeKey = (basePath: ContentNodePath, contentPath: ContentNodePath) => {
   const delimiter = '$';
   const basePathArray = Array.isArray(basePath) ? basePath : basePath.split(delimiter);
   const contentPathArray = Array.isArray(contentPath) ? contentPath : contentPath.split(delimiter);
@@ -117,7 +118,7 @@ export default class ContentfulNode<D extends object, K extends object> extends 
     );
   }
 
-  peer<E extends object>(path: Path) {
+  peer<E extends object>(path: ContentNodePath) {
     const peerNode = new ContentfulNode<E, K>(this.actions, this.getters, path);
     peerNode.setContent(this.content);
     peerNode.setSourceNode(this.sourceNode);

@@ -14,9 +14,9 @@
 
 import React, { FC } from 'react';
 import type { Enhancer } from '@bodiless/fclasses';
+import { DefaultContentNode } from '../ContentNode';
 import NodeProvider, { useNode } from '../NodeProvider';
 import ContentfulNode from './ContentfulNode';
-import { DefaultContentNode } from '../ContentNode';
 
 /**
  * Creates an HOC which provides default content to the wrapped component.

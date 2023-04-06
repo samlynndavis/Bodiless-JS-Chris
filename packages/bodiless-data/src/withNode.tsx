@@ -15,7 +15,7 @@
 import React, { FC } from 'react';
 import { HOC, Injector } from '@bodiless/fclasses';
 import NodeProvider, { useNode } from './NodeProvider';
-import { WithNodeProps } from './Types/NodeTypes';
+import { WithNodeProps } from './NodeTypes';
 
 /**
  * HOC which gives a component a content node.  The enhanced component accepts an optional
