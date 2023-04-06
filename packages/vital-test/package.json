@@ -1,5 +1,6 @@
 {
   "name": "@bodiless/vital-test",
+  "private": true,
   "sideEffects": false,
   "version": "1.0.0-rc.33",
   "description": "Test Package for a Design System package based on Vital DS",
