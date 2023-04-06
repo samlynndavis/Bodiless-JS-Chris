@@ -12,11 +12,11 @@
  * limitations under the License.
  */
 
-import withContentLibrary from './withContentLibrary';
-import { withLibraryComponents } from './withLibraryComponents';
+import identity from 'lodash/identity';
+import withContentLibrary$ from './withContentLibrary';
 
-export * from './withLibraryContext';
-export {
-  withContentLibrary,
-  withLibraryComponents,
-};
+export const withContentLibrary: typeof withContentLibrary$ = process.env.NODE_ENV !== 'production'
+  ? withContentLibrary$ : () => identity;
+
+export { withLibraryComponents } from './withLibraryComponents';
+export { useIsLibraryItem, useLibraryItemContext } from './withLibraryContext';

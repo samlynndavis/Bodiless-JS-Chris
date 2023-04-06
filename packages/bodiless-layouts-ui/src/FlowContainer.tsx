@@ -13,26 +13,37 @@
  */
 
 import React, { FC, HTMLProps } from 'react';
-import { FlowContainer as FlowContainerClean, FlowContainerProps } from '@bodiless/layouts';
+import { FlowContainer as FlowContainerClean } from '@bodiless/layouts';
+import type { FlowContainerProps } from '@bodiless/layouts';
 import { ui as componentSelectorUI } from './ComponentSelector';
 import Wrapper from './SortableResizableWrapper';
 
-const SnapIndicator:FC<HTMLProps<HTMLDivElement>> = props => (
-  <div {...props} className="bl-bg-black bl-rounded bl-p-2 bl-text-white bl-rounded bl-absolute bl-z-100 bl-right-0" />
+// In production, the flow container needs no admin UI.
+let FlowContainer$: FC<Omit<FlowContainerProps, 'ui'>> = props => (
+  <FlowContainerClean {...props} ui={{}} />
 );
 
-const ui = {
-  ...componentSelectorUI,
-  Wrapper,
-  SnapIndicator,
-};
+// In development, we inject the UI.
+if (process.env.NODE_ENV !== 'production') {
+  const SnapIndicator:FC<HTMLProps<HTMLDivElement>> = props => (
+    <div {...props} className="bl-bg-black bl-rounded bl-p-2 bl-text-white bl-rounded bl-absolute bl-z-100 bl-right-0" />
+  );
+
+  const ui = {
+    ...componentSelectorUI,
+    Wrapper,
+    SnapIndicator,
+  };
+
+  FlowContainer$ = props => (
+    <FlowContainerClean ui={ui} {...props} />
+  );
+}
 
 /**
  * A FlowContainer is a component which allows a content editor to select and place
  * components.
  */
-const FlowContainer: FC<Omit<FlowContainerProps, 'ui'>> = props => (
-  <FlowContainerClean ui={ui} {...props} />
-);
+const FlowContainer = FlowContainer$;
 
 export default FlowContainer;

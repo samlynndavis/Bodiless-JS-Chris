@@ -74,4 +74,5 @@ const StaticFlowContainer: FC<DesignableProps & { id?: string }> = ({ design, id
 
 StaticFlowContainer.displayName = 'FlowContainer';
 
-export default observer(StaticFlowContainer);
+export default process.env.NODE_ENV !== 'production'
+  ? observer(StaticFlowContainer) : StaticFlowContainer;

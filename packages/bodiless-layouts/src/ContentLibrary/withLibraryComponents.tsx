@@ -29,6 +29,7 @@ import {
   withDesign, HOC, flowHoc, flowIf,
 } from '@bodiless/fclasses';
 import type { Design } from '@bodiless/fclasses';
+import identity from 'lodash/identity';
 import { withFacet, withTitle, withDesc } from '../meta';
 import { childKeys, updateLibData } from '../utils/NodeTools';
 import {
@@ -93,146 +94,148 @@ const withAbsoluteNode = (node: ContentNode<any>): HOC => Component => {
   return WithAbsoluteNode;
 };
 
-const withLibraryMenuOptions = (
-  libPath: LibraryNodePath,
-): HOC => Component => {
-  const useContentLibMenuOptions = (
-    item: FlowContainerItem,
-    sourceNode: ContentNode<any>,
-    handlers: FlowContainerDataHandlers,
-  ) => {
-    const { setIsLibraryItem } = useLibraryItemContext();
+let withLibraryMenuOptions: (libPath: LibraryNodePath) => HOC = () => identity;
 
-    const renderForm = () => {
-      const {
-        ComponentFormLabel,
-        ComponentFormText,
-        ComponentFormFieldWrapper,
-      } = useMenuOptionUI();
+if (process.env.NODE_ENV !== 'production') {
+  withLibraryMenuOptions = libPath => Component => {
+    const useContentLibMenuOptions = (
+      item: FlowContainerItem,
+      sourceNode: ContentNode<any>,
+      handlers: FlowContainerDataHandlers,
+    ) => {
+      const { setIsLibraryItem } = useLibraryItemContext();
 
-      return (
-        isLibraryItem(item) ? (
-          <></>
-        ) : (
-          <>
-            <ComponentFormFieldWrapper>
-              <ComponentFormLabel>
-                Name
-                <ComponentFormText field="library-name" id="id-library-name" aria-describedby="name" placeholder="Default Name" />
-              </ComponentFormLabel>
-            </ComponentFormFieldWrapper>
-            <ComponentFormFieldWrapper>
-              <ComponentFormLabel>
-                Description
-                <ComponentFormText field="library-description" id="id-library-description" aria-describedby="description" placeholder="" />
-              </ComponentFormLabel>
-            </ComponentFormFieldWrapper>
-          </>
-        )
-      );
-    };
+      const renderForm = () => {
+        const {
+          ComponentFormLabel,
+          ComponentFormText,
+          ComponentFormFieldWrapper,
+        } = useMenuOptionUI();
 
-    const submitValues = (values: LibraryMenuOptionSubmitValues) => {
+        return (
+          isLibraryItem(item) ? (
+            <></>
+          ) : (
+            <>
+              <ComponentFormFieldWrapper>
+                <ComponentFormLabel>
+                  Name
+                  <ComponentFormText field="library-name" id="id-library-name" aria-describedby="name" placeholder="Default Name" />
+                </ComponentFormLabel>
+              </ComponentFormFieldWrapper>
+              <ComponentFormFieldWrapper>
+                <ComponentFormLabel>
+                  Description
+                  <ComponentFormText field="library-description" id="id-library-description" aria-describedby="description" placeholder="" />
+                </ComponentFormLabel>
+              </ComponentFormFieldWrapper>
+            </>
+          )
+        );
+      };
+
+      const submitValues = (values: LibraryMenuOptionSubmitValues) => {
       // Get flow container update handler
-      const { updateFlowContainerItem } = handlers;
+        const { updateFlowContainerItem } = handlers;
 
-      const destPath$ = Array.isArray(libPath) ? libPath : [libPath];
+        const destPath$ = Array.isArray(libPath) ? libPath : [libPath];
 
-      if (isLibraryItem(item)) {
+        if (isLibraryItem(item)) {
         /* Copy the library item to current node */
-        const uuid = item.type.split(':')[2];
-        const sourceNodeDataPath = [
-          ...destPath$,
-          uuid,
-          'data',
-        ];
-        const sourceNodeData = sourceNode.peer(sourceNodeDataPath.join('$'));
+          const uuid = item.type.split(':')[2];
+          const sourceNodeDataPath = [
+            ...destPath$,
+            uuid,
+            'data',
+          ];
+          const sourceNodeData = sourceNode.peer(sourceNodeDataPath.join('$'));
 
-        updateLibData(sourceNodeData, sourceNode, true);
-        const newItemType = item.type.split(':')[1];
-        updateFlowContainerItem({ ...item, type: newItemType });
-        setIsLibraryItem(false);
-      } else {
+          updateLibData(sourceNodeData, sourceNode, true);
+          const newItemType = item.type.split(':')[1];
+          updateFlowContainerItem({ ...item, type: newItemType });
+          setIsLibraryItem(false);
+        } else {
         /**
          * Move the original flow container node to content library node,
          * with path under DEFAULT_CONTENT_LIBRARY_PATH or with user provided
          * content library path, and update flow container
          * item to new type prefixed with `CONTENT_LIBRARY_TYPE_PREFIX`.
          */
-        const destNodePath = [
-          ...destPath$,
-          item.uuid,
-        ];
-        const destNodeDataPath = [
-          ...destNodePath,
-          'data',
-        ];
-        const destNode = sourceNode.peer(destNodePath.join('$'));
-        const destNodeData = sourceNode.peer(destNodeDataPath.join('$'));
-        updateLibData(sourceNode, destNodeData, false);
-        const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
-        updateFlowContainerItem({ ...item, type: newItemType });
+          const destNodePath = [
+            ...destPath$,
+            item.uuid,
+          ];
+          const destNodeDataPath = [
+            ...destNodePath,
+            'data',
+          ];
+          const destNode = sourceNode.peer(destNodePath.join('$'));
+          const destNodeData = sourceNode.peer(destNodeDataPath.join('$'));
+          updateLibData(sourceNode, destNodeData, false);
+          const newItemType = `${CONTENT_LIBRARY_TYPE_PREFIX}:${item.type}:${item.uuid}`;
+          updateFlowContainerItem({ ...item, type: newItemType });
 
-        // Library content meta data
-        addNodeMetaData(destNode, {
-          title: values['library-name'],
-          description: values['library-description'],
-          componentKey: item.type,
-        });
-      }
-    };
+          // Library content meta data
+          addNodeMetaData(destNode, {
+            title: values['library-name'],
+            description: values['library-description'],
+            componentKey: item.type,
+          });
+        }
+      };
 
-    const form = useContextMenuForm({ renderForm, submitValues });
-    const baseOption: OptionGroupDefinition = {
-      name: 'content-library',
-      label: isLibraryItem(item) ? 'Unlink' : 'Add',
-      isActive: isLibraryItem(item),
-      groupLabel: 'Library',
-      groupMerge: 'none',
-      icon: 'account_balance',
-      local: true,
-      global: false,
-      formTitle: 'Content Library',
-      formDescription: isLibraryItem(item) ? `This action will remove the instance of the
+      const form = useContextMenuForm({ renderForm, submitValues });
+      const baseOption: OptionGroupDefinition = {
+        name: 'content-library',
+        label: isLibraryItem(item) ? 'Unlink' : 'Add',
+        isActive: isLibraryItem(item),
+        groupLabel: 'Library',
+        groupMerge: 'none',
+        icon: 'account_balance',
+        local: true,
+        global: false,
+        formTitle: 'Content Library',
+        formDescription: isLibraryItem(item) ? `This action will remove the instance of the
       component from the library and it will be independent.` : `This action will create a library item. 
       Edit of any instance of the library item will update all instances.`,
-      isHidden: false,
+        isHidden: false,
+      };
+      const finalOption = {
+        ...baseOption,
+        handler: () => form,
+      };
+      return createMenuOptionGroup(finalOption);
     };
-    const finalOption = {
-      ...baseOption,
-      handler: () => form,
+
+    const WithLibraryMenuOptions: FC<any> = (props: any) => {
+      const {
+        useGetMenuOptions,
+        flowContainerItem,
+        handlers,
+        ...rest
+      } = props;
+
+      const { node } = useNode<any>();
+      const contentLibMenuOptions = useContentLibMenuOptions(flowContainerItem, node, handlers);
+      const newUseGetMenuOptions = (fcProps: any) => {
+        const defaultMenuOptions = useGetMenuOptions(fcProps);
+        return useGetter([
+          ...defaultMenuOptions(),
+          ...contentLibMenuOptions,
+        ]);
+      };
+
+      return (
+        <Component
+          {...rest}
+          flowContainerItem={flowContainerItem}
+          useGetMenuOptions={newUseGetMenuOptions}
+        />
+      );
     };
-    return createMenuOptionGroup(finalOption);
+    return WithLibraryMenuOptions;
   };
-
-  const WithLibraryMenuOptions: FC<any> = (props: any) => {
-    const {
-      useGetMenuOptions,
-      flowContainerItem,
-      handlers,
-      ...rest
-    } = props;
-
-    const { node } = useNode<any>();
-    const contentLibMenuOptions = useContentLibMenuOptions(flowContainerItem, node, handlers);
-    const newUseGetMenuOptions = (fcProps: any) => {
-      const defaultMenuOptions = useGetMenuOptions(fcProps);
-      return useGetter([
-        ...defaultMenuOptions(),
-        ...contentLibMenuOptions,
-      ]);
-    };
-
-    return (
-      <Component
-        {...rest}
-        flowContainerItem={flowContainerItem}
-        useGetMenuOptions={newUseGetMenuOptions}
-      />
-    );
-  };
-  return WithLibraryMenuOptions;
-};
+}
 
 type libProps = {
   libPath: LibraryNodePath,

@@ -28,12 +28,15 @@ import EditFlowContainer from './EditFlowContainer';
 import StaticFlowContainer from './StaticFlowContainer';
 import { EditFlowContainerProps, FlowContainerProps } from './types';
 
-const FlowContainerBasic: FC<EditFlowContainerProps> = props => {
+const FlowContainerBasicEdit: FC<EditFlowContainerProps> = props => {
   const { isEdit } = useEditContext();
   return isEdit
     ? <EditFlowContainer {...props} />
     : <StaticFlowContainer {...props} />;
 };
+
+const FlowContainerBasic = process.env.NODE_ENV === 'producton'
+  ? StaticFlowContainer : FlowContainerBasicEdit;
 
 const FlowContainerDesignable = flow(
   observer,

@@ -17,6 +17,7 @@ import React, {
 } from 'react';
 import { HOC } from '@bodiless/fclasses';
 
+import { identity } from 'lodash';
 import type { FlowContainerItem } from '../FlowContainer/types';
 
 /**
@@ -50,51 +51,67 @@ export type LibraryItemContextProps = {
 };
 
 /**
- * Flow Container Library Item Context.
- * @see LibraryItemContextProps
- */
-export const LibraryItemContext = createContext<LibraryItemContextProps>({
-  isLibraryItem: false,
-  setIsLibraryItem: () => null,
-});
-
-/**
  * Hook that can be used to access the Flow Container Library Item Context.
  * Component must be within a `LibraryItemProvider`.
  * @see LibraryItemContextProps
  */
-export const useLibraryItemContext = () => useContext(LibraryItemContext);
+let useLibraryItemContext$: () => LibraryItemContextProps = () => ({
+  isLibraryItem: false,
+  setIsLibraryItem: () => undefined,
+});
 
 /**
  * Hook to check if the current Flow Container Item is Library Item
  * Must only be used on `FlowContainerItem`.
  * @return boolean
  */
-export const useIsLibraryItem = () => useLibraryItemContext().isLibraryItem;
+let useIsLibraryItem$: () => boolean = () => false;
 
 /**
- * A `LibraryItemProvider` indicates whether the current Flow Container Item is a Library Item.
- * @see LibraryItemProviderProps.
+ * @private
  */
-export const LibraryItemProvider: FC<LibraryItemProviderProps> = ({ isLibrary, children }) => {
-  const [isLibraryItem, setIsLibraryItem] = useState(isLibrary);
+let withLibraryItemContext$: HOC<any> = identity;
 
-  return (
-    <LibraryItemContext.Provider value={{ isLibraryItem, setIsLibraryItem }}>
-      {children}
-    </LibraryItemContext.Provider>
-  );
-};
-
+if (process.env.NODE_ENV === 'production') {
 /**
- * HOC that wraps component in LibraryItemProvider.
- * When wrapped in `LibraryItemProvider`, it checks whether FlowContainerItem
- * is actually a Library Item by checking its `FlowContainerItem.type` prefix.
+ * @private
+ * Flow Container Library Item Context.
  * @see LibraryItemContextProps
  */
-export const withLibraryItemContext: HOC<any> = Component => props => (
+  const LibraryItemContext = createContext<LibraryItemContextProps>({
+    isLibraryItem: false,
+    setIsLibraryItem: () => null,
+  });
+
+  useLibraryItemContext$ = () => useContext(LibraryItemContext);
+
+  useIsLibraryItem$ = () => useLibraryItemContext$().isLibraryItem;
+
+  const LibraryItemProvider: FC<LibraryItemProviderProps> = ({ isLibrary, children }) => {
+    const [isLibraryItem, setIsLibraryItem] = useState(isLibrary);
+
+    return (
+      <LibraryItemContext.Provider value={{ isLibraryItem, setIsLibraryItem }}>
+        {children}
+      </LibraryItemContext.Provider>
+    );
+  };
+
+  /**
+   * @private
+   * HOC that wraps component in LibraryItemProvider.
+   * When wrapped in `LibraryItemProvider`, it checks whether FlowContainerItem
+   * is actually a Library Item by checking its `FlowContainerItem.type` prefix.
+   * @see LibraryItemContextProps
+   */
+  withLibraryItemContext$ = Component => props => (
   // eslint-disable-next-line react/destructuring-assignment
-  <LibraryItemProvider isLibrary={isLibraryItem(props.flowContainerItem)}>
-    <Component {...props} />
-  </LibraryItemProvider>
-);
+    <LibraryItemProvider isLibrary={isLibraryItem(props.flowContainerItem)}>
+      <Component {...props} />
+    </LibraryItemProvider>
+  );
+}
+
+export const useIsLibraryItem = useIsLibraryItem$;
+export const useLibraryItemContext = useLibraryItemContext$;
+export const withLibraryItemContext = withLibraryItemContext$;
