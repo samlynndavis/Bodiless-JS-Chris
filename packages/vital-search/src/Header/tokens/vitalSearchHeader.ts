@@ -12,21 +12,22 @@
  * limitations under the License.
  */
 
-import { asFluidToken } from '@bodiless/vital-elements';
-import vitalFlowContainerBase from '--vital--/lib/shadow/@bodiless/vital-flowcontainer/FlowContainer';
-import { addProps } from '@bodiless/fclasses';
+import { on } from '@bodiless/fclasses';
+import { asHeaderToken } from '@bodiless/vital-layout';
+import { SearchMenuClean, vitalSearchMenu } from '../../SearchMenu';
+import { SearchTogglerClean, vitalSearchToggler, asSearchMenuToggler } from '../../SearchToggler';
 
-const Default = asFluidToken(
-  vitalFlowContainerBase.Default,
-  vitalFlowContainerBase.WithContentLibrary,
-  {
-    Behavior: {
-      Wrapper: addProps({ 'data-shadowed-by': 'vital-test:FlowContainer' }),
-    }
-  }
-);
+const WithSearch = asHeaderToken({
+  Core: {
+    SearchToggler: asSearchMenuToggler,
+  },
+  Components: {
+    SearchToggler: on(SearchTogglerClean)(vitalSearchToggler.Default),
+    DesktopSearch: on(SearchMenuClean)(vitalSearchMenu.Default),
+    MobileSearch: on(SearchMenuClean)(vitalSearchMenu.Mobile),
+  },
+});
 
 export default {
-  ...vitalFlowContainerBase,
-  Default,
+  WithSearch,
 };

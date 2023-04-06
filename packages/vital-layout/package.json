@@ -46,7 +46,6 @@
     "@bodiless/vital-link": "^1.0.0-rc.31",
     "@bodiless/vital-meta": "^1.0.0-rc.31",
     "@bodiless/vital-navigation": "^1.0.0-rc.31",
-    "@bodiless/vital-search": "^1.0.0-rc.31",
     "lodash": "^4.17.19",
     "mobx": "^6.0.0",
     "mobx-react": "^7.2.1",
