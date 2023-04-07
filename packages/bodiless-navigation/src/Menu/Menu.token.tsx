@@ -12,14 +12,10 @@
  * limitations under the License.
  */
 
-import { observer } from 'mobx-react';
-import { useListContext } from '@bodiless/components';
-import { useEditContext } from '@bodiless/core';
 import type { HOC } from '@bodiless/fclasses';
 import {
   addClasses,
   removeClassesIf,
-  addClassesIf,
   withDesign,
   flowHoc,
 } from '@bodiless/fclasses';
@@ -32,20 +28,14 @@ import {
 } from '../token';
 import { asAccessibleMenu, asAccessibleSubMenu, withAccessibleSubMenuAttr } from './asAccessibleMenu';
 import { withSubmenuContext } from './withMenuItemContext';
+import withHoverStyles, {
+  useIsSubmenuContracted, useIsSubmenuExpanded, isMenuContextActive, isMenuContextNotActive
+} from './withHoverStyles.bl-edit';
 
 /*
  * Utility Styles
  * ===========================================
  */
-const isMenuContextActive = () => {
-  const { isActive, isEdit } = useEditContext();
-  return isEdit && isActive;
-};
-
-const isMenuContextNotActive = () => {
-  const { isActive, isEdit } = useEditContext();
-  return isEdit ? !isActive : true;
-};
 
 const asVerticalSubMenu = withDesign({
   Wrapper: withColumnDirectionStyles,
@@ -64,36 +54,7 @@ const asFullWidthSublist = withDesign({
   Wrapper: addClasses('w-full left-0'),
 });
 
-const useIsSubmenuExpanded = () => {
-  const { isActive, isEdit } = useEditContext();
-  const { activeSubmenu } = useMenuContext();
-  const { currentItem } = useListContext();
-  return (activeSubmenu === currentItem) || (isEdit && isActive);
-};
-
 const useIsHoverEnabled = () => !useIsMenuOpen() && useMenuContext().activeSubmenu === undefined;
-
-const useIsSubmenuContracted = () => {
-  const { isActive, isEdit } = useEditContext();
-  const { activeSubmenu } = useMenuContext();
-  const { currentItem } = useListContext();
-  const isNotActive = isEdit ? !isActive : true;
-  return (activeSubmenu !== currentItem) && isNotActive;
-};
-
-const withHoverStyles = withDesign({
-  OuterWrapper: flowHoc(
-    addClassesIf(useIsHoverEnabled)('group'),
-    observer as HOC,
-  ),
-  Wrapper: flowHoc(
-    addClasses('group-hover:flex'),
-    addClassesIf(useIsSubmenuContracted)('hidden'),
-    observer as HOC,
-    addClassesIf(useIsSubmenuExpanded)('flex'),
-    observer as HOC,
-  ),
-});
 
 /*
  * Base Menu Styles
