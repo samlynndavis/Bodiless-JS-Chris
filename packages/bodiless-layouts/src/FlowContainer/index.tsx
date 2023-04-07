@@ -12,43 +12,29 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType } from 'react';
-import { observer } from 'mobx-react';
+import { ComponentType } from 'react';
 import flow from 'lodash/flow';
 import {
   withNode,
-  useEditContext,
 } from '@bodiless/core';
 import {
   withDesign,
   addClasses,
   addProps,
 } from '@bodiless/fclasses';
-import EditFlowContainer from './EditFlowContainer';
-import StaticFlowContainer from './StaticFlowContainer';
-import { EditFlowContainerProps, FlowContainerProps } from './types';
+import { FlowContainerProps } from './types';
+import FlowContainerBase from './FlowContainerBase.bl-edit';
 
-const FlowContainerBasicEdit: FC<EditFlowContainerProps> = props => {
-  const { isEdit } = useEditContext();
-  return isEdit
-    ? <EditFlowContainer {...props} />
-    : <StaticFlowContainer {...props} />;
-};
-
-const FlowContainerBasic = process.env.NODE_ENV === 'producton'
-  ? StaticFlowContainer : FlowContainerBasicEdit;
-
-const FlowContainerDesignable = flow(
-  observer,
+const FlowContainer: ComponentType<FlowContainerProps> = flow(
   withDesign({
     Wrapper: addClasses('flex flex-wrap'),
   }),
-)(FlowContainerBasic);
+  withNode,
+)(FlowContainerBase);
 
 const withMandatoryCategories = (categories: string[]) => addProps({
   mandatoryCategories: categories,
 });
 
-const FlowContainer = withNode(FlowContainerDesignable) as ComponentType<FlowContainerProps>;
 export default FlowContainer;
 export { withMandatoryCategories };
