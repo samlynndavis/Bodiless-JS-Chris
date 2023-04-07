@@ -17,11 +17,10 @@ import React, {
 } from 'react';
 import { useNode } from '@bodiless/core';
 import type { LinkData } from '@bodiless/components';
-import { observer } from 'mobx-react';
 import type { HOC } from '@bodiless/fclasses';
-import { BreadcrumbItem } from './BreadcrumbStore';
-import type { BreadcrumbItemType } from './BreadcrumbStore';
-import { useBreadcrumbStore, asHiddenBreadcrumbSource } from './BreadcrumbStoreProvider';
+import { BreadcrumbItem } from '../BreadcrumbStore';
+import type { BreadcrumbItemType } from '../BreadcrumbStore';
+import { useBreadcrumbStore, asHiddenBreadcrumbSource } from '../BreadcrumbStoreProvider';
 
 const breadcrumbContext = createContext<BreadcrumbItemType | undefined>(undefined);
 
@@ -68,7 +67,7 @@ const asBreadcrumb = ({
   linkNodeKey,
   titleNodeKey,
 }: BreadcrumbSettings): HOC => Component => {
-  const AsBreadcrumb = observer((props: any) => {
+  const AsBreadcrumb =(props: any) => {
     const current = useBreadcrumbContext();
     const store = useBreadcrumbStore();
     if (store === undefined) return <Component {...props} />;
@@ -113,7 +112,7 @@ const asBreadcrumb = ({
         <Component {...props} />
       </BreadcrumbContextProvider>
     );
-  });
+  };
   return AsBreadcrumb;
 };
 
