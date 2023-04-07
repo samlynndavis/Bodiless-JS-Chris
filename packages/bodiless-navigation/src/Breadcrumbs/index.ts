@@ -48,7 +48,7 @@ export {
   withoutBreadcrumbStartingTrail,
   withBreadcrumbFinalTrail,
   withoutBreadcrumbFinalTrail,
-} from './Breadcrumbs';
+} from './Breadcrumbs.bl-edit';
 
 export {
   useBreadcrumbStore,

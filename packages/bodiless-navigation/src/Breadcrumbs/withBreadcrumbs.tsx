@@ -16,7 +16,7 @@ import React, { ComponentType, useRef } from 'react';
 import { useNode } from '@bodiless/core';
 import { HOC } from '@bodiless/fclasses';
 import { BreadcrumbStore } from './BreadcrumbStore';
-import { MenuBreadcrumbs } from './Breadcrumbs';
+import { MenuBreadcrumbs } from './Breadcrumbs.bl-edit';
 import { BreadcrumbStoreProvider } from './BreadcrumbStoreProvider';
 
 /**

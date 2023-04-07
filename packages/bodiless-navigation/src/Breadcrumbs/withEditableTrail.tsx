@@ -17,7 +17,7 @@ import {
   HOC, addProps, withDesign, flowHoc,
 } from '@bodiless/fclasses';
 
-import { withBreadcrumbStartingTrail, withBreadcrumbFinalTrail } from './Breadcrumbs';
+import { withBreadcrumbStartingTrail, withBreadcrumbFinalTrail } from './Breadcrumbs.bl-edit';
 import { asMenuTitle, withDefaultMenuTitleEditors } from '../Menu/MenuTitles';
 
 const withDefaultNodeKeys = (defaultKey: string) => (nodeKeys?: WithNodeKeyProps) => (
