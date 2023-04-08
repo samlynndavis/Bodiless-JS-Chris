@@ -14,8 +14,8 @@
 
 import React, { FC, HTMLProps } from 'react';
 import { FlowContainer as FlowContainerClean, FlowContainerProps } from '@bodiless/layouts';
-import { ui as componentSelectorUI } from './ComponentSelector';
-import Wrapper from './SortableResizableWrapper';
+import { ui as componentSelectorUI } from '../ComponentSelector';
+import Wrapper from '../SortableResizableWrapper';
 
 const SnapIndicator:FC<HTMLProps<HTMLDivElement>> = props => (
   <div {...props} className="bl-bg-black bl-rounded bl-p-2 bl-text-white bl-rounded bl-absolute bl-z-100 bl-right-0" />
