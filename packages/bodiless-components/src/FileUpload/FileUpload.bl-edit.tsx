@@ -21,7 +21,7 @@ import React, {
 import debug from 'debug';
 import { useNode } from '@bodiless/core';
 import { useDropzone } from 'react-dropzone';
-import BackendSave from '../BackendSave';
+import BackendSave from './BackendSave';
 
 import {
   FileUploadStatus, FileUploadStrings, UploadStatusProps, FileUploadProps,
