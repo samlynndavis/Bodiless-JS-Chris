@@ -12,8 +12,18 @@
  * limitations under the License.
  */
 
-export * from './components/ContentListingTemplate';
-export * from './components/ContentListing';
-export * from './components/ContentListingFlowContainer';
-export * from './components/Filter';
-export * from './components/FilterByGroup';
+import { HTMLProps } from 'react';
+import { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
+
+type ContentListingComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Content: ComponentOrTag<any>,
+};
+
+type ContentListingProps = DesignableComponentsProps<ContentListingComponents>
+& HTMLProps<HTMLElement>;
+
+export type {
+  ContentListingComponents,
+  ContentListingProps,
+};
