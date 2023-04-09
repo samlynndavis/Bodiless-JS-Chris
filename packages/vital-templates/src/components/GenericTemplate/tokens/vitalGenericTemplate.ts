@@ -24,7 +24,6 @@ import {
 import { asBodilessChameleon } from '@bodiless/components';
 import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
 import { withNode, withNodeKey, useNode } from '@bodiless/core';
 import { vitalSpacing } from '@bodiless/vital-elements';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
@@ -96,25 +95,6 @@ const Base = asGenericTemplateToken({
   },
 });
 
-const ContentListing = asGenericTemplateToken({
-  ...Base,
-  Meta: {
-    title: 'Content Listing',
-  },
-  Components: {
-    ...Base.Components,
-    Content: on(ContentListingClean)(vitalContentListing.Default),
-  },
-  Schema: {
-    ...Base.Schema,
-    Content: as(
-      withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
-      withNode,
-      Base.Schema.Content,
-    ),
-  }
-});
-
 const Generic = asGenericTemplateToken({
   ...Base,
   Meta: {
@@ -125,6 +105,5 @@ const Generic = asGenericTemplateToken({
 export default {
   Base,
   Generic,
-  ContentListing,
   WithNoBreadcrumbsOnHomePage,
 };
