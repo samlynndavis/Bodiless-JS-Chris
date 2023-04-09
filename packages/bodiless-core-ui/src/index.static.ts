@@ -12,4 +12,6 @@
  * limitations under the License.
  */
 
-export * from './index.bl-edit';
+export {
+  ContextWrapper, PageEditor, PageOverlay, LocalContextMenu, ReactTagsField
+} from '@bodiless/core';
