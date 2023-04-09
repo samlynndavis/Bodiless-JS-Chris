@@ -26,7 +26,7 @@ import {
 } from '@bodiless/fclasses';
 import { ComponentSelectorOptions } from '@bodiless/layouts';
 import { ChameleonData } from './types';
-import withChameleonButton, { withoutChameleonButtonProps } from './withChameleonButton';
+import withChameleonButton, { withoutChameleonButtonProps } from './withChameleonButton.bl-edit';
 import applyChameleon from './applyChameleon';
 import withChameleonContext from './withChameleonContext';
 
