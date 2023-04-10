@@ -37,6 +37,8 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@bodiless/core": "^1.0.0-rc.33",
+    "@bodiless/core-ui": "^1.0.0-rc.33",
     "@bodiless/fclasses": "^1.0.0-rc.33",
     "@knapsack/test-ava": "^3.105.5",
     "@knapsack/typescript-config-starter": "^3.105.5",

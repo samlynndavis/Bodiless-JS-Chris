@@ -19,4 +19,3 @@ export * from './components/Spacing';
 export * from './components/TextDecoration';
 export * from './components/KnapsackDemoElement';
 export * from './util';
-export * from './KsEditProvider';

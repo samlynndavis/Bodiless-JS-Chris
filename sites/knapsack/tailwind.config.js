@@ -13,16 +13,17 @@
  * limitations under the License.
  */
 const requireEsm = require('esm')(module);
+const glob = require('glob');
 
 const { buildTailwindConfig } = requireEsm(
   '@bodiless/fclasses'
 );
 
-const twConfig = {
-  content: [
-    // './src/**/!(*.d).{ts,js,jsx,tsx}',
-  ],
-};
+const content = glob.sync(
+  './src/**/!(*.d).{ts,js,jsx,tsx}'
+);
+
+const twConfig = { content };
 
 // Get configs sorted by precedence and/or exclude some packages:
 // const getTwConfig = () => getPackageTailwindConfig({
