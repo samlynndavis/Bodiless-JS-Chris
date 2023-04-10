@@ -29,13 +29,6 @@ import { withFinalDesign, flowHoc, HOC } from '@bodiless/fclasses';
 import { UseListOverrides } from './types';
 import { useListContext } from './List';
 
-const hasChildSubList = (context: PageEditContextInterface, count: number = 1): boolean => {
-  const descendants = context.activeDescendants || [];
-  // The first child list is the one to which this toggle applies,
-  // so we check to see if more than one.
-  return descendants.filter(c => c.type === 'list-item').length > count;
-};
-
 const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: any) => {
   const {
     addItem, deleteItem,
