@@ -113,4 +113,3 @@ const withListButtons = (useOverrides?: UseListOverrides) => ifEditable(
 );
 
 export default withListButtons;
-export { hasChildSubList };
