@@ -20,25 +20,7 @@ import {
 } from '@bodiless/core';
 import type { FormSnippet, TMenuOption } from '@bodiless/core';
 import { Div, HOC } from '@bodiless/fclasses';
-
-export enum FieldType {
-  Text = 'text',
-  TextArea = 'textarea',
-}
-
-export type HeaderProps = {
-  title: string,
-  description: string,
-};
-
-export type MetaSnippetOptions = {
-  name: string,
-  label: string,
-  useFormElement?: Function,
-  placeholder?: string,
-  submitHandler?: Function,
-  initalValueHandler?: Function,
-};
+import { MetaSnippetOptions, HeaderProps } from './types';
 
 export const withMetaSnippet = (
   options: MetaSnippetOptions,
