@@ -28,36 +28,18 @@
                 {
                   "patternId": "text-decoration",
                   "templateId": "bodiless-6GKNPvcRI7",
-                  "demoId": "main"
+                  "demoId": "9b3gwi1whT"
                 }
               ]
             },
             "extras": {
               "title": {
-                "text": "This is a whole title"
-              },
-              "body": [
-                {
-                  "type": "paragraph",
-                  "children": [
-                    {
-                      "text": "Hello World!"
-                    }
-                  ]
-                }
-              ],
-              "description": [
-                {
-                  "type": "paragraph",
-                  "children": [
-                    {
-                      "text": "Lorem ipsum dolar sit amet etc."
-                    }
-                  ]
-                }
-              ]
+                "text": "Here is a title you can edit!"
+              }
             }
-          }
+          },
+          "height": 746,
+          "width": 490
         }
       },
       "demos": ["main"],

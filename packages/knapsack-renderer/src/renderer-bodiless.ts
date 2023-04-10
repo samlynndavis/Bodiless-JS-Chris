@@ -70,6 +70,7 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
       id: altRendererId?.id || 'bodiless',
       webpackConfig,
       demoWrapperPath,
+      disableReactStrictMode: true,
     });
     this.title = altRendererId?.title || 'Bodiless';
     this.language = 'jsx';
