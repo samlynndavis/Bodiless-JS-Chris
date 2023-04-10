@@ -21,8 +21,8 @@ import {
   withMeta, withMetaStatic, withMetaHtml, withTitle, withHeadElement, Options as HeadBaseOptions,
   withMetaSiteInfo,
 } from './Meta/Meta';
-import withMetaForm, { withMetaSnippet } from './Meta/withMetaForm';
-import type { FieldType as MetaFormFieldType } from './Meta/withMetaForm';
+import withMetaForm, { withMetaSnippet } from './Meta/withMetaForm.bl-edit';
+import type { FieldType as MetaFormFieldType } from './Meta/types';
 import asBodilessHelmet from './Helmet/Helmet';
 import { withToggle, withToggleTo, withToggleButton } from './Toggle';
 import withEditPlaceholder from './Placeholder';
