@@ -83,4 +83,8 @@ export const AccordionBodyPreview = () => <span className="bl-text-gray-800">Acc
 
 export const asAccordionToken = asVitalTokenSpec<AccordionComponents>();
 
+// These are used in definig the VitalAccordion interface.
+const accordionToken = asAccordionToken();
+export type AccordionToken = typeof accordionToken;
+
 export default AccordionClean;

@@ -18,6 +18,10 @@ import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
 export const asButtonToken = asVitalTokenSpec<ButtonComponent>();
 
+// These are used in definig the VitalAccordion interface.
+const buttonToken = asButtonToken();
+type ButtonToken = typeof buttonToken;
+
 export default ButtonClean;
 
-export type { ButtonComponent, ButtonBaseProps};
+export type { ButtonComponent, ButtonBaseProps, ButtonToken };

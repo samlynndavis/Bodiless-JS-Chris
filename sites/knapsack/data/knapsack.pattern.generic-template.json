@@ -1,0 +1,43 @@
+{
+  "id": "generic-template",
+  "title": "Generic Template",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcDI9",
+      "title": "Template",
+      "path": "@bodiless/vital-templates",
+      "alias": "knapsackGenericTemplateSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demosById": {
+        "main": {
+          "id": "main",
+          "title": "Generic Template",
+          "type": "data",
+          "data": {
+            "props": {
+              "Generic": true
+            },
+            "slots": {
+              "BottomContent": [],
+              "TopContent": []
+            }
+          }
+        }
+      },
+      "demos": ["main"],
+      "slices": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcDI9"
+    }
+  ],
+  "subPages": []
+}

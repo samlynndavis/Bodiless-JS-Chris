@@ -1,6 +1,6 @@
 {
-  "id": "elements",
-  "title": "Elements",
+  "id": "text-decoration",
+  "title": "Text Decoration",
   "description": "",
   "statuses": {},
   "templates": [
@@ -8,7 +8,7 @@
       "id": "bodiless-6GKNPvcRI7",
       "title": "Template",
       "path": "@bodiless/vital-elements",
-      "alias": "elementsSpec",
+      "alias": "knapsackTextDecorationSpec",
       "templateLanguageId": "bodiless",
       "spec": {
         "isInferred": true
@@ -20,37 +20,44 @@
           "type": "data",
           "data": {
             "props": {
-              "Strong": true
+              "FontDecoration": {
+                "Bold": true
+              }
             },
             "slots": {}
           }
         },
-        "CihCHWJntY": {
-          "id": "CihCHWJntY",
-          "title": "Small Text",
+        "rkXoktYQkZ": {
+          "id": "rkXoktYQkZ",
+          "title": "Uppercase",
+          "description": "A description",
           "type": "data",
           "data": {
             "props": {
-              "Strong": false,
-              "Small": true
+              "FontDecoration": {
+                "Uppercase": true
+              }
             },
             "slots": {}
           }
         },
-        "9b3gwi1whT": {
-          "id": "9b3gwi1whT",
-          "title": "Bold Small Text",
+        "0ojvo89F67": {
+          "id": "0ojvo89F67",
+          "title": "Bold Uppercased",
+          "description": "A description",
           "type": "data",
           "data": {
             "props": {
-              "Strong": true,
-              "Small": true
+              "FontDecoration": {
+                "Bold": true,
+                "Uppercase": true
+              }
             },
             "slots": {}
           }
         }
       },
-      "demos": ["main", "CihCHWJntY", "9b3gwi1whT"],
+      "demos": ["main", "rkXoktYQkZ", "0ojvo89F67"],
       "slices": []
     }
   ],

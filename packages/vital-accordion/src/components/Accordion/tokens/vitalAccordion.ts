@@ -14,14 +14,15 @@
 
 import { withNode, withNodeKey } from '@bodiless/core';
 import {
-  addProps, as, flowHoc, replaceWith
+  addProps, as, flowHoc, replaceWith, TokenCollection
 } from '@bodiless/fclasses';
 import { withFAQSchema } from '@bodiless/schema-org';
 import { vitalColor } from '@bodiless/vital-elements';
 import { ifComponentSelector } from '@bodiless/layouts';
 import { vitalAccordionBody } from '../../AccordionBody';
 import { vitalAccordionTitle } from '../../AccordionTitle';
-import { asAccordionToken, AccordionBodyPreview } from '../AccordionClean';
+import { asAccordionToken, AccordionBodyPreview, AccordionToken } from '../AccordionClean';
+import { AccordionComponents } from '../types';
 
 const Base = asAccordionToken({
   Components: {
@@ -70,10 +71,20 @@ const WithFlowContainerPreview = asAccordionToken({
   },
 });
 
-export default {
+interface VitalAccordion extends TokenCollection<AccordionComponents, {}> {
+  Base: AccordionToken,
+  Default: AccordionToken,
+  WithInitiallyExpanded: AccordionToken,
+  WithFAQSchema: AccordionToken,
+  WithFlowContainerPreview: AccordionToken,
+}
+
+const vitalAccordion: VitalAccordion = {
   Base,
   Default,
   WithInitiallyExpanded,
   WithFAQSchema,
   WithFlowContainerPreview,
 };
+
+export default vitalAccordion;

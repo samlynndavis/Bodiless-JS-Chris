@@ -21,6 +21,7 @@ import {
   Img,
   Fragment,
   replaceWith,
+  TokenCollection,
 } from '@bodiless/fclasses';
 import { asBodilessChameleon } from '@bodiless/components';
 import { vitalLayout } from '@bodiless/vital-layout';
@@ -33,8 +34,9 @@ import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
 import { vitalImage } from '@bodiless/vital-image';
 import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
 import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
-import { asGenericTemplateToken } from '../GenericTemplateClean';
+import { asGenericTemplateToken, GenericTemplateToken } from '../GenericTemplateClean';
 import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
+import { GenericTemplateComponents } from '../types';
 
 const heroDefaultData = {
   component: 'Image',
@@ -138,10 +140,20 @@ const Search = asGenericTemplateToken({
   }
 });
 
-export default {
+interface VitalGenericTemplate extends TokenCollection<GenericTemplateComponents, {}> {
+  Base: GenericTemplateToken,
+  Generic: GenericTemplateToken,
+  ContentListing: GenericTemplateToken,
+  WithNoBreadcrumbsOnHomePage: GenericTemplateToken,
+  Search: GenericTemplateToken,
+}
+
+const vitalGenericTemplate: VitalGenericTemplate = {
   Base,
   Generic,
   ContentListing,
   WithNoBreadcrumbsOnHomePage,
   Search,
 };
+
+export default vitalGenericTemplate;

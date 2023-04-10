@@ -8,7 +8,7 @@
       "id": "bodiless-Kmd8Nb3inj",
       "title": "Vital Card",
       "path": "@bodiless/vital-card",
-      "alias": "cardSpec",
+      "alias": "knapsackCardSpec",
       "templateLanguageId": "bodiless",
       "spec": {
         "isInferred": true
@@ -21,13 +21,12 @@
           "data": {
             "props": {
               "WithHorizontalLeftOrientation": true,
-              "Base": true,
               "Default": true
             },
             "slots": {
               "Title": [
                 {
-                  "patternId": "elements",
+                  "patternId": "text-decoration",
                   "templateId": "bodiless-6GKNPvcRI7",
                   "demoId": "main"
                 }

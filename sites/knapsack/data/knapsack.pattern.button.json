@@ -1,0 +1,68 @@
+{
+  "id": "button",
+  "title": "Button",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI1",
+      "title": "Template",
+      "path": "@bodiless/vital-buttons",
+      "alias": "knapsackButtonSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demosById": {
+        "main": {
+          "id": "main",
+          "title": "Base Button",
+          "type": "data",
+          "data": {
+            "props": {
+              "Default": true
+            },
+            "slots": {},
+            "extras": {
+              "buttontext": {
+                "text": "Button Text"
+              }
+            }
+          }
+        },
+        "SjJMO5dEv_": {
+          "id": "SjJMO5dEv_",
+          "title": "Primary Button",
+          "description": "A description",
+          "type": "data",
+          "data": {
+            "props": {
+              "Primary": true
+            },
+            "slots": {},
+            "extras": {
+              "buttontext": {
+                "text": "Primary Button"
+              }
+            }
+          }
+        }
+      },
+      "demos": ["main", "SjJMO5dEv_"],
+      "slices": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcRI1"
+    }
+  ],
+  "subPages": [
+    {
+      "id": "overview",
+      "title": "Overview",
+      "slices": []
+    }
+  ]
+}

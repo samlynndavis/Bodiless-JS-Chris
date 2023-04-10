@@ -14,3 +14,4 @@
 
 export { default as vitalTypography } from './tokens';
 export { default as vitalTypographyBase } from './tokens/vitalTypography';
+export { knapsackTypographySpec } from './Typography.knapsackSpec';

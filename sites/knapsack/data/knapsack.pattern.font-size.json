@@ -1,0 +1,58 @@
+{
+  "id": "font-size",
+  "title": "Font Size",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI8",
+      "title": "Template",
+      "path": "@bodiless/vital-elements",
+      "alias": "knapsackFontSizeSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demosById": {
+        "main": {
+          "id": "main",
+          "title": "Base Text",
+          "type": "data",
+          "data": {
+            "props": {
+              "FontSize": {
+                "Base": true,
+                "XXL": false,
+                "L": false
+              }
+            },
+            "slots": {}
+          }
+        },
+        "8oblO5r52L": {
+          "id": "8oblO5r52L",
+          "title": "XXL Text",
+          "description": "A description",
+          "type": "data",
+          "data": {
+            "props": {
+              "FontSize": {
+                "XXL": true
+              }
+            },
+            "slots": {}
+          }
+        }
+      },
+      "demos": ["main", "8oblO5r52L"],
+      "slices": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcRI8"
+    }
+  ],
+  "subPages": []
+}

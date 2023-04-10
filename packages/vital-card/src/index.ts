@@ -11,33 +11,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
-import vitalCard from './components/Card/tokens/vitalCard';
-import CardClean, { CardComponents } from './components/Card/CardClean';
 
 export * from './components/Card';
 export * from './components/FlowContainer';
-
-export const cardSpec: KnapsackBodilessSpec<CardComponents> = {
-  tokens: vitalCard,
-  tokensExportName: 'vitalCard',
-  component: CardClean,
-  componentExportName: 'CardClean',
-  slots: {
-    Title: {
-      title: 'Title',
-      description: 'The title of the card',
-      allowedPatternIds: ['element'],
-    },
-    Body: {
-      title: 'Body',
-      description: 'The body of the card',
-      allowedPatternIds: ['element'],
-    },
-    ContentWrapper: {
-      title: 'Content Wrapper',
-      description: 'The wrapper for the card content',
-      allowedPatternIds: ['element'],
-    }
-  },
-};

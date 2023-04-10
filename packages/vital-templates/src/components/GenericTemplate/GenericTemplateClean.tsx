@@ -66,6 +66,10 @@ const GenericTemplateClean = designable(genericTemplateComponents, 'Generic Temp
 
 const asGenericTemplateToken = asVitalTokenSpec<GenericTemplateComponents>();
 
-export { asGenericTemplateToken };
+// These are used in definig the GenericTemplate interface.
+const genericTemplateToken = asGenericTemplateToken();
+type GenericTemplateToken = typeof genericTemplateToken;
+
+export { asGenericTemplateToken, GenericTemplateToken };
 
 export default GenericTemplateClean;

@@ -1,0 +1,57 @@
+{
+  "id": "color",
+  "title": "Colors",
+  "description": "",
+  "statuses": {},
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI9",
+      "title": "Template",
+      "path": "@bodiless/vital-elements",
+      "alias": "knapsackColorSpec",
+      "templateLanguageId": "bodiless",
+      "spec": {
+        "isInferred": true
+      },
+      "demosById": {
+        "main": {
+          "id": "main",
+          "title": "Background Primary",
+          "type": "data",
+          "data": {
+            "props": {
+              "Color": {
+                "BgPrimaryBrand": true
+              }
+            },
+            "slots": {}
+          }
+        },
+        "MecoUEAtY3": {
+          "id": "MecoUEAtY3",
+          "title": "Text Primary",
+          "description": "A description",
+          "type": "data",
+          "data": {
+            "props": {
+              "Color": {
+                "TextPrimaryBodyCopy": false,
+                "TextPrimaryInteractive": true
+              }
+            },
+            "slots": {}
+          }
+        }
+      },
+      "demos": ["main", "MecoUEAtY3"],
+      "slices": []
+    }
+  ],
+  "tabs": [
+    {
+      "type": "template",
+      "id": "bodiless-6GKNPvcRI9"
+    }
+  ],
+  "subPages": []
+}
