@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { KsEditProvider } from '@bodiless/knapsack-renderer';
+import { KsEditProvider } from '@bodiless/knapsack-edit-provider';
 import './demo-wrapper.css';
 
 /** should be either 'yes' or 'no' - set from Asset Sets defined in `knapsack.asset-sets.json` */

@@ -18,9 +18,10 @@
   },
   "dependencies": {
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.33",
-    "@knapsack/app": "^3.105.5",
+    "@knapsack/app": "^3.108.2",
     "@bodiless/fclasses": "^1.0.0-rc.33",
     "@bodiless/core": "^1.0.0-rc.33",
+    "@bodiless/knapsack-edit-provider": "^1.0.0-rc.33",
     "@bodiless/vital-accordion": "^1.0.0-rc.33",
     "@bodiless/vital-buttons": "^1.0.0-rc.33",
     "@bodiless/vital-card": "^1.0.0-rc.33",

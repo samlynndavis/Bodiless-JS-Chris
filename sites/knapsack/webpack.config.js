@@ -1,3 +1,4 @@
+const {join} = require('path');
 const webpack = require('webpack');
 const babelConfig = require('./.babelrc.json');
 const { demoWrapperPath } = require('./common-config');
@@ -35,7 +36,7 @@ const webpackConfig = {
       },
       {
         loader: 'babel-loader',
-        include: [demoWrapperPath],
+        include: [demoWrapperPath, join(__dirname, '../../packages/knapsack-renderer/lib/KsEditProvider.js')],
         options: babelConfig,
       },
       {
@@ -76,6 +77,7 @@ const webpackConfig = {
     new webpack.DefinePlugin({
       // @todo serializing the whole env is not a good idea -- it's likely to contain credentials.
       'process.env': JSON.stringify(process.env),
+      BL_IS_EDIT: JSON.stringify(process.env.NODE_ENV !== 'production')
     }),
   ],
   optimization: {

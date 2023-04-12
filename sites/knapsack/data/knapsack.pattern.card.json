@@ -14,35 +14,25 @@
         "isInferred": true
       },
       "demosById": {
-        "main": {
-          "id": "main",
-          "title": "Main",
+        "wAphvQRJOn": {
+          "id": "wAphvQRJOn",
+          "title": "New Variation",
+          "description": "A description",
           "type": "data",
           "data": {
             "props": {
-              "WithHorizontalLeftOrientation": true,
               "Default": true
             },
-            "slots": {
-              "Title": [
-                {
-                  "patternId": "text-decoration",
-                  "templateId": "bodiless-6GKNPvcRI7",
-                  "demoId": "9b3gwi1whT"
-                }
-              ]
-            },
+            "slots": {},
             "extras": {
               "title": {
-                "text": "Here is a title you can edit!"
+                "text": "Here is a title to edit"
               }
             }
-          },
-          "height": 746,
-          "width": 490
+          }
         }
       },
-      "demos": ["main"],
+      "demos": ["wAphvQRJOn"],
       "slices": []
     }
   ],

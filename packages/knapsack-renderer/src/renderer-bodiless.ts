@@ -353,6 +353,9 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
   }): ReturnType<Base['inferSpec']> => {
     const x = await this.importJsModule({
       path: templatePath,
+      define: {
+        BL_IS_EDIT: JSON.stringify(process.env.NODE_ENV !== 'production'),
+      }
     });
     const bodilessSpec = x[template.alias] as KnapsackBodilessSpec;
     if (!bodilessSpec) {
