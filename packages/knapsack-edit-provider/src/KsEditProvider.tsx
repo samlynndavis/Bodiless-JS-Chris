@@ -7,6 +7,21 @@ import {
   BodilessStoreBackend, BodilessStore,
 } from '@bodiless/core';
 import { LocalContextMenu } from '@bodiless/core-ui';
+import type { KsUpdateExtrasEvent } from '@knapsack/types';
+
+function getKsMeta(): {
+  patternId: string;
+  templateId: string;
+  demoId: string;
+  assetSetId: string;
+  isInIframe: boolean;
+} {
+  const ksMetaEl = document.getElementById('ks-meta');
+  if (!ksMetaEl) {
+    throw new Error('Could not find "#ks-meta" element');
+  }
+  return JSON.parse(ksMetaEl.innerHTML);
+}
 
 class KsClient implements BodilessStoreBackend {
   /**
@@ -14,24 +29,26 @@ class KsClient implements BodilessStoreBackend {
    * Note - these data should be **merged** with data which were previously serialized.
    */
   savePath(resourcePath: string, data: any): Promise<any> {
+    if (!window?.parent) {
+      // not in iframe, so no need to save
+      return Promise.resolve();
+    }
     // The resource path includes the page path, which is extraneous here
     const nodeKey = path.basename(resourcePath);
+    const ksMeta= getKsMeta();
+    const event: KsUpdateExtrasEvent = {
+      ...ksMeta,
+      type: 'knapsack.updateExtras',
+      extras: {
+        [nodeKey]: data,
+      },
+    };
     // stringifies the Proxy
     const payload = JSON.parse(
-      JSON.stringify({
-        extras: {
-          [nodeKey]: data,
-        },
-      }),
+      JSON.stringify(event),
     );
 
-    if (window?.parent) {
-      window.dispatchEvent(
-        new CustomEvent('knapsack.updateExtras', {
-          detail: payload,
-        }),
-      );
-    }
+    window.parent.postMessage(payload, '*');
     return Promise.resolve();
   }
 
