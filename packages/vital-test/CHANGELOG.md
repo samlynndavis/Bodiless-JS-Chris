@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.34](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.33...v1.0.0-rc.34) (2023-04-13)
+
+
+### Bug Fixes
+
+* **vital-test:** change vital-test package to private ([#2030](https://github.com/johnsonandjohnson/bodiless-js/issues/2030)) ([44996d2](https://github.com/johnsonandjohnson/bodiless-js/commit/44996d2bd9a2ffad0b50db9f535224bfcbf4a082))
+
+
+
+
+
 # [1.0.0-rc.33](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.32...v1.0.0-rc.33) (2023-04-06)
 
 
