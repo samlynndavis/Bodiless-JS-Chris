@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/knapsack-renderer",
   "description": "Render Bodiless templates in Knapsack",
-  "version": "1.0.0-rc.33",
+  "version": "1.0.0-rc.34",
   "type": "commonjs",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
