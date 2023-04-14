@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { KnapsackRendererBase } from '@knapsack/app';
 import { KnapsackRendererWebpackBase } from '@knapsack/renderer-webpack-base';
-import { KnapsackTemplateRenderer as Renderer } from '@knapsack/app/types';
+import { KnapsackTemplateRenderer as Renderer, KnapsackRenderParams, KnapsackTemplateRendererBase } from '@knapsack/app/dist/schemas/knapsack-config';
 import { KnapsackReactRenderer as Base } from '@knapsack/renderer-react';
 import {
   isObjectProp,
@@ -129,7 +129,7 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
     demo,
     isForCodeBlock,
     patternManifest,
-  }: Parameters<Base['getUsageAndImports']>[0] & {
+  }: KnapsackRenderParams & {
     isForCodeBlock: boolean;
   }): ReturnType<Base['getUsageAndImports']> {
     if (Base.isTemplateDemo(demo)) {
@@ -346,11 +346,11 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
     });
   }
 
-  inferSpec: Base['inferSpec'] = async ({
+  inferSpec: KnapsackTemplateRendererBase['inferSpec'] = async ({
     patternId,
     template,
     templatePath,
-  }): ReturnType<Base['inferSpec']> => {
+  }): ReturnType<KnapsackTemplateRendererBase['inferSpec']> => {
     const x = await this.importJsModule({
       path: templatePath,
       define: {

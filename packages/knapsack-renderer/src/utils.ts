@@ -1,4 +1,4 @@
-import { formatCode } from '@knapsack/file-utils/format';
+import { formatCode } from '@knapsack/file-utils';
 import {
   JsDataTypeInfo,
   getJsDataTypeAsString,
