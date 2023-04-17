@@ -21,7 +21,6 @@ export type PageProps = DesignableProps & ComponentProps<typeof StackbitPage>;
 
 export const asBodilessPage: Enhancer<PageProps, DesignableProps<any>> = Component => {
   const AsBodilessPage: FC<any> = (props: PageProps) => {
-    console.log("HELLO");
     const { design, ...rest } = props;
     const designProp: any = { design };
     return (
