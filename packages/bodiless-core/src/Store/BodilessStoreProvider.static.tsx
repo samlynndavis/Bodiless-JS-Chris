@@ -16,8 +16,7 @@ import React, { Component } from 'react';
 import pick from 'lodash/pick';
 import path from 'path';
 import { NodeProvider, DefaultContentNode } from '@bodiless/data';
-import { BodilessBackendClient } from '../BackendClient/BodilessBackendClient';
-import { BodilessMobxStore } from './BodilessMobxStore';
+import { BodilessMobxStore } from './BodilessMobxStore.bl-edit';
 import { BodilessStore } from './types';
 
 type State = {
@@ -93,7 +92,7 @@ export class BodilessStoreProvider extends Component<Props, State> {
    * @param config
    */
   protected createStore(): BodilessStore<any> {
-    return new DefaultStore({ slug: this.slug, client: new BodilessBackendClient() });
+    return new DefaultStore({ slug: this.slug });
   }
 
   render() {

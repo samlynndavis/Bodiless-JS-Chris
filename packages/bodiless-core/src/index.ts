@@ -23,8 +23,8 @@ import {
   useGetter, useLocalStorage, useClickOutside,
 } from './hooks';
 import withEditButton, { createMenuOptionGroup } from './withEditButton';
-import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm';
-import type { FormBodyProps, FormBodyRenderer } from './contextMenuForm';
+import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm.bl-edit';
+import type { FormBodyProps, FormBodyRenderer, ContextMenuPropsType } from './contextMenuForm.bl-edit';
 import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
 import withEditFormSnippet, { useEditFormProps } from './withEditFormSnippet';
 import type { Options as EditFormSnippetOptions } from './withEditFormSnippet';
@@ -35,9 +35,9 @@ import {
   withOnlyProps,
   withResizeDetector,
   withClickOutside,
-} from './hoc';
+} from './hoc.bl-edit';
 import { ifToggledOff, ifToggledOn, withFlowToggle } from './withFlowToggle';
-import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle';
+import { ifEditable, ifReadOnly, useEditToggle } from './withEditToggle.bl-edit';
 import type {
   ContextMenuFormProps, IContextMenuItemProps, TMenuOption, TooltipProps,
 } from './Types/ContextMenuTypes';
@@ -66,7 +66,7 @@ import withParent from './withParent';
 import asBodilessComponent, { withActivatorWrapper } from './asBodilessComponent/asBodilessComponent.bl-edit';
 import asBodilessReadOnlyComponent from './asBodilessComponent/asBodilessReadOnlyComponent';
 import type { BodilessOptions, AsBodiless } from './Types/AsBodilessTypes';
-import { useMenuOptionUI } from './components/ContextMenuContext';
+import { useMenuOptionUI } from './components/ContextMenuContext.bl-edit';
 import ContextSubMenu from './ContextMenu/ContextSubMenu';
 import withSwitcherButton from './withSwitcherButton';
 import OnNodeErrorNotification from './OnNodeErrorNotification';
@@ -152,6 +152,7 @@ export type {
   EditButtonOptions,
   FormBodyProps,
   FormBodyRenderer,
+  ContextMenuPropsType,
   OptionGroupDefinition,
   UseBodilessOverrides,
   EditButtonProps,

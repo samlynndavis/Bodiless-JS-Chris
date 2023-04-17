@@ -17,7 +17,7 @@ import { useNode } from '@bodiless/data';
 import {
   withContextActivator,
   withLocalContextMenu,
-} from './hoc';
+} from './hoc.bl-edit';
 import { withMenuOptions } from './PageContextProvider';
 import { TMenuOption } from './Types/ContextMenuTypes';
 

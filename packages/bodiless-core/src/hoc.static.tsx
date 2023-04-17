@@ -11,19 +11,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import ResizeObserver from 'resize-observer-polyfill';
 
-import { observer } from 'mobx-react';
+import identity from 'lodash/identity';
 import React, {
   ComponentType as CT, EventHandler, FC,
-  useEffect,
   useRef,
-  useState,
 } from 'react';
 import pick from 'lodash/pick';
 import { HOC } from '@bodiless/fclasses';
-import { useContextActivator, useExtendHandler, useClickOutside } from './hooks';
-import LocalContextMenu from './components/LocalContextMenu';
+import { useExtendHandler, useClickOutside } from './hooks';
 
 /**
  * Utility hoc to add an event handler which extends any handler passed to
@@ -74,12 +70,7 @@ export const withOnlyProps = <Q extends object>(...keys: string[]) => (
  * @returns
  * An HOC which injects the event handler.
  */
-export const withContextActivator = (
-  event: string = 'onClick',
-): HOC => Component => observer((props: any) => {
-  const activator = useContextActivator(event, props[event]);
-  return <Component {...props} {...activator} />;
-});
+export const withContextActivator = identity;
 
 /**
  * HOC which attaches a local context menu to the base component.
@@ -93,14 +84,7 @@ export const withContextActivator = (
  * @returns
  * A component with local context menu attached.
  */
-export const withLocalContextMenu: HOC = Component => {
-  const WithLocalContextMenu = (props: any) => (
-    <LocalContextMenu>
-      <Component {...props} />
-    </LocalContextMenu>
-  );
-  return WithLocalContextMenu;
-};
+export const withLocalContextMenu: HOC = identity;
 
 export type ClickOutsideProps = {
   onClickOutside?: (e: KeyboardEvent | MouseEvent) => void;
@@ -147,36 +131,7 @@ export type resizeDetectorProps = {
  * @return An HOC which will detect resize.
  */
 export const withResizeDetector = <P extends object>(Component: CT<P> | string) => {
-  const WithResizeDetector = (props: P & resizeDetectorProps) => {
-    const ref = useRef<HTMLDivElement>(null);
-    const [size, setSize] = useState({ width: 0, height: 0 });
-    const defaultOnResizeObserver = () => {
-      if (ref.current) {
-        const { width, height } = ref.current.getBoundingClientRect();
-        if (width !== size.width || height !== size.height) {
-          setSize({ width, height });
-        }
-      }
-    };
-
-    const { onResizeObserver = defaultOnResizeObserver } = props;
-
-    const resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
-      onResizeObserver(ref, entries);
-    });
-
-    useEffect(() => {
-      if (ref.current) {
-        resizeObserver.observe(ref.current);
-      }
-    }, [Component]);
-
-    return (
-      <div ref={ref}>
-        <Component dimensions={size} {...props} />
-      </div>
-    );
-  };
+  const WithResizeDetector = (props: P & resizeDetectorProps) => <Component {...props} />;
 
   return WithResizeDetector;
 };

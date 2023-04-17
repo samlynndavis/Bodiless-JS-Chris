@@ -18,7 +18,7 @@ import { observable } from 'mobx';
 import type { Tag } from '@bodiless/fclasses';
 import {
   withContextActivator, withLocalContextMenu, withOnlyProps,
-} from '../src/hoc';
+} from '../src/hoc.bl-edit';
 
 const TestComponent = ({ element: Element }: any) => (
   <Element><div>Test Component</div></Element>
