@@ -223,4 +223,6 @@ const extendMeta = (
 
 const noop: HOC = C => C as ComponentWithMeta;
 
-export { flowHoc, withTokenFilter, extendMeta, noop };
+export {
+  flowHoc, withTokenFilter, extendMeta, noop
+};
