@@ -20,6 +20,8 @@ import {
   OnNodeErrorNotification,
   useGitButtons,
   GitContextProvider,
+  useDocsButton,
+  useEditButton,
 } from '@bodiless/core';
 import {
   Fragment,
@@ -61,6 +63,12 @@ const GitButtons: FC = () => {
   return <></>;
 };
 
+const EditButtons: FC = () => {
+  useDocsButton();
+  useEditButton();
+  return <></>;
+};
+
 const EditPage: FC<PageProps> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
@@ -84,6 +92,7 @@ const EditPage: FC<PageProps> = observer(({ children, ui, ...rest }) => {
               <SwitcherButton />
               <NotificationButton />
               <Editor>
+                <EditButtons />
                 <OnNodeErrorNotification />
                 <NewPageButton />
                 <MovePageButton />

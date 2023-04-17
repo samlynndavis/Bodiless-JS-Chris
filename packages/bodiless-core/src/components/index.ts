@@ -15,7 +15,7 @@
 import ContextMenu from './ContextMenu';
 import ContextWrapper from './ContextWrapper';
 import LocalContextMenu from './LocalContextMenu';
-import PageEditor from './PageEditor';
+import PageEditor, { useDocsButton, useEditButton } from './PageEditor';
 import StaticPage from './StaticPage';
 import PageOverlay from './PageOverlay';
 import ContextMenuProvider, { getUI } from './ContextMenuContext';
@@ -34,6 +34,8 @@ export {
   ContextWrapper,
   LocalContextMenu,
   PageEditor,
+  useDocsButton,
+  useEditButton,
   StaticPage,
   PageOverlay,
   ReactTagsField,

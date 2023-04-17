@@ -55,12 +55,7 @@ const GlobalContextMenu: FC<Props> = observer(() => {
   );
 });
 
-/**
- * Component providing the global Bodiless UI elements, the Main Menu and Page Overlay.
- * Also provides the Edit and Docs buttons on the main menu.
- */
-const PageEditor: FC<Props> = ({ children, ui }) => {
-  const context = useEditContext();
+export const useDocsButton = () => {
   const getMenuOptions = useCallback(() => [
     {
       name: 'docs',
@@ -70,6 +65,18 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
         window.open(process.env.BODILESS_DOCS_URL, '_blank');
       },
     },
+  ], []);
+
+  // Register buttons to the main menu.
+  useRegisterMenuOptions({
+    getMenuOptions,
+    name: 'Docs',
+  });
+};
+
+export const useEditButton = () => {
+  const context = useEditContext();
+  const getMenuOptions = useCallback(() => [
     {
       name: 'edit',
       icon: 'edit',
@@ -82,18 +89,25 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
     },
   ], []);
 
-  const newUI = {
-    ...useUI(),
-    ...ui,
-  };
-
-  const { PageOverlay = () => null } = newUI;
-
   // Register buttons to the main menu.
   useRegisterMenuOptions({
     getMenuOptions,
     name: 'Editor',
   });
+};
+
+/**
+ * Component providing the global Bodiless UI elements, the Main Menu and Page Overlay.
+ * Also provides the Edit and Docs buttons on the main menu.
+ */
+const PageEditor: FC<Props> = ({ children, ui }) => {
+  const context = useEditContext();
+
+  const newUI = {
+    ...useUI(),
+    ...ui,
+  };
+  const { PageOverlay = () => null } = newUI;
   useEffect(() => {
     if (!context.isActive) context.activate();
   }, []);
