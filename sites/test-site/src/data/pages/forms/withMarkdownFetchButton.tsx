@@ -20,9 +20,8 @@ import {
   useNode,
 } from '@bodiless/data';
 import type {
-  ContextMenuFormProps,
+  ContextMenuFormProps, ContextMenuPropsType
 } from '@bodiless/core';
-import { ContextMenuPropsType } from '@bodiless/core/lib/contextMenuForm';
 
 type Data = {
   url: string,

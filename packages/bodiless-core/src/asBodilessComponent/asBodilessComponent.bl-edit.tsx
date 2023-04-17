@@ -22,8 +22,8 @@ import { withData, withBodilessData } from '@bodiless/data';
 import { withoutProps } from '@bodiless/fclasses';
 import {
   withContextActivator, withLocalContextMenu,
-} from '../hoc';
-import { ifReadOnly, ifEditable } from '../withEditToggle';
+} from '../hoc.bl-edit';
+import { ifReadOnly, ifEditable } from '../withEditToggle.bl-edit';
 import withEditButton from '../withEditButton';
 import type { EditButtonProps, UseBodilessOverrides } from '../Types/EditButtonTypes';
 import { useContextActivator } from '../hooks';

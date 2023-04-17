@@ -17,8 +17,8 @@ import {
   Form, FormApi, FormState, FormValues,
 } from 'informed';
 import flow from 'lodash/flow';
-import { withClickOutside } from './hoc';
-import { useMenuOptionUI } from './components/ContextMenuContext';
+import { withClickOutside } from './hoc.bl-edit';
+import { useMenuOptionUI } from './components/ContextMenuContext.bl-edit';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 
 export type Options<D> = {
