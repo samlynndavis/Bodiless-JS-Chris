@@ -12,6 +12,7 @@
  * limitations under the License.
  */
 
+import omit from 'lodash/omit';
 import { vitalRichText } from '@bodiless/vital-editors';
 import {
   asFluidToken, vitalColor, vitalFontSize, vitalTextDecoration
@@ -32,7 +33,7 @@ const vitalCopyrightRowRichTextDefault = asFluidToken({
       vitalTextDecoration.Normal,
     ),
     Link: as(
-      vitalLink.Base,
+      omit(vitalLink.Default, 'Theme'),
       vitalTextDecoration.Bold,
       vitalTextDecoration.Underline,
     ),
