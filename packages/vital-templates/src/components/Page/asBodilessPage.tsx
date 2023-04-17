@@ -15,7 +15,7 @@
 import React from 'react';
 import type { FC, ComponentProps } from 'react';
 import type { Enhancer, DesignableProps } from '@bodiless/fclasses';
-import { Page as BodilessPage } from '@bodiless/gatsby-theme-bodiless';
+import BodilessPage from '@bodiless/gatsby-theme-bodiless/dist/StackbitPage.bl-edit';
 
 export type PageProps = DesignableProps & ComponentProps<typeof BodilessPage>;
 

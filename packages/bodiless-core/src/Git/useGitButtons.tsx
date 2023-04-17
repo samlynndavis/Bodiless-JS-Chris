@@ -139,7 +139,7 @@ const getMenuOptions = (
     },
     {
       name: 'Pull',
-      label: 'Pull',
+      label: 'Update',
       icon: 'cloud_download',
       handler: () => formGitPull(client, notifyOfChanges),
       group: 'file',
@@ -147,7 +147,7 @@ const getMenuOptions = (
     {
       name: 'savechanges',
       icon: 'cloud_upload',
-      label: 'Push',
+      label: 'Save',
       isDisabled: () => !canCommit,
       handler: () => saveChanges,
       group: 'file',

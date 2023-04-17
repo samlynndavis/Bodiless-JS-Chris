@@ -38,7 +38,7 @@ const Toolbar = flow(
 )(Div);
 
 const ToolbarRight = flow(
-  addClasses('bl-right-grid-0'),
+  addClasses('bl-right-grid-0 bl-mr-1 bl-mt-2'),
   removeClasses('bl-left-grid-0'),
   addProps({ 'aria-label': 'Global Context Menu Right' }),
 )(Toolbar);
