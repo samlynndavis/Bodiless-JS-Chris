@@ -41,6 +41,7 @@
     "@bodiless/components-ui": "^1.0.0-rc.34",
     "@bodiless/core": "^1.0.0-rc.34",
     "@bodiless/fclasses": "^1.0.0-rc.34",
+    "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.34",
     "@bodiless/layouts": "^1.0.0-rc.34",
     "@bodiless/layouts-ui": "^1.0.0-rc.34",
     "@bodiless/richtext": "^1.0.0-rc.34",

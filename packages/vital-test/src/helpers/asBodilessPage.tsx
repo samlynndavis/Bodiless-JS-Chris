@@ -15,18 +15,19 @@
 import React from 'react';
 import type { FC, ComponentProps } from 'react';
 import type { Enhancer, DesignableProps } from '@bodiless/fclasses';
-import BodilessPage from '@bodiless/gatsby-theme-bodiless/dist/StackbitPage.bl-edit';
+import StackbitPage from '@bodiless/gatsby-theme-bodiless/dist/StackbitPage.bl-edit';
 
-export type PageProps = DesignableProps & ComponentProps<typeof BodilessPage>;
+export type PageProps = DesignableProps & ComponentProps<typeof StackbitPage>;
 
 export const asBodilessPage: Enhancer<PageProps, DesignableProps<any>> = Component => {
   const AsBodilessPage: FC<any> = (props: PageProps) => {
+    console.log("HELLO");
     const { design, ...rest } = props;
     const designProp: any = { design };
     return (
-      <BodilessPage {...rest}>
+      <StackbitPage {...rest}>
         <Component {...designProp} />
-      </BodilessPage>
+      </StackbitPage>
     );
   };
   return AsBodilessPage;
