@@ -222,19 +222,21 @@ const ContextMenuOverlay = observer(() => {
  */
 const LocalContextMenu: FC<{children: ReactElement}> = ({ children }) => {
   const context = useEditContext();
-  // console.log('render tooltip for', context.name);
+
   // let the context know it has a localMenu
   context.hasLocalMenu = true;
-  const { isInnermostLocalMenu, areLocalTooltipsDisabled } = context;
-  // TODO: Only render tooltip when needed. Currently this causes focus issues with editables.
-  // (The editable gets the focus, then the tooltip re-renders and creates a new editable
-  // which is not focused.  Might be worth investigating this at some point.)
-  // if (!isInnermostLocalMenu) {
-  //   return <>{children}</>;
-  // }
+  const { isInnermostLocalMenu, areLocalTooltipsDisabled, lastActivated } = context;
+  if (!isInnermostLocalMenu || areLocalTooltipsDisabled) {
+    return <>{children}</>;
+  }
+  // Set key based on last activated time to force remount when activated. This is
+  // necessary so that the menu will move when its underlying component moves
+  // (eg when a list is reordered).
+  const key = lastActivated ? String(lastActivated.getTime()) : 'local-context-menu';
   return (
     <Tooltip
-      visible={isInnermostLocalMenu && !areLocalTooltipsDisabled}
+      key={key}
+      visible
       overlay={<ContextMenuOverlay />}
       trigger={[]}
       destroyTooltipOnHide

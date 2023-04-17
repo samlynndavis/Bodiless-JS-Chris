@@ -27,6 +27,7 @@ export type ListContextValue = {
   currentItem?: string,
   addItem?: Function,
   deleteItem?: Function,
+  moveItem?: Function,
 };
 
 export type ListBaseProps = {

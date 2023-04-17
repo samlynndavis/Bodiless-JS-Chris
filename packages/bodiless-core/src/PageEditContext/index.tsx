@@ -57,6 +57,8 @@ class PageEditContext implements PageEditContextInterface {
 
   hasLocalMenu = false;
 
+  lastActivated: Date|undefined = undefined;
+
   // When called with no argument this creates a new store and react context.
   constructor(values?: DefinesLocalEditContext, parent?: PageEditContextInterface) {
     if (values) {
@@ -128,6 +130,7 @@ class PageEditContext implements PageEditContextInterface {
 
   // Make this the "current" context.
   activate() {
+    this.lastActivated = new Date();
     this.store.setActiveContext(this);
   }
 

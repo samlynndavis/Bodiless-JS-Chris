@@ -38,7 +38,7 @@ const hasChildSubList = (context: PageEditContextInterface, count: number = 1): 
 
 const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: any) => {
   const {
-    addItem, deleteItem,
+    addItem, deleteItem, items = [], currentItem, moveItem,
   } = useListContext();
 
   // Search for parent lists to set the default group label
@@ -56,11 +56,21 @@ const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: 
 
   const menuOptions:TMenuOption[] = useMemo(() => ([
     {
+      name: `move-left-${id}`,
+      icon: 'chevron_left',
+      label: 'Move',
+      isDisabled: !moveItem || !items.length || currentItem === items[0],
+      handler: () => (moveItem ? moveItem(-1) : undefined),
+      global,
+      local,
+      group,
+    },
+    {
       name: `add-${id}`,
       icon: 'add',
       label: 'Add',
       isDisabled: !addItem,
-      handler: addItem as TMenuOption['handler'] || (() => undefined),
+      handler: () => (addItem ? addItem() : undefined),
       global,
       local,
       group,
@@ -70,7 +80,17 @@ const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: 
       icon: 'delete',
       label: 'Delete',
       isDisabled: !deleteItem,
-      handler: deleteItem as TMenuOption['handler'] || (() => undefined),
+      handler: () => (deleteItem ? deleteItem() : undefined),
+      global,
+      local,
+      group,
+    },
+    {
+      name: `move-right-${id}`,
+      icon: 'chevron_right',
+      label: 'Move',
+      isDisabled: !moveItem || !items.length || currentItem === items[items.length - 1],
+      handler: () => (moveItem ? moveItem(1) : undefined),
       global,
       local,
       group,

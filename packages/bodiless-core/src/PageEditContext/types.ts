@@ -96,6 +96,7 @@ export interface PageEditContextInterface extends
   readonly id: string;
   readonly name: string;
   readonly parent?: PageEditContextInterface;
+  readonly lastActivated?: Date;
   /**
    * The "peer" contexts registered with this context.  Peer contexts contribute their menu
    * options when the context wo which they are registered becomes active.
