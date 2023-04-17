@@ -34,7 +34,7 @@ import {
   withDesc,
   withFacet,
 } from '../../src/meta';
-import { withLibraryComponents } from '../../src/ContentLibrary/withLibraryComponents';
+import { withLibraryComponents } from '../../src/ContentLibrary/withLibraryComponents.bl-edit';
 import { CONTENT_LIBRARY_TYPE_PREFIX } from '../../src/ContentLibrary/withLibraryContext';
 import EditFlowContainer, { EditFlowContainerComponents } from '../../src/FlowContainer/EditFlowContainer';
 
