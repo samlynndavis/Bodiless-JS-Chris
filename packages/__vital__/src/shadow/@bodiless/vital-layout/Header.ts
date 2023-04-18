@@ -30,7 +30,7 @@ export const asLanguageSelectorLink = on(LinkClean)(
 );
 
 const Default = asHeaderToken(
-  vitalHeaderBase.Base,
+  vitalHeaderBase.Default,
   // @todo Remove this if you don't want search on your site.
   vitalSearchHeader.WithSearch,
   vitalHeaderBase.WithLanguageSelector,
