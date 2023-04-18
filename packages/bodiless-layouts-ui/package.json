@@ -1,6 +1,6 @@
 {
   "name": "@bodiless/layouts-ui",
-  "version": "1.0.0-rc.35",
+  "version": "1.0.0-rc.36",
   "description": "Default UI for BodilessJS Layouts",
   "author": "Ivan Rudiuk <IRudiuk@its.jnj.com>",
   "license": "Apache-2.0",
@@ -27,9 +27,9 @@
     "clean": "rimraf \"lib/*\" && rimraf tsconfig.tsbuildinfo && rimraf \"doc/api\""
   },
   "dependencies": {
-    "@bodiless/fclasses": "^1.0.0-rc.35",
-    "@bodiless/layouts": "^1.0.0-rc.35",
-    "@bodiless/ui": "^1.0.0-rc.35",
+    "@bodiless/fclasses": "^1.0.0-rc.36",
+    "@bodiless/layouts": "^1.0.0-rc.36",
+    "@bodiless/ui": "^1.0.0-rc.36",
     "re-resizable": "^4.11.0",
     "react-sortable-hoc": "^2.0.0"
   },
