@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.34",
-    "@knapsack/app": "^3.108.4",
+    "@knapsack/app": "^3.108.10",
     "@bodiless/fclasses": "^1.0.0-rc.34",
     "@bodiless/core": "^1.0.0-rc.34",
     "@bodiless/knapsack-edit-provider": "^1.0.0-rc.34",

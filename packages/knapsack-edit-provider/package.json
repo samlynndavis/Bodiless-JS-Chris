@@ -21,7 +21,7 @@
     "@bodiless/fclasses": "^1.0.0-rc.34",
     "@bodiless/core": "^1.0.0-rc.34",
     "@bodiless/core-ui": "^1.0.0-rc.34",
-    "@knapsack/types": "^3.108.4",
+    "@knapsack/types": "^3.108.10",
     "react": "^17.0.2"
   },
   "devDependencies": {

@@ -34,8 +34,7 @@
     "build:watch": "npm run build -- --watch",
     "new": "./bin/bodiless new",
     "postpack": "rimraf oclif.manifest.json",
-    "prepack": "rimraf lib && npm run build && oclif-dev manifest && oclif-dev readme",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "prepack": "rimraf lib && npm run build && oclif-dev manifest && oclif-dev readme"
   },
   "dependencies": {
     "@oclif/command": "^1",

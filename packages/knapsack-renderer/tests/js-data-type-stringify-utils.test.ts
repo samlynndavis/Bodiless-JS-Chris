@@ -1,6 +1,6 @@
 /* eslint-disable jest/expect-expect */
 import test from 'ava';
-import { formatCodeSync } from '@knapsack/file-utils/format';
+import { formatCodeSync } from '@knapsack/file-utils';
 import {
   getJsDataTypeAsString,
   JsDataTypeInfo,
