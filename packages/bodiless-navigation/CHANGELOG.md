@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.36...v1.0.0-rc.37) (2023-04-18)
+
+**Note:** Version bump only for package @bodiless/navigation
+
+
+
+
+
 # [1.0.0-rc.36](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.35...v1.0.0-rc.36) (2023-04-18)
 
 **Note:** Version bump only for package @bodiless/navigation
