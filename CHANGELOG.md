@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.36...v1.0.0-rc.37) (2023-04-18)
+
+
+### Bug Fixes
+
+* **gatsby-theme-bodiless, lerna:** patch Lerna canary version generation [canary] ([#2037](https://github.com/johnsonandjohnson/bodiless-js/issues/2037)) ([cf67a5d](https://github.com/johnsonandjohnson/bodiless-js/commit/cf67a5d2ae28f150313fb2ff87e3112de3992fa6))
+
+
+
+
+
+# [1.0.0-rc.36](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.35...v1.0.0-rc.36) (2023-04-18)
+
+
+### Bug Fixes
+
+* **vital-layout:** Add outer Utility menu to header ([#2034](https://github.com/johnsonandjohnson/bodiless-js/issues/2034)) ([70131d6](https://github.com/johnsonandjohnson/bodiless-js/commit/70131d63012770a24dc9b90ecb066ee312215d03))
+
+
+
+
+
+# [1.0.0-rc.35](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.34...v1.0.0-rc.35) (2023-04-17)
+
+
+### Bug Fixes
+
+* **vital-layout/templates:** Update Layout/Templates ([#2004](https://github.com/johnsonandjohnson/bodiless-js/issues/2004)) ([8f56873](https://github.com/johnsonandjohnson/bodiless-js/commit/8f56873760f217a619035a0f97202c727fb92627))
+
+
+
+
+
 # [1.0.0-rc.34](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.33...v1.0.0-rc.34) (2023-04-13)
 
 

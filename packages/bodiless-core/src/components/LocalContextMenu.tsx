@@ -225,18 +225,16 @@ const LocalContextMenu: FC<{children: ReactElement}> = ({ children }) => {
 
   // let the context know it has a localMenu
   context.hasLocalMenu = true;
-  const { isInnermostLocalMenu, areLocalTooltipsDisabled, lastActivated } = context;
-  if (!isInnermostLocalMenu || areLocalTooltipsDisabled) {
+  const { isInnermostLocalMenu, areLocalTooltipsDisabled } = context;
+  const visible = isInnermostLocalMenu && !areLocalTooltipsDisabled;
+  if (!visible) {
     return <>{children}</>;
   }
-  // Set key based on last activated time to force remount when activated. This is
-  // necessary so that the menu will move when its underlying component moves
-  // (eg when a list is reordered).
-  const key = lastActivated ? String(lastActivated.getTime()) : 'local-context-menu';
+  const key = context.localContextMenuKey.getTime();
   return (
     <Tooltip
       key={key}
-      visible
+      visible={visible}
       overlay={<ContextMenuOverlay />}
       trigger={[]}
       destroyTooltipOnHide
