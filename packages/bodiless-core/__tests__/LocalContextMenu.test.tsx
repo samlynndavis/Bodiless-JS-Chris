@@ -187,6 +187,21 @@ describe('LocalContextMenu', () => {
 
 describe('Grouped options', () => {
   let mockOptionsGetter:jest.SpyInstance<TMenuOption[], []>;
+  let mockIsInnermost:jest.SpyInstance<boolean>;
+  let mockAreLocalTooltipsDisabled:jest.SpyInstance<boolean>;
+
+  beforeAll(() => {
+    mockIsInnermost = jest.spyOn(PageEditContext.prototype, 'isInnermostLocalMenu', 'get');
+    mockAreLocalTooltipsDisabled = jest.spyOn(PageEditContext.prototype, 'areLocalTooltipsDisabled', 'get');
+    mockIsInnermost.mockReturnValue(true);
+    mockAreLocalTooltipsDisabled.mockReturnValue(false);
+  });
+
+  afterAll(() => {
+    mockIsInnermost.mockRestore();
+    mockAreLocalTooltipsDisabled.mockRestore();
+  });
+
 
   const setMockOptions = (ops: TMenuOption[]) => {
     mockOptionsGetter.mockReturnValue(ops);
