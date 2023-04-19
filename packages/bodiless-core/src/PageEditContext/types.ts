@@ -98,7 +98,6 @@ export interface PageEditContextInterface extends
   readonly id: string;
   readonly name: string;
   readonly parent?: PageEditContextInterface;
-  readonly lastActivated?: Date;
   readonly localContextMenuKey: Date;
   refreshLocalContextMenu: () => void;
   /**
