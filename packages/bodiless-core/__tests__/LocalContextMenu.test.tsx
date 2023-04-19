@@ -202,7 +202,6 @@ describe('Grouped options', () => {
     mockAreLocalTooltipsDisabled.mockRestore();
   });
 
-
   const setMockOptions = (ops: TMenuOption[]) => {
     mockOptionsGetter.mockReturnValue(ops);
   };
