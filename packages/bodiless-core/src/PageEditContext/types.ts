@@ -110,7 +110,7 @@ export interface PageEditContextInterface extends
   /**
    * Function property which gets the menu options associated with this context.
    */
-readonly getMenuOptions: TMenuOptionGetter;
+  readonly getMenuOptions: TMenuOptionGetter;
   /**
    * Spawn a child of this context (another context which, when activated, will also activate
    * this one and all of its ancestors).

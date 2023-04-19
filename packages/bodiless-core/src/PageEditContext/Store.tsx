@@ -63,7 +63,7 @@ export class PageEditStore implements PageEditStoreInterface {
 
   @action
   refreshLocalContextMenu() {
-    this.localContextMenuKey = new Date()
+    this.localContextMenuKey = new Date();
   }
 
   @action reset() {
