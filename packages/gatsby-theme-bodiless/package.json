@@ -116,8 +116,6 @@
   },
   "peerDependencies": {
     "gatsby": "^4.11.2",
-    "mobx": "^6.0.0",
-    "mobx-react": "^7.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }
