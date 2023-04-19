@@ -17,20 +17,20 @@ import { withNode, withNodeKey } from '@bodiless/data';
 import { ContentListingClean, vitalContentListing } from '../../ContentListing';
 
 const Default = asGenericTemplateToken({
-  ...vitalGenericTemplate.Generic,
+  ...vitalGenericTemplate.Default,
   Meta: {
     title: 'Content Listing',
   },
   Components: {
-    ...vitalGenericTemplate.Generic.Components,
+    ...vitalGenericTemplate.Default.Components,
     Content: on(ContentListingClean)(vitalContentListing.Default),
   },
   Schema: {
-    ...vitalGenericTemplate.Generic.Schema,
+    ...vitalGenericTemplate.Default.Schema,
     Content: as(
       withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
       withNode,
-      vitalGenericTemplate.Generic.Schema.Content,
+      vitalGenericTemplate.Default.Schema.Content,
     ),
   }
 });

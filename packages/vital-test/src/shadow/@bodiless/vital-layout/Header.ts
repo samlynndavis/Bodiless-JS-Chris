@@ -17,17 +17,16 @@ import vitalHeaderBase from '--vital--/lib/shadow/@bodiless/vital-layout/Header'
 import { vitalSearchHeader } from '@bodiless/vital-search';
 import { addProps } from '@bodiless/fclasses';
 
-// Note: when used with the __vital__ package on vital-demo, that package takes precedence
-// over this one.  This test override has no effect and just an example.
-
-const Default = asHeaderToken(vitalHeaderBase.Default,
+const Default = asHeaderToken(
+  vitalHeaderBase.Default,
   vitalSearchHeader.WithSearch,
   vitalHeaderBase.WithLanguageSelector,
   {
     Behavior: {
-      Wrapper: addProps({ 'data-shadowed-by': '__vitaltest__:Header' }),
+      Wrapper: addProps({ 'data-shadowed-by': 'vital-test:Header' }),
     },
-  });
+  },
+);
 
 export default {
   ...vitalHeaderBase,
