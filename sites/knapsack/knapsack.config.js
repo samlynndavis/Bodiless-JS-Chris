@@ -1,7 +1,6 @@
 const { join } = require('path');
 const { configureKnapsack } = require('@knapsack/app');
 const { KnapsackBodilessRenderer } = require('@bodiless/knapsack-renderer');
-const postcssOptions = require('./postcss.config');
 const { version } = require('../../lerna.json');
 const { demoWrapperPath } = require('./common-config');
 const webpackConfig = require('./webpack.config');
@@ -21,6 +20,7 @@ module.exports = configureKnapsack({
   cloud: {
     siteId: 'jnj-canvasx',
     repoName: 'Bodiless-JS',
+    repoRoot: join(__dirname, '../../'),
     repoOwner: 'johnsonandjohnson',
     baseBranch: 'main',
   },
