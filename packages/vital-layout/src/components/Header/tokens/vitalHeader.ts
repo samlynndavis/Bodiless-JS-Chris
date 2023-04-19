@@ -33,7 +33,7 @@ import { asHeaderToken } from '../HeaderClean';
 import type { HeaderToken } from '../HeaderClean';
 import BurgerIcon from '../assets/BurgerIcon';
 
-const Base = asHeaderToken({
+const Default = asHeaderToken({
   Core: {
     MenuToggler: asBurgerMenuToggler,
   },
@@ -87,10 +87,6 @@ const WithLanguageSelector = asHeaderToken({
   }
 });
 
-const Default = asHeaderToken({
-  ...Base,
-});
-
 /**
  * Tokens for the vital header
  *
@@ -99,14 +95,10 @@ const Default = asHeaderToken({
  */
 export interface VitalHeader {
   /**
-   * Base applies the following as defaults:
+   * Default applies the following as defaults:
    * - Logo
    * - Togglers: BurgerMenu, Search
    * - Defines the components: Logo, Menu, BurgerMenu, Search, WhereToBuy
-   */
-  Base: HeaderToken,
-  /**
-   * Inherits Base
    *
    * @example Will remove Search components & Where to Buy components
    * ```js
@@ -145,7 +137,6 @@ export interface VitalHeader {
  * @see [[HeaderClean]]
  */
 const vitalHeader: VitalHeader = {
-  Base,
   Default,
   WithLanguageSelector,
 };

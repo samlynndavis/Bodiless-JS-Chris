@@ -19,7 +19,7 @@ import { WithGA4DesignKeys } from '@bodiless/ga4';
 import { asBodilessPage } from '../../../util/asBodilessPage';
 import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
 
-const Base = asFluidToken({
+const Default = asFluidToken({
   Core: {
     _: as(
       asBodilessChameleon(
@@ -55,11 +55,6 @@ const Base = asFluidToken({
   },
 });
 
-const Default = asFluidToken({
-  ...Base,
-});
-
 export default {
-  Base,
   Default,
 };
