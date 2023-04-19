@@ -51,7 +51,7 @@ const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
   },
 });
 
-const Base = asGenericTemplateToken({
+const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
@@ -93,17 +93,20 @@ const Base = asGenericTemplateToken({
   Compose: {
     WithNoBreadcrumbsOnHomePage,
   },
+  Meta: {
+    title: 'Default',
+  },
 });
 
 const Generic = asGenericTemplateToken({
-  ...Base,
+  ...Default,
   Meta: {
     title: 'Generic',
   },
 });
 
 export default {
-  Base,
+  Default,
   Generic,
   WithNoBreadcrumbsOnHomePage,
 };

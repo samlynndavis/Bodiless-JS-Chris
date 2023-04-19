@@ -18,12 +18,12 @@ import { vitalSearchHeader } from '@bodiless/vital-search';
 import { addProps } from '@bodiless/fclasses';
 
 const Default = asHeaderToken(
-  vitalHeaderBase.Base,
+  vitalHeaderBase.Default,
   vitalSearchHeader.WithSearch,
   vitalHeaderBase.WithLanguageSelector,
   {
     Behavior: {
-      Wrapper: addProps({ 'data-shadowed-by': '__vital__:Header' }),
+      Wrapper: addProps({ 'data-shadowed-by': 'vital-test:Header' }),
     },
   },
 );
