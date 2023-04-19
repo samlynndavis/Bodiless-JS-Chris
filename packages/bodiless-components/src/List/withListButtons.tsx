@@ -60,7 +60,11 @@ const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: 
       icon: 'chevron_left',
       label: 'Move',
       isDisabled: !moveItem || !items.length || currentItem === items[0],
-      handler: () => (moveItem ? moveItem(-1) : undefined),
+      handler: () => {
+        if (moveItem) moveItem(-1);
+        context.refreshLocalContextMenu();
+        // PageEditContext.root.lastActivated = new Date();
+      },
       global,
       local,
       group,
@@ -90,7 +94,11 @@ const useMenuOptions = (useOverrides: UseListOverrides = () => ({})) => (props: 
       icon: 'chevron_right',
       label: 'Move',
       isDisabled: !moveItem || !items.length || currentItem === items[items.length - 1],
-      handler: () => (moveItem ? moveItem(1) : undefined),
+      handler: () => {
+        if (moveItem) moveItem(1);
+        context.refreshLocalContextMenu();
+        // PageEditContext.root.lastActivated = new Date();
+      },
       global,
       local,
       group,
