@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.36...v1.0.0-rc.37) (2023-04-18)
+
+
+### Bug Fixes
+
+* **gatsby-theme-bodiless, lerna:** patch Lerna canary version generation [canary] ([#2037](https://github.com/johnsonandjohnson/bodiless-js/issues/2037)) ([cf67a5d](https://github.com/johnsonandjohnson/bodiless-js/commit/cf67a5d2ae28f150313fb2ff87e3112de3992fa6))
+
+
+
+
+
 # [1.0.0-rc.36](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.35...v1.0.0-rc.36) (2023-04-18)
 
 **Note:** Version bump only for package @bodiless/gatsby-theme-bodiless
