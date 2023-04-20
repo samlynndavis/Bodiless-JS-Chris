@@ -29,6 +29,7 @@ import RemoteChanges from './RemoteChanges';
 import Reset from './Reset';
 import SaveChanges from './SaveChanges';
 import { GitClient } from './types';
+import PageEditContext from '../PageEditContext';
 
 /**
  * DefinePlugin env var.
@@ -73,7 +74,7 @@ const formGitCommit = (client: GitClient) => contextMenuForm({
   );
 });
 
-const formGitPull = (client: GitClient, notifyOfChanges: ChangeNotifier) => contextMenuForm({
+const formGitPull = (client: GitClient, notifyOfChanges?: ChangeNotifier) => contextMenuForm({
   submitValues: (values: any) => {
     const { keepOpen } = values;
     return keepOpen;
@@ -124,28 +125,37 @@ const formGitReset = (client: GitClient) => contextMenuForm({
 
 const defaultClient = new BodilessBackendClient();
 
+export enum GitButtons {
+  Push = 'saveChanges',
+  File = 'file',
+  Pull = 'pull',
+  Revert = 'resetChanges',
+  History = 'listCommits',
+}
+
 const getMenuOptions = (
   client: GitClient,
   context: any,
-  notifyOfChanges: ChangeNotifier,
+  notifyOfChanges?: ChangeNotifier,
+  filter?: GitButtons[],
 ): TMenuOption[] => {
   const saveChanges = canCommit ? formGitCommit(client) : undefined;
-  return [
+  const buttons: TMenuOption[] = [
     {
-      name: 'file',
+      name: GitButtons.File,
       label: 'File',
       icon: 'cloud',
       Component: ContextSubMenu,
     },
     {
-      name: 'Pull',
+      name: GitButtons.Pull,
       label: 'Pull',
       icon: 'cloud_download',
       handler: () => formGitPull(client, notifyOfChanges),
       group: 'file',
     },
     {
-      name: 'savechanges',
+      name: GitButtons.Push,
       icon: 'cloud_upload',
       label: 'Push',
       isDisabled: () => !canCommit,
@@ -153,14 +163,14 @@ const getMenuOptions = (
       group: 'file',
     },
     {
-      name: 'listCommits',
+      name: GitButtons.History,
       icon: 'book',
       label: 'History',
       handler: () => formGetCommitsList(client),
       group: 'file',
     },
     {
-      name: 'resetchanges',
+      name: GitButtons.Revert,
       label: 'Revert',
       icon: 'undo',
       isHidden: () => !context.isEdit,
@@ -168,13 +178,13 @@ const getMenuOptions = (
       group: 'file',
     },
   ];
+  return buttons.filter(b => !filter || !filter.includes(b.name as GitButtons));
 };
 
 export type ChangeNotifier = () => Promise<void>;
 
-const useGitButtons = ({ client = defaultClient } = {}) => {
+const useGitNotify = ({ client = defaultClient } = {}) => {
   const [notifications, setNotifications] = useState([] as any);
-  const context = useEditContext();
 
   useNotify(notifications);
 
@@ -215,16 +225,32 @@ const useGitButtons = ({ client = defaultClient } = {}) => {
     }
   }, []);
 
+  return notifyOfChanges;
+};
+
+type UseGitButtonOptions = {
+  client?: BodilessBackendClient,
+  excludeButtons?: GitButtons[],
+};
+
+type UseGitButtons = (options?: UseGitButtonOptions) => void;
+
+const useGitButtons: UseGitButtons = ({
+  client = defaultClient,
+  excludeButtons,
+} = {}) => {
+  const context = useEditContext();
+
+  const notifyOfChanges = useGitNotify({ client });
+
   const menuOptions = useMemo(
-    () => getMenuOptions(client, context, notifyOfChanges), [notifyOfChanges],
+    () => getMenuOptions(client, context, notifyOfChanges, excludeButtons), [notifyOfChanges],
   );
 
-  let rootContext = context;
-  while (rootContext.parent) rootContext = rootContext.parent;
   useRegisterMenuOptions({
     getMenuOptions: useGetter(menuOptions),
     name: 'Git',
-  }, rootContext);
+  }, PageEditContext.root);
 };
 
 export default useGitButtons;
