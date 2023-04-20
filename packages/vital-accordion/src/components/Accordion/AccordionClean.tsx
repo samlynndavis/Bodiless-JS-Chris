@@ -21,7 +21,7 @@ import { AccordionBodyClean } from '../AccordionBody';
 import { AccordionProvider } from './AccordionContext';
 import { AccordionComponents, AccordionBaseProps, AccordionProviderProps } from './types';
 
-const AccordionComponentsStart: AccordionComponents = {
+export const AccordionComponentsStart: AccordionComponents = {
   Wrapper: Div,
   TitleWrapper: Fragment,
   Title: AccordionTitleClean,

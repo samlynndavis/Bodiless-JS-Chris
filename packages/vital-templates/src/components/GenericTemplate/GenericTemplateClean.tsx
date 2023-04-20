@@ -24,7 +24,7 @@ import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
 import { BreadcrumbsClean } from '@bodiless/vital-navigation';
 import { GenericTemplateComponents, BaseGenericTemplateProps } from './types';
 
-const genericTemplateComponents: GenericTemplateComponents = {
+export const genericTemplateComponents: GenericTemplateComponents = {
   PageWrapper: LayoutClean,
   TemplateWrapper: Fragment,
   BreadcrumbWrapper: Div,

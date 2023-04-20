@@ -14,28 +14,28 @@
 import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
 
 import vitalCard from './tokens';
-import CardClean, { CardComponents } from './CardClean';
+import CardClean, { CardComponents, cardComponentStart } from './CardClean';
+
+// @TODO: Move to a shared Knapsack package where `KnapsackBodilessSpec` will be.
+// Currently `@bodiless/knapsack-renderer` can't be used since it's build target is CommonJs
+export const toKnapsackSlots = (obj: Record<string, any>, baseComponentName: string = '', allowedPatternIds: string[] = []) => Object.entries(obj).reduce(
+  (obj, [k]) => Object.assign(obj, {
+    [k]: {
+      title: `${baseComponentName}${k.replace(/([A-Z][a-z])/g, ' $1').replace(/(\d)/g, ' $1')}`,
+      description: `${baseComponentName}${k.replace(/([A-Z][a-z])/g, ' $1').replace(/(\d)/g, ' $1')} Component.`,
+      allowedPatternIds,
+    }
+  }), {}
+);
 
 export const knapsackCardSpec: KnapsackBodilessSpec<CardComponents> = {
   tokens: vitalCard,
   tokensExportName: 'vitalCard',
   component: CardClean,
   componentExportName: 'CardClean',
-  slots: {
-    Title: {
-      title: 'Title',
-      description: 'The title of the card',
-      allowedPatternIds: ['font-size', 'text-decoration', 'typography', 'color'],
-    },
-    Body: {
-      title: 'Body',
-      description: 'The body of the card',
-      allowedPatternIds: ['font-size', 'text-decoration', 'typography', 'color'],
-    },
-    ContentWrapper: {
-      title: 'Content Wrapper',
-      description: 'The wrapper for the card content',
-      allowedPatternIds: ['font-size', 'text-decoration', 'typography', 'color'],
-    }
-  },
+  slots: toKnapsackSlots(
+    cardComponentStart,
+    'Card',
+    ['font-size', 'text-decoration', 'typography', 'color', 'button']
+  ),
 };

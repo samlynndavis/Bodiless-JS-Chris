@@ -19,5 +19,5 @@ export { default as vitalLinkBase } from './tokens/vitalLink';
 export {
   useExternalLinkToggle, useIsDownloadLink, asEditableLink, anchorTo,
 } from './util';
-export { default as LinkClean, asLinkToken } from './LinkClean';
+export { default as LinkClean, asLinkToken, linkComponents } from './LinkClean';
 export type { LinkComponents, LinkBaseProps } from './types';

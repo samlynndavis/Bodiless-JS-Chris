@@ -13,25 +13,30 @@
  */
 import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
 
-import ButtonClean from './ButtonClean';
+import ButtonClean, { buttonComponentsStart } from './ButtonClean';
 import type { ButtonComponent } from './ButtonClean';
 import vitalButtons from './tokens';
+
+// @TODO: Move to a shared Knapsack package where `KnapsackBodilessSpec` will be.
+// Currently `@bodiless/knapsack-renderer` can't be used since it's build target is CommonJs
+export const toKnapsackSlots = (obj: Record<string, any>, baseComponentName: string = '', allowedPatternIds: string[] = []) => Object.entries(obj).reduce(
+  (obj, [k]) => Object.assign(obj, {
+    [k]: {
+      title: `${baseComponentName}${k.replace(/([A-Z][a-z])/g, ' $1').replace(/(\d)/g, ' $1')}`,
+      description: `${baseComponentName}${k.replace(/([A-Z][a-z])/g, ' $1').replace(/(\d)/g, ' $1')} Component.`,
+      allowedPatternIds,
+    }
+  }), {}
+);
 
 export const knapsackButtonSpec: KnapsackBodilessSpec<ButtonComponent> = {
   tokens: vitalButtons,
   tokensExportName: 'vitalButtons',
   component: ButtonClean,
   componentExportName: 'ButtonClean',
-  slots: {
-    Icon: {
-      title: 'Button Icon',
-      description: 'Icon to be use in Button Component',
-      allowedPatternIds: ['font-size'],
-    },
-    Body: {
-      title: 'Button Body',
-      description: 'The main content of a button',
-      allowedPatternIds: ['font-size', 'text-decoration', 'typography', 'color'],
-    },
-  },
+  slots: toKnapsackSlots(
+    buttonComponentsStart,
+    'Button',
+    ['font-size', 'text-decoration', 'typography', 'color']
+  ),
 };

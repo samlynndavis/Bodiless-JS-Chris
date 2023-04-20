@@ -14,30 +14,30 @@
 
 import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
 
-import GenericTemplateClean from './GenericTemplateClean';
+import GenericTemplateClean, { genericTemplateComponents} from './GenericTemplateClean';
 import vitalGenericTemplate from './tokens';
 import type { GenericTemplateComponents } from './types';
+
+// @TODO: Move to a shared Knapsack package where `KnapsackBodilessSpec` will be.
+// Currently `@bodiless/knapsack-renderer` can't be used since it's build target is CommonJs
+export const toKnapsackSlots = (obj: Record<string, any>, baseComponentName: string = '', allowedPatternIds: string[] = []) => Object.entries(obj).reduce(
+  (obj, [k]) => Object.assign(obj, {
+    [k]: {
+      title: `${baseComponentName}${k.replace(/([A-Z][a-z])/g, ' $1').replace(/(\d)/g, ' $1')}`,
+      description: `${baseComponentName}${k.replace(/([A-Z][a-z])/g, ' $1').replace(/(\d)/g, ' $1')} Component.`,
+      allowedPatternIds,
+    }
+  }), {}
+);
 
 export const knapsackGenericTemplateSpec: KnapsackBodilessSpec<GenericTemplateComponents> = {
   tokens: vitalGenericTemplate,
   tokensExportName: 'vitalGenericTemplate',
   component: GenericTemplateClean,
   componentExportName: 'GenericTemplateClean',
-  slots: {
-    TopContent: {
-      title: 'Top Content',
-      description: 'The Top Content section of the Generic Template',
-      allowedPatternIds: ['font-size', 'text-decoration', 'typography', 'color', 'card'],
-    },
-    Content: {
-      title: 'Content',
-      description: 'The Central Section of the Generic Template',
-      allowedPatternIds: ['font-size', 'text-decoration', 'typography', 'color', 'card'],
-    },
-    BottomContent: {
-      title: 'Bottom Content',
-      description: 'The Bottom Content of the Generic Template',
-      allowedPatternIds: ['font-size', 'text-decoration', 'typography', 'color', 'card'],
-    }
-  },
+  slots: toKnapsackSlots(
+    genericTemplateComponents,
+    'Generic Template',
+    ['font-size', 'text-decoration', 'typography', 'color', 'card', 'accordion']
+  ),
 };

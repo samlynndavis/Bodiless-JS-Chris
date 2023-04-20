@@ -13,25 +13,30 @@
  */
 import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
 
-import AccordionClean from './AccordionClean';
+import AccordionClean, { AccordionComponentsStart } from './AccordionClean';
 import vitalAccordion from './tokens';
 import { AccordionComponents } from './types';
+
+// @TODO: Move to a shared Knapsack package where `KnapsackBodilessSpec` will be.
+// Currently `@bodiless/knapsack-renderer` can't be used since it's build target is CommonJs
+export const toKnapsackSlots = (obj: Record<string, any>, baseComponentName: string = '', allowedPatternIds: string[] = []) => Object.entries(obj).reduce(
+  (obj, [k]) => Object.assign(obj, {
+    [k]: {
+      title: `${baseComponentName}${k.replace(/([A-Z][a-z])/g, ' $1').replace(/(\d)/g, ' $1')}`,
+      description: `${baseComponentName}${k.replace(/([A-Z][a-z])/g, ' $1').replace(/(\d)/g, ' $1')} Component.`,
+      allowedPatternIds,
+    }
+  }), {}
+);
 
 export const knapsackAccordionSpec: KnapsackBodilessSpec<AccordionComponents> = {
   tokens: vitalAccordion,
   tokensExportName: 'vitalAccordion',
   component: AccordionClean,
   componentExportName: 'AccordionClean',
-  slots: {
-    Title: {
-      title: 'Top Content',
-      description: 'The Top Content section of the Generic Template',
-      allowedPatternIds: ['font-size', 'text-decoration', 'typography', 'color'],
-    },
-    Body: {
-      title: 'Content',
-      description: 'The Central Section of the Generic Template',
-      allowedPatternIds: ['font-size', 'text-decoration', 'typography', 'color'],
-    },
-  },
+  slots: toKnapsackSlots(
+    AccordionComponentsStart,
+    'Accordion',
+    ['font-size', 'text-decoration', 'typography', 'color']
+  ),
 };
