@@ -50,15 +50,11 @@ export abstract class BodilessMobxStore<D> extends StaticBodilessMobxStore<D> {
     addPageLeaver(this.getPendingItems.bind(this));
   }
 
-  @action setItem = (key: string, item: StoreItem) => {
-    this.store.set(key, item);
-  };
+  @action setItem(key: string, item: StoreItem) {
+    super.setItem(key, item);
+  }
 
-  @action deleteItem = (key: string, soft = true) => {
-    if (soft) {
-      const item = this.store.get(key);
-      return item && item.delete();
-    }
-    return this.store.delete(key);
-  };
+  @action deleteItem(key: string, soft = true) {
+    return super.deleteItem(key, soft);
+  }
 }

@@ -120,17 +120,17 @@ export abstract class BodilessMobxStore<D> implements BodilessStore<D> {
     return storeValue || dataValue || {};
   };
 
-  setItem = (key: string, item: StoreItem) => {
+  setItem(key: string, item: StoreItem) {
     this.store.set(key, item);
-  };
+  }
 
-  deleteItem = (key: string, soft = true) => {
+  deleteItem(key: string, soft = true) {
     if (soft) {
       const item = this.store.get(key);
       return item && item.delete();
     }
     return this.store.delete(key);
-  };
+  }
 
   /**
      * Mobx action saves or updates items.
