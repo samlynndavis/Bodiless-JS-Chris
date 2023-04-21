@@ -21,10 +21,10 @@ import {
   useEditContext, useUUID, useContextActivator, useExtendHandler,
   useGetter, useLocalStorage, useClickOutside,
 } from './hooks';
-import withEditButton, { createMenuOptionGroup } from './withEditButton';
+import withEditButton, { createMenuOptionGroup } from './withEditButton.bl-edit';
 import useContextMenuForm, { contextMenuForm, ContextMenuForm } from './contextMenuForm.bl-edit';
 import type { FormBodyProps, FormBodyRenderer, ContextMenuPropsType } from './contextMenuForm.bl-edit';
-import withCompoundForm, { useRegisterSnippet } from './withCompoundForm';
+import withCompoundForm, { useRegisterSnippet } from './withCompoundForm.bl-edit';
 import withEditFormSnippet, { useEditFormProps } from './withEditFormSnippet';
 import type { Options as EditFormSnippetOptions } from './withEditFormSnippet';
 import {
@@ -46,7 +46,7 @@ import type {
 } from './Types/EditButtonTypes';
 import type { TMenuOptionGetter, MenuOptionsDefinition } from './Types/PageContextProviderTypes';
 import type { TOverlaySettings } from './Types/PageOverlayTypes';
-import type { Snippet as FormSnippet } from './withCompoundForm';
+import type { Snippet as FormSnippet } from './withCompoundForm.bl-edit';
 import {
   ActivateOnEffectProvider,
   withActivateOnEffect,
@@ -73,7 +73,7 @@ import {
   getFromSessionStorage,
   saveToSessionStorage,
 } from './SessionStorage';
-import withResetButton from './withResetButton';
+import withResetButton from './withResetButton.bl-edit';
 
 export * from './mobx.bl-edit';
 

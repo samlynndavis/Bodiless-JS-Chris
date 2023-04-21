@@ -24,7 +24,7 @@ import {
   withContextActivator, withLocalContextMenu,
 } from '../hoc.bl-edit';
 import { ifReadOnly, ifEditable } from '../withEditToggle.bl-edit';
-import withEditButton from '../withEditButton';
+import withEditButton from '../withEditButton.bl-edit';
 import type { EditButtonProps, UseBodilessOverrides } from '../Types/EditButtonTypes';
 import { useContextActivator } from '../hooks';
 import { ifToggledOn } from '../withFlowToggle';

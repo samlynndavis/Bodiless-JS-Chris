@@ -15,7 +15,7 @@
 import flowRight from 'lodash/flowRight';
 import omit from 'lodash/omit';
 import { withoutProps } from '@bodiless/fclasses';
-import withCompoundForm from './withCompoundForm';
+import withCompoundForm from './withCompoundForm.bl-edit';
 import type { EditButtonOptions, OptionGroupDefinition } from './Types/EditButtonTypes';
 import { TMenuOption } from './Types/ContextMenuTypes';
 import withEditFormSnippet from './withEditFormSnippet';

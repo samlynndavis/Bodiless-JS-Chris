@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { StoreItem } from './StoreItem';
+import { StoreItem } from './StoreItem.bl-edit';
 import type { BodilessStoreBackend, BodilessStoreConfig, BodilessStore } from './types';
 import { ItemStateEvent } from './types';
 

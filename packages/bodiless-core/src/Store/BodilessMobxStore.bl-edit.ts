@@ -15,7 +15,7 @@
 import {
   observable, action, makeObservable,
 } from 'mobx';
-import { StoreItem } from './StoreItem';
+import { StoreItem } from './StoreItem.bl-edit';
 import type { BodilessStoreConfig } from './types';
 import addPageLeaver from './addPageLeaver';
 import { BodilessMobxStore as StaticBodilessMobxStore } from './BodilessMobxStore.static';

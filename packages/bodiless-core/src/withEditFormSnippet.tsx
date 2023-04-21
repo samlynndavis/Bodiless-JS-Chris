@@ -21,8 +21,8 @@ import { Enhancer } from '@bodiless/fclasses';
 import { EditButtonProps, EditButtonOptions } from './Types/EditButtonTypes';
 import type { FormBodyRenderer as Renderer } from './Types/EditButtonTypes';
 import type { FormBodyProps as ContextMenuFormBodyProps } from './contextMenuForm.bl-edit';
-import { useRegisterSnippet } from './withCompoundForm';
-import type { Snippet } from './withCompoundForm';
+import { useRegisterSnippet } from './withCompoundForm.bl-edit';
+import type { Snippet } from './withCompoundForm.bl-edit';
 
 export type Options<P, D> = {
   renderForm: Renderer<P, D>,
