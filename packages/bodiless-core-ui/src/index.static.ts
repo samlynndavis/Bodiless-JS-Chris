@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,5 +12,6 @@
  * limitations under the License.
  */
 
-export * from './FileUpload.bl-edit';
-export * from './types';
+export {
+  ContextWrapper, PageEditor, PageOverlay, LocalContextMenu, ReactTagsField
+} from '@bodiless/core';

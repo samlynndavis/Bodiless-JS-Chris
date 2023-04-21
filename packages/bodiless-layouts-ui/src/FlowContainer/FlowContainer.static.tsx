@@ -1,5 +1,5 @@
 /**
- * Copyright © 2021 Johnson & Johnson
+ * Copyright © 2019 Johnson & Johnson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,5 +12,15 @@
  * limitations under the License.
  */
 
-export * from './FileUpload.bl-edit';
-export * from './types';
+import React, { FC } from 'react';
+import { FlowContainer as FlowContainerClean, FlowContainerProps } from '@bodiless/layouts';
+
+/**
+ * A FlowContainer is a component which allows a content editor to select and place
+ * components.
+ */
+const FlowContainer: FC<Omit<FlowContainerProps, 'ui'>> = props => (
+  <FlowContainerClean ui={{}} {...props} />
+);
+
+export default FlowContainer;

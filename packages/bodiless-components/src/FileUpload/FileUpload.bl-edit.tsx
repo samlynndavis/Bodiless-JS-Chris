@@ -16,55 +16,19 @@ import React, {
   useState,
   useEffect,
   useCallback,
-  HTMLProps,
   ComponentType as CT,
 } from 'react';
 import debug from 'debug';
-import type { FieldApi } from 'informed';
 import { useNode } from '@bodiless/core';
 import { useDropzone } from 'react-dropzone';
-import BackendSave from '../BackendSave';
+import BackendSave from './BackendSave';
 
-export enum FileUploadStatus {
-  Initial,
-  FileRejected,
-  FileAccepted,
-}
-
-export enum FileUploadStrings {
-  FileRejected = 'File type not accepted or too many, try again!',
-  DragOrClickToUpload = 'Drag a file or click here to upload.',
-  Uploading = 'Upload is in progress',
-  UploadTimeout = 'Upload failed, please try again.',
-  UploadFinished = 'Done!',
-  UploadDisabled = 'File upload is disabled in this environment',
-}
-
-export type UploadStatusProps = HTMLProps<HTMLElement> & {
-  status: FileUploadStatus;
-  selectedFile?: string;
-};
+import {
+  FileUploadStatus, FileUploadStrings, UploadStatusProps, FileUploadProps,
+} from './types';
 
 // Controls the time spent on file upload
 const MaxTimeout:number = 10000;
-
-export type FileUploadPickerUI = {
-  MasterWrapper: CT<HTMLProps<HTMLElement>>,
-  Wrapper: CT<HTMLProps<HTMLElement>>,
-  Input: CT<HTMLProps<HTMLInputElement>>,
-  UploadArea: CT<HTMLProps<HTMLElement>>,
-  Uploading: CT<HTMLProps<HTMLElement>>,
-  DragRejected: CT<HTMLProps<HTMLElement>>,
-  UploadTimeout: CT<HTMLProps<HTMLElement>>,
-  UploadFinished: CT<HTMLProps<HTMLElement>>,
-  UploadStatus: CT<UploadStatusProps>,
-};
-
-export type FileUploadProps = {
-  fieldApi: FieldApi;
-  ui?: Partial<FileUploadPickerUI>;
-  accept?: string | string[];
-};
 
 const errorLog = debug('fileUpload');
 

@@ -42,7 +42,6 @@
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.37",
     "@bodiless/schema-org": "^1.0.0-rc.37",
     "@bodiless/vital-card": "^1.0.0-rc.37",
-    "@bodiless/vital-content-listing": "^1.0.0-rc.37",
     "@bodiless/vital-editors": "^1.0.0-rc.37",
     "@bodiless/vital-elements": "^1.0.0-rc.37",
     "@bodiless/vital-flowcontainer": "^1.0.0-rc.37",

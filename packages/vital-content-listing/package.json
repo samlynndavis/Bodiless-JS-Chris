@@ -39,6 +39,7 @@
     "@bodiless/vital-card": "^1.0.0-rc.37",
     "@bodiless/vital-elements": "^1.0.0-rc.37",
     "@bodiless/vital-flowcontainer": "^1.0.0-rc.37",
+    "@bodiless/vital-templates": "^1.0.0-rc.37",
     "lodash": "^4.17.19"
   },
   "peerDependencies": {

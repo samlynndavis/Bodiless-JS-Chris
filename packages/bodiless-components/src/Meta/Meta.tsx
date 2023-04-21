@@ -22,7 +22,7 @@ import {
 } from '@bodiless/core';
 import type { WithNodeKeyProps } from '@bodiless/core';
 import flowRight from 'lodash/flowRight';
-import { withMetaSnippet } from './withMetaForm';
+import { withMetaSnippet } from './withMetaForm.bl-edit';
 
 type BaseProps = PropsWithChildren<HelmetProps>;
 type Data = {
