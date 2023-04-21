@@ -53,7 +53,7 @@ export class BreadcrumbStore extends BreadcrumbStoreStatic implements Breadcrumb
   }
 
   @computed
-  protected get breadcrumbTrail() {
+  get breadcrumbTrail() {
     return this.getBreadcrumbTrail();
   }
 }
