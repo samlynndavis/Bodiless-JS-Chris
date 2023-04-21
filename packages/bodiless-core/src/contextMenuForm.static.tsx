@@ -12,10 +12,10 @@
  * limitations under the License.
  */
 
-import React, { useCallback } from 'react';
+import React, { useCallback, Fragment } from 'react';
 import type { ContextMenuFormProps } from './Types/ContextMenuTypes';
 
-export const ContextMenuForm = () => <></>;
+export const ContextMenuForm = Fragment;
 
 export const contextMenuForm = () => () => (
   (props: Omit<ContextMenuFormProps, 'children'>) => (

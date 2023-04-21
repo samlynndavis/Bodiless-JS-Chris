@@ -12,12 +12,8 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType, ReactElement } from 'react';
+import { ComponentType, Fragment } from 'react';
 
-const LocalContextMenu: FC<{children: ReactElement}> = ({ children }) => (
-  <>
-    {children}
-  </>
-);
+const LocalContextMenu = Fragment;
 
 export default LocalContextMenu as ComponentType;

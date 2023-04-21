@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import { Fragment } from 'react';
 import type { ContextMenuUI } from '../Types/ContextMenuTypes';
 
 const getUI = (ui: ContextMenuUI = {}) => ({
@@ -21,11 +21,7 @@ const getUI = (ui: ContextMenuUI = {}) => ({
 const useContextMenuContext = () => ({});
 const useMenuOptionUI = () => getUI();
 
-const ContextMenuProvider: FC = ({ children }) => (
-  <>
-    { children }
-  </>
-);
+const ContextMenuProvider = Fragment;
 
 export default ContextMenuProvider;
 export {
