@@ -1,4 +1,4 @@
-# `@bodiless/git`
+# `@bodiless/data`
 
-Default Git Integration for bodiless.
+Data management for bodiless.
 
