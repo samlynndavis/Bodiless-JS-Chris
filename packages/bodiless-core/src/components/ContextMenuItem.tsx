@@ -51,10 +51,11 @@ const ContextMenuItem = observer((props: IProps) => {
   const isFirst = index === 0;
   const setRenderForm = useContextMenuContext().setRenderForm || setRenderForm$;
   const context = useEditContext();
+  const { context: optionContext } = option;
 
   const onToolbarButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     const menuForm = option.handler ? option.handler(event) : undefined;
-    if (activateContext) context.activate();
+    if (activateContext && optionContext) optionContext.activate();
     if (menuForm) {
       if (!option.local) context.toggleLocalTooltipsDisabled(!context.areLocalTooltipsDisabled);
       setIsToolTipShown(!isToolTipShown);

@@ -12,13 +12,8 @@
  * limitations under the License.
  */
 
-import React, { FC, ComponentType, ReactElement } from 'react';
-import Tooltip from 'rc-tooltip';
-
 import flow from 'lodash/flow';
-import { observer } from '../mobx.bl-edit';
 import { useEditContext } from '../hooks';
-import { useUI } from './PageEditor';
 import { TMenuOption } from '../Types/ContextMenuTypes';
 import { PageEditContextInterface } from '../PageEditContext/types';
 
@@ -31,14 +26,14 @@ import { PageEditContextInterface } from '../PageEditContext/types';
  *
  * @param domNode The element to which the popup is attached.
  */
-const onPopupAlign = (domNode: Element) => {
-  const element = domNode as HTMLElement;
-  if (element.getBoundingClientRect().left < 0) {
-    element.style.visibility = 'hidden';
-  } else {
-    element.style.visibility = 'visible';
-  }
-};
+// const onPopupAlign = (domNode: Element) => {
+//   const element = domNode as HTMLElement;
+//   if (element.getBoundingClientRect().left < 0) {
+//     element.style.visibility = 'hidden';
+//   } else {
+//     element.style.visibility = 'visible';
+//   }
+// };
 
 type LocalOptionsMap = {
   options: Map<string, TMenuOption>,
@@ -205,45 +200,4 @@ const useLocalOptions = () => {
   return Array.from(options.values());
 };
 
-/**
- * @private
- *
- * Renders children inside an rc-tooltip whose overlay contents contain all local menu option icons.
- */
-const ContextMenuOverlay = observer(() => {
-  const { LocalContextMenu: Menu } = useUI();
-  const options = useLocalOptions();
-  return <Menu options={options} />;
-});
-
-/*
- * Wraps its children in a tooltip displaying local context menu options, but only if the
- * current context is the innermost context to which a local context menu has been assigned.
- */
-const LocalContextMenu: FC<{children: ReactElement}> = ({ children }) => {
-  const context = useEditContext();
-
-  // let the context know it has a localMenu
-  context.hasLocalMenu = true;
-  const { isInnermostLocalMenu, areLocalTooltipsDisabled } = context;
-  const visible = isInnermostLocalMenu && !areLocalTooltipsDisabled;
-  if (!visible) {
-    return <>{children}</>;
-  }
-  const key = context.localContextMenuKey.getTime();
-  return (
-    <Tooltip
-      key={key}
-      visible={visible}
-      overlay={<ContextMenuOverlay />}
-      trigger={[]}
-      destroyTooltipOnHide
-      placement="bottomLeft"
-      onPopupAlign={onPopupAlign}
-    >
-      {children}
-    </Tooltip>
-  );
-};
-
-export default observer(LocalContextMenu) as ComponentType;
+export default useLocalOptions;
