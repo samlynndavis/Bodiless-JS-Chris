@@ -25,7 +25,6 @@ import {
   contextMenuForm,
   useNotify,
   BodilessBackendClient,
-  PageEditContext,
 } from '@bodiless/core';
 import type { TMenuOption } from '@bodiless/core';
 import CommitsList from './CommitsList';
