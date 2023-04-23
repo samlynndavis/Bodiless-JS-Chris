@@ -13,7 +13,7 @@
  */
 
 import { BodilessMobxStore } from '../src/Store/BodilessMobxStore.bl-edit';
-import { StoreItem } from '../src/Store/StoreItem';
+import { StoreItem } from '../src/Store/StoreItem.bl-edit';
 
 const deleteItemMock = jest.fn();
 

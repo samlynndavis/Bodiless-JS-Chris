@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import { StoreItem, DEFAULT_REQUEST_DELAY } from '../src/Store/StoreItem';
+import { StoreItem, DEFAULT_REQUEST_DELAY } from '../src/Store/StoreItem.bl-edit';
 import { BodilessMobxStore } from '../src/Store/BodilessMobxStore.bl-edit';
 import { BodilessBackendClient } from '../src/BackendClient/BodilessBackendClient';
 import { ItemStateEvent } from '../src/Store/types';
