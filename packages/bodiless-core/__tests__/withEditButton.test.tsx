@@ -19,7 +19,7 @@ import { shallow, mount } from 'enzyme';
 import { Text } from 'informed';
 import omit from 'lodash/omit';
 import { observer } from '../src/mobx.bl-edit';
-import withEditButton from '../src/withEditButton';
+import withEditButton from '../src/withEditButton.bl-edit';
 import { useEditContext } from '../src/hooks';
 import ContextMenuItem from '../src/components/ContextMenuItem';
 import {
