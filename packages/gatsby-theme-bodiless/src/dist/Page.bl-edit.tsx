@@ -18,15 +18,17 @@ import {
   withNotificationButton,
   withSwitcherButton,
   OnNodeErrorNotification,
-  useGitButtons,
-  GitContextProvider,
+  observer,
   useDocsButton,
   useEditButton,
 } from '@bodiless/core';
 import {
+  useGitButtons,
+  GitContextProvider,
+} from '@bodiless/git';
+import {
   Fragment,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import { withPageDisableButton } from '@bodiless/components';
 import {
