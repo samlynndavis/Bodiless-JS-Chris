@@ -54,8 +54,8 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
   if (stage === 'build-javascript') {
     const options = {
       enabled: process.env.BODILESS_BUILD_STATS === '1',
-      sitePath: path.resolve('./'),
-      name: '__vital__',
+      sitePath: process.env.BODILESS_STATS_PATH || path.resolve('./'),
+      name: 'vital-demo',
       open: process.env.BODILESS_OPEN_STATS === '1' ? 'file' : false,
     };
 
