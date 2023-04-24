@@ -52,4 +52,4 @@ WithImageVariations,
 
 #### Defined in
 
-[vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts:81](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts#L81)
+[vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts:81](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/FlowContainer/tokens/vitalImageFlowContainer.ts#L81)

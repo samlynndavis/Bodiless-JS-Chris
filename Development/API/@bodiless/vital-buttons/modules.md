@@ -89,7 +89,7 @@ ___
 
 #### Defined in
 
-[vital-buttons/src/components/FlowContainer/index.ts:50](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-buttons/src/components/FlowContainer/index.ts#L50)
+[vital-buttons/src/components/FlowContainer/index.ts:50](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-buttons/src/components/FlowContainer/index.ts#L50)
 
 ___
 
@@ -125,7 +125,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-buttons/src/components/Buttons/tokens/vitalButtons.ts:145](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-buttons/src/components/Buttons/tokens/vitalButtons.ts#L145)
+[vital-buttons/src/components/Buttons/tokens/vitalButtons.ts:145](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-buttons/src/components/Buttons/tokens/vitalButtons.ts#L145)
 
 ## Functions
 
@@ -145,4 +145,4 @@ limitations under the License.
 
 #### Defined in
 
-[vital-buttons/src/components/Buttons/ButtonClean.tsx:19](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-buttons/src/components/Buttons/ButtonClean.tsx#L19)
+[vital-buttons/src/components/Buttons/ButtonClean.tsx:19](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-buttons/src/components/Buttons/ButtonClean.tsx#L19)

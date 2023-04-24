@@ -62,7 +62,7 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:123](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L123)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:125](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L125)
 
 ___
 
@@ -74,4 +74,4 @@ Special layout to demonstrate components.  Only used for testing purposing.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:127](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L127)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:129](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L129)
