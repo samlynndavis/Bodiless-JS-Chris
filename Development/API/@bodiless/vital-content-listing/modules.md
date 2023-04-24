@@ -8,6 +8,7 @@
 
 - [vitalContentListingBase](modules.md#vitalcontentlistingbase)
 - [vitalContentListingFlowContainerBase](modules.md#vitalcontentlistingflowcontainerbase)
+- [vitalContentListingTemplateBase](modules.md#vitalcontentlistingtemplatebase)
 - [vitalFilterBase](modules.md#vitalfilterbase)
 - [vitalFilterByGroupBase](modules.md#vitalfilterbygroupbase)
 
@@ -23,6 +24,7 @@
 - [FilterClean](modules.md#filterclean)
 - [vitalContentListing](modules.md#vitalcontentlisting)
 - [vitalContentListingFlowContainer](modules.md#vitalcontentlistingflowcontainer)
+- [vitalContentListingTemplate](modules.md#vitalcontentlistingtemplate)
 - [vitalFilter](modules.md#vitalfilter)
 - [vitalFilterByGroup](modules.md#vitalfilterbygroup)
 
@@ -45,6 +47,12 @@ ___
 ### vitalContentListingFlowContainerBase
 
 Renames and re-exports [vitalContentListingFlowContainer](modules.md#vitalcontentlistingflowcontainer)
+
+___
+
+### vitalContentListingTemplateBase
+
+Renames and re-exports [vitalContentListingTemplate](modules.md#vitalcontentlistingtemplate)
 
 ___
 
@@ -73,7 +81,7 @@ Renames and re-exports [vitalFilterByGroup](modules.md#vitalfilterbygroup)
 
 #### Defined in
 
-[vital-content-listing/src/components/ContentListing/types.ts:18](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/ContentListing/types.ts#L18)
+[vital-content-listing/src/components/ContentListing/types.ts:18](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/ContentListing/types.ts#L18)
 
 ___
 
@@ -83,7 +91,7 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/ContentListing/types.ts:23](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/ContentListing/types.ts#L23)
+[vital-content-listing/src/components/ContentListing/types.ts:23](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/ContentListing/types.ts#L23)
 
 ## Variables
 
@@ -93,7 +101,7 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/ContentListing/ContentListingClean.tsx:33](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/ContentListing/ContentListingClean.tsx#L33)
+[vital-content-listing/src/components/ContentListing/ContentListingClean.tsx:33](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/ContentListing/ContentListingClean.tsx#L33)
 
 ___
 
@@ -132,7 +140,7 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/ContentListing/tokens/vitalContentListing.ts:57](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/ContentListing/tokens/vitalContentListing.ts#L57)
+[vital-content-listing/src/components/ContentListing/tokens/vitalContentListing.ts:57](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/ContentListing/tokens/vitalContentListing.ts#L57)
 
 ___
 
@@ -148,7 +156,23 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/ContentListingFlowContainer/tokens/vitalContentListingFlowContainer.ts:48](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/ContentListingFlowContainer/tokens/vitalContentListingFlowContainer.ts#L48)
+[vital-content-listing/src/components/ContentListingFlowContainer/tokens/vitalContentListingFlowContainer.ts:48](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/ContentListingFlowContainer/tokens/vitalContentListingFlowContainer.ts#L48)
+
+___
+
+### vitalContentListingTemplate
+
+• **vitalContentListingTemplate**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `Default` | `TokenSpec`<`GenericTemplateComponents`, { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\> |
+
+#### Defined in
+
+[vital-content-listing/src/components/ContentListingTemplate/tokens/vitalContentListingTemplate.ts:38](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/ContentListingTemplate/tokens/vitalContentListingTemplate.ts#L38)
 
 ___
 
@@ -164,7 +188,7 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/Filter/tokens/vitalFilter.ts:70](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/Filter/tokens/vitalFilter.ts#L70)
+[vital-content-listing/src/components/Filter/tokens/vitalFilter.ts:70](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/Filter/tokens/vitalFilter.ts#L70)
 
 ___
 
@@ -183,7 +207,7 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/FilterByGroup/tokens/vitalFilterByGroup.ts:92](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/FilterByGroup/tokens/vitalFilterByGroup.ts#L92)
+[vital-content-listing/src/components/FilterByGroup/tokens/vitalFilterByGroup.ts:93](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/FilterByGroup/tokens/vitalFilterByGroup.ts#L93)
 
 ## Functions
 
@@ -203,7 +227,7 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/ContentListing/ContentListingClean.tsx:35](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/ContentListing/ContentListingClean.tsx#L35)
+[vital-content-listing/src/components/ContentListing/ContentListingClean.tsx:35](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/ContentListing/ContentListingClean.tsx#L35)
 
 ___
 
@@ -223,7 +247,7 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/FilterByGroup/FilterByGroupClean.tsx:18](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/FilterByGroup/FilterByGroupClean.tsx#L18)
+[vital-content-listing/src/components/FilterByGroup/FilterByGroupClean.tsx:18](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/FilterByGroup/FilterByGroupClean.tsx#L18)
 
 ___
 
@@ -243,7 +267,7 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/Filter/FilterClean.tsx:19](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/Filter/FilterClean.tsx#L19)
+[vital-content-listing/src/components/Filter/FilterClean.tsx:19](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/Filter/FilterClean.tsx#L19)
 
 ___
 
@@ -263,7 +287,7 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/Filter/FilterClean.tsx:20](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/Filter/FilterClean.tsx#L20)
+[vital-content-listing/src/components/Filter/FilterClean.tsx:20](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/Filter/FilterClean.tsx#L20)
 
 ___
 
@@ -283,4 +307,4 @@ ___
 
 #### Defined in
 
-[vital-content-listing/src/components/Filter/FilterClean.tsx:21](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-content-listing/src/components/Filter/FilterClean.tsx#L21)
+[vital-content-listing/src/components/Filter/FilterClean.tsx:21](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/vital-content-listing/src/components/Filter/FilterClean.tsx#L21)

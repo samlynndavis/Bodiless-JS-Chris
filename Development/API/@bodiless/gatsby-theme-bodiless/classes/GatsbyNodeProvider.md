@@ -65,7 +65,7 @@ BodilessStoreProvider.constructor
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessStoreProvider.d.ts:27
+packages/bodiless-core/lib/Store/BodilessStoreProvider.static.d.ts:27
 
 ## Properties
 
@@ -142,7 +142,7 @@ BodilessStoreProvider.state
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessStoreProvider.d.ts:28
+packages/bodiless-core/lib/Store/BodilessStoreProvider.static.d.ts:28
 
 ___
 
@@ -193,7 +193,7 @@ BodilessStoreProvider.slug
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessStoreProvider.d.ts:31
+packages/bodiless-core/lib/Store/BodilessStoreProvider.static.d.ts:31
 
 ## Methods
 
@@ -534,7 +534,7 @@ BodilessStoreProvider.createStore
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyNodeProvider.bl-edit.tsx:19](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/gatsby-theme-bodiless/src/dist/GatsbyNodeProvider.bl-edit.tsx#L19)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyNodeProvider.bl-edit.tsx:19](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/gatsby-theme-bodiless/src/dist/GatsbyNodeProvider.bl-edit.tsx#L19)
 
 ___
 
@@ -582,7 +582,7 @@ BodilessStoreProvider.getRootNode
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessStoreProvider.d.ts:32
+packages/bodiless-core/lib/Store/BodilessStoreProvider.static.d.ts:32
 
 ___
 
@@ -632,7 +632,7 @@ BodilessStoreProvider.render
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessStoreProvider.d.ts:39
+packages/bodiless-core/lib/Store/BodilessStoreProvider.static.d.ts:39
 
 ___
 
@@ -681,7 +681,7 @@ BodilessStoreProvider.shouldComponentUpdate
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessStoreProvider.d.ts:30
+packages/bodiless-core/lib/Store/BodilessStoreProvider.static.d.ts:30
 
 ___
 
@@ -706,4 +706,4 @@ BodilessStoreProvider.getDerivedStateFromProps
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessStoreProvider.d.ts:29
+packages/bodiless-core/lib/Store/BodilessStoreProvider.static.d.ts:29

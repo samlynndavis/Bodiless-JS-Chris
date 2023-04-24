@@ -28,7 +28,7 @@ Width classes are applied to this wrapper dynamically to control layout.
 
 #### Defined in
 
-bodiless-layouts/lib/FlowContainer/types.d.ts:93
+bodiless-layouts/lib/FlowContainer/types.d.ts:94
 
 ___
 
@@ -42,4 +42,4 @@ the layout of its children.
 
 #### Defined in
 
-bodiless-layouts/lib/FlowContainer/types.d.ts:88
+bodiless-layouts/lib/FlowContainer/types.d.ts:89

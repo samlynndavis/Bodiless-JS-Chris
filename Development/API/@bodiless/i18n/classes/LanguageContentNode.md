@@ -68,7 +68,7 @@ LanguageContentNode class allows to handle content nodes for current language.
 | :------ | :------ |
 | `actions` | `Actions` |
 | `getters` | `Getters` |
-| `path` | `Path` |
+| `path` | `ContentNodePath` |
 
 #### Inherited from
 
@@ -76,7 +76,7 @@ DefaultContentNode<D\>.constructor
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:48
+bodiless-data/lib/ContentNode.d.ts:48
 
 ## Properties
 
@@ -90,7 +90,7 @@ DefaultContentNode.actions
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:45
+bodiless-data/lib/ContentNode.d.ts:45
 
 ___
 
@@ -104,7 +104,7 @@ DefaultContentNode.getters
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:46
+bodiless-data/lib/ContentNode.d.ts:46
 
 ___
 
@@ -114,7 +114,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:10](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L10)
+[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:10](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L10)
 
 ___
 
@@ -128,7 +128,7 @@ DefaultContentNode.path
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:47
+bodiless-data/lib/ContentNode.d.ts:47
 
 ## Accessors
 
@@ -146,7 +146,7 @@ DefaultContentNode.baseResourcePath
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:53
+bodiless-data/lib/ContentNode.d.ts:53
 
 ___
 
@@ -164,7 +164,7 @@ DefaultContentNode.data
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:51
+bodiless-data/lib/ContentNode.d.ts:51
 
 ___
 
@@ -188,7 +188,7 @@ DefaultContentNode.hasError
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:57
+bodiless-data/lib/ContentNode.d.ts:57
 
 ___
 
@@ -206,7 +206,7 @@ DefaultContentNode.keys
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:56
+bodiless-data/lib/ContentNode.d.ts:56
 
 ___
 
@@ -224,7 +224,7 @@ DefaultContentNode.pagePath
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:52
+bodiless-data/lib/ContentNode.d.ts:52
 
 ## Methods
 
@@ -242,7 +242,7 @@ bodiless-core/lib/ContentNode.d.ts:52
 
 | Name | Type |
 | :------ | :------ |
-| `path` | `Path` |
+| `path` | `ContentNodePath` |
 
 #### Returns
 
@@ -254,7 +254,7 @@ DefaultContentNode.child
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:50
+bodiless-data/lib/ContentNode.d.ts:50
 
 ___
 
@@ -266,7 +266,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `path?` | `Path` |
+| `path?` | `ContentNodePath` |
 
 #### Returns
 
@@ -278,7 +278,7 @@ DefaultContentNode.delete
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:55
+bodiless-data/lib/ContentNode.d.ts:55
 
 ___
 
@@ -296,7 +296,7 @@ DefaultContentNode.getActions
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:60
+bodiless-data/lib/ContentNode.d.ts:60
 
 ___
 
@@ -314,7 +314,7 @@ DefaultContentNode.getGetters
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:59
+bodiless-data/lib/ContentNode.d.ts:59
 
 ___
 
@@ -332,7 +332,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `path` | `Path` |
+| `path` | `ContentNodePath` |
 
 #### Returns
 
@@ -344,7 +344,7 @@ DefaultContentNode.peer
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:49
+bodiless-data/lib/ContentNode.d.ts:49
 
 ___
 
@@ -368,7 +368,7 @@ DefaultContentNode.proxy
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:58
+bodiless-data/lib/ContentNode.d.ts:58
 
 ___
 
@@ -392,7 +392,7 @@ DefaultContentNode.setData
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:54
+bodiless-data/lib/ContentNode.d.ts:54
 
 ___
 
@@ -412,7 +412,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:27](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L27)
+[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:27](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L27)
 
 ___
 
@@ -433,7 +433,7 @@ ___
 
 #### Defined in
 
-[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:12](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L12)
+[bodiless-i18n/src/LanguageNode/LanguageContentNode.ts:12](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/bodiless-i18n/src/LanguageNode/LanguageContentNode.ts#L12)
 
 ___
 
@@ -458,4 +458,4 @@ DefaultContentNode.dummy
 
 #### Defined in
 
-bodiless-core/lib/ContentNode.d.ts:61
+bodiless-data/lib/ContentNode.d.ts:61

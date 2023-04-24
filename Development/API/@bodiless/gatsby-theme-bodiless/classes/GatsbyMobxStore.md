@@ -18,13 +18,11 @@
 
 - [client](GatsbyMobxStore.md#client)
 - [data](GatsbyMobxStore.md#data)
-- [deleteItem](GatsbyMobxStore.md#deleteitem)
 - [deleteNode](GatsbyMobxStore.md#deletenode)
 - [getChildrenNodes](GatsbyMobxStore.md#getchildrennodes)
 - [getKeys](GatsbyMobxStore.md#getkeys)
 - [getNode](GatsbyMobxStore.md#getnode)
 - [hasError](GatsbyMobxStore.md#haserror)
-- [setItem](GatsbyMobxStore.md#setitem)
 - [setNode](GatsbyMobxStore.md#setnode)
 - [slug](GatsbyMobxStore.md#slug)
 - [store](GatsbyMobxStore.md#store)
@@ -32,8 +30,10 @@
 
 ### Methods
 
+- [deleteItem](GatsbyMobxStore.md#deleteitem)
 - [getPendingItems](GatsbyMobxStore.md#getpendingitems)
 - [parseData](GatsbyMobxStore.md#parsedata)
+- [setItem](GatsbyMobxStore.md#setitem)
 - [updateData](GatsbyMobxStore.md#updatedata)
 
 ## Constructors
@@ -54,7 +54,7 @@ BodilessMobxStore<GatsbyData\>.constructor
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:37
+packages/bodiless-core/lib/Store/BodilessMobxStore.bl-edit.d.ts:34
 
 ## Properties
 
@@ -68,7 +68,7 @@ BodilessMobxStore.client
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:34
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:34
 
 ___
 
@@ -82,36 +82,7 @@ BodilessMobxStore.data
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:36
-
-___
-
-### deleteItem
-
-• **deleteItem**: (`key`: `string`, `soft?`: `boolean`) => `boolean` \| `void`
-
-#### Type declaration
-
-▸ (`key`, `soft?`): `boolean` \| `void`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `key` | `string` |
-| `soft?` | `boolean` |
-
-##### Returns
-
-`boolean` \| `void`
-
-#### Inherited from
-
-BodilessMobxStore.deleteItem
-
-#### Defined in
-
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:65
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:36
 
 ___
 
@@ -139,7 +110,7 @@ BodilessMobxStore.deleteNode
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:71
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:71
 
 ___
 
@@ -167,7 +138,7 @@ BodilessMobxStore.getChildrenNodes
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:70
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:70
 
 ___
 
@@ -189,7 +160,7 @@ BodilessMobxStore.getKeys
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:62
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:62
 
 ___
 
@@ -217,7 +188,7 @@ BodilessMobxStore.getNode
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:63
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:63
 
 ___
 
@@ -239,36 +210,7 @@ BodilessMobxStore.hasError
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:72
-
-___
-
-### setItem
-
-• **setItem**: (`key`: `string`, `item`: `StoreItem`) => `void`
-
-#### Type declaration
-
-▸ (`key`, `item`): `void`
-
-##### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `key` | `string` |
-| `item` | `StoreItem` |
-
-##### Returns
-
-`void`
-
-#### Inherited from
-
-BodilessMobxStore.setItem
-
-#### Defined in
-
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:64
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:72
 
 ___
 
@@ -300,7 +242,7 @@ BodilessMobxStore.setNode
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:69
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:69
 
 ___
 
@@ -314,7 +256,7 @@ BodilessMobxStore.slug
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:35
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:35
 
 ___
 
@@ -328,7 +270,7 @@ BodilessMobxStore.store
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:33
+packages/bodiless-core/lib/Store/BodilessMobxStore.bl-edit.d.ts:33
 
 ___
 
@@ -342,9 +284,34 @@ BodilessMobxStore.nodeChildDelimiter
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:32
+packages/bodiless-core/lib/Store/BodilessMobxStore.bl-edit.d.ts:32
 
 ## Methods
+
+### deleteItem
+
+▸ **deleteItem**(`key`, `soft?`): `boolean` \| `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `key` | `string` |
+| `soft?` | `boolean` |
+
+#### Returns
+
+`boolean` \| `void`
+
+#### Inherited from
+
+BodilessMobxStore.deleteItem
+
+#### Defined in
+
+packages/bodiless-core/lib/Store/BodilessMobxStore.bl-edit.d.ts:36
+
+___
 
 ### getPendingItems
 
@@ -362,7 +329,7 @@ BodilessMobxStore.getPendingItems
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:51
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:51
 
 ___
 
@@ -386,7 +353,32 @@ BodilessMobxStore.parseData
 
 #### Defined in
 
-[packages/gatsby-theme-bodiless/src/dist/GatsbyMobxStore.ts:32](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/gatsby-theme-bodiless/src/dist/GatsbyMobxStore.ts#L32)
+[packages/gatsby-theme-bodiless/src/dist/GatsbyMobxStore.ts:32](https://github.com/wodenx/Bodiless-JS/blob/cfb0cb51a/packages/gatsby-theme-bodiless/src/dist/GatsbyMobxStore.ts#L32)
+
+___
+
+### setItem
+
+▸ **setItem**(`key`, `item`): `void`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `key` | `string` |
+| `item` | `StoreItem` |
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+BodilessMobxStore.setItem
+
+#### Defined in
+
+packages/bodiless-core/lib/Store/BodilessMobxStore.bl-edit.d.ts:35
 
 ___
 
@@ -414,4 +406,4 @@ BodilessMobxStore.updateData
 
 #### Defined in
 
-packages/bodiless-core/lib/Store/BodilessMobxStore.d.ts:61
+packages/bodiless-core/lib/Store/BodilessMobxStore.static.d.ts:61
