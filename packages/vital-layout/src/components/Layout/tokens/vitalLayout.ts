@@ -13,6 +13,7 @@
  */
 
 import { withNodeKey } from '@bodiless/data';
+import { withoutHydration } from '@bodiless/hydration';
 import { useIsBurgerMenuHidden, withBurgerMenuProvider, withBreadcrumbStore } from '@bodiless/vital-navigation';
 import {
   addProps,
@@ -31,7 +32,8 @@ import { StyleGuide } from './StyleGuide';
 
 const Default = asLayoutToken({
   Core: {
-    _: as(withBurgerMenuProvider, withBreadcrumbStore),
+    _: as(withBurgerMenuProvider, withBreadcrumbStore, withoutHydration()),
+    OuterContainer: withoutHydration(),
   },
   Components: {
     Helmet: vitalHelmet.Default,
