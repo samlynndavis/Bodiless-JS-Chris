@@ -10,23 +10,10 @@ Tokens for the vital layout
 
 ### Properties
 
-- [Base](VitalLayout.md#base)
 - [Default](VitalLayout.md#default)
 - [StyleGuide](VitalLayout.md#styleguide)
 
 ## Properties
-
-### Base
-
-• **Base**: `TokenSpec`<[`LayoutComponents`](LayoutComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
-
-Base that defines the default layout.
-
-#### Defined in
-
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:87](https://github.com/wodenx/Bodiless-JS/blob/83edb8f12/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L87)
-
-___
 
 ### Default
 
@@ -39,7 +26,7 @@ Inherits from Base & assigns the components vitalHeader.Default & vitalFooter.Fo
 import { asLayoutToken, vitalHeader, vitalLayoutBase } from '@bodiless/vital-layout';
 import asMyFooter from '../../../components/Footer';
 
-const Default = asLayoutToken(vitalLayoutBase.Base, {
+const Default = asLayoutToken(vitalLayoutBase.Default, {
   Components: {
     Header: vitalHeader.Default,
     Footer: asMyFooter,
@@ -75,7 +62,7 @@ export default {
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:131](https://github.com/wodenx/Bodiless-JS/blob/83edb8f12/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L131)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:123](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L123)
 
 ___
 
@@ -87,4 +74,4 @@ Special layout to demonstrate components.  Only used for testing purposing.
 
 #### Defined in
 
-[vital-layout/src/components/Layout/tokens/vitalLayout.ts:135](https://github.com/wodenx/Bodiless-JS/blob/83edb8f12/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L135)
+[vital-layout/src/components/Layout/tokens/vitalLayout.ts:127](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Layout/tokens/vitalLayout.ts#L127)

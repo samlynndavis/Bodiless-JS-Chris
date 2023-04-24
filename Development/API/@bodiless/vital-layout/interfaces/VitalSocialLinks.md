@@ -10,29 +10,16 @@ Tokens for the vital Social Links
 
 ### Properties
 
-- [Base](VitalSocialLinks.md#base)
 - [Default](VitalSocialLinks.md#default)
 
 ## Properties
-
-### Base
-
-• **Base**: `TokenSpec`<[`SocialLinksComponents`](SocialLinksComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
-
-Base applies styling to have social links in a row at specific size
-
-#### Defined in
-
-[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:47](https://github.com/wodenx/Bodiless-JS/blob/83edb8f12/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L47)
-
-___
 
 ### Default
 
 • **Default**: `TokenSpec`<[`SocialLinksComponents`](SocialLinksComponents.md), { `A11y`: {} ; `A11yContent`: {} ; `Analytics`: {} ; `Behavior`: {} ; `Components`: {} ; `Content`: {} ; `Core`: {} ; `Editors`: {} ; `Layout`: {} ; `SEO`: {} ; `Schema`: {} ; `Spacing`: {} ; `Theme`: {}  }\>
 
-Inherits Base
+Setups social links with some styling.
 
 #### Defined in
 
-[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:51](https://github.com/wodenx/Bodiless-JS/blob/83edb8f12/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L51)
+[vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts:43](https://github.com/wodenx/Bodiless-JS/blob/908947acb/packages/vital-layout/src/components/Footer/SocialLinks/tokens/vitalSocialLinks.ts#L43)

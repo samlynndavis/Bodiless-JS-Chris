@@ -13,5 +13,5 @@
 * [@bodiless/vital-list](/Development/API/@bodiless/vital-list/README)
 * [@bodiless/vital-meta](/Development/API/@bodiless/vital-meta/README)
 * [@bodiless/vital-table](/Development/API/@bodiless/vital-table/README)
+* [@bodiless/vital-templates](/Development/API/@bodiless/vital-templates/README)
 * [@bodiless/vital-youtube](/Development/API/@bodiless/vital-youtube/README)
-* [@bodiless/vital-search](/Development/API/@bodiless/vital-search/README)
