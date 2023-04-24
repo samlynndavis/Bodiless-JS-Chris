@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.38](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.24...v1.0.0-rc.38) (2023-04-24)
+
+
+### Bug Fixes
+
+* **@bodiless/search, gatsby-theme-bodiless:** Fix/transpile to esm search and gatsby theme bodiless ([#2023](https://github.com/johnsonandjohnson/bodiless-js/issues/2023)) ([ad864af](https://github.com/johnsonandjohnson/bodiless-js/commit/ad864af6f0ef30b8df91528d7e9d4adc6615fbf9))
+
+
+### Features
+
+* **chore:** Address PR Feedback, remove Header Links from Typography ([62eaf2a](https://github.com/johnsonandjohnson/bodiless-js/commit/62eaf2a54ca00cd9dda6036f9a52618e3ad61f8a))
+
+
+
+
+
 # [1.0.0-rc.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.36...v1.0.0-rc.37) (2023-04-18)
 
 **Note:** Version bump only for package @bodiless/vital-search

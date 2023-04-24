@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.38](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.24...v1.0.0-rc.38) (2023-04-24)
+
+
+### Bug Fixes
+
+* **@bodiless/search, gatsby-theme-bodiless:** Fix/transpile to esm search and gatsby theme bodiless ([#2023](https://github.com/johnsonandjohnson/bodiless-js/issues/2023)) ([ad864af](https://github.com/johnsonandjohnson/bodiless-js/commit/ad864af6f0ef30b8df91528d7e9d4adc6615fbf9))
+* **vital-buttons, vital-elements:** Fix WTB button font-size on desktop. ([7ba10ab](https://github.com/johnsonandjohnson/bodiless-js/commit/7ba10abfc8c57fb883763502ab9cf2512434f160))
+* **vital-buttons, vital-elements:** Fix WTB button font-size on desktop. ([dc5aab8](https://github.com/johnsonandjohnson/bodiless-js/commit/dc5aab8e04c389ecaaff67afc74f73acbb8db29d))
+
+
+### Features
+
+* **chore:** Cleanup Vital Component tokens ([723c773](https://github.com/johnsonandjohnson/bodiless-js/commit/723c7736311c5b6f3d79bdddec76bdcb1e75551a))
+* **chore:** Small code cleanup ([9277807](https://github.com/johnsonandjohnson/bodiless-js/commit/9277807b958b74cb68afa0d1d7f8fef8017c61c5))
+
+
+
+
+
 # [1.0.0-rc.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.36...v1.0.0-rc.37) (2023-04-18)
 
 **Note:** Version bump only for package @bodiless/vital-buttons

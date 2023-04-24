@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.38](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.24...v1.0.0-rc.38) (2023-04-24)
+
+
+### Bug Fixes
+
+* **@bodiless/search, gatsby-theme-bodiless:** Fix/transpile to esm search and gatsby theme bodiless ([#2023](https://github.com/johnsonandjohnson/bodiless-js/issues/2023)) ([ad864af](https://github.com/johnsonandjohnson/bodiless-js/commit/ad864af6f0ef30b8df91528d7e9d4adc6615fbf9))
+
+
+### Features
+
+* **components:** 'Editable' passes through html props. [Canary] ([#2020](https://github.com/johnsonandjohnson/bodiless-js/issues/2020)) ([3897084](https://github.com/johnsonandjohnson/bodiless-js/commit/38970844d74ba647a1803f3ef94e4e4dd22239c4))
+
+
+
+
+
 # [1.0.0-rc.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.36...v1.0.0-rc.37) (2023-04-18)
 
 **Note:** Version bump only for package @bodiless/components

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.38](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.24...v1.0.0-rc.38) (2023-04-24)
+
+
+### Bug Fixes
+
+* **@bodiless/search, gatsby-theme-bodiless:** Fix/transpile to esm search and gatsby theme bodiless ([#2023](https://github.com/johnsonandjohnson/bodiless-js/issues/2023)) ([ad864af](https://github.com/johnsonandjohnson/bodiless-js/commit/ad864af6f0ef30b8df91528d7e9d4adc6615fbf9))
+* **vital-layout/templates:** Update Layout/Templates ([#2004](https://github.com/johnsonandjohnson/bodiless-js/issues/2004)) ([8f56873](https://github.com/johnsonandjohnson/bodiless-js/commit/8f56873760f217a619035a0f97202c727fb92627))
+* **vital-layout:** Add outer Utility menu to header ([#2034](https://github.com/johnsonandjohnson/bodiless-js/issues/2034)) ([70131d6](https://github.com/johnsonandjohnson/bodiless-js/commit/70131d63012770a24dc9b90ecb066ee312215d03))
+* **vital-layout:** Move Disclaimer ([#2038](https://github.com/johnsonandjohnson/bodiless-js/issues/2038)) ([8696b84](https://github.com/johnsonandjohnson/bodiless-js/commit/8696b8433dac25d1cabcf45b130ace3fe0541a3b))
+
+
+### Features
+
+* **chore:** Cleanup Vital Component tokens ([723c773](https://github.com/johnsonandjohnson/bodiless-js/commit/723c7736311c5b6f3d79bdddec76bdcb1e75551a))
+* **components:** 'Editable' passes through html props. [Canary] ([#2020](https://github.com/johnsonandjohnson/bodiless-js/issues/2020)) ([3897084](https://github.com/johnsonandjohnson/bodiless-js/commit/38970844d74ba647a1803f3ef94e4e4dd22239c4))
+
+
+
+
+
 # [1.0.0-rc.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.36...v1.0.0-rc.37) (2023-04-18)
 
 **Note:** Version bump only for package @bodiless/vital-layout

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.38](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.24...v1.0.0-rc.38) (2023-04-24)
+
+
+### Bug Fixes
+
+* **@bodiless/search, gatsby-theme-bodiless:** Fix/transpile to esm search and gatsby theme bodiless ([#2023](https://github.com/johnsonandjohnson/bodiless-js/issues/2023)) ([ad864af](https://github.com/johnsonandjohnson/bodiless-js/commit/ad864af6f0ef30b8df91528d7e9d4adc6615fbf9))
+* **styleguide:** accordion & buttons & video ([#2007](https://github.com/johnsonandjohnson/bodiless-js/issues/2007)) ([0e078dc](https://github.com/johnsonandjohnson/bodiless-js/commit/0e078dc605912be5240bca5da7a2b52ba2859cab))
+* **styleguide:** Swap Styleguide for Layout & Typography ([#2003](https://github.com/johnsonandjohnson/bodiless-js/issues/2003)) ([d24e9b1](https://github.com/johnsonandjohnson/bodiless-js/commit/d24e9b1123e36e49d850f755fc5ecccf1f1f92b1))
+* **vital-layout/templates:** Update Layout/Templates ([#2004](https://github.com/johnsonandjohnson/bodiless-js/issues/2004)) ([8f56873](https://github.com/johnsonandjohnson/bodiless-js/commit/8f56873760f217a619035a0f97202c727fb92627))
+* **vital-test:** change vital-test package to private ([#2030](https://github.com/johnsonandjohnson/bodiless-js/issues/2030)) ([44996d2](https://github.com/johnsonandjohnson/bodiless-js/commit/44996d2bd9a2ffad0b50db9f535224bfcbf4a082))
+
+
+### Features
+
+* **components:** 'Editable' passes through html props. [Canary] ([#2020](https://github.com/johnsonandjohnson/bodiless-js/issues/2020)) ([3897084](https://github.com/johnsonandjohnson/bodiless-js/commit/38970844d74ba647a1803f3ef94e4e4dd22239c4))
+
+
+
+
+
 # [1.0.0-rc.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.36...v1.0.0-rc.37) (2023-04-18)
 
 **Note:** Version bump only for package @bodiless/vital-test

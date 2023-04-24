@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.38](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.24...v1.0.0-rc.38) (2023-04-24)
+
+
+### Bug Fixes
+
+* **vital-layout/templates:** Update Layout/Templates ([#2004](https://github.com/johnsonandjohnson/bodiless-js/issues/2004)) ([8f56873](https://github.com/johnsonandjohnson/bodiless-js/commit/8f56873760f217a619035a0f97202c727fb92627))
+
+
+### Features
+
+* **chore:** Cleanup Vital Component tokens ([723c773](https://github.com/johnsonandjohnson/bodiless-js/commit/723c7736311c5b6f3d79bdddec76bdcb1e75551a))
+* **chore:** Small code cleanup ([9277807](https://github.com/johnsonandjohnson/bodiless-js/commit/9277807b958b74cb68afa0d1d7f8fef8017c61c5))
+* **vital-elements:** Address PR Feedback, simplify typography tokens and updated Domain tokens documentation ([c11fbc8](https://github.com/johnsonandjohnson/bodiless-js/commit/c11fbc8770b420b45872ad2f7794e2f4b10014f2))
+
+
+
+
+
 # [1.0.0-rc.37](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.36...v1.0.0-rc.37) (2023-04-18)
 
 **Note:** Version bump only for package --vital--
