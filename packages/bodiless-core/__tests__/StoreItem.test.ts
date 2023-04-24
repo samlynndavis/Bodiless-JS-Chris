@@ -294,7 +294,7 @@ describe('StoreItem', () => {
     describe('when item updated by browser', () => {
       it('should be sent to the server', async () => {
         // eslint-disable-next-line global-require
-        const StoreItem$ = require('../src/Store/StoreItem').StoreItem;
+        const StoreItem$ = require('../src/Store/StoreItem.bl-edit').StoreItem;
         // eslint-disable-next-line no-new
         new StoreItem$(new TestStore(dataSource), defaultKey, defaultData);
         jest.runAllTimers();
@@ -304,7 +304,7 @@ describe('StoreItem', () => {
     describe('when item deleted by browser', () => {
       it('should not be sent to the server', async () => {
         // eslint-disable-next-line global-require
-        const StoreItem$ = require('../src/Store/StoreItem').StoreItem;
+        const StoreItem$ = require('../src/Store/StoreItem.bl-edit').StoreItem;
         // eslint-disable-next-line max-len
         const item = new StoreItem$(new TestStore(dataSource), defaultKey, defaultData);
         item.delete();
