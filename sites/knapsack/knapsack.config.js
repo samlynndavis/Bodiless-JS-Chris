@@ -18,7 +18,7 @@ module.exports = configureKnapsack({
   ],
   plugins: [],
   cloud: {
-    siteId: 'jnj-canvasx',
+    siteId: 'vital-ds',
     repoName: 'Bodiless-JS',
     repoRoot: join(__dirname, '../../'),
     repoOwner: 'johnsonandjohnson',
