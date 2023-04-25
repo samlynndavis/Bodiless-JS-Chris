@@ -60,6 +60,7 @@ export const withLocalContextMenu = addProps(() => {
     'data-context-menu-id': id,
   };
 });
+
 /**
  * Utility hoc to add resize detector to the original component.
  * Optionally a callback can be provided by the component.

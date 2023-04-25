@@ -24,7 +24,7 @@ import {
   useRegisterMenuOptions,
   contextMenuForm,
   useNotify,
-  BodilessBackendClient,
+  BodilessBackendClient
 } from '@bodiless/core';
 import type { TMenuOption } from '@bodiless/core';
 import CommitsList from './CommitsList';
