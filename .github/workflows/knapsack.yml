@@ -9,16 +9,42 @@ on:
       - feat/knapsack # Note: temporary until PR merged into main
 
 jobs:
-  build:
-    name: Build
+  # build:
+  #   name: Build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0
+  #     - name: Use Node.js v16.9
+  #       uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 16.9
+  #     - name: Setup
+  #       run: npm run setup
+
+  deploy:
+    name: Deploy
+    # if: github.ref == 'refs/heads/feat/knapsack' # Note: temporary until PR merged into main
+    # needs: [build]
     runs-on: ubuntu-latest
+    env:
+      HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      HEROKU_GIT_URL: ${{ secrets.HEROKU_GIT_URL }}
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Use Node.js v16.9
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16.9
-      - name: Setup
-        run: npm run setup
+          ref: feat/knapsack # Note: temporary until PR merged into main
+      - name: write auth
+        run: |
+          cat > ~/.netrc <<EOF
+            machine git.heroku.com
+              login $HEROKU_EMAIL
+              password $HEROKU_API_KEY
+          EOF
+      - name: git push to heroku for deploy
+        run: |
+          git remote add heroku $HEROKU_GIT_URL
+          git push heroku main
