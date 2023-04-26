@@ -17,7 +17,10 @@ import { asBodilessChameleon } from '@bodiless/components';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { WithGA4DesignKeys } from '@bodiless/ga4';
 import { asBodilessPage } from '../asBodilessPage';
-import { GenericTemplateClean, vitalGenericTemplate } from '../../GenericTemplate';
+import {
+  GenericTemplateStatic as GenericTemplateClean,
+  vitalGenericTemplateStatic as vitalGenericTemplate,
+} from '../../GenericTemplate';
 
 const Default = asFluidToken({
   Core: {

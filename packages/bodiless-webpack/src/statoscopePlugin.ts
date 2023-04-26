@@ -24,6 +24,7 @@ export const createStatoscopePlugin = ({
   // Auto discover previous stats.
   const previousStats = fs.readdirSync(`${sitePath}/public/`).filter(fn => fn.startsWith(`stats-${name}-`) && fn.endsWith('.json'));
   additionalStats.push(...previousStats.map(fn => `${sitePath}/public/${fn}`));
+  console.log('additionalStats', additionalStats);
 
   return new StatoscopeWebpackPlugin({
     saveReportTo: `${sitePath}/public/stats-[name].html`,
