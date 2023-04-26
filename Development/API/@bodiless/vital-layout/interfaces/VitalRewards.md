@@ -22,4 +22,4 @@ Defines the default Rewards placeholder
 
 #### Defined in
 
-[vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts:115](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts#L115)
+[vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts:115](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-layout/src/components/Footer/Rewards/tokens/vitalRewards.ts#L115)

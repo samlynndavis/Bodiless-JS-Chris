@@ -38,7 +38,7 @@ Token which creates the VitalDS Base Image. Defines the Base as:
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:207](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L207)
+[vital-image/src/components/Image/tokens/vitalImage.ts:207](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L207)
 
 ___
 
@@ -64,7 +64,7 @@ export default {
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:284](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L284)
+[vital-image/src/components/Image/tokens/vitalImage.ts:284](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L284)
 
 ___
 
@@ -76,7 +76,7 @@ Token which recomposes the base image as NoEffect Image.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:292](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L292)
+[vital-image/src/components/Image/tokens/vitalImage.ts:292](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L292)
 
 ___
 
@@ -88,7 +88,7 @@ Token which recomposes the base image as Traced Image.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:288](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L288)
+[vital-image/src/components/Image/tokens/vitalImage.ts:288](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L288)
 
 ___
 
@@ -122,7 +122,7 @@ export default {
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:322](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L322)
+[vital-image/src/components/Image/tokens/vitalImage.ts:322](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L322)
 
 ___
 
@@ -134,7 +134,7 @@ Token which recomposes the Base image as Plain Image.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:265](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L265)
+[vital-image/src/components/Image/tokens/vitalImage.ts:265](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L265)
 
 ___
 
@@ -146,7 +146,7 @@ Composable Token which adds the `loading: eager` property for performance.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:296](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L296)
+[vital-image/src/components/Image/tokens/vitalImage.ts:296](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L296)
 
 ___
 
@@ -162,7 +162,7 @@ Composable Token which apply the following tokens/features to an image:
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:223](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L223)
+[vital-image/src/components/Image/tokens/vitalImage.ts:223](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L223)
 
 ___
 
@@ -178,7 +178,7 @@ Composable Token which apply the following tokens/features to an image:
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:239](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L239)
+[vital-image/src/components/Image/tokens/vitalImage.ts:239](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L239)
 
 ___
 
@@ -194,7 +194,7 @@ Composable Token which apply the following tokens/features to an image:
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:215](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L215)
+[vital-image/src/components/Image/tokens/vitalImage.ts:215](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L215)
 
 ___
 
@@ -210,7 +210,7 @@ Composable Token which apply the following tokens/features to an image:
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:231](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L231)
+[vital-image/src/components/Image/tokens/vitalImage.ts:231](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L231)
 
 ___
 
@@ -230,7 +230,7 @@ page after placing it.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:261](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L261)
+[vital-image/src/components/Image/tokens/vitalImage.ts:261](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L261)
 
 ___
 
@@ -243,7 +243,7 @@ Composable Token which apply the landscape placeholder image.
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:244](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L244)
+[vital-image/src/components/Image/tokens/vitalImage.ts:244](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L244)
 
 ___
 
@@ -256,4 +256,4 @@ Composable Token which wraps the image in a link
 
 #### Defined in
 
-[vital-image/src/components/Image/tokens/vitalImage.ts:249](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L249)
+[vital-image/src/components/Image/tokens/vitalImage.ts:249](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-image/src/components/Image/tokens/vitalImage.ts#L249)

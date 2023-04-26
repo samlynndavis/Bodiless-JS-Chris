@@ -7,6 +7,7 @@
 ### References
 
 - [vitalGenericTemplate](README.md#vitalgenerictemplate)
+- [vitalGenericTemplateStatic](README.md#vitalgenerictemplatestatic)
 - [vitalPDPTemplate](README.md#vitalpdptemplate)
 - [vitalPageBase](README.md#vitalpagebase)
 
@@ -23,6 +24,7 @@
 ### Variables
 
 - [GenericTemplateClean](README.md#generictemplateclean)
+- [GenericTemplateStatic](README.md#generictemplatestatic)
 - [PDPTemplateClean](README.md#pdptemplateclean)
 - [StyleGuideTemplateClean](README.md#styleguidetemplateclean)
 - [vitalGenericTemplateBase](README.md#vitalgenerictemplatebase)
@@ -40,6 +42,12 @@
 ## References
 
 ### vitalGenericTemplate
+
+Renames and re-exports [vitalGenericTemplateBase](README.md#vitalgenerictemplatebase)
+
+___
+
+### vitalGenericTemplateStatic
 
 Renames and re-exports [vitalGenericTemplateBase](README.md#vitalgenerictemplatebase)
 
@@ -78,7 +86,7 @@ Renames and re-exports [vitalPage](README.md#vitalpage)
 
 #### Defined in
 
-[vital-templates/src/components/GenericTemplate/types.ts:17](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/GenericTemplate/types.ts#L17)
+[vital-templates/src/components/GenericTemplate/types.ts:17](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/GenericTemplate/types.ts#L17)
 
 ___
 
@@ -112,7 +120,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/PDPTemplate/types.ts:17](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/PDPTemplate/types.ts#L17)
+[vital-templates/src/components/PDPTemplate/types.ts:17](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/PDPTemplate/types.ts#L17)
 
 ___
 
@@ -122,7 +130,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/Page/asBodilessPage.tsx:20](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/Page/asBodilessPage.tsx#L20)
+[vital-templates/src/components/Page/asBodilessPage.tsx:20](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/Page/asBodilessPage.tsx#L20)
 
 ## Variables
 
@@ -144,7 +152,17 @@ limitations under the License.
 
 #### Defined in
 
-[vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx:65](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx#L65)
+[vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx:66](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx#L66)
+
+___
+
+### GenericTemplateStatic
+
+• `Const` **GenericTemplateStatic**: `ComponentType`<`GenericTemplateProps`\>
+
+#### Defined in
+
+[vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx:68](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx#L68)
 
 ___
 
@@ -166,7 +184,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-templates/src/components/PDPTemplate/PDPTemplateClean.tsx:85](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/PDPTemplate/PDPTemplateClean.tsx#L85)
+[vital-templates/src/components/PDPTemplate/PDPTemplateClean.tsx:85](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/PDPTemplate/PDPTemplateClean.tsx#L85)
 
 ___
 
@@ -188,7 +206,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx:63](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx#L63)
+[vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx:63](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx#L63)
 
 ___
 
@@ -206,7 +224,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts:108](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts#L108)
+[vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts:108](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/GenericTemplate/tokens/vitalGenericTemplate.ts#L108)
 
 ___
 
@@ -222,7 +240,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/PDPTemplate/tokens/vitalPDPTemplate.ts:73](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/PDPTemplate/tokens/vitalPDPTemplate.ts#L73)
+[vital-templates/src/components/PDPTemplate/tokens/vitalPDPTemplate.ts:73](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/PDPTemplate/tokens/vitalPDPTemplate.ts#L73)
 
 ___
 
@@ -250,7 +268,7 @@ limitations under the License.
 
 #### Defined in
 
-[vital-templates/src/components/Page/tokens/vitalPage.ts:58](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/Page/tokens/vitalPage.ts#L58)
+[vital-templates/src/components/Page/tokens/vitalPage.ts:61](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/Page/tokens/vitalPage.ts#L61)
 
 ___
 
@@ -267,7 +285,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate.ts:63](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate.ts#L63)
+[vital-templates/src/components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate.ts:63](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/StyleGuideTemplate/tokens/vitalStyleGuideTemplate.ts#L63)
 
 ## Functions
 
@@ -293,7 +311,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/Page/asBodilessPage.tsx:22](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/Page/asBodilessPage.tsx#L22)
+[vital-templates/src/components/Page/asBodilessPage.tsx:22](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/Page/asBodilessPage.tsx#L22)
 
 ___
 
@@ -313,7 +331,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx:67](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx#L67)
+[vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx:72](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/GenericTemplate/GenericTemplateClean.tsx#L72)
 
 ___
 
@@ -333,7 +351,7 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/PDPTemplate/PDPTemplateClean.tsx:87](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/PDPTemplate/PDPTemplateClean.tsx#L87)
+[vital-templates/src/components/PDPTemplate/PDPTemplateClean.tsx:87](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/PDPTemplate/PDPTemplateClean.tsx#L87)
 
 ___
 
@@ -353,4 +371,4 @@ ___
 
 #### Defined in
 
-[vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx:64](https://github.com/wodenx/Bodiless-JS/blob/0aa0219c2/packages/vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx#L64)
+[vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx:64](https://github.com/wodenx/Bodiless-JS/blob/bf58290ac/packages/vital-templates/src/components/StyleGuideTemplate/StyleGuideTemplateClean.tsx#L64)
