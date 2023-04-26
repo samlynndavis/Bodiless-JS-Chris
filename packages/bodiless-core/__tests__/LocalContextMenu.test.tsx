@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Copyright © 2019 Johnson & Johnson
  *
@@ -19,11 +20,10 @@ import { mount, shallow } from 'enzyme';
 import { v1 } from 'uuid';
 import Tooltip from 'rc-tooltip';
 import PageEditContext from '../src/PageEditContext';
-import LocalContextMenu from '../src/components/PageEditor';
 import ContextMenu from '../src/components/ContextMenu';
 import { TMenuOptionGetter } from '../src/PageEditContext/types';
 import { useUUID, useEditContext } from '../src/hooks';
-import PageEditor from '../src/components/PageEditor';
+import PageEditor, { LocalContextMenu } from '../src/components/PageEditor';
 import { TMenuOption } from '../src/Types/ContextMenuTypes';
 
 const testOptions = () => [
