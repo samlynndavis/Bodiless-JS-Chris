@@ -24,7 +24,8 @@ import {
   useRegisterMenuOptions,
   contextMenuForm,
   useNotify,
-  BodilessBackendClient
+  BodilessBackendClient,
+  PageEditContext,
 } from '@bodiless/core';
 import type { TMenuOption } from '@bodiless/core';
 import CommitsList from './CommitsList';
@@ -32,7 +33,6 @@ import RemoteChanges from './RemoteChanges';
 import Reset from './Reset';
 import SaveChanges from './SaveChanges';
 import { GitClient } from './types';
-import PageEditContext from '../PageEditContext';
 
 /**
  * DefinePlugin env var.
