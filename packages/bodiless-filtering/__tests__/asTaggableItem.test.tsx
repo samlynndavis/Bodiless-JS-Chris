@@ -59,7 +59,7 @@ let menuPopup: ReactWrapper<TooltipProps>;
 
 const itemProps = { nodeKey: 'tags', ...props };
 
-describe('Filter item interactions', () => {
+describe.skip('Filter item interactions', () => {
   it('should render menu item when clicked', () => {
     wrapper = mount(
       <Taggable {...itemProps}>

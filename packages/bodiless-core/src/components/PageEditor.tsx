@@ -23,6 +23,8 @@ import { useEditContext } from '../hooks';
 import { observer } from '../mobx.bl-edit';
 import { IContextMenuProps as ContextMenuProps, TMenuOption } from '../Types/ContextMenuTypes';
 import { useRegisterMenuOptions } from '../PageContextProvider';
+import LocalContextMenuPopup from './LocalContextMenuPopup.bl-edit';
+import useLocalOptions from './useLocalOptions';
 
 type CompleteUI = {
   GlobalContextMenu: React.ComponentType<ContextMenuProps>;
@@ -53,6 +55,17 @@ const GlobalContextMenu: FC<Props> = observer(() => {
   return (
     <Menu options={options} isPositionToggled={isPositionToggled} />
   );
+});
+
+/**
+ * @private
+ *
+ * Renders children inside an rc-tooltip whose overlay contents contain all local menu option icons.
+ */
+export const LocalContextMenu = observer(() => {
+  const { LocalContextMenu: Menu } = useUI();
+  const options = useLocalOptions();
+  return <Menu options={options} />;
 });
 
 export const useDocsButton = () => {
@@ -116,6 +129,9 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
     <uiContext.Provider value={newUI}>
       {children}
       <GlobalContextMenu />
+      <LocalContextMenuPopup>
+        <LocalContextMenu />
+      </LocalContextMenuPopup>
       <PageOverlay />
     </uiContext.Provider>
   );
