@@ -22,6 +22,6 @@ module.exports = configureKnapsack({
     repoName: 'Bodiless-JS',
     repoRoot: join(__dirname, '../../'),
     repoOwner: 'johnsonandjohnson',
-    baseBranch: 'main',
+    baseBranch: 'master',
   },
 });
