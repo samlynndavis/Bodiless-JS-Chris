@@ -159,7 +159,9 @@ export const copyNode = (
  * https://github.com/johnsonandjohnson/Bodiless-JS/issues/1160
  *
  * @param node ContentNode
+ *
  * @returns keys string[]
+ * THe relative nodeKeys of the immediate children of the specified node.
  */
 export const childKeys = (node: ContentNode<any>) => {
   const aParent = node.path;

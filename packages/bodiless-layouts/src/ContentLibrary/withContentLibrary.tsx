@@ -26,13 +26,27 @@ import ComponentSelector from '../ComponentSelector';
 import type { ComponentSelectorProps, Meta, ComponentWithMeta } from '../ComponentSelector/types';
 import { copyNode, childKeys } from '../utils/NodeTools';
 
+const LIBRARY_REFERENCE_NODEKEY = '_library-reference';
+
 export type ContentLibraryOptions = {
   useLibraryNode: (props: any) => { node: ContentNode<any> },
   DisplayComponent?: ComponentType<any>,
   Selector?: ComponentType<ComponentSelectorProps>,
   useMeta?: (node: ContentNode<any>) => Partial<Meta>|null,
   useOverrides?: (props: any) => Partial<OptionGroupDefinition>,
+  referenceKey?: string,
+  copyContent?: boolean,
 };
+
+const useDefaultContentFrom = (
+  useSourceNode: (props: any) => { node: ContentNode<any> }
+ ) => (props: any) => {
+  const { node: sourceNode } = useSourceNode(props);
+  const sourceKeys = childKeys(sourceNode)
+    .map(k => k.)
+    
+
+}
 
 const withContentLibrary = (options: ContentLibraryOptions) => <P extends object>(
   Component: ComponentOrTag<P>,
@@ -43,12 +57,15 @@ const withContentLibrary = (options: ContentLibraryOptions) => <P extends object
     useLibraryNode,
     useMeta,
     useOverrides = () => {},
+    referenceKey = LIBRARY_REFERENCE_NODEKEY,
+    copyContent = false,
   } = options;
 
   const useMenuOptions = (props: any) => {
     const { node: targetNode } = useNode();
     const { node: libraryNode } = useLibraryNode(props);
     const keys = childKeys(libraryNode);
+    const referenceNode = targetNode.child(referenceKey);
 
     const components = keys.map(key => {
       const node = libraryNode.child(key);
@@ -69,11 +86,14 @@ const withContentLibrary = (options: ContentLibraryOptions) => <P extends object
       }
       return ComponentWithNode;
     }).filter(Boolean) as ComponentWithMeta[];
-
     const renderForm = ({ closeForm }:any) => {
       const onSelect = ([name]: string[]) => {
         if (name) {
-          copyNode(libraryNode.child(name), targetNode, true);
+          const sourceNode = libraryNode.child(name);
+          referenceNode.setData({
+            path: sourceNode.path,
+          });
+          if (copyContent) copyNode(sourceNode, targetNode, true);
         }
         closeForm(null);
       };
