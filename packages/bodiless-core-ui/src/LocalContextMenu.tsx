@@ -35,14 +35,14 @@ import {
   ComponentFormUnwrapButton, ComponentFormTextArea, ComponentFormDescription, ComponentFormWarning,
   ComponentFormFieldWrapper, ComponentFormFieldTitle, ComponentFormCheckBox, ComponentFormRadio,
   ComponentFormRadioGroup, ComponentFormSelect, ComponentFormOption, ContextSubMenu,
-  ToolbarButtonLabel,
+  ToolbarButtonLabel, ToolbarHorizontal,
   ComponentFormSpinner,
 } from '@bodiless/ui';
 import ReactTagsField from './ReactTags';
 
 // Stacked toolbar orientation...
 // Horizontal
-const toolbarClasses = 'bl-flex bl-divide-x rtl:bl-divide-x-reverse bl-divide-white';
+const toolbarClasses = 'bl-divide-x rtl:bl-divide-x-reverse bl-divide-white';
 const groupClasses = 'bl-px-3';
 // Vertical
 // const toolbarClasses = '';
@@ -52,8 +52,8 @@ const groupClasses = 'bl-px-3';
 // For accessibility attributes, see https://www.w3.org/TR/wai-aria-practices/examples/toolbar/toolbar.html
 const Toolbar = flow(
   addClasses(toolbarClasses),
-  addProps({ role: 'toolbar', 'aria-label': 'Local Context Menu' }),
-)(Div);
+  addProps({ 'aria-label': 'Local Context Menu' }),
+)(ToolbarHorizontal);
 
 type Props = {
   overlay: ReactNode | (() => ReactNode);

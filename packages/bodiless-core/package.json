@@ -31,6 +31,7 @@
     "@bodiless/cli": "^1.0.0-rc.37",
     "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
+    "@floating-ui/react": "^0.23.1",
     "axios": "^0.21.0",
     "informed": "^4.44.0",
     "lodash": "^4.17.19",

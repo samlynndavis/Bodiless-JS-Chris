@@ -14,7 +14,6 @@
 
 import ContextMenu from './ContextMenu';
 import ContextWrapper from './ContextWrapper';
-import LocalContextMenu from './LocalContextMenu.bl-edit';
 import PageEditor from './PageEditor';
 import StaticPage from './StaticPage';
 import PageOverlay from './PageOverlay';
@@ -33,7 +32,6 @@ export {
   ContextMenuProvider,
   getUI,
   ContextWrapper,
-  LocalContextMenu,
   PageEditor,
   StaticPage,
   PageOverlay,

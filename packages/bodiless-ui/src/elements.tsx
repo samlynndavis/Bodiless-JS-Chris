@@ -178,6 +178,14 @@ export const HorizontalToolbarButton = flow(
   addClasses('bl-mr-grid-2 last:bl-mr-grid-0'),
 )(ToolbarButton);
 
+export const ToolbarBase = flow(
+  addClasses('bl-text-white bl-bg-black bl-rounded bl-z-50 bl-flex'),
+  addProps({ role: 'toolbar' }),
+)(Div);
+
+export const ToolbarHorizontal = addClasses('bl-py-2 bl-px-grid-2')(ToolbarBase);
+export const ToolbarVertical = addClasses('bl-px-2 bl-py-grid-2 bl-flex-col')(ToolbarBase);
+
 export const ToolbarButtonLabel = addClasses('bl-text-center bl-text-base')(Span);
 
 const ResizeHandleBar = addClasses(

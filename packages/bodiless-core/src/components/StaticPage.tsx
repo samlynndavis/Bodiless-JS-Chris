@@ -75,6 +75,10 @@ class StaticContext implements PageEditContextInterface {
   unregisterPeer = () => {};
 
   allMenuOptions = [];
+
+  localContextMenuKey = new Date();
+
+  refreshLocalContextMenu = () => undefined;
 }
 
 const staticContext = new StaticContext();
