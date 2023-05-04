@@ -59,7 +59,7 @@ const ContextMenuItem = observer((props: IProps) => {
   const onToolbarButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     const menuForm = option.handler ? option.handler(event) : undefined;
     if (local) {
-      if (activateContext) (optionContext || context).activate()
+      if (activateContext) (optionContext || context).activate();
     } else {
       context.activate();
     }
