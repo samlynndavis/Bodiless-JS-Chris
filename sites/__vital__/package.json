@@ -20,7 +20,6 @@
     "@bodiless/documentation": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/gatsby-theme-bodiless": "^1.0.0-rc.37",
-    "@bodiless/search": "^1.0.0-rc.37",
     "@bodiless/ui": "^1.0.0-rc.37",
     "@bodiless/vital-buttons": "^1.0.0-rc.37",
     "@bodiless/vital-editors": "^1.0.0-rc.37",
@@ -33,7 +32,6 @@
     "@bodiless/vital-navigation": "^1.0.0-rc.37",
     "@bodiless/vital-table": "^1.0.0-rc.37",
     "@bodiless/vital-templates": "^1.0.0-rc.37",
-    "@bodiless/vital-test": "^1.0.0-rc.37",
     "@bodiless/webpack": "^1.0.0-rc.37",
     "autoprefixer": "^10.4.2",
     "docsify-cli": "^4.3.0",
@@ -44,17 +42,16 @@
     "gatsby-plugin-canonical-urls": "^4.10.0",
     "gatsby-plugin-sitemap": "^5.10.2",
     "glob": "^7.1.6",
-    "informed": "^3.34.0",
+    "informed": "^4.44.0",
     "lodash": "^4.17.19",
-    "mobx-react": "^7.2.1",
     "ora": "^4.0.2",
     "postcss": "^8.4.12",
     "rc-tooltip": "^5.1.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-markdown": "^8.0.0",
-    "react-mde": "^11.0.0"
+    "@uiw/react-md-editor": "^3.19.7"
   },
   "files": [
     "lib"
@@ -64,11 +61,10 @@
     "url": "https://github.com/johnsonandjohnson/bodiless-js.git"
   },
   "scripts": {
-    "build": "npm-run-all build:env-vars build:lib build:search",
+    "build": "npm-run-all build:env-vars build:lib",
     "build:docs": "bl-docs-build",
     "build:env-vars": "bodiless generate-env-vars",
     "build:lib": "bl-clear-logs && gatsby build && bl-validate-logs",
-    "build:search": "create-search-index",
     "build:stats": "BODILESS_BUILD_STATS=1 npm run build",
     "check": "tsc -p ./tsconfig.check.json",
     "clean": "gatsby clean",

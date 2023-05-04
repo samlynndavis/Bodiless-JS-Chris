@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "@bodiless/components": "^1.0.0-rc.37",
-    "@bodiless/core": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
     "@bodiless/layouts": "^1.0.0-rc.37",
     "@bodiless/layouts-ui": "^1.0.0-rc.37",
@@ -35,7 +34,7 @@
     "lodash": "^4.17.19"
   },
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

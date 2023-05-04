@@ -15,12 +15,12 @@
 import React, { ComponentType, FC } from 'react';
 import MD5 from 'crypto-js/md5';
 import {
-  useMenuOptionUI, WithNodeKeyProps, withNodeKey, withNode, ifEditable,
-  withLocalContextMenu, withContextActivator, withEditButton, withNodeDataHandlers,
-  EditButtonProps,
-  EditButtonOptions,
-  UseBodilessOverrides,
+  useMenuOptionUI, ifEditable, withLocalContextMenu, withContextActivator, withEditButton,
+  EditButtonProps, EditButtonOptions, UseBodilessOverrides,
 } from '@bodiless/core';
+import {
+  WithNodeKeyProps, withNodeKey, withNode, withNodeDataHandlers,
+} from '@bodiless/data';
 import type { HOC, ComponentOrTag } from '@bodiless/fclasses';
 import flowRight from 'lodash/flowRight';
 import pick from 'lodash/pick';
@@ -57,7 +57,7 @@ const submitValueHandler = (data: { [field: string]: boolean }) => ({
 //   const { ComponentFormLabel, ComponentFormCheckBox } = useMenuOptionUI();
 //   return (
 //     <ComponentFormLabel>
-//       <ComponentFormCheckBox field={name} />
+//       <ComponentFormCheckBox  name={name} />
 //       {name}
 //     </ComponentFormLabel>
 //   );
@@ -70,7 +70,7 @@ const useCategoryCheckboxes = (map: TokenMap<any>) => {
       <ComponentFormLabel>{cat}</ComponentFormLabel>
       {map.namesFor(cat).map(name => (
         <ComponentFormLabel>
-          <ComponentFormCheckBox field={name} />
+          <ComponentFormCheckBox name={name} />
           {name}
         </ComponentFormLabel>
       ))}

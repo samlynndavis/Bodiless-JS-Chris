@@ -12,21 +12,23 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import {
   NotificationProvider,
   withNotificationButton,
   withSwitcherButton,
   OnNodeErrorNotification,
-  useGitButtons,
-  GitContextProvider,
+  observer,
   useDocsButton,
   useEditButton,
 } from '@bodiless/core';
 import {
+  useGitButtons,
+  GitContextProvider,
+} from '@bodiless/git';
+import {
   Fragment,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import { withPageDisableButton } from '@bodiless/components';
 import {
@@ -69,7 +71,7 @@ const EditButtons: FC = () => {
   return <></>;
 };
 
-const EditPage: FC<PageProps> = observer(({ children, ui, ...rest }) => {
+const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
   const {

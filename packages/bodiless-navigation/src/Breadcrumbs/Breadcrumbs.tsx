@@ -13,14 +13,14 @@
  */
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { ComponentType } from 'react';
-import { withNode, useNode } from '@bodiless/core';
+import React, { ComponentType, PropsWithChildren } from 'react';
+import { withNode, useNode } from '@bodiless/data';
 import { LinkData } from '@bodiless/components';
-import type { WithNodeProps } from '@bodiless/core';
+import type { WithNodeProps } from '@bodiless/data';
 import {
   designable, addProps, Fragment, withDesign, replaceWith, withoutProps, ComponentOrTag, flowIf,
 } from '@bodiless/fclasses';
-import { observer } from 'mobx-react';
+import { observer } from '@bodiless/core';
 import flowRight from 'lodash/flowRight';
 import { asStylableBreadcrumbs } from './Breadcrumb.token';
 
@@ -34,7 +34,7 @@ import type {
   CleanBreadcrumbItemType,
 } from './types';
 
-const ItemNodeProvider = withNode(Fragment) as ComponentType<WithNodeProps>;
+const ItemNodeProvider = withNode(Fragment) as ComponentType<PropsWithChildren<WithNodeProps>>;
 const useIsLink = (linkNodeKey: string) => {
   const { node } = useNode();
   const linkHref = node.child<LinkData>(linkNodeKey);

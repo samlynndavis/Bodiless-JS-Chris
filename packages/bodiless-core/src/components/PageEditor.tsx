@@ -15,14 +15,16 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, {
-  FC, createContext, useContext, useEffect, useCallback,
+  FC, createContext, useContext, useEffect, useCallback, PropsWithChildren,
 } from 'react';
-import { observer } from 'mobx-react';
 
 import ContextMenu from './ContextMenu';
 import { useEditContext } from '../hooks';
+import { observer } from '../mobx.bl-edit';
 import { IContextMenuProps as ContextMenuProps, TMenuOption } from '../Types/ContextMenuTypes';
 import { useRegisterMenuOptions } from '../PageContextProvider';
+import LocalContextMenuPopup from './LocalContextMenuPopup.bl-edit';
+import useLocalOptions from './useLocalOptions';
 
 type CompleteUI = {
   GlobalContextMenu: React.ComponentType<ContextMenuProps>;
@@ -53,6 +55,17 @@ const GlobalContextMenu: FC<Props> = observer(() => {
   return (
     <Menu options={options} isPositionToggled={isPositionToggled} />
   );
+});
+
+/**
+ * @private
+ *
+ * Renders the local context menu.
+ */
+export const LocalContextMenu = observer(() => {
+  const { LocalContextMenu: Menu } = useUI();
+  const options = useLocalOptions();
+  return <Menu options={options} />;
 });
 
 export const useDocsButton = () => {
@@ -100,7 +113,7 @@ export const useEditButton = () => {
  * Component providing the global Bodiless UI elements, the Main Menu and Page Overlay.
  * Also provides the Edit and Docs buttons on the main menu.
  */
-const PageEditor: FC<Props> = ({ children, ui }) => {
+const PageEditor: FC<PropsWithChildren<Props>> = ({ children, ui }) => {
   const context = useEditContext();
 
   const newUI = {
@@ -116,6 +129,9 @@ const PageEditor: FC<Props> = ({ children, ui }) => {
     <uiContext.Provider value={newUI}>
       {children}
       <GlobalContextMenu />
+      <LocalContextMenuPopup>
+        <LocalContextMenu />
+      </LocalContextMenuPopup>
       <PageOverlay />
     </uiContext.Provider>
   );

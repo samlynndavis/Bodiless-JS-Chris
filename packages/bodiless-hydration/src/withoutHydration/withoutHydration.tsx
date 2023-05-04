@@ -14,7 +14,7 @@
 
 import { ComponentOrTag } from '@bodiless/fclasses';
 import MD5 from 'crypto-js/md5';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import React, { FC, useRef, useLayoutEffect } from 'react';
 import memoize from 'lodash/memoize';
 import {
@@ -31,14 +31,12 @@ const DEFAULT_OPTIONS: WithoutHydrationOptions = {
 export const isStaticClientSide = !!(
   typeof window !== 'undefined'
   && window.document
-  && window.document.createElement
   && process.env.NODE_ENV === 'production'
 );
 
 export const isEditClientSide = !!(
   typeof window !== 'undefined'
   && window.document
-  && window.document.createElement
   && process.env.NODE_ENV === 'development'
 );
 

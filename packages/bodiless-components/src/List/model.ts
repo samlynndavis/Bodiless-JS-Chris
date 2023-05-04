@@ -13,7 +13,7 @@
  */
 
 import { v4 } from 'uuid';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { ListData, ListBaseProps } from './types';
 
 /**
@@ -96,7 +96,7 @@ const useMoveItem = () => {
 };
 
 /**
- * Returns a pair of functions which can be used to insert
+ * Returns a set of functions which can be used to insert, move
  * or delete items.
  */
 export const useItemsMutators = (props?: Pick<ListBaseProps, 'unwrap' | 'onDelete'>) => ({

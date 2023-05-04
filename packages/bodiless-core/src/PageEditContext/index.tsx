@@ -13,13 +13,13 @@
  */
 
 import React, { ConsumerProps, FC, ReactElement } from 'react';
-import { Observer } from 'mobx-react';
 import {
   DefinesLocalEditContext,
   PageEditContextInterface,
   PageEditStoreInterface,
   TMenuOptionGetter,
 } from './types';
+import { Observer } from '../mobx.bl-edit';
 import { TOverlaySettings } from '../Types/PageOverlayTypes';
 import { defaultStore, defaultOverlaySettings } from './Store';
 
@@ -57,8 +57,6 @@ class PageEditContext implements PageEditContextInterface {
 
   hasLocalMenu = false;
 
-  lastActivated: Date|undefined = undefined;
-
   // When called with no argument this creates a new store and react context.
   constructor(values?: DefinesLocalEditContext, parent?: PageEditContextInterface) {
     if (values) {
@@ -73,6 +71,24 @@ class PageEditContext implements PageEditContextInterface {
   }
 
   protected peerContextMap: Map<string, PageEditContextInterface|null> = new Map();
+
+  /**
+   * Key which changes when the local context menu needs to be refreshed.
+   * This is only used by the LocalContextMenu component.
+   *
+   * @see refreshLocalContextMenu()
+   */
+  get localContextMenuKey() {
+    return this.store.localContextMenuKey;
+  }
+
+  /**
+   * May be called to force a refresh of the active local context menu.
+   * Useful if the underlying component is moved to force the menu to follow it.
+   */
+  refreshLocalContextMenu() {
+    this.store.refreshLocalContextMenu();
+  }
 
   get peerContexts() {
     // Cast is necessary bc ts can't figure out that the filter removes all the nulls.
@@ -130,7 +146,6 @@ class PageEditContext implements PageEditContextInterface {
 
   // Make this the "current" context.
   activate() {
-    this.lastActivated = new Date();
     this.store.setActiveContext(this);
   }
 

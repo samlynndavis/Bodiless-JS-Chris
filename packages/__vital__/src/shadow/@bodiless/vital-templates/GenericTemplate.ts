@@ -12,12 +12,13 @@
  * limitations under the License.
  */
 
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import {
   flowHoc, addProps, Div, flowIf, replaceWith, Fragment
 } from '@bodiless/fclasses';
 import { useLanguageContext } from '@bodiless/i18n';
-import { vitalGenericTemplateBase, asGenericTemplateToken } from '@bodiless/vital-templates';
+import { asGenericTemplateToken } from '@bodiless/vital-templates';
+import { vitalGenericTemplate } from '@bodiless/vital-templates/lib/base';
 
 const isHomePage = () => (
   useNode().node.pagePath === '/'
@@ -32,7 +33,7 @@ const WithNoBreadcrumbsOnHomePage = asGenericTemplateToken({
   },
 });
 
-const Default = asGenericTemplateToken(vitalGenericTemplateBase.Default, {
+const Default = asGenericTemplateToken(vitalGenericTemplate.Default, {
   Compose: {
     WithNoBreadcrumbsOnHomePage,
   },
@@ -45,6 +46,6 @@ const Default = asGenericTemplateToken(vitalGenericTemplateBase.Default, {
 });
 
 export default {
-  ...vitalGenericTemplateBase,
+  ...vitalGenericTemplate,
   Default,
 };
