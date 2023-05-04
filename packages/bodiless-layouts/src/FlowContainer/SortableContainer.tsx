@@ -58,7 +58,7 @@ const defaultUI: FinalUI = {
 
 const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
-const FlowContainerEmpty$ = ({ ui, ...rest }) => {
+const FlowContainerEmpty$ = ({ ui, ...rest }: any) => {
   const { FlowContainerEmptyWrapper } = getUI(ui);
   // mobx has issues with destructured values
   // eslint-disable-next-line react/destructuring-assignment

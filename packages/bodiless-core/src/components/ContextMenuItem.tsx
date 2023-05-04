@@ -58,12 +58,13 @@ const ContextMenuItem = observer((props: IProps) => {
 
   const onToolbarButtonClick = (event: React.MouseEvent<HTMLDivElement>): void => {
     const menuForm = option.handler ? option.handler(event) : undefined;
-    if (activateContext) {
-      if (local && optionContext) optionContext.activate();
-      else context.activate();
+    if (local) {
+      if (activateContext) (optionContext || context).activate()
+    } else {
+      context.activate();
     }
     if (menuForm) {
-      if (!option.local) context.toggleLocalTooltipsDisabled(!context.areLocalTooltipsDisabled);
+      if (!local) context.toggleLocalTooltipsDisabled(!context.areLocalTooltipsDisabled);
       setIsToolTipShown(!isToolTipShown);
       const formProps: Partial<ContextMenuFormProps> = {
         // @TODO Do we wnt to set the aria label here?
