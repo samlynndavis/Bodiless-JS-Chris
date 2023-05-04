@@ -38,14 +38,14 @@ const defaultUI: FinalUI = {
 
 const getUI = (ui: UI = {}) => ({ ...defaultUI, ...ui });
 
-const FlowContainerEmpty$ = (ui: UI) => {
+const FlowContainerEmpty$ = ({ ui, ...rest }) => {
   const { FlowContainerEmptyWrapper } = getUI(ui);
   // mobx has issues with destructured values
   // eslint-disable-next-line react/destructuring-assignment
   const classNames = `bl-border-2 bl-border-dashed bl-border-gray-200 bl-flex bl-w-full bl-justify-center 
     bl-flex-wrap bl-py-grid-3 hover:bl-border-orange-400`;
   return (
-    <FlowContainerEmptyWrapper className={classNames}>
+    <FlowContainerEmptyWrapper {...rest} className={classNames}>
       Empty FlowContainer
     </FlowContainerEmptyWrapper>
   );
@@ -62,7 +62,7 @@ const SortableListWrapper = SortableContainer(
       const children$ = React.Children.toArray(children);
       const content = children && children$.length
         ? children
-        : <FlowContainerEmpty />;
+        : <FlowContainerEmpty ui={ui} />;
       return (
         <section {...rest} {...useContextActivator()}>
           {content}
