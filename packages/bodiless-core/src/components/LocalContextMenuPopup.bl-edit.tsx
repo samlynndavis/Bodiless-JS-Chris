@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, ComponentType, useRef, useLayoutEffect
+  FC, ComponentType, useRef, useLayoutEffect, PropsWithChildren
 } from 'react';
 import {
   useFloating,
@@ -43,7 +43,7 @@ const findContextMenuElement = (context?: PageEditContextInterface): Element|nul
  * Wraps its children in a tooltip which is positioned below
  * the innermost context to which a local context menu has been assigned.
  */
-const LocalContextMenuPopup: FC = ({ children }) => {
+const LocalContextMenuPopup: FC<PropsWithChildren> = ({ children }) => {
   const { activeContext, localContextMenuKey } = useEditContext();
   const key = localContextMenuKey ? localContextMenuKey.getTime() : 'local-context-menu';
   const ref = findContextMenuElement(activeContext);
@@ -101,4 +101,4 @@ const LocalContextMenuPopup: FC = ({ children }) => {
   );
 };
 
-export default observer(LocalContextMenuPopup) as ComponentType;
+export default observer(LocalContextMenuPopup) as ComponentType<PropsWithChildren>;

@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import {
   NotificationProvider,
   withNotificationButton,
@@ -71,7 +71,7 @@ const EditButtons: FC = () => {
   return <></>;
 };
 
-const EditPage: FC<PageProps> = observer(({ children, ui, ...rest }) => {
+const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
   const {
