@@ -60,7 +60,7 @@ const GlobalContextMenu: FC<Props> = observer(() => {
 /**
  * @private
  *
- * Renders children inside an rc-tooltip whose overlay contents contain all local menu option icons.
+ * Renders the local context menu.
  */
 export const LocalContextMenu = observer(() => {
   const { LocalContextMenu: Menu } = useUI();
