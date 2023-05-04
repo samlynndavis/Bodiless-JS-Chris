@@ -43,7 +43,7 @@ type PropsWithUi = {
 };
 
 type PropsWithNotify = {
-  notifyOfChanges: ChangeNotifier;
+  notifyOfChanges?: ChangeNotifier;
 };
 
 type MessageProps = {
@@ -327,7 +327,7 @@ const FetchChanges = (
           messageData: (error as any).message,
         });
       } finally {
-        notifyOfChanges();
+        if (notifyOfChanges) notifyOfChanges();
         context.hidePageOverlay();
       }
     })();
@@ -391,7 +391,7 @@ const PullChanges = (
       } finally {
         formApi.setValue('keepOpen', false);
         context.hidePageOverlay();
-        notifyOfChanges();
+        if (notifyOfChanges) notifyOfChanges();
       }
     })();
   }, []);

@@ -60,7 +60,7 @@ const GlobalContextMenu: FC<Props> = observer(() => {
 /**
  * @private
  *
- * Renders children inside an rc-tooltip whose overlay contents contain all local menu option icons.
+ * Renders the local context menu.
  */
 export const LocalContextMenu = observer(() => {
   const { LocalContextMenu: Menu } = useUI();
@@ -68,12 +68,7 @@ export const LocalContextMenu = observer(() => {
   return <Menu options={options} />;
 });
 
-/**
- * Component providing the global Bodiless UI elements, the Main Menu and Page Overlay.
- * Also provides the Edit and Docs buttons on the main menu.
- */
-const PageEditor: FC<PropsWithChildren<Props>> = ({ children, ui }) => {
-  const context = useEditContext();
+export const useDocsButton = () => {
   const getMenuOptions = useCallback(() => [
     {
       name: 'docs',
@@ -83,6 +78,18 @@ const PageEditor: FC<PropsWithChildren<Props>> = ({ children, ui }) => {
         window.open(process.env.BODILESS_DOCS_URL, '_blank');
       },
     },
+  ], []);
+
+  // Register buttons to the main menu.
+  useRegisterMenuOptions({
+    getMenuOptions,
+    name: 'Docs',
+  });
+};
+
+export const useEditButton = () => {
+  const context = useEditContext();
+  const getMenuOptions = useCallback(() => [
     {
       name: 'edit',
       icon: 'edit',
@@ -95,18 +102,25 @@ const PageEditor: FC<PropsWithChildren<Props>> = ({ children, ui }) => {
     },
   ], []);
 
-  const newUI = {
-    ...useUI(),
-    ...ui,
-  };
-
-  const { PageOverlay = () => null } = newUI;
-
   // Register buttons to the main menu.
   useRegisterMenuOptions({
     getMenuOptions,
     name: 'Editor',
   });
+};
+
+/**
+ * Component providing the global Bodiless UI elements, the Main Menu and Page Overlay.
+ * Also provides the Edit and Docs buttons on the main menu.
+ */
+const PageEditor: FC<PropsWithChildren<Props>> = ({ children, ui }) => {
+  const context = useEditContext();
+
+  const newUI = {
+    ...useUI(),
+    ...ui,
+  };
+  const { PageOverlay = () => null } = newUI;
   useEffect(() => {
     if (!context.isActive) context.activate();
   }, []);

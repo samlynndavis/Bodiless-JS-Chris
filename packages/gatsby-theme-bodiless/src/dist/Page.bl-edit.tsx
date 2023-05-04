@@ -19,6 +19,8 @@ import {
   withSwitcherButton,
   OnNodeErrorNotification,
   observer,
+  useDocsButton,
+  useEditButton,
 } from '@bodiless/core';
 import {
   useGitButtons,
@@ -63,6 +65,12 @@ const GitButtons: FC = () => {
   return <></>;
 };
 
+const EditButtons: FC = () => {
+  useDocsButton();
+  useEditButton();
+  return <></>;
+};
+
 const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
@@ -86,6 +94,7 @@ const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...
               <SwitcherButton />
               <NotificationButton />
               <Editor>
+                <EditButtons />
                 <OnNodeErrorNotification />
                 <NewPageButton />
                 <MovePageButton />
