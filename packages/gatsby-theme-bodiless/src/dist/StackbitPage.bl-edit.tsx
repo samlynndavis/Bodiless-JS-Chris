@@ -12,15 +12,19 @@
  * limitations under the License.
  */
 
-import React, { FC, Fragment, useEffect } from 'react';
+import React, {
+  FC, Fragment, PropsWithChildren, useEffect
+} from 'react';
 import {
   OnNodeErrorNotification,
-  useGitButtons,
-  GitContextProvider,
   useEditButton,
   useEditContext,
+  observer,
 } from '@bodiless/core';
-import { observer } from 'mobx-react';
+import {
+  useGitButtons,
+  GitContextProvider,
+} from '@bodiless/git';
 import { ContextWrapper, PageEditor } from '@bodiless/core-ui';
 import {
   PageDataProvider, withPageMenuGroup,
@@ -58,7 +62,7 @@ const DisablePageButton = flowHoc(
   withPageDisableButton,
 )(Fragment);
 
-const EditPage: FC<PageProps> = observer(({ children, ui, ...rest }) => {
+const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
   const { pageContext } = rest;
   const {
