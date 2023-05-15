@@ -31,9 +31,9 @@ const LinkBase: FC<PropsWithChildren<LinkBaseProps>> = ({ components: C, childre
   <C.Wrapper {...rest}>
     <C.ExternalSRText />
     <C.Icon />
-    <C.Body>
-      {children}
-    </C.Body>
+    {children
+      ? <C.Body>{children}</C.Body>
+      : <C.Body />}
   </C.Wrapper>
 );
 

@@ -31,14 +31,13 @@ const vitalTokenSpecDomains = {
   Layout: {},
   Spacing: {},
   Theme: {},
-  Editors: {},
   A11yContent: {},
   Content: {},
   Behavior: {},
   Schema: {},
 };
 
-type DefaultDomains = typeof vitalTokenSpecDomains;
+export type DefaultDomains = typeof vitalTokenSpecDomains;
 
 /**
  * Creates a token definition utility for a clean component.
