@@ -14,11 +14,32 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
+const plugin = require('tailwindcss/plugin');
+
 const resolver = (pkgName) => require.resolve(pkgName);
 
 const twConfig = {
-  content: [
-    './lib/**/!(*.d).{ts,js,jsx,tsx}',
+  content: ['./lib/**/!(*.d).{ts,js,jsx,tsx}'],
+  theme: {
+    extend: {
+      backgroundImage: {
+        'mobile-wave-top': "url('vital-examples/src/background-images/assets/images/mobilewave.svg')",
+      },
+      backgroundSize: {
+        'wave-full': '100% 100%',
+      },
+    },
+  },
+  plugins: [
+    plugin(({ addComponents }) => {
+      addComponents({
+        '.footer-wave': {
+          maskImage: "url('vital-examples/src/background-images/assets/images/desktopwave.svg')",
+          maskPosition: 'bottom center',
+          maskSize: '100%',
+        },
+      });
+    }),
   ],
 };
 
