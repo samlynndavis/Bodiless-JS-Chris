@@ -21,7 +21,7 @@ const twConfig = {
   theme: {
     extend: {
       colors: {
-        primary: {
+        'vital-primary': {
           brand: '#CD8987',
           card: '#CDCACC',
           interactive: '#CDACA1',
@@ -31,7 +31,7 @@ const twConfig = {
           'footer-copy': '#330000',
           'page-bg': '#CDCACC',
         },
-        secondary: {
+        'vital-secondary': {
           eyebrow: '#CCFBFE',
           separator: '#330000',
           'footer-bg': '#CDCACC',

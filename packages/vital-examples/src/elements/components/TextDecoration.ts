@@ -3,6 +3,6 @@ import { vitalTextDecorationBase } from '@bodiless/vital-elements/src/base';
 
 export default asTokenGroup(TextDecorationMeta)({
   ...vitalTextDecorationBase,
-  Book: 'font-book',
-  Bold: 'font-light',
+  Book: 'font-light',
+  Bold: 'font-black',
 });
