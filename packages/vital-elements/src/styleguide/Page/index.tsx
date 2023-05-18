@@ -1,4 +1,4 @@
-import { asFluidToken } from '@bodiless/vital-elements';
+import { asFluidToken } from '../../util';
 import { vitalPage } from '@bodiless/vital-templates';
 import { TestStyleGuideTemplate } from './StyleGuideTemplate';
 

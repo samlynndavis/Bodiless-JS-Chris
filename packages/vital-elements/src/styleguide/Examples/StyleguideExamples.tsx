@@ -17,12 +17,10 @@ import {
   DesignableComponents,
   as,
 } from '@bodiless/fclasses';
-import {
-  asFluidToken,
-  vitalSpacing,
-  vitalTypography,
-} from '@bodiless/vital-elements';
 import { withDefaultContent, withNode, withNodeKey } from '@bodiless/data';
+import { asFluidToken } from '../../util';
+import { vitalSpacing } from '../../components/Spacing';
+import { vitalTypography } from '../../components/Typography';
 
 export type StyleGuideExamplesComponents = {
   Wrapper: ComponentOrTag<any>;

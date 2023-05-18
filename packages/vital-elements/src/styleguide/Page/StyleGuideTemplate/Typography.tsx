@@ -13,11 +13,12 @@ import {
   addProps,
   Span,
 } from '@bodiless/fclasses';
-import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import {
   asStyleGuideTemplateToken,
   vitalStyleGuideTemplate,
 } from '@bodiless/vital-templates';
+import { asFluidToken } from '../../../util';
+import { vitalTypography } from '../../../components/Typography';
 import {
   StyleGuideExamplesClean,
   vitalStyleGuideExamples,

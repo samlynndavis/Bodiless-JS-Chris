@@ -10,7 +10,7 @@ import { vitalTypographyBase } from '@bodiless/vital-elements/src/base';
 
 const H1 = asElementToken(vitalTypographyBase.H1, {
   Core: {
-    _: as(vitalTextDecoration.Normal, vitalFontSize.XXXXXL),
+    _: as(vitalTextDecoration.Normal, 'text-m-5xl lg:text-5xl'),
   },
   Theme: {
     _: vitalColor.TextPrimaryBrand,
