@@ -140,10 +140,14 @@ const H5 = asElementToken({
   Meta: meta,
 });
 
-const HeaderLink = as(
-  vitalColor.TextPrimaryInteractive,
-  vitalTextDecoration.Underline,
-);
+const HeaderLink = asElementToken({
+  Theme: {
+    _: as(
+      vitalColor.TextPrimaryInteractive,
+      vitalTextDecoration.Underline,
+    )
+  }
+});
 
 const Body = asElementToken({
   Core: {

@@ -1,4 +1,4 @@
-# Learn how to Shadow Design Tokens
+# Learn how to Customize Design Tokens
 
 In this lesson we will learn how to shadow the design elements, these are the base elements for customizing a website, in it we will define colors, fonts, typography and the like.
 
