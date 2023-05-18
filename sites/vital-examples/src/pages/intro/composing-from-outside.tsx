@@ -1,6 +1,6 @@
 import { as } from '@bodiless/fclasses';
 import React from 'react';
-import { Dialog, exampleDialog, customDialog } from 'vital-examples/lib/intro/composing-from-without';
+import { Dialog, exampleDialog, customDialog } from 'vital-examples/lib/intro/composing-from-outside';
 
 const WelcomeDialog = as(exampleDialog.Welcome)(Dialog);
 const CustomWelcomeDialog = as(customDialog.Welcome)(Dialog);

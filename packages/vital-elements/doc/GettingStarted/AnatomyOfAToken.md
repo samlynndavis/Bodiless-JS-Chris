@@ -10,8 +10,8 @@ additional styling and content.  It is equivalent to the following:
 ```ts
 const Welcome = asDialogToken({
   Theme: {
-    TitleWrapper: 'dialog-title-utility-classes',
-    MessageWrapper: 'dialog-message-utility-classes',
+    TitleWrapper: 'Dialog-title',
+    MessageWrapper: 'Dialog-message',
     Border: addProps({ color: FancyBorderColor.Blue }),
   },
   Content: {
