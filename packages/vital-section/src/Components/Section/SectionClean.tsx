@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import {
   designable,
-  Div,
   H2,
   Section,
   Fragment,
@@ -14,8 +13,8 @@ import { SectionComponents, SectionBaseProps } from './types';
 
 const sectionComponents: SectionComponents = {
   Wrapper: Section,
-  TitleWrapper: Div,
-  Title: H2,
+  TitleWrapper: H2,
+  Title: Fragment,
   LinkWrapper: Fragment,
   Link: Fragment,
   DescriptionWrapper: Fragment,
