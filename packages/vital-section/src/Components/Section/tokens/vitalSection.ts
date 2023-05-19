@@ -1,66 +1,109 @@
-import { withNodeKey } from '@bodiless/data';
-import { flowHoc, replaceWith } from '@bodiless/fclasses';
+import { withNode, withNodeKey } from '@bodiless/data';
 import { withPlaceholder } from '@bodiless/components';
-import { vitalEditorPlain } from '@bodiless/vital-editors';
+import { EditorPlainClean, vitalEditorPlain } from '@bodiless/vital-editors';
+import { vitalTypography } from '@bodiless/vital-elements';
+import { LinkClean, vitalLink } from '@bodiless/vital-link';
+import {
+  H2, P, as, extendMeta, flowHoc, on,
+} from '@bodiless/fclasses';
 
 import { asSectionToken } from '../SectionClean';
 
-export const SectionNodeKeys = {
-  Title: 'title',
-  Description: 'description',
-  Link: 'link',
-  Content: 'content',
-};
-
+/**
+ * A Default token for the Section Component. This token registers nodes and node keys
+ * and sets minimal layout styles. Note how we use `on(CleanComponent)(cleanComponentToken.Default)`
+ * to replace the initial Section clean components.
+ */
 const Default = asSectionToken({
-  Components: {
-    Title: vitalEditorPlain.Default,
-    Description: vitalEditorPlain.Default,
-  },
   Layout: {
     Wrapper: 'w-full flex flex-col',
   },
   Schema: {
-    Title: withNodeKey(SectionNodeKeys.Title),
-    Description: withNodeKey(SectionNodeKeys.Description),
-    Link: withNodeKey(SectionNodeKeys.Link),
-    Content: withNodeKey(SectionNodeKeys.Content),
+    Title: as(withNode, withNodeKey('title')),
+    Description: as(withNode, withNodeKey('description')),
+    Link: as(withNode, withNodeKey('link')),
+    Content: as(withNode, withNodeKey('content')),
   },
   Content: {
     Title: withPlaceholder('Default Section Title'),
-    Content: withPlaceholder('Default Section Content'),
     Description: withPlaceholder('Section description'),
   },
   Meta: flowHoc.meta.term('Type')('Section'),
 });
 
-const WithNoTitle = asSectionToken({
-  ...Default,
+/**
+ * A token that adds a Link to the Section Component.
+ * Note that this token does not add any default link text.
+ *
+ * Note that the name of this token *starts with* `With...`. That means that the token is meant
+ * to be layered on top of other tokens and not used by itself. The big difference here is that
+ * this token *does not extend* the Default token. It is very limited in what this token can do.
+ *
+ * Think of it as an Adjective, something that reflects behaviour or additional functionality.
+ *
+ * This is the preffered Token pattern since it encourages composition
+ * and results in a better overall code structure as well as simplifying testing.
+ */
+const WithLink = asSectionToken({
   Components: {
-    ...Default.Component,
-    Title: replaceWith(() => null),
+    Link: on(LinkClean)(vitalLink.Default),
   },
+  Meta: extendMeta(
+    flowHoc.meta.term('Sub Type')('With Link'),
+  ),
 });
 
-const WithNoDescription = asSectionToken({
-  ...Default,
+/**
+ * A token that adds a Title to the Section Component.
+ * The Title is an `EditorPlainClean` with `vitalEditorPlain.Default` token.
+ * `TitleWrapper` is the actual `H2` tag.
+ *
+ * Note that the name of this token *starts with* `With...`. That means that the token is meant
+ * to be layered on top of other tokens and not used by itself. The big difference here is that
+ * this token *does not extend* the Default token. It is very limited in what this token can do.
+ *
+ * Think of it as an Adjective, something that reflects behaviour or additional functionality.
+ *
+ * This is the preffered Token pattern since it encourages composition
+ * and results in a better overall code structure as well as simplifying testing.
+ */
+const WithTitle = asSectionToken({
   Components: {
-    ...Default.Component,
-    Description: replaceWith(() => null),
+    TitleWrapper: on(H2)(vitalTypography.H2),
+    Title: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
+  Meta: extendMeta(
+    flowHoc.meta.term('Sub Type')('With Title'),
+  ),
 });
 
-const WithNoLink = asSectionToken({
-  ...Default,
+/**
+ * A token that adds a Description to the Section Component.
+ * The Description is an `EditorPlainClean` with `vitalEditorPlain.Default` token.
+ * `DescriptionWrapper` is the `P` tag.
+ *
+ * Note that the name of this token *starts with* `With...`. That means that the token is meant
+ * to be layered on top of other tokens and not used by itself. The big difference here is that
+ * this token *does not extend* the Default token. It is very limited in what this token can do.
+ *
+ * Think of it as an Adjective, something that reflects behaviour or additional functionality.
+ *
+ * This is the preffered Token pattern since it encourages composition
+ * and results in a better overall code structure as well as simplifying testing.
+ */
+const WithDescription = asSectionToken({
   Components: {
-    ...Default.Component,
-    Link: replaceWith(() => null),
+    DescriptionWrapper: on(P)(vitalTypography.Body),
+    Description: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
+  Meta: extendMeta(
+    flowHoc.meta.term('Sub Type')('With Description'),
+  ),
 });
 
 export default {
   Default,
-  WithNoTitle,
-  WithNoDescription,
-  WithNoLink
+  WithTitle,
+  WithLink,
+  WithDescription,
 };

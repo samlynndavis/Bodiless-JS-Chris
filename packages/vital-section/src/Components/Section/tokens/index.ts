@@ -1,4 +1,3 @@
-import vitalSection, { SectionNodeKeys } from './vitalSection';
+import vitalSection from './vitalSection';
 
 export default vitalSection;
-export { SectionNodeKeys };

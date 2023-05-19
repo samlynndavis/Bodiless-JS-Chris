@@ -33,10 +33,7 @@ To add a Vital Section Component to your page:
 import { withNodeKey } from '@bodiless/data';
 import { SectionClean, vitalSection } from '@bodiless/vital-section';
 
-const DefaultSection = as(
-  vitalSection.Default,
-  withNodeKey('defaultbutton'),
-)(SectionClean);
+const DefaultSection = as(vitalSection.Default)(SectionClean);
 ```
 
 ### Overriding Section

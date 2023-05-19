@@ -12,7 +12,7 @@ import { asVitalTokenSpec } from '@bodiless/vital-elements';
 
 import { SectionComponents, SectionBaseProps } from './types';
 
-const sectionComponent: SectionComponents = {
+const sectionComponents: SectionComponents = {
   Wrapper: Section,
   TitleWrapper: Div,
   Title: H2,
@@ -20,8 +20,8 @@ const sectionComponent: SectionComponents = {
   Link: Fragment,
   DescriptionWrapper: Fragment,
   Description: Fragment,
-  ContentWrapper: Div,
-  Content: Div,
+  ContentWrapper: Fragment,
+  Content: Fragment,
 };
 
 const SectionBase: FC<SectionBaseProps> = ({ components, ...rest }) => {
@@ -32,6 +32,17 @@ const SectionBase: FC<SectionBaseProps> = ({ components, ...rest }) => {
     DescriptionWrapper,
     Description,
     LinkWrapper,
+    /**
+     * Renaming the link because of this error:
+     *
+     * `The href attribute is required for an anchor to be keyboard accessible.
+     *  Provide a valid, navigable address as the href value. If you cannot provide an href,
+     *  but still need the element to resemble a link, use a button and change it
+     *  withappropriate styles.
+     *
+     *  Learn more:
+     *  https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md
+     */
     Link: SectionLink,
     ContentWrapper,
     Content,
@@ -56,7 +67,7 @@ const SectionBase: FC<SectionBaseProps> = ({ components, ...rest }) => {
 };
 
 const SectionClean = as(
-  designable(sectionComponent, 'Section'),
+  designable(sectionComponents, 'Section'),
   withNode,
 )(SectionBase);
 
