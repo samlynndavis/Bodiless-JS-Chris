@@ -1,5 +1,5 @@
-import { asFluidToken } from '../../util';
 import { vitalPage } from '@bodiless/vital-templates';
+import { asFluidToken } from '../../util';
 import { TestStyleGuideTemplate } from './StyleGuideTemplate';
 
 const { Typography } = TestStyleGuideTemplate;

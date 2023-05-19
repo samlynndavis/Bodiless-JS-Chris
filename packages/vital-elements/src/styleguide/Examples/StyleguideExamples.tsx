@@ -42,23 +42,27 @@ export type StyleGuideExamplesBaseProps = DesignableComponentsProps & {
 
 const StyleGuideExamplesBase: FC<StyleGuideExamplesBaseProps> = (props) => {
   const { components, content } = props;
-  const { Wrapper, ItemWrapper, ItemTitle, ItemContent, ...restComponents } =
-    components;
+  const {
+    Wrapper,
+    ItemWrapper,
+    ItemTitle,
+    ItemContent,
+    ...restComponents
+  } = components;
 
   const finalComponents: DesignableComponents = useMemo(
-    () =>
-      Object.entries(restComponents).reduce(
-        (acc, [key, value]) => ({
-          ...acc,
-          [key]: flowHoc(
-            content ? withDefaultContent(content) : identity,
-            // Remove next 2 lines if we want shared content.
-            withNode,
-            withNodeKey(key),
-          )(value),
-        }),
-        {},
-      ),
+    () => Object.entries(restComponents).reduce(
+      (acc, [key, value]) => ({
+        ...acc,
+        [key]: flowHoc(
+          content ? withDefaultContent(content) : identity,
+          // Remove next 2 lines if we want shared content.
+          withNode,
+          withNodeKey(key),
+        )(value),
+      }),
+      {},
+    ),
     [components, content],
   );
 
