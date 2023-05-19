@@ -1,0 +1,30 @@
+{{#if sourcePackageName}}
+import { {{camelCase sourceLibraryName}}{{properCase componentName}}Base, as{{properCase componentName}}Token } from '{{sourcePackageName}}';
+
+const Default = as{{properCase componentName}}Token({{camelCase sourceLibraryName}}{{properCase componentName}}Base.Default, {
+  Behavior: {
+    ...
+  },
+  Components: {
+    ...
+  }
+});
+{{else}}
+const Default = {
+  Behavior: {
+    ...
+  },
+  Components: {
+    ...
+  }
+};
+
+{{/if}}
+
+
+...
+
+export {
+  Default,
+  ...
+};

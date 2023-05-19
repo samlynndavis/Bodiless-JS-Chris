@@ -1,0 +1,39 @@
+import React, { FC, Fragment } from 'react';
+import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { designable, Div } from '@bodiless/fclasses';
+
+type {{properCase componentName}}Props = {
+  ...
+};
+
+const {{camelCase componentName}}Components: {{properCase componentName}}Components = {
+  Wrapper: Div,
+  Component1Wrapper: Div,
+  Component1: Fragment,
+  Component2Wrapper: Div,
+  Component2: Fragment,
+  Component3Wrapper: Div,
+  Component3: Fragment,
+};
+
+const {{properCase componentName}}CleanBase: FC<{{properCase componentName}}Props> = ({ components: C, ...rest }) => (
+  <C.Wrapper {...rest}>
+      <C.Component1Wrapper><C.Component1 /></C.Component1Wrapper>
+      <C.Component2Wrapper><C.Component2 /></C.Component2Wrapper>
+      <C.Component3Wrapper><C.Component3 /></C.Component3Wrapper>
+  </C.Wrapper>
+);
+
+const {{properCase componentName}}Clean = designable({{camelCase componentName}}Components, '{{properCase componentName}}')({{properCase componentName}}CleanBase);
+
+/**
+ * A token modifier that respects the {{properCase componentName}} Components.
+ *
+ * @category Token Collection
+ */
+const as{{properCase componentName}}Token = asVitalTokenSpec<{{properCase componentName}}Components>();
+
+const {{camelCase componentName}}Token = as{{properCase componentName}}Token();
+export type {{properCase componentName}}Token = typeof {{camelCase componentName}}Token;
+
+export { {{properCase componentName}}Clean, as{{properCase componentName}}Token };
