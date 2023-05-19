@@ -35,11 +35,15 @@ You can find all vital colors [in here](https://github.com/johnsonandjohnson/Bod
 
 Then under the `src/component` folder, we'll create the files with the Components names, in our case, we'll override the `Typography` and `TextDecoration`, so we create theses files.
 
-### TextDecoration
+### Components
+
+For the sake of this example, we will two components, which extends the vital components, `TextDecoration` and `Typography` and define our custom tokens, and to shadow them, we'll just export them.
+
+#### TextDecoration
 
 The `TextDecoration` class is easier to do, since we just export some tokens with only a class for each tokens, our file will look like this.
 
-#### `src/component/TextDecoration.ts`
+##### `src/component/TextDecoration/tokens/exampleTextDecoration.ts`
 ```ts
 import { asTokenGroup, TextDecorationMeta } from '@bodiless/vital-elements';
 import { vitalTextDecorationBase } from '@bodiless/vital-elements/src/base';
@@ -56,18 +60,18 @@ export default asTokenGroup(TextDecorationMeta)({
 
 In this example we overwrite the the `Bold` token to set a bolder font and also create the new `Book` font weight, which is lighter than the vital text decoration tokens.
 
-### Typography
+#### Typography
 
 For the typography, we will have to do some more work, each typography element should be a instance of `asElementToken`, so we can rely on Domains to help us to define our tokens. Our typography file will be something like this.
 
-#### `src/component/Typography.ts`
+##### `src/component/TextDecoration/tokens/exampleTypography.ts`
 ```ts
-import { asElementToken, vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
+import { asElementToken, vitalColor, vitalFontSize, vitalTextDecoration } from '@bodiless/vital-elements';
 import { vitalTypographyBase } from '@bodiless/vital-elements/src/base';
 
 const H1 = asElementToken({
   Core: {
-    _: as(vitalTextDecoration.Normal, 'text-5xl'),
+    _: as(vitalTextDecoration.Normal, vitalFontSize.XXXL),
   },
   Theme: {
     _: vitalColor.TextPrimaryBrand,
@@ -76,7 +80,7 @@ const H1 = asElementToken({
 
 const H2 = asElementToken({
   Core: {
-    _: as(vitalTextDecoration.ExtraBold, 'text-3xl'),
+    _: as(vitalTextDecoration.ExtraBold, vitalFontSize.XXXL),
   },
   Theme: {
     _: vitalColor.TextPrimaryBodyCopy,
@@ -90,23 +94,22 @@ export default {
 }
 ```
 
-In this example, we create a custom H1 and H2 Tokens and exporting them with the vital typography base.
+In this example, we created a custom H1 and H2 Tokens and exporting them with the vital typography base. So our package have all the vital tokens.
+
+### Shadowing
+
+And now, to shadow the our tokens, create a file with the same path of the package, in out case, since we area shadowing the `@bodiles/vital-elements` package, we'll have this structure.
+
+```bash
+├── shadow
+│   ├── @bodiless
+│   │   ├── vital-elements
+│   │   |   ├─ Typography.ts
+│   │   |   └─ TextDecoration.ts
+```
+
+Where each file export the tokens from the components folder.
 
 ## Practice
 
 Now you can try to create you own shadow files, try to customize some vital text decorations tokens, or even create a new typography token.
-
-## FAQ
-
-<!--
-    If you remember any of the questions you had when completing this task — or can think of any
-    questions a new developer may have — document the Questions and Answers here.
--->
-
-### [ QUESTION 1 ]
-
-<!-- Answer to QUESTION 1 -->
-
-### [ QUESTION 2 ]
-
-<!-- Answer to QUESTION 2 -->
