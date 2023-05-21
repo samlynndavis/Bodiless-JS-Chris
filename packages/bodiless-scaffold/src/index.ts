@@ -1,3 +1,17 @@
+/**
+ * Copyright © 2023 Johnson & Johnson
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { Plop, run } from 'plop';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -8,19 +22,6 @@ const cwd = process.cwd();
 const configPath = join(dir, 'plopFile.js');
 const preload = process.env.PLOP_PRELOAD || '';
 const completion = process.env.PLOP_COMPLETION || '';
-
-// @todo: remove debug
-//
-// console.log(
-//   'cwd',
-//   cwd,
-//   'configPath',
-//   configPath,
-//   'preload',
-//   preload,
-//   'completion',
-//   completion,
-// );
 
 const execute = (env: any) => {
   Plop.prepare(
@@ -39,7 +40,5 @@ const execute = (env: any) => {
     },
   );
 };
-
-// execute({});
 
 export { execute };
