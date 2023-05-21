@@ -17,32 +17,32 @@ import type { Actions } from 'node-plop';
 const defaultActions: Actions = [
   {
     type: 'add',
-    path: '{{destinationPath}}/{{properCase componentName}}/src/index.ts',
+    path: '{{destinationPath}}/{{properCase componentName}}/index.ts',
     templateFile: './templates/component/index.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{destinationPath}}/{{properCase componentName}}/src/token/index.ts',
+    path: '{{destinationPath}}/{{properCase componentName}}/token/index.ts',
     templateFile: './templates/component/tokens/index.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{destinationPath}}/{{properCase componentName}}/src/token/{{camelCase libraryName}}{{properCase componentName}}.ts',
+    path: '{{destinationPath}}/{{properCase componentName}}/token/{{camelCase libraryName}}{{properCase componentName}}.ts',
     templateFile: './templates/component/tokens/libraryComponent.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{destinationPath}}/{{properCase componentName}}/src/token/{{camelCase libraryName}}Base{{properCase componentName}}.ts',
+    path: '{{destinationPath}}/{{properCase componentName}}/token/{{camelCase libraryName}}Base{{properCase componentName}}.ts',
     templateFile: './templates/component/tokens/libraryBaseComponent.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{destinationPath}}/{{properCase componentName}}/src/token/{{camelCase libraryName}}Variant1{{properCase componentName}}.ts',
+    path: '{{destinationPath}}/{{properCase componentName}}/token/{{camelCase libraryName}}Variant1{{properCase componentName}}.ts',
     templateFile: './templates/component/tokens/libraryVariantComponent.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{destinationPath}}/{{properCase componentName}}/src/token/{{camelCase libraryName}}Variant2{{properCase componentName}}.ts',
+    path: '{{destinationPath}}/{{properCase componentName}}/token/{{camelCase libraryName}}Variant2{{properCase componentName}}.ts',
     templateFile: './templates/component/tokens/libraryVariantComponent.ts.hbs',
   },
 ];
@@ -59,7 +59,7 @@ const actions: Actions = (data) => {
   if (!tokensOnly) {
     actionsToRun.push({
       type: 'add',
-      path: '{{destinationPath}}/{{properCase componentName}}/src/{{properCase componentName}}Clean.ts',
+      path: '{{destinationPath}}/{{properCase componentName}}/{{properCase componentName}}Clean.ts',
       templateFile: './templates/component/Clean.tsx.hbs',
     });
   }
