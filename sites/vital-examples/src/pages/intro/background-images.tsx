@@ -2,12 +2,12 @@ import {
   as, H1, H2, P
 } from '@bodiless/fclasses';
 import React from 'react';
-import { customFooter } from 'vital-examples/lib/background-images';
+import { lessonFooter } from 'vital-examples/lib/background-images';
 import { FooterClean, vitalFooter } from '@bodiless/vital-layout';
 import { vitalTypography } from '@bodiless/vital-elements';
 
 const Footer = as(vitalFooter.Default)(FooterClean);
-const CustomFooter = as(customFooter.Default)(FooterClean);
+const CustomFooter = as(lessonFooter.Default)(FooterClean);
 
 const Title = as(vitalTypography.H1, 'pt-8')(H1);
 const SubTitle = as(vitalTypography.H2, 'pt-8')(H2);
