@@ -3,7 +3,7 @@ import { asVitalTokenSpec } from '@bodiless/vital-elements';
 import { designable, Div } from '@bodiless/fclasses';
 
 type {{properCase componentName}}Props = {
-  ...
+  // ...
 };
 
 const {{camelCase componentName}}Components: {{properCase componentName}}Components = {
@@ -12,15 +12,16 @@ const {{camelCase componentName}}Components: {{properCase componentName}}Compone
   Component1: Fragment,
   Component2Wrapper: Div,
   Component2: Fragment,
-  Component3Wrapper: Div,
-  Component3: Fragment,
 };
 
 const {{properCase componentName}}CleanBase: FC<{{properCase componentName}}Props> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
-      <C.Component1Wrapper><C.Component1 /></C.Component1Wrapper>
-      <C.Component2Wrapper><C.Component2 /></C.Component2Wrapper>
-      <C.Component3Wrapper><C.Component3 /></C.Component3Wrapper>
+      <C.Component1Wrapper>
+        <C.Component1 />
+      </C.Component1Wrapper>
+      <C.Component2Wrapper>
+        <C.Component2 />
+      </C.Component2Wrapper>
   </C.Wrapper>
 );
 

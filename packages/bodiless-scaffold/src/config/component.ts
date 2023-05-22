@@ -13,7 +13,7 @@
  */
 
 import type { NodePlopAPI } from 'plop';
-import config from './config/index.js';
+import config from './component/index.js';
 
 export default (plop: NodePlopAPI) => {
   plop.setGenerator('component', config);

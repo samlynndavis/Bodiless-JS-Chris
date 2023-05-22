@@ -23,9 +23,9 @@ import {
 const prompts: Prompts = [
   {
     type: 'input',
-    name: 'destinationPath',
-    message: `Path to components directory [Required],
-e.g. "./", "./src/components/", "/absolute/path/to/" etc. Default to current directory.
+    name: 'packageSourcePath',
+    message: `Path to package source(src) directory [Required],
+e.g. "./", "./src/", "/absolute/path/to/[package name]/src" etc. Default to current directory.
 > `,
     validate: pathValidator,
   },
@@ -67,17 +67,17 @@ e.g. "./", "./src/components/", "/absolute/path/to/" etc. Default to current dir
     default: false,
     when: ({ sourcePackageName }) => !!sourcePackageName,
   },
+  // {
+  //   type: 'input',
+  //   name: 'shadowPath',
+  //   message: 'Path to shadow directory, e.g. "./src/shadow", ',
+  //   when: ({ shadow }) => shadow,
+  //   validate: pathValidator,
+  // },
   {
     type: 'confirm',
     name: 'static',
     message: 'Whether or not the component is always static (Y/n)',
-  },
-  {
-    type: 'input',
-    name: 'shadowPath',
-    message: 'Path to shadow directory, e.g. "./src/shadow", ',
-    when: ({ shadow }) => shadow,
-    validate: pathValidator,
   },
 ];
 

@@ -16,10 +16,18 @@ import { Plop, run } from 'plop';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-const dir = dirname(fileURLToPath(import.meta.url));
+const validScaffoldTypes = ['component', 'page', 'site'];
+const scaffoldType = process.argv.slice(2).shift() || 'component';
+if (!validScaffoldTypes.includes(scaffoldType)) {
+  console.error(`
+Error: Invalid scaffold type: ${scaffoldType}.
+Valid types are: "${validScaffoldTypes.join(', ')}"\n`);
+  process.exit(1);
+}
 
+const dir = dirname(fileURLToPath(import.meta.url));
 const cwd = process.cwd();
-const configPath = join(dir, 'plopFile.js');
+const configPath = join(dir, `config/${scaffoldType}.js`);
 const preload = process.env.PLOP_PRELOAD || '';
 const completion = process.env.PLOP_COMPLETION || '';
 
