@@ -107,6 +107,7 @@ In a separate `customFooter.ts` file, we will construct a token for our custom f
 
 - [Adding components in Tailwind](https://tailwindcss.com/docs/plugins#adding-components)
 - [SVGR - For converting SVGs to React components](https://react-svgr.com/playground/)
+- [Using Tailwind for Background Images](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/Guides/BuildingSites/TailwindGuide?id=using-tailwind-for-background-images)
 -
 
 <!--

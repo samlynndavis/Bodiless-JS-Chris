@@ -1,1 +1,1 @@
-export * from './components/CustomFooter';
+export * from './components/lessonFooter';

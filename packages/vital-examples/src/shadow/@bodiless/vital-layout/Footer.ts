@@ -11,18 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { asFooterToken } from '@bodiless/vital-layout';
-import { vitalFooterBase } from '@bodiless/vital-layout/lib/base';
-import { addProps } from '@bodiless/fclasses';
-// Setup the vital package to use the Rewards by default.
-const Default = asFooterToken(vitalFooterBase.Default, {
-  ...vitalFooterBase.WithRewardsExpanding2XL,
-  Behavior: {
-    Container: addProps({ 'data-shadowed-by': 'vitalExamplesFooter' }),
-  },
-});
+
+import { vitalFooter, asFooterToken } from '@bodiless/vital-layout';
+import { lessonFooterBase } from '../../../../lib/background-images/components/lessonFooter/base';
+
+const Default = asFooterToken(lessonFooterBase.Default);
 
 export default {
-  ...vitalFooterBase,
+  ...vitalFooter,
   Default,
 };
