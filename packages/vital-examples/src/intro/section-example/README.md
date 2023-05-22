@@ -412,7 +412,7 @@ The `ArticleClean` component may have the following structure:
 </Wrapper>
 ```
 
-All slots except for the `ArticleTitle` are `Fragments` by default and there are 3 Tokens exported by the package: `WithArticleLink`, `WithArticleCTA`, ``WithArticleContent` that add corresponding slots to the component.
+All slots except for the `ArticleTitle` are `Fragments` by default and there are 3 Tokens exported by the package: `WithArticleLink`, `WithArticleCTA`, `WithArticleContent` that add corresponding slots to the component.
 
  
 ## FAQ
@@ -423,8 +423,8 @@ A: The `asSectionToken` function is used to create component tokens for the `Sec
  
 ### Why are these tokens called "With..."?
  
-A: The tokens in BodilessJs are named with the prefix "with..." to indicate that they provide additional functionality or behavior to the component they are applied to. This naming convention helps developers understand that these tokens are meant to be layered on top of other tokens and enable composition. By using the "with..." naming convention, it promotes a modular and composable approach to building components.
+A: The tokens in BodilessJs are named with the prefix "With..." to indicate that they provide additional functionality or behavior to the component they are applied to. This naming convention helps developers understand that these tokens are meant to be layered on top of other tokens and enable composition. By using the "With..." naming convention, it promotes a modular and composable approach to building components.
  
 ### Can I use these tokens independently without other tokens?
  
-A: Yes, you can use the tokens independently without layering them on top of other tokens. However, it's important to note that the tokens prefixed with "with..." are designed to enhance and extend the functionality of existing tokens or components. Using them independently may limit their capabilities and potential benefits. Consider the specific use case and whether applying the tokens individually aligns with your development goals.
+A: Yes, you can use the tokens independently without layering them on top of other tokens. However, it's important to note that the tokens prefixed with "With..." are designed to enhance and extend the functionality of existing tokens or components. Using them independently may limit their capabilities and potential benefits. Consider the specific use case and whether applying the tokens individually aligns with your development goals.
