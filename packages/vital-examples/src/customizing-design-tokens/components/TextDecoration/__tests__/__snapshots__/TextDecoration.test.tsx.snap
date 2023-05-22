@@ -6,12 +6,6 @@ exports[`TextDecoration Matches snapshot for Bold 1`] = `
 />
 `;
 
-exports[`TextDecoration Matches snapshot for Book 1`] = `
-<span
-  className="font-light"
-/>
-`;
-
 exports[`TextDecoration Matches snapshot for ExtraBold 1`] = `
 <span
   className="font-extrabold"

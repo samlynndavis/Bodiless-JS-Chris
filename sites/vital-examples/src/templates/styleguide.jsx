@@ -12,9 +12,9 @@
  * limitations under the License.
  */
 
-import { StyleGuideTemplateClean } from '@bodiless/vital-templates';
 import { as } from '@bodiless/fclasses';
-import { VitalTestStyleGuidePage } from '@bodiless/vital-elements';
+import { StyleGuideTemplateClean } from '@bodiless/vital-templates';
+import { VitalTestStyleGuidePage } from '@bodiless/vital-demo';
 
 const StyleGuidePage = as(VitalTestStyleGuidePage.Default)(
   StyleGuideTemplateClean,

@@ -18,4 +18,3 @@ export * from './components/FontSize';
 export * from './components/Spacing';
 export * from './components/TextDecoration';
 export * from './util';
-export * from './styleguide';
