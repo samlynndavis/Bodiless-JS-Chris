@@ -1,2 +1,2 @@
 export * from './components/Radius';
-export * from './components/fancyRadius';
+export * from './components/lessonCard';

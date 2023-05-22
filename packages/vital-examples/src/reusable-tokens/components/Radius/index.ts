@@ -1,1 +1,1 @@
-export { default as simpleCorner } from './tokens';
+export { default as Radius } from './tokens';
