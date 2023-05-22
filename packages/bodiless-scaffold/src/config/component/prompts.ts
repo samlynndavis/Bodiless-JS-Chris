@@ -59,6 +59,7 @@ e.g. "./", "./src/", "/absolute/path/to/[package name]/src" etc. Default to curr
     type: 'confirm',
     name: 'tokensOnly',
     message: 'Tokens only? otherwise includes a clean component (Y/n)',
+    default: true,
   },
   {
     type: 'confirm',

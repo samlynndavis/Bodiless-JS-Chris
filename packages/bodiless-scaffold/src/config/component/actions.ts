@@ -40,6 +40,11 @@ const defaultActions: Actions = [
     path: '{{packageSourcePath}}/components/{{properCase componentName}}/base/index.ts',
     templateFile: '../templates/component/index.base.ts.hbs',
   },
+  {
+    type: 'add',
+    path: '{{packageSourcePath}}/components/{{properCase componentName}}/tests/{{properCase componentName}}.test.tsx',
+    templateFile: '../templates/component/tests/Component.test.tsx.hbs',
+  },
 ];
 
 const actions: Actions = (data) => {
