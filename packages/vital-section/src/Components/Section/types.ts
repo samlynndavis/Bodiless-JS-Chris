@@ -7,6 +7,7 @@ import {
 } from '@bodiless/fclasses';
 
 /**
+ * A set of Section components. By default all slots are typed as `ComponentOrTag<any>`.
  * @category Component
  */
 export interface SectionComponents extends DesignableComponents {

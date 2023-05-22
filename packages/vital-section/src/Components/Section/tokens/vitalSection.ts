@@ -11,8 +11,7 @@ import { asSectionToken } from '../SectionClean';
 
 /**
  * A Default token for the Section Component. This token registers nodes and node keys
- * and sets minimal layout styles. Note how we use `on(CleanComponent)(cleanComponentToken.Default)`
- * to replace the initial Section clean components.
+ * and sets minimal layout styles.
  */
 const Default = asSectionToken({
   Layout: {
@@ -101,6 +100,9 @@ const WithDescription = asSectionToken({
   ),
 });
 
+/**
+ * Export all tokens as a single object that is exported from package as `vitalSection`.
+ */
 export default {
   Default,
   WithTitle,
