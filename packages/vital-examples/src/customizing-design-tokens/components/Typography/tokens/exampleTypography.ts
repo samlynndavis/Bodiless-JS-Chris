@@ -9,14 +9,14 @@ import { vitalTypographyBase } from '@bodiless/vital-elements/src/base';
 const H1 = asElementToken({
   ...vitalTypographyBase.H1,
   Core: {
-    _: as(vitalTextDecoration.Normal, 'text-m-5xl lg:text-5xl'),
+    _: as(vitalTextDecoration.Normal, vitalFontSize.XXXL),
   },
 });
 
 const H2 = asElementToken({
   ...vitalTypographyBase.H2,
   Core: {
-    _: as(vitalTextDecoration.ExtraBold, vitalFontSize.XXXL),
+    _: as(vitalTextDecoration.ExtraBold, vitalFontSize.XXL),
   },
 });
 

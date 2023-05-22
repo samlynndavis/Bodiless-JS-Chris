@@ -12,4 +12,20 @@
  * limitations under the License.
  */
 
-export * from './styleguide';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalPage } from '@bodiless/vital-templates';
+import { VitalDemoStyleGuideTemplate } from './StyleGuideTemplate';
+
+const { Typography, _default } = VitalDemoStyleGuideTemplate;
+
+const Default = asFluidToken({
+  ...vitalPage.Default,
+  Components: {
+    _default,
+    Typography,
+  },
+});
+
+export default {
+  Default,
+};

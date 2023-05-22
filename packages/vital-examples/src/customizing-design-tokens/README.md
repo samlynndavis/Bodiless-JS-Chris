@@ -69,29 +69,12 @@ For the typography, we will have to do some more work, each typography element s
 import { asElementToken, vitalColor, vitalFontSize, vitalTextDecoration } from '@bodiless/vital-elements';
 import { vitalTypographyBase } from '@bodiless/vital-elements/src/base';
 
-const H1 = asElementToken({
-  Core: {
-    _: as(vitalTextDecoration.Normal, vitalFontSize.XXXL),
-  },
-  Theme: {
-    _: vitalColor.TextPrimaryBrand,
-  },
-});
-
 const H2 = asElementToken({
+  ...vitalTypographyBase.H2,
   Core: {
-    _: as(vitalTextDecoration.ExtraBold, vitalFontSize.XXXL),
-  },
-  Theme: {
-    _: vitalColor.TextPrimaryBodyCopy,
-  },
+    _: as(vitalTextDecoration.ExtraBold, vitalFontSize.XXL)
+  }
 });
-
-export default {
-    ...vitalTypographyBase,
-    H1,
-    H2
-}
 ```
 
 In this example, we created a custom H1 and H2 Tokens and exporting them with the vital typography base. So our package have all the vital tokens.
