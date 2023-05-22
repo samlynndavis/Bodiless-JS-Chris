@@ -4,8 +4,9 @@ import { asElementToken } from '@bodiless/vital-elements';
 // import { fancyRadius } from '../../fancyRadius';
 // import { simpleCorner } from '../../Radius';
 
-// TODO: Determine how to import 'simpleCorner' token rather
+// TODO: Determine how to import 'simpleCorner' and 'fancyRadius' tokens rather
 // than needing to compose and apply here
+
 const simpleCorner = asElementToken({
   Theme: {
     _: 'rounded-bl-[20px]',
