@@ -12,12 +12,24 @@
  * limitations under the License.
  */
 
-import { vitalFooter, asFooterToken } from '@bodiless/vital-layout';
-import { lessonFooterBase } from '../../../../lib/background-images/components/lessonFooter/base';
+import { addProps } from '@bodiless/fclasses';
+import { asFooterToken } from '@bodiless/vital-layout';
+import { vitalFooterBase } from '@bodiless/vital-layout/lib/base';
+import { lessonFooterBase } from '../../../base';
 
-const Default = asFooterToken(lessonFooterBase.Default);
+const Default = asFooterToken(
+  vitalFooterBase.Default,
+  lessonFooterBase.WithLogo,
+  lessonFooterBase.WithTopWave,
+  {
+    Behavior: {
+      Wrapper: addProps({ 'shadowed-by': 'lessonFooter' }),
+    },
+
+  }
+);
 
 export default {
-  ...vitalFooter,
+  ...vitalFooterBase,
   Default,
 };

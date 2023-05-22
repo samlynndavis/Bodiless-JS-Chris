@@ -1,8 +1,6 @@
+import { asFooterToken } from '@bodiless/vital-layout';
 import {
-  vitalFooter, asFooterToken,
-} from '@bodiless/vital-layout';
-import {
-  addProps,
+  as,
   Div,
   on,
 } from '@bodiless/fclasses';
@@ -25,15 +23,20 @@ const WithTopWave = asFooterToken({
   },
 });
 
-const Default = asFooterToken(
-  vitalFooter.Default,
-  WithTopWave,
+// const WithLogo = asFooterToken({
+
+// });
+
+const WithLogo = asFooterToken(
   {
     Components: {
       Rewards:
       // NOTE: Here we replace our footer's current 'Rewards' slot with
       // a div, and add our new logo as a child of that div.
-      on(Div)(withChild(LogoIcon)),
+      as(
+        on(Div)(withChild(LogoIcon)),
+        'px-40',
+      ),
       // NOTE: This could also be written as: as(replaceWith(Div), withChild(LogoIcon), 'logo'),
     },
     Spacing: {
@@ -44,14 +47,10 @@ const Default = asFooterToken(
       // class to the container (Wrapper) at desktop screen sizes.
       Wrapper: '2xl:footer-wave',
     },
-    Behavior: {
-      Wrapper: addProps({ 'shadowed-by': 'lessonFooter' }),
-    },
   },
 );
 
 export default {
-  ...vitalFooter,
-  Default,
   WithTopWave,
+  WithLogo,
 };
