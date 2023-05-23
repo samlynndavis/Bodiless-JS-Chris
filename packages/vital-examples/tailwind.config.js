@@ -25,11 +25,6 @@ const twConfig = {
   plugins: [
     plugin(({ addComponents }) => {
       addComponents({
-        '.footer-wave': {
-          maskImage: "url('@kenvue/listerine/assets/image/footer-desktop.svg')",
-          maskPosition: 'top center',
-          maskSize: '100%',
-        },
         '.card-corner': {
           width: 'calc(100% - 60px)',
           height: '18rem',

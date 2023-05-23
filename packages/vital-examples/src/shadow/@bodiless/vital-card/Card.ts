@@ -1,14 +1,14 @@
 import { addProps } from '@bodiless/fclasses';
 import { asCardToken } from '@bodiless/vital-card';
-import { lessonCard } from '../../../reusable-tokens/components/lessonCard';
+import { exampleCard } from '../../../reusable-tokens/components/Card';
 
-const Default = asCardToken(lessonCard.Default, {
+const Default = asCardToken(exampleCard.Default, {
   Behavior: {
-    _: addProps({ 'data-shadowed-by': 'lessonCard' }),
+    _: addProps({ 'data-shadowed-by': 'exampleCard' }),
   },
 });
 
 export default {
-  ...lessonCard,
+  ...exampleCard,
   Default,
 };

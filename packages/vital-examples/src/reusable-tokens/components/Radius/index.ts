@@ -1,1 +1,1 @@
-export { default as Radius } from './tokens';
+export { default as exampleRadius } from './tokens';
