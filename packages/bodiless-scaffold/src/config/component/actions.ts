@@ -23,24 +23,19 @@ const defaultActions: Actions = [
   },
   {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}/token/index.ts',
+    path: '{{packageSourcePath}}/components/{{properCase componentName}}/tokens/index.ts',
     templateFile: '../templates/component/tokens/index.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}/token/{{camelCase libraryName}}{{properCase componentName}}.ts',
+    path: '{{packageSourcePath}}/components/{{properCase componentName}}/tokens/{{camelCase libraryName}}{{properCase componentName}}.ts',
     templateFile: '../templates/component/tokens/libraryComponent.ts.hbs',
   },
   {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}/token/{{camelCase libraryName}}Base{{properCase componentName}}.ts',
+    path: '{{packageSourcePath}}/components/{{properCase componentName}}/tokens/{{camelCase libraryName}}Base{{properCase componentName}}.ts',
     templateFile: '../templates/component/tokens/libraryBaseComponent.ts.hbs',
   },
-  // {
-  //   type: 'add',
-  //   path: '{{packageSourcePath}}/components/{{properCase componentName}}/base/index.ts',
-  //   templateFile: '../templates/component/index.base.ts.hbs',
-  // },
   {
     type: 'add',
     path: '{{packageSourcePath}}/components/{{properCase componentName}}/__tests__/{{properCase componentName}}.test.tsx',
