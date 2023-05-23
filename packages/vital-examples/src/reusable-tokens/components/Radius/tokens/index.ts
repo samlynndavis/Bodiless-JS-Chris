@@ -1,3 +1,3 @@
-import tokens from './radius';
+import tokens from './exampleRadius';
 
 export default tokens;
