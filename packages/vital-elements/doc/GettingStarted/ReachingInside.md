@@ -63,9 +63,9 @@ const DialogClean = designable(dialogComponents, 'Dialog')(DialogCleanBase);
 As you can see, this component has zero functionality or styling built in. Instead, we use the
 `designable` utility to allow these to be provided by tokens. The resulting component will receive a
 `design` prop. This is an object with the same keys as the `components` prop received by the base
-component. Each value is a Higher-Order Component composing all the Vital tokens which have been
-applied to that slot. `designable` will apply the HOCs to the starting component in each slot, and
-pass the resulting sub-component through to the `DialogCleanBase` in the `components` prop.
+component. Each value is a higher-order component (HOC) composing all the Vital tokens which have
+been applied to that slot. `designable` will apply the HOCs to the starting component in each slot,
+and pass the resulting sub-component through to the `DialogCleanBase` in the `components` prop.
 
 ?> **Note:** The second parameter passed to `designable` is a string which will be used to identify
 slots in the rendered markup. This makes it easier to understand which slot to target in order to
