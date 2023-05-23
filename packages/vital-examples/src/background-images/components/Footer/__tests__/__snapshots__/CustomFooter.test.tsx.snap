@@ -3,7 +3,7 @@
 exports[`Footer Tokens Matches snapshot for Default 1`] = `
 <footer
   className="2xl:footer-wave bg-vital-secondary-footer-bg mt-10 w-full"
-  shadowed-by="CustomFooter"
+  shadowed-by="exampleFooter"
 >
   <div
     className="2xl:pt-16 2xl:pb-10 2xl:container 2xl:mx-auto mx-site-percent md:mx-md-site-percent 2xl:px-40 2xl:flex"
@@ -134,7 +134,7 @@ exports[`Footer Tokens Matches snapshot for Default 1`] = `
 </footer>
 `;
 
-exports[`Footer Tokens Matches snapshot for customFooter 1`] = `
+exports[`Footer Tokens Matches snapshot for exampleFooter 1`] = `
 <footer
   className="2xl:footer-wave bg-vital-secondary-footer-bg mt-10 w-full"
 >

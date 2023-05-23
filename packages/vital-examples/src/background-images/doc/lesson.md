@@ -59,21 +59,21 @@ export default LogoIcon;
 
 ```
 
-Next, you'll need to create the folder that will house your new footer component `CustomFooter` that will be used to override the default vital footer.
+Next, you'll need to create the folder that will house your new footer component `ExampleFooter` that will be used to override the default vital footer.
 
-You can structure this component's folder in a similar fashion to that of the vital component found [here](packages/vital-layout/src/components/Footer), but because you'll also be modifying the 'Rewards' section of the footer, you'll want to include a folder and token collection for that component as well.
+You can structure this component's folder in a similar fashion to that of the vital component found [here](packages/vital-layout/src/components/Footer), but
 
 - TODO: Add more details on import chain and/or refer to new shadow documentation to avoid verbosity here?
 
 ### Adding our custom brand logo
 
-In our 'Rewards' token -- named `customRewards.ts` in this example -- you'll pull the styling of the default `vitalRewards` token's `Theme` domain into your new token via the spread operator. This will allow you to modify, or even replace any slot in this component using the HOCs that Bodiless make available to you.
+In our 'Rewards' token -- named `customRewards.ts` in this example -- you'll pull the styling of the default `vitalRewards` token's `Theme` domain into your new token via the spread operator. This will allow you to modify, or even replace any slot in this component using the HOCs that Bodiless makes available to you.
 
 In this case we'll use the `withChild` HOC to add our svg logo as a child element of the 'Brand' slot.
 
 ### Creating a new CSS rule in Tailwind for our wave SVG image mask
 
-Using the `addComponents` function provided by Tailwind, we can create a new class containing our image mask path, size, and position, and apply it to the our new footer in the next section.
+Using the `addComponents` function provided by Tailwind, we can create a new class containing our image mask path, size, and position, and apply it to our new footer in the next section.
 
 ```js
 plugin(({ addComponents }) => {
@@ -90,7 +90,7 @@ plugin(({ addComponents }) => {
 
 ### Adding our 'wave' svg asset to the footer wrapper
 
-In a separate `customFooter.ts` file, we will construct a token for our custom footer, and apply our newly-created `.footer-wave` image mask to the `Wrapper` slot ~~as well as a separate token for the inclusion of our mobile wave SVG and apply it to the `Column2Wrapper` slot of our footer token~~.
+In a separate `exampleFooter.ts` file, we will construct a token for our custom footer, and apply our newly-created `.footer-wave` image mask to the `Wrapper` slot ~~as well as a separate token for the inclusion of our mobile wave SVG and apply it to the `Column2Wrapper` slot of our footer token~~.
 
 ## Practice
 

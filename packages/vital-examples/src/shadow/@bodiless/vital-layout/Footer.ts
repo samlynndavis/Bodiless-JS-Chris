@@ -15,15 +15,15 @@
 import { addProps } from '@bodiless/fclasses';
 import { asFooterToken } from '@bodiless/vital-layout';
 import { vitalFooterBase } from '@bodiless/vital-layout/lib/base';
-import { lessonFooterBase } from '../../../base';
+import { exampleFooter } from '../../../background-images';
 
 const Default = asFooterToken(
   vitalFooterBase.Default,
-  lessonFooterBase.WithLogo,
-  lessonFooterBase.WithTopWave,
+  exampleFooter.WithLogo,
+  exampleFooter.WithTopWave,
   {
-    Behavior: {
-      Wrapper: addProps({ 'shadowed-by': 'lessonFooter' }),
+    Compose: {
+      WithShadowedBy: addProps({ 'data-shadowed-by': 'exampleFooter' }),
     },
 
   }

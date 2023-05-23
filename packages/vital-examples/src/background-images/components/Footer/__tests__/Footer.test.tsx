@@ -2,6 +2,6 @@
 import React from 'react';
 import { testTokens } from '@bodiless/vital-elements';
 import { FooterClean } from '@bodiless/vital-layout';
-import { customFooter } from '..';
+import { exampleFooter } from '..';
 
-describe('Footer Tokens', testTokens(FooterClean, customFooter));
+describe('Footer Tokens', testTokens(FooterClean, exampleFooter));
