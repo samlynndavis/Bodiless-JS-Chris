@@ -13,6 +13,7 @@
  */
 
 import type { Actions } from 'node-plop';
+import fs from 'fs';
 
 const defaultActions: Actions = [
   {
@@ -35,14 +36,14 @@ const defaultActions: Actions = [
     path: '{{packageSourcePath}}/components/{{properCase componentName}}/token/{{camelCase libraryName}}Base{{properCase componentName}}.ts',
     templateFile: '../templates/component/tokens/libraryBaseComponent.ts.hbs',
   },
+  // {
+  //   type: 'add',
+  //   path: '{{packageSourcePath}}/components/{{properCase componentName}}/base/index.ts',
+  //   templateFile: '../templates/component/index.base.ts.hbs',
+  // },
   {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}/base/index.ts',
-    templateFile: '../templates/component/index.base.ts.hbs',
-  },
-  {
-    type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}/tests/{{properCase componentName}}.test.tsx',
+    path: '{{packageSourcePath}}/components/{{properCase componentName}}/__tests__/{{properCase componentName}}.test.tsx',
     templateFile: '../templates/component/tests/Component.test.tsx.hbs',
   },
 ];
@@ -53,8 +54,23 @@ const actions: Actions = (data) => {
   const {
     tokensOnly = true,
     shadow = false,
-    static: isStatic
+    static: isStatic,
+    packageSourcePath,
   } = data;
+
+  if (fs.existsSync(`${packageSourcePath}/base/index.ts`)) {
+    actionsToRun.push({
+      type: 'append',
+      path: '{{packageSourcePath}}/base/index.ts',
+      templateFile: '../templates/component/index.base.ts.hbs',
+    });
+  } else {
+    actionsToRun.push({
+      type: 'add',
+      path: '{{packageSourcePath}}/base/index.ts',
+      templateFile: '../templates/component/index.base.ts.hbs',
+    });
+  }
 
   if (!tokensOnly) {
     actionsToRun.push({
