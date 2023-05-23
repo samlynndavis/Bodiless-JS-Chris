@@ -13,20 +13,23 @@
  */
 
 import { addProps } from '@bodiless/fclasses';
+import { withLanguageNode } from '@bodiless/i18n';
 import { asFooterToken } from '@bodiless/vital-layout';
 import { vitalFooterBase } from '@bodiless/vital-layout/lib/base';
 import { exampleFooter } from '../../../background-images';
 
 const Default = asFooterToken(
   vitalFooterBase.Default,
-  exampleFooter.WithLogo,
-  exampleFooter.WithTopWave,
+  exampleFooter.Default,
   {
     Compose: {
       WithShadowedBy: addProps({ 'data-shadowed-by': 'exampleFooter' }),
     },
-
+    Schema: {
+      _: withLanguageNode,
+    },
   }
+
 );
 
 export default {
