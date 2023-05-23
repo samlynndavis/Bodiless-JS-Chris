@@ -1,11 +1,2 @@
-import { {{camelCase sourceLibraryName}}{{properCase componentName}}Base } from '{{sourcePackageName}}/lib/base';
-import { as{{properCase componentName}}Token } from '{{sourcePackageName}}';
-
-const Variant = as{{properCase componentName}}Token(
-  {{camelCase sourceLibraryName}}{{properCase componentName}}.Variant{{properCase componentName}}
-);
-
-export default {
-  ...{{camelCase sourceLibraryName}}{{properCase componentName}}Base,
-  Variant,
-};
+import { {{camelCase libraryName}}{{properCase componentName}} } from '../../../components/{{properCase componentName}}'
+export default {{camelCase libraryName}}{{properCase componentName}};

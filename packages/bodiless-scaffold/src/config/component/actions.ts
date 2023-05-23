@@ -33,11 +33,6 @@ const defaultActions: Actions = [
   },
   {
     type: 'add',
-    path: '{{packageSourcePath}}/components/{{properCase componentName}}/tokens/{{camelCase libraryName}}Base{{properCase componentName}}.ts',
-    templateFile: '../templates/component/tokens/libraryBaseComponent.ts.hbs',
-  },
-  {
-    type: 'add',
     path: '{{packageSourcePath}}/components/{{properCase componentName}}/__tests__/{{properCase componentName}}.test.tsx',
     templateFile: '../templates/component/tests/Component.test.tsx.hbs',
   },
