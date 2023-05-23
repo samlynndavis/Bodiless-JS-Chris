@@ -5,7 +5,7 @@ import {
   on,
 } from '@bodiless/fclasses';
 import { withChild } from '@bodiless/core';
-// import { vitalFooterBase } from '@bodiless/vital-layout/lib/base';
+import { vitalFooterBase } from '@bodiless/vital-layout/lib/base';
 import LogoIcon from '../../../assets/images/logo';
 
 // NOTE: In truth, all of the styling found within this withTopFooterWave token
@@ -28,38 +28,9 @@ const WithTopWave = asFooterToken({
   },
 });
 
-const WithLogo = asFooterToken(
-  {
-    Components: {
-      Rewards:
-      // NOTE: Here we replace our footer's current 'Rewards' slot with
-      // a div, and add our new logo as a child of that div.
-      as(
-        on(Div)(withChild(LogoIcon)),
-        'px-40',
-      ),
-      // NOTE: This could also be written as: as(replaceWith(Div), withChild(LogoIcon), 'logo'),
-    },
-  },
-);
-
-// const Default = asFooterToken(
-//   vitalFooterBase.Default,
-//   WithTopWave,
-//   WithLogo,
-//   {
-//     Spacing: {
-//       Wrapper: 'py-40',
-//     },
-//   },
-// );
-
-// const Default = asFooterToken(
-//   vitalFooterBase.Default,
-//   WithTopWave,
+// const WithLogo = asFooterToken(
 //   {
 //     Components: {
-//       ...vitalFooterBase.Default.Components,
 //       Rewards:
 //       // NOTE: Here we replace our footer's current 'Rewards' slot with
 //       // a div, and add our new logo as a child of that div.
@@ -69,14 +40,30 @@ const WithLogo = asFooterToken(
 //       ),
 //       // NOTE: This could also be written as: as(replaceWith(Div), withChild(LogoIcon), 'logo'),
 //     },
-//     Spacing: {
-//       Wrapper: 'py-40',
-//     },
 //   },
 // );
 
-export default {
+const Default = asFooterToken(
+  vitalFooterBase.Default,
   WithTopWave,
-  WithLogo,
-  // Default,
+  {
+    Components: {
+      ...vitalFooterBase.Default.Components,
+      Rewards:
+      // NOTE: Here we replace our footer's current 'Rewards' slot with
+      // a div, and add our new logo as a child of that div.
+      as(
+        on(Div)(withChild(LogoIcon)),
+        'px-40',
+      ),
+      // NOTE: This could also be written as: as(replaceWith(Div), withChild(LogoIcon), 'logo'),
+    },
+    Spacing: {
+      Wrapper: 'py-40',
+    },
+  },
+);
+
+export default {
+  Default,
 };
