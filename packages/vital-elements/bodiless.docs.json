@@ -7,7 +7,7 @@
       "ComponentsAndTokens.md": "./doc/GettingStarted/ComponentsAndTokens.md",
       "CompositionFromWithout.md": "./doc/GettingStarted/ComposingFromOutside.md",
       "ReachingInside.md": "./doc/GettingStarted/ReachingInside.md",
-      "AnatomyOfAToken.md": "./doc/GettingStarted/AnatomyOfAToken.md",
+      "AnatomyOfA_Token.md": "./doc/GettingStarted/AnatomyOfAToken.md",
       "FunctionalClasses.md": "./doc/GettingStarted/FunctionalClasses.md",
       "WorkingWithContent.md": "./doc/GettingStarted/WorkingWithContent.md",
       "CleanComponents.md": "./doc/GettingStarted/CleanComponents.md",
@@ -19,6 +19,7 @@
       "VitalElements": {
         "README.md": "./doc/VitalElements.md",
         "ComponentTemplate.md": "./doc/ComponentTemplate.md",
+        "ExtendingAndComposingTokens.md": "./doc/ExtendingAndComposing.md",
         "SiteTypography.md": "./doc/SiteTypography.md",
         "Shadow.md": "./doc/Shadow.md",
         "StaticReplacement.md": "./doc/StaticReplacement.md",
