@@ -1,6 +1,19 @@
 {
   "VitalDesignSystem": {
     "README.md": "./doc/VitalDesignSystem.md",
+    "GettingStarted": {
+      "README.md": "./doc/GettingStarted/README.md",
+      "CoreConcepts.md": "./doc/GettingStarted/CoreConcepts.md",
+      "ComponentsAndTokens.md": "./doc/GettingStarted/ComponentsAndTokens.md",
+      "CompositionFromWithout.md": "./doc/GettingStarted/ComposingFromOutside.md",
+      "ReachingInside.md": "./doc/GettingStarted/ReachingInside.md",
+      "AnatomyOfAToken.md": "./doc/GettingStarted/AnatomyOfAToken.md",
+      "FunctionalClasses.md": "./doc/GettingStarted/FunctionalClasses.md",
+      "WorkingWithContent.md": "./doc/GettingStarted/WorkingWithContent.md",
+      "CleanComponents.md": "./doc/GettingStarted/CleanComponents.md",
+      "YourFirstToken.md": "./doc/GettingStarted/YourFirstToken.md",
+      "WhyVital.md": "./doc/GettingStarted/WhyVital.md"
+    },
     "Components": {
       "README.md": "./doc/Components.md",
       "VitalElements": {
