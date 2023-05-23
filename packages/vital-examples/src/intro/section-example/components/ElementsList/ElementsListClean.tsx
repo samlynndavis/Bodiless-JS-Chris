@@ -1,33 +1,41 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { withNode, withNodeKey } from '@bodiless/data';
 import {
-  DesignableComponentsProps, Ul, Li, designable, ComponentOrTag, Fragment,
+  DesignableComponentsProps, Ul, Li, designable, ComponentOrTag, Fragment, flowHoc,
 } from '@bodiless/fclasses';
 
 export type ElementsListComponents = {
   Wrapper: ComponentOrTag<any>,
   ElementWrapper: ComponentOrTag<any>,
-  ElementToUse: ComponentOrTag<any>,
+  Element: ComponentOrTag<any>,
 };
 
 export const elementsListComponents: ElementsListComponents = {
   Wrapper: Ul,
   ElementWrapper: Li,
-  ElementToUse: Fragment,
+  Element: Fragment,
 };
 
 const ElementsListBase: FC<DesignableComponentsProps & { times: number }> = props => {
-  const { times = 4, components } = props;
-  const { Wrapper, ElementToUse, ElementWrapper } = components;
+  const { times = 4, components, ...rest } = props;
+  const { Wrapper, Element, ElementWrapper } = components;
 
-  const items = Array.from(Array(times).keys()).map((val) => (
-    <ElementWrapper key={val}>
-      <ElementToUse />
-    </ElementWrapper>
-  ));
+  const items = useMemo(() => Array.from(Array(times).keys()).map((val) => {
+    const FinalElement = flowHoc(
+      withNode,
+      withNodeKey(`element-${val}`),
+    )(Element);
+
+    return (
+      <ElementWrapper key={val}>
+        <FinalElement />
+      </ElementWrapper>
+    );
+  }), [components, times]);
 
   return (
-    <Wrapper>
+    <Wrapper {...rest}>
       {items}
     </Wrapper>
   );

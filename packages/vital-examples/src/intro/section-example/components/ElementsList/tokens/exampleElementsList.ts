@@ -5,7 +5,7 @@ import { asElementListToken } from '../ElementsListClean';
 
 const Default = asElementListToken({
   Components: {
-    ElementToUse: on(CardClean)(vitalCard.Default),
+    Element: on(CardClean)(vitalCard.Default),
   },
   Layout: {
     Wrapper: 'flex',

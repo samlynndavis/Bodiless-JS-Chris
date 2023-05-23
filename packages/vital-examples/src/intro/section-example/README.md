@@ -206,6 +206,8 @@ const WithLink = asSectionToken({
 });
 ```
 
+##### Tokens Naming Convention
+
 When working with Tokens, it's important to understand the different Token types and their intended usage. Here are the examples of two types of Tokens: names of which start with  "With..." and Standalone Tokens (`WithSectionLink` vs `SectionLink`). These two types serve distinct purposes and have specific characteristics that influence how they should be used.
 
 Here is an example of `WithSectionLink` token. Note that this token is very limited and adds a component without inheriting any other tokens.
@@ -414,6 +416,9 @@ The `ArticleClean` component may have the following structure:
 
 All slots except for the `ArticleTitle` are `Fragments` by default and there are 3 Tokens exported by the package: `WithArticleLink`, `WithArticleCTA`, `WithArticleContent` that add corresponding slots to the component.
 
+## Resources
+ - [Extending & Composing Tokens](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9d872a75c7ff2a00af0bc53ae9c3b2f3545ddf24/packages/vital-elements/doc/ExtendingAndComposing.md)
+ - [Vital Component Template](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/ComponentTemplate)
  
 ## FAQ
 
