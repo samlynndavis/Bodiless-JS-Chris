@@ -28,6 +28,7 @@ const prompts: Prompts = [
 e.g. "./", "./src/", "/absolute/path/to/[package name]/src" etc. Default to current directory.
 > `,
     validate: pathValidator,
+    default: './',
   },
   {
     type: 'input',
