@@ -1,2 +1,4 @@
 import { {{camelCase libraryName}}{{properCase componentName}} } from '../../../components/{{properCase componentName}}'
-export default {{camelCase libraryName}}{{properCase componentName}};
+import { shadow } from '@bodiless/vital-elements';
+
+export default shadow({{camelCase libraryName}}{{properCase componentName}}, '{{properCase libraryName}}:{{properCase componentName}}');
