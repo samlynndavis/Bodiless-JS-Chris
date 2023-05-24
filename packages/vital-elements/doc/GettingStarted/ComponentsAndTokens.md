@@ -35,4 +35,4 @@ recomposed or extended.
 
 Okay, enough talk.  Let's dive into some code to see how these blocks fit together.
 
-[Next: Composition from Without](./ComposingFromWithout.md)
+[Next: Composing from Outside](./ComposingFromOutside.md)

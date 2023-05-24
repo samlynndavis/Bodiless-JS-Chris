@@ -1,6 +1,6 @@
 # Reaching Inside
 
-The [previous example](./CompositionFromWithout) allowed us to reuse functionality from an upstream
+The [previous example](./ComposingFromOutside) allowed us to reuse functionality from an upstream
 component library (or, really, _token_ library) while selectively extending it, but it has one
 significant limitation: The various configuration options exposed by the `Dialog` component must be
 defined by the upstream library.

@@ -31,7 +31,7 @@ You can read more about the specific domains defined in the VitalDS and their us
 component. They are sometimes referred to as "design keys." Note, that in addition to the internal
 design keys exposed by the component, you can also define the special `_` key here to specify a
 token which should be applied to the component as a whole, as we did in the original `Dialog` tokens
-from [Composition From Without](./CompositionFromWithout):
+from [Composing From Outside](./ComposingFromOutside):
 
 ```ts
 const Welcome = asElementToken({

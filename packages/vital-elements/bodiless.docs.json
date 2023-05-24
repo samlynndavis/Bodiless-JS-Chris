@@ -5,7 +5,7 @@
       "README.md": "./doc/GettingStarted/README.md",
       "CoreConcepts.md": "./doc/GettingStarted/CoreConcepts.md",
       "ComponentsAndTokens.md": "./doc/GettingStarted/ComponentsAndTokens.md",
-      "CompositionFromWithout.md": "./doc/GettingStarted/ComposingFromOutside.md",
+      "ComposingFromOutside.md": "./doc/GettingStarted/ComposingFromOutside.md",
       "ReachingInside.md": "./doc/GettingStarted/ReachingInside.md",
       "AnatomyOfA_Token.md": "./doc/GettingStarted/AnatomyOfAToken.md",
       "FunctionalClasses.md": "./doc/GettingStarted/FunctionalClasses.md",
