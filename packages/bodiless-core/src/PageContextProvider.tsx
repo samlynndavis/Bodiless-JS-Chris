@@ -13,7 +13,7 @@
  */
 
 import React, {
-  FC, useEffect, useLayoutEffect, useRef, useMemo,
+  FC, useEffect, useLayoutEffect, useRef, useMemo, PropsWithChildren,
 } from 'react';
 import pickBy from 'lodash/pickBy';
 import { HOC } from '@bodiless/fclasses';
@@ -69,16 +69,18 @@ export const useRegisterMenuOptions = (
   // appear to be no change, and menu options will not update.  But if the component
   // did not remount (was removed), then we go ahead and remove its options.
   const updateOnUnmount = useRef(false);
-  useLayoutEffect(() => {
-    // We re-register the peer when the component mounts.  We have to do it both here and in
-    // render (above), bc we want the order of peers to be render order, not effect order.
-    context.registerPeer(peerContext);
-    updateOnUnmount.current = false;
-    return () => {
-      context.unregisterPeer(peerContext);
-      updateOnUnmount.current = true;
-    };
-  });
+  if (typeof window !== 'undefined') {
+    useLayoutEffect(() => {
+      // We re-register the peer when the component mounts.  We have to do it both here and in
+      // render (above), bc we want the order of peers to be render order, not effect order.
+      context.registerPeer(peerContext);
+      updateOnUnmount.current = false;
+      return () => {
+        context.unregisterPeer(peerContext);
+        updateOnUnmount.current = true;
+      };
+    });
+  }
   // In the normal effect, we update the menu options if the context is active.
   useEffect(() => {
     // When the component mounts,
@@ -103,7 +105,9 @@ export const useRegisterMenuOptions = (
  *
  * @param props
  */
-const PageContextProvider: FC<PageContextProviderProps> = ({ children, ...rest }) => {
+const PageContextProvider: FC<PropsWithChildren<PageContextProviderProps>> = (
+  { children, ...rest }
+) => {
   const context = useEditContext();
   const newValue = useNewContext(rest, context);
   useEffect(() => {

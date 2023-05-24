@@ -14,7 +14,7 @@
 
 import { ComponentOrTag } from '@bodiless/fclasses';
 import MD5 from 'crypto-js/md5';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import React, { FC, useRef, useLayoutEffect } from 'react';
 import memoize from 'lodash/memoize';
 import {
@@ -31,16 +31,16 @@ const DEFAULT_OPTIONS: WithoutHydrationOptions = {
 export const isStaticClientSide = !!(
   typeof window !== 'undefined'
   && window.document
-  && window.document.createElement
   && process.env.NODE_ENV === 'production'
 );
 
 export const isEditClientSide = !!(
   typeof window !== 'undefined'
   && window.document
-  && window.document.createElement
   && process.env.NODE_ENV === 'development'
 );
+
+export const isEdit = process.env.NODE_ENV === 'development';
 
 /**
  * InnerHtml is memoized to allow retrieving it on component remount.
@@ -93,23 +93,24 @@ const withoutHydrationClientSide: WithoutHydrationFunction = ({
       // component's dom manipulation), it renders the empty inner html.  Here, we grab
       // the server-rendered html and stash it in a hidden div so we can restore it if/when the
       // component re-mounts.
-      useLayoutEffect(() => {
-        // Component did mount.
-        if (rootRef.current) {
-          if (onUpdate) {
-            onUpdate(props, rootRef.current);
+      if (typeof window !== 'undefined') {
+        useLayoutEffect(() => {
+          // Component did mount.
+          if (rootRef.current) {
+            if (onUpdate) {
+              onUpdate(props, rootRef.current);
+            }
+            if (rootRef.current.innerHTML === '') {
+              rootRef.current.innerHTML = getInnerHTML(rootRef.current);
+            }
           }
-          if (rootRef.current.innerHTML === '') {
-            rootRef.current.innerHTML = getInnerHTML(rootRef.current);
-          }
-        }
-        // Component did unmount.
-        return () => {
-          // Memoize the innerHTML
-          getInnerHTML(rootRef.current);
-        };
-      }, []);
-
+          // Component did unmount.
+          return () => {
+            // Memoize the innerHTML
+            getInnerHTML(rootRef.current);
+          };
+        }, []);
+      }
       return (
         <WrapperElement
           data-no-hydrate
@@ -175,7 +176,7 @@ export const withoutHydration: WithoutHydrationWrapperFunction = (options) => {
 
   if (isStaticClientSide) return withoutHydrationClientSide(optionsWithDefault);
 
-  if (isEditClientSide) return withoutHydrationClientSideEdit(optionsWithDefault);
+  if (isEdit) return withoutHydrationClientSideEdit(optionsWithDefault);
 
   return withoutHydrationServerSide(optionsWithDefault);
 };

@@ -13,8 +13,7 @@
     "/lib",
     "/bodiless.docs.json",
     "/getDocs.js",
-    "/doc",
-    "node-api"
+    "/doc"
   ],
   "repository": {
     "type": "git",
@@ -34,15 +33,16 @@
   "dependencies": {
     "@bodiless/cli": "^1.0.0-rc.37",
     "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
+    "@bodiless/git": "^1.0.0-rc.37",
     "@bodiless/layouts": "^1.0.0-rc.37",
     "@bodiless/ui": "^1.0.0-rc.37",
     "axios": "^0.21.0",
     "common-tags": "^1.8.0",
     "copyfiles": "^2.1.1",
     "debug": "^4.1.1",
-    "enzyme": "^3.9.0",
-    "informed": "^3.34.0",
+    "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "rc-tooltip": "^5.1.1",
     "react-contenteditable": "^3.2.6",
@@ -51,13 +51,12 @@
   },
   "peerDependencies": {
     "@types/react-helmet": "^6.1.0",
-    "mobx": "^6.0.0",
-    "mobx-react": "^7.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0"
   },
   "devDependencies": {
+    "enzyme": "^3.9.0",
     "@types/common-tags": "^1.8.0",
     "@types/rc-tooltip": "^3.7.1",
     "@types/uuid": "^3.4.4"

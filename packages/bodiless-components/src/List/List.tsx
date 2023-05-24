@@ -18,8 +18,8 @@ import React, {
   useMemo,
 } from 'react';
 import flow from 'lodash/flow';
-import { observer } from 'mobx-react';
-import { useActivateOnEffect, withNode } from '@bodiless/core';
+import { observer, useActivateOnEffect } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import {
   designable, addProps, withDesign, Fragment,
 } from '@bodiless/fclasses';
@@ -53,7 +53,7 @@ const ListBase: FC<ListBaseProps> = ({
     Title,
   } = components;
 
-  const { addItem, deleteItem } = useItemsMutators({ unwrap, onDelete });
+  const { addItem, deleteItem, moveItem } = useItemsMutators({ unwrap, onDelete });
   const { getItems } = useItemsAccessors();
   const { setId } = useActivateOnEffect();
   const dataItems = getItems();
@@ -83,7 +83,11 @@ const ListBase: FC<ListBaseProps> = ({
       ) {
         value.deleteItem = () => deleteItem(currentItem);
       }
-
+      if (dataItems.includes(currentItem)) {
+        value.moveItem = (offset: number) => {
+          moveItem(currentItem, offset);
+        };
+      }
       return value;
     }),
     [dataItems, prependItems, appendItems],

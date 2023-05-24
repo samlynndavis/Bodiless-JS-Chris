@@ -28,7 +28,7 @@ import Base, {
   WithSecondaryButton,
 } from './Base';
 import type { VitalCardBase } from './Base';
-import { Hero, HeroLeftImageContentCentered } from './Hero';
+import { Hero } from './Hero';
 import type { VitalCardHero } from './Hero';
 import { Category } from './Category';
 import type { VitalCardCategory } from './Category';
@@ -197,7 +197,6 @@ const vitalCard: VitalCard = {
   Default,
   Basic,
   Hero,
-  HeroLeftImageContentCentered,
   Category,
   Topic,
   Product,

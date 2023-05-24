@@ -13,18 +13,12 @@
  */
 
 import {
-  withNode,
-  withNodeKey,
   withParent,
-  withSidecarNodes,
 } from '@bodiless/core';
 import {
-  GatsbyImagePresets,
-  withoutGatsbyImageProps,
-  asGatsbyImage,
-  withGatsbyImageLogger,
-  withGatsbyImageNode,
-} from '@bodiless/gatsby-theme-bodiless';
+  withNodeKey,
+  withSidecarNodes,
+} from '@bodiless/data';
 import {
   flowHoc,
   stylable,
@@ -39,9 +33,30 @@ import { asBodilessLink, asBodilessImage } from '@bodiless/components-ui';
 import { asElementToken } from '@bodiless/vital-elements';
 import type { ElementToken } from '@bodiless/vital-elements';
 import { withoutHydration } from '@bodiless/hydration';
+import {
+  ImagePresets,
+  withoutImageProps,
+  asImage,
+  withImageLogger,
+  withImageNode,
+} from './vitalImage.gatsby';
 
 // @ts-ignore Cannot find module
 import landscapeImage from '../../../../assets/landscape_image.png';
+
+/**
+ * @private
+ * Provides the editable schema for an image depending on the Gatsby preset. Also
+ * provides a default node key.
+ *
+ * @param preset
+ * The Gatsby image preset to use.
+ */
+const withImageSchema = (preset?: ImagePresets) => flowHoc(
+  asBodilessImage(),
+  preset === undefined ? withoutImageProps : withImageNode(preset),
+  withNodeKey('image'),
+);
 
 /**
  * @private
@@ -60,37 +75,25 @@ const objectFitCoverProps = {
 const Base = asElementToken({
   Core: {
     _: as(
-      asGatsbyImage,
+      asImage,
       stylable,
-      withGatsbyImageLogger(),
+      withImageLogger(),
       withoutHydration(),
     ),
-  },
-  Schema: {
-    _: withNodeKey('image'),
   },
   Meta: flowHoc.meta.term('Type')('Image'),
 });
 
 const WithEditorPlain = asElementToken({
-  Editors: {
-    _: asBodilessImage(),
-  },
-  Behavior: {
-    _: as(
-      withNode,
-      withoutGatsbyImageProps,
-    ),
+  Schema: {
+    _: withImageSchema(),
   },
   Meta: flowHoc.meta.term('Optimization')('Plain'),
 });
 
 const WithEditorBlurUp = asElementToken({
-  Editors: {
-    _: asBodilessImage(),
-  },
-  Behavior: {
-    _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebp),
+  Schema: {
+    _: withImageSchema(ImagePresets.FluidWithWebp),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),
@@ -102,11 +105,8 @@ const WithEditorBlurUp = asElementToken({
 });
 
 const WithEditorTraced = asElementToken({
-  Editors: {
-    _: asBodilessImage(),
-  },
-  Behavior: {
-    _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebpTracedSVG),
+  Schema: {
+    _: withImageSchema(ImagePresets.FluidWithWebpTracedSVG),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),
@@ -118,11 +118,8 @@ const WithEditorTraced = asElementToken({
 });
 
 const WithEditorNoEffect = asElementToken({
-  Editors: {
-    _: asBodilessImage(),
-  },
-  Behavior: {
-    _: withGatsbyImageNode(GatsbyImagePresets.FluidWithWebpNoBase64),
+  Schema: {
+    _: withImageSchema(ImagePresets.FluidWithWebpNoBase64),
   },
   Meta: extendMeta(
     flowHoc.meta.term('Optimization')('Optimized'),

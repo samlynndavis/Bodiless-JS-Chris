@@ -15,7 +15,7 @@
 import React, { useEffect, FC } from 'react';
 import { useFilterByGroupContext } from '@bodiless/filtering';
 import type { FilteredItemType } from '@bodiless/filtering';
-import { ContentNode } from '@bodiless/core';
+import { ContentNode } from '@bodiless/data';
 import { Token, addProps } from '@bodiless/fclasses';
 import type { FlowContainerWrapperProps } from '@bodiless/layouts';
 import MD5 from 'crypto-js/md5';
@@ -94,9 +94,8 @@ const getFilteredItemData = (tagsNode: ContentNode<any>) => {
       ? titleArray[0].text
       : ''
     : titleNode.data.text || '';
-
   const { tags = [] } = tagsNode.data;
-  const tagsData = tags.length > 0 ? tags.map((tag: any) => tag.name) : [];
+  const tagsData = tags.length > 0 ? tags.map((tag: any) => tag.label || tag.name) : [];
   const itemCats = tagsData.join(',');
   return {
     item_brand: brandName,

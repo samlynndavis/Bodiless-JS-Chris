@@ -58,8 +58,10 @@
     "@bodiless/components": "^1.0.0-rc.37",
     "@bodiless/components-ui": "^1.0.0-rc.37",
     "@bodiless/core": "^1.0.0-rc.37",
+    "@bodiless/data": "^1.0.0-rc.37",
     "@bodiless/core-ui": "^1.0.0-rc.37",
     "@bodiless/fclasses": "^1.0.0-rc.37",
+    "@bodiless/git": "^1.0.0-rc.37",
     "@bodiless/layouts": "^1.0.0-rc.37",
     "@bodiless/navigation": "^1.0.0-rc.37",
     "@bodiless/organisms": "^1.0.0-rc.37",
@@ -74,7 +76,6 @@
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "fast-glob": "^3.2.5",
-    "find-up": "^4.1.0",
     "fs-extra": "^8.1.0",
     "gatsby-image": "^3.11.0",
     "gatsby-plugin-emotion": "^7.10.0",
@@ -91,10 +92,8 @@
     "gatsby-plugin-typescript": "^4.10.1",
     "gatsby-source-filesystem": "^4.11.1",
     "gatsby-transformer-sharp": "^4.10.0",
-    "git-branch": "^2.0.1",
     "glob": "^7.1.6",
-    "informed": "^3.34.0",
-    "isomorphic-git": "^1.10.1",
+    "informed": "^4.44.0",
     "lodash": "^4.17.19",
     "md5-file": "^5.0.0",
     "path-browserify": "^1.0.1",
@@ -114,9 +113,7 @@
   },
   "peerDependencies": {
     "gatsby": "^4.11.2",
-    "mobx": "^6.0.0",
-    "mobx-react": "^7.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

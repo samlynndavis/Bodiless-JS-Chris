@@ -17,6 +17,8 @@ import React, {
   useMemo,
   FC,
   useRef,
+  PropsWithChildren,
+  ReactNode
 } from 'react';
 import isEqual from 'react-fast-compare';
 import flowRight from 'lodash/flowRight';
@@ -26,15 +28,15 @@ import { createEditor, Editor } from 'slate';
 import {
   Slate, withReact, useSlate
 } from 'slate-react';
-import { observer } from 'mobx-react';
 import {
   useEditContext,
   useContextActivator,
-  withNode,
   withMenuOptions,
   ifToggledOn,
   useUUID,
+  observer,
 } from '@bodiless/core';
+import { withNode } from '@bodiless/data';
 import {
   designable,
   withDisplayName,
@@ -153,6 +155,7 @@ const ifMenuOptions = ifToggledOn((props: UseMenuOptionsProps) => {
 
 type RichTextProviderProps = {
   plugins: Plugin[],
+  children?: ReactNode,
 } & UseMenuOptionsProps & Pick<RichTextProps, 'initialValue'>;
 type RichTextProviderType = ComponentType<RichTextProviderProps>;
 const RichTextProvider = flowRight(
@@ -169,7 +172,9 @@ const RichTextProvider = flowRight(
  * @private
  * Observer wrapper around hover menu which hides it when not in edit mode.
  */
-const EditOnlyHoverMenu$: FC<Pick<Required<UI>, 'HoverMenu'>> = ({ HoverMenu, children }) => {
+const EditOnlyHoverMenu$: FC<PropsWithChildren<Pick<Required<UI>, 'HoverMenu'>>> = (
+  { HoverMenu, children }
+) => {
   const { isEdit } = useEditContext();
   return isEdit
     ? <HoverMenu>{children}</HoverMenu>
