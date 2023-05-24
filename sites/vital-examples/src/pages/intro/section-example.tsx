@@ -9,33 +9,33 @@ import { exampleSection } from 'vital-examples/lib/intro/section-example';
 
 const DefaultSection = as(
   exampleSection.Default,
-  exampleSection.WithSectionCards,
+  exampleSection.WithCards,
 )(SectionClean);
 
 const SectionWithTitle = as(
   exampleSection.Default,
-  exampleSection.WithSectionTitle,
-  exampleSection.WithSectionCards,
+  exampleSection.WithTitle,
+  exampleSection.WithCards,
 )(SectionClean);
 
 const SectionWithLink = as(
   exampleSection.Default,
-  exampleSection.WithSectionLink,
-  exampleSection.WithSectionCards,
+  exampleSection.WithLink,
+  exampleSection.WithCards,
 )(SectionClean);
 
 const SectionWithDescription = as(
   exampleSection.Default,
-  exampleSection.WithSectionDescription,
-  exampleSection.WithSectionCards,
+  exampleSection.WithDescription,
+  exampleSection.WithCards,
 )(SectionClean);
 
 const SectionFull = as(
   exampleSection.Default,
-  exampleSection.WithSectionTitle,
-  exampleSection.WithSectionLink,
-  exampleSection.WithSectionDescription,
-  exampleSection.WithSectionCards,
+  exampleSection.WithTitle,
+  exampleSection.WithLink,
+  exampleSection.WithDescription,
+  exampleSection.WithCards,
 )(SectionClean);
 
 const Container = as('mx-2.5 md:mx-8 lg:mx-36')(Div);
