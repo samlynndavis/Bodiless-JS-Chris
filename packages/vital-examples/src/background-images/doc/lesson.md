@@ -1,5 +1,3 @@
-Bodiless Onboarding Doc Lesson Template
-
 # Background Images
 
 <!-- OPENING NOTE & REMINDER TO THE DEVELOPERS:
@@ -61,19 +59,23 @@ export default LogoIcon;
 
 Next, you'll need to create the folder that will house your new footer component `ExampleFooter` that will be used to override the default vital footer.
 
-You can structure this component's folder in a similar fashion to that of the vital component found [here](packages/vital-layout/src/components/Footer), but
+You can structure this component's folder in a similar fashion to that of the vital component found [here](packages/vital-layout/src/components/Footer), or make use of the component scaffolder to create this component structure automatically.
 
 - TODO: Add more details on import chain and/or refer to new shadow documentation to avoid verbosity here?
 
 ### Adding our custom brand logo
 
-In our 'Rewards' token -- named `customRewards.ts` in this example -- you'll pull the styling of the default `vitalRewards` token's `Theme` domain into your new token via the spread operator. This will allow you to modify, or even replace any slot in this component using the HOCs that Bodiless makes available to you.
+In our 'Footer' token collection -- named `exampleFooter.ts` -- you'll replace the `Rewards` slot of the footer component with your new custom brand logo, using the `startWith` HOC.
 
-In this case we'll use the `withChild` HOC to add our svg logo as a child element of the 'Brand' slot.
+NOTE: You may have noticed that a similar HOC, `replaceWith`, can be used to achieve the same result, but `startWith` is the preferred method in this instance, as it replaces a component while still retaining any tokens previously applied to it. `replaceWith` is most often used to remove a component or slot in its entirety (`replaceWith(() => null)`).
 
 ### Creating a new CSS rule in Tailwind for our wave SVG image mask
 
 Using the `addComponents` function provided by Tailwind, we can create a new class containing our image mask path, size, and position, and apply it to our new footer in the next section.
+
+NOTE: In most instances, the utility classes provided out of the box by Tailwind will be enough to satisfy all of your styling needs. However, in cases such as this one where our footer wave must be implemented through the use of an image mask (a CSS property for which no default Tailwind utility class exists), we can construct a CSS rule directly in our Tailwind configuration file.
+
+@TODO for JONES: use the technique you discovered to embed actual code snippets here rather than inlining them
 
 ```js
 plugin(({ addComponents }) => {
@@ -88,9 +90,15 @@ plugin(({ addComponents }) => {
 
 ```
 
-### Adding our 'wave' svg asset to the footer wrapper
+### Adding our 'wave' svg asset and mobile wave to the footer wrapper
 
-In a separate `exampleFooter.ts` file, we will construct a token for our custom footer, and apply our newly-created `.footer-wave` image mask to the `Wrapper` slot ~~as well as a separate token for the inclusion of our mobile wave SVG and apply it to the `Column2Wrapper` slot of our footer token~~.
+@TODO for JONES -- break this into 3steps following the guide from UsingTailwind Background Images
+
+In our `exampleFooter.ts`, we will construct a `WithTopWave` token, in which we will apply to the [appropriate domains](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/Tokens/TokenDomains?id=token-domains) the tailwind classes needed to render an SVG wave to the top of the footer.
+
+On the `Wrapper` slot, we will apply our `.footer-wave` CSS rule, and on the `Column2Wrapper` slot, we will apply the tailwind classes necessary to render a similar SVG wave to the top of the footer on mobile and tablet devices.
+
+ We will then construct a `Default` token for our custom footer and apply our newly-created `WithTopWave` token to this token's `Compose` domain.
 
 ## Practice
 

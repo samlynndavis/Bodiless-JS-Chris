@@ -1,10 +1,8 @@
 import { asFooterToken } from '@bodiless/vital-layout';
 import {
-  as,
   Div,
-  on,
+  startWith,
 } from '@bodiless/fclasses';
-import { withChild } from '@bodiless/core';
 import { vitalFooterBase } from '@bodiless/vital-layout/lib/base';
 import LogoIcon from '../../../assets/images/logo';
 
@@ -15,7 +13,7 @@ import LogoIcon from '../../../assets/images/logo';
 const WithTopWave = asFooterToken({
   Theme: {
     // NOTE: Here in 'Theme' domain of our footer token, we apply our footer-wave
-    // class to the container (Wrapper) at desktop screen sizes using the '2xl' prefix.
+    // class to the container (Wrapper) at desktop screen sizes using Tailwind's '2xl' prefix.
     Wrapper: '2xl:footer-wave',
     Column2Wrapper: '2xl:before:content-none before:content-[\'\'] before:bg-mobile-wave-top relative',
   },
@@ -28,39 +26,26 @@ const WithTopWave = asFooterToken({
   },
 });
 
-// const WithLogo = asFooterToken(
-//   {
-//     Components: {
-//       Rewards:
-//       // NOTE: Here we replace our footer's current 'Rewards' slot with
-//       // a div, and add our new logo as a child of that div.
-//       as(
-//         on(Div)(withChild(LogoIcon)),
-//         'px-40',
-//       ),
-//       // NOTE: This could also be written as: as(replaceWith(Div), withChild(LogoIcon), 'logo'),
-//     },
-//   },
-// );
-
 const Default = asFooterToken(
   vitalFooterBase.Default,
-  WithTopWave,
   {
     Components: {
       ...vitalFooterBase.Default.Components,
+      RewardsWrapper: startWith(Div),
       Rewards:
       // NOTE: Here we replace our footer's current 'Rewards' slot with
-      // a div, and add our new logo as a child of that div.
-      as(
-        on(Div)(withChild(LogoIcon)),
-        'px-40',
-      ),
+      // our custom logo using the `startWith` HOC.
+      startWith(LogoIcon)
       // NOTE: This could also be written as: as(replaceWith(Div), withChild(LogoIcon), 'logo'),
     },
     Spacing: {
       Wrapper: 'py-40',
+      RewardsWrapper: 'px-40',
     },
+    Compose: {
+      ...vitalFooterBase.Default.Compose,
+      WithTopWave,
+    }
   },
 );
 
