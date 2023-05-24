@@ -3,8 +3,16 @@ import {
   asElementToken,
   vitalTextDecoration,
   vitalFontSize,
+  asTokenGroup,
 } from '@bodiless/vital-elements';
 import { vitalTypographyBase } from '@bodiless/vital-elements/src/base';
+
+const TypographyMeta = {
+  categories: {
+    Type: ['Element'],
+    Group: ['Typography'],
+  },
+};
 
 const H1 = asElementToken({
   ...vitalTypographyBase.H1,
@@ -20,8 +28,9 @@ const H2 = asElementToken({
   },
 });
 
-export default {
+// Here we use `asTokenGroup` to share the TypographyMeta among all tokens exported.
+export default asTokenGroup(TypographyMeta)({
   ...vitalTypographyBase,
   H1,
   H2,
-};
+});

@@ -50,15 +50,14 @@ import { vitalTextDecorationBase } from '@bodiless/vital-elements/src/base';
 
 export default asTokenGroup(TextDecorationMeta)({
   ...vitalTextDecorationBase,
-  Book: 'font-book',
   Bold: 'font-black',
 });
 
 ```
 
-**PS:** the `asTokenGroup` function creates a group of element tokens that share the same meta.
+**PS:** the `asTokenGroup` function creates a group of element tokens that share the same metadata, you can find more information about the Meta domain [here](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/Tokens/TokenDomains?id=special-domains).
 
-In this example we overwrite the the `Bold` token to set a bolder font and also create the new `Book` font weight, which is lighter than the vital text decoration tokens.
+In this example we overwrite the the `Bold` token to set a bolder font.
 
 #### Typography
 
