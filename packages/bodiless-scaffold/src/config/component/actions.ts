@@ -36,6 +36,18 @@ const defaultActions: Actions = [
     path: '{{packageSourcePath}}/components/{{properCase componentName}}/__tests__/{{properCase componentName}}.test.tsx',
     templateFile: '../templates/component/tests/Component.test.tsx.hbs',
   },
+  {
+    type: 'add',
+    path: '{{packageSourcePath}}/components/{{properCase componentName}}'
+      + '/index.bl-edit.ts',
+    templateFile: '../templates/component/index.bl-edit.ts.hbs',
+  },
+  {
+    type: 'add',
+    path: '{{packageSourcePath}}/components/{{properCase componentName}}'
+       + '/index.static.ts',
+    templateFile: '../templates/component/index.static.ts.hbs',
+  }
 ];
 
 const actions: Actions = (data) => {
@@ -44,7 +56,6 @@ const actions: Actions = (data) => {
   const {
     tokensOnly = true,
     shadow = false,
-    static: isStatic,
     packageSourcePath,
   } = data;
 
@@ -77,14 +88,7 @@ const actions: Actions = (data) => {
       templateFile: '../templates/shadow/component.ts.hbs',
     });
   }
-  if (isStatic) {
-    actionsToRun.push({
-      type: 'add',
-      path: '{{packageSourcePath}}/components/{{properCase componentName}}'
-         + '/index.static.ts',
-      templateFile: '../templates/component/index.static.ts.hbs',
-    });
-  }
+
   return actionsToRun;
 };
 

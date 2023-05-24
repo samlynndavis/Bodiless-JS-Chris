@@ -1,0 +1,6 @@
+{{#if static}}
+export { default as {{camelCase libraryName}}{{properCase componentName}} } from './tokens';
+{{else}}
+export { default as {{camelCase libraryName}}{{properCase componentName}}Static } from './tokens';
+export { {{properCase componentName}}Static } from './{{properCase componentName}}Clean';
+{{/if}}
