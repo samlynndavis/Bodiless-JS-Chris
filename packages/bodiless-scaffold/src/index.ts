@@ -16,7 +16,8 @@ import { Plop, run } from 'plop';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-const validScaffoldTypes = ['component', 'page', 'site'];
+// Validate scaffold types. Only allow "component" for now. Extend this as needed.
+const validScaffoldTypes = ['component'];
 const scaffoldType = process.argv.slice(2).shift() || 'component';
 if (!validScaffoldTypes.includes(scaffoldType)) {
   console.error(`
