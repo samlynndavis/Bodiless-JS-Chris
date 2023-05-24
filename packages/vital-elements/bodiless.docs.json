@@ -10,8 +10,6 @@
       "AnatomyOfA_Token.md": "./doc/GettingStarted/AnatomyOfAToken.md",
       "FunctionalClasses.md": "./doc/GettingStarted/FunctionalClasses.md",
       "WorkingWithContent.md": "./doc/GettingStarted/WorkingWithContent.md",
-      "CleanComponents.md": "./doc/GettingStarted/CleanComponents.md",
-      "YourFirstToken.md": "./doc/GettingStarted/YourFirstToken.md",
       "WhyVital.md": "./doc/GettingStarted/WhyVital.md"
     },
     "Components": {
