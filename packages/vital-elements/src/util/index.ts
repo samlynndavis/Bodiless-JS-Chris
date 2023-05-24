@@ -14,4 +14,3 @@
 
 export * from './tokenSpec';
 export * from './testing';
-export * from './shadowedBy';
