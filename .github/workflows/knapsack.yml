@@ -1,4 +1,4 @@
-name: Deploy Knapsack Vital-DS
+name: Build Knapsack Vital-DS
 env:
   CI: true
   FORCE_COLOR: 1
