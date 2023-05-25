@@ -1,4 +1,4 @@
-# Composition from Without
+# Composing from Outside
 
 If you're a seasoned React developer, you are familiar with the concept of
 composition and the

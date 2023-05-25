@@ -1,11 +1,23 @@
 {
   "VitalDesignSystem": {
     "README.md": "./doc/VitalDesignSystem.md",
+    "GettingStarted": {
+      "README.md": "./doc/GettingStarted/README.md",
+      "CoreConcepts.md": "./doc/GettingStarted/CoreConcepts.md",
+      "ComponentsAndTokens.md": "./doc/GettingStarted/ComponentsAndTokens.md",
+      "ComposingFromOutside.md": "./doc/GettingStarted/ComposingFromOutside.md",
+      "ReachingInside.md": "./doc/GettingStarted/ReachingInside.md",
+      "AnatomyOfA_Token.md": "./doc/GettingStarted/AnatomyOfAToken.md",
+      "FunctionalClasses.md": "./doc/GettingStarted/FunctionalClasses.md",
+      "WorkingWithContent.md": "./doc/GettingStarted/WorkingWithContent.md",
+      "WhyVital.md": "./doc/GettingStarted/WhyVital.md"
+    },
     "Components": {
       "README.md": "./doc/Components.md",
       "VitalElements": {
         "README.md": "./doc/VitalElements.md",
         "ComponentTemplate.md": "./doc/ComponentTemplate.md",
+        "ExtendingAndComposingTokens.md": "./doc/ExtendingAndComposing.md",
         "SiteTypography.md": "./doc/SiteTypography.md",
         "Shadow.md": "./doc/Shadow.md",
         "StaticReplacement.md": "./doc/StaticReplacement.md",
