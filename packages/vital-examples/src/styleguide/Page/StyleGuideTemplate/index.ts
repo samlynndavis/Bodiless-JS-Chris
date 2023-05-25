@@ -12,4 +12,10 @@
  * limitations under the License.
  */
 
-export * from './styleguide';
+import { Card } from './Card';
+import { _default } from './_default';
+
+export const VitalDemoStyleGuideTemplate = {
+  _default,
+  Card,
+};

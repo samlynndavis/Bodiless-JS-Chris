@@ -12,4 +12,6 @@
  * limitations under the License.
  */
 
-export * from './styleguide';
+import VitalDemoStyleGuidePage from './Page';
+
+export { VitalDemoStyleGuidePage };

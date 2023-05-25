@@ -3,15 +3,61 @@ import { asCardToken } from '@bodiless/vital-card';
 import { vitalCardBase } from '@bodiless/vital-card/lib/base';
 import { exampleRadius } from '../../Radius';
 
-const Default = asCardToken(vitalCardBase.Default, {
+/*
+ * Here we extend the `Default` card token using the merge pattern by supplying
+ * multiple arguments to `asCardToken`. Our radius token will be merged with
+ * other tokens applied to the ContentWrapper in the Theme domain.
+ */
+
+const Default = asCardToken(vitalCardBase.Basic, {
   Theme: {
-    ContentWrapper: as(exampleRadius.Simple),
-  }
+    ContentWrapper: as(
+      exampleRadius.Simple,
+      'bg-[#d6d3d1]',
+    ),
+  },
+  Layout: {
+    Image: 'w-full',
+  },
 });
 
-const Hero = asCardToken(vitalCardBase.Hero, {
+// const Hero = asCardToken(vitalCardBase.Hero, {
+//   Theme: {
+//     Image: exampleRadius.Fancy,
+//   },
+// });
+
+/*
+ * Here we extend the Vital 'Hero` card token using the override pattern.
+ * In this case, we use the spread operator to pull in all tokens applied to
+ * the vital 'Hero' card.
+ *
+ * We then use the spread operator again to pull in all tokens applied to items in
+ * the 'Theme' domain of the Vital 'Hero' card and replace the 'Image' component's tokens
+ * with our own.
+ */
+
+const Hero = asCardToken({
+  // This will spread all existing 'Hero' card functionality across all domains.
+  ...vitalCardBase.Hero,
   Theme: {
-    Image: as(exampleRadius.Fancy),
+    // This will spread all existing 'Hero' card tokens present in the 'Theme' domain.
+    ...vitalCardBase.Hero.Theme,
+    /* Normally, after spreading in a domain's tokens as we have on line 39 above, setting
+    * new tokens as we have below will effectively clear that component's tokens, and replace
+    * with our own.
+    */
+
+    /* In this case, because we're restoring the vital Hero card's 'Image' tokens with the first
+    * argument (a step that must be taken when using the override pattern if we wish to modify a
+    * component while retaining it's original tokens), this application is effectively the same
+    * as writing: 'Image: exampleRadius.Fancy', in the same way that we have in the 'Default'
+    * token example above.
+    *
+    * Both options are perfectly acceptable, but as you can see, the Default example
+    * is much more concise.
+    */
+    Image: as(vitalCardBase.Hero.Theme.Image, exampleRadius.Fancy),
   },
 });
 
