@@ -10,7 +10,7 @@
   "scripts": {
     "build": "npm run ks:build",
     "clean": "rm -rf ./lib",
-    "ks:build": "NODE_ENV=production knapsack build",
+    "ks:build": "knapsack build",
     "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
     "start": "knapsack start",
     "serve": "NODE_ENV=production knapsack serve",
