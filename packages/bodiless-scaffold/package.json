@@ -27,7 +27,7 @@
     "access": "public"
   },
   "scripts": {
-    "scaffold": "scaffold",
+    "scaffold": "./bin/scaffold.js",
     "build": "run-p copy build:lib",
     "copy": "copyfiles -u 1 \"./src/templates/**/*\" \"./lib/\"",
     "build:lib": "tsc --version && tsc -p ./tsconfig.json",
