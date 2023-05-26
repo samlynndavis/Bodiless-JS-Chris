@@ -20,7 +20,7 @@ import {
   varyDesigns,
   addProps,
 } from '@bodiless/fclasses';
-import { ButtonClean, vitalButtons } from '@bodiless/vital-buttons';
+import { ButtonClean } from '@bodiless/vital-buttons';
 import { asFluidToken, vitalTypography } from '@bodiless/vital-elements';
 import {
   asStyleGuideTemplateToken,
@@ -32,28 +32,30 @@ import {
   StyleGuideExamplesClean,
   vitalStyleGuideExamples,
 } from '../../Examples';
+import { exampleButtons } from '../../../shadowing-simple-component';
 
 const label = {
   buttontext: { text: 'Button Label' },
 };
 
 const Default = on(ButtonClean)(
-  vitalButtons.Default,
+  exampleButtons.Default,
   withDefaultContent(label),
 );
 
 // Generate the Button Varations
 const ButtonStyleVariations = varyDesigns(
   {
-    Primary: vitalButtons.Primary,
-    Secondary: vitalButtons.Secondary,
-    PrimarySelected: vitalButtons.PrimarySelected,
-    SecondarySelected: vitalButtons.SecondarySelected,
+    Primary: exampleButtons.Primary,
+    Secondary: exampleButtons.Secondary,
+    PrimarySelected: exampleButtons.PrimarySelected,
+    SecondarySelected: exampleButtons.SecondarySelected,
   },
   {
     '': '', // vary on itself and produce default button variation
-    AsDisabled: vitalButtons.WithDisabled,
-    WithArrow: vitalButtons.WithArrow,
+    AsDisabled: exampleButtons.WithDisabled,
+    WithArrow: exampleButtons.WithArrow,
+    WithBigButton: exampleButtons.WithBigButton,
   },
   {
     '': Default,

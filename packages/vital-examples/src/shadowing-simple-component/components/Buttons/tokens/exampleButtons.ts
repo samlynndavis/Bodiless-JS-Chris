@@ -7,9 +7,18 @@ import {
   vitalTextDecoration,
 } from '@bodiless/vital-elements';
 
+/**
+ * Here we spread the vital primary button to inherit the tokens that won't be replaced.
+ * Note that the order is essential, since, as we are working with javascript objects
+ * at the end of the day, the keys that come later in the object's definition overwrite
+ * the ones we inherit from vitalButtonsBase.Primary.
+ */
 const WithPrimary = asButtonToken({
   ...vitalButtonsBase.Primary,
   Theme: {
+    /**
+     * Spreading Theme here prevents unwanted changes, keeping all tokens other than the wrappers.
+     */
     ...vitalButtonsBase.Primary.Theme,
     Wrapper: as(
       vitalColor.BgPrimaryBrand,
@@ -22,6 +31,10 @@ const WithPrimary = asButtonToken({
   },
 });
 
+/**
+ * Here we follow the same logic, but this time, we'll create a new variation of button, a big
+ * button with extra padding.
+ */
 const WithBigButton = asButtonToken({
   ...vitalButtonsBase.Default,
   Spacing: {
@@ -30,6 +43,7 @@ const WithBigButton = asButtonToken({
   },
 });
 
+// Exporting the vitalButtonsBase with our custom Primary with hover, and our new big variation.
 export default {
   ...vitalButtonsBase,
   WithPrimary,
