@@ -48,7 +48,7 @@ The purpose of this lesson is to better understand the preferred method of creat
 
 To begin, we'll use the `addComponents` function provided by Tailwind to first create a collection of CSS rules containing the corner radius styling to be applied to the 'Hero' card.
 
-NOTE: In most cases, the default utility classes provided by Tailwind will be enough to meet your styling needs, but in cases such as this where we are attemting to apply a more complex set of styling rules to a component, we can construct those CSS rules directly in our Tailwind configuration file as shown below:
+NOTE: In most cases, the default utility classes provided by Tailwind will be enough to meet your styling needs, but in cases such as this where we are attempting to apply a more complex set of styling rules to a component, we can construct those CSS rules directly in our Tailwind configuration file as shown below:
 
 ```js
 plugin(({ addComponents }) => {
@@ -111,9 +111,7 @@ As we will be shadowing both the 'Default' and 'Hero' Vital card variants, let's
 
 const Default = asCardToken(vitalCardBase.Basic, {
   Theme: {
-    ContentWrapper: as(
-      exampleRadius.Simple,
-    ),
+    ContentWrapper: exampleRadius.Simple,
   },
 });
 
@@ -121,6 +119,12 @@ const Hero = asCardToken({
   ...vitalCardBase.Hero,
   Theme: {
     ...vitalCardBase.Hero.Theme,
+/* Note the use of 'as' here. This is a composition utility provided 
+* by BodilessJS that converts a list of tokens into an HOC. When applying
+* multiple tokens to a component, 'as' must be used to properly combine them.
+*
+* In the 'Default' token example above, you'll notice that because only one * token is being applied to the 'ContentWrapper' slot, 'as' is not needed.
+*/
     Image: as(vitalCardBase.Hero.Theme.Image, exampleRadius.Fancy),
   },
 });
@@ -164,7 +168,7 @@ Because we've duplicated this code in two places, we'll now need to change the v
 
 Now imagine that we've applied this border radius to a numerous components on our site. You can probably begin to see how tedious it might be track down all instances and make this change.
 
-By instead encapuslating this styling in its own `Simple` element token as we've done at the beginning of this section, and placing _that_ token on the various components in which we'd like to use it (or even the 'Base' card token from which all other 'Card' components are built if it's decided that all card elements should have this styling) we ensure that if brand guidelines ever shift to alter the value of that border radius, we only need to make a change in one place.
+By instead encapsulating this styling in its own `Simple` element token as we've done at the beginning of this section, and placing _that_ token on the various components in which we'd like to use it (or even the 'Base' card token from which all other 'Card' components are built if it's decided that all card elements should have this styling) we ensure that if brand guidelines ever shift to alter the value of that border radius, we only need to make a change in one place.
 
 ## Practice
 

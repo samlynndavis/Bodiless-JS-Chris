@@ -21,12 +21,6 @@ const Default = asCardToken(vitalCardBase.Basic, {
   },
 });
 
-// const Hero = asCardToken(vitalCardBase.Hero, {
-//   Theme: {
-//     Image: exampleRadius.Fancy,
-//   },
-// });
-
 /*
  * Here we extend the Vital 'Hero` card token using the override pattern.
  * In this case, we use the spread operator to pull in all tokens applied to
@@ -43,12 +37,12 @@ const Hero = asCardToken({
   Theme: {
     // This will spread all existing 'Hero' card tokens present in the 'Theme' domain.
     ...vitalCardBase.Hero.Theme,
-    /* Normally, after spreading in a domain's tokens as we have on line 39 above, setting
-    * new tokens as we have below will effectively clear that component's tokens, and replace
-    * with our own.
+    /* Normally, after spreading in a domain's tokens as we have at the top of
+    * this token, setting new tokens as we have below will effectively clear that
+    component's tokens, and replace them with the ones we've specified.
     */
 
-    /* In this case, because we're restoring the vital Hero card's 'Image' tokens with the first
+    /* In this case, because we're restoring the vital Hero card's 'Image' tokens in the first
     * argument (a step that must be taken when using the override pattern if we wish to modify a
     * component while retaining it's original tokens), this application is effectively the same
     * as writing: 'Image: exampleRadius.Fancy', in the same way that we have in the 'Default'
