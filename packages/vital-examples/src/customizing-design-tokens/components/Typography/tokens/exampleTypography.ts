@@ -4,15 +4,9 @@ import {
   vitalTextDecoration,
   vitalFontSize,
   asTokenGroup,
+  TypographyMeta,
 } from '@bodiless/vital-elements';
 import { vitalTypographyBase } from '@bodiless/vital-elements/src/base';
-
-const TypographyMeta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['Typography'],
-  },
-};
 
 const H1 = asElementToken({
   ...vitalTypographyBase.H1,
