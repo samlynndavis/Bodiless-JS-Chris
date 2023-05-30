@@ -1,29 +1,7 @@
-# [ PAGE TITLE ]
-
-<!-- OPENING NOTE & REMINDER TO THE DEVELOPERS:
- 
-    - The most important thing in these curriculum lessons is INFORMATION.
-      - Do not worry about prettiness (e.g., formatting) or spelling/punctuation.
-        The technical writer will take these and clean them up later.
-    - Some tasks may not need to use all the sections listed below, and that is ok.
--->
-
-<!-- INTRODUCTION
- 
-    Use this section to _introduce_ the topic/task.
-    What this looks like may differ depending on the task.
- 
-    - Keep in mind that the next section is the "Overview," which will describe what you are doing,
-      and why.
-      So, this should set up the reader for what they'll read in the "Overview," and provide them
-      with any necessary context.
-    - For example, you could provide links to any resources necessary/beneficial to getting started.
-    - Don't use an "Introduction" header — just roll into your intro.
--->
+# [ Reusable Tokens ]
 
 ## Overview
 
-<!-- Describe what you'll be doing in this task and why (if relevant). -->
 In this lesson we will be creating two reusable styling tokens and applying them to elements of our 'Default' and 'Hero' Vital card variants.
 
 One will apply a simple bottom right border radius, and the other will apply a more complex set of custom CSS rules to be applied to the 'Image' slot of the 'Hero' card.
@@ -31,18 +9,6 @@ One will apply a simple bottom right border radius, and the other will apply a m
 The purpose of this lesson is to better understand the preferred method of creating reusable tokens, and the reasons why this pattern is encouraged when repeating styling choices across multiple components in a site.
 
 ## Assignment
-
-<!--
-    Explain, using Bodiless terminology, how a developer should accomplish this task.
- 
-    - Feel free to reference other documents or examples.
-      - If there aren't existing examples showcasing what you want, then provide some.
-      - If there isn't documentation discussing a particular topic or detail that is relevant to
-        your task, you may need to write it and add it to the appropriate location in documentation.
-        - Ultimately, this curriculum should just be an onboarding tool, and all the _actual_
-          documentation should live outside of this curriculum and be in its appropriate place. This
-          curriculum can then link to any of that relevant documentation.
--->
 
 ### Creating a new CSS rule in Tailwind for our image border radius
 
@@ -166,7 +132,7 @@ Though this will achieve the desired result, consider a future scenario where th
 
 Because we've duplicated this code in two places, we'll now need to change the value of both instances of this utility class from '40px' to '20px'.
 
-Now imagine that we've applied this border radius to a numerous components on our site. You can probably begin to see how tedious it might be track down all instances and make this change.
+Now imagine that we've applied this border radius to a number of components on our site. You can probably begin to see how tedious it might be track down all instances and make this change.
 
 By instead encapsulating this styling in its own `Simple` element token as we've done at the beginning of this section, and placing _that_ token on the various components in which we'd like to use it (or even the 'Base' card token from which all other 'Card' components are built if it's decided that all card elements should have this styling) we ensure that if brand guidelines ever shift to alter the value of that border radius, we only need to make a change in one place.
 
@@ -179,14 +145,6 @@ By instead encapsulating this styling in its own `Simple` element token as we've
 
 ## Resources
 
-<!--
-    Link to any resources you found/used to help you accomplish this task.
- 
-    - Link to pages/sections within the Bodiless documentation or the API docs.
- 
-    TIP: When searching for resources in the Bodiless documentation, don't rely on the Docsify
-         search; instead, use the search in VS Code.
--->
 * [Adding components in Tailwind](https://tailwindcss.com/docs/plugins#adding-components)
 
 * [Vital Component Template Documentation](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/ComponentTemplate)
