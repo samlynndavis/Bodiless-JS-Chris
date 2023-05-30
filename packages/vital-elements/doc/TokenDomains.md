@@ -4,6 +4,12 @@ Vital tokens are expressed in a special format known as the _Token Object Notati
 this object are "domains" — special groupings of designs or HOCs which can be overridden or extended
 separately by downstream consumers.
 
+A downside of using Tailwind is that it can result in long lists of classes in your HTML that are
+difficult to parse through. Using domains allows you to separate these long lists of classes into
+groups of shorter lists. This can be especially helpful if you have a bug in a particular domain
+(e.g., `Layout`), as you can focus your debugging attention on that domain and the set of tokens
+within it.
+
 ## Allowed Domains
 
 The set of allowed domains is defined by Vital as follows. For most domains, the value is an
@@ -140,6 +146,32 @@ const Example = asLinkToken({
   },
 });
 ```
+
+## How to Determine the Appropriate Domain for a Utility Class
+
+Whenever you create a utility class, you'll need to determine the appropriate domain in which it
+should be placed. The Tailwind documentation is a useful aid in this regard. Visit the [Tailwind
+Documentation](https://tailwindcss.com/docs/installation ':target=_blank'), and take note of the
+table of contents listed in the left sidebar. Using this table of contents, identify the category to
+which the utility class you've written belongs. Then, using the table below, find the associated
+domain.
+
+| Tailwind Category | Domain   |
+| ----------------- | -------- |
+| Layout            | Layout   |
+| Flexbox & Grid    | Layout   |
+| Spacing           | Spacing  |
+| Sizing            | Theme    |
+| Typography        | Theme    |
+| Borders           | Theme    |
+| Effects           | Theme    |
+| Filter            | Theme    |
+| Tables            | Theme    |
+| Transitions       | Behavior |
+| Transforms        | Behavior |
+| Interactivity     | Behavior |
+| SVG               | Theme    |
+| Accessibility     | Behavior |
 
 ## Additional Considerations and Gotchas
 
