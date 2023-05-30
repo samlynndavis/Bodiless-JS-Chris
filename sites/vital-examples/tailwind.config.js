@@ -14,6 +14,8 @@
  */
 const requireEsm = require('esm')(module);
 const glob = require('glob');
+const colors = require('tailwindcss/colors');
+
 
 const content = glob.sync(
   './src/**/!(*.d).{ts,js,jsx,tsx}'
@@ -29,6 +31,18 @@ const twConfig = {
   //   './src/**/!(*.d).{ts,js,jsx,tsx}',
   // ],
   content,
+  // We are adding back the default tailwind red/blue so that we can use
+  // default colors in the 'intro' section (these are removed by vital-elements).
+  // This is just to simplify the intro, and would not normally be part of a
+  // site build, so we do it here and not in the 'vital-examples' package.
+  theme: {
+    extend: {
+      colors: {
+        red: colors.red,
+        blue: colors.blue,
+      },
+    },
+  },
 };
 
 // Get configs sorted by precedence and/or exclude some packages:
