@@ -1,2 +1,2 @@
-export * from './components/Radius';
-export * from './components/Card';
+export * from './components/Accordion';
+export * from './components/AccordionTitle';

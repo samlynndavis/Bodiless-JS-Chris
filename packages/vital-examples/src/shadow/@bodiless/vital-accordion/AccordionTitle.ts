@@ -12,10 +12,21 @@
  * limitations under the License.
  */
 
-import { _default } from './_default';
-import { Accordion } from './Accordion';
+import { addProps } from '@bodiless/fclasses';
+import { asAccordionTitleToken } from '@bodiless/vital-accordion';
+import { vitalAccordionTitleBase } from '@bodiless/vital-accordion/lib/base';
+import { exampleAccordionTitle } from '../../../reusable-tokens';
 
-export const VitalDemoStyleGuideTemplate = {
-  _default,
-  Accordion,
+const Default = asAccordionTitleToken(
+  vitalAccordionTitleBase.Default,
+  exampleAccordionTitle.Default, {
+    Compose: {
+      WithShadowedBy: addProps({ 'data-shadowed-by': 'exampleAccordionTitle' }),
+    },
+  }
+);
+
+export default {
+  ...exampleAccordionTitle,
+  Default,
 };
