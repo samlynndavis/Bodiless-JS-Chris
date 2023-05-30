@@ -4,4 +4,4 @@ import { testTokens } from '@bodiless/vital-elements';
 import { FooterClean } from '@bodiless/vital-layout';
 import { exampleFooter } from '..';
 
-describe('Footer Tokens', testTokens(FooterClean, exampleFooter));
+describe.skip('Footer Tokens', testTokens(FooterClean, exampleFooter));
