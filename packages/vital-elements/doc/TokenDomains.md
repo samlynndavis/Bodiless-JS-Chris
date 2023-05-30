@@ -24,7 +24,6 @@ differently as described below.
   line-spacing, etc.
 - `Theme`: Tokens which apply styling which is very likely to be overridden; e.g., colors,
   typography, sizing such as `width` and `height`, etc. 
-- `Editors`: Tokens which define how a component's data are edited.
 - `Content`: Tokens which provide default content or other fixed props. Any hardcoded, translatable
   strings belong in this domain.
 - `Behavior`: Tokens which define or add behaviors to a component; e.g., the expanding and
@@ -146,8 +145,8 @@ const Example = asLinkToken({
 
 ### Access to Component Data
 
-Note the position of the `Editors` and `Schema` domains which usually provide the data that a
-component renders. They are applied "outside" (after) the styling domains (`Theme`, `Layout`,
-`Spacing`), so that these domains will have access to the data (to allow conditional styling based
-on state). However, they are "inside" (before) the `Compose` and `Condition` domain — so that tokens
-added to the component via `Compose` will not have access to the component's data.
+Note the position of the `Schema` domain, which usually provides the data that a component renders.
+It's applied "outside" (after) the styling domains (`Theme`, `Layout`, `Spacing`), so that these
+domains will have access to the data (to allow conditional styling based on state). However, it's
+"inside" (before) the `Compose` and `Condition` domain — so that tokens added to the component via
+`Compose` will not have access to the component's data.
