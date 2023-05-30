@@ -251,7 +251,7 @@ const SectionLink = asSectionToken(Default, {
 });
 ```
 
-Now that we know the difference in Token namin convention, lets create few more tokens:
+Now that we know the difference in Token naming convention, lets create few more tokens:
 
 ```ts
 /**
