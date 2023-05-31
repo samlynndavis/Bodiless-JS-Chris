@@ -1,7 +1,6 @@
 /* eslint-disable jest/valid-describe */
-import { Button, TokenCollection } from '@bodiless/fclasses';
-import { DefaultDomains, testTokens } from '@bodiless/vital-elements';
-import Buttons from '../tokens';
+import { Button } from '@bodiless/fclasses';
+import { testTokens } from '@bodiless/vital-elements';
+import { exampleButtons } from '..';
 
-const tokenCollection = Buttons as any as TokenCollection<any, DefaultDomains>;
-describe('Buttons', testTokens(Button, tokenCollection));
+describe('Buttons', testTokens(Button, exampleButtons));
