@@ -1,5 +1,5 @@
 import omit from 'lodash/omit';
-import { withDefaultContent, } from '@bodiless/data';
+import { withDefaultContent } from '@bodiless/data';
 import { addProps, on } from '@bodiless/fclasses';
 
 /**
