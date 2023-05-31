@@ -23,6 +23,7 @@ import { AccordionClean, vitalAccordion } from '@bodiless/vital-accordion';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { withDefaultContent } from '@bodiless/data';
+import { exampleAccordion } from '../../../how-to-use-domains-accordion';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
 const BaseVariation = {
@@ -34,6 +35,7 @@ const BaseVariation = {
 
 const AccordionVariations = {
   Default: '',
+  VideoOnly: exampleAccordion.WithOnlyVideo,
   FAQ: vitalAccordion.WithFAQSchema,
 };
 

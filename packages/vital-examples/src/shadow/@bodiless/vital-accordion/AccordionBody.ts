@@ -13,30 +13,20 @@
  */
 
 import { addProps } from '@bodiless/fclasses';
-import { asAccordionTitleToken } from '@bodiless/vital-accordion';
-import { vitalAccordionTitleBase } from '@bodiless/vital-accordion/lib/base';
-import { exampleAccordionTitle } from '../../../how-to-use-domains-accordion';
+import { asAccordionBodyToken } from '@bodiless/vital-accordion';
+import { vitalAccordionBodyBase } from '@bodiless/vital-accordion/lib/base';
+import { exampleAccordionBody } from '../../../how-to-use-domains-accordion';
 
-const Default = asAccordionTitleToken(
-  vitalAccordionTitleBase.Default,
-  exampleAccordionTitle.Default, {
+const WithFAQSchema = asAccordionBodyToken(
+  vitalAccordionBodyBase.WithFAQSchema,
+  exampleAccordionBody.WithFAQSchema, {
     Compose: {
-      WithShadowedBy: addProps({ 'data-shadowed-by': 'exampleAccordionTitle' }),
-    },
-  }
-);
-
-const WithFAQSchema = asAccordionTitleToken(
-  vitalAccordionTitleBase.WithFAQSchema,
-  exampleAccordionTitle.WithFAQSchema, {
-    Compose: {
-      WithShadowedBy: addProps({ 'data-shadowed-by': 'exampleFAQAccordionTitle' }),
+      WithShadowedBy: addProps({ 'data-shadowed-by': 'exampleFAQAccordionBody' }),
     },
   }
 );
 
 export default {
-  ...exampleAccordionTitle,
-  Default,
+  ...exampleAccordionBody,
   WithFAQSchema,
 };
