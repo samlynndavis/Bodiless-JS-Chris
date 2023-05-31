@@ -7,7 +7,7 @@ import { asElementToken } from '@bodiless/vital-elements';
 
 const Simple = asElementToken({
   Theme: {
-    _: 'rounded-br-[40px]',
+    _: 'rounded-bl-[40px]',
   },
 });
 
