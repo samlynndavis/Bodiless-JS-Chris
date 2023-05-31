@@ -407,7 +407,7 @@ const WithSectionTitle = asSectionToken({
      *
      * When `Schema` and `DefaultContent` for the slot Components are in the same node context,
      * there will be no need to specify the `nodeKey` for the DefaultContent object. See how
-     * in `vitalSectionBase.WithDescription` token we set a component for Description slot, and
+     * in `vitalSectionBase.WithTitle` token we set a component for Title slot, and
      * the Schema data for it and then use it to compose this token all with the same node context.
      */
     Title: withDefaultContent(useTitleContent),
