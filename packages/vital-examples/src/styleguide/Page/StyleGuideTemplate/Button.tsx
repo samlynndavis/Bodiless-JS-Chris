@@ -38,10 +38,7 @@ const label = {
   buttontext: { text: 'Button Label' },
 };
 
-const Default = on(ButtonClean)(
-  exampleButtons.Default,
-  withDefaultContent(label),
-);
+const Default = on(ButtonClean)(withDefaultContent(label));
 
 // Generate the Button Varations
 const ButtonStyleVariations = varyDesigns(
