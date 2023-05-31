@@ -12,6 +12,9 @@ import {
  * Note that the order is essential, since, as we are working with javascript objects
  * at the end of the day, the keys that come later in the object's definition overwrite
  * the ones we inherit from vitalButtonsBase.Primary.
+ *
+ * The `asButtonToken` function to help us with the tokens convention, creating the auto-completing
+ * for the ButtonClean component.
  */
 const WithPrimary = asButtonToken({
   ...vitalButtonsBase.Primary,
@@ -21,11 +24,13 @@ const WithPrimary = asButtonToken({
      */
     ...vitalButtonsBase.Primary.Theme,
     Wrapper: as(
+      // vital-elements tokens
       vitalColor.BgPrimaryBrand,
       vitalColor.TextWhite,
       vitalTextDecoration.Bold,
       vitalTextDecoration.Uppercase,
       vitalFontSize.Base,
+      // Tailwind classes
       'rounded hover:bg-vital-primary-interactive transition-colors duration-400',
     ),
   },
@@ -34,6 +39,9 @@ const WithPrimary = asButtonToken({
 /**
  * Here we follow the same logic, but this time, we'll create a new variation of button, a big
  * button with extra padding.
+ *
+ * The `asButtonToken` function to help us with the tokens convention, creating the auto-completing
+ * for the ButtonClean component.
  */
 const WithBigButton = asButtonToken({
   ...vitalButtonsBase.Default,
