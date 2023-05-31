@@ -15,7 +15,7 @@
 import { addProps } from '@bodiless/fclasses';
 import { asAccordionToken } from '@bodiless/vital-accordion';
 import { vitalAccordionBase } from '@bodiless/vital-accordion/lib/base';
-import { exampleAccordion } from '../../../how-to-use-domains-accordion';
+import { exampleAccordion } from '../../../how-to-use-domains';
 
 const Default = asAccordionToken(
   vitalAccordionBase.Default,

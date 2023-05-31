@@ -12,21 +12,6 @@
  * limitations under the License.
  */
 
-import { addProps } from '@bodiless/fclasses';
-import { asAccordionBodyToken } from '@bodiless/vital-accordion';
-import { vitalAccordionBodyBase } from '@bodiless/vital-accordion/lib/base';
-import { exampleAccordionBody } from '../../../how-to-use-domains';
+import { exampleAccordionBody } from '../../components/AccordionBody';
 
-const WithFAQSchema = asAccordionBodyToken(
-  vitalAccordionBodyBase.WithFAQSchema,
-  exampleAccordionBody.WithFAQSchema, {
-    Compose: {
-      WithShadowedBy: addProps({ 'data-shadowed-by': 'exampleFAQAccordionBody' }),
-    },
-  }
-);
-
-export default {
-  ...exampleAccordionBody,
-  WithFAQSchema,
-};
+export default exampleAccordionBody;

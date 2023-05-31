@@ -5,8 +5,8 @@ import { vitalAccordionTitleBase } from '@bodiless/vital-accordion/lib/base';
 import { omit } from 'lodash';
 import { vitalColor, vitalTextDecoration } from '@bodiless/vital-elements';
 
-const Default = asAccordionTitleToken(vitalAccordionTitleBase.Default, {
-  ...omit(vitalAccordionTitleBase.Default, 'Theme', 'Spacing', 'Layout'),
+const Default = asAccordionTitleToken({
+  ...omit(vitalAccordionTitleBase.Default, 'Layout'),
   Theme: {
     Label: as(
       vitalTextDecoration.ExtraBold,
@@ -19,16 +19,18 @@ const Default = asAccordionTitleToken(vitalAccordionTitleBase.Default, {
   },
 },);
 
-const WithFAQSchema = asAccordionTitleToken(
-  vitalAccordionTitleBase.WithFAQSchema, {
-    Content: {
-      Label: withPlaceholder('Question'),
-    },
-    Analytics: {
-      Wrapper: addProps({ 'custom-accordion-data-element': 'faq'})
-    },
+const WithFAQSchema = asAccordionTitleToken({
+  ...vitalAccordionTitleBase.WithFAQSchema,
+  Theme: {
+    Wrapper: 'uppercase',
   },
-);
+  Content: {
+    Label: withPlaceholder('Question'),
+  },
+  Analytics: {
+    Wrapper: addProps({ 'custom-accordion-data-element': 'faq'})
+  },
+},);
 
 export default {
   ...vitalAccordionTitleBase,

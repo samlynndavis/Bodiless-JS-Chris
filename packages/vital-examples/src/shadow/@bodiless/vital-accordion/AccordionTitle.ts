@@ -15,7 +15,7 @@
 import { addProps } from '@bodiless/fclasses';
 import { asAccordionTitleToken } from '@bodiless/vital-accordion';
 import { vitalAccordionTitleBase } from '@bodiless/vital-accordion/lib/base';
-import { exampleAccordionTitle } from '../../../how-to-use-domains-accordion';
+import { exampleAccordionTitle } from '../../../how-to-use-domains';
 
 const Default = asAccordionTitleToken(
   vitalAccordionTitleBase.Default,

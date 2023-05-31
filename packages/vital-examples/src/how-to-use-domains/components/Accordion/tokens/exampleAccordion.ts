@@ -11,11 +11,6 @@ import { vitalYouTube, YouTubeClean } from '@bodiless/vital-youtube';
 
 const WithFAQSchema = asAccordionToken(
   vitalAccordionBase.WithFAQSchema, {
-    SEO: {
-      Title: withDesign({
-        Label: 'uppercase',
-      }),
-    },
     Schema: {
       ...vitalAccordionBase.WithFAQSchema.Schema,
       _: as(
@@ -30,7 +25,8 @@ const WithOnlyVideo = asAccordionToken(vitalAccordionBase.Default, {
   Components: {
     ...vitalAccordionBase.Default.Components,
     Body: withDesign({
-      Content: on(FlowContainerClean)(asFluidToken(vitalFlowContainerBase.Default, {
+      Content: on(FlowContainerClean)(asFluidToken({
+        ...vitalFlowContainerBase.Default,
         Components: {
           YouTube: on(YouTubeClean)(vitalYouTube.Default),
         },
