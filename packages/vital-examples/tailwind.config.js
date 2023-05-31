@@ -14,12 +14,28 @@
  */
 import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
+const colors = require('tailwindcss/colors');
+
 const resolver = (pkgName) => require.resolve(pkgName);
 
 const twConfig = {
   content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
+  // We are adding back the default tailwind red/blue so that we can use
+  // some default colors in our examples.
+  // This is just to simplify the examples, and would not normally be part
+  // of a site build.
+  // Note that this is necessary bc vital-elements *overrides* rather
+  // than *extending* the default Tailwind palette.
+  theme: {
+    extend: {
+      colors: {
+        red: colors.red,
+        blue: colors.blue,
+      },
+    },
+  },
 };
 
 module.exports = getPackageTailwindConfig({
