@@ -335,8 +335,8 @@ export const siteLink = {
 };
 ```
 
-Our site-level `Default` token reuses everything from the Vital `Default` token, but overrides the `Theme`
-domain with site-specific styling.
+Our site-level `Default` token reuses everything from the Vital `Default` token, but overrides the
+`Theme` domain with site-specific styling.
 
 As another example, imagine we wanted to reuse the styling of the original link, but in a context
 where we did not want the link to be editable by a Content Editor. We could easily define our
