@@ -1,8 +1,8 @@
 # Token Domains
 
-Vital tokens are expressed in a special format known as the _Token Object Notation_. The keys of
-this object are "domains" — special groupings of designs or HOCs which can be overridden or extended
-separately by downstream consumers.
+Vital tokens are expressed in a special format known as the [_Token Object
+Notation_](./#token-object-notation). The keys of this object are "domains" — special groupings of
+designs or HOCs which can be overridden or extended separately by downstream consumers.
 
 A downside of using Tailwind is that it can result in long lists of classes in your HTML that are
 difficult to parse through. Using domains allows you to separate these long lists of classes into
@@ -29,7 +29,7 @@ differently as described below.
 - `Spacing`: Tokens which sit somewhere between `Theme` and `Layout`; e.g., padding, margin,
   line-spacing, etc.
 - `Theme`: Tokens which apply styling which is very likely to be overridden; e.g., colors,
-  typography, sizing such as `width` and `height`, etc. 
+  typography, sizing such as `width` and `height`, etc.
 - `Content`: Tokens which provide default content or other fixed props. Any hardcoded, translatable
   strings belong in this domain.
 - `Behavior`: Tokens which define or add behaviors to a component; e.g., the expanding and
@@ -81,8 +81,9 @@ The following special domains have values which are not extended domain objects:
 
 ## Order of Domains
 
-HOCs defined for each domain are applied in a fixed order (as listed above), regardless of the order
-in which they are specified in an individual token.
+HOCs defined for each domain are applied in a fixed order (as listed above). Regardless of the order
+in which domains are specified in an individual token, they will always be applied in the canonical
+order.
 
 For example, given:
 
@@ -172,6 +173,28 @@ domain.
 | Interactivity     | Behavior |
 | SVG               | Theme    |
 | Accessibility     | Behavior |
+
+## Compose vs Extend vs Override
+
+As mentioned, domains can be _extended_ or _overridden_. An extension or override can be made at the
+token, domain, or slot (component) level. _Extending_ is useful when you only need to make a small
+number of changes to a token/domain/slot. _Overriding_ allows you to completely overwrite a
+token/domain/slot, essentially writing your own version of it from scratch. This is useful when you
+need to make many adjustments to a token/domain/slot, and extending it would take more effort than
+simply rewriting it.
+
+Similar to extension is _composition_. Where extension takes an existing token and modifies its
+effect, composition takes several existing tokens and combines them. Use _composition_ when you are
+adding styling or behavior that creates a variation of the original component that downstream
+consumers may choose to add, remove, customize, or combine with other variations. Use _extension_
+when you are customizing an existing token at the brand or site level, and, especially, when you
+want to completely override one or more domains from the original token (as this isn't possible with
+composition).
+
+For further details on composing, extending, and overriding, please see:
+
+- [Extending and Composing Tokens](../ExtendingAndComposingTokens)
+- [Vital Tokens : Extension and Composition](./#extension-and-composition)
 
 ## Additional Considerations and Gotchas
 
