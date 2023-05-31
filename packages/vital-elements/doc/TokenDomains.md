@@ -153,8 +153,8 @@ const Example = asLinkToken({
 
 ## How to Determine the Appropriate Domain for a Utility Class
 
-Whenever you create a utility class, you'll need to determine the appropriate domain in which it
-should be placed. The Tailwind documentation is a useful aid in this regard. Visit the [Tailwind
+Whenever you use a utility class, you'll need to determine the appropriate domain in which it should
+be placed. The Tailwind documentation is a useful aid in this regard. Visit the [Tailwind
 Documentation](https://tailwindcss.com/docs/installation ':target=_blank'), and take note of the
 table of contents listed in the left sidebar. Using this table of contents, identify the category to
 which the utility class you've written belongs. Then, using the table below, find the associated
