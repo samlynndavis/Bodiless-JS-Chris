@@ -41,8 +41,7 @@ differently as described below.
 The following special domains have values which are not extended domain objects:
 
 - `Compose`: This special domain allows specifying other named tokens which should be composed with
-  this one. See [Extension and Composition](../Tokens/#extension-and-composition) for more
-  details. For example:
+  this one. For example:
 
   ```ts
   const Sticky = asHeaderToken({
@@ -53,6 +52,10 @@ The following special domains have values which are not extended domain objects:
     },
   });
   ```
+
+  - For more details on the `Compose` domains, see:
+    - [Extending and Composing Tokens : The `Compose` Domain](../ExtendingAndComposingTokens#the-compose-domain)
+    - [Vital Tokens : Extension and Composition](./#extension-and-composition)
 
 - `Flow`: By default, the tokens' HOCs for each domain are composed using the Bodiless `asToken`
   utility. This behavior can be overridden by specifying a different composer here. This is useful
