@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Buttons Matches snapshot for Default 1`] = `
+<span
+  design={
+    Object {
+      "Body": [Function],
+      "Wrapper": [Function],
+    }
+  }
+  href="#"
+/>
+`;
+
+exports[`Buttons Matches snapshot for Primary 1`] = `
+<span
+  design={
+    Object {
+      "Body": [Function],
+      "Wrapper": [Function],
+    }
+  }
+  href="#"
+/>
+`;
+
+exports[`Buttons Matches snapshot for PrimarySelected 1`] = `
+<span
+  design={
+    Object {
+      "Body": [Function],
+      "Wrapper": [Function],
+    }
+  }
+  href="#"
+/>
+`;
+
+exports[`Buttons Matches snapshot for Secondary 1`] = `
+<span
+  design={
+    Object {
+      "Body": [Function],
+      "Wrapper": [Function],
+    }
+  }
+  href="#"
+/>
+`;
+
+exports[`Buttons Matches snapshot for SecondarySelected 1`] = `
+<span
+  design={
+    Object {
+      "Body": [Function],
+      "Wrapper": [Function],
+    }
+  }
+  href="#"
+/>
+`;
+
+exports[`Buttons Matches snapshot for WhereToBuy 1`] = `
+<span
+  design={
+    Object {
+      "Body": [Function],
+      "Icon": [Function],
+      "Wrapper": [Function],
+    }
+  }
+>
+  Where to Buy
+</span>
+`;
+
+exports[`Buttons Matches snapshot for WhereToBuyWithoutIcon 1`] = `
+<span
+  design={
+    Object {
+      "Body": [Function],
+      "Icon": [Function],
+      "Wrapper": [Function],
+    }
+  }
+>
+  Where to Buy
+</span>
+`;
+
+exports[`Buttons Matches snapshot for WithArrow 1`] = `
+<span
+  design={
+    Object {
+      "Icon": [Function],
+      "Wrapper": [Function],
+    }
+  }
+/>
+`;
+
+exports[`Buttons Matches snapshot for WithBigButton 1`] = `
+<span
+  design={
+    Object {
+      "Body": [Function],
+      "Wrapper": [Function],
+    }
+  }
+  href="#"
+/>
+`;
+
+exports[`Buttons Matches snapshot for WithDisabled 1`] = `
+<span
+  design={
+    Object {
+      "Wrapper": [Function],
+    }
+  }
+/>
+`;
+
+exports[`Buttons Matches snapshot for WithPrimary 1`] = `
+<span
+  design={
+    Object {
+      "Body": [Function],
+      "Wrapper": [Function],
+    }
+  }
+  href="#"
+/>
+`;
