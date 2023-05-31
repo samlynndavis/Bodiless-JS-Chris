@@ -20,6 +20,10 @@ const Welcome = asDialogToken({
 });
 ```
 
+> Note - so far we are still using the semantic CSS class names from the
+> original React example. In a true Vital token, we would actually use
+> *functional* classes from TailwindCSS. We'll get to that in the next section.
+
 As we mentioned before, a token is a structured set of higher-order components which can be applied
 to a component. These are structured as a two-layer nested object.
 
