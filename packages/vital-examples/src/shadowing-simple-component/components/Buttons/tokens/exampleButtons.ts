@@ -19,9 +19,7 @@ import {
 const WithPrimary = asButtonToken({
   ...vitalButtonsBase.Primary,
   Theme: {
-    /**
-     * Spreading Theme here prevents unwanted changes, keeping all tokens other than the wrappers.
-     */
+    // Spreading Theme here prevents unwanted changes, keeping all tokens other than the wrappers.
     ...vitalButtonsBase.Primary.Theme,
     Wrapper: as(
       // vital-elements tokens
@@ -30,7 +28,8 @@ const WithPrimary = asButtonToken({
       vitalTextDecoration.Bold,
       vitalTextDecoration.Uppercase,
       vitalFontSize.Base,
-      // Tailwind classes
+      // For the sake of example/simplicity, we have provided some example classes to modify the
+      // button style. The best practice would be to use tokens for any reusable classes.
       'rounded hover:bg-vital-primary-interactive transition-colors duration-400',
     ),
   },
