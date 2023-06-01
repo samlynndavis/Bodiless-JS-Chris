@@ -1,4 +1,4 @@
-import { as } from '@bodiless/fclasses';
+import { as, Div, on } from '@bodiless/fclasses';
 import React from 'react';
 import { Dialog, exampleDialog, customDialog } from 'vital-examples/lib/intro/composing-from-outside';
 
