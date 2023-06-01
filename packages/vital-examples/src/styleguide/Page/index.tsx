@@ -16,7 +16,9 @@ import { asFluidToken } from '@bodiless/vital-elements';
 import { vitalPage } from '@bodiless/vital-templates';
 import { VitalDemoStyleGuideTemplate } from './StyleGuideTemplate';
 
-const { _default, Buttons, Card, Typography } = VitalDemoStyleGuideTemplate;
+const {
+  _default, Buttons, Card, Typography
+} = VitalDemoStyleGuideTemplate;
 
 const Default = asFluidToken({
   ...vitalPage.Default,
