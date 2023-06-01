@@ -14,7 +14,7 @@ const Default = asCardToken(vitalCardBase.Default, {
     ContentWrapper: as(
       exampleRadius.Simple,
       // Padding and bg color are added here to make the rounded corner visible.
-      'bg-amber-100 p-4',
+      'bg-vital-secondary-footer-bg p-4',
     ),
   },
   Layout: {
