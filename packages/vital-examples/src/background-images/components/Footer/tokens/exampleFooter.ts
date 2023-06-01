@@ -25,8 +25,10 @@ const WithTopWave = asFooterToken({
     Column2Wrapper: 'before:absolute before:w-screen before:h-9'
   },
 });
-
+// Here we are nerging 2 toiens by passing 2 arguments to `asFooterToken`
 const Default = asFooterToken({
+// In the first, we spread the values of the original token, overriding only the `Rewards` and `RewardsWrapper`
+// in the `Components` domain
   ...vitalFooterBase.Default,
   Components: {
     ...vitalFooterBase.Default.Components,
@@ -37,6 +39,7 @@ const Default = asFooterToken({
       startWith(LogoIcon)
   },
 }, {
+  // in the second, we *add* styling to the `Spacing` domain, as well as composing our `WithFooterWave`
   Spacing: {
     Wrapper: 'py-40',
     RewardsWrapper: '2xl:px-40 py-10',
