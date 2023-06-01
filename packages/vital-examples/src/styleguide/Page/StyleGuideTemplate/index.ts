@@ -17,7 +17,6 @@ import { Buttons } from './Button';
 import { Card } from './Card';
 import { Typography } from './Typography';
 
-
 export const VitalDemoStyleGuideTemplate = {
   _default,
   Buttons,
