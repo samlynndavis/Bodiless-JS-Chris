@@ -31,6 +31,7 @@ export const getPackageDocs: GetPackageDocs = ({
   try {
     const pkgPath = join(resolver('./package.json'), '..');
     const pkgJson = require(join(pkgPath, 'package.json'));
+    console.log('package', pkgJson.name);
     const paths: string[] = [];
     const deps = Object.keys(pkgJson.dependencies);
 

@@ -36,6 +36,6 @@ test-report.xml
 playwright-report
 
 # API doc
-**/doc/api
+# **/doc/api
 test-results/
 playwright-report/
