@@ -16,12 +16,22 @@ import { getPackageTailwindConfig } from '@bodiless/fclasses';
 
 const resolver = (pkgName) => require.resolve(pkgName);
 
+const colors = require('tailwindcss/colors');
+
 const plugin = require('tailwindcss/plugin');
 
 const twConfig = {
   content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
+  theme: {
+    extend: {
+      colors: {
+        amber: colors.amber,
+        blue: colors.blue,
+      },
+    },
+  },
   plugins: [
     plugin(({ addComponents }) => {
       addComponents({

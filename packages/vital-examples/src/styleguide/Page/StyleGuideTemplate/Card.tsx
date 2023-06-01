@@ -17,34 +17,20 @@ import {
   flowHoc,
   replaceWith,
   on,
-  varyDesigns,
+  // varyDesigns,
   addProps
 } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { CardClean } from '@bodiless/vital-card';
-import { vitalCardBase } from '@bodiless/vital-card/lib/base';
+// import { vitalCardBase } from '@bodiless/vital-card/lib/base';
 import { exampleCard } from '../../../reusable-tokens';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
-const Default = on(CardClean)(
-  vitalCardBase.Default,
-);
-
-const CardVariations = varyDesigns(
-  {
-    Default: exampleCard.Default,
-    Hero: exampleCard.Hero,
-  },
-  {
-    '': Default
-  },
-);
-
 const TestFlowContainer = asFluidToken({
   Components: {
-    Default,
-    ...CardVariations,
+    Default: on(CardClean)(exampleCard.Default),
+    Hero: on(CardClean)(exampleCard.Hero),
   },
 });
 
