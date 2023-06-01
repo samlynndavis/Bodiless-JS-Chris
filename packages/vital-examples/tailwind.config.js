@@ -21,6 +21,23 @@ const resolver = (pkgName) => require.resolve(pkgName);
 const twConfig = {
   content: ['./lib/**/!(*.d).{ts,js,jsx,tsx}'],
   theme: {
+    colors: {
+      'vital-primary': {
+        brand: '#CD8987',
+        card: '#CDCACC',
+        interactive: '#CDACA1',
+        divider: '#CDCACC',
+        'header-copy': '#330000',
+        'body-copy': '#330000',
+        'footer-copy': '#330000',
+        'page-bg': '#CDCACC',
+      },
+      'vital-secondary': {
+        eyebrow: '#CCFBFE',
+        separator: '#330000',
+        'footer-bg': '#CDCACC',
+      },
+    },
     extend: {
       backgroundImage: {
         'mobile-wave-top': "url('vital-examples/src/background-images/assets/images/mobilewave.svg')",
@@ -41,24 +58,6 @@ const twConfig = {
       });
     }),
   ],
-  colors: {
-    'vital-primary': {
-      brand: '#CD8987',
-      card: '#CDCACC',
-      interactive: '#CDACA1',
-      divider: '#CDCACC',
-      'header-copy': '#330000',
-      'body-copy': '#330000',
-      'footer-copy': '#330000',
-      'page-bg': '#CDCACC',
-    },
-    'vital-secondary': {
-      eyebrow: '#CCFBFE',
-      separator: '#330000',
-      'footer-bg': '#CDCACC',
-    },
-  },
-},
 };
 
 module.exports = getPackageTailwindConfig({

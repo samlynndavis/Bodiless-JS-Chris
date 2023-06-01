@@ -18,7 +18,7 @@ const WithTopWave = asFooterToken({
     Column2Wrapper: '2xl:before:content-none before:content-[\'\'] before:bg-mobile-wave-top relative',
   },
   Spacing: {
-    // Wrapper: 'py-40',
+    Wrapper: 'py-40',
     Column2Wrapper: 'before:mr-[-50vw] before:right-[50%] before:top-[-310px]'
   },
   Layout: {
