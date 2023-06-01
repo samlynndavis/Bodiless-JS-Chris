@@ -1,46 +1,13 @@
 # Background Images
 
-<!-- OPENING NOTE & REMINDER TO THE DEVELOPERS:
-
-    - The most important thing in these curriculum lessons is INFORMATION.
-      - Do not worry about prettiness (e.g., formatting) or spelling/punctuation.
-        The technical writer will take these and clean them up later.
-    - Some tasks may not need to use all the sections listed below, and that is ok.
--->
-
-<!-- INTRODUCTION
-
-    Use this section to _introduce_ the topic/task.
-    What this looks like may differ depending on the task.
-
-    - Keep in mind that the next section is the "Overview," which will describe what you are doing,
-      and why.
-      So, this should set up the reader for what they'll read in the "Overview," and provide them
-      with any necessary context.
-    - For example, you could provide links to any resources necessary/beneficial to getting started.
-    - Don't use an "Introduction" header — just roll into your intro.
--->
-
 @TODO Link to shadowing documentation and Bodiless documentation section on using Tailwind for background images.
 
 ## Overview
 
-<!-- Describe what you'll be doing in this task and why (if relevant). -->
 In this task we'll be customizing the default vital footer to include a new brand-specific SVG logo, as well an SVG wave image on both desktop and mobile.
 
 ## Assignment
 
-<!--
-    Explain, using Bodiless terminology, how a developer should accomplish this task.
-
-    - Feel free to reference other documents or examples.
-      - If there aren't existing examples showcasing what you want, then provide some.
-      - If there isn't documentation discussing a particular topic or detail that is relevant to
-        your task, you may need to write it and add it to the appropriate location in documentation.
-        - Ultimately, this curriculum should just be an onboarding tool, and all the _actual_
-          documentation should live outside of this curriculum and be in its appropriate place. This
-          curriculum can then link to any of that relevant documentation.
--->
 To begin, we will create a react component from our SVG to be used to replace the brand logo on the default vital footer. Using your SVG-to-React conversion app of choice (SVGR Playground), inlcude your SVG in the body of a functional component as illustrated below:
 
 ```jsx
@@ -100,6 +67,10 @@ On the `Wrapper` slot, we will apply our `.footer-wave` CSS rule, and on the `Co
 
  We will then construct a `Default` token for our custom footer and apply our newly-created `WithTopWave` token to this token's `Compose` domain.
 
+ NOTE: Our `WithTopWave` token could easily be woven into the body of our `Default` footer token, but imagine a future scenario where our design changes, and we no longer want that top wave to be present. By encapsulating this styling in its own token, and applying it via the `Compose` domain, we can easily add (and just as easily remove) a bit of styling or functionality to an existing token, without embedding it so deeply within that making changes it later becomes unncessarily cumbersome.
+
+ And in the event that this token has more widespread applications (i.e., a token that adds a border radius to an element), we can
+
 ## Practice
 
 @TODO
@@ -111,21 +82,10 @@ On the `Wrapper` slot, we will apply our `.footer-wave` CSS rule, and on the `Co
 
 ## Resources
 
-@TODO
-
 - [Adding components in Tailwind](https://tailwindcss.com/docs/plugins#adding-components)
 - [SVGR - For converting SVGs to React components](https://react-svgr.com/playground/)
 - [Using Tailwind for Background Images](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/Guides/BuildingSites/TailwindGuide?id=using-tailwind-for-background-images)
 -
-
-<!--
-    Link to any resources you found/used to help you accomplish this task.
-
-    - Link to pages/sections within the Bodiless documentation or the API docs.
-
-    TIP: When searching for resources in the Bodiless documentation, don't rely on the Docsify
-         search; instead, use the search in VS Code.
--->
 
 ## FAQ
 

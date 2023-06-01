@@ -18,37 +18,56 @@ const WithTopWave = asFooterToken({
     Column2Wrapper: '2xl:before:content-none before:content-[\'\'] before:bg-mobile-wave-top relative',
   },
   Spacing: {
-    Wrapper: 'py-40',
-    Column2Wrapper: 'before:mr-[-50vw] before:right-[50%] before:top-[-35px]'
+    // Wrapper: 'py-40',
+    Column2Wrapper: 'before:mr-[-50vw] before:right-[50%] before:top-[-310px]'
   },
   Layout: {
     Column2Wrapper: 'before:absolute before:w-screen before:h-9'
   },
 });
 
-const Default = asFooterToken(
-  vitalFooterBase.Default,
-  {
-    Components: {
-      ...vitalFooterBase.Default.Components,
-      RewardsWrapper: startWith(Div),
-      Rewards:
+const Default = asFooterToken({
+  ...vitalFooterBase.Default,
+  Components: {
+    ...vitalFooterBase.Default.Components,
+    RewardsWrapper: startWith(Div),
+    Rewards:
       // NOTE: Here we replace our footer's current 'Rewards' slot with
       // our custom logo using the `startWith` HOC.
       startWith(LogoIcon)
-      // NOTE: This could also be written as: as(replaceWith(Div), withChild(LogoIcon), 'logo'),
-    },
-    Spacing: {
-      Wrapper: 'py-40',
-      RewardsWrapper: 'px-40',
-    },
-    Compose: {
-      ...vitalFooterBase.Default.Compose,
-      WithTopWave,
-    }
   },
-);
+}, {
+  Spacing: {
+    Wrapper: 'py-40',
+    RewardsWrapper: '2xl:px-40 py-10',
+  },
+  Compose: {
+    WithTopWave,
+  }
+},);
+
+// const DefaultTest = asFooterToken({
+//   ...vitalFooterBase.Default,
+//   Components: {
+//     ...vitalFooterBase.Default.Components,
+//     RewardsWrapper: startWith(Div),
+//     Rewards:
+//       // NOTE: Here we replace our footer's current 'Rewards' slot with
+//       // our custom logo using the `startWith` HOC.
+//       startWith(LogoIcon)
+//   },
+//   Spacing: {
+//     ...vitalFooterBase.Default.Spacing,
+//     Wrapper: as(vitalFooterBase.Default.Spacing.Wrapper, 'py-40'),
+//     RewardsWrapper: as(vitalFooterBase.Default.Spacing.RewardsWrapper, '2xl:px-40 py-10'),
+//   },
+//   Compose: {
+//     ...vitalFooterBase.Default.Compose,
+//     WithTopWave,
+//   }
+// },);
 
 export default {
   Default,
+  WithTopWave,
 };

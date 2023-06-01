@@ -1,1 +1,1 @@
-export { default as exampleFooterBase } from './components/Footer/tokens';
+export { default as exampleFooterBase } from './components/Footer/tokens/exampleFooter';
