@@ -12,10 +12,15 @@
  * limitations under the License.
  */
 
-import { Card } from './Card';
 import { _default } from './_default';
+import { Buttons } from './Button';
+import { Card } from './Card';
+import { Typography } from './Typography';
+
 
 export const VitalDemoStyleGuideTemplate = {
   _default,
+  Buttons,
   Card,
+  Typography,
 };
