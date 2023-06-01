@@ -71,7 +71,7 @@
     "lint": "next lint",
     "docs": "run-s build:docs serve:docs",
     "prepare": "node ../../scripts/set-missing-symlinks.js @bodiless",
-    "prestart": "run-s build:env-vars build:docs",
+    "prestart": "run-s build:env-vars",
     "search-index": "create-search-index",
     "serve": "next start -p ${APP_PORT:-9000}",
     "serve:docs": "docsify serve ./public/generated/doc",
