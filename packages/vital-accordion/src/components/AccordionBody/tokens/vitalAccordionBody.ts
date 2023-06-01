@@ -13,11 +13,11 @@
  */
 
 import { withPlaceholder } from '@bodiless/components';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
 import { as, flowIf, on } from '@bodiless/fclasses';
 import { asSchemaSource } from '@bodiless/schema-org';
 import { vitalRichText, RichTextClean } from '@bodiless/vital-editors';
-import { useIsAccordionContracted, useIsAccordionExpanded } from '../../Accordion';
+import { useIsAccordionContracted, useIsAccordionExpanded } from '../../Accordion/AccordionContext';
 import { asAccordionBodyToken } from '../AccordionBodyClean';
 
 const Base = asAccordionBodyToken({
@@ -27,7 +27,7 @@ const Base = asAccordionBodyToken({
       flowIf(useIsAccordionContracted)(as('hidden')),
     ),
   },
-  Editors: {
+  Components: {
     Content: on(RichTextClean)(vitalRichText.Default),
   },
   Content: {

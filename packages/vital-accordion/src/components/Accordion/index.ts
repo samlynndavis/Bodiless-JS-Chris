@@ -14,7 +14,6 @@
 
 export { default as AccordionClean, asAccordionToken } from './AccordionClean';
 export { default as vitalAccordion } from './tokens';
-export { default as vitalAccordionBase } from './tokens/vitalAccordion';
 export { knapsackAccordionSpec } from './Accordion.knapsackSpec';
 export {
   AccordionProvider,
@@ -26,7 +25,7 @@ export {
   useIsAccordionFocusedIn,
   useIsAccordionFocusedOut,
 } from './AccordionContext';
-export {
+export type {
   AccordionComponents,
   AccordionProps,
   AccordionContextInterface,

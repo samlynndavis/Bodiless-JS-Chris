@@ -15,9 +15,9 @@
 import React, {
   createContext, useContext, FC, useLayoutEffect,
 } from 'react';
-import { useNode } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import type { LinkData } from '@bodiless/components';
-import { observer } from 'mobx-react';
+import { observer } from '@bodiless/core';
 import type { HOC } from '@bodiless/fclasses';
 import { BreadcrumbItem } from './BreadcrumbStore';
 import type { BreadcrumbItemType } from './BreadcrumbStore';
@@ -100,13 +100,14 @@ const asBreadcrumb = ({
       // a layout effect is executed.
       store.setItem(item);
     }
-
-    useLayoutEffect(() => {
-      store.setItem(item);
-      return () => {
-        store.deleteItem(item);
-      };
-    }, [titleNode.data, linkNode.data]);
+    if (typeof window !== 'undefined') {
+      useLayoutEffect(() => {
+        store.setItem(item);
+        return () => {
+          store.deleteItem(item);
+        };
+      }, [titleNode.data, linkNode.data]);
+    }
 
     return (
       <BreadcrumbContextProvider value={item}>

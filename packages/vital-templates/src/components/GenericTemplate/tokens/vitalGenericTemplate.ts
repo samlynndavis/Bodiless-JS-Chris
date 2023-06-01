@@ -13,36 +13,21 @@
  */
 
 import {
-  on,
   as,
   flowIf,
-  withDesign,
-  Img,
   Fragment,
   replaceWith,
   TokenCollection,
 } from '@bodiless/fclasses';
-import { asBodilessChameleon } from '@bodiless/components';
 import { vitalLayout } from '@bodiless/vital-layout';
 import { vitalFlowContainer } from '@bodiless/vital-flowcontainer';
-import { ContentListingClean, vitalContentListing } from '@bodiless/vital-content-listing';
-import { withNode, withNodeKey, useNode } from '@bodiless/core';
+import { withNode, withNodeKey, useNode } from '@bodiless/data';
 import { vitalSpacing } from '@bodiless/vital-elements';
 import { vitalBreadcrumbs } from '@bodiless/vital-navigation';
-import { vitalImage } from '@bodiless/vital-image';
-import { YouTubeClean, vitalYouTube } from '@bodiless/vital-youtube';
-import { CardStatic, vitalCardStatic } from '@bodiless/vital-card';
 import { asGenericTemplateToken, GenericTemplateToken } from '../GenericTemplateClean';
 import { TemplateNodeKeys } from '../../TemplatesNodeKeys';
+import { vitalHero } from '../../Hero';
 import { GenericTemplateComponents } from '../types';
-
-const heroDefaultData = {
-  component: 'Image',
-};
-
-const heroUseOverrides = () => ({
-  groupLabel: 'Hero'
-});
 
 const isHomePage = () => useNode().node.pagePath === '/';
 
@@ -58,14 +43,7 @@ const Default = asGenericTemplateToken({
   Components: {
     PageWrapper: vitalLayout.Default,
     Breadcrumb: as(vitalBreadcrumbs.Default),
-    TopContent: as(
-      asBodilessChameleon('component', heroDefaultData, heroUseOverrides),
-      withDesign({
-        Image: on(Img)(vitalImage.Hero),
-        Video: on(YouTubeClean)(vitalYouTube.Hero),
-        HeroCard: on(CardStatic)(vitalCardStatic.HeroLeftImageContentCentered),
-      }),
-    ),
+    TopContent: vitalHero.Default,
     Content: as(vitalFlowContainer.Default),
     BottomContent: as(vitalFlowContainer.Default),
   },
@@ -101,26 +79,6 @@ const Default = asGenericTemplateToken({
   },
 });
 
-const ContentListing = asGenericTemplateToken({
-  ...Default,
-  Meta: {
-    title: 'Content Listing',
-  },
-  Components: {
-    ...Default.Components,
-    Content: on(ContentListingClean)(vitalContentListing.Default),
-  },
-  Schema: {
-    ...Default.Schema,
-    Content: as(
-      withNodeKey({ nodeKey: 'content-listing', nodeCollection: 'site' }),
-      withNode,
-      Default.Schema.Content,
-    ),
-  }
-});
-
-// Holding here for backward compabitility document as deprecated.
 const Generic = asGenericTemplateToken({
   ...Default,
   Meta: {
@@ -131,14 +89,12 @@ const Generic = asGenericTemplateToken({
 interface VitalGenericTemplate extends TokenCollection<GenericTemplateComponents, {}> {
   Default: GenericTemplateToken,
   Generic: GenericTemplateToken,
-  ContentListing: GenericTemplateToken,
   WithNoBreadcrumbsOnHomePage: GenericTemplateToken,
 }
 
 const vitalGenericTemplate: VitalGenericTemplate = {
   Default,
   Generic,
-  ContentListing,
   WithNoBreadcrumbsOnHomePage,
 };
 

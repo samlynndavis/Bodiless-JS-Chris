@@ -12,7 +12,7 @@
  * limitations under the License.
  */
 
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { withoutHydrationInline } from '@bodiless/hydration';
 import {
   A, Span, Fragment, designable,
@@ -27,13 +27,13 @@ export const linkComponents: LinkComponents = {
   ExternalSRText: Fragment,
 };
 
-const LinkBase: FC<LinkBaseProps> = ({ components: C, children, ...rest }) => (
+const LinkBase: FC<PropsWithChildren<LinkBaseProps>> = ({ components: C, children, ...rest }) => (
   <C.Wrapper {...rest}>
     <C.ExternalSRText />
     <C.Icon />
-    <C.Body>
-      {children}
-    </C.Body>
+    {children
+      ? <C.Body>{children}</C.Body>
+      : <C.Body />}
   </C.Wrapper>
 );
 

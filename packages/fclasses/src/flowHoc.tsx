@@ -45,7 +45,7 @@ const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>
     return Object.assign(NewComponent, finalMeta);
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.warn(`KNOWN ISSUE: ${(e as Error).message}`);
+    // console.warn(`KNOWN ISSUE: ${(e as Error).message}`);
     return Component as ComponentWithMeta;
   }
 };
@@ -62,8 +62,11 @@ const preserveMeta = (hoc: HOC): HOC => <P extends object, Q extends object = P>
  * @category Token API
  */
 export const withMeta = (meta: TokenMeta): HOC => Component => {
-  const WithMeta = (props: any) => <Component {...props} />;
-  return Object.assign(WithMeta, meta);
+  const WithMeta = typeof Component === 'string'
+    ? (props: any) => <Component {...props} />
+    : Component;
+  // const WithMeta = (props: any) => <Component {...props} />;
+  return mergeWith(WithMeta, meta, mergeMeta);
 };
 
 type TokenWithParents = HOCWithMeta & {
@@ -221,4 +224,8 @@ const extendMeta = (
   return undefined;
 });
 
-export { flowHoc, withTokenFilter, extendMeta };
+const noop: HOC = C => C as ComponentWithMeta;
+
+export {
+  flowHoc, withTokenFilter, extendMeta, noop
+};

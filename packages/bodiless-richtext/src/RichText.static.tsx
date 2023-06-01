@@ -16,6 +16,7 @@ import React, {
   ComponentType,
   useMemo,
   useRef,
+  ReactNode,
 } from 'react';
 import isEqual from 'react-fast-compare';
 import flowRight from 'lodash/flowRight';
@@ -27,7 +28,7 @@ import {
 } from 'slate-react';
 import {
   withNode
-} from '@bodiless/core';
+} from '@bodiless/data';
 import {
   designable,
   withDisplayName,
@@ -54,6 +55,7 @@ import useInitialValue from './useInitialValue';
 
 type RichTextProviderProps = {
   plugins: Plugin[],
+  children?: ReactNode,
 } & Pick<RichTextProps, 'initialValue'>;
 type RichTextProviderType = ComponentType<RichTextProviderProps>;
 const RichTextProvider = flowRight(

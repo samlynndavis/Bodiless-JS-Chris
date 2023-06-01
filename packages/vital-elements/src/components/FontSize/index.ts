@@ -13,6 +13,5 @@
  */
 
 export { default as vitalFontSize } from './tokens';
-export { default as vitalFontSizeBase } from './tokens/vitalFontSize';
-export { FontSizeMeta } from './tokens';
+export { FontSizeMeta } from './meta';
 export { knapsackFontSizeSpec } from './FontSize.knapsackSpec';

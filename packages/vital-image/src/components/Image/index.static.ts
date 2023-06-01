@@ -13,7 +13,8 @@
  */
 import { asElementToken } from '@bodiless/vital-elements';
 import { withoutHydration } from '@bodiless/hydration';
-import { withNodeKey } from '@bodiless/core';
+import { withNodeKey } from '@bodiless/data';
+import { withImageClientLoader } from './tokens/vitalImage.gatsby';
 
 export const vitalImage = new Proxy({}, {
   get: (target, prop) => {
@@ -25,6 +26,9 @@ export const vitalImage = new Proxy({}, {
       Schema: {
         _: withNodeKey(nodeKey),
       },
+      Behavior: {
+        _: withImageClientLoader,
+      }
     });
   }
 });

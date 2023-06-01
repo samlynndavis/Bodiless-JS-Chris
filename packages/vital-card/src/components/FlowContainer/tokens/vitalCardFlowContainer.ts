@@ -13,8 +13,9 @@
  */
 
 import { asFluidToken } from '@bodiless/vital-elements';
+import omit from 'lodash/omit';
 import {
-  on, varyDesigns, flowHoc, extendDesign,
+  on, varyDesigns, flowHoc, extendDesign, removeClasses,
 } from '@bodiless/fclasses';
 import type { FluidToken } from '@bodiless/vital-elements';
 import {
@@ -32,6 +33,12 @@ const ContentVariations = {
   NoDescription: vitalCardStatic.WithNoDescription,
   NoEyebrow: vitalCardStatic.WithNoEyebrow,
 };
+
+const resetVerticalPadding = asCardToken({
+  Spacing: {
+    ImageWrapper: removeClasses('py-4')
+  }
+});
 
 /*
  * Horizontal Variations to vary on Left or Right Images & Content Top & Centered.
@@ -99,7 +106,11 @@ const WithBasicVariations = asFluidToken({
 
 const HeroVariations = varyDesigns(
   {
-    Hero: on(CardStatic)(vitalCardStatic.Hero, vitalCardStatic.WithFlowContainerPreview),
+    Hero: on(CardStatic)(
+      asCardToken(omit(vitalCardStatic.Hero, 'Compose')),
+      vitalCardStatic.WithFlowContainerPreview,
+      resetVerticalPadding
+    ),
   },
   LinkVariations,
   HorizontalVariations,

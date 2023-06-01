@@ -27,8 +27,8 @@ import { withPlaceholder } from '@bodiless/components';
 import { vitalColor } from '@bodiless/vital-elements';
 import { vitalEditorPlain, EditorPlainClean } from '@bodiless/vital-editors';
 import { asEditableLink, vitalLink } from '@bodiless/vital-link';
-import { withNodeKey } from '@bodiless/core';
-import { asButtonToken, ButtonComponent, ButtonToken } from '../ButtonClean';
+import { withNodeKey } from '@bodiless/data';
+import { ButtonComponent, ButtonToken, asButtonToken } from '../ButtonClean';
 import { WhereToBuy, WhereToBuyWithoutIcon } from './vitalWTB';
 
 const ButtonThemeStyle = as(
@@ -49,7 +49,7 @@ const Base = asButtonToken({
   Spacing: {
     Wrapper: 'px-6 py-3.5',
   },
-  Editors: {
+  Components: {
     Body: on(EditorPlainClean)(vitalEditorPlain.Default),
   },
   Content: {
