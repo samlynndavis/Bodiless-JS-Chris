@@ -11,15 +11,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
 import { TokenCollection } from '@bodiless/fclasses';
 
 import { KnapsackDemoTextClean } from '../KnapsackDemoElement';
 import vitalFontSize from './tokens';
 
+import type { VitalDesignSpec } from '../../util';
+
 const fontSizeTokens = vitalFontSize as unknown as TokenCollection<any, any>;
 
-export const knapsackFontSizeSpec: KnapsackBodilessSpec = {
+export const knapsackFontSizeSpec: VitalDesignSpec = {
   tokens: fontSizeTokens,
   tokensExportName: 'vitalFontSize',
   component: KnapsackDemoTextClean,

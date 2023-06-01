@@ -12,13 +12,13 @@
  * limitations under the License.
  */
 
-import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
+import type { VitalDesignSpec } from '@bodiless/vital-elements';
 
 import GenericTemplateClean, { genericTemplateComponents} from './GenericTemplateClean';
 import vitalGenericTemplate from './tokens';
 import type { GenericTemplateComponents } from './types';
 
-// @TODO: Move to a shared Knapsack package where `KnapsackBodilessSpec` will be.
+// @TODO: Move to a shared Knapsack package where `VitalDesignSpec` will be.
 // Currently `@bodiless/knapsack-renderer` can't be used since it's build target is CommonJs
 export const toKnapsackSlots = (obj: Record<string, any>, baseComponentName: string = '', allowedPatternIds: string[] = []) => Object.entries(obj).reduce(
   (obj, [k]) => Object.assign(obj, {
@@ -30,7 +30,7 @@ export const toKnapsackSlots = (obj: Record<string, any>, baseComponentName: str
   }), {}
 );
 
-export const knapsackGenericTemplateSpec: KnapsackBodilessSpec<GenericTemplateComponents> = {
+export const knapsackGenericTemplateSpec: VitalDesignSpec<GenericTemplateComponents> = {
   tokens: vitalGenericTemplate,
   tokensExportName: 'vitalGenericTemplate',
   component: GenericTemplateClean,

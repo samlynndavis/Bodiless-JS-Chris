@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import type { VitalDesignSpec } from '@bodiless/vital-elements';
 import { KnapsackRendererBase } from '@knapsack/app';
 import { KnapsackRendererWebpackBase } from '@knapsack/renderer-webpack-base';
 import { KnapsackTemplateRenderer as Renderer, KnapsackRenderParams, KnapsackTemplateRendererBase } from '@knapsack/app/dist/schemas/knapsack-config';
@@ -12,7 +13,6 @@ import {
 import { findUpPkgJson } from '@knapsack/file-utils';
 import { isObject } from '@knapsack/utils';
 import { getDemoAppUsage, getUsage } from './utils';
-import { KnapsackBodilessSpec } from './types';
 
 const { pkg } = findUpPkgJson(__dirname);
 
@@ -357,7 +357,7 @@ export class KnapsackBodilessRenderer extends Base implements Renderer {
         BL_IS_EDIT: JSON.stringify(process.env.NODE_ENV !== 'production'),
       }
     });
-    const bodilessSpec = x[template.alias] as KnapsackBodilessSpec;
+    const bodilessSpec = x[template.alias] as VitalDesignSpec;
     if (!bodilessSpec) {
       throw new Error(
         `No named export "${template.alias}" found after importing from "${templatePath}"`,

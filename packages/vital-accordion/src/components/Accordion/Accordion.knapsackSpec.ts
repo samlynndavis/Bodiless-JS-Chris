@@ -11,13 +11,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import type { KnapsackBodilessSpec } from '@bodiless/knapsack-renderer';
+import type { VitalDesignSpec } from '@bodiless/vital-elements';
 
 import AccordionClean, { AccordionComponentsStart } from './AccordionClean';
 import vitalAccordion from './tokens';
 import { AccordionComponents } from './types';
 
-// @TODO: Move to a shared Knapsack package where `KnapsackBodilessSpec` will be.
+// @TODO: Move to a shared Knapsack package where `VitalDesignSpec` will be.
 // Currently `@bodiless/knapsack-renderer` can't be used since it's build target is CommonJs
 export const toKnapsackSlots = (obj: Record<string, any>, baseComponentName: string = '', allowedPatternIds: string[] = []) => Object.entries(obj).reduce(
   (obj, [k]) => Object.assign(obj, {
@@ -29,7 +29,7 @@ export const toKnapsackSlots = (obj: Record<string, any>, baseComponentName: str
   }), {}
 );
 
-export const knapsackAccordionSpec: KnapsackBodilessSpec<AccordionComponents> = {
+export const knapsackAccordionSpec: VitalDesignSpec<AccordionComponents> = {
   tokens: vitalAccordion,
   tokensExportName: 'vitalAccordion',
   component: AccordionClean,

@@ -50,7 +50,6 @@
     "@bodiless/vital-layout": "^1.0.0-rc.38",
     "@bodiless/vital-navigation": "^1.0.0-rc.38",
     "@bodiless/vital-youtube": "^1.0.0-rc.38",
-    "@bodiless/knapsack-renderer": "^1.0.0-rc.38",
     "lodash": "^4.17.19"
   }
 }

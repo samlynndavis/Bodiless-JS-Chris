@@ -39,6 +39,7 @@
     "@bodiless/core": "^1.0.0-rc.38",
     "@bodiless/core-ui": "^1.0.0-rc.38",
     "@bodiless/fclasses": "^1.0.0-rc.38",
+    "@bodiless/vital-elements": "^1.0.0-rc.38",
     "@knapsack/test-ava": "^3.108.10",
     "@types/babel__core": "^7.1.16",
     "@types/node": "^16",
