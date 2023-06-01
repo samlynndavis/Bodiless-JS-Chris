@@ -12,4 +12,4 @@
  * limitations under the License.
  */
 
-export * from './background-images';
+export * from './styleguide';
