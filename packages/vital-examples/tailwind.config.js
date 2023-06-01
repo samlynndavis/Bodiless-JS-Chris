@@ -55,6 +55,26 @@ const twConfig = {
           maskPosition: 'bottom center',
           maskSize: '100%',
         },
+        '.card-corner': {
+          width: 'calc(100% - 60px)',
+          height: '18rem',
+          float: 'right',
+          'border-radius': '0 0 0 150px',
+          'object-fit': 'cover',
+          'object-position': 'center',
+        },
+        '.card-corner-md': {
+          // width: '50%',
+          height: '31rem',
+          'border-radius': '0 0 0 150px',
+          'object-position': '72%',
+        },
+        '.card-corner-lg': {
+          width: '100%',
+          height: '38rem',
+          float: 'none',
+          'border-radius': '0 0 0 400px',
+        },
       });
     }),
   ],
