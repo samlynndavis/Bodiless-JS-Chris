@@ -127,5 +127,3 @@ as(withAFalse, WithATrue)(C); // -> <C a={true} />
 It's important to remember that this is also true for the domains of a single token. These are
 applied in a fixed order (see [Token Domains](../Components/VitalElements/Tokens/TokenDomains)), and
 those applied later will take precedence.
-
-[Next: Functional Classes](./FunctionalClasses.md)

@@ -193,5 +193,3 @@ The possibilities are endless!
 
 ?> **Note:** By convention, tokens which are not intended to be used alone, but rather combined with
 other tokens, are named beginning with `With...`.
-
-[Next: Anatomy Of A Token](./AnatomyOfA_Token)

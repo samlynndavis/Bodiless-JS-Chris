@@ -30,5 +30,3 @@ multiple components, but they can represent bits of styling at any level. A layo
 or a data binding can all be represented as Vital tokens.
 
 Okay, enough talk. Let's dive into some code to see how these blocks fit together.
-
-[Next: Composing from Outside](./ComposingFromOutside.md)

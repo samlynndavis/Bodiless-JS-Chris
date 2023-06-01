@@ -192,5 +192,3 @@ customization.
 Note that the upstream library no longer exports the specialized version of the component
 (`WelcomeDialog`). Instead, it exports the specialization as a token which can be more easily
 extended or customized downstream.
-
-[Next: Reaching Inside](ReachingInside.md)

@@ -37,5 +37,3 @@ it](./WhyVital). Working code for all the examples in this curriculum can be fou
 and is demonstrated on the
 [`vital-examples` site](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/sites/vital-examples ':target=_blank').
 If you like, you can copy these directories to your new site and run the examples.
-
-[Next: Core Concepts](./CoreConcepts.md)

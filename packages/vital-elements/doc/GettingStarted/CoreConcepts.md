@@ -49,5 +49,3 @@ simplify the process of overriding or extending core styling or behavior. Althou
 different, this is theoretically similar to (and inspired by) [Gatsby Component
 Shadowing](https://www.gatsbyjs.com/blog/2019-04-29-component-shadowing/ ':target=_blank'), so an
 understanding of the principle will help when you come to implementing it in Vital.
-
-[Next: Components and Tokens](./ComponentsAndTokens.md)
