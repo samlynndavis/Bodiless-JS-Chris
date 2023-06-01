@@ -12,24 +12,12 @@
  * limitations under the License.
  */
 
-import { asFluidToken } from '@bodiless/vital-elements';
-import { vitalPage } from '@bodiless/vital-templates';
-import { VitalDemoStyleGuideTemplate } from './StyleGuideTemplate';
+import { StyleGuideTemplateClean } from '@bodiless/vital-templates';
+import { as } from '@bodiless/fclasses';
+import { VitalTestStyleGuidePage } from '@bodiless/vital-elements';
 
-const {
-  _default, Buttons, Card, Typography
-} = VitalDemoStyleGuideTemplate;
+const StyleGuidePage = as(VitalTestStyleGuidePage.Default)(
+  StyleGuideTemplateClean,
+);
 
-const Default = asFluidToken({
-  ...vitalPage.Default,
-  Components: {
-    _default,
-    Buttons,
-    Card,
-    Typography,
-  },
-});
-
-export default {
-  Default,
-};
+export default StyleGuidePage;
