@@ -6,7 +6,6 @@ import { FlowContainerClean, vitalFlowContainer } from '@bodiless/vital-flowcont
 const WelcomeDialog = as(exampleDialog.Welcome)(Dialog);
 const CustomWelcomeDialog = as(customDialog.Welcome)(Dialog);
 const HeroCardVariations = as(vitalFlowContainer.Default)(FlowContainerClean);
-// const HeroCardVariations = on(FlowContainerClean)(vitalFlowContainer.Default);
 
 export default () => (
   // @todo Have an example wrapper for intro?
