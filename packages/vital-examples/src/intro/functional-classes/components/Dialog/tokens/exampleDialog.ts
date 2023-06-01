@@ -26,7 +26,7 @@ const Welcome = asDialogToken({
     ...Default.Theme,
     // Note that there is no longer a `FancyBorder` component which accpets
     // props defining the color. Instead, there is a `Fancy` border token,
-    // and the color variations are encapsulated in `Red` and `Blue` tokens. 
+    // and the color variations are encapsulated in `Red` and `Blue` tokens.
     Border: exampleBorder.Blue,
   },
   Content: {

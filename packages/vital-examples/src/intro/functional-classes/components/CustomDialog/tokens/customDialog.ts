@@ -15,6 +15,7 @@ const Welcome = asDialogToken({
     ...exampleDialog.Welcome.Theme,
     //  ...except the `Border` which I want to override.
     Border: exampleBorder.Red,
+    TitleWrapper: 'text-xl font-bold',
   }
 });
 
@@ -46,7 +47,7 @@ const WelcomeWithRedMessage = asDialogToken({
   // }),
   Theme: {
     ...Welcome.Theme,
-    MessageWrapper: as(Welcome.Theme.MessageWrapper, 'text-red-600'), 
+    MessageWrapper: as(Welcome.Theme.MessageWrapper, 'text-red-600'),
   },
 });
 
