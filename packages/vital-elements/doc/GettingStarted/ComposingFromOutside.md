@@ -1,19 +1,18 @@
 # Composing from Outside
 
-If you're a seasoned React developer, you are familiar with the concept of
-composition and the
-[standard patterns for using it](https://legacy.reactjs.org/docs/composition-vs-inheritance.html).
-You are probably used to composing by creating a new *component* which assembles
-and encapsulates the functionality you want to compose. Vital-DS approaches this
-slightly differently. To understand this better, let's look at the
-[Specialization Pattern](https://legacy.reactjs.org/docs/composition-vs-inheritance.html#specialization)
-from the React docs.  Here is the original code rewritten in Typescript.
+If you're a seasoned React developer, you are familiar with the concept of composition and the
+[standard patterns for using it](https://legacy.reactjs.org/docs/composition-vs-inheritance.html
+':target=_blank'). You are probably used to composing by creating a new _component_ that assembles
+and encapsulates the functionality you want to compose. VitalDS approaches this slightly
+differently. To understand this better, let's look at the [Specialization
+Pattern](https://legacy.reactjs.org/docs/composition-vs-inheritance.html#specialization
+':target=_blank') from the React docs. Here is the original code rewritten in TypeScript:
 
 ```ts
 import React from 'react';
 import type { FC } from 'react';
 
-/// FancyBorder........
+// FancyBorder........
 enum FancyBorderColor {
   Red = 'red',
   Blue = 'blue',
@@ -46,7 +45,7 @@ const Dialog: FC<DialogProps> = props => {
       </p>
     </FancyBorder>
   );
-}
+};
 
 const WelcomeDialog: FC = () => (
   <Dialog
@@ -56,12 +55,11 @@ const WelcomeDialog: FC = () => (
 );
 ```
 
-In this example, we take a generic `Dialog` component and create a specific
-variation of it by creating a new `WelcomeDialog` component which supplies
-props. In a sense you could say we are composing *from within* -- the
-composition happens *inside* the new component.
+In this example, we take a generic `Dialog` component and create a specific variation of it by
+creating a new `WelcomeDialog` component that supplies props. In a sense, you could say we are
+composing _from within_ — the composition happens _inside_ the new component.
 
-In Vital, you would accomplish the same thing *from without*, by creating a token:
+In Vital, you would accomplish the same thing _from without_, by creating a token:
 
 ```ts
 import { addProps, as } from '@bodiless/fclasses';
@@ -70,20 +68,20 @@ import { asElementToken } from '@bodiless/vital-elements';
 const Welcome = asElementToken({
   Content: {
     _: addProps({
-        title: 'Welcome',
-        message: 'Thank you for visiting our spacecraft!',
+      title: 'Welcome',
+      message: 'Thank you for visiting our spacecraft!',
     }),
-  }
+  },
 });
 
 const WelcomeDialog = as(Welcome)(Dialog);
 ```
 
-This may take a bit of getting used to, but it opens up a powerful pattern for extension
-and recomposition through *layering*.
+This may take a bit of getting used to, but it opens up a powerful pattern for extension and
+recomposition through _layering_.
 
-Let's imagine that in addition to allowing you to modify the content, the `Dialog`
-component also allowed you to modify the color:
+Let's imagine that in addition to allowing you to modify the content, the `Dialog` component also
+allowed you to modify the color:
 
 ```ts
 
@@ -104,16 +102,17 @@ export const Dialog: FC<DialogProps> = ({ color, title, message })=> (
 );
 
 export const WelcomeDialog: FC = props => (
-    <Dialog
-      color={FancyBorderColor.Blue},
-      title="Welcome"
-      message="Thank you for visiting our spacecraft!" />
+  <Dialog
+    color={FancyBorderColor.Blue},
+    title="Welcome"
+    message="Thank you for visiting our spacecraft!"
+  />
 );
 ```
 
-Now, let's assume these components are provided by an upstream library, and I
-want to use them, but on my site a welcome dialog is red, not blue. I have to
-create a new component, manually replicating the content and changing the color:
+Now, let's assume these components are provided by an upstream library, and you want to use them,
+but on your site, a welcome dialog is red, not blue. You have to create a new component, manually
+replicating the content and changing the color:
 
 ```ts
 const MyWelcomeDialog FC = () => (
@@ -125,7 +124,7 @@ const MyWelcomeDialog FC = () => (
 );
 ```
 
-Now, if the upstream library changes the content:
+Now, if the upstream library changes the content—
 
 ```ts
 const WelcomeDialog: FC = () => (
@@ -137,8 +136,8 @@ const WelcomeDialog: FC = () => (
 );
 ```
 
-I won't receive it. Essentially, I have "forked" the upstream component, and am
-cut off from any future enhancements.
+—you won't receive it. Essentially, you have "forked" the upstream component, and are cut off from
+any future enhancements.
 
 Using tokens, on the other hand, the upstream library can export these specializations
 independently:
@@ -150,8 +149,8 @@ const Welcome = asElementToken({
   },
   Content: {
     _: addProps({
-        title: 'Welcome',
-        message: 'Thank you for visiting our spacecraft!',
+      title: 'Welcome',
+      message: 'Thank you for visiting our spacecraft!',
     }),
   },
 });
@@ -162,12 +161,12 @@ export const exampleDialog = {
 };
 ```
 
-Don't worry too much about the structure of the token--we'll get into that later. For
-now it's enough to know that a token is a structured set of Higher Order Components
-which compose styling or behavior onto a component. In this case, the token uses
-the `addProps` utility to create those Higher Order Components.
+Don't worry too much about the structure of the token — we'll get into that later. For now, it's
+enough to know that a token is a structured set of higher-order components that compose styling or
+behavior onto a component. In this case, the token uses the `addProps` utility to create those
+higher-order components.
 
-Now I can recompose these attributes independently:
+Now you can recompose these attributes independently:
 
 ```ts
 const Welcome = asElementToken({
@@ -184,15 +183,14 @@ const customDialog = {
 const WelcomeDialog = as(customDialog.Welcome)(Dialog);
 ```
 
-This is just plain old Javascript object composition -- we keep all the
-top-level keys of the original token, but supply our own `Theme`.
+This is just plain old JavaScript object composition — you keep all the top-level keys of the
+original token, but supply your own `Theme`.
 
-Now if the content changes upstream, we'll receive the enhancement while still
-retaining our customization.
+Now if the content changes upstream, you'll receive the enhancement while still retaining your
+customization.
 
-Note that the upstream library no longer exports the specialized version
-of the component (`WellcomeDialog`).  Instead it exports the specialization
-as a token which can be more easily extended or customized downstream.
+Note that the upstream library no longer exports the specialized version of the component
+(`WelcomeDialog`). Instead, it exports the specialization as a token which can be more easily
+extended or customized downstream.
 
 [Next: Reaching Inside](ReachingInside.md)
-
