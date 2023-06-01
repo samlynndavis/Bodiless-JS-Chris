@@ -46,27 +46,6 @@ const Default = asFooterToken({
   }
 },);
 
-// const DefaultTest = asFooterToken({
-//   ...vitalFooterBase.Default,
-//   Components: {
-//     ...vitalFooterBase.Default.Components,
-//     RewardsWrapper: startWith(Div),
-//     Rewards:
-//       // NOTE: Here we replace our footer's current 'Rewards' slot with
-//       // our custom logo using the `startWith` HOC.
-//       startWith(LogoIcon)
-//   },
-//   Spacing: {
-//     ...vitalFooterBase.Default.Spacing,
-//     Wrapper: as(vitalFooterBase.Default.Spacing.Wrapper, 'py-40'),
-//     RewardsWrapper: as(vitalFooterBase.Default.Spacing.RewardsWrapper, '2xl:px-40 py-10'),
-//   },
-//   Compose: {
-//     ...vitalFooterBase.Default.Compose,
-//     WithTopWave,
-//   }
-// },);
-
 export default {
   Default,
   WithTopWave,
