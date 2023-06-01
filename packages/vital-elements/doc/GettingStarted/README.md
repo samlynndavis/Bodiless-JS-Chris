@@ -27,12 +27,14 @@ The Vital-DS components provide:
  ```
  npx @bodiless/cli@next new -r next
  ```
- and choose either `__vital__` (for Gatsby) or `__vital-next__` for NextJS as
- the template site. For more information, see the
+ and choose `__vital_next__` as the template site. For more information, see the
  [Bodiless-JS Getting Started Guide]().
 
 Once your site is running locally, walk through the introduction in the following
 pages to see how it works.  Or, if you're philosophically minded, read more about
-[why you might want to use it](./WhyVital.md);
+[why you might want to use it](./WhyVital.md).  Working code for all the eexamples
+in this curriculum can be found in the [vital-examples package]() and is demonstrated
+on the [vital-examples site](). If you like, you can copy these directories to your
+new site and run the examples.
 
 [Next: Core Concepts](./CoreConcepts.md)
