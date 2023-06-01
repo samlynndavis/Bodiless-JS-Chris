@@ -17,13 +17,11 @@ import {
   flowHoc,
   replaceWith,
   on,
-  // varyDesigns,
   addProps
 } from '@bodiless/fclasses';
 import { asFluidToken } from '@bodiless/vital-elements';
 import { asStyleGuideTemplateToken, vitalStyleGuideTemplate } from '@bodiless/vital-templates';
 import { CardClean } from '@bodiless/vital-card';
-// import { vitalCardBase } from '@bodiless/vital-card/lib/base';
 import { exampleCard } from '../../../reusable-tokens';
 import { StyleGuideExamplesClean, vitalStyleGuideExamples } from '../../Examples';
 
