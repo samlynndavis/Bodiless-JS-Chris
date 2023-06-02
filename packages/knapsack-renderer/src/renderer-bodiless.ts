@@ -20,7 +20,7 @@ const ourImports: KsJsImport[] = [
   {
     type: 'extra',
     importInfo: {
-      path: '@bodiless/core',
+      path: '@bodiless/data',
       name: 'withDefaultContent',
       type: 'named',
     },
