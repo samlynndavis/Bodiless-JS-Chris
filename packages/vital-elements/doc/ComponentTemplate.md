@@ -1,12 +1,73 @@
 # Vital Component Template
 
-Every component/package in the Vital Design System (or one which extends it) should follow these
-conventions.
+Every component/package in the Vital Design System (or one which extends it) should follow the
+directory structure and conventions described below. This ensures consistency, enables
+[Token Shadowing](./Shadow.md) and [Static Replacement](./StaticReplacement.md).
+
+## Component Scaffolding
+
+Vital provides a tool for scaffolding new components which makes it easier to ensure the standards
+are met. You should use it anytime you are creating a new component or extending an existing token
+collection.
+
+To use it, run the following command from a local directory:
+  
+  ```bash
+  npx @bodiless/vital-scaffold@next
+  ```
+
+Follow the prompts to create the new component. The tool will generate the file structure based on
+the answers provided and populate it with the necessary files.
+
+Below is a list of prompts and their descriptions, please note that some prompts are conditional on
+previous answers.
+- `Path to "src" directory where component should be created [Required]`
+    
+  Relative or absolute path to the `src` directory of the package in which the new
+  component should be created. If the directory does not exist, it will show warning message. For
+  example, if current working directory is project root, provide a relative path for new component:
+  `./packages/{package name}/src/`, and code will be generated inside `src`.
+
+- `Component name [Required]`
+
+  Name of the component to create, with underscore or alphanumeric and case insensitive
+  characters, e.g. `card`.  If you are extending an existing token collection, this should
+  be the name of the upstream component to which that applies.
+
+- `Library name [Required]`
+
+  The library name to which new component will belong, with underscore or alphanumeric and case
+  insensitive characters e.g. `myBrand`.
+
+- `Upstream package to extend`
+
+  If you plan to extend a token collecdtion from an existing package, e.g.
+  `@bodiless/vital-card`, specify the source package name here. In this case,
+  only a token collection will be provisioned, and it will apply to the upstream
+  clean compoennt. If you are creating a new component rather than extending,  
+  leave it blank, and a clean component will be generated.
+
+- `Upstream library name`
+
+  The name of the library to which the upstream component you're extending belongs.Default to
+  `vital`.
+
+- `Shadow the upstream token collection (Y/n)`
+
+  If you want to shadow the upstream token collection, type `Y` or `y` to generate shadow file
+  templates. In most cases you should answer 'yes'.
+
+- `Is the component is always static and never hydrated?`
+
+  If you want to create a component that never hydrates, type `Y` or `y` to generate static version
+  only. Otherwise, both static and dynamic versions will be created. In general, you should only
+  answer 'yes' if you know that your compnoent will never contain interactive functionality. For
+  more information, see [Static Replacement](./StaticReplacement.md).
 
 ## File Structure
 
-Packages defining Vital components and/or tokens should use the following file structure. Some files
-are optional; see below for full details.
+Using the scaffolding tool will produce the following file structure. Some files are optional; see
+below for full details.
 
 ```
 package.json
@@ -22,6 +83,7 @@ bodiless.docs.json
             index.bl-edit.ts
             index.static.ts
             {Component}Clean.tsx
+            types.ts
             __tests__/
                 {Component}.test.tsx
             tokens/
@@ -259,54 +321,3 @@ export { default as {brand}{ComponentA}Base } from '../components/{ComponentA}/t
 export { default as {brand}{ComponentB}Base } from '../components/{ComponentB}/tokens/{brand}{ComponentB}';
 ```
 
-
-## Component Scaffolding
-
-Bodiless provides a tool for scaffolding new components. To use it, run the following command from
-a local directory:
-  
-  ```bash
-  npx @bodiless/vital-scaffold@next
-  ```
-
-Follow the prompts to create the new component. The tool will generate the file structure base on
-the answers provided and populate it with the necessary files.
-
-Below is a list of prompts and their descriptions, please note that some prompts are conditional on
-previous answers.
-- `Path to directory where component should be created [Required]`
-    
-  Relative or absolute directory path that new component to be created in. If the directory does
-  not exist, it will show warning message. For example, if current working directory is project
-  root, provide a relative path for new component: `./packages/{package name}/src/`, and code will
-  be generated inside `src`.
-
-- `Component name [Required]`
-
-  Name of the component to create, with underscore or alphanumeric and case insensitive
-  characters, e.g. `card`,
-
-- `Library name [Required]`
-
-  The library name for which new component belongs, with underscore or alphanumeric and case
-  insensitive characters e.g. `myBrand`.
-
-- `Upstream package to extend`
-
-  If the new component is planned for extending from an upstream package, e.g.
-  `@bodiless/vital-card`, specify the source package name here. If the new component is not planned
-  for extending from an upstream package, leave it blank, a clean component will be generated.
-
-- `Upstream library name`
-
-  Source library name, default to `vital`.
-
-- `Shadow the upstream token collection (Y/n)`
-
-  If you want to shadow the upstream token collection, type `Y` or `y` to generate shadow file
-  templates.
-
-- `Is the component is always static and never hydrated?`
-
-  If you want to create a component that never hydrates, type `Y` or `y` to generate static version
-  files.
