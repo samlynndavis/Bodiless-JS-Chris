@@ -298,14 +298,14 @@ export const brandLink = {
 };
 ```
 
-Here we define two "domains" — `Theme` and `Editors` — and specify element-level tokens which should
+Here we define two "domains" — `Theme` and `Schema` — and specify element-level tokens which should
 be applied to the `Wrapper` key of the designable `Link` component.
 
 Note that we reuse element-level tokens (`brandElement.TextLink` and `brandElement.EditableLink`).
 These are defined at the element level because there may be times when you wish to apply that
 styling or behavior to a plain `A` tag.
 
-?> **Note:** Note also the use of the special `_` key in the `Editors` domain. This indicates that
+?> **Note:** Note also the use of the special `_` key in the `Schema` domain. This indicates that
 the associated HOC(s) should be applied to the component as a whole rather than to an individual
 design element within the component.
 
@@ -335,8 +335,8 @@ export const siteLink = {
 };
 ```
 
-Our site-level `Default` token reuses everything from the Vital `Default` token, but overrides the `Theme`
-domain with site-specific styling.
+Our site-level `Default` token reuses everything from the Vital `Default` token, but overrides the
+`Theme` domain with site-specific styling.
 
 As another example, imagine we wanted to reuse the styling of the original link, but in a context
 where we did not want the link to be editable by a Content Editor. We could easily define our
@@ -347,12 +347,12 @@ import omit from 'lodash/omit';
 import { LinkClean } from '@bodiless/vital-link';
 import { brandLink } from '@bodiless/brand';
 
-const NonEditableLink = as(omit(brandLink.Default, 'Editors'))(LinkClean);
+const NonEditableLink = as(omit(brandLink.Default, 'Schema'))(LinkClean);
 ```
 
 #### Domains
 
-In the above example, we defined two _domains_: `Theme` and `Editors`. This choice was based on an
+In the above example, we defined two _domains_: `Theme` and `Schema`. This choice was based on an
 understanding of how the token would likely be reused or extended by downstream consumers. In this
 case, we separated design elements which were very unlikely to be reused (typography and colors),
 from a behavior (editability) which was more likely to be reused, but which might also be extracted.

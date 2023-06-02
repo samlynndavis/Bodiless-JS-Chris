@@ -88,7 +88,7 @@ const Custom = asDialogToken({
 });
 ```
 
-Or using th `omit` utility from Lodash:
+Or using the `omit` utility from [Lodash](https://lodash.com/docs/#omit ':target=_blank'):
 
 ```ts
 const Custom = asDialogToken({
@@ -442,3 +442,52 @@ token is really just recomposing it.
 ?> **Note:** The order in which domains are composed is fixed (you can see the full list of domains,
 in order, in [Token Domains](./Tokens/TokenDomains)). It doesn't matter which order you specify them
 in when defining your token; they will always be applied in the canonical order.
+
+## Special Cases
+
+### Removing Components from Fluid Tokens
+
+For some container-like components ([RTE](../VitalEditors/RTE_Editor),
+[chameleons](/Components/Chameleon), [Flow Containers](../VitalFlowContainer), etc.), the selection
+of components is _fluid_ and determined by the tokens — unlike clean components, which define a
+_fixed_ set of components — so removing these components from the token will effectively remove them
+from the container. Note that you must remove them from _all_ domains. The presence of a slot in any
+domain of any token which applies to such component will cause a component of that name to be
+available in the container.
+
+The components can be removed from the token using [Lodash's `omit`
+function](https://lodash.com/docs/#omit ':target=_blank'):
+
+```ts
+const Custom = asFooToken({
+  ...Foo,
+  Layout: {
+    ...omit(Foo.Layout, 'Bar'),
+  },
+  Schema: {
+    ...omit(Foo.Schema, 'Bar'),
+  },
+  Theme: {
+    ...omit(Foo.Theme, 'Bar'),
+  },
+});
+```
+
+In the example above, we're extending the `Foo` token, which utilizes the `Bar` component, and, for
+whatever reason, we've decided we don't want to utilize the `Bar` component in our `Custom` version
+of `Foo`, so, using `omit`, we've removed `Bar` from each domain where it is used.
+
+Looking here—
+
+```ts
+  Layout: {
+    ...omit(Foo.Layout, 'Bar'),
+  },
+```
+
+—we're spreading the `Layout` components — except `Bar` — across the `Layout` domain. We use this
+pattern for the `Schema` and `Theme` domains as well, where `Bar` has also been set.
+
+?> **Note:** For a real-world use case of using `omit` to remove components, see [Removing
+Components from Vital Rich Text Editor by
+Shadowing](../VitalEditors/RichTextCustomizing#removing-components-from-vital-rich-text-editor-by-shadowing).
