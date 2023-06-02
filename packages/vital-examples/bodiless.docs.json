@@ -1,7 +1,11 @@
 {
-  "Components": {
-    "Link": {
-      "README.md": "./doc/Link.md"
+  "Curriculum": {
+    "Lessons": {
+      "ShadowA_SimpleComponent.md": "./doc/Curriculum/Lessons/ShadowASimpleComponent.md",
+      "ReusableTokens.md": "./doc/Curriculum/Lessons/ReusableTokens.md",
+      "CustomizeDesignTokens.md": "./doc/Curriculum/Lessons/CustomizeDesignTokens.md",
+      "BackgroundImages.md": "./doc/Curriculum/Lessons/BackgroundImages.md",
+      "README.md": "./doc/Curriculum/Lessons/README.md"
     }
   }
 }
