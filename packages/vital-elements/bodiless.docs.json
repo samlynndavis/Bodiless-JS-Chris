@@ -1,17 +1,4 @@
 {
-  "Curriculum": {
-    "GettingStarted": {
-      "WhyVital.md": "./doc/GettingStarted/WhyVital.md",
-      "WorkingWithContent.md": "./doc/GettingStarted/WorkingWithContent.md",
-      "FunctionalClasses.md": "./doc/GettingStarted/FunctionalClasses.md",
-      "AnatomyOfA_Token.md": "./doc/GettingStarted/AnatomyOfAToken.md",
-      "ReachingInside.md": "./doc/GettingStarted/ReachingInside.md",
-      "ComposingFromOutside.md": "./doc/GettingStarted/ComposingFromOutside.md",
-      "ComponentsAndTokens.md": "./doc/GettingStarted/ComponentsAndTokens.md",
-      "CoreConcepts.md": "./doc/GettingStarted/CoreConcepts.md",
-      "README.md": "./doc/GettingStarted/README.md"
-    }
-  },
   "VitalDesignSystem": {
     "README.md": "./doc/VitalDesignSystem.md",
     "Components": {
