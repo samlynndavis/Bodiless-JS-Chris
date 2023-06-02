@@ -1,5 +1,24 @@
 # Reaching Inside
 
+<!-- Inlining HTML to add multi-line info block with disclosure widget and unordered list. -->
+<div class="warn">
+  <strong>Note:</strong> Files containing code exampled on this page can be found under the <a
+  target="_blank" rel="noopener noreferrer" href="https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/reaching-inside">
+  <code>intro/reaching-inside</code> directory</a> in the <code>vital-examples</code> package.
+  <br><br>
+  <details>
+  <summary>
+    Expand for a list of the most relevant files...
+  </summary>
+
+  - [`./components/Dialog/types.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/reaching-inside/components/Dialog/types.ts)
+  - [`./components/Dialog/Dialog.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/reaching-inside/components/Dialog/Dialog.tsx)
+  - [`./components/tokens/exampleDialog.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/reaching-inside/components/tokens/exampleDialog.ts)
+  - [`./components/CustomDialog/tokens/customDialog.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/reaching-inside/components/CustomDialog/tokens/customDialog.ts)
+
+  </details>
+</div>
+
 The [previous example](./ComposingFromOutside) allowed us to reuse functionality from an upstream
 component library (or, really, _token_ library) while selectively extending it, but it has one
 significant limitation: The various configuration options exposed by the `Dialog` component must be
@@ -193,5 +212,3 @@ The possibilities are endless!
 
 ?> **Note:** By convention, tokens which are not intended to be used alone, but rather combined with
 other tokens, are named beginning with `With...`.
-
-[Next: Anatomy Of A Token](./AnatomyOfA_Token)
