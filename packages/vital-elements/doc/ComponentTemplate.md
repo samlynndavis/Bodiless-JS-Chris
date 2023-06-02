@@ -14,6 +14,7 @@ tsconfig.json
 bodiless.docs.json
 /doc
 /src
+    base.ts
     index.ts
     /components
         /{Component}
@@ -21,9 +22,14 @@ bodiless.docs.json
             index.bl-edit.ts
             index.static.ts
             {Component}Clean.tsx
+            __tests__/
+                {Component}.test.tsx
             tokens/
                 index.ts
                 {brand}{Component}.ts
+    /shadow
+        {sourcePackage}/
+            {Component}.ts
 ```
 
 This structure is intended to facilitate two build-time webpack optimizations:
@@ -195,6 +201,15 @@ export { default as vitalFooClean } from './FooClean';
 export { default as vitalFoo } from './tokens';
 ```
 
+#### `__tests__/{Component}.test.tsx` (component-level)
+
+Unittest template for component and token with snapshot testing.
+
+#### `shadow/{sourcePackage}/{Component}.ts` (component-level)
+
+Token collection shadowing template. This file is used to shadow a token collection from upstream
+package token collection.
+
 ### Top-Level Files
 
 #### `package.json`
@@ -232,3 +247,66 @@ export * from './components/{ComponentB}';
 // ... additional utilities or types defined in your package.
 // ...
 ```
+
+#### `base.ts` (top-level)
+
+Exports "base" or un-shadowed version of token collections to allow downstream consumers to extend
+them. This file could exist already with other component token exports. If so, scaffold will just
+append new token exports to the file.
+
+```js
+export { default as {brand}{ComponentA}Base } from '../components/{ComponentA}/tokens/{brand}{ComponentA}';
+export { default as {brand}{ComponentB}Base } from '../components/{ComponentB}/tokens/{brand}{ComponentB}';
+```
+
+
+## Component Scaffolding
+
+Bodiless provides a tool for scaffolding new components. To use it, run the following command from
+a local directory:
+  
+  ```bash
+  npx @bodiless/vital-scaffold@next
+  ```
+
+Follow the prompts to create the new component. The tool will generate the file structure base on
+the answers provided and populate it with the necessary files.
+
+Below is a list of prompts and their descriptions, please note that some prompts are conditional on
+previous answers.
+- `Path to directory where component should be created [Required]`
+    
+  Relative or absolute directory path that new component to be created in. If the directory does
+  not exist, it will show warning message. For example, if current working directory is project
+  root, provide a relative path for new component: `./packages/{package name}/src/`, and code will
+  be generated inside `src`.
+
+- `Component name [Required]`
+
+  Name of the component to create, with underscore or alphanumeric and case insensitive
+  characters, e.g. `card`,
+
+- `Library name [Required]`
+
+  The library name for which new component belongs, with underscore or alphanumeric and case
+  insensitive characters e.g. `myBrand`.
+
+- `Upstream package to extend`
+
+  If the new component is planned for extending from an upstream package, e.g.
+  `@bodiless/vital-card`, specify the source package name here. If the new component is not planned
+  for extending from an upstream package, leave it blank, a clean component will be generated.
+
+- `Upstream library name`
+
+  Source library name, default to `vital`.
+
+- `Shadow the upstream token collection (Y/n)`
+
+  If you want to shadow the upstream token collection, type `Y` or `y` to generate shadow file
+  templates.
+
+- `Is the component is always static and never hydrated?`
+
+  If you want to create a component that never hydrates, type `Y` or `y` to generate static version
+  files.
