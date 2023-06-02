@@ -1,5 +1,24 @@
 # Functional Classes
 
+<!-- Inlining HTML to add multi-line info block with disclosure widget and unordered list. -->
+<div class="warn">
+  <strong>Note:</strong> Files containing code exampled on this page can be found under the <a
+  target="_blank" rel="noopener noreferrer" href="https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/functional-classes">
+  <code>intro/functional-classes</code> directory</a> in the <code>vital-examples</code> package.
+  <br><br>
+  <details>
+  <summary>
+    Expand for a list of the most relevant files...
+  </summary>
+
+  - [`./components/Dialog/Dialog.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/functional-classes/components/Dialog/Dialog.tsx)
+  - [`./components/Dialog/tokens/exampleDialog.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/functional-classes/components/Dialog/tokens/exampleDialog.ts)
+  - [`./components/CustomDialog/tokens/customDialog.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/functional-classes/components/CustomDialog/tokens/customDialog.ts)
+  - [`./components/Border/tokens/exampleBorder.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/functional-classes/components/Border/tokens/exampleBorder.ts)
+
+  </details>
+</div>
+
 Up until now, our ability to control the styling of our `Dialog` through tokens has been limited.
 The component takes a traditional approach to styling, applying semantic classes like
 `Dialog--title` or `Dialog--message` to the elements. To modify the styling we need to write our own

@@ -1,5 +1,25 @@
 # Composing from Outside
 
+<!-- Inlining HTML to add multi-line info block with disclosure widget and unordered list. -->
+<div class="warn">
+  <strong>Note:</strong> Files containing code exampled on this page can be found under the <a
+  target="_blank" rel="noopener noreferrer" href="https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/composing-from-outside">
+  <code>intro/composing-from-outside</code> directory</a> in the <code>vital-examples</code>
+  package.
+  <br><br>
+  <details>
+  <summary>
+    Expand for a list of the most relevant files...
+  </summary>
+
+  - [`./components/Dialog/types.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/composing-from-outside/components/Dialog/types.ts)
+  - [`./components/Dialog/Dialog.tsx`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/composing-from-outside/components/Dialog/Dialog.tsx)
+  - [`./components/Dialog/tokens/exampleDialog.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/composing-from-outside/components/Dialog/tokens/exampleDialog.ts)
+  - [`./components/CustomDialog/tokens/customDialog.ts`](https://github.com/johnsonandjohnson/Bodiless-JS/tree/main/packages/vital-examples/src/intro/composing-from-outside/components/CustomDialog/tokens/customDialog.ts)
+
+  </details>
+</div>
+
 If you're a seasoned React developer, you are familiar with the concept of composition and the
 [standard patterns for using it](https://legacy.reactjs.org/docs/composition-vs-inheritance.html
 ':target=_blank'). You are probably used to composing by creating a new _component_ that assembles
