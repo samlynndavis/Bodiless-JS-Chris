@@ -39,7 +39,7 @@ export const getPackageDocs: GetPackageDocs = ({
 
     try {
       const docsJsonPath = join(pkgPath, `${nameSpace}.docs.json`);
-      require(docsJsonPath); 
+      require(docsJsonPath);
       paths.push(docsJsonPath);
     } catch (e) {
       // do nothing
