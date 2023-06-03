@@ -15,6 +15,7 @@
 import path from 'path';
 
 const { join } = path;
+const maxDepth = Number(process.env.BODILESS_DOCS_MAX_DEPTH || 5);
 
 export type GetPackageDocsProps = {
   pkgPath: string,
@@ -38,12 +39,12 @@ export const getPackageDocs: GetPackageDocs = ({
 
     try {
       const docsJsonPath = join(pkgPath, `${nameSpace}.docs.json`);
-      require(docsJsonPath);
+      require(docsJsonPath); 
       paths.push(docsJsonPath);
     } catch (e) {
       // do nothing
     }
-    if (depth >= 4) return paths;
+    if (depth >= maxDepth) return paths;
 
     deps.forEach(dep => {
       try {
