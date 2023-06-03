@@ -20,6 +20,7 @@ export type GetPackageDocsProps = {
   pkgPath: string,
   resolver?: any,
   nameSpace?: string,
+  depth?: number,
 };
 
 export type GetPackageDocs = (props: GetPackageDocsProps) => string[];
@@ -27,6 +28,7 @@ export type GetPackageDocs = (props: GetPackageDocsProps) => string[];
 export const getPackageDocs: GetPackageDocs = ({
   resolver,
   nameSpace = 'bodiless',
+  depth = 0,
 }) => {
   try {
     const pkgPath = join(resolver('./package.json'), '..');
@@ -41,11 +43,12 @@ export const getPackageDocs: GetPackageDocs = ({
     } catch (e) {
       // do nothing
     }
+    if (depth >= 4) return paths;
 
     deps.forEach(dep => {
       try {
         const depDocsJsonPath = require(resolver(join(dep, 'getDocs')))
-          .getDocs(nameSpace);
+          .getDocs(nameSpace, depth + 1);
         paths.push(depDocsJsonPath[0]);
       } catch (e) {
         // do nothing
