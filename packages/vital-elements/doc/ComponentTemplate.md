@@ -41,10 +41,10 @@ previous answers.
 
 - `Upstream package to extend`
 
-  If you plan to extend a token collecdtion from an existing package, e.g.
+  If you plan to extend a token collection from an existing package, e.g.
   `@bodiless/vital-card`, specify the source package name here. In this case,
   only a token collection will be provisioned, and it will apply to the upstream
-  clean compoennt. If you are creating a new component rather than extending,  
+  clean component. If you are creating a new component rather than extending,  
   leave it blank, and a clean component will be generated.
 
 - `Upstream library name`
@@ -61,7 +61,7 @@ previous answers.
 
   If you want to create a component that never hydrates, type `Y` or `y` to generate static version
   only. Otherwise, both static and dynamic versions will be created. In general, you should only
-  answer 'yes' if you know that your compnoent will never contain interactive functionality. For
+  answer 'yes' if you know that your component will never contain interactive functionality. For
   more information, see [Static Replacement](./StaticReplacement.md).
 
 ## File Structure
@@ -113,30 +113,47 @@ For example:
 **File `FooClean.tsx`:**
 
 ```tsx
-import React from 'react';
-import type { ComponentOrTag, DesignableComponentsProps } from '@bodiless/fclasses';
-import { Div, Fragment, designable } from '@bodiless/fclasses';
-import type { FC } from 'react';
+import React, { FC, Fragment } from 'react';
 import { asVitalTokenSpec } from '@bodiless/vital-elements';
+import { designable, Div } from '@bodiless/fclasses';
+import type { DesignableComponentsProps } from '@bodiless/fclasses';
+import type { FooComponents } from './types';
 
-export type FooComponents = {
-  Wrapper: ComponentOrTag<any>,
-  Body: ComponentOrTag<any>,
+type FooBaseProps = DesignableComponentsProps<FooComponents>;
+
+/**
+ * The starting components for each slot.
+ */
+const fooComponents: FooComponents = {
+  Wrapper: Div,
+  Slot1Wrapper: Div,
+  Slot1: Fragment,
+  Slot2Wrapper: Div,
+  Slot2: Fragment,
 };
 
-const FooBase: FC<DesignableComponentsProps<FooComponents>> = ({ components: C, ...rest }) => (
+const FooBase: FC<FooBaseProps> = ({ components: C, ...rest }) => (
   <C.Wrapper {...rest}>
-    <C.Body />
+    <C.Slot1Wrapper>
+      <C.Slot1 />
+    </C.Slot1Wrapper>
+    <C.Slot2Wrapper>
+      <C.Slot2 />
+    </C.Slot2Wrapper>
   </C.Wrapper>
 );
 
-const fooComponents: FooComponents = {
-  Wrapper: Div,
-  Body: Fragment,
-};
+const FooClean = designable(fooComponents, 'Foo')(FooBase);
 
-export default designable(fooComponents, 'Foo')(FooBase);
+/**
+ * A token creator that respects the Foo slots.
+ *
+ * @category Token Collection
+ */
 export const asFooToken = asVitalTokenSpec<FooComponents>();
+
+export default FooClean;
+
 ```
 
 If your component is _always_ static, wrap it in `withoutHydration()` (or `withoutHydrationInline()`
@@ -155,19 +172,87 @@ export const FooStatic = withoutHydration()(FooClean);
 ?> **Note:** In some cases, there will be no clean component; for example, if a package is merely
 providing tokens for a component defined elsewhere.  In such cases, this file may be omitted.
 
+#### `types.ts`
+
+Exports the type of the clean component's design keys and props accepted, plus type of token spec
+which applies to the clean component.
+
+**File `types.ts`:**
+
+```js
+import type { ComponentOrTag, DesignableProps, TokenSpec } from '@bodiless/fclasses';
+import type { DefaultDomains } from '@bodiless/vital-elements';
+
+/**
+ * Type representing the "slots" exposed by the FooClean component.
+ */
+export type FooComponents = {
+  Wrapper: ComponentOrTag<any>,
+  Slot1Wrapper: ComponentOrTag<any>,
+  Slot1: ComponentOrTag<any>,
+  Slot2Wrapper: ComponentOrTag<any>,
+  Slot2: ComponentOrTag<any>,
+};
+
+/**
+ * The props accepted by the FooClean component
+ */
+export type FooProps = DesignableProps<FooComponents>;
+
+/**
+ * The type of a token spec which applies to the FooClean component.
+ */
+export type FooToken = TokenSpec<FooComponents, DefaultDomains>;
+
+/**
+ * Tokens for the FooClean component.
+ *
+ * @category Token Collection
+ * @see [[FooClean]]
+ */
+export interface MybrandFoo {
+  /**
+   * Default styling and behavior.
+   */
+  Default: FooToken;
+
+  // Document other tokens here.
+};
+```
+
 #### `tokens/{brand}{Component}.ts`
 
 Provides the component's token collection as a default export. For example:
 
-**File `vitalFoo.ts`:**
+**File `mybrandFoo.ts`:**
 
 ```js
-const Default = asFooToken({ ... });
-const Special = asFooToken({ ... });
-// A token which is intended to be composed with other tokens should be prefixed with `With...`.
-const WithSomething = asFooToken({ ... });
+import { asFooToken } from '../FooClean';
+import type { MybrandFoo } from '../types';
 
-export default { Default, Special, WithSomething };
+const Default = asFooToken({
+  Core: {
+    // ...
+  },
+  // ... other domains
+});
+
+// Add additional variant tokens or variators here.
+// ...
+
+/**
+ * Tokens for FooClean
+ *
+ * @category Token Collection
+ * @see [[MybrandFoo]]
+ * @see [[FooClean]]
+ */
+const mybrandFoo: MybrandFoo = {
+  Default,
+  // ...
+};
+
+export default mybrandFoo;
 ```
 
 May extend a token collection from another package, for example:
@@ -186,7 +271,7 @@ export default { ...otherFooBase, Default };
 Simply re-exports the token collection defined in `{brandComponent}.ts`:
 
 ```js
-import tokens from './vitalFoo';
+import tokens from './mybrandFoo';
 
 export default tokens;
 ```
@@ -201,15 +286,43 @@ If your token collection is _always_ static, export it and the associated clean 
 from this file:
 
 ```js
-export { default as FooClean } from './FooClean';
-// Note this export will be shadowable.
+import type { ComponentType } from 'react';
+import { withoutHydration, /* withoutHydrationInline */ } from '@bodiless/hydration';
+import type { FooProps } from './types';
+import Foo from './FooClean';
+
+/**
+ * This clean component is always static.  That means it is never hydrated
+ * in the browser, and must not contain any client-side interactivity.
+ */
+const FooClean: ComponentType<FooProps> = withoutHydration()(
+  Foo
+);
+
+export {
+  FooClean,
+};
 export { default as mybrandFoo } from './tokens';
+
 ```
 
 If your token collection is _sometimes_ static, export the static version:
 
 ```js
-export { FooStatic } from './FooClean';
+import type { ComponentType } from 'react';
+import { withoutHydration, /* withoutHydrationInline */ } from '@bodiless/hydration';
+import type { FooProps } from './types';
+import FooClean from './FooClean';
+
+const FooStatic: ComponentType<FooProps> = withoutHydration()(
+  FooClean
+);
+
+export {
+  FooClean,
+  FooStatic,
+};
+export { default as mybrandFoo } from './tokens';
 export { default as mybrandFooStatic } from './tokens';
 ```
 
@@ -219,22 +332,30 @@ If your token is always static, export empty versions of the token and clean com
 
 ```js
 import {
-  StaticBlock as FooClean,  // Use `StaticInline` if your component renders inline elements.
-  staticTokenCollection as mybrandFoo,
+  staticTokenCollection,
+  StaticBlock as StaticComponent,
+  // Use `StaticInline` if your component renders inline elements.
+  // StaticInline as StaticComponent,
 } from '@bodiless/hydration';
 
-export { FooClean, mybrandFoo };
+export const mybrandFoo = staticTokenCollection;
+export const FooClean = StaticComponent;
 ```
 
 If you have both static and dynamic versions of your token collection:
 
 ```js
 import {
-  StaticBlock as FooStatic,  // Use `StaticInline` if your component renders inline elements.
-  staticTokenCollection  as mybrandFooStatic,
-  } from '@bodiless/hydration';
+  staticTokenCollection,
+  StaticBlock as StaticComponent,
+  // Use `StaticInline` if your component renders inline elements.
+  // StaticInline as StaticComponent,
+} from '@bodiless/hydration';
 
-export { FooStatic, mybrandFooStatic };
+export { default as mybrandFoo } from './tokens';
+export const mybrandFooStatic = staticTokenCollection;
+export { default as FooClean } from './FooClean';
+export const FooStatic = StaticComponent;
 ```
 
 ?> **Note:** If your token does not have a static version, omit both `index.bl-edit.ts` and
@@ -247,6 +368,8 @@ the "Base" version of the token collection directly from its location.
 
 ```js
 export { asFooToken, FooComponents } from './FooClean';
+export * from './types';
+
 // This export will not be shadowable, because it is exported
 // directly from `vitalFoo`.
 export { default as mybrandFooBase } from './tokens/vitalFoo';
@@ -259,8 +382,9 @@ export * from './index.bl-edit';
 If your token collection is not _always_ static, also export the non-static version here:
 
 ```js
-export { default as vitalFooClean } from './FooClean';
-export { default as vitalFoo } from './tokens';
+export * from './index.bl-edit';
+export * from './types';
+export { asFooToken } from './FooClean';
 ```
 
 #### `__tests__/{Component}.test.tsx` (component-level)
