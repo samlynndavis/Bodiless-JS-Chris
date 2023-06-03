@@ -51,7 +51,7 @@ const twConfig = {
         blue: colors.blue,
       },
       backgroundImage: {
-        'mobile-wave-top': "url('vital-examples/src/background-images/assets/images/mobilewave.svg')",
+        'mobile-wave-top': "url('@bodiless/vital-examples/src/background-images/assets/images/mobilewave.svg')",
       },
       backgroundSize: {
         'wave-full': '100% 100%',
@@ -62,7 +62,7 @@ const twConfig = {
     plugin(({ addComponents }) => {
       addComponents({
         '.footer-wave': {
-          maskImage: "url('vital-examples/src/background-images/assets/images/desktopwave.svg')",
+          maskImage: "url('@bodiless/vital-examples/src/background-images/assets/images/desktopwave.svg')",
           maskPosition: 'bottom center',
           maskSize: '100%',
         },

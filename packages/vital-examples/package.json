@@ -1,5 +1,5 @@
 {
-  "name": "vital-examples",
+  "name": "@bodiless/vital-examples",
   "sideEffects": [
     "*.css"
   ],
@@ -7,7 +7,7 @@
   "description": "",
   "author": "",
   "license": "Apache-2.0",
-  "private": true,
+  "private": false,
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "files": [
@@ -16,6 +16,7 @@
     "/getDocs.js",
     "/tailwind.config.js",
     "/doc",
+    "/src",
     "./shadow.js"
   ],
   "repository": {

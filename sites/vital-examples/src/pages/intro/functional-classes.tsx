@@ -1,6 +1,6 @@
 import { as } from '@bodiless/fclasses';
 import React from 'react';
-import { DialogClean, exampleDialog, customDialog } from 'vital-examples/lib/intro/functional-classes';
+import { DialogClean, exampleDialog, customDialog } from '@bodiless/vital-examples/lib/intro/functional-classes';
 
 const WelcomeDialog = as(exampleDialog.Welcome)(DialogClean);
 const CustomWelcomeDialog = as(customDialog.Welcome)(DialogClean);
