@@ -1,22 +1,25 @@
 {
-  "Curriculum": {
-    "Lessons": {
-      "ShadowA_SimpleComponent.md": "./doc/Curriculum/Lessons/ShadowASimpleComponent.md",
-      "ReusableTokens.md": "./doc/Curriculum/Lessons/ReusableTokens.md",
-      "CustomizeDesignTokens.md": "./doc/Curriculum/Lessons/CustomizeDesignTokens.md",
-      "BackgroundImages.md": "./doc/Curriculum/Lessons/BackgroundImages.md",
-      "README.md": "./doc/Curriculum/Lessons/README.md"
-    },
-    "Introduction": {
-      "WhyVital.md": "./doc/GettingStarted/WhyVital.md",
-      "WorkingWithContent.md": "./doc/GettingStarted/WorkingWithContent.md",
-      "FunctionalClasses.md": "./doc/GettingStarted/FunctionalClasses.md",
-      "AnatomyOfA_Token.md": "./doc/GettingStarted/AnatomyOfAToken.md",
-      "ReachingInside.md": "./doc/GettingStarted/ReachingInside.md",
-      "ComposingFromOutside.md": "./doc/GettingStarted/ComposingFromOutside.md",
-      "ComponentsAndTokens.md": "./doc/GettingStarted/ComponentsAndTokens.md",
-      "CoreConcepts.md": "./doc/GettingStarted/CoreConcepts.md",
-      "README.md": "./doc/GettingStarted/README.md"
+  "VitalDesignSystem": {
+    "Curriculum": {
+      "Lessons": {
+        "ShadowA_SimpleComponent.md": "./doc/Curriculum/Lessons/ShadowASimpleComponent.md",
+        "ReusableTokens.md": "./doc/Curriculum/Lessons/ReusableTokens.md",
+        "CustomizeDesignTokens.md": "./doc/Curriculum/Lessons/CustomizeDesignTokens.md",
+        "BackgroundImages.md": "./doc/Curriculum/Lessons/BackgroundImages.md",
+        "README.md": "./doc/Curriculum/Lessons/README.md"
+      },
+      "Introduction": {
+        "WhyVital.md": "./doc/Introduction/WhyVital.md",
+        "WorkingWithContent.md": "./doc/Introduction/WorkingWithContent.md",
+        "FunctionalClasses.md": "./doc/Introduction/FunctionalClasses.md",
+        "AnatomyOfA_Token.md": "./doc/Introduction/AnatomyOfAToken.md",
+        "ReachingInside.md": "./doc/Introduction/ReachingInside.md",
+        "ComposingFromOutside.md": "./doc/Introduction/ComposingFromOutside.md",
+        "ComponentsAndTokens.md": "./doc/Introduction/ComponentsAndTokens.md",
+        "CoreConcepts.md": "./doc/Introduction/CoreConcepts.md",
+        "README.md": "./doc/Introduction/README.md"
+      },
+      "README.md": "./doc/README.md"
     }
   }
 }

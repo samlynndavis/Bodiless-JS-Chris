@@ -1,5 +1,7 @@
 # Functional Classes
 
+?> Note this section is still under development.
+
 <!-- Inlining HTML to add multi-line info block with disclosure widget and unordered list. -->
 <div class="warn">
   <strong>Note:</strong> Files containing code exampled on this page can be found under the <a
@@ -152,7 +154,8 @@ const Welcome = asDialogToken({
     ...
 ```
 
-
+## Further Reading
+- [Tailwind Guide]()
 
 
 

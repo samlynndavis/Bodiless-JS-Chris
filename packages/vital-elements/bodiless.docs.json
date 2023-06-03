@@ -1,6 +1,6 @@
 {
   "VitalDesignSystem": {
-    "README.md": "./doc/VitalDesignSystem.md",
+    "README.md": "./doc/README.md",
     "Components": {
       "README.md": "./doc/Components.md",
       "VitalElements": {

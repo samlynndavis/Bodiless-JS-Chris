@@ -8,9 +8,9 @@ the Vital Design System.
 
 ## Prerequisites
 
-- Please read and understand the introduction to the [Bodiless Design System](/Design/DesignSystem),
+- Please read and understand the introduction to the [Bodiless Design System](/VitalDesignSystem/),
   along with other prerequisites listed there.
-- Work through the [Design Element Concepts Guide](/Development/Guides/DesignElementConcepts).
+- Work through the [Vital Design System Curriculum](/VitalDesignSystem/Curriculum/).
 - Read through the full documentation for the [`@bodiless/fclasses`
   package](/Development/Architecture/FClasses).
 

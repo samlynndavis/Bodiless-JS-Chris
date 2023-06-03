@@ -1,5 +1,7 @@
 # Working with Content
 
+?> Note this section is still under development.
+
 Our `Dialog` component now looks a lot like any other Vital component:
 
 - It has a "clean" component with very little functionality in itself, but able to have these added

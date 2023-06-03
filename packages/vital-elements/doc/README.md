@@ -1,13 +1,16 @@
-# Bodiless Design System
+# Vital Design System
 
-The Bodiless Design System is an opinionated set of tools and patterns for
-implementing a reusable and extensible *Design System* in React. Inspired by
+The Vital Design System is an opinionated set of tools and patterns for
+implementing a reusable and extensible *Design System* in React.  Inspired by
 principles of Atomic Design, Functional CSS and other functional programming
 paradigms, it utilizes React's higher-order components (HOC) to encapsulate
 component styling or behavior as reusable *Design Tokens* which can be applied
 consistently across a site. All tokens can be independently extended to meet
 specific design requirements without changing the overall design system, and
 without altering the internal structure of complex components.
+
+VitalDS also includes a set of reusable, white-label components which you can
+use as a foundation for your own sites.
 
 ## Pre-requisites
 
