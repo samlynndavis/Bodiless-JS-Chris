@@ -428,9 +428,9 @@ This should include, at a minimum, the following keys:
 Expose exports from all components:
 
 ```js
-export * from './components/{ComponentA}';
-export * from './components/{ComponentB}';
+export * from './components/Foo';
 // ... additional utilities or types defined in your package.
+// export * from './components/Bar';
 // ...
 ```
 
@@ -441,7 +441,6 @@ them. This file could exist already with other component token exports. If so, s
 append new token exports to the file.
 
 ```js
-export { default as {brand}{ComponentA}Base } from '../components/{ComponentA}/tokens/{brand}{ComponentA}';
-export { default as {brand}{ComponentB}Base } from '../components/{ComponentB}/tokens/{brand}{ComponentB}';
+export { default as mybrandFooBase } from './components/Foo/tokens/mybrandFoo';
+// export { default as mybrandBarBase } from './components/Bar/tokens/mybrandBar';
 ```
-
