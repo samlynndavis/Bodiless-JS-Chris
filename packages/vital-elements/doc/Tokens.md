@@ -8,7 +8,7 @@ the Vital Design System.
 
 ## Prerequisites
 
-- Please read and understand the introduction to the [Bodiless Design System](/VitalDesignSystem/),
+- Please read and understand the introduction to the [Vital Design System](/VitalDesignSystem/),
   along with other prerequisites listed there.
 - Work through the [Vital Design System Curriculum](/VitalDesignSystem/Curriculum/).
 - Read through the full documentation for the [`@bodiless/fclasses`
@@ -38,13 +38,13 @@ are generally suffixed with "...Clean" (e.g.,
 ':target=_blank')).
 
 A clean component in Vital is always "designable" via the [Bodiless Design
-API](../../bodiless/Development/Architecture/FClasses?id=the-design-api). That is, it exposes an API
-which allows tokens to be applied to constituent elements within the component. This is very similar
-to the basic [slots pattern](https://daveceddia.com/pluggable-slots-in-react-components/
-':target=\_blank') in React. The key difference is that, with the Design API, we don't inject the
-actual React nodes which should be rendered in a particular slot; instead, we provide a higher-order
-component (a _token_) which will be applied to the component in that slot. This allows us to _layer_
-styling or behavior for individual elements. More on this below.
+API](/Development/Architecture/FClasses#the-design-api). That is, it exposes an API which allows
+tokens to be applied to constituent elements within the component. This is very similar to the basic
+[slots pattern](https://daveceddia.com/pluggable-slots-in-react-components/ ':target=\_blank') in
+React. The key difference is that, with the Design API, we don't inject the actual React nodes which
+should be rendered in a particular slot; instead, we provide a higher-order component (a _token_)
+which will be applied to the component in that slot. This allows us to _layer_ styling or behavior
+for individual elements. More on this below.
 
 ### Clean Component Design Elements ("Slots")
 
@@ -235,12 +235,12 @@ composition of utility classes to a token, be sure:
 
 ### Component-Level Tokens
 
-As described in [the Bodiless documentation](), a _component-level token_ composes a collection of
-styles and behaviors onto a _compound component_ — that is, one which renders more than a single
-element (these are the molecules, organisms, and templates in the language of [Atomic
-Design](https://bradfrost.com/blog/post/atomic-web-design/ ':target=_blank')). As described above,
-such components use the Bodiless Design API to allow their constituent elements to receive tokens
-which define their look, feel, and behavior in the context of the enclosing component.
+A _component-level token_ composes a collection of styles and behaviors onto a _compound component_
+— that is, one which renders more than a single element (these are the molecules, organisms, and
+templates in the language of [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/
+':target=_blank')). As described above, such components use the Bodiless Design API to allow their
+constituent elements to receive tokens which define their look, feel, and behavior in the context of
+the enclosing component.
 
 <div class="warn">
   <strong>In this section:</strong>
@@ -479,7 +479,7 @@ exact science. As a rule of thumb:
 
 A Vital component will often have other clean components as design elements. For example, the [Vital
 Layout
-Component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Layout/LayoutClean.tsx)
+Component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-layout/src/components/Layout/LayoutClean.tsx ':target=_blank')
 includes the `HeaderClean` and `FooterClean` components as design keys:
 
 ```tsx

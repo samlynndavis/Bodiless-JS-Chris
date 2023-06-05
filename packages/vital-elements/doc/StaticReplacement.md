@@ -3,9 +3,9 @@
 VitalDS supports a performance optimization which helps remove unused code from your production
 bundle throuhg static replacement and selective hydration.  This is a two-stage process;
 
-- Mark components as not to be hydrated in the browser (selective hydration -- see
-  [the React docs](https://react.dev/reference/react-dom/client/hydrateRoot) for more information
-  about hydration).
+- Mark components as not to be hydrated in the browser (selective hydration -- see [the React
+  docs](https://react.dev/reference/react-dom/client/hydrateRoot ':target=_blank') for more
+  information about hydration).
 - Instruct Webpack tp exclude code for those components from the production bundle (static
   replacement).
 
@@ -72,8 +72,8 @@ editable.
 
 ### React Derver Components
 
-This optimization technique is similar in some ways to the new
-[React Server Components](https://nextjs.org/docs/getting-started/react-essentials) introduced in
+This optimization technique is similar in some ways to the new [React Server
+Components](https://nextjs.org/docs/getting-started/react-essentials ':target=_blank') introduced in
 React 18 and NextJS 13. Both allow you to define React code which is pnly intended to be used when
 rendering your components at build time, and exclude that code from the production bundle.
 

@@ -38,7 +38,7 @@ colors).
 ### **Guide**
 
 - [Shadowing Typography: Step by Step](./Typography/ShadowGuide)
-- [Overview of steps to setup a Site's Typography](../../../VitalDesignSystem/Components/VitalElements/SiteTypography)
+- [Overview of steps to setup a Site's Typography](/VitalDesignSystem/Guides/SiteTypography)
 
 ### **Resources**
 

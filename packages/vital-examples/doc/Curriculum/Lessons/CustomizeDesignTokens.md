@@ -55,7 +55,7 @@ export default asTokenGroup(TextDecorationMeta)({
 
 ```
 
-**PS:** the `asTokenGroup` function creates a group of element tokens that share the same metadata, you can find more information about the Meta domain [here](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/Tokens/TokenDomains?id=special-domains).
+**PS:** the `asTokenGroup` function creates a group of element tokens that share the same metadata, you can find more information about the Meta domain [here](../../Guides/Tokens/TokenDomains#special-domains).
 
 In this example we overwrite the the `Bold` token to set a bolder font.
 

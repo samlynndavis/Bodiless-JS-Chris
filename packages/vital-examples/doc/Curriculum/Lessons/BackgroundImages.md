@@ -61,7 +61,7 @@ plugin(({ addComponents }) => {
 
 @TODO for JONES -- break this into 3steps following the guide from UsingTailwind Background Images
 
-In our `exampleFooter.ts`, we will construct a `WithTopWave` token, in which we will apply to the [appropriate domains](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/Tokens/TokenDomains?id=token-domains) the tailwind classes needed to render an SVG wave to the top of the footer.
+In our `exampleFooter.ts`, we will construct a `WithTopWave` token, in which we will apply to the [appropriate domains](../../Guides/Tokens/TokenDomains) the tailwind classes needed to render an SVG wave to the top of the footer.
 
 On the `Wrapper` slot, we will apply our `.footer-wave` CSS rule, and on the `Column2Wrapper` slot, we will apply the tailwind classes necessary to render a similar SVG wave to the top of the footer on mobile and tablet devices.
 

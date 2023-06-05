@@ -30,12 +30,12 @@ to a component. These are structured as a two-layer nested object.
 The outer keys of the object (`Theme`, `Content` in the example above) are called "domains" and are
 used to divide the token into functional sections which can be extended or overridden independently.
 You can read more about the specific domains defined in the VitalDS and their usage
-[here](../Components/VitalElements/Tokens/TokenDomains). The inner keys of this object
-(`TitleWrapper`, `MessageWrapper`, `Border`, etc.) correspond to the "slots" exposed by the clean
-component. They are sometimes referred to as "design keys." Note, that in addition to the internal
-design keys exposed by the component, you can also define the special `_` key here to specify a
-token which should be applied to the component as a whole, as we did in the original `Dialog` tokens
-from [Composing From Outside](./ComposingFromOutside):
+[here](../../Guides/Tokens/TokenDomains). The inner keys of this object (`TitleWrapper`,
+`MessageWrapper`, `Border`, etc.) correspond to the "slots" exposed by the clean component. They are
+sometimes referred to as "design keys." Note, that in addition to the internal design keys exposed
+by the component, you can also define the special `_` key here to specify a token which should be
+applied to the component as a whole, as we did in the original `Dialog` tokens from [Composing From
+Outside](./ComposingFromOutside):
 
 ```ts
 const Welcome = asElementToken({
@@ -125,8 +125,8 @@ as(withAFalse, WithATrue)(C); // -> <C a={true} />
 ```
 
 It's important to remember that this is also true for the domains of a single token. These are
-applied in a fixed order (see [Token Domains](../Components/VitalElements/Tokens/TokenDomains)), and
-those applied later will take precedence.
+applied in a fixed order (see [Token Domains](../../Guides/Tokens/TokenDomains)), and those applied
+later will take precedence.
 
 
 ## Further Reading
