@@ -58,8 +58,8 @@ npm run serve
 Visit [http://localhost:9000/](http://localhost:9000/ ':target=_blank') in your browser to view the
 site.
 
-If you have created a site using one of the Vital starters, an overview of the structure of the
-site monorepo can be found at [Repository Structure]().
+If you have created a site using one of the Vital starters, an overview of the structure of the site
+monorepo can be found at [Repository Structure](/VitalDesignSystem/Guides/RepositoryStructure).
 
 ## Next Steps
 
