@@ -101,7 +101,7 @@ export class BasePage {
     this.firstMenuItem = '#content-wrapper > div:nth-child(5) > nav > ul > li:nth-child(1) > a > span';
     this.addSubMenuItem = 'button[aria-label="Sub Main Menu Item"]';
     this.addSubMenuListItem = '#bl-component-form-chameleon-radio-List';
-    this.bodilessDocUrl = '/___docs/#/?id=bodilessjs';
+    this.bodilessDocUrl = '/___docs/#/?id=bodilessjs-and-vitalds';
   }
 
   async typeText(locator:string, text:string, request?:string, confirmButton?:string) {
