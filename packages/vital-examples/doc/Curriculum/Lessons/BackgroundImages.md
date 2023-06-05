@@ -84,7 +84,7 @@ On the `Wrapper` slot, we will apply our `.footer-wave` CSS rule, and on the `Co
 
 - [Adding components in Tailwind](https://tailwindcss.com/docs/plugins#adding-components)
 - [SVGR - For converting SVGs to React components](https://react-svgr.com/playground/)
-- [Using Tailwind for Background Images](https://johnsonandjohnson.github.io/Bodiless-JS/#/Development/Guides/BuildingSites/TailwindGuide?id=using-tailwind-for-background-images)
+- [Using Tailwind for Background Images](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Guides/TailwindGuide?id=using-tailwind-for-background-images)
 -
 
 ## FAQ

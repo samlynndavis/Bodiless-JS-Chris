@@ -6,8 +6,8 @@ in VitalDS.
 
 ## Reminders
 
-- Use the ]Vital Scaffolding Tool]() to create the correct structure for your components
-  and tokens:
+- Use the [Vital Scaffolding Tool](../../Guides/ComponentTemplate.md) to create the correct
+  structure for your components and tokens:
   ```
   npx @bodiless/vital-scaffold@next
   ```

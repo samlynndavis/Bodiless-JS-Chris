@@ -156,4 +156,4 @@ const Welcome = asDialogToken({
 
 ## Further Reading
 
-- [Tailwind Guide](/Development/Guides/BuildingSites/TailwindGuide)
+- [Tailwind Guide](../../Guides/TailwindGuide)
