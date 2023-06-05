@@ -76,7 +76,7 @@ export class BasePage {
   constructor(page: Page) {
     this.page = page;
     this.docsPath = '/___docs/';
-    this.docsTitle = '//*[@data-id="bodilessjs"]';
+    this.docsTitle = '//*[@data-id="bodilessjs-and-vitalds"]';
     this.switcherIcon = '//*[@aria-label="switcher"]';
     this.editIcon = '//*[@aria-label="Edit"]';
     this.pathToImages = './playwright/images/';
