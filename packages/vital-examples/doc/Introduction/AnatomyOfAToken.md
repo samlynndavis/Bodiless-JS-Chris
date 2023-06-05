@@ -128,8 +128,8 @@ It's important to remember that this is also true for the domains of a single to
 applied in a fixed order (see [Token Domains](../../Guides/Tokens/TokenDomains)), and those applied
 later will take precedence.
 
-
 ## Further Reading
-- [Composing and Extending Tokens]()
-- [Tokens]()
-- [Token Domains]()
+
+- [Extending and Composing Tokens](../../Guides/ExtendingAndComposingTokens)
+- [Tokens](../../Guides/Tokens/)
+- [Token Domains](../../Guides/Tokens/TokenDomains)
