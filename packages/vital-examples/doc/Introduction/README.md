@@ -27,8 +27,9 @@ The easiest way to get started is to use one of the BodilessJS starters—
 npx @bodiless/cli@next new -r next
 ```
 
-—and choose `__vital_next__` as the template site. For more information, see the [BodilessJS
-Getting Started Guide](/About/GettingStarted).
+—and choose `__vital_next__` as the template site. For more information, see the [BodilessJS Getting
+Started Guide](/About/GettingStarted). For an overview of the structure of your new repository, see
+[Repository Structure](../../Guides/RepositoryStructure).
 
 Once your site is running locally, walk through the introduction in the following pages to see how
 it works. Or, if you're philosophically-minded, read more about [why you might want to use

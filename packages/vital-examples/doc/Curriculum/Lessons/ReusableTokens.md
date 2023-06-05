@@ -1,4 +1,4 @@
-# [ Reusable Tokens ]
+# Reusable Tokens
 
 ## Overview
 
@@ -14,7 +14,7 @@ The purpose of this lesson is to better understand the preferred method of creat
 
 To begin, we'll use the `addComponents` function provided by Tailwind to first create a collection of CSS rules containing the corner radius styling to be applied to the 'Hero' card.
 
-NOTE: In most cases, the default utility classes provided by Tailwind will be enough to meet your styling needs, but in cases such as this where we are attempting to apply a more complex set of styling rules to a component, we can construct those CSS rules directly in our Tailwind configuration file as shown below:
+?> **Note:** In most cases, the default utility classes provided by Tailwind will be enough to meet your styling needs, but in cases such as this where we are attempting to apply a more complex set of styling rules to a component, we can construct those CSS rules directly in our Tailwind configuration file as shown below:
 
 ```js
 plugin(({ addComponents }) => {
@@ -47,7 +47,7 @@ Next, we will create both a 'Card' and 'Radius' component folder inside of our e
 
 The 'Card' component folder will contain the 'Default' and 'Hero' card tokens in an `exampleCard.ts` token collection file, and the 'Radius' component folder will contain the corner radius styling tokens in an `exampleRadius.ts` token collection file.
 
-Please reference the [Vital Component Template Documentation](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/ComponentTemplate) to ensure that you are following the proper naming conventions and file structure when creating a new component folder.
+Please reference the [Vital Component Template Documentation](../../Guides/ComponentTemplate) to ensure that you are following the proper naming conventions and file structure when creating a new component folder.
 
 ### Creating Our Reusable 'Radius' tokens
 
@@ -147,7 +147,7 @@ By instead encapsulating this styling in its own `Simple` element token as we've
 
 * [Adding components in Tailwind](https://tailwindcss.com/docs/plugins#adding-components)
 
-* [Vital Component Template Documentation](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/ComponentTemplate)
+* [Vital Component Template](../../Guides/ComponentTemplate)
 
 ## FAQ
 

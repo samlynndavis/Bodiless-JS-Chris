@@ -2,7 +2,7 @@
 
 Every component/package in the Vital Design System (or one which extends it) should follow the
 directory structure and conventions described below. This ensures consistency, enables
-[Token Shadowing](./Shadow.md) and [Static Replacement](./StaticReplacement.md).
+[Token Shadowing](/Development/Guides/Shadowing) and [Static Replacement](./StaticReplacement).
 
 ## Component Scaffolding
 
@@ -11,7 +11,7 @@ are met. You should use it anytime you are creating a new component or extending
 collection.
 
 To use it, run the following command from a local directory:
-  
+
   ```bash
   npx @bodiless/vital-scaffold@next
   ```
@@ -22,34 +22,33 @@ the answers provided and populate it with the necessary files.
 Below is a list of prompts and their descriptions, please note that some prompts are conditional on
 previous answers.
 - `Path to "src" directory where component should be created [Required]`
-    
-  Relative or absolute path to the `src` directory of the package in which the new
-  component should be created. If the directory does not exist, it will show warning message. For
-  example, if current working directory is project root, provide a relative path for new component:
-  `./packages/{package name}/src/`, and code will be generated inside `src`.
+
+  Relative or absolute path to the `src` directory of the package in which the new component should
+  be created. If the directory does not exist, it will show warning message. For example, if current
+  working directory is project root, provide a relative path for new component: `./packages/{package
+  name}/src/`, and code will be generated inside `src`.
 
 - `Component name [Required]`
 
-  Name of the component to create, with underscore or alphanumeric and case insensitive
-  characters, e.g. `card`.  If you are extending an existing token collection, this should
-  be the name of the upstream component to which that applies.
+  Name of the component to create, with underscore or alphanumeric and case insensitive characters,
+  e.g., `card`.  If you are extending an existing token collection, this should be the name of the
+  upstream component to which that applies.
 
 - `Library name [Required]`
 
   The library name to which new component will belong, with underscore or alphanumeric and case
-  insensitive characters e.g. `myBrand`.
+  insensitive characters e.g., `myBrand`.
 
 - `Upstream package to extend`
 
-  If you plan to extend a token collection from an existing package, e.g.
-  `@bodiless/vital-card`, specify the source package name here. In this case,
-  only a token collection will be provisioned, and it will apply to the upstream
-  clean component. If you are creating a new component rather than extending,  
-  leave it blank, and a clean component will be generated.
+  If you plan to extend a token collection from an existing package, e.g., `@bodiless/vital-card`,
+  specify the source package name here. In this case, only a token collection will be provisioned,
+  and it will apply to the upstream clean component. If you are creating a new component rather than
+  extending, leave it blank, and a clean component will be generated.
 
 - `Upstream library name`
 
-  The name of the library to which the upstream component you're extending belongs.Default to
+  The name of the library to which the upstream component you're extending belongs. Defaults to
   `vital`.
 
 - `Shadow the upstream token collection (Y/n)`
@@ -62,7 +61,7 @@ previous answers.
   If you want to create a component that never hydrates, type `Y` or `y` to generate static version
   only. Otherwise, both static and dynamic versions will be created. In general, you should only
   answer 'yes' if you know that your component will never contain interactive functionality. For
-  more information, see [Static Replacement](./StaticReplacement.md).
+  more information, see [Static Replacement](./StaticReplacement).
 
 ## File Structure
 
@@ -97,8 +96,8 @@ bodiless.docs.json
 This structure is intended to facilitate two build-time webpack optimizations:
 
 - [Static Replacement](./StaticReplacement): Removes unnecessary code from the production bundle.
-- [Token Shadowing](./Shadow): Allows a downstream package to define an override of any Vital token
-  collection.
+- [Token Shadowing](/Development/Guides/Shadowing): Allows a downstream package to define an
+  override of any Vital token collection.
 
 The files and directories are described in more detail below:
 

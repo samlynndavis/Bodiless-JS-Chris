@@ -13,7 +13,7 @@ By building the `vital-section` package, we will cover:
  
 ## Assignment
 
-To develop a new `vital-section` package it is important to keep the `vital-*` package structure in mind. Please refer to the [Vital Component Template Documentation](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/ComponentTemplate) to follow the right structure and naming conventions.
+To develop a new `vital-section` package it is important to keep the `vital-*` package structure in mind. Please refer to the [Vital Component Template Documentation](../../Guides/ComponentTemplate) to follow the right structure and naming conventions.
 
 #### Creating a Clean Component
 
@@ -443,7 +443,7 @@ All slots except for the `ArticleTitle` are `Fragments` by default and there are
 
 ## Resources
  - [Extending & Composing Tokens](https://github.com/johnsonandjohnson/Bodiless-JS/blob/9d872a75c7ff2a00af0bc53ae9c3b2f3545ddf24/packages/vital-elements/doc/ExtendingAndComposing.md)
- - [Vital Component Template](https://johnsonandjohnson.github.io/Bodiless-JS/#/VitalDesignSystem/Components/VitalElements/ComponentTemplate)
+ - [Vital Component Template](../../Guides/ComponentTemplate)
  
 ## FAQ
 

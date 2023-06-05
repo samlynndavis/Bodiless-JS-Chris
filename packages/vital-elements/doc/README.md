@@ -12,6 +12,8 @@ without altering the internal structure of complex components.
 VitalDS also includes a set of reusable, white-label components which you can
 use as a foundation for your own sites.
 
+?> To get started developing with VitalDS, try our [Curriculum](./Curriculum/).
+
 ## Pre-requisites
 
 To get the most out of this document, you should have a basic familiarity with:

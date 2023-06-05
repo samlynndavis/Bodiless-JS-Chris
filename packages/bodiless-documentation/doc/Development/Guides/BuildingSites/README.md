@@ -38,12 +38,12 @@ colors).
 ### **Guide**
 
 - [Shadowing Typography: Step by Step](./Typography/ShadowGuide)
-- [Overview of steps to setup a Site's Typography](../../../VitalDesignSystem/Components/VitalElements/SiteTypography)
+- [Overview of steps to setup a Site's Typography](/VitalDesignSystem/Guides/SiteTypography)
 
 ### **Resources**
 
 - [Typography Overview](./Typography/Typography)
-- [Best Practices for Using Tailwind with Bodiless](./TailwindGuide)
+- [Best Practices for Using Tailwind with Bodiless](../../../VitalDesignSystem/Guides/TailwindGuide)
 - [Best Practices Using Custom Fonts](./Typography/Fonts)
 
 <!-- tabs:end -->
