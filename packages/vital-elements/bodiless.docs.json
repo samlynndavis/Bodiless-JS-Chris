@@ -3,15 +3,16 @@
     "README.md": "./doc/README.md",
     "Guides": {
       "README.md": "./doc/Guides.md",
+      "StaticReplacement.md": "./doc/StaticReplacement.md",
+      "SiteTypography.md": "./doc/SiteTypography.md",
+      "TailwindGuide.md": "./doc/TailwindGuide.md",
+      "ExtendingAndComposingTokens.md": "./doc/ExtendingAndComposing.md",
       "Tokens": {
         "README.md": "./doc/Tokens.md",
         "TokenDomains.md": "./doc/TokenDomains.md"
       },
-      "StaticReplacement.md": "./doc/StaticReplacement.md",
-      "SiteTypography.md": "./doc/SiteTypography.md",
-      "RepositoryStructure.md": "./doc/RepositoryStructure.md",
-      "ExtendingAndComposingTokens.md": "./doc/ExtendingAndComposing.md",
-      "ComponentTemplate.md": "./doc/ComponentTemplate.md"
+      "ComponentTemplate.md": "./doc/ComponentTemplate.md",
+      "RepositoryStructure.md": "./doc/RepositoryStructure.md"
     },
     "Components": {
       "README.md": "./doc/Components.md",
