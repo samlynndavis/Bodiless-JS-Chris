@@ -20,52 +20,52 @@
       "parentId": "docs"
     },
     {
-      "path": "/pattern/card",
-      "parentId": "components",
       "id": "card",
-      "name": "Card"
+      "name": "Card",
+      "path": "/pattern/card",
+      "parentId": "components"
     },
     {
-      "path": "/pattern/text-decoration",
-      "parentId": "components",
       "id": "text-decoration",
-      "name": "Elements"
+      "name": "Elements",
+      "path": "/pattern/text-decoration",
+      "parentId": "components"
     },
     {
-      "path": "/pattern/font-size",
-      "parentId": "components",
       "id": "font-size",
-      "name": "Font Size"
+      "name": "Font Size",
+      "path": "/pattern/font-size",
+      "parentId": "components"
     },
     {
-      "path": "/pattern/color",
-      "parentId": "components",
       "id": "color",
-      "name": "Colors"
+      "name": "Colors",
+      "path": "/pattern/color",
+      "parentId": "components"
     },
     {
-      "path": "/pattern/typography",
-      "parentId": "components",
       "id": "typography",
-      "name": "Typography"
+      "name": "Typography",
+      "path": "/pattern/typography",
+      "parentId": "components"
     },
     {
-      "path": "/pattern/generic-template",
-      "parentId": "components",
       "id": "generic-template",
-      "name": "Generic Template"
+      "name": "Generic Template",
+      "path": "/pattern/generic-template",
+      "parentId": "components"
     },
     {
-      "path": "/pattern/accordion",
-      "parentId": "components",
       "id": "accordion",
-      "name": "Accordion"
+      "name": "Accordion",
+      "path": "/pattern/accordion",
+      "parentId": "components"
     },
     {
-      "path": "/pattern/button",
-      "parentId": "components",
       "id": "button",
-      "name": "Button"
+      "name": "Button",
+      "path": "/pattern/button",
+      "parentId": "components"
     }
   ]
 }
