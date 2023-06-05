@@ -8,8 +8,8 @@ not.
 There are several strategies for implementing these customizations; these are described in detail in
 this article.
 
-In the examples below, we'll use [the simple `Dialog` component from the "Getting Started"
-guide](../../GettingStarted/) as our base component.
+In the examples below, we'll use [the simple `Dialog` component from the "Introducing VitalDS"
+guide](../Curriculum/Introduction/) as our base component.
 
 ```ts
 const Default = asDialogToken({
@@ -324,7 +324,7 @@ const GreenDialogWithRedTitleAndSolidBorder = as(Default, WithGreenBorder, WithR
 
 This pattern is useful when your component has many dimensions of variation. You can see it in full
 force with
-[`vitalCard`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-card/src/components/Card/tokens/vitalCard.ts).
+[`vitalCard`](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-card/src/components/Card/tokens/vitalCard.ts ':target=_blank').
 Let's call this kind of token, one intended to be composed with another token to produce a
 variation, a "Variator."
 
@@ -447,13 +447,13 @@ in when defining your token; they will always be applied in the canonical order.
 
 ### Removing Components from Fluid Tokens
 
-For some container-like components ([RTE](../VitalEditors/RTE_Editor),
-[chameleons](/Components/Chameleon), [Flow Containers](../VitalFlowContainer), etc.), the selection
-of components is _fluid_ and determined by the tokens — unlike clean components, which define a
-_fixed_ set of components — so removing these components from the token will effectively remove them
-from the container. Note that you must remove them from _all_ domains. The presence of a slot in any
-domain of any token which applies to such component will cause a component of that name to be
-available in the container.
+For some container-like components ([RTE](../Components/VitalEditors/RTE_Editor),
+[chameleons](/Components/Chameleon), [Flow Containers](../Components/VitalFlowContainer), etc.), the
+selection of components is _fluid_ and determined by the tokens — unlike clean components, which
+define a _fixed_ set of components — so removing these components from the token will effectively
+remove them from the container. Note that you must remove them from _all_ domains. The presence of a
+slot in any domain of any token which applies to such component will cause a component of that name
+to be available in the container.
 
 The components can be removed from the token using [Lodash's `omit`
 function](https://lodash.com/docs/#omit ':target=_blank'):
@@ -490,4 +490,4 @@ pattern for the `Schema` and `Theme` domains as well, where `Bar` has also been 
 
 ?> **Note:** For a real-world use case of using `omit` to remove components, see [Removing
 Components from Vital Rich Text Editor by
-Shadowing](../VitalEditors/RichTextCustomizing#removing-components-from-vital-rich-text-editor-by-shadowing).
+Shadowing](../Components/VitalEditors/RichTextCustomizing#removing-components-from-vital-rich-text-editor-by-shadowing).

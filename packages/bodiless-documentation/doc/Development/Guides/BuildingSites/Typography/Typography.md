@@ -14,8 +14,8 @@ For more information on specific details of typography, it is best to review
 If you plan on leveraging other Vital components, we recommend leveraging all or parts of
 `vital-elements`.
 
-For more details on usage and getting started using this package, please follow the [Vital Elements
-Typography Guide](/VitalDesignSystem/Components/VitalElements/SiteTypography).
+For more details on usage and getting started using this package, please follow the [Vital Design
+System Typography Guide](/VitalDesignSystem/Guides/SiteTypography).
 
 ## Developing Your Typography without Leveraging Vital Elements
 
@@ -23,8 +23,7 @@ The following section defines a high-level overview of defining your typography.
 we recommend following patterns seen in the `vital-elements` package.
 
 ?> **Tip:** If you foresee your package being shadowed in the future, we recommend following the
-[template format](../../../../VitalDesignSystem/Components/VitalElements/ComponentTemplate) to allow
-shadowing.
+[template format](/VitalDesignSystem/Guides/ComponentTemplate) to allow shadowing.
 
 ### Font Sizes & Line Heights
 
