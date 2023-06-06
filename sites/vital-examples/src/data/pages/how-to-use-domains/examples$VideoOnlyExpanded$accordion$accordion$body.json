@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "uuid": "da7118c0-03ab-11ee-b142-09fc27f9cddc",
+      "wrapperProps": {
+        "className": "w-full"
+      },
+      "type": "YouTube"
+    }
+  ]
+}

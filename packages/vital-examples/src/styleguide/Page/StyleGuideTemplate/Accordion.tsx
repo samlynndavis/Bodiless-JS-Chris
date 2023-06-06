@@ -36,7 +36,8 @@ const BaseVariation = {
 const AccordionVariations = {
   Default: '',
   VideoOnly: exampleAccordion.WithOnlyVideo,
-  FAQ: vitalAccordion.WithFAQSchema,
+  FAQ: vitalAccordion.WithFAQ,
+  WithSlidingDrawer: exampleAccordion.WithSlidingDrawer,
 };
 
 const vitalAccordionVariations = varyDesigns(
@@ -84,10 +85,14 @@ const data = {
   examples$Default$accordion$body: simplebody,
   examples$DefaultExpanded$accordion$title: { text: 'What is Expanded on Open Accordion?' },
   examples$DefaultExpanded$accordion$body: simplebody,
-  examples$FAQ$accordion$title: { text: 'What is FAQ accordion?' },
-  examples$FAQ$accordion$body: simplebody,
-  examples$FAQExpanded$accordion$title: { text: 'What is Expanded on a FAQ accordion?' },
-  examples$FAQExpanded$accordion$body: simplebody,
+  // examples$FAQ$accordion$title: { text: 'What is FAQ accordion?' },
+  // examples$FAQ$accordion$body: simplebody,
+  // examples$FAQExpanded$accordion$title: { text: 'What is Expanded on a FAQ accordion?' },
+  // examples$FAQExpanded$accordion$body: simplebody,
+  examples$WithSlidingDrawer$accordion$accordion$title: { text: 'This is an example of a sliding accordion drawer.' },
+  examples$WithSlidingDrawer$accordion$accordion$body: simplebody,
+  examples$WithSlidingDrawerExpanded$accordion$accordion$title: { text: 'This is an example of an expanded sliding accordion drawer.' },
+  examples$WithSlidingDrawerExpanded$accordion$accordion$body: simplebody,
 };
 
 export const Accordion = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {

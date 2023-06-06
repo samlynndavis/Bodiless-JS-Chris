@@ -24,6 +24,16 @@ const twConfig = {
   content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
+  theme: {
+    extend: {
+      transitionProperty: {
+        maxHeight: 'max-height'
+      }
+    }
+  },
+  variants: {
+    height: ['responsive', 'hover', 'focus']
+  },
 };
 
 module.exports = getPackageTailwindConfig({

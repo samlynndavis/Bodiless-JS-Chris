@@ -22,7 +22,7 @@ import { vitalRewards, RewardsClean } from '../Rewards';
 import { vitalCopyrightRow } from '../CopyrightRow';
 import { asFooterToken, FooterToken } from '../FooterClean';
 
-const Default = asFooterToken({
+const Base = asFooterToken({
   Components: {
     FooterMenu: vitalMenu.Footer,
     CopyrightRow: vitalCopyrightRow.Default,
@@ -53,7 +53,7 @@ const Default = asFooterToken({
     FooterMenu: withNodeKey('footer-menu'),
     _: withNode,
   },
-});
+},);
 
 const WithRewardsExpanding2XL = asFooterToken({
   Components: {
@@ -83,6 +83,10 @@ const WithRewardsExpanding2XL = asFooterToken({
   },
 });
 
+const Default = asFooterToken(Base, {
+  ...WithRewardsExpanding2XL,
+});
+
 /**
  * Tokens for the vital footer
  *
@@ -90,6 +94,7 @@ const WithRewardsExpanding2XL = asFooterToken({
  * @see [[FooterClean]]
  */
 export interface VitalFooter {
+  Base: FooterToken;
   /**
    * Inherits from Base
    * @example Will remove Menu components
@@ -129,6 +134,7 @@ export interface VitalFooter {
  * @see [[FooterClean]]
  */
 const vitalFooter: VitalFooter = {
+  Base,
   Default,
   WithRewardsExpanding2XL,
 };

@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import { exampleAccordionBody } from '../../components/AccordionBody';
+import { exampleAccordionBody } from '../../../components/AccordionBody';
 
 export default exampleAccordionBody;

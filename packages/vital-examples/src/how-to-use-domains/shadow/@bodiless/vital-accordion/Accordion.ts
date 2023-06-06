@@ -12,6 +12,6 @@
  * limitations under the License.
  */
 
-import { exampleAccordion } from '../../components/Accordion';
+import { exampleAccordion } from '../../../components/Accordion';
 
 export default exampleAccordion;

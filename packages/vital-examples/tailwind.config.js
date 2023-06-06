@@ -20,6 +20,13 @@ const twConfig = {
   content: [
     './lib/**/!(*.d).{ts,js,jsx,tsx}',
   ],
+  theme: {
+    extend: {
+      transitionProperty: {
+        maxHeight: 'max-height',
+      }
+    }
+  }
 };
 
 module.exports = getPackageTailwindConfig({
