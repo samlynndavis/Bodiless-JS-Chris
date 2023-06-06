@@ -4,9 +4,9 @@ In this lesson we will learn how to define our site breakpoints and shadow the v
 
 ## Overview
 
-This is a very quick lesson, first, we will define our breakpoints on the `tailwind.config.js` file, then we will shadow vital-spacing to override the tokens we want.
+This is a very quick lesson. We will first define our breakpoints on the `tailwind.config.js` file, and then shadow vital-spacing to override the tokens we want.
 In this case, we will:
-1. Define our breakpoint base on the [Bootstrap Breakpoint](https://getbootstrap.com/docs/5.0/layout/breakpoints/)
+1. Define our breakpoint based on the [Bootstrap Breakpoint](https://getbootstrap.com/docs/5.0/layout/breakpoints/)
 2. Define responsive container margins
 3. Define site max width.
 
@@ -14,7 +14,7 @@ In this case, we will:
 
 ### Define our breakpoints.
 
-Let's start by taking a look into the bootstrap breakpoint values.
+Let's start by taking a look at the bootstrap breakpoint values.
 
 |Breakpoint|Class infix|Dimensions|
 |----------|-----------|----------|
@@ -50,7 +50,7 @@ Once that's done, thanks to tailwind, our breakpoints are already set.
 
 ### Define our spacing tokens.
 
-Now let's take a look into the vital [Spacing component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Spacing/tokens/vitalSpacing.ts).
+Now let's take a look at the vital [Spacing component](https://github.com/johnsonandjohnson/Bodiless-JS/blob/main/packages/vital-elements/src/components/Spacing/tokens/vitalSpacing.ts).
 
 ```ts
 export default asTokenGroup(SpacingMeta)({
@@ -66,8 +66,7 @@ export default asTokenGroup(SpacingMeta)({
 
 ```
 
-Everything we have here is pretty simple, we just defined a few tokens for easy spacing on our site, nothing fancy, except for two special tokens that we use to define the general layout of our website, they are `WithSiteMargin` and `WithSiteXLConstraint`.
-
+Everything we have here is pretty simple. We've just defined a few tokens for easy spacing on our site. Nothing fancy, except for two special tokens that we use to define the general layout of our website: `WithSiteMargin` and `WithSiteXLConstraint`.
 #### Special tokens
 As we talked about above, let's see a little more about these tokens that need a little attention.
 First, the `WithSiteMargin` token, as it rely in two special settings in our `tailwind.config.js` file, which are called `site-percent` and `md-site-percent`, which define the margin in percentage to our website. If we take a look at the tailwind file of the vital-element package you will see this setting under the extend key.
@@ -109,8 +108,7 @@ And that's it, we've already finished defining the tokens, now we just have to i
 
 ### Shadowing
 
-And now, to shadow the our tokens, create a `Spacing.ts` file with the same path of the package, in our case, since we are shadowing the `@bodiles/vital-elements` package, we'll have this structure.
-
+And now, to shadow our tokens, create a `Spacing.ts` file with the same path of the package. In our case, since we are shadowing the `@bodiles/vital-elements` package, we'll have this structure.
 ```bash
 ├── shadow
 │   ├── @bodiless
@@ -119,7 +117,7 @@ And now, to shadow the our tokens, create a `Spacing.ts` file with the same path
 ```
 
 <!-- Waiting for the actual function to be available; -->
-Each file must only export the tokens from the components folder with the our helper `shadow` function. You can see more about this function [here](TBD).
+Each file must only export the tokens from the components folder with our helper `shadow` function. You can see more about this function [here](TBD).
 
 Our whole file will only have 3 lines.
 
