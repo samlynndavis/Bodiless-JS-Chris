@@ -35,7 +35,7 @@ const Default = asAccordionTitleToken(omit(vitalAccordionTitleBase.Default, 'Lay
     Label: as(
       vitalFontSize.XXL,
       vitalTextDecoration.ExtraBold,
-      vitalColor.TextPrimaryHeaderCopy,
+      vitalColor.TextPrimaryInteractive,
       'outline-dashed',
     ),
   },
