@@ -13,9 +13,13 @@
  */
 
 import { _default } from './_default';
-import { Accordion } from './Accordion';
+import { Buttons } from './Button';
+import { Card } from './Card';
+import { Typography } from './Typography';
 
 export const VitalDemoStyleGuideTemplate = {
   _default,
-  Accordion,
+  Buttons,
+  Card,
+  Typography,
 };
