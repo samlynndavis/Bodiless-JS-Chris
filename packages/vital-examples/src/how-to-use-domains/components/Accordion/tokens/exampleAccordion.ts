@@ -1,12 +1,5 @@
-import {
-  on, withDesign
-} from '@bodiless/fclasses';
 import { asAccordionToken } from '@bodiless/vital-accordion';
 import { vitalAccordionBase } from '@bodiless/vital-accordion/lib/base';
-import { asFluidToken } from '@bodiless/vital-elements';
-import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
-import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer/lib/base';
-import { vitalYouTube, YouTubeClean } from '@bodiless/vital-youtube';
 import { exampleAccordionBody } from '../../AccordionBody';
 
 /**
@@ -15,17 +8,10 @@ import { exampleAccordionBody } from '../../AccordionBody';
  * we can replace the 'Body' slot with a custom flow container that will *only*
  * contain a YouTube video.
  */
-const WithOnlyVideo = asAccordionToken(vitalAccordionBase.Default, {
+const OnlyVideo = asAccordionToken({
+  ...vitalAccordionBase.Default,
   Components: {
-    ...vitalAccordionBase.Default.Components,
-    Body: withDesign({
-      Content: on(FlowContainerClean)(asFluidToken({
-        ...vitalFlowContainerBase.Default,
-        Components: {
-          YouTube: on(YouTubeClean)(vitalYouTube.Default),
-        },
-      },)),
-    }),
+    Body: exampleAccordionBody.YouTube,
   },
 });
 
@@ -34,15 +20,15 @@ const WithOnlyVideo = asAccordionToken(vitalAccordionBase.Default, {
  * our 'Body' slot with the 'WithSlidingDrawer' AccordionBody token
  * created in our exampleAccordionBody.ts file.
  */
-const WithSlidingDrawer = asAccordionToken(vitalAccordionBase.Default, {
+const Animated = asAccordionToken({
+  ...vitalAccordionBase.Default,
   Components: {
-    ...vitalAccordionBase.Default.Components,
-    Body: exampleAccordionBody.WithSlidingDrawer,
+    Body: exampleAccordionBody.SlidingDrawer,
   },
 });
 
 export default {
   ...vitalAccordionBase,
-  WithOnlyVideo,
-  WithSlidingDrawer
+  OnlyVideo,
+  Animated
 };

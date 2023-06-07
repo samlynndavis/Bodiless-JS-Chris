@@ -3,8 +3,12 @@ import { withPlaceholder } from '@bodiless/components';
 import { vitalAccordionBodyBase } from '@bodiless/vital-accordion/lib/base';
 import { asSchemaSource } from '@bodiless/schema-org';
 import {
-  addClassesIf, as, Div, flowHoc, removeClassesIf, replaceWith
+  addClassesIf, as, Div, on, removeClassesIf, replaceWith,
 } from '@bodiless/fclasses';
+import { FlowContainerClean } from '@bodiless/vital-flowcontainer';
+import { asFluidToken } from '@bodiless/vital-elements';
+import { vitalFlowContainerBase } from '@bodiless/vital-flowcontainer/lib/base';
+import { vitalYouTube, YouTubeClean } from '@bodiless/vital-youtube';
 /**
  * By default, the 'WithFAQ' variant of the Vital AccordionBody token
  * sets the value of the 'data-schema-source' attribute to 'faq-answer'.
@@ -18,7 +22,6 @@ import {
  * text that is normally applied.
  */
 const WithFAQ = asAccordionBodyToken({
-  ...vitalAccordionBodyBase.WithFAQ,
   SEO: {
     Content: asSchemaSource('answer'),
   },
@@ -32,25 +35,20 @@ const WithFAQ = asAccordionBodyToken({
   * else isn't recognized.
   */
 
-const WithSlidingDrawer = asAccordionBodyToken({
+const SlidingDrawer = asAccordionBodyToken({
   ...vitalAccordionBodyBase.Default,
   Components: {
-    // TODO (REMEMBER TO REMOVE): Replacing the AccordionBody 'Wrapper' slot with a
-    // Div (though it's already instantiated as a div in the clean component),
-    // seems to remove the 'block,' 'hidden' behavior successfully.
     Wrapper: replaceWith(Div),
   },
   // Here we extend the 'Behavior' domain of the 'Default' AccordionBody token,
-  // where the accordion's open/close behavior lives, and replace the Wrapper, on
-  // which this behavior is set, with the styles needed to smoothly animate the open/closed
-  // states of our accordion.
+  // where the accordion's open/close behavior lives, and override the tokens on the `Wrapper` slot
+  // with the styles needed to smoothly animate the open/closed states of our accordion.
 
   // NOTE: Animating max-height is not the preferred method, but we've opted to use it here
   // for ease of use in illustrating how domains can be used to modify tokens.
   Behavior: {
-    ...vitalAccordionBodyBase.Default.Behavior,
-    Wrapper: flowHoc(
-      as('max-h-0'),
+    Wrapper: as(
+      as('max-h-0 transition-[max-height] duration-500 ease-in-out'),
       // Here we use a set of special Bodiless-supplied HOCs to add classes to the 'Wrapper'
       // slot when our accordion is open/closed.
       addClassesIf(useIsAccordionExpanded)('max-h-20'),
@@ -64,15 +62,23 @@ const WithSlidingDrawer = asAccordionBodyToken({
   Layout: {
     Wrapper: 'overflow-hidden',
   },
-  // Here we place our transition styling on the 'Theme' domain, as it does not fall
-  // within the 'Layout' or 'Spacing' domains in Tailwind.
-  Theme: {
-    Wrapper: 'transition-[max-height] duration-500 ease-in-out',
-  },
 },);
+
+const YouTube = asAccordionBodyToken({
+  ...vitalAccordionBodyBase.Default,
+  Components: {
+    Content: on(FlowContainerClean)(asFluidToken({
+      ...vitalFlowContainerBase.Default,
+      Components: {
+        YouTube: on(YouTubeClean)(vitalYouTube.Default),
+      },
+    },)),
+  }
+});
 
 export default {
   ...vitalAccordionBodyBase,
   WithFAQ,
-  WithSlidingDrawer,
+  YouTube,
+  SlidingDrawer,
 };

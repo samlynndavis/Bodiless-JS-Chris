@@ -35,9 +35,9 @@ const BaseVariation = {
 
 const AccordionVariations = {
   Default: '',
-  VideoOnly: exampleAccordion.WithOnlyVideo,
+  VideoOnly: exampleAccordion.OnlyVideo,
   FAQ: vitalAccordion.WithFAQ,
-  WithSlidingDrawer: exampleAccordion.WithSlidingDrawer,
+  Animated: exampleAccordion.Animated,
 };
 
 const vitalAccordionVariations = varyDesigns(
@@ -89,10 +89,10 @@ const data = {
   // examples$FAQ$accordion$body: simplebody,
   // examples$FAQExpanded$accordion$title: { text: 'What is Expanded on a FAQ accordion?' },
   // examples$FAQExpanded$accordion$body: simplebody,
-  examples$WithSlidingDrawer$accordion$accordion$title: { text: 'This is an example of a sliding accordion drawer.' },
-  examples$WithSlidingDrawer$accordion$accordion$body: simplebody,
-  examples$WithSlidingDrawerExpanded$accordion$accordion$title: { text: 'This is an example of an expanded sliding accordion drawer.' },
-  examples$WithSlidingDrawerExpanded$accordion$accordion$body: simplebody,
+  examples$Animated$accordion$title: { text: 'This is an example of a sliding accordion drawer.' },
+  examples$Animated$accordion$body: simplebody,
+  examples$AnimatedExpanded$accordion$title: { text: 'This is an example of an expanded sliding accordion drawer.' },
+  examples$AnimatedExpanded$accordion$body: simplebody,
 };
 
 export const Accordion = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Default, {
@@ -105,5 +105,8 @@ export const Accordion = asStyleGuideTemplateToken(vitalStyleGuideTemplate.Defau
       vitalAccordionFlowContainer,
       withDefaultContent(data),
     ),
+  },
+  Spacing: {
+    DescriptionWrapper: 'mb-3',
   },
 });
