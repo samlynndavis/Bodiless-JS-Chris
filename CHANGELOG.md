@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-rc.41](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.40...v1.0.0-rc.41) (2023-06-08)
+
+### Bug Fixes
+
+- **package-lock:** Fixing broken lock file ([#2121](https://github.com/johnsonandjohnson/bodiless-js/issues/2121)) ([3eee89a](https://github.com/johnsonandjohnson/bodiless-js/commit/3eee89a1f97063aa20a39265509b9488104079e6))
+
 # [1.0.0-rc.40](https://github.com/johnsonandjohnson/bodiless-js/compare/v1.0.0-rc.39...v1.0.0-rc.40) (2023-06-07)
 
 ### Bug Fixes
