@@ -17,7 +17,7 @@ import { vitalPage } from '@bodiless/vital-templates';
 import { VitalDemoStyleGuideTemplate } from './StyleGuideTemplate';
 
 const {
-  _default, Accordion, Buttons, Card, Typography
+  _default, Accordion, Buttons, Card, Typography, Layout
 } = VitalDemoStyleGuideTemplate;
 
 const Default = asFluidToken({
@@ -28,6 +28,7 @@ const Default = asFluidToken({
     Buttons,
     Card,
     Typography,
+    Layout,
   },
 });
 

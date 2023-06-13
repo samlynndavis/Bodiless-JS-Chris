@@ -17,6 +17,7 @@ import { Accordion } from './Accordion';
 import { Buttons } from './Button';
 import { Card } from './Card';
 import { Typography } from './Typography';
+import { Layout } from './Layout';
 
 export const VitalDemoStyleGuideTemplate = {
   _default,
@@ -24,4 +25,5 @@ export const VitalDemoStyleGuideTemplate = {
   Buttons,
   Card,
   Typography,
+  Layout,
 };
