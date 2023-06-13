@@ -83,10 +83,6 @@ const WithRewardsExpanding2XL = asFooterToken({
   },
 });
 
-const Default = asFooterToken(Base, {
-  ...WithRewardsExpanding2XL,
-});
-
 /**
  * Tokens for the vital footer
  *
