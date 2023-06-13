@@ -40,7 +40,7 @@ const Base = asAccordionBodyToken({
 
 const Default = asAccordionBodyToken(Base, {
   Spacing: {
-    Wrapper: 'mt-2',
+    Wrapper: 'p-2',
   },
 });
 
