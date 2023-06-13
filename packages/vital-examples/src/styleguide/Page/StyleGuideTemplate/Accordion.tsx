@@ -43,10 +43,10 @@ const AccordionVariations = {
 const vitalAccordionVariations = varyDesigns(
   BaseVariation,
   AccordionVariations,
-  {
-    '': '', // vary on itself and produce closed accordion variation
-    Expanded: vitalAccordion.WithInitiallyExpanded,
-  }
+  // {
+  //   '': '', // vary on itself and produce closed accordion variation
+  //   Expanded: vitalAccordion.WithInitiallyExpanded,
+  // }
 );
 
 const vitalAccordionFlowContainer = asFluidToken({
