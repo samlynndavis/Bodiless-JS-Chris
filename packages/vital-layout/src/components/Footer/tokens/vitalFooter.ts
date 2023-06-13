@@ -131,7 +131,6 @@ export interface VitalFooter {
  */
 const vitalFooter: VitalFooter = {
   Base,
-  Default,
   WithRewardsExpanding2XL,
 };
 
