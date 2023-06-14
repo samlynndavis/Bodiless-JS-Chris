@@ -30,7 +30,7 @@
     "@bodiless/vital-templates": "^1.0.0-rc.41",
     "@bodiless/knapsack-renderer": "^1.0.0-rc.41",
     "@bodiless/knapsack-edit-provider": "^1.0.0-rc.41",
-    "@knapsack/app": "^3.108.10",
+    "@knapsack/app": "^4.1.4",
     "@types/react": "^18.2.0",
     "react": "^18.2.0",
     "esm": "^3.2.25",
