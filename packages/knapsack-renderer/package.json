@@ -1,7 +1,7 @@
 {
   "name": "@bodiless/knapsack-renderer",
   "description": "Render Bodiless templates in Knapsack",
-  "version": "1.0.0-rc.38",
+  "version": "1.0.0-rc.41",
   "type": "commonjs",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -36,10 +36,10 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@bodiless/core": "^1.0.0-rc.38",
-    "@bodiless/core-ui": "^1.0.0-rc.38",
-    "@bodiless/fclasses": "^1.0.0-rc.38",
-    "@bodiless/vital-elements": "^1.0.0-rc.38",
+    "@bodiless/core": "^1.0.0-rc.41",
+    "@bodiless/core-ui": "^1.0.0-rc.41",
+    "@bodiless/fclasses": "^1.0.0-rc.41",
+    "@bodiless/vital-elements": "^1.0.0-rc.41",
     "@knapsack/test-ava": "^3.108.10",
     "@types/babel__core": "^7.1.16",
     "@types/node": "^16",
