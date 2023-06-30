@@ -2,12 +2,10 @@ import React, {
   useMemo, FC, useState, useRef, useLayoutEffect,
 } from 'react';
 import {
-  withMenuOptions, ContextMenuFormProps, ContextMenuForm, useMenuOptionUI
+  withMenuOptions, ContextMenuFormProps, ContextMenuForm,
 } from '@bodiless/core';
-import {
-  addClasses, flowHoc, removeClasses, ComponentOrTag,
-} from '@bodiless/fclasses';
 import { pathsToTree, TreeNode } from './pathsToTree';
+import { usePageMenuOptionUI } from '../MenuOptionUI';
 
 type FolderTreeProps = {
   data: TreeNode,
@@ -27,18 +25,13 @@ const isNodeVisible = (data: TreeNode, testVisible: (data: TreeNode) => boolean)
 
 const FolderTreeNode: FC<FolderTreeNodeProps>= ({ data, test }) => {
   if (!isNodeVisible(data, test)) return null;
-  const { ComponentFormLink, ComponentFormList, ComponentFormListItem } = useMenuOptionUI();
-  const Link = flowHoc(
-    addClasses('bl-block hover:bl-text-yellow-500'),
-    // addClasses('block hover:text-interactive-tertiary-hover'),
-    removeClasses('bl-underline'),
-  )(ComponentFormLink as ComponentOrTag<any>);
-  // const ComponentFormList = 'ul';
-  // const ComponentFormListItem = 'li';
+  const {
+    ComponentFormList, ComponentFormListItem, PageTreeLink,
+  } = usePageMenuOptionUI();
   return (
     // @todo should use bl classes
     <ComponentFormListItem>
-      <Link href={data.url}>{data.name}</Link>
+      <PageTreeLink href={data.url}>{data.name}</PageTreeLink>
       {data.children.length > 0 && (
       <ComponentFormList>
         {data.children.map(c => <FolderTreeNode data={c} test={test} />)}
@@ -49,9 +42,9 @@ const FolderTreeNode: FC<FolderTreeNodeProps>= ({ data, test }) => {
 };
 
 const FolderTree: FC<FolderTreeProps> = props => {
-  const { ComponentFormList } = useMenuOptionUI();
+  const { ComponentFormList } = usePageMenuOptionUI();
   // const ComponentFormList = 'ul';
-  const { ComponentFormText } = useMenuOptionUI();
+  const { ComponentFormText } = usePageMenuOptionUI();
 
   // Track the text in the filter input field
   const [match, setMatch] = useState<string|undefined>();
@@ -95,7 +88,7 @@ const useForm = ({ pages }: withPageTreeButtonProps) => useMemo(() => (
     const {
       ComponentFormTitle,
       ComponentFormDescription,
-    } = useMenuOptionUI();
+    } = usePageMenuOptionUI();
     const tree = pathsToTree(pages);
     return (
       <ContextMenuForm {...props} hasSubmit={false}>
