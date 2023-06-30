@@ -43,6 +43,7 @@ import GatsbyNodeProvider from './GatsbyNodeProvider.bl-edit';
 import { FinalUI, UI, PageProps } from './types';
 import ShowDesignKeys from './ShowDesignKeys';
 import StaticPage from './Page.static';
+import withPageTreeButton from './withPageTreeButton';
 
 const defaultUI: FinalUI = {
   ContextWrapper,
@@ -70,6 +71,7 @@ const EditButtons: FC = () => {
   useEditButton();
   return <></>;
 };
+const PageTreeButton = withPageTreeButton(Fragment);
 
 const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...rest }) => {
   const { PageEditor: Editor, ContextWrapper: Wrapper } = getUI(ui);
@@ -95,6 +97,7 @@ const EditPage: FC<PropsWithChildren<PageProps>> = observer(({ children, ui, ...
               <NotificationButton />
               <Editor>
                 <EditButtons />
+                <PageTreeButton />
                 <OnNodeErrorNotification />
                 <NewPageButton />
                 <MovePageButton />

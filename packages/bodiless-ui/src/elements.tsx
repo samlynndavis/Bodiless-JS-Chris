@@ -91,6 +91,10 @@ export const ComponentFormDescription = addClasses(
 )(Div);
 
 export const ComponentFormListItem = addClasses(
+  'bl-px-grid-4 bl-max-w-xl-grid-1',
+)(Li);
+
+export const ComponentFormNotification = addClasses(
   'first:bl-border-t-0 bl-border-t bl-py-grid-1 bl-px-grid-1 bl-max-w-xl-grid-1',
 )(Li);
 

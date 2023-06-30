@@ -11,13 +11,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-export * from './Forms';
-export * from './MenuOptions';
-export * from './MenuOptionUI';
-export * from './Operations';
-export * from './Provider';
-export * from './RedirectAlias';
-export * from './types';
-export * from './utils';
-export * from './withPageTreeButton';
+export * from './withPageTreeButton.bl-edit';
