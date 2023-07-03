@@ -5,8 +5,8 @@
     },
     "FClasses": {
       "README.md": "./README.md",
-      "AddClassesAPI": "./doc/AddClasses.md",
-      "DesignAPI": "./doc/Design.md"
+      "AddClassesAPI.md": "./doc/AddClasses.md",
+      "DesignAPI.md": "./doc/Design.md"
     }
   }
 }
