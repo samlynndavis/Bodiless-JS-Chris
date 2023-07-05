@@ -2,12 +2,16 @@
   "id": "card",
   "tabs": [
     {
-      "id": "bodiless-Kmd8Nb3inj",
-      "type": "template"
-    },
-    {
       "id": "overview",
       "type": "subPage"
+    },
+    {
+      "id": "9oHdnpe1jB",
+      "type": "subPage"
+    },
+    {
+      "id": "bodiless-Kmd8Nb3inj",
+      "type": "template"
     }
   ],
   "title": "Card",
@@ -15,8 +19,13 @@
   "subPages": [
     {
       "id": "overview",
-      "title": "Overview",
+      "title": "Guidelines",
       "blockIds": ["z6oyLDb-mS"]
+    },
+    {
+      "id": "9oHdnpe1jB",
+      "title": "Figma",
+      "blockIds": ["CBFAjrJd8A"]
     }
   ],
   "templates": [
@@ -27,7 +36,7 @@
         "isInferred": true
       },
       "alias": "knapsackCardSpec",
-      "title": "Vital Card",
+      "title": "Code",
       "templateLanguageId": "bodiless",
       "demoIds": ["wAphvQRJOn"],
       "blockIds": []
