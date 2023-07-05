@@ -195,7 +195,7 @@ blocks:
                   type: text
               type: heading
             - content:
-                - text: These tokens were generated from Figma styles using Tokens Studio for Figma
+                - text: These tokens were generated from Figma styles using Tokens Studio for Figma.
                   type: text
               type: paragraph
           type: doc
