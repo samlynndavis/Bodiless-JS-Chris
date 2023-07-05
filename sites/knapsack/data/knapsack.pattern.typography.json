@@ -6,7 +6,7 @@
   "templates": [
     {
       "id": "bodiless-6GKNPvcRI9",
-      "title": "Template",
+      "title": "Code",
       "path": "@bodiless/vital-elements",
       "alias": "knapsackTypographySpec",
       "templateLanguageId": "bodiless",
@@ -19,8 +19,16 @@
   ],
   "tabs": [
     {
-      "type": "template",
-      "id": "bodiless-6GKNPvcRI9"
+      "id": "zDa0Gm1mIO",
+      "type": "subPage"
+    },
+    {
+      "id": "P8wBj9oy8H",
+      "type": "subPage"
+    },
+    {
+      "id": "bodiless-6GKNPvcRI9",
+      "type": "template"
     }
   ],
   "subPages": [
@@ -28,6 +36,16 @@
       "id": "overview",
       "title": "Overview",
       "blockIds": []
+    },
+    {
+      "id": "zDa0Gm1mIO",
+      "title": "Guidelines",
+      "blockIds": []
+    },
+    {
+      "id": "P8wBj9oy8H",
+      "title": "Figma",
+      "blockIds": ["ad25zPbIAj"]
     }
   ]
 }
