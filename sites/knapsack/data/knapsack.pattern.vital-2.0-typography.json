@@ -2,7 +2,11 @@
   "id": "vital-2.0-typography",
   "tabs": [
     {
-      "id": "overview",
+      "id": "qU3lD8qIPR",
+      "type": "subPage"
+    },
+    {
+      "id": "Jgpod8gy13",
       "type": "subPage"
     },
     {
@@ -10,13 +14,20 @@
       "type": "template"
     }
   ],
-  "title": "Vital 2.0 Typography OLD",
-  "statuses": {},
+  "title": "Vital 2.0 Typography",
+  "statuses": {
+    "KIRz-iaKhz": "needsReview"
+  },
   "subPages": [
     {
-      "id": "overview",
-      "title": "Overview",
-      "blockIds": ["PoOIw5aqQw"]
+      "id": "qU3lD8qIPR",
+      "title": "Guidelines",
+      "blockIds": ["j0L7cNXKaa"]
+    },
+    {
+      "id": "Jgpod8gy13",
+      "title": "Figma",
+      "blockIds": ["k2Y8dJdKsx"]
     }
   ],
   "templates": [
@@ -27,7 +38,7 @@
         "isInferred": true
       },
       "alias": "knapsackVitalTypographySpec",
-      "title": "Examples",
+      "title": "Code",
       "demoIds": ["1BsFIzVo30", "07HJPaXqRQ"],
       "blockIds": [],
       "templateLanguageId": "bodiless"

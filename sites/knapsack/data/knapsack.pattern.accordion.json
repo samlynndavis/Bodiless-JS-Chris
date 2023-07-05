@@ -2,7 +2,9 @@
   "id": "accordion",
   "title": "Accordion",
   "description": "",
-  "statuses": {},
+  "statuses": {
+    "KIRz-iaKhz": "needsReview"
+  },
   "templates": [
     {
       "id": "bodiless-6GKNPvcRI0",

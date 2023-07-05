@@ -1,16 +1,16 @@
 {
-  "id": "menu",
+  "id": "media-wrapper",
   "tabs": [
     {
       "id": "overview",
       "type": "subPage"
     },
     {
-      "id": "kBehkWZUbd",
+      "id": "BopG1YAfJr",
       "type": "subPage"
     }
   ],
-  "title": "Menu",
+  "title": "Media Wrapper",
   "statuses": {
     "main": "needsDev"
   },
@@ -21,7 +21,7 @@
       "blockIds": []
     },
     {
-      "id": "kBehkWZUbd",
+      "id": "BopG1YAfJr",
       "title": "Figma",
       "blockIds": []
     }

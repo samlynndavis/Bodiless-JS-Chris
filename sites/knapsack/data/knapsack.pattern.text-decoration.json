@@ -2,7 +2,9 @@
   "id": "text-decoration",
   "title": "Text Decoration",
   "description": "",
-  "statuses": {},
+  "statuses": {
+    "KIRz-iaKhz": "ready"
+  },
   "templates": [
     {
       "id": "bodiless-6GKNPvcRI7",

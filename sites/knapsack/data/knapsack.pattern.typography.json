@@ -1,22 +1,5 @@
 {
   "id": "typography",
-  "title": "Typography",
-  "description": "",
-  "statuses": {},
-  "templates": [
-    {
-      "id": "bodiless-6GKNPvcRI9",
-      "title": "Code",
-      "path": "@bodiless/vital-elements",
-      "alias": "knapsackTypographySpec",
-      "templateLanguageId": "bodiless",
-      "spec": {
-        "isInferred": true
-      },
-      "demoIds": ["n7PYyApmLa", "bLZ89peK6T"],
-      "blockIds": []
-    }
-  ],
   "tabs": [
     {
       "id": "zDa0Gm1mIO",
@@ -31,6 +14,10 @@
       "type": "template"
     }
   ],
+  "title": "Typography",
+  "statuses": {
+    "KIRz-iaKhz": "ready"
+  },
   "subPages": [
     {
       "id": "overview",
@@ -40,12 +27,27 @@
     {
       "id": "zDa0Gm1mIO",
       "title": "Guidelines",
-      "blockIds": []
+      "blockIds": ["KYM1112U4w"]
     },
     {
       "id": "P8wBj9oy8H",
       "title": "Figma",
       "blockIds": ["ad25zPbIAj"]
     }
-  ]
+  ],
+  "templates": [
+    {
+      "id": "bodiless-6GKNPvcRI9",
+      "path": "@bodiless/vital-elements",
+      "spec": {
+        "isInferred": true
+      },
+      "alias": "knapsackTypographySpec",
+      "title": "Code",
+      "demoIds": ["n7PYyApmLa", "bLZ89peK6T"],
+      "blockIds": [],
+      "templateLanguageId": "bodiless"
+    }
+  ],
+  "description": "A list of all White Label default typography tokens. Note that the Design does not account for H1-H3 and the correct refined Vital 2.0 heading styles start at H4."
 }

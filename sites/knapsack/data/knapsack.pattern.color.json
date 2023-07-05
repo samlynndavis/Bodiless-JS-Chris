@@ -2,7 +2,10 @@
   "id": "color",
   "title": "Colors",
   "description": "",
-  "statuses": {},
+  "statuses": {
+    "KIRz-iaKhz": "ready",
+    "main": "needsDev"
+  },
   "templates": [
     {
       "id": "bodiless-6GKNPvcRI9",

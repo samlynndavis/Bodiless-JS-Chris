@@ -1,19 +1,17 @@
 {
-  "id": "menu",
+  "id": "content-dividers",
   "tabs": [
     {
       "id": "overview",
       "type": "subPage"
     },
     {
-      "id": "kBehkWZUbd",
+      "id": "iNMvaveDjS",
       "type": "subPage"
     }
   ],
-  "title": "Menu",
-  "statuses": {
-    "main": "needsDev"
-  },
+  "title": "Content Dividers",
+  "statuses": {},
   "subPages": [
     {
       "id": "overview",
@@ -21,7 +19,7 @@
       "blockIds": []
     },
     {
-      "id": "kBehkWZUbd",
+      "id": "iNMvaveDjS",
       "title": "Figma",
       "blockIds": []
     }

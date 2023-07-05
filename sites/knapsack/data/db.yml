@@ -195,7 +195,7 @@ blocks:
                   type: text
               type: heading
             - content:
-                - text: These tokens were generated from Figma styles using Tokens Studio for Figma
+                - text: These tokens were generated from Figma styles using Tokens Studio for Figma.
                   type: text
               type: paragraph
           type: doc
@@ -257,6 +257,73 @@ blocks:
               type: heading
           type: doc
       id: K3axZJtuZ5
+      size: null
+    KYM1112U4w:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 3
+              content:
+                - text: 'Things to Note:'
+                  type: text
+              type: heading
+            - content:
+                - content:
+                    - content:
+                        - text: 'We already have '
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Typography
+                          type: text
+                        - text: "\_pattern under `Components` page, so naming this pattern "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Vital 2.0 Typography
+                          type: text
+                        - marks:
+                            - type: code
+                          type: hardBreak
+                        - text: .
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - marks:
+                            - type: code
+                          text: H1
+                          type: text
+                        - text: "\_through "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: H3
+                          type: text
+                        - text: "\_are not user or correctly defined."
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - text: "Links have no hover styles in tokens JSON files:\_"
+                          type: text
+                        - marks:
+                            - attrs:
+                                class: null
+                                href: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                                target: _blank
+                              type: link
+                          text: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                          type: text
+                      type: paragraph
+                  type: listItem
+              type: bulletList
+          type: doc
+      id: KYM1112U4w
       size: null
     KymKRTLXS-:
       blockType: design-tokens
@@ -485,6 +552,77 @@ blocks:
     h7dovr5LkE:
       blockType: figma-block
       id: h7dovr5LkE
+      size: null
+    j0L7cNXKaa:
+      blockType: text-editor
+      data:
+        content:
+          content:
+            - attrs:
+                level: 3
+              content:
+                - text: 'Things to Note:'
+                  type: text
+              type: heading
+            - content:
+                - content:
+                    - content:
+                        - text: 'We already have '
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Typography
+                          type: text
+                        - text: "\_pattern under `Components` page, so naming this pattern "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: Vital 2.0 Typography
+                          type: text
+                        - marks:
+                            - type: code
+                          type: hardBreak
+                        - text: .
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - marks:
+                            - type: code
+                          text: H1
+                          type: text
+                        - text: "\_through "
+                          type: text
+                        - marks:
+                            - type: code
+                          text: H3
+                          type: text
+                        - text: "\_are not user or correctly defined."
+                          type: text
+                      type: paragraph
+                  type: listItem
+                - content:
+                    - content:
+                        - text: "Links have no hover styles in tokens JSON files:\_"
+                          type: text
+                        - marks:
+                            - attrs:
+                                class: null
+                                href: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                                target: _blank
+                              type: link
+                          text: https://github.com/dxp-prototype/vital-design-tokens/tree/tokens.json
+                          type: text
+                      type: paragraph
+                  type: listItem
+              type: bulletList
+          type: doc
+      id: j0L7cNXKaa
+      size: null
+    k2Y8dJdKsx:
+      blockType: figma-block
+      id: k2Y8dJdKsx
       size: null
     o6tW8v1Jz1:
       blockType: figma-block
