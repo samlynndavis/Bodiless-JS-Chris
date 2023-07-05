@@ -15,7 +15,10 @@
     }
   ],
   "title": "Card",
-  "statuses": {},
+  "statuses": {
+    "main": "needsDev",
+    "KIRz-iaKhz": "needsReview"
+  },
   "subPages": [
     {
       "id": "overview",

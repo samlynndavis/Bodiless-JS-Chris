@@ -2,7 +2,10 @@
   "id": "font-size",
   "title": "Font Size",
   "description": "",
-  "statuses": {},
+  "statuses": {
+    "KIRz-iaKhz": "ready",
+    "main": "ready"
+  },
   "templates": [
     {
       "id": "bodiless-6GKNPvcRI8",
