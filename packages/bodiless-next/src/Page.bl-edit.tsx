@@ -38,8 +38,8 @@ import {
   withMovePageButton,
   withNewPageButton,
   withRedirectAliasButton,
+  withPageTreeButton,
 } from '@bodiless/page';
-import withPageTreeButton from './withPageTreeButton';
 import NextNodeProvider from './NextNodeProvider.bl-edit';
 import { FinalUI, UI, PageProps } from './types';
 import ShowDesignKeys from './ShowDesignKeys';

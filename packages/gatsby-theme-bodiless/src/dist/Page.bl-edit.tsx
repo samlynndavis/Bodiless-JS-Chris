@@ -38,12 +38,12 @@ import {
   withMovePageButton,
   withNewPageButton,
   withRedirectAliasButton,
+  withPageTreeButton,
 } from '@bodiless/page';
 import GatsbyNodeProvider from './GatsbyNodeProvider.bl-edit';
 import { FinalUI, UI, PageProps } from './types';
 import ShowDesignKeys from './ShowDesignKeys';
 import StaticPage from './Page.static';
-import withPageTreeButton from './withPageTreeButton';
 
 const defaultUI: FinalUI = {
   ContextWrapper,

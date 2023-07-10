@@ -14,7 +14,7 @@
 import { asElementToken } from '@bodiless/vital-elements';
 import { withoutHydration } from '@bodiless/hydration';
 import { withNodeKey } from '@bodiless/data';
-import { withImageClientLoader } from './tokens/vitalImage.gatsby';
+import { withImageClientLoader } from './tokens/vitalImage.bl-noframework';
 
 export const vitalImage = new Proxy({}, {
   get: (target, prop) => {

@@ -23,6 +23,8 @@ export function pathsToTree(paths: string[] = []) {
       children: map[path] ? map[path].map(buildTree) : [],
     };
   }
-  paths.forEach(addToMap);
+  if (Array.isArray(paths)) {
+    paths.forEach(addToMap);
+  }
   return buildTree('');
 }

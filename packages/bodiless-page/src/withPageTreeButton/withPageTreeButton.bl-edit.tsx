@@ -4,8 +4,11 @@ import React, {
 import {
   withMenuOptions, ContextMenuFormProps, ContextMenuForm,
 } from '@bodiless/core';
+import { useNode } from '@bodiless/data';
 import { pathsToTree, TreeNode } from './pathsToTree';
 import { usePageMenuOptionUI } from '../MenuOptionUI';
+
+export const PAGE_TREE_NODE_KEY = 'Site$_pages';
 
 type FolderTreeProps = {
   data: TreeNode,
@@ -80,16 +83,19 @@ const FolderTree: FC<FolderTreeProps> = props => {
 };
 
 export type withPageTreeButtonProps = {
-  pages: string[],
+  pages?: string[],
 };
 
 const useForm = ({ pages }: withPageTreeButtonProps) => useMemo(() => (
   (props: ContextMenuFormProps) => {
+    const { node } = useNode();
+    const { data } = node.peer<string[]>(PAGE_TREE_NODE_KEY);
+    const finalPages = pages || data;
     const {
       ComponentFormTitle,
       ComponentFormDescription,
     } = usePageMenuOptionUI();
-    const tree = pathsToTree(pages);
+    const tree = pathsToTree(finalPages);
     return (
       <ContextMenuForm {...props} hasSubmit={false}>
         <ComponentFormTitle>Navigate to Page</ComponentFormTitle>
@@ -118,6 +124,13 @@ const useMenuOptions = (props: withPageTreeButtonProps) => {
   }];
 };
 
+/**
+ * Adds a page tree navigation button to the global sidebar menu.
+ *
+ * @example
+ * ```
+ *
+ */
 export const withPageTreeButton = withMenuOptions({
   useMenuOptions,
   name: 'Page Tree',
