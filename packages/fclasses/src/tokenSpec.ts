@@ -19,34 +19,56 @@ import { startWith } from './replaceable';
 import type {
   HOCDef,
   DesignableComponents, HocDesign,
-  ReservedDomains, Design, Token, HOD, AsTokenSpec, FinalDesign, TokenSpec, FinalDomains,
+   Design, Token, HOD, AsTokenSpec, FinalDesign, FinalDomains, TokenMeta, ComposedToken,
 } from './types';
 import { $TokenSpec, HOC } from './types';
 import { flowHoc, extendMeta } from './flowHoc';
 import { addClasses } from './addClasses';
 import { withHocDesign } from './withHocDesign';
 
+/*
+type ComposeValue<C extends DesignableComponents, D extends object> =  Record<string, ComposedToken<C, D>>;
+type TokenSpecValue<C extends DesignableComponents, D extends object> = FinalDesign<C, D> | TokenMeta | Record<string, ComposedToken<C, D>>;
+type TokenSpec<C extends DesignableComponents, D extends object> = Record<string, TokenSpecValue<C, D>>;
+type TSEntry<C extends DesignableComponents, D extends object> = [string, TokenSpecValue<C, D>];
+
+type ComposeEntry<C extends DesignableComponents, D extends object> = [ string, ComposeValue<C, D>];
+const isComposeEntry = <C extends DesignableComponents, D extends object>(
+  e: TSEntry<C, D>
+): e is ComposeEntry<C, D> => e[0] === 'Compose';
+*/
+
+type TokenMember<C extends DesignableComponents, D extends object> = {
+  Meta: TokenMeta,
+  Design: Design<C, D>;
+}
+
+type TokenSpec
+
+
+
 /**
- * Converts a domain into a HOC which applies the extended design defined
- * by that domain.  Properly handles special domain names ('Flow',
- * 'Compose' and 'Meta').
- *
- * @param domainName
- * @param domain
+ * @private
+ * Collapses a token to an internal representation
+ * @param spec 
+ * @returns 
  */
-function getHocForDomain<C extends DesignableComponents, D extends object = any>(
-  domainName: string,
-  domain?: FinalDesign<C> | ReservedDomains<C, any>['Meta'] | ReservedDomains<C, any>['Flow'] | ReservedDomains<C, any>['Compose']
-): HOCDef | undefined {
-  if (!domain) return undefined;
-  if (domainName === 'Flow') return undefined;
-  if (domainName === 'Meta') return Array.isArray(domain) ? extendMeta(...domain) : domain;
-  if (domainName === 'Compose') {
-    const compose = domain as Required<ReservedDomains<any, any>>['Compose'];
-    const toks = Object.values(compose);
-    return as(...toks);
-  }
-  return withDesign(domain as Design<C, D>);
+const tokenSpecToMember = <C extends DesignableComponents = any, D extends object = any>(
+  spec: TokenSpec<C, D>
+): TokenMember<C, D> => {
+  const { Meta, ...rest } = spec;
+  const designs: Design<C>[] = Object.entries(rest).map(
+    entry => {
+      if (isComposeEntry(entry)) {
+        const [_, composed] = entry;
+        return { _: as(...Object.values(composed)) } as Design<C>;
+      }
+      const [_, design] = entry;
+      return design as Design<C>;
+    },
+  );
+  const Design = extendDesign(...designs);
+  return { Meta, Design};
 }
 
 /**
@@ -66,39 +88,73 @@ function as(
   ...args$: Token[]
 
 ): HOC<any, any, any> {
-  const args = args$.filter(Boolean);
+  const args = args$.filter(Boolean) as Exclude<Token, undefined>[];
+  const members: TokenSpec<any, any>[] = args.reduce(
+    (acc, arg) => {
+      if (typeof arg === 'function' || typeof arg === 'string') {
+        if (typeof arg === 'function' && arg.members) {
+          return [...acc, ...arg.members];
+        }
+        return [...acc, {
+          Core: {
+            _: arg,
+          }
+        }];
+      }
+      return [...acc, arg];
+    },
+    [] as TokenSpec<any, any>[],
+  );
+  const asHoc: TokenHOC = Component => {
+    const 
+    const designs = members.(
+      (acc, member)
+    )
 
-  // Ensure that all token specs have been passed through `asTokenSpec`.
-  args.forEach(a => {
-    if (typeof a !== 'function' && typeof a !== 'string' && !a![$TokenSpec]) {
-      // @todo add some debugging info here - token domains names, token meta if any, etc.
-      throw new Error('All token specifications passed to "as" must be created by a version of "asTokenSpec"');
+
+  };
+  asHoc.members = members;
+  return asHoc;
+
+        /*
+      if (typeof arg === 'function') {
+        if (arg.members) {
+          return [...acc, ...arg.members];
+        } 
+        else {
+          const spec: Partial<TokenSpec<any, any>> = {
+            Core: {
+              _: arg,
+            } 
+          };
+          return [...acc, spec]
+        };
+      }
+      return [...acc];
+    },
+    [] as Partial<TokenSpec<any, any>>[],
+  );
+        */
+
+
+
+
+      if (typeof arg === 'function' || typeof arg === 'undefined') return arg;
+      if (typeof arg === 'string') return addClasses(arg);
+      const specTokens: HOCDef[] = [];
+      const keys = Object.getOwnPropertyNames(arg);
+      specTokens.push(...keys
+        .map(domainName => getHocForDomain(
+          domainName,
+          arg[domainName as keyof Omit<typeof arg, typeof $TokenSpec>],
+        )));
+
+      if (arg.Flow) {
+        return arg.Flow(...specTokens);
+      }
+      return flowHoc(...specTokens);
     }
-  });
-
-  const tokens: HOCDef[] = args.map(arg => {
-    if (typeof arg === 'function' || typeof arg === 'undefined') return arg;
-    if (typeof arg === 'string') return addClasses(arg);
-    const specTokens: HOCDef[] = [];
-    // Use keys of the base token spec to ensure correct order of domains.
-    // const keys = [
-    //   ...Object.getOwnPropertyNames(omit(arg, 'Meta', 'Compose', 'Flow')),
-    //   'Meta',
-    //   'Compose',
-    //   'Flow',
-    // ];
-    const keys = Object.getOwnPropertyNames(arg);
-    specTokens.push(...keys
-      .map(domainName => getHocForDomain(
-        domainName,
-        arg[domainName as keyof Omit<typeof arg, typeof $TokenSpec>],
-      )));
-
-    if (arg.Flow) {
-      return arg.Flow(...specTokens);
-    }
-    return flowHoc(...specTokens);
-  });
+  );
   return flowHoc(...tokens);
 }
 
