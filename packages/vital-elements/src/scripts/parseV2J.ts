@@ -81,57 +81,23 @@ const readData = async (file: string): Promise<Data> => {
   return JSON.parse(json.toString());
 };
 
-const toVitalTokenName = (exportName: string, target: ColorTargets|'' = '') => {
-  const cleanedName = exportName.split('/').slice(2).map(s => s.replace(/[ ]/g, '')).join('');
-  return `${target}${cleanedName}`;
-};
-
-const toTwColorName = (
-  aliasName: string,
-  target: ColorTargets,
-  state: ColorStates = ColorStates.Idle,
-): string => {
-  const cleanedName = aliasName.split('/').slice(1).join('/').replace(/[/ ]/g, '-')
-    .toLowerCase();
-  const statePrefix = TwColorStatePrefixes[state];
-  const typePrefix = TwColorTargetPrefixes[target];
-  return `'${statePrefix}${typePrefix}${cleanedName}'`;
-};
-
-const isInteractive = (exportName: string) => exportName.split('/')[2] === ColorTargets.Interactive;
-const isColorTarget = (
-  s: string
-): s is ColorTargets => Object.keys(TwColorTargetPrefixes).includes(s);
-
-const isColorState = (
-  s: string
-): s is ColorStates => Object.values(ColorStates).includes(s as ColorStates);
-
 const getColorTokensForVariable = (next: AliasVariable): Record<string, string> => {
-  if (isInteractive(next.name)) {
-    const segments = next.name.split('/');
-    const colorState = segments[segments.length - 1];
-    if (!isColorState(colorState)) {
-      console.warn('Invalid color state', colorState, 'in', next.name);
-      return {};
-    }
+  const name = new FigmaVariableName(next.name);
+  const aliasName = new FigmaVariableName(next.value.name);
+  if (name.isInteractive) {
+    if (!name.state) return {};
     const tokens = Object.keys(TwColorTargetPrefixes).reduce(
       (tokenAcc, colorTarget) => ({
         ...tokenAcc,
-        [toVitalTokenName(next.name, colorTarget as ColorTargets)]:
-            toTwColorName(next.value.name, colorTarget as ColorTargets, colorState),
+        [name.toVitalTokenName(colorTarget as ColorTargets)]:
+          aliasName.toTwColorName(colorTarget as ColorTargets)
       }), {}
     );
     return tokens;
   }
-  const colorTarget = next.name.split('/')[2];
-  if (!isColorTarget(colorTarget)) {
-    console.warn('Invalid color target', colorTarget, 'in', next.name);
-    return {};
-  }
+  if (!name.target) return {};
   return {
-    [toVitalTokenName(next.name)]:
-      toTwColorName(next.value.name, colorTarget as ColorTargets),
+    [name.toVitalTokenName()]: aliasName.toTwColorName(name.target),
   };
 };
 
@@ -161,6 +127,49 @@ const resolveBrandAlias = (
   const reference = vars?.find(v$ => v$.name === v.value.name);
   return resolveBrandAlias(reference, vars, depth + 1);
 };
+
+class FigmaVariableName {
+  protected segments: string[];
+
+  constructor(name: string) {
+    this.segments = name.split('/');
+  }
+
+  get isInteractive() {
+    return this.segments[2] === ColorTargets.Interactive;
+  }
+
+  get target(): ColorTargets|undefined {
+    if (!Object.keys(TwColorTargetPrefixes).includes(this.segments[2])) {
+      console.warn('Invalid color targer in', this.segments.join('/'));
+      return undefined;
+    }
+    return this.segments[2] as ColorTargets;
+  }
+
+  get state(): ColorStates|undefined {
+    const state = this.segments[this.segments.length - 1];
+    if (!Object.keys(TwColorStatePrefixes).includes(state)) {
+      console.warn('Invalid color state in', this.segments.join('/'));
+      return undefined;
+    }
+    return state as ColorStates;
+  }
+
+  toVitalTokenName(target?: ColorTargets) {
+    const cleanedName = this.segments.slice(2).map(s => s.replace(/[ ]/g, '')).join('');
+    return `${target || ''}${cleanedName}`;
+  }
+
+  toTwColorName(target: ColorTargets, state: ColorStates = ColorStates.Idle): string {
+    const cleanedName = this.segments.slice(1).join('/').replace(/[/ ]/g, '-')
+      .toLowerCase();
+    const statePrefix = TwColorStatePrefixes[state];
+    const typePrefix = TwColorTargetPrefixes[target];
+    return `'${statePrefix}${typePrefix}${cleanedName}'`;
+  }
+}
+
 
 export const getSemanticColors = (data: Data, brand: string): Record<string, string> => {
   const brandTokens = data.collections.find(c => c.name === Collections.Brand);
