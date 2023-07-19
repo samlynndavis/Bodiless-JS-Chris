@@ -140,11 +140,13 @@ class FigmaVariableName {
   }
 
   get target(): ColorTargets|undefined {
-    if (!Object.keys(TwColorTargetPrefixes).includes(this.segments[2])) {
-      console.warn('Invalid color targer in', this.segments.join('/'));
-      return undefined;
+    for (let i = 2; i < this.segments.length; i += 1) {
+      if (Object.keys(TwColorTargetPrefixes).includes(this.segments[i])) {
+        return this.segments[i] as ColorTargets;
+      }
     }
-    return this.segments[2] as ColorTargets;
+    // console.warn('No valid color target in', this.segments.join('/'));
+    return undefined;
   }
 
   get state(): ColorStates|undefined {
@@ -170,6 +172,33 @@ class FigmaVariableName {
   }
 }
 
+const getColorTokensForComponent = (
+  vars: Variable[], semantic?: Record<string, string>
+) => vars.reduce(
+  (acc, next) => {
+    if (!isAliasVariable(next)) {
+      console.warn('Non alias variable', JSON.stringify(next, undefined, 2));
+      return acc;
+    }
+    if (next.value.collection !== Collections.Brand) {
+      console.warn('Non brand alias', JSON.stringify(next, undefined, 2));
+      return acc;
+    }
+    const name = new FigmaVariableName(next.name);
+    const aliasName = new FigmaVariableName(next.value.name);
+    if (!name.target) return acc;
+    const value = aliasName.toVitalTokenName(aliasName.isInteractive ? name.target : undefined);
+    if (semantic && !semantic[value]) {
+      console.warn('Missing semantic value', value);
+      return acc;
+    }
+    return {
+      ...acc,
+      [name.toVitalTokenName()]: `vitalColor.${value}`,
+    };
+  },
+  {},
+);
 
 export const getSemanticColors = (data: Data, brand: string): Record<string, string> => {
   const brandTokens = data.collections.find(c => c.name === Collections.Brand);
@@ -189,28 +218,65 @@ export const getSemanticColors = (data: Data, brand: string): Record<string, str
   return result || {};
 };
 
-const writeTokenColletion = async ({
-  collectionName,
-  collectionPath = '.',
-  importPackage = '@bodiless/vital-elements',
+export const getComponentColors = (
+  data: Data, brand: string,
+): Record<string, Record<string, string>> => {
+  const brandTokens = data.collections.find(c => c.name === Collections.Brand);
+  const colors = brandTokens?.modes.find(b => b.name === brand);
+  const componentColors = colors?.variables.filter(v => /^Components/.test(v.name));
+  const semantic = getSemanticColors(data, brand);
+  const components = (componentColors || []).reduce(
+    (acc, next) => {
+      const componentName = next.name.split('/')[1].replace(/ /g, '');
+      return {
+        ...acc,
+        [componentName]: acc[componentName] ? [...acc[componentName], next] : [next],
+      };
+    }, {} as Record<string, Variable[]>
+  );
+  const result = Object.keys(components)
+    .reduce(
+      (acc, next) => {
+        const tokens = getColorTokensForComponent(components[next], semantic);
+        if (Object.keys(tokens).length === 0) return acc;
+        return {
+          ...acc,
+          [next]: tokens,
+        };
+      },
+      {},
+    );
+  return result;
+};
+
+const writeTokenCollection = async ({
+  libraryName = 'vital',
+  collectionPath = './src/generated',
+  imports = {
+    '../util': ['asTokenGroup']
+  },
   group,
   tokens,
   type = 'Element',
 }: {
-  collectionName?: string,
+  libraryName?: string,
   collectionPath?: string,
-  importPackage?: string,
+  imports?: Record<string, string[]>,
   group: string,
   type?: string
   tokens: Record<string, string>,
 }) => {
-  const finalName = collectionName || `vital${group}`;
+  const finalName = `${libraryName || 'vital'}${group}`;
   const finalPath = path.join(collectionPath, `${finalName}.ts`);
   const entries = Object.entries(tokens).map(
     ([key, value]) => `  ${key}: ${value},`
   ).join('\n');
 
-  const content = `import { asTokenGroup } from '${importPackage}';
+  const importString = Object.keys(imports).map(key => (
+    `import { ${imports[key].join(', ')} } from '${key}';`
+  )).join('\n');
+
+  const content = `${importString}
 
 const meta = {
   categories: {
@@ -226,13 +292,42 @@ ${entries}
   return fs.promises.writeFile(finalPath, content);
 };
 
-const main = async () => {
+const writeComponentTokens = async (
+  components: Record<string, Record<string, string>>, libraryName: string = 'vital',
+) => {
+  const imports = {
+    '../util': ['asTokenGroup'],
+    './semantic': ['vitalColor'],
+  };
+
+  const promises = Object.keys(components).map(key => writeTokenCollection({
+    imports,
+    group: `${key}Element`,
+    libraryName,
+    tokens: components[key],
+  }));
+
+  return Promise.all(promises);
+};
+
+export const mainSemanticColors = async () => {
   const data = await readData(args.jsonFile);
   const tokens = getSemanticColors(data, args.brand);
-  await writeTokenColletion({
+  await writeTokenCollection({
     group: 'Color',
     tokens,
   });
 };
 
-main();
+export const mainComponentColors = async () => {
+  const data = await readData(args.jsonFile);
+  const tokens = getComponentColors(data, args.brand);
+  await writeComponentTokens(tokens);
+  await fs.promises.writeFile('./src/generated/semantic.ts', `
+import vitalColor from './vitalColor';
+export { vitalColor }
+  `);
+};
+
+mainComponentColors();
+mainSemanticColors();
