@@ -1,9 +1,11 @@
 /* eslint-disable no-console */
 import fs from 'fs';
+import path from 'path';
 
 const args = {
   jsonFile: 'v2j.json',
   brand: 'White Label',
+  outFile: 'vitalColor.ts',
 };
 
 enum Collections {
@@ -67,7 +69,7 @@ type AliasVariable = Variable & {
   value: AliasValue,
 };
 
-const isAliasVariable = (v: Variable): v is AliasVariable => v.isAlias;
+const isAliasVariable = (v?: Variable): v is AliasVariable => Boolean(v?.isAlias);
 
 type Collection = {
   name: string,
@@ -79,21 +81,21 @@ const readData = async (file: string): Promise<Data> => {
   return JSON.parse(json.toString());
 };
 
-const toVitalTokenName = (exportName: string, typePrefix: ColorTargets|'' = '') => {
+const toVitalTokenName = (exportName: string, target: ColorTargets|'' = '') => {
   const cleanedName = exportName.split('/').slice(2).map(s => s.replace(/[ ]/g, '')).join('');
-  return `${typePrefix}${cleanedName}`;
+  return `${target}${cleanedName}`;
 };
 
 const toTwColorName = (
   aliasName: string,
-  type: ColorTargets,
+  target: ColorTargets,
   state: ColorStates = ColorStates.Idle,
 ): string => {
   const cleanedName = aliasName.split('/').slice(1).join('/').replace(/[/ ]/g, '-')
     .toLowerCase();
   const statePrefix = TwColorStatePrefixes[state];
-  const typePrefix = TwColorTargetPrefixes[type];
-  return `${statePrefix}${typePrefix}${cleanedName}`;
+  const typePrefix = TwColorTargetPrefixes[target];
+  return `'${statePrefix}${typePrefix}${cleanedName}'`;
 };
 
 const isInteractive = (exportName: string) => exportName.split('/')[2] === ColorTargets.Interactive;
@@ -105,55 +107,123 @@ const isColorState = (
   s: string
 ): s is ColorStates => Object.values(ColorStates).includes(s as ColorStates);
 
+const getColorTokensForVariable = (next: AliasVariable): Record<string, string> => {
+  if (isInteractive(next.name)) {
+    const segments = next.name.split('/');
+    const colorState = segments[segments.length - 1];
+    if (!isColorState(colorState)) {
+      console.warn('Invalid color state', colorState, 'in', next.name);
+      return {};
+    }
+    const tokens = Object.keys(TwColorTargetPrefixes).reduce(
+      (tokenAcc, colorTarget) => ({
+        ...tokenAcc,
+        [toVitalTokenName(next.name, colorTarget as ColorTargets)]:
+            toTwColorName(next.value.name, colorTarget as ColorTargets, colorState),
+      }), {}
+    );
+    return tokens;
+  }
+  const colorTarget = next.name.split('/')[2];
+  if (!isColorTarget(colorTarget)) {
+    console.warn('Invalid color target', colorTarget, 'in', next.name);
+    return {};
+  }
+  return {
+    [toVitalTokenName(next.name)]:
+      toTwColorName(next.value.name, colorTarget as ColorTargets),
+  };
+};
+
+/**
+ * Recursively resolve a variable which may be an alias to anothr brand variable.
+ *
+ * @param v The variable to resolve.
+ * @param vars The list of all variables.
+ * @param depth The current depth (used to catch circular references).
+ * @returns
+ * The resolved variable, which is guaranteed to be a Core alias, or undefined if it
+ * cannot be resolved.
+ */
+const resolveBrandAlias = (
+  v?: Variable, vars?: Variable[], depth = 0
+): AliasVariable|undefined => {
+  if (!isAliasVariable(v)) {
+    console.warn('Non Alias Variable', v?.name);
+    return undefined;
+  }
+  if (v.value.collection === Collections.Core) return v;
+  if (v.value.collection !== Collections.Brand) {
+    console.warn('Non Brnd or Core Alias', v.value.collection);
+    return undefined;
+  }
+  if (depth > 10) return undefined;
+  const reference = vars?.find(v$ => v$.name === v.value.name);
+  return resolveBrandAlias(reference, vars, depth + 1);
+};
+
 export const getSemanticColors = (data: Data, brand: string): Record<string, string> => {
   const brandTokens = data.collections.find(c => c.name === Collections.Brand);
   const colors = brandTokens?.modes.find(b => b.name === brand);
   const semanticColors = colors?.variables.filter(v => /^Semantic/.test(v.name));
   const result = semanticColors?.reduce((acc, next) => {
-    if (!isAliasVariable(next)) {
-      console.warn('Non Alias Variable ', next.name);
-      return acc;
-    }
-    if (next.value.collection !== Collections.Core) {
-      console.warn('Non Core Alias ', next.name, next.value.collection);
-      return acc;
-    }
-    if (isInteractive(next.name)) {
-      const segments = next.name.split('/');
-      const colorState = segments[segments.length - 1];
-      if (!isColorState(colorState)) {
-        console.warn('Invalid color state', colorState, 'in', next.name);
-        return acc;
-      }
-      const tokens = Object.keys(TwColorTargetPrefixes).reduce(
-        (tokenAcc, ColorTarget) => ({
-          ...tokenAcc,
-          [toVitalTokenName(next.name, ColorTarget as ColorTargets)]:
-              toTwColorName(next.value.name, ColorTarget as ColorTargets, colorState),
-        }), {}
-      );
-      return {
-        ...acc,
-        ...tokens,
-      };
-    }
-    const ColorTarget = next.name.split('/')[2];
-    if (!isColorTarget(ColorTarget)) {
-      console.warn('Invalid color type', ColorTarget, 'in', next.name);
+    const resolved = resolveBrandAlias(next, semanticColors);
+    if (!resolved) {
+      console.warn('Could not resolve', JSON.stringify(next, undefined, 2));
       return acc;
     }
     return {
       ...acc,
-      [toVitalTokenName(next.name)]: toTwColorName(next.value.name, ColorTarget),
+      ...getColorTokensForVariable(resolved),
     };
   }, {});
-  console.log(result);
   return result || {};
+};
+
+const writeTokenColletion = async ({
+  collectionName,
+  collectionPath = '.',
+  importPackage = '@bodiless/vital-elements',
+  group,
+  tokens,
+  type = 'Element',
+}: {
+  collectionName?: string,
+  collectionPath?: string,
+  importPackage?: string,
+  group: string,
+  type?: string
+  tokens: Record<string, string>,
+}) => {
+  const finalName = collectionName || `vital${group}`;
+  const finalPath = path.join(collectionPath, `${finalName}.ts`);
+  const entries = Object.entries(tokens).map(
+    ([key, value]) => `  ${key}: ${value},`
+  ).join('\n');
+
+  const content = `import { asTokenGroup } from '${importPackage}';
+
+const meta = {
+  categories: {
+    Type: ['Element'],
+    Group: ['${group}'],
+  },
+};
+
+export default asTokenGroup(meta)({
+${entries}
+});
+`;
+  return fs.promises.writeFile(finalPath, content);
 };
 
 const main = async () => {
   const data = await readData(args.jsonFile);
-  getSemanticColors(data, args.brand);
+  const tokens = getSemanticColors(data, args.brand);
+  await writeTokenColletion({
+    group: 'Color',
+    tokens,
+  });
 };
 
 main();
