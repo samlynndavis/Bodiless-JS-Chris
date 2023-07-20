@@ -10,6 +10,8 @@ const FILTERS: Record<string, ((v: Variable) => boolean)> = {
   'component-color-core-alias': v => v.collection === Collections.Brand
     && v.isAlias && v.value.collection === Collections.Core
     && /^Component/.test(v.name) && v.type === Types.Color,
+  spacing: v => v.isAlias && v.collection === Collections.Brand
+    && /Spacing/.test(v.value.name)
 };
 
 export const main = async () => {
