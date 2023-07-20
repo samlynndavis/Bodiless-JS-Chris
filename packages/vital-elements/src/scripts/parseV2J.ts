@@ -63,9 +63,12 @@ type Variable = {
   name: string,
   type: string,
   isAlias: boolean,
+  collection?: string,
+  mode?: string,
+  value?: any,
 };
 
-type AliasVariable = Variable & {
+type AliasVariable = Omit<Variable, 'value'> & {
   value: AliasValue,
 };
 
@@ -310,6 +313,19 @@ const writeComponentTokens = async (
   return Promise.all(promises);
 };
 
+const findVariables = (data: Data, condition: (v: Variable) => boolean): Variable[] => {
+  const result: Variable[] = [];
+  data.collections.forEach(collection => {
+    collection.modes.forEach(mode => {
+      const vars = mode.variables.map(
+        (v: Variable): Variable => ({ ...v, collection: collection.name, mode: mode.name })
+      ).filter(v => condition(v));
+      result.push(...vars);
+    });
+  });
+  return result;
+};
+
 export const mainSemanticColors = async () => {
   const data = await readData(args.jsonFile);
   const tokens = getSemanticColors(data, args.brand);
@@ -329,5 +345,13 @@ export { vitalColor }
   `);
 };
 
-mainComponentColors();
-mainSemanticColors();
+export const mainFindNonAliasVars = async () => {
+  const data = await readData(args.jsonFile);
+  const vars = findVariables(data, v => !v.isAlias && v.collection === Collections.Brand);
+  const lines = vars.map(v => `${v.name},${v.collection},${v.mode},${v.value}`);
+  await fs.promises.writeFile('found.csv', lines.join('\n'));
+};
+
+// mainComponentColors();
+// mainSemanticColors();
+mainFindNonAliasVars();
