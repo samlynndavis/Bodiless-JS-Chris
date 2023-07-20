@@ -2,8 +2,8 @@
 import fs from 'fs';
 import {
   Collections, Types, Variable, isAliasVariable
-} from '../types';
-import { readData, findVariables } from '../util';
+} from './parseTokens/types';
+import { readData, findVariables } from './parseTokens/util';
 
 const FILTERS: Record<string, ((v: Variable) => boolean)> = {
   'brand-no-alias': v => !v.isAlias && v.collection === Collections.Brand,

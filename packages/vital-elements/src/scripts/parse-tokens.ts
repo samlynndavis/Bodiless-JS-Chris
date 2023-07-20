@@ -1,7 +1,7 @@
 import fs from 'fs';
-import { getSemanticColors, getComponentColors, writeComponentTokens } from '../parseV2J';
-import { Brands } from '../types';
-import { readData, writeTokenCollection } from '../util';
+import { getSemanticColors, getComponentColors, writeComponentTokens } from './parseTokens/parseV2J';
+import { Brands } from './parseTokens/types';
+import { readData, writeTokenCollection } from './parseTokens/util';
 
 export const main = async () => {
   const brand = process.argv[2] || Brands.Kenvue;
