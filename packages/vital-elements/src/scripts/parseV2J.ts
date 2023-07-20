@@ -1,88 +1,9 @@
 /* eslint-disable no-console */
-import fs from 'fs';
-import path from 'path';
-
-const args = {
-  jsonFile: 'v2j.json',
-  brand: 'White Label',
-  outFile: 'vitalColor.ts',
-};
-
-enum Collections {
-  Core = 'Core Values',
-  Brand = 'Brand Tokens',
-  Device = 'Device Tokens',
-}
-
-enum ColorTargets {
-  Interactive = 'Interactive',
-  Border = 'Border',
-  Background = 'Background',
-  Text = 'Text',
-}
-
-enum ColorStates {
-  Idle = 'Idle',
-  Hover = 'Hover',
-  Disabled = 'Disabled',
-  Pressed = 'Pressed',
-  Focus = 'Focus',
-}
-
-const TwColorTargetPrefixes: Partial<Record<ColorTargets, string>> = {
-  Border: 'border-',
-  Background: 'bg-',
-  Text: 'text-',
-};
-
-const TwColorStatePrefixes: Partial<Record<ColorStates, string>> = {
-  Idle: '',
-  Hover: 'hover:',
-  // @todo Is there a tw resposive variant for disabled?
-  Disabled: 'aria-disabled:',
-  Pressed: 'active:', // or should this be aria-pressed?
-  Focus: 'focus:',
-};
-
-type Data = {
-  version: string,
-  collections: Collection[],
-};
-
-type Mode = {
-  name: string,
-  variables: Variable[],
-};
-
-type AliasValue = {
-  collection: string,
-  name: string,
-};
-
-type Variable = {
-  name: string,
-  type: string,
-  isAlias: boolean,
-  collection?: string,
-  mode?: string,
-  value?: any,
-};
-
-type AliasVariable = Omit<Variable, 'value'> & {
-  value: AliasValue,
-};
-
-const isAliasVariable = (v?: Variable): v is AliasVariable => Boolean(v?.isAlias);
-
-type Collection = {
-  name: string,
-  modes: Mode[],
-};
-
-const readData = async (file: string): Promise<Data> => {
-  const json = await fs.promises.readFile(file);
-  return JSON.parse(json.toString());
-};
+import { FigmaVariableName } from './FigmaVariableName';
+import {
+  Data, AliasVariable, TwColorTargetPrefixes, ColorTargets, Variable, isAliasVariable, Collections
+} from './types';
+import { writeTokenCollection } from './util';
 
 const getColorTokensForVariable = (next: AliasVariable): Record<string, string> => {
   const name = new FigmaVariableName(next.name);
@@ -131,54 +52,11 @@ const resolveBrandAlias = (
   return resolveBrandAlias(reference, vars, depth + 1);
 };
 
-class FigmaVariableName {
-  protected segments: string[];
-
-  constructor(name: string) {
-    this.segments = name.split('/');
-  }
-
-  get isInteractive() {
-    return this.segments[2] === ColorTargets.Interactive;
-  }
-
-  get target(): ColorTargets|undefined {
-    for (let i = 2; i < this.segments.length; i += 1) {
-      if (Object.keys(TwColorTargetPrefixes).includes(this.segments[i])) {
-        return this.segments[i] as ColorTargets;
-      }
-    }
-    // console.warn('No valid color target in', this.segments.join('/'));
-    return undefined;
-  }
-
-  get state(): ColorStates|undefined {
-    const state = this.segments[this.segments.length - 1];
-    if (!Object.keys(TwColorStatePrefixes).includes(state)) {
-      console.warn('Invalid color state in', this.segments.join('/'));
-      return undefined;
-    }
-    return state as ColorStates;
-  }
-
-  toVitalTokenName(target?: ColorTargets) {
-    const cleanedName = this.segments.slice(2).map(s => s.replace(/[ ]/g, '')).join('');
-    return `${target || ''}${cleanedName}`;
-  }
-
-  toTwColorName(target: ColorTargets, state: ColorStates = ColorStates.Idle): string {
-    const cleanedName = this.segments.slice(1).join('/').replace(/[/ ]/g, '-')
-      .toLowerCase();
-    const statePrefix = TwColorStatePrefixes[state];
-    const typePrefix = TwColorTargetPrefixes[target];
-    return `'${statePrefix}${typePrefix}${cleanedName}'`;
-  }
-}
-
 const getColorTokensForComponent = (
   vars: Variable[], semantic?: Record<string, string>
 ) => vars.reduce(
   (acc, next) => {
+    if (next.type !== 'color') return acc;
     if (!isAliasVariable(next)) {
       console.warn('Non alias variable', JSON.stringify(next, undefined, 2));
       return acc;
@@ -224,8 +102,10 @@ export const getSemanticColors = (data: Data, brand: string): Record<string, str
 export const getComponentColors = (
   data: Data, brand: string,
 ): Record<string, Record<string, string>> => {
+  console.log('brand', brand);
   const brandTokens = data.collections.find(c => c.name === Collections.Brand);
   const colors = brandTokens?.modes.find(b => b.name === brand);
+  console.log(Object.keys(colors || {}));
   const componentColors = colors?.variables.filter(v => /^Components/.test(v.name));
   const semantic = getSemanticColors(data, brand);
   const components = (componentColors || []).reduce(
@@ -252,50 +132,7 @@ export const getComponentColors = (
   return result;
 };
 
-const writeTokenCollection = async ({
-  libraryName = 'vital',
-  collectionPath = './src/generated',
-  imports = {
-    '../util': ['asTokenGroup']
-  },
-  group,
-  tokens,
-  type = 'Element',
-}: {
-  libraryName?: string,
-  collectionPath?: string,
-  imports?: Record<string, string[]>,
-  group: string,
-  type?: string
-  tokens: Record<string, string>,
-}) => {
-  const finalName = `${libraryName || 'vital'}${group}`;
-  const finalPath = path.join(collectionPath, `${finalName}.ts`);
-  const entries = Object.entries(tokens).map(
-    ([key, value]) => `  ${key}: ${value},`
-  ).join('\n');
-
-  const importString = Object.keys(imports).map(key => (
-    `import { ${imports[key].join(', ')} } from '${key}';`
-  )).join('\n');
-
-  const content = `${importString}
-
-const meta = {
-  categories: {
-    Type: ['Element'],
-    Group: ['${group}'],
-  },
-};
-
-export default asTokenGroup(meta)({
-${entries}
-});
-`;
-  return fs.promises.writeFile(finalPath, content);
-};
-
-const writeComponentTokens = async (
+export const writeComponentTokens = async (
   components: Record<string, Record<string, string>>, libraryName: string = 'vital',
 ) => {
   const imports = {
@@ -312,46 +149,3 @@ const writeComponentTokens = async (
 
   return Promise.all(promises);
 };
-
-const findVariables = (data: Data, condition: (v: Variable) => boolean): Variable[] => {
-  const result: Variable[] = [];
-  data.collections.forEach(collection => {
-    collection.modes.forEach(mode => {
-      const vars = mode.variables.map(
-        (v: Variable): Variable => ({ ...v, collection: collection.name, mode: mode.name })
-      ).filter(v => condition(v));
-      result.push(...vars);
-    });
-  });
-  return result;
-};
-
-export const mainSemanticColors = async () => {
-  const data = await readData(args.jsonFile);
-  const tokens = getSemanticColors(data, args.brand);
-  await writeTokenCollection({
-    group: 'Color',
-    tokens,
-  });
-};
-
-export const mainComponentColors = async () => {
-  const data = await readData(args.jsonFile);
-  const tokens = getComponentColors(data, args.brand);
-  await writeComponentTokens(tokens);
-  await fs.promises.writeFile('./src/generated/semantic.ts', `
-import vitalColor from './vitalColor';
-export { vitalColor }
-  `);
-};
-
-export const mainFindNonAliasVars = async () => {
-  const data = await readData(args.jsonFile);
-  const vars = findVariables(data, v => !v.isAlias && v.collection === Collections.Brand);
-  const lines = vars.map(v => `${v.name},${v.collection},${v.mode},${v.value}`);
-  await fs.promises.writeFile('found.csv', lines.join('\n'));
-};
-
-// mainComponentColors();
-// mainSemanticColors();
-mainFindNonAliasVars();

@@ -1,4 +1,3 @@
-
 import vitalColor from './vitalColor';
-export { vitalColor }
-  
+
+export { vitalColor };
