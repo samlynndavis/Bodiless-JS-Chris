@@ -11,8 +11,6 @@ const meta = {
 export default asTokenGroup(meta)({
   PrimaryDropdownBackgroundDarkThemeBackground: vitalColor.BackgroundAlt8,
   PrimaryDropdownBackgroundLightThemeBackground: vitalColor.BackgroundBase,
-  SecondaryIconLightThemeSecondaryNavigation: vitalColor.BackgroundAlt6,
-  SecondaryIconDarkThemeSecondaryNavigation: vitalColor.BackgroundAlt8,
   PrimaryBackgroundDarkThemePrimaryNavigation: vitalColor.BackgroundAlt5,
   PrimaryBackgroundLightThemePrimaryNavigation: vitalColor.BackgroundBase,
   PrimaryDropdownBorderDarkThemeBorder: vitalColor.BorderInteractiveDarkThemeIdle,

@@ -1,13 +1,14 @@
 /* eslint-disable no-console */
-import { FigmaVariableName } from './FigmaVariableName';
+import FigmaVariable from './FigmaVariable';
 import {
-  Data, AliasVariable, TwColorTargetPrefixes, ColorTargets, Variable, isAliasVariable, Collections
+  Data, AliasVariable, TwColorTargetPrefixes, ColorTargets,
+  Variable, isAliasVariable, Collections, Levels
 } from './types';
-import { writeTokenCollection } from './util';
+import { findVariables, writeTokenCollection } from './util';
 
 const getColorTokensForVariable = (next: AliasVariable): Record<string, string> => {
-  const name = new FigmaVariableName(next.name);
-  const aliasName = new FigmaVariableName(next.value.name);
+  const name = new FigmaVariable(next.name);
+  const aliasName = new FigmaVariable(next.value.name);
   if (name.isInteractive) {
     if (!name.state) return {};
     const tokens = Object.keys(TwColorTargetPrefixes).reduce(
@@ -65,8 +66,9 @@ const getColorTokensForComponent = (
       console.warn('Non brand alias', JSON.stringify(next, undefined, 2));
       return acc;
     }
-    const name = new FigmaVariableName(next.name);
-    const aliasName = new FigmaVariableName(next.value.name);
+    const name = new FigmaVariable(next.name);
+    const aliasName = new FigmaVariable(next.value.name);
+    if (!name.target) return acc;
     const value = aliasName.toVitalTokenName(aliasName.isInteractive ? name.target : undefined);
     if (semantic && !semantic[value]) {
       console.warn('Missing semantic value', value);
@@ -99,28 +101,31 @@ export const getSemanticColors = (data: Data, brand: string): Record<string, str
 };
 
 export const getComponentColors = (
-  data: Data, brand: string,
+  data: Data,
+  brand: string,
+  semanticTokens: Record<string, string>
 ): Record<string, Record<string, string>> => {
-  console.log('brand', brand);
-  const brandTokens = data.collections.find(c => c.name === Collections.Brand);
-  const colors = brandTokens?.modes.find(b => b.name === brand);
-  console.log(Object.keys(colors || {}));
-  const componentColors = colors?.variables.filter(v => /^Components/.test(v.name));
-  const semantic = getSemanticColors(data, brand);
-  const components = (componentColors || []).reduce(
+  const componentVars = findVariables(data, v => (
+    v.collection === Collections.Brand
+      && v.mode === brand
+      && new FigmaVariable(v).level === Levels.Component
+  )).reduce(
     (acc, next) => {
-      const componentName = next.name.split('/')[1].replace(/ /g, '');
+      const v = new FigmaVariable(next);
+      if (!v.componentName) {
+        console.warn('Missing component name in', v.name);
+        return acc;
+      }
       return {
         ...acc,
-        [componentName]: acc[componentName] ? [...acc[componentName], next] : [next],
+        [v.componentName]: acc[v.componentName] ? [...acc[v.componentName], v] : [v],
       };
     }, {} as Record<string, Variable[]>
   );
-  console.log('comps', components);
-  const result = Object.keys(components)
+  const colors = Object.keys(componentVars)
     .reduce(
       (acc, next) => {
-        const tokens = getColorTokensForComponent(components[next], semantic);
+        const tokens = getColorTokensForComponent(componentVars[next], semanticTokens);
         if (Object.keys(tokens).length === 0) return acc;
         return {
           ...acc,
@@ -129,7 +134,7 @@ export const getComponentColors = (
       },
       {},
     );
-  return result;
+  return colors;
 };
 
 export const writeComponentTokens = async (

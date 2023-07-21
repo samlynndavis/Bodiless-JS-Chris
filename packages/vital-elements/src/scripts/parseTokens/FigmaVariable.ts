@@ -1,17 +1,33 @@
 /* eslint-disable no-console */
 import {
-  ColorTargets, TwColorTargetPrefixes, ColorStates, TwColorStatePrefixes, Levels, isLevel,
+  ColorTargets, TwColorTargetPrefixes, ColorStates, TwColorStatePrefixes,
+  Levels, isLevel, Variable, Collections, AliasValue, isColorTarget,
 } from './types';
 
-export class FigmaVariableName {
+class FigmaVariable implements Variable {
   protected segments: string[];
 
-  constructor(name: string) {
-    this.segments = name.split('/');
+  readonly name: string;
+
+  readonly type?: string;
+
+  readonly isAlias?: boolean;
+
+  readonly collection?: Collections;
+
+  readonly mode?: string;
+
+  readonly value?: string|AliasValue;
+
+  constructor(variable$: string|Variable) {
+    const variable: Variable = typeof variable$ === 'string' ? { name: variable$ } : variable$;
+    Object.assign(this, variable);
+    this.name = variable.name;
+    this.segments = this.name.split('/');
   }
 
   get isInteractive() {
-    return this.segments[2] === ColorTargets.Interactive;
+    return this.segments[2] === 'Interactive';
   }
 
   get isComponentSpacing(): Boolean {
@@ -35,14 +51,16 @@ export class FigmaVariableName {
   }
 
   get target(): ColorTargets | undefined {
-    if (this.isComponent && this.componentName === 'ScrollIndicator') return ColorTargets.Scrollbar;
-
-    for (let i = 2; i < this.segments.length; i += 1) {
-      if (Object.keys(TwColorTargetPrefixes).includes(this.segments[i])) {
-        return this.segments[i] as ColorTargets;
-      }
+    // Special cases for some components
+    if (this.componentName === 'ScrollIndicator') return ColorTargets.Scrollbar;
+    if (this.componentName === 'Divider') return ColorTargets.Border;
+    if (isColorTarget(this.segments[2])) return this.segments[2];
+    // For components, segments[2/3] can be a variant and/or subcomponent
+    // so we have to look farther.
+    if (this.isComponent) {
+      if (isColorTarget(this.segments[3])) return this.segments[3];
+      if (isColorTarget(this.segments[4])) return this.segments[4];
     }
-    // console.warn('No valid color target in', this.segments.join('/'));
     return undefined;
   }
 
@@ -68,3 +86,5 @@ export class FigmaVariableName {
     return `'${statePrefix}${typePrefix}${cleanedName}'`;
   }
 }
+
+export default FigmaVariable;

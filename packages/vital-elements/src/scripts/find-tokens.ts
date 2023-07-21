@@ -7,11 +7,11 @@ import { readData, findVariables } from './parseTokens/util';
 
 const FILTERS: Record<string, ((v: Variable) => boolean)> = {
   'brand-no-alias': v => !v.isAlias && v.collection === Collections.Brand,
-  'component-color-core-alias': v => v.collection === Collections.Brand
+  'component-color-core-alias': v => Boolean(v.collection === Collections.Brand
     && v.isAlias && v.value.collection === Collections.Core
-    && /^Component/.test(v.name) && v.type === Types.Color,
-  spacing: v => v.isAlias && v.collection === Collections.Brand
-    && /Spacing/.test(v.value.name)
+    && /^Component/.test(v.name) && v.type === Types.Color),
+  spacing: v => Boolean(v.isAlias && v.collection === Collections.Brand
+    && /Spacing/.test(v.value.name))
 };
 
 export const main = async () => {

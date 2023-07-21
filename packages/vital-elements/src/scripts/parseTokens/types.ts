@@ -22,7 +22,6 @@ export enum Levels {
 export const isLevel = (l: string): l is Levels => Object.values(Levels).includes(l as Levels);
 
 export enum ColorTargets {
-  Interactive = 'Interactive',
   Border = 'Border',
   Background = 'Background',
   Text = 'Text',
@@ -40,7 +39,7 @@ export enum ColorStates {
   Focus = 'Focus'
 }
 
-export const TwColorTargetPrefixes: Partial<Record<ColorTargets, string>> = {
+export const TwColorTargetPrefixes: Record<ColorTargets, string> = {
   Border: 'border-',
   Background: 'bg-',
   Text: 'text-',
@@ -73,8 +72,8 @@ export type AliasValue = {
 
 export type Variable = {
   name: string;
-  type: string;
-  isAlias: boolean;
+  type?: string;
+  isAlias?: boolean;
   collection?: string;
   mode?: string;
   value?: any;
