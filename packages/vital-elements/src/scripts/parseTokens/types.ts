@@ -1,3 +1,24 @@
+export interface FigmaVariableInterface extends Variable {
+  isColor: boolean,
+  isSpacing: boolean,
+  target: ColorTargets | SpacingTargets | undefined,
+}
+
+export interface ColorVariable extends FigmaVariableInterface {
+  target: ColorTargets,
+  alias: ColorVariable,
+}
+
+export const isColorVariable = (v: FigmaVariableInterface): v is ColorVariable => v.isColor;
+
+export interface SpacingVariable extends FigmaVariableInterface {
+  target: SpacingTargets,
+  spacingSide: SpacingSides,
+  alias: FigmaVariableInterface,
+}
+
+export const isSpacingVariable = (v: FigmaVariableInterface): v is SpacingVariable => v.isSpacing;
+
 export enum Collections {
   Core = 'Core Values',
   Brand = 'Brand Tokens',
@@ -9,8 +30,12 @@ export enum Brands {
   Motrin = 'Motrin',
 }
 
+/**
+ * Figma variable types.
+ */
 export enum Types {
   Color = 'color',
+  Number = 'number',
 }
 
 export enum Levels {
@@ -53,7 +78,16 @@ export const TwSpacingPrefixes: Record<SpacingTargets, string> = {
   Margin: 'm',
 };
 
-export const TwSpacingSidePrefixes = {
+export enum SpacingSides {
+  Left = 'Left',
+  Right = 'Right',
+  Top = 'Top',
+  Bottom = 'Bottom',
+  X = 'X',
+  Y = 'Y',
+  ALL = 'ALL',
+}
+export const TwSpacingSidePrefixes: Record<SpacingSides, string> = {
   Left: 'l',
   Right: 'r',
   Top: 't',
@@ -62,6 +96,9 @@ export const TwSpacingSidePrefixes = {
   Y: 'y',
   ALL: '',
 };
+export const isSpacingSide = (
+  s?: string
+): s is SpacingSides => Boolean(s && Object.values(SpacingSides).includes(s as SpacingSides));
 
 export const TwColorTargetPrefixes: Record<ColorTargets, string> = {
   Border: 'border-',

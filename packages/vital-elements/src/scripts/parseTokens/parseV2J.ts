@@ -2,7 +2,7 @@
 import FigmaVariable from './FigmaVariable';
 import {
   Data, AliasVariable, TwColorTargetPrefixes, ColorTargets,
-  Variable, isAliasVariable, Collections, Levels, isColorTarget
+  Variable, isAliasVariable, Collections, Levels, isColorTarget, isColorVariable
 } from './types';
 import { findVariables, writeTokenCollection } from './util';
 
@@ -56,27 +56,20 @@ const resolveBrandAlias = (
 const getColorTokensForComponent = (
   vars: Variable[], semantic?: Record<string, string>
 ) => vars.reduce(
-  (acc, next) => {
-    if (next.type !== 'color') return acc;
-    if (!isAliasVariable(next)) {
-      console.warn('Non alias variable', JSON.stringify(next, undefined, 2));
-      return acc;
-    }
-    if (next.value.collection !== Collections.Brand) {
-      console.warn('Non brand alias', JSON.stringify(next, undefined, 2));
-      return acc;
-    }
-    const name = new FigmaVariable(next.name);
-    const aliasName = new FigmaVariable(next.value.name);
-    if (!isColorTarget(name.target)) return acc;
-    const value = aliasName.toVitalTokenName(aliasName.isInteractive ? name.target : undefined);
-    if (semantic && !semantic[value]) {
-      console.warn('Missing semantic value', value);
-      return acc;
+  (acc, next$) => {
+    const next = new FigmaVariable(next$);
+    const value = next.parsedValue;
+    if (!value) return acc;
+    if (isColorVariable(next)) {
+      const key = value.replace('vitalColor.', '');
+      if (semantic && !semantic[key]) {
+        console.warn('Missing semantic value', value);
+        return acc;
+      }
     }
     return {
       ...acc,
-      [name.toVitalTokenName()]: `vitalColor.${value}`,
+      [next.toVitalTokenName()]: value,
     };
   },
   {},

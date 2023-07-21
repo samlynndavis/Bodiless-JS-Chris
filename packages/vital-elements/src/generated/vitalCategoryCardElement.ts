@@ -9,6 +9,8 @@ const meta = {
 };
 
 export default asTokenGroup(meta)({
+  PaddingLeft: 'pl-0px',
+  PaddingRight: 'pr-0px',
   TextDarkThemeHeadline: vitalColor.TextDarkThemeBase,
   TextLightThemeHeadline: vitalColor.TextLightThemeBase,
 });

@@ -9,6 +9,10 @@ const meta = {
 };
 
 export default asTokenGroup(meta)({
+  IconButtonPaddingLeft: 'pl-8px',
+  IconButtonPaddingBottom: 'pb-8px',
+  IconButtonPaddingRight: 'pr-8px',
+  IconButtonPaddingTop: 'pt-8px',
   SecondaryTextDarkThemePressed: vitalColor.TextInteractiveDarkThemePressed,
   SecondaryBorderLightThemeFocus: vitalColor.BorderInteractiveLightThemeFocus,
   SecondaryBorderLightThemeHover: vitalColor.BorderInteractiveLightThemeHover,

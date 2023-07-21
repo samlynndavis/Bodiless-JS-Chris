@@ -17,5 +17,6 @@ export default asTokenGroup(meta)({
   BackgroundLightThemeHover: vitalColor.BackgroundInteractiveLightThemeHover,
   TextLightThemeLabel: vitalColor.TextLightThemeBase,
   BorderLightThemeDisabled: vitalColor.BorderInteractiveLightThemeDisabled,
+  MarginRight: 'mr-12px',
   TextDarkThemeLabel: vitalColor.TextLightThemeBase,
 });
