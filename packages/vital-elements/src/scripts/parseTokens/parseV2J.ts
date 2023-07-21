@@ -2,7 +2,7 @@
 import FigmaVariable from './FigmaVariable';
 import {
   Data, AliasVariable, TwColorTargetPrefixes, ColorTargets,
-  Variable, isAliasVariable, Collections, Levels
+  Variable, isAliasVariable, Collections, Levels, isColorTarget
 } from './types';
 import { findVariables, writeTokenCollection } from './util';
 
@@ -20,7 +20,7 @@ const getColorTokensForVariable = (next: AliasVariable): Record<string, string> 
     );
     return tokens;
   }
-  if (!name.target) return {};
+  if (!isColorTarget(name.target)) return {};
   return {
     [name.toVitalTokenName()]: aliasName.toTwColorName(name.target),
   };
@@ -68,7 +68,7 @@ const getColorTokensForComponent = (
     }
     const name = new FigmaVariable(next.name);
     const aliasName = new FigmaVariable(next.value.name);
-    if (!name.target) return acc;
+    if (!isColorTarget(name.target)) return acc;
     const value = aliasName.toVitalTokenName(aliasName.isInteractive ? name.target : undefined);
     if (semantic && !semantic[value]) {
       console.warn('Missing semantic value', value);

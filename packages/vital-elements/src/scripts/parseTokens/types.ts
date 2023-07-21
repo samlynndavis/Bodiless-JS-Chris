@@ -19,7 +19,7 @@ export enum Levels {
   Core = 'Core',
 }
 
-export const isLevel = (l: string): l is Levels => Object.values(Levels).includes(l as Levels);
+export const isLevel = (l?: string): l is Levels => Object.values(Levels).includes(l as Levels);
 
 export enum ColorTargets {
   Border = 'Border',
@@ -28,8 +28,8 @@ export enum ColorTargets {
   Scrollbar = 'Scrollbar'
 }
 export const isColorTarget = (
-  t: string
-): t is ColorTargets => Object.values(ColorTargets).includes(t as ColorTargets);
+  t?: string
+): t is ColorTargets => !!t && Object.values(ColorTargets).includes(t as ColorTargets);
 
 export enum ColorStates {
   Idle = 'Idle',
@@ -38,6 +38,30 @@ export enum ColorStates {
   Pressed = 'Pressed',
   Focus = 'Focus'
 }
+
+export enum SpacingTargets {
+  Padding = 'Padding',
+  Margin = 'Margin',
+}
+
+export const isSpacingTarget = (
+  t?: string
+): t is SpacingTargets => !!t && Object.values(SpacingTargets).includes(t as SpacingTargets);
+
+export const TwSpacingPrefixes: Record<SpacingTargets, string> = {
+  Padding: 'p',
+  Margin: 'm',
+};
+
+export const TwSpacingSidePrefixes = {
+  Left: 'l',
+  Right: 'r',
+  Top: 't',
+  Bottom: 'b',
+  X: 'x',
+  Y: 'y',
+  ALL: '',
+};
 
 export const TwColorTargetPrefixes: Record<ColorTargets, string> = {
   Border: 'border-',

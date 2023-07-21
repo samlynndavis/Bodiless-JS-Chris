@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
 import {
   ColorTargets, TwColorTargetPrefixes, ColorStates, TwColorStatePrefixes,
-  Levels, isLevel, Variable, Collections, AliasValue, isColorTarget,
+  Levels, isLevel, Variable, Collections, AliasValue, isColorTarget, SpacingTargets,
+  isSpacingTarget,
 } from './types';
 
 class FigmaVariable implements Variable {
@@ -50,16 +51,18 @@ class FigmaVariable implements Variable {
     return undefined;
   }
 
-  get target(): ColorTargets | undefined {
+  get target(): ColorTargets | SpacingTargets | undefined {
     // Special cases for some components
     if (this.componentName === 'ScrollIndicator') return ColorTargets.Scrollbar;
     if (this.componentName === 'Divider') return ColorTargets.Border;
-    if (isColorTarget(this.segments[2])) return this.segments[2];
-    // For components, segments[2/3] can be a variant and/or subcomponent
-    // so we have to look farther.
-    if (this.isComponent) {
-      if (isColorTarget(this.segments[3])) return this.segments[3];
-      if (isColorTarget(this.segments[4])) return this.segments[4];
+
+    // The target can be in segment 2, 3 or 4
+    for (let s = 2; s <= 4; s += 1) {
+      const seg = this.segments[s];
+      if (isColorTarget(seg)) return seg;
+      // For no-component tokens, only color targets are supported and only in segment 2
+      if (!this.isComponent) break;
+      if (isSpacingTarget(seg)) return seg;
     }
     return undefined;
   }
