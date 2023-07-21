@@ -13,12 +13,24 @@ export enum Types {
   Color = 'color',
 }
 
+export enum Levels {
+  Component = 'Components',
+  Semantic = 'Semantic',
+  Core = 'Core',
+}
+
+export const isLevel = (l: string): l is Levels => Object.values(Levels).includes(l as Levels);
+
 export enum ColorTargets {
   Interactive = 'Interactive',
   Border = 'Border',
   Background = 'Background',
-  Text = 'Text'
+  Text = 'Text',
+  Scrollbar = 'Scrollbar'
 }
+export const isColorTarget = (
+  t: string
+): t is ColorTargets => Object.values(ColorTargets).includes(t as ColorTargets);
 
 export enum ColorStates {
   Idle = 'Idle',
@@ -32,6 +44,7 @@ export const TwColorTargetPrefixes: Partial<Record<ColorTargets, string>> = {
   Border: 'border-',
   Background: 'bg-',
   Text: 'text-',
+  Scrollbar: 'scrollbar-',
 };
 
 export const TwColorStatePrefixes: Partial<Record<ColorStates, string>> = {

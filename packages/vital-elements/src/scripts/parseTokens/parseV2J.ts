@@ -67,7 +67,6 @@ const getColorTokensForComponent = (
     }
     const name = new FigmaVariableName(next.name);
     const aliasName = new FigmaVariableName(next.value.name);
-    if (!name.target) return acc;
     const value = aliasName.toVitalTokenName(aliasName.isInteractive ? name.target : undefined);
     if (semantic && !semantic[value]) {
       console.warn('Missing semantic value', value);
@@ -117,6 +116,7 @@ export const getComponentColors = (
       };
     }, {} as Record<string, Variable[]>
   );
+  console.log('comps', components);
   const result = Object.keys(components)
     .reduce(
       (acc, next) => {

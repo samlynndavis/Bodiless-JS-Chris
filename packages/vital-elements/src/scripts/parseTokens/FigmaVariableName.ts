@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import {
-  ColorTargets, TwColorTargetPrefixes, ColorStates, TwColorStatePrefixes
+  ColorTargets, TwColorTargetPrefixes, ColorStates, TwColorStatePrefixes, Levels, isLevel,
 } from './types';
 
 export class FigmaVariableName {
@@ -14,7 +14,29 @@ export class FigmaVariableName {
     return this.segments[2] === ColorTargets.Interactive;
   }
 
+  get isComponentSpacing(): Boolean {
+    if (this.segments.length < 2) return false;
+    if (this.segments[0] !== Levels.Component) return false;
+    const segment = this.segments[this.segments.length - 2];
+    return (segment === 'Padding' || segment === 'Margin');
+  }
+
+  get level(): Levels|undefined {
+    return isLevel(this.segments[0]) ? this.segments[0] : undefined;
+  }
+
+  get isComponent(): boolean {
+    return this.segments[0] === Levels.Component;
+  }
+
+  get componentName(): string|undefined {
+    if (this.isComponent) return this.segments[1].replace(/ /g, '').replace(/-/g, '_');
+    return undefined;
+  }
+
   get target(): ColorTargets | undefined {
+    if (this.isComponent && this.componentName === 'ScrollIndicator') return ColorTargets.Scrollbar;
+
     for (let i = 2; i < this.segments.length; i += 1) {
       if (Object.keys(TwColorTargetPrefixes).includes(this.segments[i])) {
         return this.segments[i] as ColorTargets;
