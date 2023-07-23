@@ -1,7 +1,7 @@
 Errors for Brand Tokens/White Label/Semantic/Color/Background/Section/Light Theme/Secondary
- . Attempt to resolve alias to undefined
+ . Color value "#FFFFFF" is not an alias
 Errors for Brand Tokens/White Label/Semantic/Color/Background/Section/Light Theme/Tertiary
- . Attempt to resolve alias to undefined
+ . Color value "#FFFFFF" is not an alias
 Errors for Brand Tokens/White Label/Components/Checkbox/Background/Dark Theme/Hover
  . Color value "#FFFFFF" is not an alias
 Errors for Brand Tokens/White Label/Components/Checkbox/Border/Dark Theme/Disabled

@@ -3,13 +3,19 @@ import path from 'path';
 import { Data, FigmaVariableInterface, Variable } from './types';
 import FigmaVariable from './FigmaVariable';
 
-export const logErrors = (v: FigmaVariableInterface) => {
+export const logErrors = (
+  v: FigmaVariableInterface,
+  extraErrors: string[] = [],
+) => {
+  if (v.errors.size === 0 && extraErrors.length === 0) return;
   // Temporarily weed out known issues.
   if (/Icon/.test(v.name) || /Border Radius/.test(v.name)) return;
   // eslint-disable-next-line no-console
-  console.warn(`Errors for ${v.collection}/${v.mode}/${v.name}`);
+  console.warn(`Errors for ${v.longName}`);
   // eslint-disable-next-line no-console
   v.errors.forEach(e => console.warn(` . ${e}`));
+  // eslint-disable-next-line no-console
+  extraErrors.forEach(e => console.warn(` . ${e}`));
 };
 
 export const readData = async (): Promise<Data> => {

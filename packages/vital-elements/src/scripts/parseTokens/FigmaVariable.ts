@@ -1,19 +1,21 @@
 /* eslint-disable no-console */
 import {
-  ColorTargets, TwColorTargetPrefixes, ColorStates, TwColorStatePrefixes,
+  ColorTargets, TwColorTargetPrefixes, States, TwStatePrefixes,
   Levels, isLevel, Variable, Collections, AliasValue, isColorTarget, SpacingTargets,
   isSpacingTarget,
-  isSpacingSide,
+  isSide,
   TwSpacingPrefixes,
-  SpacingSides,
-  TwSpacingSidePrefixes,
+  Sides,
+  TwSides,
   isAliasVariable,
   Types,
   FigmaVariableInterface,
   isSpacingVariable,
   isColorVariable,
-  ColorVariable,
   BORDER_RADIUS,
+  Corners,
+  isCorner,
+  isState,
 } from './types';
 
 class FigmaVariable implements Variable, FigmaVariableInterface {
@@ -44,15 +46,15 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     return this.segments[2] === 'Interactive';
   }
 
-  resolveBrandAlias(
-    vars: Variable[], v$?: FigmaVariableInterface, depth = 0
-  ): ColorVariable|undefined {
+  get longName() {
+    return `${this.collection}/${this.mode}/${this.name}`;
+  }
+
+  resolveSemanticAlias(
+    vars: FigmaVariableInterface[], v$?: FigmaVariableInterface, depth = 0
+  ): FigmaVariableInterface|undefined {
     const v = v$ || this;
-    if (!isColorVariable(v)) {
-      this.errors.add('Attempt to resolve alias for non color variable');
-      return undefined;
-    }
-    if (v.value.collection === Collections.Core) return v;
+    if (!isAliasVariable(v) || v.value.collection === Collections.Core) return v;
     if (v.value.collection !== Collections.Brand) {
       this.errors.add(`Attempt to resolve alias to ${v.value.collection}`);
       return undefined;
@@ -66,7 +68,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
       this.errors.add(`Reference not found "${v.value.collection}/${v.value.name}"`);
       return undefined;
     }
-    return this.resolveBrandAlias(vars, new FigmaVariable(reference), depth + 1);
+    return this.resolveSemanticAlias(vars, reference, depth + 1);
   }
 
   get alias(): FigmaVariable|undefined {
@@ -79,6 +81,8 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   }
 
   validate(): boolean {
+    // @todo validation for core variables.
+    if (this.isCore) return true;
     if (this.isComponent) {
       if (!this.componentName) {
         this.errors.add('Component variable has no component');
@@ -117,6 +121,9 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
           this.errors.add(`Component color target "${this.target}" invalid`);
           return false;
         }
+      } else if (!isColorTarget(this.target) && !this.isInteractive) {
+        this.errors.add(`Semantic color target "${this.target}" invalid`);
+        return false;
       }
       return true;
     }
@@ -178,13 +185,12 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     return target;
   }
 
-  get state(): ColorStates | undefined {
-    const state = this.segments[this.segments.length - 1];
-    if (!Object.keys(TwColorStatePrefixes).includes(state)) {
-      this.errors.add('Invalid color state in');
-      return undefined;
+  get state(): States | undefined {
+    const state = this.findSegment('State', isState);
+    if (!state) {
+      this.errors.add('Could not find a valid state');
     }
-    return state as ColorStates;
+    return state;
   }
 
   toVitalTokenName(target?: ColorTargets) {
@@ -192,26 +198,58 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     return `${target || ''}${cleanedName}`;
   }
 
-  toTwColorName(target: ColorTargets, state: ColorStates = ColorStates.Idle): string {
+  toTwColorName(target: ColorTargets, state: States = States.Idle): string {
     const cleanedName = this.segments.slice(1).join('/').replace(/[/ ]/g, '-')
       .toLowerCase();
-    const statePrefix = TwColorStatePrefixes[state];
+    const statePrefix = TwStatePrefixes[state];
     const typePrefix = TwColorTargetPrefixes[target];
     return `'${statePrefix}${typePrefix}${cleanedName}'`;
   }
 
-  get spacingSide(): SpacingSides|undefined {
-    const [s] = this.findTarget();
-    const side = this.segments[s + 1];
-    if (isSpacingSide(side)) return side;
-    this.errors.add('No valid spacing side found');
-    return SpacingSides.ALL;
+  findSegment<T extends string>(
+    label: string,
+    condition: (s: string) => s is T,
+    after: number = 1,
+  ): T|undefined {
+    const candidates = this.segments.map((s, ix) => (condition(s) ? ix : -1))
+      .filter(ix => ix >= 0)
+      .filter(ix => ix! > after);
+    if (candidates.length === 0) {
+      this.errors.add(`Could not find ${label} segment`);
+      return undefined;
+    }
+    if (candidates.length > 1) {
+      this.errors.add(`Found mmultiple ${label} segments`);
+    }
+    return this.segments[candidates[0]] as T;
+  }
+
+  get side(): Sides|undefined {
+    const side = this.findSegment('Side', isSide);
+    return isSide(side) ? side : Sides.ALL;
+  }
+
+  get corner(): Corners|undefined {
+    const corner = this.findSegment('Corner', isCorner);
+    return isCorner(corner) ? corner: Corners.ALL;
   }
 
   get parsedValue(): string|undefined {
     if (!this.validate()) return undefined;
+    // if (isRadiusVariable(this)) {
+    //   const prefix = `rounded${TwCorners[this.corner]}`;
+    //   const valueSegments = this.alias.name.split('/');
+    //   const rawValue = valueSegments[valueSegments.length = 1];
+    //   try {
+    //     const iValue = parseInt(rawValue.replace('Rounded ', ''), 10);
+    //     return `${prefix}-${iValue}`;
+    //   } catch (e) {
+    //     this.errors.add(`Could not convert "${rawValue}" to number`);
+    //     return undefined;
+    //   }
+    // }
     if (isSpacingVariable(this)) {
-      const prefix = `${TwSpacingPrefixes[this.target]}${TwSpacingSidePrefixes[this.spacingSide]}`;
+      const prefix = `${TwSpacingPrefixes[this.target]}${TwSides[this.side]}`;
       const valueSegments = this.alias.name.split('/');
       const value = valueSegments[valueSegments.length - 1];
       return `'${prefix}-${value}px'`;

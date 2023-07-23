@@ -2,7 +2,7 @@
 import FigmaVariable from './FigmaVariable';
 import {
   Data, ColorTargets,
-  Collections, isColorTarget, isColorVariable, ColorVariable,
+  Collections, isColorVariable, ColorVariable,
   isComponentVariable, FigmaVariableInterface, ComponentVariable
 } from './types';
 import { findVariables, logErrors, writeTokenCollection } from './util';
@@ -23,7 +23,6 @@ const getColorTokensForVariable = (next: ColorVariable): Record<string, string> 
     );
     return tokens;
   }
-  if (!isColorTarget(next.target)) return {};
   return {
     [next.toVitalTokenName()]: alias.toTwColorName(next.target),
   };
@@ -41,7 +40,7 @@ const getTokensForComponent = (
     if (isColorVariable(next)) {
       const key = value.replace('vitalColor.', '');
       if (semantic && !semantic[key]) {
-        console.warn('Missing semantic value', value);
+        logErrors(next, [`Semantic token for value "${key}" not found`]);
         return acc;
       }
     }
@@ -53,20 +52,16 @@ const getTokensForComponent = (
   {},
 );
 
-export const getSemanticColors = (data: Data, brand: string): Record<string, string> => {
-  const semanticColors = findVariables(data, v => (
+export const getSemanticTokens = (data: Data, brand: string): Record<string, string> => {
+  const semanticVars = findVariables(data, v => (
     v.collection === Collections.Brand
     && v.mode === brand
     && v.isSemantic
   ));
-  const result = semanticColors?.reduce((acc, next) => {
-    if (!isColorVariable(next)) {
-      logErrors(next);
-      return acc;
-    }
-    const resolved = next.resolveBrandAlias(semanticColors);
-    if (!resolved) {
-      logErrors(next);
+  const result = semanticVars.reduce((acc, next) => {
+    const resolved = next.resolveSemanticAlias(semanticVars);
+    if (!isColorVariable(resolved)) {
+      logErrors(next, ['Resolved semantic variable is not a color']);
       return acc;
     }
     return {
@@ -77,7 +72,7 @@ export const getSemanticColors = (data: Data, brand: string): Record<string, str
   return result || {};
 };
 
-export const getComponentColors = (
+export const getComponentTokens = (
   data: Data,
   brand: string,
   semanticTokens: Record<string, string>

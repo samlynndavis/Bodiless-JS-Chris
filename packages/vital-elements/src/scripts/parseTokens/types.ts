@@ -11,6 +11,8 @@ export interface FigmaVariableInterface extends Variable {
   level?: Levels,
   validate: () => boolean,
   parsedValue?: string,
+  longName: string,
+  resolveSemanticAlias: (variables: FigmaVariableInterface[]) => FigmaVariableInterface|undefined;
 }
 
 export const BORDER_RADIUS = 'Border Radius';
@@ -25,9 +27,8 @@ export const isComponentVariable = (
 export interface ColorVariable extends FigmaVariableInterface {
   target: ColorTargets,
   alias: ColorVariable,
-  state: ColorStates,
-  toTwColorName: (target: ColorTargets, state?: ColorStates) => string,
-  resolveBrandAlias: (variables: FigmaVariableInterface[]) => ColorVariable,
+  state: States,
+  toTwColorName: (target: ColorTargets, state?: States) => string,
 }
 
 export const isColorVariable = (
@@ -36,7 +37,7 @@ export const isColorVariable = (
 
 export interface SpacingVariable extends FigmaVariableInterface {
   target: SpacingTargets,
-  spacingSide: SpacingSides,
+  side: Sides,
   alias: FigmaVariableInterface,
 }
 
@@ -46,7 +47,7 @@ export const isSpacingVariable = (
 
 export interface RadiusVariable extends FigmaVariableInterface {
   target: typeof BORDER_RADIUS,
-  spacingSide: SpacingSides,
+  corner: Corners,
   alias: FigmaVariableInterface,
 }
 
@@ -91,13 +92,26 @@ export const isColorTarget = (
   t?: string
 ): t is ColorTargets => !!t && Object.values(ColorTargets).includes(t as ColorTargets);
 
-export enum ColorStates {
+export enum States {
   Idle = 'Idle',
   Hover = 'Hover',
   Disabled = 'Disabled',
   Pressed = 'Pressed',
   Focus = 'Focus'
 }
+
+export const isState = (s?: string): s is States => Boolean(
+  s && Object.values(States).includes(s as States)
+);
+
+export const TwStatePrefixes: Partial<Record<States, string>> = {
+  Idle: '',
+  Hover: 'hover:',
+  // @todo Is there a tw resposive variant for disabled?
+  Disabled: 'aria-disabled:',
+  Pressed: 'active:',
+  Focus: 'focus:',
+};
 
 export enum SpacingTargets {
   Padding = 'Padding',
@@ -113,7 +127,35 @@ export const TwSpacingPrefixes: Record<SpacingTargets, string> = {
   Margin: 'm',
 };
 
-export enum SpacingSides {
+export enum Corners {
+  Left = 'Left',
+  Right = 'Right',
+  Top = 'Top',
+  Bottom = 'Bottom',
+  TopRight = 'Top Right',
+  TopLeft = 'Top Left',
+  BottomRight = 'Bottom Right',
+  BottomLeft = 'Bottom Left',
+  ALL = 'ALL',
+}
+
+export const isCorner = (
+  s?: string
+): s is Corners => Boolean(s && Object.values(Corners).includes(s as Corners));
+
+export const TwCorners: Record<Corners, string> = {
+  Left: '-l',
+  Right: '-r',
+  Top: '-t',
+  Bottom: '-b',
+  'Top Right': '-tr',
+  'Top Left': '-tl',
+  'Bottom Right': '-br',
+  'Bottom Left': '-bl',
+  ALL: '',
+};
+
+export enum Sides {
   Left = 'Left',
   Right = 'Right',
   Top = 'Top',
@@ -122,7 +164,8 @@ export enum SpacingSides {
   Y = 'Y',
   ALL = 'ALL',
 }
-export const TwSpacingSidePrefixes: Record<SpacingSides, string> = {
+
+export const TwSides: Record<Sides, string> = {
   Left: 'l',
   Right: 'r',
   Top: 't',
@@ -131,24 +174,16 @@ export const TwSpacingSidePrefixes: Record<SpacingSides, string> = {
   Y: 'y',
   ALL: '',
 };
-export const isSpacingSide = (
+
+export const isSide = (
   s?: string
-): s is SpacingSides => Boolean(s && Object.values(SpacingSides).includes(s as SpacingSides));
+): s is Sides => Boolean(s && Object.values(Sides).includes(s as Sides));
 
 export const TwColorTargetPrefixes: Record<ColorTargets, string> = {
   Border: 'border-',
   Background: 'bg-',
   Text: 'text-',
   Scrollbar: 'scrollbar-',
-};
-
-export const TwColorStatePrefixes: Partial<Record<ColorStates, string>> = {
-  Idle: '',
-  Hover: 'hover:',
-  // @todo Is there a tw resposive variant for disabled?
-  Disabled: 'aria-disabled:',
-  Pressed: 'active:',
-  Focus: 'focus:',
 };
 
 export type Data = {
