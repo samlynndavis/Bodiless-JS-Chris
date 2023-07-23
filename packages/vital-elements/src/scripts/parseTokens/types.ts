@@ -1,15 +1,33 @@
 export interface FigmaVariableInterface extends Variable {
   isColor: boolean,
   isSpacing: boolean,
-  target: ColorTargets | SpacingTargets | undefined,
+  target?: ColorTargets | SpacingTargets,
+  isInteractive: boolean,
+  toVitalTokenName: (target?: ColorTargets) => string,
+  isSemantic: boolean,
+  isComponent: boolean,
+  errors: Set<string>,
+  level?: Levels,
 }
+
+export interface ComponentVariable extends FigmaVariableInterface {
+  componentName: string,
+}
+export const isComponentVariable = (
+  v?: FigmaVariableInterface
+): v is ComponentVariable => Boolean(v && v.isComponent);
 
 export interface ColorVariable extends FigmaVariableInterface {
   target: ColorTargets,
   alias: ColorVariable,
+  state: ColorStates,
+  toTwColorName: (target: ColorTargets, state?: ColorStates) => string,
+  resolveBrandAlias: (variables: FigmaVariableInterface[]) => ColorVariable,
 }
 
-export const isColorVariable = (v: FigmaVariableInterface): v is ColorVariable => v.isColor;
+export const isColorVariable = (
+  v?: FigmaVariableInterface
+): v is ColorVariable => Boolean(v && v.isColor);
 
 export interface SpacingVariable extends FigmaVariableInterface {
   target: SpacingTargets,

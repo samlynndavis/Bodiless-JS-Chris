@@ -3,7 +3,6 @@ import {
   ColorTargets, TwColorTargetPrefixes, ColorStates, TwColorStatePrefixes,
   Levels, isLevel, Variable, Collections, AliasValue, isColorTarget, SpacingTargets,
   isSpacingTarget,
-  Data,
   isSpacingSide,
   TwSpacingPrefixes,
   SpacingSides,
@@ -13,8 +12,8 @@ import {
   FigmaVariableInterface,
   isSpacingVariable,
   isColorVariable,
+  ColorVariable,
 } from './types';
-import { findVariables } from './util';
 
 class FigmaVariable implements Variable, FigmaVariableInterface {
   protected segments: string[];
@@ -31,6 +30,8 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
 
   readonly value?: string|AliasValue;
 
+  readonly errors = new Set<string>();
+
   constructor(variable$: string|Variable) {
     const variable: Variable = typeof variable$ === 'string' ? { name: variable$ } : variable$;
     Object.assign(this, variable);
@@ -38,32 +39,33 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     this.segments = this.name.split('/');
   }
 
-  resolve(
-    data: Data,
-    params: Pick<Variable, 'mode'|'collection'> = {},
-  ): FigmaVariable|undefined {
-    const { mode, collection, name}= {
-      ...this,
-      ...params,
-    };
-    const condition = (v: Variable) => (
-      (!mode || v.mode === mode)
-      && (v.name === name)
-      && (!collection || v.collection === collection)
-    );
-    const candidates = findVariables(data, condition);
-    if (candidates.length > 1) {
-      console.warn('Multiple resolutions for ', collection, mode, name);
-    }
-    if (candidates.length < 1) {
-      console.warn('No resolutions for ', collection, mode, name);
-      return undefined;
-    }
-    return new FigmaVariable(candidates[0]);
-  }
-
   get isInteractive() {
     return this.segments[2] === 'Interactive';
+  }
+
+  resolveBrandAlias(
+    vars: Variable[], v$?: FigmaVariableInterface, depth = 0
+  ): ColorVariable|undefined {
+    const v = v$ || this;
+    if (!isColorVariable(v)) {
+      this.errors.add('Attempt to resolve alias for non color variable');
+      return undefined;
+    }
+    if (v.value.collection === Collections.Core) return v;
+    if (v.value.collection !== Collections.Brand) {
+      this.errors.add(`Attempt to resolve alias to ${v.value.collection}`);
+      return undefined;
+    }
+    if (depth > 10) {
+      this.errors.add('Max depth exceeded resolving alias');
+      return undefined;
+    }
+    const reference = vars?.find(vv => vv.name === v.value.name);
+    if (!reference) {
+      this.errors.add(`Reference not found "${v.value.collection}/${v.value.name}"`);
+      return undefined;
+    }
+    return this.resolveBrandAlias(vars, new FigmaVariable(reference), depth + 1);
   }
 
   get alias(): FigmaVariable|undefined {
@@ -75,29 +77,36 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     if (this.type !== Types.Color) return false;
     if (this.isCore) return true;
     if (!this.alias) {
-      console.warn('Non alias semantic or component color', JSON.stringify(this));
+      this.errors.add(`Color value "${this.value}" is not an alias`);
       return false;
     }
-    if (this.isComponent && !this.alias.isSemantic) {
-      console.warn('Non semantic alias for component color', JSON.stringify(this));
-      return false;
-    }
-    if (!isColorTarget(this.target)) {
-      console.warn('Invalid target for color variable', JSON.stringify(this));
-      return false;
+    if (this.isComponent) {
+      if (!this.alias.isSemantic) {
+        this.errors.add(`Component color alias "(${this.alias.name}" is not semantic`);
+        return false;
+      }
+      if (!isColorTarget(this.target)) {
+        this.errors.add(`Component color target "${this.target}" invalid`);
+        return false;
+      }
     }
     return true;
   }
 
-  get isComponent(): Boolean {
-    return this.collection === Collections.Brand && this.level === Levels.Component;
+  get isComponent(): boolean {
+    if (this.collection !== Collections.Brand || this.level !== Levels.Component) return false;
+    if (!this.componentName) {
+      this.errors.add('Component variable has no component');
+      return false;
+    }
+    return true;
   }
 
   get isCore(): Boolean {
     return this.collection === Collections.Core;
   }
 
-  get isSemantic(): Boolean {
+  get isSemantic(): boolean {
     return this.collection === Collections.Brand && this.level === Levels.Semantic;
   }
 
@@ -108,11 +117,11 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   get isSpacing(): boolean {
     if (!this.isComponent || !isSpacingTarget(this.target)) return false;
     if (!isAliasVariable(this)) {
-      console.warn('Non-alias spacing variable', this);
+      this.errors.add('Non-alias spacing variable');
       return false;
     }
     if (this.alias?.collection !== Collections.Core) {
-      console.warn('Non-core alias for spacing variable', this);
+      this.errors.add('Non-core alias for spacing variable');
       return false;
     }
     return true;
@@ -122,9 +131,8 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     return isLevel(this.segments[0]) ? this.segments[0] : undefined;
   }
 
-  get componentName(): string|undefined {
-    if (this.isComponent) return this.segments[1]?.replace(/ /g, '').replace(/-/g, '_');
-    return undefined;
+  get componentName(): string {
+    return this.segments[1]?.replace(/ /g, '').replace(/-/g, '_');
   }
 
   protected findTarget(): [number, ColorTargets | SpacingTargets | undefined] {
@@ -151,7 +159,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   get state(): ColorStates | undefined {
     const state = this.segments[this.segments.length - 1];
     if (!Object.keys(TwColorStatePrefixes).includes(state)) {
-      console.warn('Invalid color state in', this.segments.join('/'));
+      this.errors.add('Invalid color state in');
       return undefined;
     }
     return state as ColorStates;
@@ -173,12 +181,12 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   get spacingSide(): SpacingSides|undefined {
     const [s, target] = this.findTarget();
     if (!isSpacingTarget(target)) {
-      console.warn('No spacing target for', this.name);
+      this.errors.add('No spacing target for');
       return undefined;
     }
     const side = this.segments[s + 1];
     if (isSpacingSide(side)) return side;
-    console.warn('No valid spacing side found for ', this.name);
+    this.errors.add('No valid spacing side found');
     return SpacingSides.ALL;
   }
 
@@ -195,7 +203,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
       );
       return `vitalColor.${value}`;
     }
-    console.warn('Could not parse value of', this);
+    this.errors.add('Could not parse value');
     return undefined;
   }
 }

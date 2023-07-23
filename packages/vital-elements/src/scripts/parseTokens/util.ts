@@ -1,6 +1,16 @@
 import fs from 'fs';
 import path from 'path';
-import { Data, Variable } from './types';
+import { Data, FigmaVariableInterface, Variable } from './types';
+import FigmaVariable from './FigmaVariable';
+
+export const logErrors = (v: FigmaVariableInterface) => {
+  // Temporarily weed out known issues.
+  if (/Icon/.test(v.name) || /Border Radius/.test(v.name)) return;
+  // eslint-disable-next-line no-console
+  console.warn(`Errors for ${v.collection}/${v.mode}/${v.name}`);
+  // eslint-disable-next-line no-console
+  v.errors.forEach(e => console.warn(` . ${e}`));
+};
 
 export const readData = async (): Promise<Data> => {
   const file = process.env.VITAL_TOKENS_JSON || './assets/vital-tokens.json';
@@ -8,12 +18,15 @@ export const readData = async (): Promise<Data> => {
   return JSON.parse(json.toString());
 };
 
-export const findVariables = (data: Data, condition: (v: Variable) => boolean): Variable[] => {
-  const result: Variable[] = [];
+export const findVariables = (data: Data, condition: (
+  v: FigmaVariableInterface) => boolean): FigmaVariableInterface[] => {
+  const result: FigmaVariableInterface[] = [];
   data.collections.forEach(collection => {
     collection.modes.forEach(mode => {
       const vars = mode.variables.map(
-        (v: Variable): Variable => ({ ...v, collection: collection.name, mode: mode.name })
+        (v: Variable): FigmaVariableInterface => new FigmaVariable(
+          { ...v, collection: collection.name, mode: mode.name }
+        )
       ).filter(v => condition(v));
       result.push(...vars);
     });

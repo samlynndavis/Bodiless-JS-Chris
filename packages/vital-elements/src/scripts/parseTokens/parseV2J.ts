@@ -1,56 +1,32 @@
 /* eslint-disable no-console */
 import FigmaVariable from './FigmaVariable';
 import {
-  Data, AliasVariable, TwColorTargetPrefixes, ColorTargets,
-  Variable, isAliasVariable, Collections, Levels, isColorTarget, isColorVariable
+  Data, ColorTargets,
+  Variable, Collections, isColorTarget, isColorVariable, ColorVariable, isComponentVariable
 } from './types';
-import { findVariables, writeTokenCollection } from './util';
+import { findVariables, logErrors, writeTokenCollection } from './util';
 
-const getColorTokensForVariable = (next: AliasVariable): Record<string, string> => {
-  const name = new FigmaVariable(next.name);
-  const aliasName = new FigmaVariable(next.value.name);
-  if (name.isInteractive) {
-    if (!name.state) return {};
-    const tokens = Object.keys(TwColorTargetPrefixes).reduce(
+const getColorTokensForVariable = (next: ColorVariable): Record<string, string> => {
+  if (!isColorVariable(next)) {
+    logErrors(next);
+    return {};
+  }
+  const alias = new FigmaVariable(next.value);
+  if (next.isInteractive) {
+    if (!next.state) return {};
+    const tokens = Object.values(ColorTargets).reduce(
       (tokenAcc, colorTarget) => ({
         ...tokenAcc,
-        [name.toVitalTokenName(colorTarget as ColorTargets)]:
-          aliasName.toTwColorName(colorTarget as ColorTargets)
+        [next.toVitalTokenName(colorTarget)]:
+          alias.toTwColorName(colorTarget)
       }), {}
     );
     return tokens;
   }
-  if (!isColorTarget(name.target)) return {};
+  if (!isColorTarget(next.target)) return {};
   return {
-    [name.toVitalTokenName()]: aliasName.toTwColorName(name.target),
+    [next.toVitalTokenName()]: alias.toTwColorName(next.target),
   };
-};
-
-/**
- * Recursively resolve a variable which may be an alias to anothr brand variable.
- *
- * @param v The variable to resolve.
- * @param vars The list of all variables.
- * @param depth The current depth (used to catch circular references).
- * @returns
- * The resolved variable, which is guaranteed to be a Core alias, or undefined if it
- * cannot be resolved.
- */
-const resolveBrandAlias = (
-  v?: Variable, vars?: Variable[], depth = 0
-): AliasVariable|undefined => {
-  if (!isAliasVariable(v)) {
-    console.warn('Non Alias Variable', v?.name);
-    return undefined;
-  }
-  if (v.value.collection === Collections.Core) return v;
-  if (v.value.collection !== Collections.Brand) {
-    console.warn('Non Brnd or Core Alias', v.value.collection);
-    return undefined;
-  }
-  if (depth > 10) return undefined;
-  const reference = vars?.find(v$ => v$.name === v.value.name);
-  return resolveBrandAlias(reference, vars, depth + 1);
 };
 
 const getColorTokensForComponent = (
@@ -59,7 +35,10 @@ const getColorTokensForComponent = (
   (acc, next$) => {
     const next = new FigmaVariable(next$);
     const value = next.parsedValue;
-    if (!value) return acc;
+    if (!value) {
+      logErrors(next);
+      return acc;
+    }
     if (isColorVariable(next)) {
       const key = value.replace('vitalColor.', '');
       if (semantic && !semantic[key]) {
@@ -76,13 +55,19 @@ const getColorTokensForComponent = (
 );
 
 export const getSemanticColors = (data: Data, brand: string): Record<string, string> => {
-  const brandTokens = data.collections.find(c => c.name === Collections.Brand);
-  const colors = brandTokens?.modes.find(b => b.name === brand);
-  const semanticColors = colors?.variables.filter(v => /^Semantic/.test(v.name));
+  const semanticColors = findVariables(data, v => (
+    v.collection === Collections.Brand
+    && v.mode === brand
+    && v.isSemantic
+  ));
   const result = semanticColors?.reduce((acc, next) => {
-    const resolved = resolveBrandAlias(next, semanticColors);
+    if (!isColorVariable(next)) {
+      logErrors(next);
+      return acc;
+    }
+    const resolved = next.resolveBrandAlias(semanticColors);
     if (!resolved) {
-      console.warn('Could not resolve', JSON.stringify(next, undefined, 2));
+      logErrors(next);
       return acc;
     }
     return {
@@ -101,12 +86,11 @@ export const getComponentColors = (
   const componentVars = findVariables(data, v => (
     v.collection === Collections.Brand
       && v.mode === brand
-      && new FigmaVariable(v).level === Levels.Component
+      && v.isComponent
   )).reduce(
-    (acc, next) => {
-      const v = new FigmaVariable(next);
-      if (!v.componentName) {
-        console.warn('Missing component name in', v.name);
+    (acc, v) => {
+      if (!isComponentVariable(v)) {
+        logErrors(v);
         return acc;
       }
       return {
