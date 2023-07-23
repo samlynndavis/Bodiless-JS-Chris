@@ -12,8 +12,8 @@ export default asTokenGroup(meta)({
   BackgroundDarkThemeBackground: vitalColor.BackgroundAlt8,
   BorderActive: vitalColor.BorderInteractiveLightThemeIdle,
   BorderIdle: vitalColor.BorderLightThemeBase,
-  BorderRadiusBorderRadius: rounded-4px,
-  PaddingPadding-Top,Bottom: 'p-16px',
+  BorderRadiusBorderRadius: 'rounded-4px',
+  PaddingPaddingTopBottom: 'p-16px',
   BackgroundLightThemeBackground: vitalColor.BackgroundBase,
-  PaddingPadding-Left,Right: 'p-16px',
+  PaddingPaddingLeftRight: 'p-16px',
 });

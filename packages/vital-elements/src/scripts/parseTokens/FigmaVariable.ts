@@ -199,7 +199,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   }
 
   toVitalTokenName(target?: ColorTargets) {
-    const cleanedName = this.segments.slice(2).map(s => s.replace(/[ ]/g, '')).join('');
+    const cleanedName = this.segments.slice(2).map(s => s.replace(/[ \-,]/g, '')).join('');
     return `${target || ''}${cleanedName}`;
   }
 
@@ -267,7 +267,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
       const rawValue = valueSegments[valueSegments.length - 1];
       try {
         const iValue = parseInt(rawValue.replace('Rounded ', ''), 10);
-        return `${prefix}-${iValue}px`;
+        return `'${prefix}-${iValue}px'`;
       } catch (e) {
         this.errors.add(`Could not convert "${rawValue}" to number`);
         return undefined;
