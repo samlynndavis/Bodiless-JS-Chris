@@ -1,0 +1,58 @@
+Errors for Brand Tokens/White Label/Semantic/Color/Background/Section/Light Theme/Secondary
+ . Attempt to resolve alias to undefined
+Errors for Brand Tokens/White Label/Semantic/Color/Background/Section/Light Theme/Tertiary
+ . Attempt to resolve alias to undefined
+Errors for Brand Tokens/White Label/Components/Checkbox/Background/Dark Theme/Hover
+ . Color value "#FFFFFF" is not an alias
+Errors for Brand Tokens/White Label/Components/Checkbox/Border/Dark Theme/Disabled
+ . Color value "#FFFFFF" is not an alias
+Errors for Brand Tokens/White Label/Components/Checkbox/Border/Dark Theme/Checked
+ . Color value "#FFFFFF" is not an alias
+Errors for Brand Tokens/White Label/Components/Checkbox/Border/Dark Theme/Hover
+ . Color value "#FFFFFF" is not an alias
+Errors for Brand Tokens/White Label/Components/Checkbox/Border/Dark Theme/Idle
+ . Color value "#FFFFFF" is not an alias
+Errors for Brand Tokens/White Label/Components/Checkbox/Background/Light Theme/Idle
+ . Component color alias "(Color/--NO VALUE--" is not semantic
+Errors for Brand Tokens/White Label/Components/Checkbox/Background/Dark Theme/Disabled
+ . Color value "#FFFFFF" is not an alias
+Errors for Brand Tokens/White Label/Components/Checkbox/Background/Dark Theme/Idle
+ . Color value "#FFFFFF" is not an alias
+Errors for Brand Tokens/White Label/Components/Checkbox/Background/Dark Theme/Checked
+ . Color value "#FFFFFF" is not an alias
+Errors for Brand Tokens/White Label/Components/Form Field/Text/Caption
+ . Component color alias "(Typography/Body/Small" is not semantic
+Errors for Brand Tokens/White Label/Components/Form Field/Border/Error
+ . Component color alias "(Color/Signal/Error/Error" is not semantic
+Errors for Brand Tokens/White Label/Components/Form Field/Text/Error
+ . Component color alias "(Color/Signal/Error/Error" is not semantic
+Errors for Brand Tokens/White Label/Components/Form Field/Border/Success
+ . Component color alias "(Color/Signal/Success/Success" is not semantic
+Errors for Brand Tokens/White Label/Components/Form Field/Text/Input
+ . Component color alias "(Typography/Body/Regular" is not semantic
+Errors for Brand Tokens/White Label/Components/Form Field/Text/Label
+ . Component color alias "(Typography/Eyebrow/Eyebrow" is not semantic
+Errors for Brand Tokens/White Label/Components/Navigation/Link
+ . Color value "#FFFFFF" is not an alias
+Errors for Brand Tokens/White Label/Components/Navigation/Primary/Primary Link/Border/Hover
+ . Component color alias "(Semantic/Color/Interactive/Default" is not semantic
+Errors for Brand Tokens/White Label/Components/Navigation/Primary/Primary Link/Border/Active
+ . Component color alias "(Semantic/Color/Interactive/Hover" is not semantic
+Errors for Brand Tokens/White Label/Components/Category Card/Padding/Bottom
+ . Spacing value "0" is not an alias
+Errors for Brand Tokens/White Label/Components/Category Card/Padding/Top
+ . Spacing value "0" is not an alias
+Errors for Brand Tokens/White Label/Components/Category Card/Background/Light Theme/Background
+ . Component color alias "(Color/--NO VALUE--" is not semantic
+Errors for Brand Tokens/White Label/Components/Category Card/Background/Dark Theme/Background
+ . Component color alias "(Color/--NO VALUE--" is not semantic
+Errors for Brand Tokens/White Label/Components/Accordion/Dropdown/Border/Light Theme/Border
+ . Component color alias "(Color/--NO VALUE--" is not semantic
+Errors for Brand Tokens/White Label/Components/Breadcrumb/Background/Light Theme/Color
+ . Component color alias "(Semantic/Color/Background/Page/Primary" is not semantic
+Errors for Brand Tokens/White Label/Components/Breadcrumb/Background/Dark Theme/Color
+ . Component color alias "(Semantic/Color/Background/Page/Primary" is not semantic
+Errors for Brand Tokens/White Label/Components/Article Card/Border/Dark Theme/Background
+ . Component color alias "(Color/--NO VALUE--" is not semantic
+Errors for Brand Tokens/White Label/Components/Article Card/Border/Light Theme/Background
+ . Component color alias "(Color/--NO VALUE--" is not semantic

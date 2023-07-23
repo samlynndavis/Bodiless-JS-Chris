@@ -2,7 +2,8 @@
 import FigmaVariable from './FigmaVariable';
 import {
   Data, ColorTargets,
-  Variable, Collections, isColorTarget, isColorVariable, ColorVariable, isComponentVariable
+  Collections, isColorTarget, isColorVariable, ColorVariable,
+  isComponentVariable, FigmaVariableInterface, ComponentVariable
 } from './types';
 import { findVariables, logErrors, writeTokenCollection } from './util';
 
@@ -28,11 +29,10 @@ const getColorTokensForVariable = (next: ColorVariable): Record<string, string> 
   };
 };
 
-const getColorTokensForComponent = (
-  vars: Variable[], semantic?: Record<string, string>
+const getTokensForComponent = (
+  vars: FigmaVariableInterface[], semantic?: Record<string, string>
 ) => vars.reduce(
-  (acc, next$) => {
-    const next = new FigmaVariable(next$);
+  (acc, next) => {
     const value = next.parsedValue;
     if (!value) {
       logErrors(next);
@@ -85,23 +85,19 @@ export const getComponentColors = (
   const componentVars = findVariables(data, v => (
     v.collection === Collections.Brand
       && v.mode === brand
-      && v.isComponent
   )).reduce(
     (acc, v) => {
-      if (!isComponentVariable(v)) {
-        logErrors(v);
-        return acc;
-      }
-      return {
+      if (!isComponentVariable(v)) return acc;
+      return ({
         ...acc,
         [v.componentName]: acc[v.componentName] ? [...acc[v.componentName], v] : [v],
-      };
-    }, {} as Record<string, Variable[]>
+      });
+    }, {} as Record<string, ComponentVariable[]>
   );
   const colors = Object.keys(componentVars)
     .reduce(
       (acc, next) => {
-        const tokens = getColorTokensForComponent(componentVars[next], semanticTokens);
+        const tokens = getTokensForComponent(componentVars[next], semanticTokens);
         if (Object.keys(tokens).length === 0) return acc;
         return {
           ...acc,

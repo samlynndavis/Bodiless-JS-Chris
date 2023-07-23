@@ -10,6 +10,7 @@ export interface FigmaVariableInterface extends Variable {
   errors: Set<string>,
   level?: Levels,
   validate: () => boolean,
+  parsedValue?: string,
 }
 
 export const BORDER_RADIUS = 'Border Radius';
