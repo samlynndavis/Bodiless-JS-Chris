@@ -16,6 +16,8 @@ import {
   Corners,
   isCorner,
   isState,
+  isRadiusVariable,
+  TwCorners,
 } from './types';
 
 class FigmaVariable implements Variable, FigmaVariableInterface {
@@ -89,11 +91,18 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
         return false;
       }
     }
-    if (isSpacingVariable(this)) {
-      if (!isAliasVariable(this)) {
-        this.errors.add(`Spacing value "${this.value}" is not an alias`);
+    if (!isAliasVariable(this)) {
+      this.errors.add(`Non-core value "${this.value}" is not an alias`);
+      return false;
+    }
+    if (isRadiusVariable(this)) {
+      if (this.alias?.collection !== Collections.Core) {
+        this.errors.add(`Radius alias collection "${this.alias.collection}" is not core`);
         return false;
       }
+      return true;
+    }
+    if (isSpacingVariable(this)) {
       if (this.alias?.collection !== Collections.Core) {
         this.errors.add(`Spaing alias collection "${this.alias.collection}" is not core`);
         return false;
@@ -104,14 +113,6 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
       return true;
     }
     if (isColorVariable(this)) {
-      if (!this.alias) {
-        this.errors.add(`Color value "${this.value}" is not an alias`);
-        return false;
-      }
-      if (this.isInteractive && !this.state) {
-        this.errors.add('Interactive color has no state');
-        return false;
-      }
       if (this.isComponent) {
         if (!this.alias.isSemantic) {
           this.errors.add(`Component color alias "(${this.alias.name}" is not semantic`);
@@ -164,7 +165,10 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     return this.segments[1]?.replace(/ /g, '').replace(/-/g, '_');
   }
 
-  protected findTarget(): [number, ColorTargets | SpacingTargets | undefined] {
+  protected findTarget(): [
+    number,
+    ColorTargets | SpacingTargets | typeof BORDER_RADIUS | undefined
+  ] {
     // Special cases for some components
     if (this.componentName === 'ScrollIndicator') return [-1, ColorTargets.Scrollbar];
     if (this.componentName === 'Divider') return [-2, ColorTargets.Border];
@@ -176,6 +180,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
       // For no-component tokens, only color targets are supported and only in segment 2
       if (!this.isComponent) break;
       if (isSpacingTarget(seg)) return [s, seg];
+      if (seg === BORDER_RADIUS) return [s, seg];
     }
     return [-1, undefined];
   }
@@ -234,20 +239,40 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     return isCorner(corner) ? corner: Corners.ALL;
   }
 
+  /**
+   * Returns the parsed value guaranteeing that it belongs to the set of allowed values.
+   *
+   * @param allowedValues
+   *
+   * @returns
+   */
+  validatedValue(allowedValues?: string[]): string|undefined {
+    if (this.parsedValue) {
+      const simpleValue = this.isColor
+        ? this.parsedValue.replace('vitalColor.', '')
+        : this.parsedValue.replace(/'/g, '');
+      if (allowedValues && !allowedValues.includes(simpleValue)) {
+        this.errors.add(`Semantic token for value "${simpleValue}" not found`);
+        return undefined;
+      }
+    }
+    return this.parsedValue;
+  }
+
   get parsedValue(): string|undefined {
     if (!this.validate()) return undefined;
-    // if (isRadiusVariable(this)) {
-    //   const prefix = `rounded${TwCorners[this.corner]}`;
-    //   const valueSegments = this.alias.name.split('/');
-    //   const rawValue = valueSegments[valueSegments.length = 1];
-    //   try {
-    //     const iValue = parseInt(rawValue.replace('Rounded ', ''), 10);
-    //     return `${prefix}-${iValue}`;
-    //   } catch (e) {
-    //     this.errors.add(`Could not convert "${rawValue}" to number`);
-    //     return undefined;
-    //   }
-    // }
+    if (isRadiusVariable(this)) {
+      const prefix = `rounded${TwCorners[this.corner]}`;
+      const valueSegments = this.alias.name.split('/');
+      const rawValue = valueSegments[valueSegments.length - 1];
+      try {
+        const iValue = parseInt(rawValue.replace('Rounded ', ''), 10);
+        return `${prefix}-${iValue}px`;
+      } catch (e) {
+        this.errors.add(`Could not convert "${rawValue}" to number`);
+        return undefined;
+      }
+    }
     if (isSpacingVariable(this)) {
       const prefix = `${TwSpacingPrefixes[this.target]}${TwSides[this.side]}`;
       const valueSegments = this.alias.name.split('/');

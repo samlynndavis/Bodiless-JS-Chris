@@ -8,46 +8,41 @@ import {
 import { findVariables, logErrors, writeTokenCollection } from './util';
 
 const getColorTokensForVariable = (next: ColorVariable): Record<string, string> => {
-  if (!next.validate()) {
-    logErrors(next);
-    return {};
-  }
-  const alias = new FigmaVariable(next.value);
-  if (next.isInteractive) {
-    const tokens = Object.values(ColorTargets).reduce(
-      (tokenAcc, colorTarget) => ({
-        ...tokenAcc,
-        [next.toVitalTokenName(colorTarget)]:
+  let result: Record<string, string> = {};
+  if (next.validate()) {
+    const alias = new FigmaVariable(next.value);
+    if (next.isInteractive) {
+      result = Object.values(ColorTargets).reduce(
+        (tokenAcc, colorTarget) => ({
+          ...tokenAcc,
+          [next.toVitalTokenName(colorTarget)]:
           alias.toTwColorName(colorTarget)
-      }), {}
-    );
-    return tokens;
+        }), {}
+      );
+    } else {
+      result = {
+        [next.toVitalTokenName()]: alias.toTwColorName(next.target),
+      };
+    }
   }
-  return {
-    [next.toVitalTokenName()]: alias.toTwColorName(next.target),
-  };
+  logErrors(next);
+  return result;
 };
 
 const getTokensForComponent = (
   vars: FigmaVariableInterface[], semantic?: Record<string, string>
 ) => vars.reduce(
   (acc, next) => {
-    const value = next.parsedValue;
-    if (!value) {
-      logErrors(next);
-      return acc;
+    let result: Record<string, string> = acc;
+    const value = next.validatedValue(semantic && Object.keys(semantic));
+    if (value) {
+      result = {
+        ...acc,
+        [next.toVitalTokenName()]: value,
+      };
     }
-    if (isColorVariable(next)) {
-      const key = value.replace('vitalColor.', '');
-      if (semantic && !semantic[key]) {
-        logErrors(next, [`Semantic token for value "${key}" not found`]);
-        return acc;
-      }
-    }
-    return {
-      ...acc,
-      [next.toVitalTokenName()]: value,
-    };
+    logErrors(next);
+    return result;
   },
   {},
 );

@@ -11,6 +11,7 @@ export interface FigmaVariableInterface extends Variable {
   level?: Levels,
   validate: () => boolean,
   parsedValue?: string,
+  validatedValue: (allowedValues?: string[]) => string|undefined;
   longName: string,
   resolveSemanticAlias: (variables: FigmaVariableInterface[]) => FigmaVariableInterface|undefined;
 }

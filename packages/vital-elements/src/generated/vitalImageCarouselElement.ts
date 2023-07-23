@@ -13,6 +13,7 @@ export default asTokenGroup(meta)({
   ImageThumbnailBorderDarkThemeIdle: vitalColor.BorderDarkThemeBase,
   ImageThumbnailBorderLightThemeActive: vitalColor.BorderInteractiveLightThemeIdle,
   ImageBorderLightThemeBorder: vitalColor.BorderLightThemeBase,
+  ImageBorderRadiusBorderRadius: rounded-0px,
   ImageThumbnailBorderLightThemeIdle: vitalColor.BorderLightThemeBase,
   ImageThumbnailBorderDarkThemeActive: vitalColor.BorderInteractiveDarkThemeIdle,
 });

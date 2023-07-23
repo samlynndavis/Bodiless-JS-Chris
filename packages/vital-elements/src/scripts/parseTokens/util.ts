@@ -9,7 +9,7 @@ export const logErrors = (
 ) => {
   if (v.errors.size === 0 && extraErrors.length === 0) return;
   // Temporarily weed out known issues.
-  if (/Icon/.test(v.name) || /Border Radius/.test(v.name)) return;
+  if (/Icon/.test(v.name)) return;
   // eslint-disable-next-line no-console
   console.warn(`Errors for ${v.longName}`);
   // eslint-disable-next-line no-console
