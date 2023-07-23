@@ -13,6 +13,7 @@ import {
   isSpacingVariable,
   isColorVariable,
   ColorVariable,
+  BORDER_RADIUS,
 } from './types';
 
 class FigmaVariable implements Variable, FigmaVariableInterface {
@@ -74,31 +75,57 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   }
 
   get isColor(): boolean {
-    if (this.type !== Types.Color) return false;
-    if (this.isCore) return true;
-    if (!this.alias) {
-      this.errors.add(`Color value "${this.value}" is not an alias`);
-      return false;
-    }
+    return (this.type === Types.Color);
+  }
+
+  validate(): boolean {
     if (this.isComponent) {
-      if (!this.alias.isSemantic) {
-        this.errors.add(`Component color alias "(${this.alias.name}" is not semantic`);
-        return false;
-      }
-      if (!isColorTarget(this.target)) {
-        this.errors.add(`Component color target "${this.target}" invalid`);
+      if (!this.componentName) {
+        this.errors.add('Component variable has no component');
         return false;
       }
     }
-    return true;
+    if (isSpacingVariable(this)) {
+      if (!isAliasVariable(this)) {
+        this.errors.add(`Spacing value "${this.value}" is not an alias`);
+        return false;
+      }
+      if (this.alias?.collection !== Collections.Core) {
+        this.errors.add(`Spaing alias collection "${this.alias.collection}" is not core`);
+        return false;
+      }
+      if (!isSpacingTarget(this.target)) {
+        this.errors.add(`Invalid spacing target ${this.target}`);
+      }
+      return true;
+    }
+    if (isColorVariable(this)) {
+      if (!this.alias) {
+        this.errors.add(`Color value "${this.value}" is not an alias`);
+        return false;
+      }
+      if (this.isInteractive && !this.state) {
+        this.errors.add('Interactive color has no state');
+        return false;
+      }
+      if (this.isComponent) {
+        if (!this.alias.isSemantic) {
+          this.errors.add(`Component color alias "(${this.alias.name}" is not semantic`);
+          return false;
+        }
+        if (!isColorTarget(this.target)) {
+          this.errors.add(`Component color target "${this.target}" invalid`);
+          return false;
+        }
+      }
+      return true;
+    }
+    this.errors.add('Could not determine variable tupe');
+    return false;
   }
 
   get isComponent(): boolean {
     if (this.collection !== Collections.Brand || this.level !== Levels.Component) return false;
-    if (!this.componentName) {
-      this.errors.add('Component variable has no component');
-      return false;
-    }
     return true;
   }
 
@@ -115,16 +142,11 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   }
 
   get isSpacing(): boolean {
-    if (!this.isComponent || !isSpacingTarget(this.target)) return false;
-    if (!isAliasVariable(this)) {
-      this.errors.add('Non-alias spacing variable');
-      return false;
-    }
-    if (this.alias?.collection !== Collections.Core) {
-      this.errors.add('Non-core alias for spacing variable');
-      return false;
-    }
-    return true;
+    return this.isComponent && isSpacingTarget(this.target);
+  }
+
+  get isRadius(): boolean {
+    return this.isComponent && this.target === BORDER_RADIUS;
   }
 
   get level(): Levels|undefined {
@@ -151,7 +173,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
     return [-1, undefined];
   }
 
-  get target(): ColorTargets | SpacingTargets | undefined {
+  get target(): ColorTargets | SpacingTargets | typeof BORDER_RADIUS | undefined {
     const [_, target] = this.findTarget();
     return target;
   }
@@ -179,11 +201,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   }
 
   get spacingSide(): SpacingSides|undefined {
-    const [s, target] = this.findTarget();
-    if (!isSpacingTarget(target)) {
-      this.errors.add('No spacing target for');
-      return undefined;
-    }
+    const [s] = this.findTarget();
     const side = this.segments[s + 1];
     if (isSpacingSide(side)) return side;
     this.errors.add('No valid spacing side found');
@@ -191,6 +209,7 @@ class FigmaVariable implements Variable, FigmaVariableInterface {
   }
 
   get parsedValue(): string|undefined {
+    if (!this.validate()) return undefined;
     if (isSpacingVariable(this)) {
       const prefix = `${TwSpacingPrefixes[this.target]}${TwSpacingSidePrefixes[this.spacingSide]}`;
       const valueSegments = this.alias.name.split('/');

@@ -7,13 +7,12 @@ import {
 import { findVariables, logErrors, writeTokenCollection } from './util';
 
 const getColorTokensForVariable = (next: ColorVariable): Record<string, string> => {
-  if (!isColorVariable(next)) {
+  if (!next.validate()) {
     logErrors(next);
     return {};
   }
   const alias = new FigmaVariable(next.value);
   if (next.isInteractive) {
-    if (!next.state) return {};
     const tokens = Object.values(ColorTargets).reduce(
       (tokenAcc, colorTarget) => ({
         ...tokenAcc,

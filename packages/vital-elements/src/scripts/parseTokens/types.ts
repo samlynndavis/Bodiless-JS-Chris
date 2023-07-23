@@ -1,14 +1,18 @@
 export interface FigmaVariableInterface extends Variable {
   isColor: boolean,
   isSpacing: boolean,
-  target?: ColorTargets | SpacingTargets,
+  isRadius: boolean,
+  target?: ColorTargets | SpacingTargets | typeof BORDER_RADIUS;
   isInteractive: boolean,
   toVitalTokenName: (target?: ColorTargets) => string,
   isSemantic: boolean,
   isComponent: boolean,
   errors: Set<string>,
   level?: Levels,
+  validate: () => boolean,
 }
+
+export const BORDER_RADIUS = 'Border Radius';
 
 export interface ComponentVariable extends FigmaVariableInterface {
   componentName: string,
@@ -35,7 +39,19 @@ export interface SpacingVariable extends FigmaVariableInterface {
   alias: FigmaVariableInterface,
 }
 
-export const isSpacingVariable = (v: FigmaVariableInterface): v is SpacingVariable => v.isSpacing;
+export const isSpacingVariable = (
+  v?: FigmaVariableInterface
+): v is SpacingVariable => Boolean(v && v.isSpacing);
+
+export interface RadiusVariable extends FigmaVariableInterface {
+  target: typeof BORDER_RADIUS,
+  spacingSide: SpacingSides,
+  alias: FigmaVariableInterface,
+}
+
+export const isRadiusVariable = (
+  v?: FigmaVariableInterface
+): v is RadiusVariable => Boolean(v && v.isRadius);
 
 export enum Collections {
   Core = 'Core Values',
