@@ -223,14 +223,6 @@ class FigmaVariable implements FigmaVariableInterface {
       ? `${this.target}${cleanedName}` : cleanedName;
   }
 
-  toTwColorName(target: ColorTargets, state: States = States.Idle): string {
-    const cleanedName = this.segments.slice(1).join('/').replace(/[/ ]/g, '-')
-      .toLowerCase();
-    const statePrefix = TwStatePrefixes[state];
-    const typePrefix = TwColorTargetPrefixes[target];
-    return `${statePrefix}${typePrefix}${cleanedName}`;
-  }
-
   /**
    * Returns the parsed value guaranteeing that it belongs to the set of allowed values.
    *
@@ -346,9 +338,14 @@ class FigmaVariable implements FigmaVariableInterface {
         const value = alias?.vitalName;
         return value && `vitalColor.${value}`;
       }
-      // @TODO Correct parsed value for semantic color vars.
-      const value = this.alias?.toTwColorName(this.target, this.state);
-      return value && `'${value}'`;
+      if (this.alias) {
+        const cleanedName = this.alias.segments.slice(1).join('/').replace(/[/ ]/g, '-')
+          .toLowerCase();
+        const statePrefix = TwStatePrefixes[this.state || States.Idle];
+        const targetPrefix = TwColorTargetPrefixes[this.target];
+        return `'${statePrefix}${targetPrefix}${cleanedName}'`;
+      }
+      return undefined;
     }
     this.errors.add('Unknown variable type');
     return undefined;
