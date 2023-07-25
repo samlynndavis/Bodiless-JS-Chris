@@ -8,25 +8,23 @@ import { findVariables, logErrors, writeTokenCollection } from './util';
 
 const getColorTokensForVariable = (next: ColorVariable): Record<string, string> => {
   let result: Record<string, string> = {};
-  if (next.validate()) {
-    if (next.isInteractive) {
-      result = Object.values(ColorTargets).reduce(
-        (tokenAcc, colorTarget) => {
-          next.setInteractiveTarget(colorTarget);
-          return next.parsedValue ? {
-            ...tokenAcc,
-            [next.toVitalTokenName(colorTarget)]: next.parsedValue,
-          } : tokenAcc;
-        }, {}
-      );
-    } else if (next.parsedValue) {
-      result = {
-        [next.vitalName]: next.parsedValue,
-      };
-    }
+  if (next.isInteractive) {
+    result = Object.values(ColorTargets).reduce(
+      (tokenAcc, colorTarget) => {
+        next.setInteractiveTarget(colorTarget);
+        return next.parsedValue ? {
+          ...tokenAcc,
+          [next.toVitalTokenName(colorTarget)]: next.parsedValue,
+        } : tokenAcc;
+      }, {}
+    );
+  } else if (next.parsedValue) {
+    result = {
+      [next.vitalName]: next.parsedValue,
+    };
   }
   logErrors(next);
-  return result;
+  return next.errors.size === 0 ? result : {};
 };
 
 const getTokensForComponent = (
