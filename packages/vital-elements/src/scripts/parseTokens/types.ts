@@ -16,7 +16,6 @@ export type FigmaVariableInterface = NormalVariable & RawVariable & {
   isSpacing: boolean,
   isRadius: boolean,
   isInteractive: boolean,
-  toVitalTokenName: (target?: ColorTargets) => string,
   isSemantic: boolean,
   isComponent: boolean,
   errors: Set<string>,
@@ -42,7 +41,6 @@ export interface ColorVariable extends FigmaVariableInterface {
   target: ColorTargets,
   state: States,
   theme: Themes,
-  toTwColorName: (target: ColorTargets, state?: States) => string,
 }
 
 export const isColorVariable = (

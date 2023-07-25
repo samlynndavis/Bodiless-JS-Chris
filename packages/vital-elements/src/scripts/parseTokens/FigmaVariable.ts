@@ -217,15 +217,10 @@ class FigmaVariable implements FigmaVariableInterface {
     return isCorner(corner) ? corner: Corners.ALL;
   }
 
-  toVitalTokenName(target?: ColorTargets) {
-    const cleanedName = this.segments.slice(2).map(s => s.replace(/[ \-,]/g, '')).join('');
-    return `${target || ''}${cleanedName}`;
-  }
-
   get vitalName(): string {
+    const cleanedName = this.segments.slice(2).map(s => s.replace(/[ \-,]/g, '')).join('');
     return this.isInteractive && isColorVariable(this)
-      ? this.toVitalTokenName(this.target)
-      : this.toVitalTokenName();
+      ? `${this.target}${cleanedName}` : cleanedName;
   }
 
   toTwColorName(target: ColorTargets, state: States = States.Idle): string {
@@ -271,7 +266,9 @@ class FigmaVariable implements FigmaVariableInterface {
   }
 
   get category(): Categories|undefined {
-    if (this.type === Types.Color) return Categories.Color;
+    if (this.type === Types.Color || (!this.type && this.segments[1] === Categories.Color)) {
+      return Categories.Color;
+    }
     const [_, target] = this.findTarget();
     if (this.isComponent && isSpacingTarget(target)) return Categories.Spacing;
     if (this.isComponent && target === BORDER_RADIUS) return Categories.Radius;
@@ -341,9 +338,12 @@ class FigmaVariable implements FigmaVariableInterface {
     }
     if (isColorVariable(this)) {
       if (this.isComponent) {
-        const value = this.alias?.toVitalTokenName(
-          this.alias.isInteractive ? this.target : undefined
-        );
+        const { alias } = this;
+        if (alias?.isInteractive) alias.setInteractiveTarget(this.target);
+        if (this.name === 'Components/Breadcrumb/Text/Dark Theme/Hover') {
+          console.log('here', alias, alias?.isInteractive, alias?.target);
+        }
+        const value = alias?.vitalName;
         return value && `vitalColor.${value}`;
       }
       // @TODO Correct parsed value for semantic color vars.
