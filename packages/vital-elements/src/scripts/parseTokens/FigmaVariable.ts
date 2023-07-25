@@ -43,6 +43,8 @@ class FigmaVariable implements FigmaVariableInterface {
 
   readonly errors = new Set<string>();
 
+  protected interactiveTarget?: ColorTargets;
+
   constructor(variable$: string|RawVariable) {
     const variable: RawVariable = typeof variable$ === 'string' ? { name: variable$ } : variable$;
     Object.assign(this, variable);
@@ -183,8 +185,12 @@ class FigmaVariable implements FigmaVariableInterface {
 
   get target(): ColorTargets | SpacingTargets | typeof BORDER_RADIUS | undefined {
     const [_, target] = this.findTarget();
-    if (isColorVariable(this) && !isColorTarget(target) && !this.isInteractive) {
-      this.errors.add(`Component color target "${target}" invalid`);
+    if (isColorVariable(this)) {
+      if (this.isInteractive) {
+        if (this.interactiveTarget) return this.interactiveTarget;
+      } else if (!isColorTarget(target)) {
+        this.errors.add(`Component color target "${target}" invalid`);
+      }
     }
     if (isSpacingVariable(this) && !isSpacingTarget(target)) {
       this.errors.add(`Invalid spacing target ${target}`);
@@ -216,12 +222,18 @@ class FigmaVariable implements FigmaVariableInterface {
     return `${target || ''}${cleanedName}`;
   }
 
+  get vitalName(): string {
+    return this.isInteractive && isColorVariable(this)
+      ? this.toVitalTokenName(this.target)
+      : this.toVitalTokenName();
+  }
+
   toTwColorName(target: ColorTargets, state: States = States.Idle): string {
     const cleanedName = this.segments.slice(1).join('/').replace(/[/ ]/g, '-')
       .toLowerCase();
     const statePrefix = TwStatePrefixes[state];
     const typePrefix = TwColorTargetPrefixes[target];
-    return `'${statePrefix}${typePrefix}${cleanedName}'`;
+    return `${statePrefix}${typePrefix}${cleanedName}`;
   }
 
   /**
@@ -302,6 +314,10 @@ class FigmaVariable implements FigmaVariableInterface {
       this.viewport,
     ];
     return segments.join('/');
+  }
+
+  setInteractiveTarget(target: ColorTargets) {
+    this.interactiveTarget = target;
   }
 
   get parsedValue(): string|undefined {

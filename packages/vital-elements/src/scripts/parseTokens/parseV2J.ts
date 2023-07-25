@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import FigmaVariable from './FigmaVariable';
 import {
   Data, ColorTargets,
   Collections, isColorVariable, ColorVariable,
@@ -10,18 +9,19 @@ import { findVariables, logErrors, writeTokenCollection } from './util';
 const getColorTokensForVariable = (next: ColorVariable): Record<string, string> => {
   let result: Record<string, string> = {};
   if (next.validate()) {
-    const alias = new FigmaVariable(next.value);
     if (next.isInteractive) {
       result = Object.values(ColorTargets).reduce(
-        (tokenAcc, colorTarget) => ({
-          ...tokenAcc,
-          [next.toVitalTokenName(colorTarget)]:
-          alias.toTwColorName(colorTarget)
-        }), {}
+        (tokenAcc, colorTarget) => {
+          next.setInteractiveTarget(colorTarget);
+          return next.parsedValue ? {
+            ...tokenAcc,
+            [next.toVitalTokenName(colorTarget)]: next.parsedValue,
+          } : tokenAcc;
+        }, {}
       );
-    } else {
+    } else if (next.parsedValue) {
       result = {
-        [next.toVitalTokenName()]: alias.toTwColorName(next.target),
+        [next.vitalName]: next.parsedValue,
       };
     }
   }

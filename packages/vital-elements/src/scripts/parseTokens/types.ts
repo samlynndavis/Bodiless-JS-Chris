@@ -25,6 +25,8 @@ export type FigmaVariableInterface = NormalVariable & RawVariable & {
   longName: string,
   resolveSemanticAlias: (variables: FigmaVariableInterface[]) => FigmaVariableInterface|undefined;
   validate: () => boolean,
+  vitalName: string,
+  setInteractiveTarget: (target: ColorTargets) => void,
 };
 
 export const BORDER_RADIUS = 'Border Radius';
