@@ -36,7 +36,7 @@ const getTokensForComponent = (
     if (value) {
       result = {
         ...acc,
-        [next.toVitalTokenName()]: value,
+        [next.vitalName]: value,
       };
     }
     logErrors(next);
