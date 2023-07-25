@@ -14,7 +14,7 @@ const getColorTokensForVariable = (next: ColorVariable): Record<string, string> 
         next.setInteractiveTarget(colorTarget);
         return next.parsedValue ? {
           ...tokenAcc,
-          [next.toVitalTokenName(colorTarget)]: next.parsedValue,
+          [next.vitalName]: next.parsedValue,
         } : tokenAcc;
       }, {}
     );
