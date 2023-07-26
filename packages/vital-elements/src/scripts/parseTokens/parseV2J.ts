@@ -1,28 +1,20 @@
 /* eslint-disable no-console */
 import {
-  Data, ColorTargets,
+  Data,
   Collections, isColorVariable, ColorVariable,
   isComponentVariable, FigmaVariableInterface, ComponentVariable
 } from './types';
 import { findVariables, logErrors, writeTokenCollection } from './util';
 
 const getColorTokensForVariable = (next: ColorVariable): Record<string, string> => {
-  let result: Record<string, string> = {};
-  if (next.isInteractive) {
-    result = Object.values(ColorTargets).reduce(
-      (tokenAcc, colorTarget) => {
-        next.setInteractiveTarget(colorTarget);
-        return next.parsedValue ? {
-          ...tokenAcc,
-          [next.vitalName]: next.parsedValue,
-        } : tokenAcc;
-      }, {}
-    );
-  } else if (next.parsedValue) {
-    result = {
-      [next.vitalName]: next.parsedValue,
-    };
-  }
+  const result: Record<string, string> = next.createInteractiveVariants().reduce(
+    (acc, variant) => {
+      const entry = { [variant.vitalName]: variant.parsedValue };
+      next.setErrors(variant.errors);
+      return { ...acc, ...entry };
+    },
+    {},
+  );
   logErrors(next);
   return next.errors.size === 0 ? result : {};
 };

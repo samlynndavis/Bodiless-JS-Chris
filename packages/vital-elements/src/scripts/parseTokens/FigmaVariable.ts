@@ -43,7 +43,7 @@ class FigmaVariable implements FigmaVariableInterface {
 
   readonly value?: string|AliasValue;
 
-  readonly errors = new Set<string>();
+  readonly errors: Set<string> = new Set<string>();
 
   protected interactiveTarget?: ColorTargets;
 
@@ -52,6 +52,9 @@ class FigmaVariable implements FigmaVariableInterface {
     Object.assign(this, variable);
     this.name = variable.name;
     this.segments = this.name.split('/');
+    // Copy errors to a new set.
+    const { errors } = this;
+    this.errors = new Set<string>(errors.values());
   }
 
   get isInteractive() {
@@ -307,8 +310,13 @@ class FigmaVariable implements FigmaVariableInterface {
     return segments.join('/');
   }
 
-  setInteractiveTarget(target: ColorTargets) {
+  protected setInteractiveTarget(target: ColorTargets) {
     this.interactiveTarget = target;
+  }
+
+  setErrors(errors: string|Set<string>|string[]) {
+    if (typeof errors === 'string') this.errors.add(errors);
+    else errors.forEach(e => this.errors.add(e));
   }
 
   createInteractiveVariants(): FigmaVariable[] {
