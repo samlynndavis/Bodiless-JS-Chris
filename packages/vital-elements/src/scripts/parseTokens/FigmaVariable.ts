@@ -24,6 +24,8 @@ import {
   SubTargets,
   Viewports,
   isViewport,
+  isTheme,
+  Themes,
 } from './types';
 
 class FigmaVariable implements FigmaVariableInterface {
@@ -309,6 +311,10 @@ class FigmaVariable implements FigmaVariableInterface {
     this.interactiveTarget = target;
   }
 
+  get theme(): Themes|undefined {
+    return this.segments.find(isTheme);
+  }
+
   get parsedValue(): string|undefined {
     if (isRadiusVariable(this)) {
       const prefix = `rounded${TwCorners[this.corner]}`;
@@ -330,11 +336,11 @@ class FigmaVariable implements FigmaVariableInterface {
     }
     if (isColorVariable(this)) {
       if (this.isComponent) {
+        // if (this.collection === Collections.Brand && !this.theme) {
+        //   this.errors.add('Brand variable has no theme');
+        // }
         const { alias } = this;
         if (alias?.isInteractive) alias.setInteractiveTarget(this.target);
-        if (this.name === 'Components/Breadcrumb/Text/Dark Theme/Hover') {
-          console.log('here', alias, alias?.isInteractive, alias?.target);
-        }
         const value = alias?.vitalName;
         return value && `vitalColor.${value}`;
       }
@@ -343,7 +349,8 @@ class FigmaVariable implements FigmaVariableInterface {
           .toLowerCase();
         const statePrefix = TwStatePrefixes[this.state || States.Idle];
         const targetPrefix = TwColorTargetPrefixes[this.target];
-        return `'${statePrefix}${targetPrefix}${cleanedName}'`;
+        const themePrefix = this.theme === Themes.Dark ? 'dark:' : '';
+        return `'${statePrefix}${themePrefix}${targetPrefix}${cleanedName}'`;
       }
       return undefined;
     }
