@@ -171,6 +171,22 @@ export const TwSpacingPrefixes: Record<SpacingTargets, string> = {
   Margin: 'm',
 };
 
+export enum Devices {
+  Mobile = 'Mobile',
+  Tablet = 'Tablet',
+  Desktop = 'Desktop',
+}
+
+export const isDevice = (
+  d?: string
+): d is Devices => Boolean(d && Object.values(Devices).includes(d as Devices));
+
+export const TwDevicePrefixes: Record<Devices, string> = {
+  Mobile: '',
+  Tablet: 'md:',
+  Desktop: 'lg:',
+};
+
 export enum Corners {
   Left = 'Left',
   Right = 'Right',

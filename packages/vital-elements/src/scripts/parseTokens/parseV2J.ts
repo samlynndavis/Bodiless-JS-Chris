@@ -15,31 +15,52 @@ const getColorTokensForVariable = (next: ColorVariable): Record<string, string> 
       // by a Dark Theme component it will have the correct prefix. Do this by
       // adding a `createThemeVariants` method to `FigmaVariable` and reducing it
       // here, just as we do for interactive variants.
-      const entry = { [variant.vitalName]: variant.parsedValue };
+      const entry = { [variant.vitalName]: variant.parsedValue || 'undefined' };
       next.setErrors(variant.errors);
       return { ...acc, ...entry };
     },
-    {},
+    {} as Record<string, string>,
   );
   logErrors(next);
   return next.errors.size === 0 ? result : {};
 };
 
+// export const getDeviceTokensForComponent = (
+//   variables: FigmaVariableInterface[],
+// ): Record<string, string> => {
+//   const tokens = variables.filter(v => v.mode === Devices.Mobile).reduce(
+//     (acc, mobile) => {
+//       const tablet = variables.find(v => v.name === mobile.name && v.mode === Devices.Tablet);
+//       const desktop = variables.find(v => v.name === mobile.name && v.mode === Devices.Tablet);
+//       const value = [mobile.parsedValue, tablet?.parsedValue, desktop?.parsedValue]
+//         .filter(Boolean)
+//         .join(' ');
+//       const entry = { [mobile.vitalName]: value };
+//       logErrors(mobile);
+//       return mobile.errors.size === 0 ? { ...acc, ...entry } : acc;
+//     },
+//     {},
+//   );
+//   return tokens;
+// };
+
 const getTokensForComponent = (
   vars: FigmaVariableInterface[], semantic?: Record<string, string>
 ) => {
   // Create tokens for the brand variables.  There should be light and dark versions of each.
-  const brandTokens: Record<string, string> = vars.reduce(
-    (acc, next) => {
-      const result = {
-        ...acc,
-        [next.vitalName]: next.validatedValue(semantic && Object.keys(semantic))
-      };
-      logErrors(next);
-      return next.errors.size === 0 ? result : acc;
-    },
-    {},
-  );
+  const brandTokens: Record<string, string> = vars
+    .filter(v => v.collection === Collections.Brand)
+    .reduce(
+      (acc, next) => {
+        const result = {
+          ...acc,
+          [next.vitalName]: next.validatedValue(semantic && Object.keys(semantic))
+        };
+        logErrors(next);
+        return next.errors.size === 0 ? result : acc;
+      },
+      {},
+    );
   // Create the theme tokens. For now these are just aliases of the light theme versions.
   const themeTokens: Record<string, string> = Object.entries(brandTokens)
     .filter(([name]) => /LightTheme/.test(name))
@@ -57,6 +78,9 @@ const getTokensForComponent = (
       },
       {}
     );
+  // const deviceTokens = getDeviceTokensForComponent(
+  //   vars.filter(v => v.collection === Collections.Device)
+  // );
   return { ...themeTokens, ...brandTokens };
 };
 
@@ -86,8 +110,7 @@ export const getComponentTokens = (
   semanticTokens: Record<string, string>
 ): Record<string, Record<string, string>> => {
   const componentVars = findVariables(data, v => (
-    v.collection === Collections.Brand
-      && v.mode === brand
+    (v.collection === Collections.Brand && v.mode === brand) || v.collection === Collections.Device
   )).reduce(
     (acc, v) => {
       if (!isComponentVariable(v)) return acc;
@@ -97,7 +120,7 @@ export const getComponentTokens = (
       });
     }, {} as Record<string, ComponentVariable[]>
   );
-  const colors = Object.keys(componentVars)
+  const tokens = Object.keys(componentVars)
     .reduce(
       (acc, next) => {
         const tokens = getTokensForComponent(componentVars[next], semanticTokens);
@@ -109,7 +132,7 @@ export const getComponentTokens = (
       },
       {},
     );
-  return colors;
+  return tokens;
 };
 
 export const writeComponentTokens = async (

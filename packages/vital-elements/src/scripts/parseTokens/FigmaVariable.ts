@@ -26,6 +26,8 @@ import {
   isViewport,
   isTheme,
   Themes,
+  isDevice,
+  TwDevicePrefixes,
 } from './types';
 
 class FigmaVariable implements FigmaVariableInterface {
@@ -344,13 +346,17 @@ class FigmaVariable implements FigmaVariableInterface {
   }
 
   get parsedValue(): string|undefined {
+    let devicePrefix = '';
+    if (this.collection === Collections.Device && isDevice(this.mode)) {
+      devicePrefix = TwDevicePrefixes[this.mode];
+    }
     if (isRadiusVariable(this)) {
       const prefix = `rounded${TwCorners[this.corner]}`;
       const valueSegments = this.alias?.name.split('/') || [];
       const rawValue = valueSegments[valueSegments.length - 1];
       try {
         const iValue = parseInt(rawValue.replace('Rounded ', ''), 10);
-        return `'${prefix}-${iValue}px'`;
+        return `'${devicePrefix}${prefix}-${iValue}px'`;
       } catch (e) {
         this.errors.add(`Could not convert "${rawValue}" to number`);
         return undefined;
@@ -360,7 +366,7 @@ class FigmaVariable implements FigmaVariableInterface {
       const prefix = `${TwSpacingPrefixes[this.target]}${TwSides[this.side]}`;
       const valueSegments = this.alias?.name.split('/') || [];
       const value = valueSegments[valueSegments.length - 1];
-      return `'${prefix}-${value}px'`;
+      return `'${devicePrefix}${prefix}-${value}px'`;
     }
     if (isColorVariable(this)) {
       if (this.isComponent) {
