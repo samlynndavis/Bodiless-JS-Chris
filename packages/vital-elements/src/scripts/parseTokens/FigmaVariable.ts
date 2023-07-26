@@ -311,6 +311,15 @@ class FigmaVariable implements FigmaVariableInterface {
     this.interactiveTarget = target;
   }
 
+  createInteractiveVariants(): FigmaVariable[] {
+    if (!this.isInteractive) return [this];
+    return Object.values(ColorTargets).map(target => {
+      const variant = new FigmaVariable(this);
+      variant.setInteractiveTarget(target);
+      return variant;
+    });
+  }
+
   get theme(): Themes|undefined {
     return this.segments.find(isTheme);
   }
@@ -340,6 +349,15 @@ class FigmaVariable implements FigmaVariableInterface {
         //   this.errors.add('Brand variable has no theme');
         // }
         const { alias } = this;
+        // if (this.theme === Themes.Dark) {
+        //   if (!this.alias?.theme) {
+        //     // @todo Force the alias to dark theme bc we need the version with the dark prefix
+        //   } else if (this.alias.theme !== Themes.Dark) {
+        //     this.errors.add(`Component theme "${this.theme} does not match semantic theme ${this.alias?.theme}`);
+        //   }
+        // } else if (this.alias?.theme === Themes.Dark) {
+        //   this.errors.add(`Component theme "${this.theme} does not match semantic theme ${this.alias?.theme}`);
+        // }
         if (alias?.isInteractive) alias.setInteractiveTarget(this.target);
         const value = alias?.vitalName;
         return value && `vitalColor.${value}`;
