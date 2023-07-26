@@ -9,6 +9,9 @@ const meta = {
 };
 
 export default asTokenGroup(meta)({
+  ImageThumbnailBorderActive: vitalColor.BorderInteractiveLightThemeIdle,
+  ImageBorderBorder: vitalColor.BorderLightThemeBase,
+  ImageThumbnailBorderIdle: vitalColor.BorderLightThemeBase,
   ImageBorderDarkThemeIdle: vitalColor.BorderDarkThemeBase,
   ImageThumbnailBorderDarkThemeIdle: vitalColor.BorderDarkThemeBase,
   ImageThumbnailBorderLightThemeActive: vitalColor.BorderInteractiveLightThemeIdle,

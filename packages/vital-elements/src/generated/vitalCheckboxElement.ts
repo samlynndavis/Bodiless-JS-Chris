@@ -9,6 +9,14 @@ const meta = {
 };
 
 export default asTokenGroup(meta)({
+  BorderChecked: vitalColor.BorderInteractiveLightThemeIdle,
+  BorderHover: vitalColor.BorderLightThemeBase,
+  BorderIdle: vitalColor.BorderLightThemeBase,
+  BackgroundDisabled: vitalColor.BackgroundInteractiveLightThemeDisabled,
+  BackgroundChecked: vitalColor.BackgroundInteractiveLightThemeIdle,
+  BackgroundHover: vitalColor.BackgroundInteractiveLightThemeHover,
+  TextLabel: vitalColor.TextLightThemeBase,
+  BorderDisabled: vitalColor.BorderInteractiveLightThemeDisabled,
   BorderLightThemeChecked: vitalColor.BorderInteractiveLightThemeIdle,
   BorderLightThemeHover: vitalColor.BorderLightThemeBase,
   BorderLightThemeIdle: vitalColor.BorderLightThemeBase,

@@ -9,6 +9,10 @@ const meta = {
 };
 
 export default asTokenGroup(meta)({
+  PrimaryDropdownBackgroundBackground: vitalColor.BackgroundBase,
+  PrimaryBackgroundPrimaryNavigation: vitalColor.BackgroundBase,
+  PrimaryDropdownBorderBorder: vitalColor.BorderInteractiveLightThemeIdle,
+  SecondaryBackgroundSecondaryNavigation: vitalColor.BackgroundAlt6,
   PrimaryDropdownBackgroundDarkThemeBackground: vitalColor.BackgroundAlt8,
   PrimaryDropdownBackgroundLightThemeBackground: vitalColor.BackgroundBase,
   PrimaryBackgroundDarkThemePrimaryNavigation: vitalColor.BackgroundAlt5,

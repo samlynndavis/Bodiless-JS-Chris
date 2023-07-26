@@ -9,6 +9,14 @@ const meta = {
 };
 
 export default asTokenGroup(meta)({
+  PrimaryTextHeadline: vitalColor.TextDarkThemeBase,
+  PrimaryTextCaption: vitalColor.TextDarkThemeBase,
+  PrimaryTextLink: vitalColor.TextDarkThemeBase,
+  PrimaryBackgroundBackground: vitalColor.BackgroundAlt8,
+  SecondaryTextCaption: vitalColor.TextLightThemeAlt1,
+  SecondaryTextHeadline: vitalColor.TextLightThemeBase,
+  SecondaryBackgroundBackground: vitalColor.BackgroundAlt6,
+  SecondaryTextBody: vitalColor.TextLightThemeBase,
   PrimaryTextDarkThemeHeadline: vitalColor.TextDarkThemeBase,
   PrimaryTextDarkThemeLink: vitalColor.TextDarkThemeBase,
   PrimaryTextLightThemeHeadline: vitalColor.TextDarkThemeBase,

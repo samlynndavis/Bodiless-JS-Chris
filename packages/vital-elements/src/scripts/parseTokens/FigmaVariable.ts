@@ -47,6 +47,10 @@ class FigmaVariable implements FigmaVariableInterface {
 
   protected interactiveTarget?: ColorTargets;
 
+  static sanitize(s: string) {
+    return s.replace(/[ -/.]/g, '').replace(/-/g, '_');
+  }
+
   constructor(variable$: string|RawVariable) {
     const variable: RawVariable = typeof variable$ === 'string' ? { name: variable$ } : variable$;
     Object.assign(this, variable);
@@ -368,14 +372,18 @@ class FigmaVariable implements FigmaVariableInterface {
           this.errors.add('Brand variable has no theme');
         }
         const { alias } = this;
+        // @TODO Dark Theme support
+        // Ensure that all dark theme component variables point to dark theme semantic ones,
+        // and that all light theme component variables point to light (or unthemed) semantic ones
+        // bc dark theme tailwind classes use the 'dark:' prefix.
         // if (this.theme === Themes.Dark) {
         //   if (!this.alias?.theme) {
-        //     // @todo Force the alias to dark theme bc we need the version with the dark prefix
+        //     // @TODO Force the alias to dark theme if it has no theme
         //   } else if (this.alias.theme !== Themes.Dark) {
-        //     this.errors.add(`Component theme "${this.theme} does not match semantic theme ${this.alias?.theme}`);
+        //     // @TODO Raise an error if the alias has a light theme.
         //   }
         // } else if (this.alias?.theme === Themes.Dark) {
-        //   this.errors.add(`Component theme "${this.theme} does not match semantic theme ${this.alias?.theme}`);
+        //    // @TODO Raise an error if a
         // }
         if (alias?.isInteractive) alias.setInteractiveTarget(this.target);
         const value = alias?.vitalName;

@@ -9,6 +9,11 @@ const meta = {
 };
 
 export default asTokenGroup(meta)({
+  DropdownTextBody: vitalColor.TextLightThemeBase,
+  BorderColor: vitalColor.BorderLightThemeBase,
+  LabelBackgroundBackground: vitalColor.BackgroundBase,
+  LabelTextLabel: vitalColor.TextLightThemeBase,
+  DropdownBackgroundBackground: vitalColor.BackgroundBase,
   DropdownBorderRadiusActiveBottomRight: 'rounded-br-0px',
   DropdownBorderRadiusActiveTopRight: 'rounded-tr-0px',
   DropdownTextDarkThemeBody: vitalColor.TextDarkThemeBase,

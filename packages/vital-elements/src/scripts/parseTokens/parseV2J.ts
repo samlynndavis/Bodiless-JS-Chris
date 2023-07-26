@@ -2,7 +2,7 @@
 import {
   Data,
   Collections, isColorVariable, ColorVariable,
-  isComponentVariable, FigmaVariableInterface, ComponentVariable
+  isComponentVariable, FigmaVariableInterface, ComponentVariable, Themes
 } from './types';
 import { findVariables, logErrors, writeTokenCollection } from './util';
 
@@ -27,21 +27,38 @@ const getColorTokensForVariable = (next: ColorVariable): Record<string, string> 
 
 const getTokensForComponent = (
   vars: FigmaVariableInterface[], semantic?: Record<string, string>
-) => vars.reduce(
-  (acc, next) => {
-    let result: Record<string, string> = acc;
-    const value = next.validatedValue(semantic && Object.keys(semantic));
-    if (value) {
-      result = {
+) => {
+  // Create tokens for the brand variables.  There should be light and dark versions of each.
+  const brandTokens: Record<string, string> = vars.reduce(
+    (acc, next) => {
+      const result = {
         ...acc,
-        [next.vitalName]: value,
+        [next.vitalName]: next.validatedValue(semantic && Object.keys(semantic))
       };
-    }
-    logErrors(next);
-    return result;
-  },
-  {},
-);
+      logErrors(next);
+      return next.errors.size === 0 ? result : acc;
+    },
+    {},
+  );
+  // Create the theme tokens. For now these are just aliases of the light theme versions.
+  const themeTokens: Record<string, string> = Object.entries(brandTokens)
+    .filter(([name]) => /LightTheme/.test(name))
+    .reduce(
+      (acc, [name, value]) => {
+        const lightTheme = Themes.Light.replace(/ /g, '');
+        const unthemedName = name.replace(lightTheme, '');
+        // @TODO Once dark theme is supported, the theme token will combine both light and dark.
+        // const darkTheme = Themes.Dark.replace(/ /g, '');
+        // const darkName = name.replace(lightTheme, darkTheme);
+        // if (brandTokens[darkName]) {
+        //   return { ...acc, [unthemedName]: `as(${value}, ${brandTokens[darkName]})` };
+        // }
+        return { ...acc, [unthemedName]: value };
+      },
+      {}
+    );
+  return { ...themeTokens, ...brandTokens };
+};
 
 export const getSemanticTokens = (data: Data, brand: string): Record<string, string> => {
   const semanticVars = findVariables(data, v => (

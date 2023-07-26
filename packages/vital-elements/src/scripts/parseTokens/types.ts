@@ -11,7 +11,6 @@ export type NormalVariable = {
 };
 
 export type FigmaVariableInterface = NormalVariable & RawVariable & {
-  name: string,
   isColor: boolean,
   isSpacing: boolean,
   isRadius: boolean,
@@ -21,6 +20,7 @@ export type FigmaVariableInterface = NormalVariable & RawVariable & {
   errors: Set<string>,
   setErrors: (errors: string|Set<string>|string[]) => void,
   level?: Levels,
+  theme?: Themes,
   validatedValue: (allowedValues?: string[]) => string|undefined;
   longName: string,
   resolveSemanticAlias: (variables: FigmaVariableInterface[]) => FigmaVariableInterface|undefined;

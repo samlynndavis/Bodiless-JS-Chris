@@ -9,6 +9,8 @@ const meta = {
 };
 
 export default asTokenGroup(meta)({
+  Active: vitalColor.ScrollbarInteractiveLightThemeIdle,
+  Inactive: vitalColor.BorderLightThemeBase,
   LightThemeActive: vitalColor.ScrollbarInteractiveLightThemeIdle,
   LightThemeInactive: vitalColor.BorderLightThemeBase,
   DarkThemeActive: vitalColor.ScrollbarInteractiveDarkThemeIdle,
