@@ -2,7 +2,7 @@
 import {
   Data,
   Collections, isColorVariable, ColorVariable,
-  isComponentVariable, FigmaVariableInterface, ComponentVariable, Themes
+  isComponentVariable, FigmaVariableInterface, ComponentVariable, Themes, Devices
 } from './types';
 import { findVariables, logErrors, writeTokenCollection } from './util';
 
@@ -25,24 +25,25 @@ const getColorTokensForVariable = (next: ColorVariable): Record<string, string> 
   return next.errors.size === 0 ? result : {};
 };
 
-// export const getDeviceTokensForComponent = (
-//   variables: FigmaVariableInterface[],
-// ): Record<string, string> => {
-//   const tokens = variables.filter(v => v.mode === Devices.Mobile).reduce(
-//     (acc, mobile) => {
-//       const tablet = variables.find(v => v.name === mobile.name && v.mode === Devices.Tablet);
-//       const desktop = variables.find(v => v.name === mobile.name && v.mode === Devices.Tablet);
-//       const value = [mobile.parsedValue, tablet?.parsedValue, desktop?.parsedValue]
-//         .filter(Boolean)
-//         .join(' ');
-//       const entry = { [mobile.vitalName]: value };
-//       logErrors(mobile);
-//       return mobile.errors.size === 0 ? { ...acc, ...entry } : acc;
-//     },
-//     {},
-//   );
-//   return tokens;
-// };
+export const getDeviceTokensForComponent = (
+  variables: FigmaVariableInterface[],
+): Record<string, string> => {
+  console.log('vars', variables);
+  const tokens = variables.filter(v => v.mode === Devices.Mobile).reduce(
+    (acc, mobile) => {
+      const tablet = variables.find(v => v.name === mobile.name && v.mode === Devices.Tablet);
+      const desktop = variables.find(v => v.name === mobile.name && v.mode === Devices.Tablet);
+      const value = [mobile.parsedValue, tablet?.parsedValue, desktop?.parsedValue]
+        .filter(Boolean)
+        .join(' ');
+      const entry = { [mobile.vitalName]: value };
+      logErrors(mobile);
+      return mobile.errors.size === 0 ? { ...acc, ...entry } : acc;
+    },
+    {},
+  );
+  return tokens;
+};
 
 const getTokensForComponent = (
   vars: FigmaVariableInterface[], semantic?: Record<string, string>
@@ -78,6 +79,8 @@ const getTokensForComponent = (
       },
       {}
     );
+  const dv = vars.filter(v => v.collection === Collections.Device);
+  console.log('dv', dv);
   // const deviceTokens = getDeviceTokensForComponent(
   //   vars.filter(v => v.collection === Collections.Device)
   // );

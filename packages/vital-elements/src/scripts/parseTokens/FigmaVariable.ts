@@ -144,8 +144,7 @@ class FigmaVariable implements FigmaVariableInterface {
   }
 
   get isComponent(): boolean {
-    if (this.collection !== Collections.Brand || this.level !== Levels.Component) return false;
-    return true;
+    return this.level === Levels.Component;
   }
 
   get isCore(): Boolean {
