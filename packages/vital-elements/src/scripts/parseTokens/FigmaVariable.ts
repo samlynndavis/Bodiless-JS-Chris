@@ -98,6 +98,13 @@ class FigmaVariable implements FigmaVariableInterface {
       return undefined;
     }
     const alias = new FigmaVariable(this.value);
+    if (this.collection === Collections.Device && !alias.isCore) {
+      // @TODO Handle this case. Sometimes device variables may point to brand variables
+      // if a brand needs to customized them.
+      // Also - some device tokens point to other device tokens which appear to be
+      // semantic - eg /Spacing/X Small'.  Is this real?
+      this.errors.add(`Device alias collection "${alias.longName}" is not core`);
+    }
     if (this.category === Categories.Radius) {
       if (!alias.isCore) this.errors.add(`Radius alias collection "${alias.longName}" is not core`);
     }

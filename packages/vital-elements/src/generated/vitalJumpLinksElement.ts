@@ -27,4 +27,9 @@ export default asTokenGroup(meta)({
   TextDarkThemeIdle: vitalColor.TextInteractiveDarkThemeIdle,
   TextLightThemeBody: vitalColor.TextLightThemeBase,
   TextLightThemeActive: vitalColor.TextInteractiveLightThemeIdle,
+  LinkMarginRight: 'mr-8px' 'md:mr-8px' 'lg:mr-16px',
+  LinkPaddingLeft: 'pl-8px' 'md:pl-8px' 'lg:pl-16px',
+  PaddingTop: 'pt-8px' 'md:pt-8px' 'lg:pt-16px',
+  LinkPaddingRight: 'pr-8px' 'md:pr-8px' 'lg:pr-16px',
+  LinkPaddingBottom: 'pb-8px' 'md:pb-8px' 'lg:pb-16px',
 });

@@ -36,4 +36,12 @@ export default asTokenGroup(meta)({
   DropdownBackgroundLightThemeBackground: vitalColor.BackgroundBase,
   BorderDarkThemeColor: vitalColor.BorderDarkThemeBase,
   LabelBackgroundDarkThemeBackground: vitalColor.BackgroundAlt7,
+  DropdownPaddingBottom: 'pb-16px' 'md:pb-16px' 'lg:pb-16px',
+  DropdownPaddingLeft: 'pl-16px' 'md:pl-16px' 'lg:pl-24px',
+  DropdownPaddingTop: 'pt-16px' 'md:pt-16px' 'lg:pt-16px',
+  LabelPaddingLeft: 'pl-16px' 'md:pl-16px' 'lg:pl-24px',
+  LabelPaddingBottom: 'pb-16px' 'md:pb-16px' 'lg:pb-16px',
+  LabelPaddingTop: 'pt-16px' 'md:pt-16px' 'lg:pt-16px',
+  DropdownPaddingRight: 'pr-16px' 'md:pr-16px' 'lg:pr-24px',
+  LabelPaddingRight: 'pr-16px' 'md:pr-16px' 'lg:pr-24px',
 });

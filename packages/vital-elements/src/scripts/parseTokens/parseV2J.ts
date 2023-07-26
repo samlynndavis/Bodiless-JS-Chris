@@ -32,7 +32,7 @@ export const getDeviceTokensForComponent = (
   const tokens = variables.filter(v => v.mode === Devices.Mobile).reduce(
     (acc, mobile) => {
       const tablet = variables.find(v => v.name === mobile.name && v.mode === Devices.Tablet);
-      const desktop = variables.find(v => v.name === mobile.name && v.mode === Devices.Tablet);
+      const desktop = variables.find(v => v.name === mobile.name && v.mode === Devices.Desktop);
       const value = [mobile.parsedValue, tablet?.parsedValue, desktop?.parsedValue]
         .filter(Boolean)
         .join(' ');
@@ -79,12 +79,10 @@ const getTokensForComponent = (
       },
       {}
     );
-  const dv = vars.filter(v => v.collection === Collections.Device);
-  console.log('dv', dv);
-  // const deviceTokens = getDeviceTokensForComponent(
-  //   vars.filter(v => v.collection === Collections.Device)
-  // );
-  return { ...themeTokens, ...brandTokens };
+  const deviceTokens = getDeviceTokensForComponent(
+    vars.filter(v => v.collection === Collections.Device)
+  );
+  return { ...themeTokens, ...brandTokens, ...deviceTokens };
 };
 
 export const getSemanticTokens = (data: Data, brand: string): Record<string, string> => {

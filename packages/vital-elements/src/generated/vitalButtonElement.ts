@@ -79,4 +79,12 @@ export default asTokenGroup(meta)({
   SecondaryBorderDarkThemeHover: vitalColor.BorderInteractiveDarkThemeHover,
   SecondaryBorderDarkThemePressed: vitalColor.BorderInteractiveDarkThemePressed,
   SecondaryTextDarkThemeHover: vitalColor.TextInteractiveDarkThemeHover,
+  PrimaryPaddingLeft: 'pl-24px' 'md:pl-24px' 'lg:pl-24px',
+  PrimaryPaddingBottom: 'pb-16px' 'md:pb-16px' 'lg:pb-16px',
+  SecondaryPaddingLeft: 'pl-24px' 'md:pl-24px' 'lg:pl-24px',
+  SecondaryPaddingRight: 'pr-24px' 'md:pr-24px' 'lg:pr-24px',
+  PrimaryPaddingRight: 'pr-24px' 'md:pr-24px' 'lg:pr-24px',
+  SecondaryPaddingTop: 'pt-16px' 'md:pt-16px' 'lg:pt-16px',
+  SecondaryPaddingBottom: 'pb-16px' 'md:pb-16px' 'lg:pb-16px',
+  PrimaryPaddingTop: 'pt-16px' 'md:pt-16px' 'lg:pt-16px',
 });
