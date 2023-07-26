@@ -9,6 +9,12 @@ import { findVariables, logErrors, writeTokenCollection } from './util';
 const getColorTokensForVariable = (next: ColorVariable): Record<string, string> => {
   const result: Record<string, string> = next.createInteractiveVariants().reduce(
     (acc, variant) => {
+      // @TODO Create theme variants
+      // For any semantic color which does not have a theme, we need to create a
+      // Dark Theme variant with the "dark:" prefix, so that if it is referenced
+      // by a Dark Theme component it will have the correct prefix. Do this by
+      // adding a `createThemeVariants` method to `FigmaVariable` and reducing it
+      // here, just as we do for interactive variants.
       const entry = { [variant.vitalName]: variant.parsedValue };
       next.setErrors(variant.errors);
       return { ...acc, ...entry };

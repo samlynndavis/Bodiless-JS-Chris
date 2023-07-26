@@ -328,6 +328,13 @@ class FigmaVariable implements FigmaVariableInterface {
     });
   }
 
+  // @TODO add createThemeVariants to add a dark version of any semantic color
+  // which does not have a theme
+  // createThemeVariants(): FigmaVariable[] {
+  //   if (!this.isSemantic || !this.isColor || this.theme) return [this];
+  //   ...
+  // }
+
   get theme(): Themes|undefined {
     return this.segments.find(isTheme);
   }
@@ -353,9 +360,13 @@ class FigmaVariable implements FigmaVariableInterface {
     }
     if (isColorVariable(this)) {
       if (this.isComponent) {
-        // if (this.collection === Collections.Brand && !this.theme) {
-        //   this.errors.add('Brand variable has no theme');
-        // }
+        // @TODO Check with Jordan to see if this is expected.  Current understanding
+        // is that Brand variables should always have a theme, and that Theme variables
+        // point to both the Light and Dark versions of the Brand variable. If this is
+        // expected, remove the check.
+        if (this.collection === Collections.Brand && !this.theme) {
+          this.errors.add('Brand variable has no theme');
+        }
         const { alias } = this;
         // if (this.theme === Themes.Dark) {
         //   if (!this.alias?.theme) {

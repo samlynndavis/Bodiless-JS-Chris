@@ -22,29 +22,42 @@ Errors for Brand Tokens/White Label/Components/Checkbox/Background/Dark Theme/Id
 Errors for Brand Tokens/White Label/Components/Checkbox/Background/Dark Theme/Checked
  . KNOWN ISSUE: Non-core value "#FFFFFF" is not an alias
 Errors for Brand Tokens/White Label/Components/Form Field/Text/Caption
+ . Brand variable has no theme
  . Component color alias "(Theme Tokens/undefined/Typography/Body/Small" is not semantic
  . Component color alias "(Theme Tokens/undefined/Typography/Body/Small" is not brand
 Errors for Brand Tokens/White Label/Components/Form Field/Border/Error
+ . Brand variable has no theme
  . Component color alias "(Core Values/undefined/Color/Signal/Error/Error" is not semantic
  . Component color alias "(Core Values/undefined/Color/Signal/Error/Error" is not brand
 Errors for Brand Tokens/White Label/Components/Form Field/Text/Error
+ . Brand variable has no theme
  . Component color alias "(Core Values/undefined/Color/Signal/Error/Error" is not semantic
  . Component color alias "(Core Values/undefined/Color/Signal/Error/Error" is not brand
+Errors for Brand Tokens/White Label/Components/Form Field/Border/Active
+ . Brand variable has no theme
+Errors for Brand Tokens/White Label/Components/Form Field/Border/Idle
+ . Brand variable has no theme
 Errors for Brand Tokens/White Label/Components/Form Field/Border/Success
+ . Brand variable has no theme
  . Component color alias "(Core Values/undefined/Color/Signal/Success/Success" is not semantic
  . Component color alias "(Core Values/undefined/Color/Signal/Success/Success" is not brand
 Errors for Brand Tokens/White Label/Components/Form Field/Text/Input
+ . Brand variable has no theme
  . Component color alias "(Theme Tokens/undefined/Typography/Body/Regular" is not semantic
  . Component color alias "(Theme Tokens/undefined/Typography/Body/Regular" is not brand
 Errors for Brand Tokens/White Label/Components/Form Field/Text/Label
+ . Brand variable has no theme
  . Component color alias "(Theme Tokens/undefined/Typography/Eyebrow/Eyebrow" is not semantic
  . Component color alias "(Theme Tokens/undefined/Typography/Eyebrow/Eyebrow" is not brand
 Errors for Brand Tokens/White Label/Components/Navigation/Link
  . Component color target "undefined" invalid
+ . Brand variable has no theme
  . KNOWN ISSUE: Non-core value "#FFFFFF" is not an alias
 Errors for Brand Tokens/White Label/Components/Navigation/Primary/Primary Link/Border/Hover
+ . Brand variable has no theme
  . Component color alias "(Theme Tokens/undefined/Semantic/Color/Interactive/Default" is not brand
 Errors for Brand Tokens/White Label/Components/Navigation/Primary/Primary Link/Border/Active
+ . Brand variable has no theme
  . Component color alias "(Theme Tokens/undefined/Semantic/Color/Interactive/Hover" is not brand
 Errors for Brand Tokens/White Label/Components/Category Card/Padding/Bottom
  . KNOWN ISSUE: Non-core value "0" is not an alias

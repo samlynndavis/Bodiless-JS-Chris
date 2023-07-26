@@ -10,8 +10,6 @@ const meta = {
 
 export default asTokenGroup(meta)({
   BackgroundDarkThemeBackground: vitalColor.BackgroundAlt8,
-  BorderActive: vitalColor.BorderInteractiveLightThemeIdle,
-  BorderIdle: vitalColor.BorderLightThemeBase,
   BorderRadiusBorderRadius: 'rounded-4px',
   PaddingPaddingTopBottom: 'p-16px',
   BackgroundLightThemeBackground: vitalColor.BackgroundBase,
